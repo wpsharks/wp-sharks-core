@@ -1,2 +1,3 @@
-# wp-core
-Core framework for plugins developed by WebSharks, Inc.
+## WordPress Theme/Plugin Framework
+
+Core framework for WP plugins developed by WebSharks, Inc.
