@@ -1,0 +1,55 @@
+{
+  "name": "websharks/core",
+  "homepage": "https://github.com/websharks/wp-core",
+  "description": "Core WP library used by WebSharks, Inc.",
+  "keywords": ["websharks", "wordpress"],
+
+  "type": "library",
+  "license": "GPL-3.0+",
+
+  "authors": [{
+    "name": "websharks",
+    "homepage": "http://websharks-inc.com/",
+    "role": "company"
+  }, {
+    "name": "jaswsinc",
+    "homepage": "http://jaswsinc.com/",
+    "role": "developer"
+  }, {
+    "name": "raamdev",
+    "homepage": "http://raam.org/",
+    "role": "developer"
+  }],
+
+  "support": {
+    "source": "https://github.com/websharks/wp-core",
+    "issues": "https://github.com/websharks/wp-core/issues"
+  },
+
+  "require": {
+    "websharks/core": "dev-master",
+    "websharks/wp-php-rv": "150511"
+  },
+  "require-dev": {
+    "websharks/wp-i18n-tools": "dev-master"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+
+  "autoload": {
+    "psr-4": {
+      "WebSharks\\Wp\\Core\\Classes\\": "src/includes/classes",
+      "WebSharks\\Wp\\Core\\Functions\\": "src/includes/functions",
+      "WebSharks\\Wp\\Core\\Interfaces\\": "src/includes/interfaces",
+      "WebSharks\\Wp\\Core\\Traits\\": "src/includes/traits"
+    },
+    "files": ["src/includes/functions/_load.php"]
+  },
+
+  "config": {
+    "vendor-dir": "src/vendor",
+    "preferred-install": "dist"
+  },
+
+  "repositories": []
+}

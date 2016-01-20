@@ -1,0 +1,12 @@
+project_title                   = WebSharks WP Core
+
+project_owner                   = websharks
+project_slug                    = wp-core
+
+project_namespace               = WebSharks\\Wp\\Core
+project_sub_namespace           = WebSharksWpCore
+
+project_version                 = %y%m%d
+
+project_php_required_version    = 7.0.1
+project_php_tested_up_to_version = ${php.version}
