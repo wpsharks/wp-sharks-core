@@ -4,7 +4,7 @@ project_owner                   = websharks
 project_slug                    = wp-core
 
 project_namespace               = WebSharks\\Wp\\Core
-project_sub_namespace           = WebSharksWpCore
+project_sub_namespace           = WpCore
 
 project_version                 = %y%m%d
 
