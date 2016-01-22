@@ -1,11 +1,11 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\Wp\Core\Classes\Utils;
+namespace WebSharks\WpCore\Classes\Utils;
 
-use WebSharks\Wp\Core\Classes;
-use WebSharks\Wp\Core\Functions as w;
-use WebSharks\Wp\Core\Interfaces;
-use WebSharks\Wp\Core\Traits;
+use WebSharks\WpCore\Classes;
+use WebSharks\WpCore\Functions as w;
+use WebSharks\WpCore\Interfaces;
+use WebSharks\WpCore\Traits;
 #
 use WebSharks\Core\WpCore\Functions as c;
 use WebSharks\Core\WpCore\Classes\Exception;
