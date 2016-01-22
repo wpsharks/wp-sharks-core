@@ -38,10 +38,10 @@
 
   "autoload": {
     "psr-4": {
-      "WebSharks\\Wp\\Core\\Classes\\": "src/includes/classes",
-      "WebSharks\\Wp\\Core\\Functions\\": "src/includes/functions",
-      "WebSharks\\Wp\\Core\\Interfaces\\": "src/includes/interfaces",
-      "WebSharks\\Wp\\Core\\Traits\\": "src/includes/traits"
+      "WebSharks\\WpCore\\Classes\\": "src/includes/classes",
+      "WebSharks\\WpCore\\Functions\\": "src/includes/functions",
+      "WebSharks\\WpCore\\Interfaces\\": "src/includes/interfaces",
+      "WebSharks\\WpCore\\Traits\\": "src/includes/traits"
     },
     "files": ["src/includes/functions/_load.php"]
   },
