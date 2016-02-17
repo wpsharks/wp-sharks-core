@@ -49,6 +49,8 @@ class App extends CoreClasses\App
      */
     public function __construct(array $instance_base, array $instance = [])
     {
+        $GLOBALS[self::class] = $this;
+
         $nameToSlug = function (string $name) {
             $slug = $name; // Copy.
             $slug = trim(mb_strtolower($slug));
@@ -76,6 +78,9 @@ class App extends CoreClasses\App
 
         $plugin_slug      = (string) ($instance_base['plugin']['slug'] ?? '');
         $plugin_base_slug = (string) ($instance_base['plugin']['base_slug'] ?? preg_replace('/\-+(?:lite|pro)$/ui', '', $plugin_slug));
+
+        $plugin_var      = (string) ($instance_base['plugin']['var'] ?? str_replace('-', '_', $plugin_slug));
+        $plugin_base_var = (string) ($instance_base['plugin']['base_var'] ?? preg_replace('/_+(?:lite|pro)$/ui', '', $plugin_var));
 
         $plugin_name      = (string) ($instance_base['plugin']['name'] ?? '');
         $plugin_base_name = (string) ($instance_base['plugin']['base_name'] ?? preg_replace('/\s+(?:lite|pro)$/ui', '', $plugin_name));
@@ -211,6 +216,9 @@ class App extends CoreClasses\App
                 'slug'      => $plugin_slug,
                 'base_slug' => $plugin_base_slug,
 
+                'var'      => $plugin_var,
+                'base_var' => $plugin_base_var,
+
                 'name'      => $plugin_name,
                 'base_name' => $plugin_base_name,
 
@@ -227,6 +235,9 @@ class App extends CoreClasses\App
                 ],
                 'deactivatble_conflicts' => [ // Keys are plugin slugs, values are plugin names.
                     $plugin_base_slug.($plugin_is_pro ? '' : '-pro') => $plugin_base_name.($plugin_is_pro ? ' Lite' : ' Pro'),
+                ],
+                'notices' => [
+                    'key' => $blog_salt,
                 ],
             ],
         ];
