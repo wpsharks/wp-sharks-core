@@ -1,12 +1,15 @@
-project_title                   = WebSharks WP Core
+project_title                    = WP Sharks Core
 
-project_owner                   = websharks
-project_slug                    = wp-core
+project_owner                    = websharks
+project_slug                     = wp-sharks-core
 
-project_namespace               = WebSharks\\WpCore
-project_sub_namespace           = WpCore
+project_namespace                = WebSharks\\WpSharks\Core
+project_sub_namespace            = WpSharksCore
 
-project_version                 = %y%m%d
+project_version                  = %y%m%d
 
-project_php_required_version    = 7.0.1
+project_php_required_version     = 7.0.1
 project_php_tested_up_to_version = ${php.version}
+
+project_wp_required_version      = 4.4
+project_wp_tested_up_to_version  = 4.4

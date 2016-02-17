@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a4b7eecdf779a06f5c9f4784b0ee1ed",
-    "content-hash": "959ea8ee8bbdcff9da1cdfefd2b50652",
+    "hash": "917637e7c49c49160505d2ad35aba583",
+    "content-hash": "433ad124cbcd582eafb183f7f0f3d493",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "2.8.24",
+            "version": "2.8.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830"
+                "reference": "c1605360b6624958a5397601ad5543cd45fcf8f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/54b67f902bb2c5bbab481bc3c46537752a018830",
-                "reference": "54b67f902bb2c5bbab481bc3c46537752a018830",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c1605360b6624958a5397601ad5543cd45fcf8f7",
+                "reference": "c1605360b6624958a5397601ad5543cd45fcf8f7",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-11-16 22:34:08"
+            "time": "2016-01-30 00:53:32"
         },
         {
             "name": "embedly/embedly-php",
@@ -352,16 +352,16 @@
         },
         {
             "name": "lusitanian/oauth",
-            "version": "v0.8.6",
+            "version": "v0.8.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
-                "reference": "769fea1bb53845c7b03cca97cbdd0708e9ec26da"
+                "reference": "eeafc1937d7560825ff5c2f1b8e5f86f059b5a28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/769fea1bb53845c7b03cca97cbdd0708e9ec26da",
-                "reference": "769fea1bb53845c7b03cca97cbdd0708e9ec26da",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/eeafc1937d7560825ff5c2f1b8e5f86f059b5a28",
+                "reference": "eeafc1937d7560825ff5c2f1b8e5f86f059b5a28",
                 "shasum": ""
             },
             "require": {
@@ -415,7 +415,7 @@
                 "oauth",
                 "security"
             ],
-            "time": "2015-12-21 00:06:34"
+            "time": "2016-02-14 22:50:50"
         },
         {
             "name": "michelf/php-markdown",
@@ -714,12 +714,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "39a0d15a40f372a3a3a6bbcaef9ce1cb002b8ba4"
+                "reference": "c861671c1d1688d4351e791433a0ece92b755e46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/39a0d15a40f372a3a3a6bbcaef9ce1cb002b8ba4",
-                "reference": "39a0d15a40f372a3a3a6bbcaef9ce1cb002b8ba4",
+                "url": "https://api.github.com/repos/websharks/core/zipball/c861671c1d1688d4351e791433a0ece92b755e46",
+                "reference": "c861671c1d1688d4351e791433a0ece92b755e46",
                 "shasum": ""
             },
             "require": {
@@ -829,7 +829,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-01-22 10:05:20"
+            "time": "2016-02-17 06:42:20"
         },
         {
             "name": "websharks/dicer",

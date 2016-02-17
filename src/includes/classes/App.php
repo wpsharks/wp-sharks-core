@@ -1,18 +1,18 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpCore\Classes;
+namespace WebSharks\WpSharks\Core\Classes;
 
-use WebSharks\WpCore\Classes\Utils;
-use WebSharks\WpCore\Functions as w;
-use WebSharks\WpCore\Interfaces;
-use WebSharks\WpCore\Traits;
+use WebSharks\WpSharks\Core\Classes\Utils;
+use WebSharks\WpSharks\Core\Functions as w;
+use WebSharks\WpSharks\Core\Interfaces;
+use WebSharks\WpSharks\Core\Traits;
 #
-use WebSharks\Core\WpCore\Functions as c;
-use WebSharks\Core\WpCore\Classes\Exception;
-use WebSharks\Core\WpCore\Classes as CoreClasses;
-use WebSharks\Core\WpCore\Classes\Utils as CoreUtils;
-use WebSharks\Core\WpCore\Interfaces as CoreInterfaces;
-use WebSharks\Core\WpCore\Traits as CoreTraits;
+use WebSharks\Core\WpSharksCore\Functions as c;
+use WebSharks\Core\WpSharksCore\Classes\Exception;
+use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
+use WebSharks\Core\WpSharksCore\Classes\Utils as CoreUtils;
+use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
+use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
 /**
  * Application.
@@ -28,7 +28,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160122'; //v//
+    const VERSION = '160217'; //v//
 
     /**
      * Constructor.
