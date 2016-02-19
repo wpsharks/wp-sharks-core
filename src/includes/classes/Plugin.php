@@ -2,10 +2,12 @@
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes;
 
-use WebSharks\WpSharks\Core\Classes\Utils;
-use WebSharks\WpSharks\Core\Functions as w;
-use WebSharks\WpSharks\Core\Interfaces;
-use WebSharks\WpSharks\Core\Traits;
+use WebSharks\WpSharks\Core\Classes\Utils\Plugin as Utils;
+#
+use WebSharks\WpSharks\Core\Functions as wc;
+use WebSharks\WpSharks\Core\Classes\Utils as WCoreUtils;
+use WebSharks\WpSharks\Core\Interfaces as WCoreInterfaces;
+use WebSharks\WpSharks\Core\Traits as WCoreTraits;
 #
 use WebSharks\Core\WpSharksCore\Functions\__;
 use WebSharks\Core\WpSharksCore\Functions as c;
@@ -20,8 +22,71 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx Initial release.
  */
-class Plugin extends CoreClasses\AbsCore
+abstract class Plugin extends CoreClasses\AbsCore
 {
+    /**
+     * Namespace.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $namespace;
+
+    /**
+     * Namespace SHA-1.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $namespace_sha1;
+
+    /**
+     * Dir.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $dir;
+
+    /**
+     * Core dir.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $core_dir;
+
+    /**
+     * Config.
+     *
+     * @since 16xxxx
+     *
+     * @type PluginConfig
+     */
+    public $Config;
+
+    /**
+     * Dicer.
+     *
+     * @since 16xxxx
+     *
+     * @type PluginDi
+     */
+    public $Di;
+
+    /**
+     * Utilities.
+     *
+     * @since 16xxxx
+     *
+     * @type PluginUtils
+     */
+    public $Utils;
+
     /**
      * Conflicts?
      *
@@ -50,67 +115,28 @@ class Plugin extends CoreClasses\AbsCore
      */
     public function __construct(array $instance_base, array $instance = [])
     {
-        $GLOBALS[self::class] = $this;
+        parent::__construct();
 
-        $plugin_type = (string) ($instance_base['plugin']['type'] ?? '');
-        $plugin_file = (string) ($instance_base['plugin']['file'] ?? '');
+        $Class = new \ReflectionClass($this);
 
-        $plugin_acronym = (string) ($instance_base['plugin']['acronym'] ?? '');
+        $this->namespace      = $Class->getNamespaceName();
+        $this->namespace_sha1 = sha1($this->namespace);
 
-        $plugin_slug      = (string) ($instance_base['plugin']['slug'] ?? '');
-        $plugin_base_slug = (string) ($instance_base['plugin']['base_slug'] ?? preg_replace('/\-+(?:lite|pro)$/ui', '', $plugin_slug));
+        $this->dir      = dirname($Class->getFileName(), 4);
+        $this->core_dir = dirname(__FILE__, 4);
 
-        $plugin_var      = (string) ($instance_base['plugin']['var'] ?? str_replace('-', '_', $plugin_slug));
-        $plugin_base_var = (string) ($instance_base['plugin']['base_var'] ?? preg_replace('/_+(?:lite|pro)$/ui', '', $plugin_var));
+        $this->Config = new PluginConfig($this, $instance_base, $instance);
+        $this->Di     = new PluginDi($this, $this->Config->di['default_rule']);
+        $this->Utils  = new PluginUtils($this); // Utility class access.
 
-        $plugin_name      = (string) ($instance_base['plugin']['name'] ?? '');
-        $plugin_base_name = (string) ($instance_base['plugin']['base_name'] ?? preg_replace('/\s+(?:lite|pro)$/ui', '', $plugin_name));
+        $GLOBALS[$Class->getName()]                = $this;
+        $GLOBALS[$this->Config->brand['var_base']] = $this;
 
-        $plugin_domain      = (string) ($instance_base['plugin']['domain'] ?? '');
-        $plugin_text_domain = (string) ($instance_base['plugin']['text_domain'] ?? $plugin_base_slug);
-
-        $plugin_qv_prefix        = (string) ($instance_base['plugin']['qv_prefix'] ?? mb_strtolower($plugin_acronym).'_');
-        $plugin_transient_prefix = (string) ($instance_base['plugin']['transient_prefix'] ?? $plugin_qv_prefix);
-
-        $plugin_is_pro = (bool) ($instance_base['plugin']['is_pro'] ?? preg_match('/\-pro$/ui', $plugin_slug));
-
-        $default_instance_base = [
-            'type' => $plugin_type,
-            'file' => $plugin_file,
-
-            'acronym' => $plugin_acronym,
-
-            'slug'      => $plugin_slug,
-            'base_slug' => $plugin_base_slug,
-
-            'var'      => $plugin_var,
-            'base_var' => $plugin_base_var,
-
-            'name'      => $plugin_name,
-            'base_name' => $plugin_base_name,
-
-            'domain'      => $plugin_domain,
-            'text_domain' => $plugin_text_domain,
-
-            'qv_prefix'        => $plugin_qv_prefix,
-            'transient_prefix' => $plugin_transient_prefix,
-
-            'is_pro' => $plugin_is_pro, // Is this a pro version?
-
-            'conflicts' => [ // Keys are plugin slugs, values are plugin names.
-                $plugin_base_slug.($plugin_is_pro ? '' : '-pro') => $plugin_base_name.($plugin_is_pro ? ' Lite' : ' Pro'),
-            ],
-            'deactivatble_conflicts' => [ // Keys are plugin slugs, values are plugin names.
-                $plugin_base_slug.($plugin_is_pro ? '' : '-pro') => $plugin_base_name.($plugin_is_pro ? ' Lite' : ' Pro'),
-            ],
-            'notices' => [
-                'key' => $blog_salt,
-            ],
-        ];
-        $instance_base = $this->merge($default_instance_base, $instance_base);
-
-        parent::__construct($instance_base, $instance);
-
+        $this->Di->addInstances([
+            $this,
+            $this->Config,
+            $this->Utils,
+        ]);
         $this->maybeCheckConflicts();
         $this->maybeEnqueueConflictsNotice();
     }

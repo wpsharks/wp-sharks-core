@@ -18,11 +18,11 @@ use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
 /**
- * Base for plugin classes.
+ * Plugin DI.
  *
- * @since 16xxxx Initial release.
+ * @since 15xxxx Initial release.
  */
-abstract class PluginBase extends CoreClasses\AbsCore
+class PluginDi extends \WebSharks\Dicer\Di
 {
     /**
      * Plugin.
@@ -38,11 +38,12 @@ abstract class PluginBase extends CoreClasses\AbsCore
      *
      * @since 15xxxx Initial release.
      *
-     * @param Plugin $Plugin Instance.
+     * @param Plugin $Plugin              Instance.
+     * @param array  $global_default_rule Default rule.
      */
-    public function __construct(Plugin $Plugin)
+    public function __construct(Plugin $Plugin, array $global_default_rule = [])
     {
-        parent::__construct();
+        parent::__construct($global_default_rule);
 
         $this->Plugin = $Plugin;
     }

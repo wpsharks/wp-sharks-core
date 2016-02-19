@@ -3,7 +3,7 @@ declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes;
 
 use WebSharks\WpSharks\Core\Classes\Utils;
-use WebSharks\WpSharks\Core\Functions as w;
+use WebSharks\WpSharks\Core\Functions as wc;
 use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #

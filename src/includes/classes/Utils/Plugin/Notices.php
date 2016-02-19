@@ -2,10 +2,11 @@
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\Utils\Plugin;
 
-use WebSharks\WpSharks\Core\Classes;
-use WebSharks\WpSharks\Core\Functions as w;
-use WebSharks\WpSharks\Core\Interfaces;
-use WebSharks\WpSharks\Core\Traits;
+use WebSharks\WpSharks\Core\Functions as wc;
+use WebSharks\WpSharks\Core\Classes as WCoreClasses;
+use WebSharks\WpSharks\Core\Classes\Utils as WCoreUtils;
+use WebSharks\WpSharks\Core\Interfaces as WCoreInterfaces;
+use WebSharks\WpSharks\Core\Traits as WCoreTraits;
 #
 use WebSharks\Core\WpSharksCore\Functions\__;
 use WebSharks\Core\WpSharksCore\Functions as c;
@@ -16,11 +17,11 @@ use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
 /**
- * WP notices.
+ * Plugin notices.
  *
  * @since 16xxxx WP notices.
  */
-class WpNotices extends CoreClasses\AppBase
+class Notices extends WCoreClasses\PluginBase
 {
     /**
      * Enqueue an administrative notice.
