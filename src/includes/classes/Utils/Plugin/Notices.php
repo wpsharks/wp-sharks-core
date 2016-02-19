@@ -60,16 +60,101 @@ class Notices extends WCoreClasses\PluginBase
     }
 
     /**
+     * Normalize a notice.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param array $notice Input notice.
+     *
+     * @return array Normalized notice.
+     */
+    protected function normalize(array $notice): array
+    {
+        $notice = array_merge($this->defaults, $notice);
+        $notice = array_intersect_key($notice, $this->defaults);
+
+        $notice['id']            = (string) $notice['id'];
+        $notice['type']          = (string) $notice['type'];
+        $notice['style']         = (string) $notice['style'];
+        $notice['markup']        = c\mb_trim((string) $notice['markup']);
+        $notice['for_user_id']   = max(0, (int) $notice['for_user_id']);
+        $notice['for_page']      = c\mb_trim((string) $notice['for_page']);
+        $notice['requires_cap']  = c\mb_trim((string) $notice['requires_cap']);
+        $notice['is_persistent'] = (bool) $notice['is_persistent'];
+        $notice['is_transient']  = (bool) $notice['is_transient'];
+        $notice['push_to_top']   = (bool) $notice['push_to_top'];
+
+        if (!in_array($notice['type'], ['notice', 'error', 'warning'], true)) {
+            $notice['type'] = 'notice'; // Use default type.
+        }
+        ksort($notice); // Sort by key.
+
+        return $notice;
+    }
+
+    /**
+     * Build a notice key.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param array $notice Input notice.
+     *
+     * @return string Notice key.
+     */
+    protected function key(array $notice): string
+    {
+        $notice = $this->normalize($notice);
+
+        if ($notice['id']) {
+            return $notice['id']; // Use as key also.
+        }
+        return c\sha256_keyed_hash(serialize($notice), $this->App->Config->wp['salt']);
+    }
+
+    /**
+     * Current user can?
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param array $notice Input notice.
+     *
+     * @return bool True if current user can.
+     */
+    protected function currentUserCan(array $notice): bool
+    {
+        $notice = $this->normalize($notice);
+        $user   = wp_get_current_user();
+
+        if ($notice['for_user_id'] && $user->ID !== $notice['for_user_id']) {
+            return false;
+        }
+        if (!$notice['requires_cap']) {
+            return true;
+        }
+        // Pipe-delimited `|` OR logic. Can view if any are true.
+        $caps = preg_split('/\|+/u', $notice['requires_cap']);
+
+        foreach ($caps as $_cap) {
+            if ($_cap && $user->has_cap($_cap)) {
+                return true;
+            }
+        } // unset($_caps, $_cap);
+
+        return false;
+    }
+
+    /**
      * Get notices.
      *
      * @since 16xxxx WP notices.
      *
      * @return array All notices.
      */
-    public function get(): array
+    protected function get(): array
     {
         if (!is_array($notices = get_option($this->Plugin->Config->brand['base_var'].'_notices'))) {
-            update_option($this->Plugin->Config->brand['base_var'].'_notices', $notices = []);
+            delete_option($this->Plugin->Config->brand['base_var'].'_notices');
+            add_option($this->Plugin->Config->brand['base_var'].'_notices', $notices = [], '', 'no');
         }
         return $notices;
     }
@@ -81,9 +166,11 @@ class Notices extends WCoreClasses\PluginBase
      *
      * @param $notices New array of notices.
      */
-    public function update(array $notices)
+    protected function update(array $notices)
     {
-        update_option($this->Plugin->Config->brand['base_var'].'_notices', $notices);
+        if ($this->get() !== $notices) {
+            update_option($this->Plugin->Config->brand['base_var'].'_notices', $notices);
+        }
     }
 
     /**
@@ -131,52 +218,86 @@ class Notices extends WCoreClasses\PluginBase
     }
 
     /**
-     * Normalize a notice.
+     * Dismiss a notice.
      *
-     * @since 16xxxx First documented version.
+     * @since 16xxxx WP notices.
      *
-     * @param array $notice Input notice.
-     *
-     * @return array Normalized notice.
+     * @param string $key A key to dismiss.
      */
-    public function normalize(array $notice): array
+    public function dismiss(string $key)
     {
-        $notice = array_merge($this->defaults, $notice);
-        $notice = array_intersect_key($notice, $this->defaults);
-
-        $notice['id']            = (string) $notice['id'];
-        $notice['type']          = (string) $notice['type'];
-        $notice['style']         = (string) $notice['style'];
-        $notice['markup']        = c\mb_trim((string) $notice['markup']);
-        $notice['for_user_id']   = max(0, (int) $notice['for_user_id']);
-        $notice['for_page']      = c\mb_trim((string) $notice['for_page']);
-        $notice['requires_cap']  = c\mb_trim((string) $notice['requires_cap']);
-        $notice['is_persistent'] = (bool) $notice['is_persistent'];
-        $notice['is_transient']  = (bool) $notice['is_transient'];
-        $notice['push_to_top']   = (bool) $notice['push_to_top'];
-
-        if (!in_array($notice['type'], ['notice', 'error', 'warning'], true)) {
-            $notice['type'] = 'notice'; // Use default type.
-        }
-        ksort($notice); // Sort by key.
-
-        return $notice;
+        $notices = $this->get();
+        unset($notices[$key]);
+        $this->update($notices);
     }
 
     /**
-     * Build a notice key.
+     * Dismiss action.
      *
-     * @since 16xxxx First documented version.
+     * @since 16xxxx WP notices.
      *
-     * @param array $notice Input notice.
-     *
-     * @return string Notice key.
+     * @return string Dismiss action.
      */
-    public function key(array $notice): string
+    protected function dismissAction(): string
     {
-        $serialized_notice = serialize($this->normalize($notice));
+        return 'dismiss_'.$this->Plugin->Config->brand['base_var'].'_notice';
+    }
 
-        return c\sha256_keyed_hash($serialized_notice, $this->App->Config->wp['salt']);
+    /**
+     * Dismiss URL.
+     *
+     * @since 16xxxx WP notices.
+     *
+     * @param string $key A key to dismiss.
+     *
+     * @return string Dismiss URL.
+     */
+    protected function dismissUrl(string $key): string
+    {
+        $url    = c\current_url();
+        $action = $this->dismissAction();
+        $url    = c\add_url_query_args([$action => $key], $url);
+        $url    = wc\add_url_nonce($url, $action.$key);
+
+        return $url;
+    }
+
+    /**
+     * Maybe dismiss.
+     *
+     * @since 16xxxx WP notices.
+     *
+     * @attaches-to `admin_init` action.
+     *
+     * @see <http://jas.xyz/1Tuh3aI>
+     */
+    public function maybeDismiss()
+    {
+        $action = $this->dismissAction();
+        $key    = (string) ($_REQUEST[$action] ?? '');
+
+        if (!$key || !($key = c\unslash($key))) {
+            return; // Nothing to do.
+        }
+        nocache_headers(); // No-cache.
+        wc\require_valid_nonce($action.$key);
+
+        $notices = $this->get();
+
+        if (isset($notices[$key])) {
+            $notice = $notices[$key];
+
+            if (!$this->currentUserCan($notice)) {
+                wc\die_forbidden();
+            }
+            $this->dismiss($key);
+        }
+        $url = c\current_url();
+        $url = wc\remove_url_nonce($url);
+        $url = c\remove_url_query_args([$action], $url);
+
+        wp_redirect($url);
+        exit; // Stop.
     }
 
     /**
@@ -193,8 +314,6 @@ class Notices extends WCoreClasses\PluginBase
         if (!($notices = $this->get())) {
             return; // Nothing to do.
         }
-        $original_notices = $notices; // Copy.
-
         foreach ($notices as $_key => $_notice) {
             if (!is_string($key) || !is_array($_notice)) {
                 unset($notices[$_key]);
@@ -214,27 +333,11 @@ class Notices extends WCoreClasses\PluginBase
             if ($_notice['is_transient']) {
                 unset($notices[$_key]);
             }
-            if ($_notice['for_user_id'] && get_current_user_id() !== $_notice['for_user_id']) {
+            if (!$this->currentUserCan($_notice)) {
                 continue; // Do not display.
             }
             if ($_notice['for_page'] && !wc\is_menu_page($_notice['for_page'])) {
                 continue; // Do not display.
-            }
-            if ($_notice['requires_cap']) {
-                // Pipe-delimited `|` OR logic. Can view if any are true.
-                $_caps = preg_split('/\|+/u', $_notice['requires_cap']);
-
-                foreach ($_caps as $_cap) {
-                    if ($_cap && current_user_can($_cap)) {
-                        $_current_user_can = true;
-                        break; // Done here.
-                    }
-                } // Housekeeping.
-                unset($_caps, $_cap);
-
-                if (!$_current_user_can) {
-                    continue; // Do not display.
-                }
             }
             switch ($_notice['type']) {
                 case 'info':
@@ -261,11 +364,11 @@ class Notices extends WCoreClasses\PluginBase
                 // We use a different approach for dismissals.
 
                 $_style .= ' padding-right:38px; position:relative;';
-                $_dismiss = '<a class="notice-dismiss" href="'.esc_attr($_dismiss_url).'">'.
+                $_dismiss = '<a class="notice-dismiss" href="'.esc_attr($this->dismissUrl($_key)).'">'.
                                 '<span class="screen-reader-text">'.__('Dismiss this notice.').'</span>'.
                             '</a>';
             }
-            if (!preg_match('/^\<(?:p|div)[\s>]/ui', $_notice['markup'])) {
+            if (!preg_match('/^\<(?:p|div|h[1-6])[\s>]/ui', $_notice['markup'])) {
                 $_notice['markup'] = '<p>'.$_notice['markup'].'</p>';
             }
             echo '<div class="'.esc_attr($_class).'" style="'.esc_attr($_style).'">'.
@@ -275,11 +378,8 @@ class Notices extends WCoreClasses\PluginBase
             if (!$_notice['is_persistent']) {
                 unset($notices[$_key]);
             }
-        }
-        unset($_key, $_notice, $_current_user_can, $_class, $_style, $_dismiss);
+        } // unset($_key, $_notice, $_current_user_can, $_class, $_style, $_dismiss);
 
-        if ($original_notices !== $notices) {
-            $this->update($notices);
-        }
+        $this->update($notices);
     }
 }
