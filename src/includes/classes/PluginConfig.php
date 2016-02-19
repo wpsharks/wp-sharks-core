@@ -99,6 +99,11 @@ class PluginConfig extends CoreClasses\AbsCore
 
             'brand' => $brand,
 
+            'setup' => [
+                'priority'     => 10,
+                'enable_hooks' => true,
+            ],
+
             'fs_paths' => [
                 'logs_dir'  => $blog_tmp_dir.'/'.$brand['base_slug'].'/logs',
                 'cache_dir' => $blog_tmp_dir.'/'.$brand['base_slug'].'/cache',
