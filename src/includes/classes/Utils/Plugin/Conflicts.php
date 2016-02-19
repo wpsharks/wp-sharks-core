@@ -105,7 +105,7 @@ class Conflicts extends WCoreClasses\PluginBase
             }
         } // unset($_active_plugin_basename, $_active_plugin_slug, $_conflicting_plugin_name);
 
-        $this->maybeEnqueueNotice(); // If conflicts exist.
+        $this->maybeNotify(); // If conflicts exist.
     }
 
     /**
@@ -113,17 +113,15 @@ class Conflicts extends WCoreClasses\PluginBase
      *
      * @since 16xxxx Rewrite.
      */
-    protected function maybeEnqueueNotice()
+    protected function maybeNotify()
     {
         if (!$this->conflicts) {
             return; // No conflicts.
         }
-        // @TODO enhance this w/ notice utils.
-
         add_action('all_admin_notices', function () {
-            echo '<div class="error">'.// Error notice.
+            echo '<div class="notice notice-error">'.
                  '   <p>'.// Running one or more conflicting plugins at the same time.
-                 '      '.sprintf(__('<strong>%1$s</strong> is NOT running. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the %2$s plugin to clear this message.', SLUG_TD), esc_html($this_plugin_name), esc_html($conflicting_plugin_name)).
+                 '      '.sprintf(__('<strong>%1$s</strong> is NOT running. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' plugin to clear this message.'), esc_html($this->Plugin->Config->brand['name']), esc_html(end($this->conflicts))).
                  '   </p>'.
                  '</div>';
         });

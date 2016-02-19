@@ -38,8 +38,11 @@ class App extends CoreClasses\App
      */
     public function __construct()
     {
-        $blog_salt    = wp_salt();
-        $blog_tmp_dir = rtrim(get_temp_dir(), '/');
+        $slug = 'wp-sharks-core';
+        $var  = 'wp_sharks_core';
+
+        $blog_salt    = str_pad(wp_salt(), 64, 'x');
+        $blog_tmp_dir = rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
         $blog_scheme  = mb_strtlower(parse_url(site_url('/'), PHP_URL_SCHEME));
 
         parent::__construct([
@@ -96,8 +99,9 @@ class App extends CoreClasses\App
             ],
 
             'fs_paths' => [
-                'logs_dir'      => $blog_tmp_dir.'/wp-sharks-core/log',
-                'cache_dir'     => $blog_tmp_dir.'/wp-sharks-core/cache',
+                'tmp_dir'       => $blog_tmp_dir.'/'.$slug.'/tmp',
+                'logs_dir'      => $blog_tmp_dir.'/'.$slug.'/log',
+                'cache_dir'     => $blog_tmp_dir.'/'.$slug.'/cache',
                 'templates_dir' => dirname(__FILE__, 2).'/src/includes/templates',
                 'errors_dir'    => '', // N/A in WordPress.
                 'config_file'   => '', // N/A in WordPress.
@@ -114,7 +118,7 @@ class App extends CoreClasses\App
 
             'i18n' => [
                 'locales'     => [],
-                'text_domain' => 'wp-sharks-core',
+                'text_domain' => $slug,
             ],
 
             'email' => [
@@ -154,6 +158,12 @@ class App extends CoreClasses\App
             ],
             'bitly' => [
                 'api_key' => '',
+            ],
+
+            'wp' => [
+                'slug' => $slug,
+                'var'  => $var,
+                'salt' => $blog_salt,
             ],
         ]);
     }

@@ -25,6 +25,15 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class PluginUtils extends CoreClasses\AbsCore
 {
     /**
+     * App.
+     *
+     * @since 16xxxx
+     *
+     * @type App
+     */
+    protected $App;
+
+    /**
      * Plugin.
      *
      * @since 16xxxx
@@ -44,6 +53,7 @@ class PluginUtils extends CoreClasses\AbsCore
     {
         parent::__construct();
 
+        $this->App    = $GLOBALS[App::class];
         $this->Plugin = $Plugin;
     }
 

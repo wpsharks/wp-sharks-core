@@ -25,6 +25,15 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class PluginDi extends \WebSharks\Dicer\Di
 {
     /**
+     * App.
+     *
+     * @since 16xxxx
+     *
+     * @type App
+     */
+    protected $App;
+
+    /**
      * Plugin.
      *
      * @since 16xxxx
@@ -45,6 +54,7 @@ class PluginDi extends \WebSharks\Dicer\Di
     {
         parent::__construct($global_default_rule);
 
+        $this->App    = $GLOBALS[App::class];
         $this->Plugin = $Plugin;
     }
 }

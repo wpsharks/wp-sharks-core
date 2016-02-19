@@ -32,10 +32,15 @@ class Plugins extends CoreClasses\AppBase
     public function active(): array
     {
         if (!is_null($active = &$this->cacheKey(__FUNCTION__))) {
-            return $active; // Cached this already.
+            return $active;
         }
-        $active          = (array) get_option('active_plugins', []);
-        $active_sitewide = is_multisite() ? array_keys((array) get_site_option('active_sitewide_plugins', [])) : [];
+        if (!is_array($active = get_option('active_plugins'))) {
+            $active = [];
+        }
+        if (is_multisite() && !is_array($active_sitewide = get_site_option('active_sitewide_plugins'))) {
+            $active_sitewide = [];
+        }
+        $active_sitewide = isset($active_sitewide) ? array_keys($active_sitewide) : [];
         $active          = array_unique(array_merge($active, $active_sitewide));
 
         return $active;

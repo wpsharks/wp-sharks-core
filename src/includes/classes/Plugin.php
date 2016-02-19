@@ -25,6 +25,15 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 abstract class Plugin extends CoreClasses\AbsCore
 {
     /**
+     * App.
+     *
+     * @since 16xxxx
+     *
+     * @type App
+     */
+    protected $App;
+
+    /**
      * Namespace.
      *
      * @since 16xxxx
@@ -117,6 +126,8 @@ abstract class Plugin extends CoreClasses\AbsCore
     {
         parent::__construct();
 
+        $this->App = $GLOBALS[App::class];
+
         $Class = new \ReflectionClass($this);
 
         $this->namespace      = $Class->getNamespaceName();
@@ -130,7 +141,8 @@ abstract class Plugin extends CoreClasses\AbsCore
         $this->Utils  = new PluginUtils($this); // Utility class access.
 
         $GLOBALS[$Class->getName()]                = $this;
-        $GLOBALS[$this->Config->brand['var_base']] = $this;
+        $GLOBALS[$this->Config->brand['var']]      = $this;
+        $GLOBALS[$this->Config->brand['base_var']] = $this;
 
         $this->Di->addInstances([
             $this,
@@ -153,5 +165,39 @@ abstract class Plugin extends CoreClasses\AbsCore
             return;
         }
         $this->is_setup = true;
+
+        if (!$this->Config->setup['enable_hooks']) {
+            return; // No hooks.
+        }
+        add_action('all_admin_notices', [$this->Utils->Notices, 'display']);
+    }
+
+    /**
+     * Apply filters.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string $hook  A hook.
+     * @param mixed  $value Value to filter.
+     * @param mixed ...$args Any additional args.
+     *
+     * @return mixed Filtered `$value`.
+     */
+    public function applyFilters(string $hook, $value, ...$args)
+    {
+        return apply_filters($this->Config->brand['base_var'].'_'.$hook, $value, ...$args);
+    }
+
+    /**
+     * Do an action.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string $hook A hook.
+     * @param mixed ...$args Any additional args.
+     */
+    public function doAction(string $hook, ...$args)
+    {
+        do_action($this->Config->brand['base_var'].'_'.$hook, ...$args);
     }
 }

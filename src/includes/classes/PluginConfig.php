@@ -25,6 +25,15 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class PluginConfig extends CoreClasses\AbsCore
 {
     /**
+     * App.
+     *
+     * @since 16xxxx
+     *
+     * @type App
+     */
+    protected $App;
+
+    /**
      * Plugin.
      *
      * @since 16xxxx
@@ -46,6 +55,7 @@ class PluginConfig extends CoreClasses\AbsCore
     {
         parent::__construct();
 
+        $this->App    = $GLOBALS[App::class];
         $this->Plugin = $Plugin;
 
         $default_brand = [
@@ -82,7 +92,7 @@ class PluginConfig extends CoreClasses\AbsCore
         if (!isset($brand['is_pro'])) {
             $brand['is_pro'] = (bool) preg_match('/\-pro$/ui', $brand['slug']);
         }
-        $blog_tmp_dir = c\mb_rtrim(get_temp_dir(), '/');
+        $blog_tmp_dir = c\mb_rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
 
         $default_instance_base = [
             'type' => 'plugin',
@@ -105,8 +115,22 @@ class PluginConfig extends CoreClasses\AbsCore
             ],
 
             'fs_paths' => [
+                'tmp_dir'   => $blog_tmp_dir.'/'.$brand['base_slug'].'/tmp',
                 'logs_dir'  => $blog_tmp_dir.'/'.$brand['base_slug'].'/logs',
                 'cache_dir' => $blog_tmp_dir.'/'.$brand['base_slug'].'/cache',
+            ],
+
+            'keys' => [
+                'salt' => c\mb_str_pad(wp_salt(), 64, 'x'),
+            ],
+
+            'caps' => [
+                'administrate' => 'activate_plugins',
+                'manage'       => 'activate_plugins',
+                'view_notices' => 'activate_plugins',
+                'recompile'    => 'activate_plugins',
+                'update'       => 'update_plugins',
+                'uninstall'    => 'delete_plugins',
             ],
 
             'conflicting' => [
@@ -119,9 +143,10 @@ class PluginConfig extends CoreClasses\AbsCore
             ],
         ];
         $instance_base['brand'] = $instance['brand'] = $brand;
+        $instance_base          = $this->merge($default_instance_base, $instance_base);
 
-        $instance_base = $this->merge($default_instance_base, $instance_base);
-        $config        = $this->merge($instance_base, $instance);
+        $config = $this->merge($instance_base, $instance);
+        $config = apply_filters($brand['base_var'].'_config', $config);
 
         $this->overload((object) $config, true);
     }
