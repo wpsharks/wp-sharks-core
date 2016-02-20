@@ -61,6 +61,15 @@ abstract class Plugin extends CoreClasses\AbsCore
     public $dir;
 
     /**
+     * Dir basename.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $dir_basename;
+
+    /**
      * Core dir.
      *
      * @since 16xxxx
@@ -68,6 +77,33 @@ abstract class Plugin extends CoreClasses\AbsCore
      * @type string
      */
     public $core_dir;
+
+    /**
+     * Core dir basename.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $core_dir_basename;
+
+    /**
+     * Type.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $type;
+
+    /**
+     * File.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $file;
 
     /**
      * Config.
@@ -126,23 +162,35 @@ abstract class Plugin extends CoreClasses\AbsCore
     {
         parent::__construct();
 
-        $this->App = $GLOBALS[App::class];
-
         $Class = new \ReflectionClass($this);
+
+        $this->App                  = $GLOBALS[App::class];
+        $GLOBALS[$Class->getName()] = $this;
 
         $this->namespace      = $Class->getNamespaceName();
         $this->namespace_sha1 = sha1($this->namespace);
 
-        $this->dir      = dirname($Class->getFileName(), 4);
-        $this->core_dir = dirname(__FILE__, 4);
+        $this->dir          = dirname($Class->getFileName(), 4);
+        $this->dir_basename = basename($this->dir);
 
+        $this->core_dir          = dirname(__FILE__, 4);
+        $this->core_dir_basename = basename($this->core_dir);
+
+        if (is_file($this->dir.'/plugin.php')) {
+            $this->type = 'plugin';
+            $this->file = $this->dir.'/plugin.php';
+        } elseif (is_file($this->dir.'/'.$this->dir_basename.'.php')) {
+            $this->type = 'plugin';
+            $this->file = $this->dir.'/'.$this->dir_basename.'.php';
+        } elseif (is_file($this->dir.'/style.css')) {
+            $this->type = 'theme';
+            $this->file = $this->dir.'/style.css';
+        } else {
+            throw new Exception('Unable to determine type/file.');
+        }
         $this->Config = new PluginConfig($this, $instance_base, $instance);
         $this->Di     = new PluginDi($this, $this->Config->di['default_rule']);
         $this->Utils  = new PluginUtils($this); // Utility class access.
-
-        $GLOBALS[$Class->getName()]                = $this;
-        $GLOBALS[$this->Config->brand['var']]      = $this;
-        $GLOBALS[$this->Config->brand['base_var']] = $this;
 
         $this->Di->addInstances([
             $this,
@@ -150,7 +198,7 @@ abstract class Plugin extends CoreClasses\AbsCore
             $this->Utils,
         ]);
         if (!$this->Utils->Conflicts->exist()) {
-            add_action('after_setup_theme', [$this, 'setup'], $this->Config->setup['priority']);
+            add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], $this->Config->setup['priority']);
         }
     }
 
@@ -159,7 +207,7 @@ abstract class Plugin extends CoreClasses\AbsCore
      *
      * @since 16xxxx Initial release.
      */
-    public function setup()
+    public function onAfterSetupTheme()
     {
         if ($this->is_setup) {
             return;
@@ -169,7 +217,8 @@ abstract class Plugin extends CoreClasses\AbsCore
         if (!$this->Config->setup['enable_hooks']) {
             return; // No hooks.
         }
-        add_action('all_admin_notices', [$this->Utils->Notices, 'display']);
+        add_action('admin_init', [$this->Utils->Notices, 'onAdminInitMaybeDismiss']);
+        add_action('all_admin_notices', [$this->Utils->Notices, 'onAllAdminNotices']);
     }
 
     /**

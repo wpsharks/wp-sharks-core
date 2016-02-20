@@ -59,8 +59,6 @@ class PluginConfig extends CoreClasses\AbsCore
         $this->Plugin = $Plugin;
 
         $default_brand = [
-            'acronym' => '',
-
             'slug'      => '',
             'base_slug' => '',
 
@@ -70,24 +68,57 @@ class PluginConfig extends CoreClasses\AbsCore
             'name'      => '',
             'base_name' => '',
 
-            'domain'      => '',
-            'text_domain' => '',
+            'acronym'      => '',
+            'base_acronym' => '',
 
-            'qv_prefix'        => '',
-            'transient_prefix' => '',
+            'prefix'      => '',
+            'base_prefix' => '',
+
+            'domain'      => '',
+            'domain_path' => '',
+
+            'text_domain' => '',
 
             'is_pro' => null, // Pro version?
         ];
         $brand = array_merge($default_brand, $instance_base['brand'] ?? [], $instance['brand'] ?? []);
 
+        if (!$brand['slug']) {
+            $brand['slug'] = $this->Plugin->dir_basename;
+        }
         if (!$brand['base_slug']) {
             $brand['base_slug'] = preg_replace('/\-+(?:lite|pro)$/ui', '', $brand['slug']);
+        }
+        if (!$brand['var']) {
+            $brand['var'] = c\slug_to_var($brand['slug']);
         }
         if (!$brand['base_var']) {
             $brand['base_var'] = preg_replace('/_+(?:lite|pro)$/ui', '', $brand['var']);
         }
+        if (!$brand['name']) {
+            $brand['name'] = c\slug_to_name($brand['slug']);
+        }
         if (!$brand['base_name']) {
             $brand['base_name'] = preg_replace('/\s+(?:lite|pro)$/ui', '', $brand['name']);
+        }
+        if (!$brand['acronym']) {
+            $brand['acronym'] = c\name_to_acronym($brand['name']);
+        }
+        if (!$brand['base_acronym']) {
+            $brand['base_acronym'] = c\name_to_acronym($brand['base_name']);
+        }
+        if (!$brand['prefix']) {
+            $brand['prefix'] = c\name_to_slug($brand['acronym']);
+        }
+        if (!$brand['base_prefix']) {
+            $brand['base_prefix'] = c\name_to_slug($brand['base_acronym']);
+        }
+        if (!$brand['domain']) {
+            $brand['domain']      = $this->App->Config->app['brand']['domain'];
+            $brand['domain_path'] = '/product/'.$brand['base_slug'];
+        }
+        if (!$brand['text_domain']) {
+            $brand['text_domain'] = $brand['base_slug'];
         }
         if (!isset($brand['is_pro'])) {
             $brand['is_pro'] = (bool) preg_match('/\-pro$/ui', $brand['slug']);
@@ -95,8 +126,7 @@ class PluginConfig extends CoreClasses\AbsCore
         $blog_tmp_dir = c\mb_rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
 
         $default_instance_base = [
-            'type' => 'plugin',
-            'file' => '',
+            'brand' => $brand,
 
             'di' => [
                 'default_rule' => [
@@ -107,10 +137,8 @@ class PluginConfig extends CoreClasses\AbsCore
                 ],
             ],
 
-            'brand' => $brand,
-
             'setup' => [
-                'priority'     => 10,
+                'priority'     => -100,
                 'enable_hooks' => true,
             ],
 

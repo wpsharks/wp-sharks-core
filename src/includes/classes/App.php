@@ -23,6 +23,24 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class App extends CoreClasses\App
 {
     /**
+     * File.
+     *
+     * @since 16xxxx
+     *
+     * @type string
+     */
+    public $file;
+
+    /**
+     * Setup?
+     *
+     * @since 16xxxx
+     *
+     * @type bool
+     */
+    public $is_setup = false;
+
+    /**
      * Version.
      *
      * @since 16xxxx
@@ -38,12 +56,21 @@ class App extends CoreClasses\App
      */
     public function __construct()
     {
-        $slug = 'wp-sharks-core';
-        $var  = 'wp_sharks_core';
-
+        $brand = [
+            'slug'        => 'wp-sharks-core',
+            'var'         => 'wp_sharks_core',
+            'name'        => 'WP Sharks Core',
+            'acronym'     => 'WPSC',
+            'prefix'      => 'wpsc',
+            'domain'      => 'wpsharks.com',
+            'domain_path' => '/product/core',
+            'text_domain' => 'wp-sharks-core',
+        ];
         $blog_salt    = str_pad(wp_salt(), 64, 'x');
         $blog_tmp_dir = rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
         $blog_scheme  = mb_strtlower(parse_url(site_url('/'), PHP_URL_SCHEME));
+
+        $this->file = dirname(__FILE__, 4).'/plugin.php';
 
         parent::__construct([
             'debug'             => false,
@@ -71,9 +98,11 @@ class App extends CoreClasses\App
             ],
 
             'brand' => [
-                'acronym' => '',
-                'slug'    => '',
-                'name'    => '',
+                'slug'    => $brand['slug'],
+                'var'     => $brand['var'],
+                'name'    => $brand['name'],
+                'acronym' => $brand['acronym'],
+                'prefix'  => $brand['prefix'],
 
                 'keywords'    => '',
                 'description' => '',
@@ -99,9 +128,9 @@ class App extends CoreClasses\App
             ],
 
             'fs_paths' => [
-                'tmp_dir'       => $blog_tmp_dir.'/'.$slug.'/tmp',
-                'logs_dir'      => $blog_tmp_dir.'/'.$slug.'/log',
-                'cache_dir'     => $blog_tmp_dir.'/'.$slug.'/cache',
+                'tmp_dir'       => $blog_tmp_dir.'/'.$brand['slug'].'/tmp',
+                'logs_dir'      => $blog_tmp_dir.'/'.$brand['slug'].'/log',
+                'cache_dir'     => $blog_tmp_dir.'/'.$brand['slug'].'/cache',
                 'templates_dir' => dirname(__FILE__, 2).'/src/includes/templates',
                 'errors_dir'    => '', // N/A in WordPress.
                 'config_file'   => '', // N/A in WordPress.
@@ -118,7 +147,7 @@ class App extends CoreClasses\App
 
             'i18n' => [
                 'locales'     => [],
-                'text_domain' => $slug,
+                'text_domain' => $brand['text_domain'],
             ],
 
             'email' => [
@@ -160,11 +189,26 @@ class App extends CoreClasses\App
                 'api_key' => '',
             ],
 
-            'wp' => [
-                'slug' => $slug,
-                'var'  => $var,
-                'salt' => $blog_salt,
+            'app' => [
+                'brand' => $brand,
+                'keys'  => [
+                    'salt' => $blog_salt,
+                ],
             ],
         ]);
+        add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], -10000);
+    }
+
+    /**
+     * Setup handler.
+     *
+     * @since 16xxxx Initial release.
+     */
+    public function onAfterSetupTheme()
+    {
+        if ($this->is_setup) {
+            return;
+        }
+        $this->is_setup = true;
     }
 }

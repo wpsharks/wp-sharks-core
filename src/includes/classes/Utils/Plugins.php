@@ -35,14 +35,14 @@ class Plugins extends CoreClasses\AppBase
             return $active;
         }
         if (!is_array($active = get_option('active_plugins'))) {
-            $active = [];
+            $active = []; // Fprce an array.
         }
-        if (is_multisite() && !is_array($active_sitewide = get_site_option('active_sitewide_plugins'))) {
-            $active_sitewide = [];
+        if (is_multisite()) {
+            if (is_array($active_sitewide = get_site_option('active_sitewide_plugins'))) {
+                $active_sitewide = array_keys($active_sitewide);
+                $active          = array_merge($active, $active_sitewide);
+            }
         }
-        $active_sitewide = isset($active_sitewide) ? array_keys($active_sitewide) : [];
-        $active          = array_unique(array_merge($active, $active_sitewide));
-
-        return $active;
+        return array_unique($active);
     }
 }

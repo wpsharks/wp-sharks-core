@@ -43,8 +43,6 @@ class Notices extends WCoreClasses\PluginBase
     {
         parent::__construct($Plugin);
 
-        $cap = $this->Plugin->Config->caps['view_notices'];
-
         $this->defaults = [
             'id'            => '',
             'type'          => 'info',
@@ -52,7 +50,7 @@ class Notices extends WCoreClasses\PluginBase
             'markup'        => '',
             'for_user_id'   => 0,
             'for_page'      => '',
-            'requires_cap'  => $cap,
+            'requires_cap'  => $this->Plugin->Config->caps['view_notices'],
             'is_persistent' => false,
             'is_transient'  => false,
             'push_to_top'   => false,
@@ -108,7 +106,7 @@ class Notices extends WCoreClasses\PluginBase
         if ($notice['id']) {
             return $notice['id']; // Use as key also.
         }
-        return c\sha256_keyed_hash(serialize($notice), $this->App->Config->wp['salt']);
+        return c\sha256_keyed_hash(serialize($notice), $this->App->Config->app['keys']['salt']);
     }
 
     /**
@@ -271,7 +269,7 @@ class Notices extends WCoreClasses\PluginBase
      *
      * @see <http://jas.xyz/1Tuh3aI>
      */
-    public function maybeDismiss()
+    public function onAdminInitMaybeDismiss()
     {
         $action = $this->dismissAction();
         $key    = (string) ($_REQUEST[$action] ?? '');
@@ -309,7 +307,7 @@ class Notices extends WCoreClasses\PluginBase
      *
      * @see <http://jas.xyz/1Tuh3aI>
      */
-    public function display()
+    public function onAllAdminNotices()
     {
         if (!($notices = $this->get())) {
             return; // Nothing to do.
