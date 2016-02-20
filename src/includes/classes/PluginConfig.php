@@ -162,14 +162,18 @@ class PluginConfig extends CoreClasses\AbsCore
             ],
 
             'conflicting' => [
-                'plugins' => [ // Keys are plugin slugs, values are plugin names.
-                    $brand['base_slug'].($brand['is_pro'] ? '' : '-pro') => $brand['base_name'].($brand['is_pro'] ? ' Lite' : ' Pro'),
-                ],
-                'deactivatble_plugins' => [ // Keys are plugin slugs, values are plugin names.
-                    $brand['base_slug'].($brand['is_pro'] ? '' : '-pro') => $brand['base_name'].($brand['is_pro'] ? ' Lite' : ' Pro'),
-                ],
+                'plugins'              => [], // Slug keys, name values.
+                'themes'               => [], // Slug keys, name values.
+                'deactivatble_plugins' => [], // Slug keys, name values.
             ],
         ];
+        if ($this->Plugin->type === 'plugin') {
+            $lp_conflicting_slug = $brand['base_slug'].($brand['is_pro'] ? '' : '-pro');
+            $lp_conflicting_name = $brand['base_name'].($brand['is_pro'] ? ' Lite' : ' Pro');
+
+            $default_instance_base['conflicting']['plugins'][$lp_conflicting_slug]              = $lp_conflicting_name;
+            $default_instance_base['conflicting']['deactivatble_plugins'][$lp_conflicting_slug] = $lp_conflicting_name;
+        }
         $instance_base['brand'] = $instance['brand'] = $brand;
         $instance_base          = $this->merge($default_instance_base, $instance_base);
 
