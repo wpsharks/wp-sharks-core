@@ -181,9 +181,13 @@ class Notices extends WCoreClasses\PluginBase
      */
     public function enqueue(string $markup, array $args = [])
     {
-        $notice           = $args;
-        $notice['markup'] = &$markup; // + markup.
-        $notice           = $this->normalize($notice);
+        $notice = $args; // As notice.
+
+        // Use `$markup` if not in `$args`.
+        if ($markup && empty($notice['markup'])) {
+            $notice['markup'] = $markup;
+        }
+        $notice = $this->normalize($notice);
 
         if (!$notice['markup']) {
             return; // Nothing to do.
@@ -206,13 +210,15 @@ class Notices extends WCoreClasses\PluginBase
      *
      * @param string $markup HTML markup containing the notice itself.
      * @param array  $args   Additional args; i.e., presentation/style.
+     *
+     * @return mixed See {@link enqueue}.
      */
     public function uEnqueue($markup, array $args = [])
     {
         if (!isset($args['for_user_id'])) {
             $args['for_user_id'] = get_current_user_id();
         }
-        $this->enqueue($markup, $args);
+        return $this->enqueue($markup, $args);
     }
 
     /**

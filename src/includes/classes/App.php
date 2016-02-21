@@ -87,7 +87,10 @@ class App extends CoreClasses\App
             'di' => [
                 'default_rule' => [
                     'new_instances' => [
-
+                        Plugin::class,
+                        PluginDi::class,
+                        PluginConfig::class,
+                        PluginUtils::class,
                     ],
                 ],
             ],
@@ -196,19 +199,5 @@ class App extends CoreClasses\App
                 ],
             ],
         ]);
-        add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], -10000);
-    }
-
-    /**
-     * Setup handler.
-     *
-     * @since 16xxxx Initial release.
-     */
-    public function onAfterSetupTheme()
-    {
-        if ($this->is_setup) {
-            return;
-        }
-        $this->is_setup = true;
     }
 }

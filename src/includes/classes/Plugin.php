@@ -198,8 +198,30 @@ abstract class Plugin extends CoreClasses\AbsCore
             $this->Utils,
         ]);
         if (!$this->Utils->Conflicts->exist()) {
+            register_activation_hook($this->file, [$this, 'onActivation']);
+            register_deactivation_hook($this->file, [$this, 'onDeactivation']);
             add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], $this->Config->setup['priority']);
         }
+    }
+
+    /**
+     * Activation handler.
+     *
+     * @since 16xxxx Initial release.
+     */
+    public function onActivation()
+    {
+        $this->Utils->Install();
+    }
+
+    /**
+     * Deactivation handler.
+     *
+     * @since 16xxxx Initial release.
+     */
+    public function onDeactivation()
+    {
+        // Nothing at this time.
     }
 
     /**

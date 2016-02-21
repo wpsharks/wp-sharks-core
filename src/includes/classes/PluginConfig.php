@@ -43,6 +43,24 @@ class PluginConfig extends CoreClasses\AbsCore
     protected $Plugin;
 
     /**
+     * Default options.
+     *
+     * @since 16xxxx
+     *
+     * @type array
+     */
+    protected $default_options;
+
+    /**
+     * Instance options.
+     *
+     * @since 16xxxx
+     *
+     * @type array
+     */
+    protected $instance_options;
+
+    /**
      * Class constructor.
      *
      * @since 16xxxx Initial release.
@@ -58,7 +76,7 @@ class PluginConfig extends CoreClasses\AbsCore
         $this->App    = $GLOBALS[App::class];
         $this->Plugin = $Plugin;
 
-        $default_brand = [
+        $default_brand_base = [
             'slug'      => '',
             'base_slug' => '',
 
@@ -79,10 +97,13 @@ class PluginConfig extends CoreClasses\AbsCore
 
             'text_domain' => '',
 
-            'is_pro' => null, // Pro version?
+            'is_pro' => null,
         ];
-        $brand = array_merge($default_brand, $instance_base['brand'] ?? [], $instance['brand'] ?? []);
-
+        $brand = array_merge(
+            $default_brand_base,
+            $instance_base['brand'] ?? [],
+            $instance['brand'] ?? []
+        );
         if (!$brand['slug']) {
             $brand['slug'] = $this->Plugin->dir_basename;
         }
@@ -125,12 +146,21 @@ class PluginConfig extends CoreClasses\AbsCore
         }
         $blog_tmp_dir = c\mb_rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
 
+        if (!is_array($blog_options = get_option($brand['base_var'].'_options'))) {
+            update_option($brand['base_var'].'_options', $blog_options = []);
+        }
         $default_instance_base = [
-            'brand' => $brand,
+            'brand' => $default_brand_base,
 
             'di' => [
                 'default_rule' => [
-                    'new_instances'    => [],
+                    'new_instances' => [
+                        self::class,
+                        Plugin::class,
+                        PluginDi::class,
+                        PluginOptions::class,
+                        PluginUtils::class,
+                    ],
                     'constructor_args' => [
                         'Plugin' => $this->Plugin,
                     ],
@@ -140,6 +170,10 @@ class PluginConfig extends CoreClasses\AbsCore
             'setup' => [
                 'priority'     => -100,
                 'enable_hooks' => true,
+            ],
+
+            'db' => [
+                'tables_dir' => $this->Plugin->dir.'/src/includes/tables',
             ],
 
             'fs_paths' => [
@@ -152,19 +186,24 @@ class PluginConfig extends CoreClasses\AbsCore
                 'salt' => c\mb_str_pad(wp_salt(), 64, 'x'),
             ],
 
-            'caps' => [
-                'administrate' => 'activate_plugins',
-                'manage'       => 'activate_plugins',
-                'view_notices' => 'activate_plugins',
-                'recompile'    => 'activate_plugins',
-                'update'       => 'update_plugins',
-                'uninstall'    => 'delete_plugins',
-            ],
-
             'conflicting' => [
                 'plugins'              => [], // Slug keys, name values.
                 'themes'               => [], // Slug keys, name values.
                 'deactivatble_plugins' => [], // Slug keys, name values.
+            ],
+
+            'options' => [
+                'cap_administrate' => 'activate_plugins',
+                'cap_manage'       => 'activate_plugins',
+                'cap_view_notices' => 'activate_plugins',
+                'cap_recompile'    => 'activate_plugins',
+                'cap_update'       => 'update_plugins',
+                'cap_uninstall'    => 'delete_plugins',
+            ],
+            'pro_option_keys' => [],
+
+            'notices' => [
+                'on_install' => null,
             ],
         ];
         if ($this->Plugin->type === 'plugin') {
@@ -174,13 +213,73 @@ class PluginConfig extends CoreClasses\AbsCore
             $default_instance_base['conflicting']['plugins'][$lp_conflicting_slug]              = $lp_conflicting_name;
             $default_instance_base['conflicting']['deactivatble_plugins'][$lp_conflicting_slug] = $lp_conflicting_name;
         }
-        $instance_base['brand'] = $instance['brand'] = $brand;
-        $instance_base          = $this->merge($default_instance_base, $instance_base);
+        $instance_base = $this->merge($default_instance_base, $instance_base);
 
-        $config = $this->merge($instance_base, $instance);
-        $config = apply_filters($brand['base_var'].'_config', $config);
+        $this->default_options  = $instance_base['options']; // Base default options.
+        $this->instance_options = $instance['options'] ?? []; // Highest precedence.
+
+        $options = $this->mergeOptions($this->default_options, $blog_options);
+        $options = $this->mergeOptions($options, $this->instance_options);
+
+        $config            = $this->merge($instance_base, $instance);
+        $config['options'] = &$options; // By reference.
+        $config['brand']   = &$brand; // By reference.
+
+        $config            = apply_filters($brand['base_var'].'_config', $config);
+        $config['options'] = apply_filters($brand['base_var'].'_options', $config['options']);
 
         $this->overload((object) $config, true);
+    }
+
+    /**
+     * Update options.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param array $new_blog_options New options.
+     *
+     * @note An option can be set to `null` to force a default option value.
+     */
+    public function updateOptions(array $new_blog_options)
+    {
+        if (!is_array($blog_options = get_option($this->brand['base_var'].'_options'))) {
+            update_option($this->brand['base_var'].'_options', $blog_options = []);
+        }
+        $blog_options = $this->mergeOptions($this->default_options, $blog_options);
+        $blog_options = $this->mergeOptions($blog_options, $new_blog_options);
+
+        update_option($this->brand['base_var'].'_options', $blog_options);
+
+        $this->options = $this->mergeOptions($blog_options, $this->instance_options);
+        $this->options = apply_filters($this->brand['base_var'].'_options', $this->options);
+    }
+
+    /**
+     * Merge options.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param array $base  Base array.
+     * @param array $merge Array to merge.
+     *
+     * @return array The resuling array after merging.
+     *
+     * @note An option can be set to `null` to force a default option value.
+     */
+    protected function mergeOptions(array $base, array $merge): array
+    {
+        $options = array_merge($base, $merge);
+        $options = array_intersect_key($options, $this->default_options);
+
+        foreach ($this->default_options as $_key => $_default_option_value) {
+            if (is_null($options[$_key])) {
+                $options[$_key] = $_default_option_value;
+            } else {
+                settype($options[$_key], gettype($_default_option_value));
+            }
+        } // unset($_key, $_default_option_value);
+
+        return $options;
     }
 
     /**
