@@ -223,7 +223,8 @@ abstract class Plugin extends CoreClasses\AbsCore
         $this->is_setup = true;
 
         if ($this->Config->setup['enable_hooks']) {
-            add_action('admin_init', [$this->Config, 'onAdminInitMaybeRestoreDefaultOptions']);
+            add_action('admin_init', [$this->Utils->Options, 'onAdminInitMaybeRestoreDefaults']);
+
             add_action('admin_init', [$this->Utils->Notices, 'onAdminInitMaybeDismiss']);
             add_action('all_admin_notices', [$this->Utils->Notices, 'onAllAdminNotices']);
         }

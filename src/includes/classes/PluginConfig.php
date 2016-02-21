@@ -49,7 +49,7 @@ class PluginConfig extends CoreClasses\AbsCore
      *
      * @type array
      */
-    protected $default_options;
+    public $default_options;
 
     /**
      * Instance options.
@@ -58,7 +58,7 @@ class PluginConfig extends CoreClasses\AbsCore
      *
      * @type array
      */
-    protected $instance_options;
+    public $instance_options;
 
     /**
      * Class constructor.
@@ -193,10 +193,11 @@ class PluginConfig extends CoreClasses\AbsCore
                 'deactivatble_plugins' => [], // Slug keys, name values.
             ],
 
-            'options' => [
-                'cap_manage'       => 'activate_plugins',
-                'cap_view_notices' => 'activate_plugins',
+            'caps' => [
+                'manage' => 'activate_plugins',
             ],
+
+            'options'         => [],
             'pro_option_keys' => [],
 
             'notices' => [
@@ -227,73 +228,6 @@ class PluginConfig extends CoreClasses\AbsCore
         $config['options'] = apply_filters($brand['base_var'].'_options', $config['options']);
 
         $this->overload((object) $config, true);
-    }
-
-    /**
-     * Restore default options.
-     *
-     * @since 16xxxx Initial release.
-     */
-    public function restoreDefaultOptions()
-    {
-        $this->updateOptions($this->default_options);
-    }
-
-    /**
-     * Restore default options.
-     *
-     * @since 16xxxx Initial release.
-     */
-    protected function restoreDefaultOptionsAction()
-    {
-        return $this->brand['base_var'].'_restore_default_options';
-    }
-
-    /**
-     * Restore default options URL.
-     *
-     * @since 16xxxx Initial release.
-     *
-     * @return string Restore default options URL.
-     */
-    public function restoreDefaultOptionsUrl(): string
-    {
-        $url    = c\current_url();
-        $action = $this->restoreDefaultOptionsAction();
-        $url    = c\add_url_query_args([$action => ''], $url);
-        $url    = wc\add_url_nonce($url, $action);
-
-        return $url;
-    }
-
-    /**
-     * Maybe restore default options.
-     *
-     * @since 16xxxx Initial release.
-     *
-     * @attaches-to `admin_init` action.
-     */
-    public function onAdminInitMaybeRestoreDefaultOptions()
-    {
-        $action = $this->restoreDefaultOptionsAction();
-
-        if (!isset($_REQUEST[$action])) {
-            return; // Nothing to do.
-        }
-        c\no_cache_headers();
-        wc\require_valid_nonce($action);
-
-        if (!current_user_can($this->options['cap_manage'])) {
-            wc\die_forbidden();
-        }
-        $this->restoreDefaultOptions();
-
-        $url = c\current_url();
-        $url = wc\remove_url_nonce($url);
-        $url = c\remove_url_query_args([$action], $url);
-
-        wp_redirect($url);
-        exit; // Stop.
     }
 
     /**
