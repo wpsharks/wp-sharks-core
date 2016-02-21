@@ -59,11 +59,11 @@ class Db extends WCoreClasses\PluginBase
     }
 
     /**
-     * Create DB tables (if not exists).
+     * Create missing DB tables.
      *
      * @since 16xxxx DB utils.
      */
-    public function createTables()
+    public function createMissingTables()
     {
         $tables_dir = $this->Plugin->Config->db['tables_dir'];
         $Tables     = c\dir_regex_recursive_iterator($tables_dir, '/\.sql$/ui');
@@ -92,11 +92,11 @@ class Db extends WCoreClasses\PluginBase
     }
 
     /**
-     * Drop DB tables (if exists).
+     * Drop existing DB tables.
      *
      * @since 16xxxx DB utils.
      */
-    public function dropTables()
+    public function dropExistingTables()
     {
         $tables_dir = $this->Plugin->Config->db['tables_dir'];
         $Tables     = c\dir_regex_recursive_iterator($tables_dir, '/\.sql$/ui');

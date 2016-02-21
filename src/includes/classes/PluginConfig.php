@@ -168,6 +168,7 @@ class PluginConfig extends CoreClasses\AbsCore
             ],
 
             'setup' => [
+                'enable'       => true,
                 'priority'     => -100,
                 'enable_hooks' => true,
             ],
@@ -196,14 +197,12 @@ class PluginConfig extends CoreClasses\AbsCore
                 'cap_administrate' => 'activate_plugins',
                 'cap_manage'       => 'activate_plugins',
                 'cap_view_notices' => 'activate_plugins',
-                'cap_recompile'    => 'activate_plugins',
-                'cap_update'       => 'update_plugins',
-                'cap_uninstall'    => 'delete_plugins',
             ],
             'pro_option_keys' => [],
 
             'notices' => [
-                'on_install' => null,
+                'on_install'   => null,
+                'on_reinstall' => null,
             ],
         ];
         if ($this->Plugin->type === 'plugin') {
@@ -238,7 +237,7 @@ class PluginConfig extends CoreClasses\AbsCore
      *
      * @param array $new_blog_options New options.
      *
-     * @note An option can be set to `null` to force a default option value.
+     * @note `null` options force a default value.
      */
     public function updateOptions(array $new_blog_options)
     {
@@ -264,7 +263,7 @@ class PluginConfig extends CoreClasses\AbsCore
      *
      * @return array The resuling array after merging.
      *
-     * @note An option can be set to `null` to force a default option value.
+     * @note `null` options force a default value.
      */
     protected function mergeOptions(array $base, array $merge): array
     {

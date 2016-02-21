@@ -192,36 +192,19 @@ abstract class Plugin extends CoreClasses\AbsCore
         $this->Di     = new PluginDi($this, $this->Config->di['default_rule']);
         $this->Utils  = new PluginUtils($this); // Utility class access.
 
-        $this->Di->addInstances([
-            $this,
-            $this->Config,
-            $this->Utils,
-        ]);
-        if (!$this->Utils->Conflicts->exist()) {
-            register_activation_hook($this->file, [$this, 'onActivation']);
-            register_deactivation_hook($this->file, [$this, 'onDeactivation']);
+        if ($this->Utils->Conflicts->exist()) {
+            return; // Stop on conflicts!
+        }
+        if (!defined('WP_UNINSTALL_PLUGIN')) {
+            $this->Utils->Installer->checkVersion();
+        }
+        $GLOBALS[$this->Config->brand['base_var']] = $this->Utils->Api;
+        if (c\can_call_func('eval')) { // Also expose a global function for easy access.
+                eval('function '.$this->Config->brand['base_var'].'(){ return $GLOBALS[\''.$this->Config->brand['base_var'].'\']; }');
+        }
+        if ($this->Config->setup['enable']) {
             add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], $this->Config->setup['priority']);
         }
-    }
-
-    /**
-     * Activation handler.
-     *
-     * @since 16xxxx Initial release.
-     */
-    public function onActivation()
-    {
-        $this->Utils->Install();
-    }
-
-    /**
-     * Deactivation handler.
-     *
-     * @since 16xxxx Initial release.
-     */
-    public function onDeactivation()
-    {
-        // Nothing at this time.
     }
 
     /**
@@ -231,16 +214,18 @@ abstract class Plugin extends CoreClasses\AbsCore
      */
     public function onAfterSetupTheme()
     {
+        if (!$this->Config->setup['enable']) {
+            return; // Disabled.
+        }
         if ($this->is_setup) {
-            return;
+            return; // Done.
         }
         $this->is_setup = true;
 
-        if (!$this->Config->setup['enable_hooks']) {
-            return; // No hooks.
+        if ($this->Config->setup['enable_hooks']) {
+            add_action('admin_init', [$this->Utils->Notices, 'onAdminInitMaybeDismiss']);
+            add_action('all_admin_notices', [$this->Utils->Notices, 'onAllAdminNotices']);
         }
-        add_action('admin_init', [$this->Utils->Notices, 'onAdminInitMaybeDismiss']);
-        add_action('all_admin_notices', [$this->Utils->Notices, 'onAllAdminNotices']);
     }
 
     /**
