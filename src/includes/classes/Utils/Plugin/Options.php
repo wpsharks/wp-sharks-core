@@ -111,8 +111,9 @@ class Options extends WCoreClasses\PluginBase
      */
     public function onAdminInitMaybeSave()
     {
-        $Config = $this->Plugin->Config;
-        $action = $this->save_action;
+        $Config  = $this->Plugin->Config;
+        $Notices = $this->Plugin->Utils->Notices;
+        $action  = $this->save_action;
 
         if (empty($_REQUEST[$action])) {
             return; // Nothing to do.
@@ -129,7 +130,9 @@ class Options extends WCoreClasses\PluginBase
         $url = c\current_url();
         $url = wc\remove_url_nonce($url);
 
-        // @TODO enqueue notice here.
+        $markup = __('%1$s options updated successfully.');
+        $markup = sprintf($markup, esc_html($Config->brand['base_name']));
+        $Notices->uEnqueue($markup, ['type' => 'success']);
 
         wp_redirect($url);
         exit; // Stop.
