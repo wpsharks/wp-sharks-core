@@ -43,6 +43,8 @@ class Notices extends WCoreClasses\PluginBase
     {
         parent::__construct($Plugin);
 
+        $Config = $this->Plugin->Config;
+
         $this->defaults = [
             'id'            => '',
             'type'          => 'info',
@@ -50,7 +52,7 @@ class Notices extends WCoreClasses\PluginBase
             'markup'        => '',
             'for_user_id'   => 0,
             'for_page'      => '',
-            'requires_cap'  => $this->Plugin->Config->options['cap_view_notices'],
+            'requires_cap'  => $Config->options['cap_view_notices'],
             'is_persistent' => false,
             'is_transient'  => false,
             'push_to_top'   => false,
@@ -150,9 +152,11 @@ class Notices extends WCoreClasses\PluginBase
      */
     protected function get(): array
     {
-        if (!is_array($notices = get_option($this->Plugin->Config->brand['base_var'].'_notices'))) {
-            delete_option($this->Plugin->Config->brand['base_var'].'_notices');
-            add_option($this->Plugin->Config->brand['base_var'].'_notices', $notices = [], '', 'no');
+        $Config = $this->Plugin->Config;
+
+        if (!is_array($notices = get_option($Config->brand['base_var'].'_notices'))) {
+            delete_option($Config->brand['base_var'].'_notices');
+            add_option($Config->brand['base_var'].'_notices', $notices = [], '', 'no');
         }
         return $notices;
     }
@@ -166,8 +170,10 @@ class Notices extends WCoreClasses\PluginBase
      */
     protected function update(array $notices)
     {
+        $Config = $this->Plugin->Config;
+
         if ($this->get() !== $notices) {
-            update_option($this->Plugin->Config->brand['base_var'].'_notices', $notices);
+            update_option($Config->brand['base_var'].'_notices', $notices);
         }
     }
 
@@ -244,7 +250,9 @@ class Notices extends WCoreClasses\PluginBase
      */
     protected function dismissAction(): string
     {
-        return 'dismiss_'.$this->Plugin->Config->brand['base_var'].'_notice';
+        $Config = $this->Plugin->Config;
+
+        return 'dismiss_'.$Config->brand['base_var'].'_notice';
     }
 
     /**

@@ -43,13 +43,15 @@ class Installer extends WCoreClasses\PluginBase
     {
         parent::__construct($Plugin);
 
+        $Config = $this->Plugin->Config;
+
         $default_history = [
             'first_time'   => 0,
             'last_time'    => 0,
             'last_version' => '',
             'versions'     => [],
         ];
-        if (!is_array($this->history = get_option($this->Plugin->Config->brand['base_var'].'_install_history'))) {
+        if (!is_array($this->history = get_option($Config->brand['base_var'].'_install_history'))) {
             $this->history = $default_history;
         }
         $this->history = array_merge($default_history, $this->history);
@@ -116,15 +118,16 @@ class Installer extends WCoreClasses\PluginBase
      */
     protected function enqueueNotice()
     {
+        $Config  = $this->Plugin->Config;
         $Notices = $this->Plugin->Utils->Notices;
 
         if (!$this->history['first_time']) {
-            if ($this->Plugin->Config->notices['on_install']) {
-                $Notices->enqueue('', $this->Plugin->Config->notices['on_install']);
+            if ($Config->notices['on_install']) {
+                $Notices->enqueue('', $Config->notices['on_install']);
             }
         } else {
-            if ($this->Plugin->Config->notices['on_reinstall']) {
-                $Notices->enqueue('', $this->Plugin->Config->notices['on_reinstall']);
+            if ($Config->notices['on_reinstall']) {
+                $Notices->enqueue('', $Config->notices['on_reinstall']);
             }
         }
     }
@@ -136,7 +139,8 @@ class Installer extends WCoreClasses\PluginBase
      */
     protected function updateHistory()
     {
-        $time = time();
+        $time   = time();
+        $Config = $this->Plugin->Config;
 
         if (!$this->history['first_time']) {
             $this->history['first_time'] = $time;
@@ -145,6 +149,6 @@ class Installer extends WCoreClasses\PluginBase
         $this->history['last_version']                     = $this->Plugin::VERSION;
         $this->history['versions'][$this->Plugin::VERSION] = $time;
 
-        update_option($this->Plugin->Config->brand['base_var'].'_install_history', $this->history);
+        update_option($Config->brand['base_var'].'_install_history', $this->history);
     }
 }

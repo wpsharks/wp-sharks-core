@@ -55,7 +55,9 @@ class Db extends WCoreClasses\PluginBase
      */
     public function prefix(): string
     {
-        return $this->wp->prefix.$this->Plugin->Config->brand['base_prefix'].'_';
+        $Config = $this->Plugin->Config;
+
+        return $this->wp->prefix.$Config->brand['base_prefix'].'_';
     }
 
     /**
@@ -65,7 +67,8 @@ class Db extends WCoreClasses\PluginBase
      */
     public function createMissingTables()
     {
-        $tables_dir = $this->Plugin->Config->db['tables_dir'];
+        $Config     = $this->Plugin->Config;
+        $tables_dir = $Config->db['tables_dir'];
         $Tables     = c\dir_regex_recursive_iterator($tables_dir, '/\.sql$/ui');
 
         foreach ($Tables as $_Table) {
@@ -98,7 +101,8 @@ class Db extends WCoreClasses\PluginBase
      */
     public function dropExistingTables()
     {
-        $tables_dir = $this->Plugin->Config->db['tables_dir'];
+        $Config     = $this->Plugin->Config;
+        $tables_dir = $Config->db['tables_dir'];
         $Tables     = c\dir_regex_recursive_iterator($tables_dir, '/\.sql$/ui');
 
         foreach ($Tables as $_Table) {

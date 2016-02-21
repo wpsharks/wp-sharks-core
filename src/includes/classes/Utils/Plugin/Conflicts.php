@@ -97,31 +97,33 @@ class Conflicts extends WCoreClasses\PluginBase
     public function check()
     {
         if ($this->checked) {
-            return; // Did this already.
+            return; // Done.
         }
-        $this->checked = true; // Checking now.
+        $this->checked = true;
 
-        if (!$this->Plugin->Config->conflicting['plugins']) {
+        $Config = $this->Plugin->Config;
+
+        if (!$Config->conflicting['plugins']) {
             return; // Nothing to do here.
         }
         $is_admin          = is_admin();
         $active_theme_slug = get_template();
         $active_plugins    = wc\all_active_plugins();
 
-        $conflicting_plugins      = $this->Plugin->Config->conflicting['plugins'];
-        $conflicting_plugin_slugs = array_keys($this->Plugin->Config->conflicting['plugins']);
+        $conflicting_plugins      = $Config->conflicting['plugins'];
+        $conflicting_plugin_slugs = array_keys($Config->conflicting['plugins']);
 
-        $deactivatble_plugins      = $this->Plugin->Config->conflicting['deactivatble_plugins'];
-        $deactivatble_plugin_slugs = array_keys($this->Plugin->Config->conflicting['deactivatble_plugins']);
+        $deactivatble_plugins      = $Config->conflicting['deactivatble_plugins'];
+        $deactivatble_plugin_slugs = array_keys($Config->conflicting['deactivatble_plugins']);
 
-        $conflicting_themes      = $this->Plugin->Config->conflicting['themes'];
-        $conflicting_theme_slugs = array_keys($this->Plugin->Config->conflicting['themes']);
+        $conflicting_themes      = $Config->conflicting['themes'];
+        $conflicting_theme_slugs = array_keys($Config->conflicting['themes']);
 
         foreach ($active_plugins as $_active_plugin_basename) {
             if (!($_active_plugin_slug = mb_strstr($_active_plugin_basename, '/', true))) {
                 continue; // Sanity check. Cannot be empty.
             }
-            if ($_active_plugin_slug === $this->Plugin->Config->brand['slug']) {
+            if ($_active_plugin_slug === $Config->brand['slug']) {
                 continue; // Sanity check. Cannot conflict w/ self.
             }
             if (in_array($_active_plugin_slug, $conflicting_plugin_slugs, true)) {
@@ -155,32 +157,34 @@ class Conflicts extends WCoreClasses\PluginBase
      */
     protected function maybeNotify()
     {
+        $Config = $this->Plugin->Config;
+
         if ($this->plugins) {
-            add_action('all_admin_notices', function () {
+            add_action('all_admin_notices', function () use ($Config) {
                 if (!current_user_can('activate_plugins')) {
                     return; // Do not show.
                 }
                 echo '<div class="notice notice-error">'.
-                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' plugin to clear this message.'), esc_html($this->Plugin->Config->brand['name']), esc_html(end($this->plugins))).'</p>'.
+                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' plugin to clear this message.'), esc_html($Config->brand['name']), esc_html(end($this->plugins))).'</p>'.
                      '</div>';
             });
         } elseif ($this->themes) {
-            add_action('all_admin_notices', function () {
+            add_action('all_admin_notices', function () use ($Config) {
                 if (!current_user_can('activate_plugins')) {
                     return; // Do not show.
                 }
                 echo '<div class="notice notice-error">'.
-                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' theme to clear this message.'), esc_html($this->Plugin->Config->brand['name']), esc_html(end($this->themes))).'</p>'.
+                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' theme to clear this message.'), esc_html($Config->brand['name']), esc_html(end($this->themes))).'</p>'.
                      '</div>';
             });
         } elseif ($this->deactivatble_plugins) {
-            add_action('all_admin_notices', function () {
+            add_action('all_admin_notices', function () use ($Config) {
                 if (!current_user_can('activate_plugins')) {
                     return; // Do not show.
                 }
                 echo '<div class="notice notice-warning">'.
-                        '<p>'.sprintf(__('The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>.'), esc_html($this->Plugin->Config->brand['name']), esc_html(implode(', ', $this->deactivatble_plugins))).'</p>'.
-                        '<p>'.sprintf(__('<strong>%1$s</strong> will load now. Please <a href="javascript:location.reload();">refresh</a>.'), esc_html($this->Plugin->Config->brand['name'])).'</p>'.
+                        '<p>'.sprintf(__('The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>.'), esc_html($Config->brand['name']), esc_html(implode(', ', $this->deactivatble_plugins))).'</p>'.
+                        '<p>'.sprintf(__('<strong>%1$s</strong> will load now. Please <a href="javascript:location.reload();">refresh</a>.'), esc_html($Config->brand['name'])).'</p>'.
                      '</div>';
             });
         }

@@ -66,9 +66,9 @@ class App extends CoreClasses\App
             'domain_path' => '/product/core',
             'text_domain' => 'wp-sharks-core',
         ];
-        $blog_salt    = str_pad(wp_salt(), 64, 'x');
-        $blog_tmp_dir = rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
-        $blog_scheme  = mb_strtlower(parse_url(site_url('/'), PHP_URL_SCHEME));
+        $site_salt    = str_pad(wp_salt(), 64, 'x');
+        $site_tmp_dir = rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
+        $site_scheme  = mb_strtlower(parse_url(site_url('/'), PHP_URL_SCHEME));
 
         $this->file = dirname(__FILE__, 4).'/plugin.php';
 
@@ -126,14 +126,14 @@ class App extends CoreClasses\App
                     'cdn_s3' => '',
                 ],
                 'cdn_filter_enable' => false,
-                'default_scheme'    => $blog_scheme,
-                'sig_key'           => $blog_salt,
+                'default_scheme'    => $site_scheme,
+                'sig_key'           => $site_salt,
             ],
 
             'fs_paths' => [
-                'tmp_dir'       => $blog_tmp_dir.'/'.$brand['slug'].'/tmp',
-                'logs_dir'      => $blog_tmp_dir.'/'.$brand['slug'].'/log',
-                'cache_dir'     => $blog_tmp_dir.'/'.$brand['slug'].'/cache',
+                'tmp_dir'       => $site_tmp_dir.'/'.$brand['slug'].'/tmp',
+                'logs_dir'      => $site_tmp_dir.'/'.$brand['slug'].'/log',
+                'cache_dir'     => $site_tmp_dir.'/'.$brand['slug'].'/cache',
                 'templates_dir' => dirname(__FILE__, 2).'/src/includes/templates',
                 'errors_dir'    => '', // N/A in WordPress.
                 'config_file'   => '', // N/A in WordPress.
@@ -169,13 +169,13 @@ class App extends CoreClasses\App
             ],
 
             'cookies' => [
-                'encryption_key' => $blog_salt,
+                'encryption_key' => $site_salt,
             ],
             'hash_ids' => [
-                'hash_key' => $blog_salt,
+                'hash_key' => $site_salt,
             ],
             'passwords' => [
-                'hash_key' => $blog_salt,
+                'hash_key' => $site_salt,
             ],
 
             'aws' => [
@@ -195,7 +195,7 @@ class App extends CoreClasses\App
             'app' => [
                 'brand' => $brand,
                 'keys'  => [
-                    'salt' => $blog_salt,
+                    'salt' => $site_salt,
                 ],
             ],
         ]);

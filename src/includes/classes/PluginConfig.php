@@ -144,10 +144,10 @@ class PluginConfig extends CoreClasses\AbsCore
         if (!isset($brand['is_pro'])) {
             $brand['is_pro'] = (bool) preg_match('/\-pro$/ui', $brand['slug']);
         }
-        $blog_tmp_dir = c\mb_rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
+        $site_tmp_dir = c\mb_rtrim(get_temp_dir(), '/').'/'.sha1(ABSPATH);
 
-        if (!is_array($blog_options = get_option($brand['base_var'].'_options'))) {
-            update_option($brand['base_var'].'_options', $blog_options = []);
+        if (!is_array($site_options = get_option($brand['base_var'].'_options'))) {
+            update_option($brand['base_var'].'_options', $site_options = []);
         }
         $default_instance_base = [
             'brand' => $default_brand_base,
@@ -178,9 +178,9 @@ class PluginConfig extends CoreClasses\AbsCore
             ],
 
             'fs_paths' => [
-                'tmp_dir'   => $blog_tmp_dir.'/'.$brand['base_slug'].'/tmp',
-                'logs_dir'  => $blog_tmp_dir.'/'.$brand['base_slug'].'/logs',
-                'cache_dir' => $blog_tmp_dir.'/'.$brand['base_slug'].'/cache',
+                'tmp_dir'   => $site_tmp_dir.'/'.$brand['base_slug'].'/tmp',
+                'logs_dir'  => $site_tmp_dir.'/'.$brand['base_slug'].'/logs',
+                'cache_dir' => $site_tmp_dir.'/'.$brand['base_slug'].'/cache',
             ],
 
             'keys' => [
@@ -217,7 +217,7 @@ class PluginConfig extends CoreClasses\AbsCore
         $this->default_options  = $instance_base['options']; // Base default options.
         $this->instance_options = $instance['options'] ?? []; // Highest precedence.
 
-        $options = $this->mergeOptions($this->default_options, $blog_options);
+        $options = $this->mergeOptions($this->default_options, $site_options);
         $options = $this->mergeOptions($options, $this->instance_options);
 
         $config            = $this->merge($instance_base, $instance);
@@ -235,21 +235,21 @@ class PluginConfig extends CoreClasses\AbsCore
      *
      * @since 16xxxx Initial release.
      *
-     * @param array $new_blog_options New options.
+     * @param array $new_site_options New options.
      *
      * @note `null` options force a default value.
      */
-    public function updateOptions(array $new_blog_options)
+    public function updateOptions(array $new_site_options)
     {
-        if (!is_array($blog_options = get_option($this->brand['base_var'].'_options'))) {
-            update_option($this->brand['base_var'].'_options', $blog_options = []);
+        if (!is_array($site_options = get_option($this->brand['base_var'].'_options'))) {
+            update_option($this->brand['base_var'].'_options', $site_options = []);
         }
-        $blog_options = $this->mergeOptions($this->default_options, $blog_options);
-        $blog_options = $this->mergeOptions($blog_options, $new_blog_options);
+        $site_options = $this->mergeOptions($this->default_options, $site_options);
+        $site_options = $this->mergeOptions($site_options, $new_site_options);
 
-        update_option($this->brand['base_var'].'_options', $blog_options);
+        update_option($this->brand['base_var'].'_options', $site_options);
 
-        $this->options = $this->mergeOptions($blog_options, $this->instance_options);
+        $this->options = $this->mergeOptions($site_options, $this->instance_options);
         $this->options = apply_filters($this->brand['base_var'].'_options', $this->options);
     }
 
