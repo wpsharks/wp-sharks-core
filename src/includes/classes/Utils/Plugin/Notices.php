@@ -30,7 +30,16 @@ class Notices extends WCoreClasses\PluginBase
      *
      * @type array Defaults.
      */
-    protected $defaults = [];
+    protected $defaults;
+
+    /**
+     * Dismiss action.
+     *
+     * @since 16xxxx WP notices.
+     *
+     * @type string Dismiss action.
+     */
+    protected $dismiss_action;
 
     /**
      * Class constructor.
@@ -57,6 +66,7 @@ class Notices extends WCoreClasses\PluginBase
             'is_transient'  => false,
             'push_to_top'   => false,
         ];
+        $this->dismiss_action = 'dismiss_'.$Config->brand['base_var'].'_notice';
     }
 
     /**
@@ -216,15 +226,13 @@ class Notices extends WCoreClasses\PluginBase
      *
      * @param string $markup HTML markup containing the notice itself.
      * @param array  $args   Additional args; i.e., presentation/style.
-     *
-     * @return mixed See {@link enqueue}.
      */
     public function uEnqueue($markup, array $args = [])
     {
         if (!isset($args['for_user_id'])) {
             $args['for_user_id'] = get_current_user_id();
         }
-        return $this->enqueue($markup, $args);
+        $this->enqueue($markup, $args);
     }
 
     /**
@@ -242,20 +250,6 @@ class Notices extends WCoreClasses\PluginBase
     }
 
     /**
-     * Dismiss action.
-     *
-     * @since 16xxxx WP notices.
-     *
-     * @return string Dismiss action.
-     */
-    protected function dismissAction(): string
-    {
-        $Config = $this->Plugin->Config;
-
-        return 'dismiss_'.$Config->brand['base_var'].'_notice';
-    }
-
-    /**
      * Dismiss URL.
      *
      * @since 16xxxx WP notices.
@@ -267,7 +261,7 @@ class Notices extends WCoreClasses\PluginBase
     protected function dismissUrl(string $key): string
     {
         $url    = c\current_url();
-        $action = $this->dismissAction();
+        $action = $this->dismiss_action;
         $url    = c\add_url_query_args([$action => $key], $url);
         $url    = wc\add_url_nonce($url, $action.$key);
 
@@ -279,13 +273,11 @@ class Notices extends WCoreClasses\PluginBase
      *
      * @since 16xxxx WP notices.
      *
-     * @attaches-to `admin_init` action.
-     *
      * @see <http://jas.xyz/1Tuh3aI>
      */
     public function onAdminInitMaybeDismiss()
     {
-        $action = $this->dismissAction();
+        $action = $this->dismiss_action;
         $key    = (string) ($_REQUEST[$action] ?? '');
 
         if (!$key || !($key = c\unslash($key))) {
@@ -316,8 +308,6 @@ class Notices extends WCoreClasses\PluginBase
      * Render admin notices.
      *
      * @since 16xxxx WP notices.
-     *
-     * @attaches-to `all_admin_notices` action.
      *
      * @see <http://jas.xyz/1Tuh3aI>
      */
