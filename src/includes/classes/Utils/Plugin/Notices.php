@@ -291,7 +291,7 @@ class Notices extends WCoreClasses\PluginBase
         if (!$key || !($key = c\unslash($key))) {
             return; // Nothing to do.
         }
-        nocache_headers(); // No-cache.
+        c\no_cache_headers();
         wc\require_valid_nonce($action.$key);
 
         $notices = $this->get();

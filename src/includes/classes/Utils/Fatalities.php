@@ -16,11 +16,11 @@ use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
 /**
- * Death utils.
+ * Fatal error utils.
  *
  * @since 16xxxx WP notices.
  */
-class Deaths extends CoreClasses\AppBase
+class Fatalities extends CoreClasses\AppBase
 {
     /**
      * Forbidden response.

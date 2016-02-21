@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Functions;
 
+require_once __DIR__.'/fatalities.php';
 require_once __DIR__.'/menu-page.php';
 require_once __DIR__.'/nonce.php';
 require_once __DIR__.'/plugins.php';
