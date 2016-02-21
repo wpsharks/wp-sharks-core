@@ -50,7 +50,7 @@ class Notices extends WCoreClasses\PluginBase
             'markup'        => '',
             'for_user_id'   => 0,
             'for_page'      => '',
-            'requires_cap'  => $this->Plugin->Config->caps['view_notices'],
+            'requires_cap'  => $this->Plugin->Config->options['cap_view_notices'],
             'is_persistent' => false,
             'is_transient'  => false,
             'push_to_top'   => false,
