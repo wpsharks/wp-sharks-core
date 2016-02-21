@@ -20,7 +20,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class MenuPage extends CoreClasses\AppBase
+class WpMenuPage extends CoreClasses\AppBase
 {
     /**
      * Current menu page.
@@ -83,4 +83,6 @@ class MenuPage extends CoreClasses\AppBase
         }
         return (bool) preg_match($regex, $current);
     }
+
+    // @TODO New utils for building menu page components.
 }
