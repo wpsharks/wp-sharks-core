@@ -39,11 +39,11 @@ class Uninstaller extends WCoreClasses\PluginBase
         if (is_multisite() && ($sites = wp_get_sites(['limit' => 10000]))) {
             foreach ($sites as $_site) {
                 switch_to_blog($_site['blog_id']);
-                $this->siteUninstall();
+                $this->uninstall();
                 restore_current_blog();
             } // unset($_site);
         } else {
-            $this->siteUninstall();
+            $this->uninstall();
         }
     }
 
