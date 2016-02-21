@@ -9,7 +9,7 @@ use WebSharks\WpSharks\Core\Classes\App;
  */
 function is_menu_page(...$args)
 {
-    return $GLOBALS[App::class]->Utils->MenuPage->is(...$args);
+    return $GLOBALS[App::class]->Utils->WpMenuPage->is(...$args);
 }
 
 /**
@@ -17,7 +17,7 @@ function is_menu_page(...$args)
  */
 function current_menu_page(...$args)
 {
-    return $GLOBALS[App::class]->Utils->MenuPage->current(...$args);
+    return $GLOBALS[App::class]->Utils->WpMenuPage->current(...$args);
 }
 
 /**
@@ -25,5 +25,5 @@ function current_menu_page(...$args)
  */
 function menu_page_now(...$args)
 {
-    return $GLOBALS[App::class]->Utils->MenuPage->now(...$args);
+    return $GLOBALS[App::class]->Utils->WpMenuPage->now(...$args);
 }

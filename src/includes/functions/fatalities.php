@@ -9,5 +9,5 @@ use WebSharks\WpSharks\Core\Classes\App;
  */
 function die_forbidden(...$args)
 {
-    return $GLOBALS[App::class]->Utils->Fatalities->forbidden(...$args);
+    return $GLOBALS[App::class]->Utils->WpFatalities->forbidden(...$args);
 }

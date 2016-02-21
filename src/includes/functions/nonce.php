@@ -9,7 +9,7 @@ use WebSharks\WpSharks\Core\Classes\App;
  */
 function add_url_nonce(...$args)
 {
-    return $GLOBALS[App::class]->Utils->Nonce->urlAdd(...$args);
+    return $GLOBALS[App::class]->Utils->WpNonce->urlAdd(...$args);
 }
 
 /**
@@ -17,7 +17,7 @@ function add_url_nonce(...$args)
  */
 function remove_url_nonce(...$args)
 {
-    return $GLOBALS[App::class]->Utils->Nonce->urlRemove(...$args);
+    return $GLOBALS[App::class]->Utils->WpNonce->urlRemove(...$args);
 }
 
 /**
@@ -25,7 +25,7 @@ function remove_url_nonce(...$args)
  */
 function is_nonce_valid(...$args)
 {
-    return $GLOBALS[App::class]->Utils->Nonce->isValid(...$args);
+    return $GLOBALS[App::class]->Utils->WpNonce->isValid(...$args);
 }
 
 /**
@@ -33,5 +33,5 @@ function is_nonce_valid(...$args)
  */
 function require_valid_nonce(...$args)
 {
-    return $GLOBALS[App::class]->Utils->Nonce->requireValid(...$args);
+    return $GLOBALS[App::class]->Utils->WpNonce->requireValid(...$args);
 }

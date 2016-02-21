@@ -9,5 +9,5 @@ use WebSharks\WpSharks\Core\Classes\App;
  */
 function all_active_plugins(...$args)
 {
-    return $GLOBALS[App::class]->Utils->Plugins->active(...$args);
+    return $GLOBALS[App::class]->Utils->WpPlugins->active(...$args);
 }
