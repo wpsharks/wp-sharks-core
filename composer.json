@@ -42,8 +42,7 @@
       "WebSharks\\WpSharks\\Core\\Functions\\": "src/includes/functions",
       "WebSharks\\WpSharks\\Core\\Interfaces\\": "src/includes/interfaces",
       "WebSharks\\WpSharks\\Core\\Traits\\": "src/includes/traits"
-    },
-    "files": ["src/includes/functions/_load.php"]
+    }
   },
 
   "config": {

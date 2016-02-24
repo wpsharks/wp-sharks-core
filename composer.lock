@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "917637e7c49c49160505d2ad35aba583",
+    "hash": "9a3731cd48b0f540ae43d296e1ded9a7",
     "content-hash": "433ad124cbcd582eafb183f7f0f3d493",
     "packages": [
         {
@@ -352,16 +352,16 @@
         },
         {
             "name": "lusitanian/oauth",
-            "version": "v0.8.8",
+            "version": "v0.8.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
-                "reference": "eeafc1937d7560825ff5c2f1b8e5f86f059b5a28"
+                "reference": "29bda6e176df6c292a9b1c43ae8a44d56a87c30b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/eeafc1937d7560825ff5c2f1b8e5f86f059b5a28",
-                "reference": "eeafc1937d7560825ff5c2f1b8e5f86f059b5a28",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/29bda6e176df6c292a9b1c43ae8a44d56a87c30b",
+                "reference": "29bda6e176df6c292a9b1c43ae8a44d56a87c30b",
                 "shasum": ""
             },
             "require": {
@@ -415,7 +415,7 @@
                 "oauth",
                 "security"
             ],
-            "time": "2016-02-14 22:50:50"
+            "time": "2016-02-24 00:20:18"
         },
         {
             "name": "michelf/php-markdown",
@@ -531,16 +531,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "3cc2dd253e296ce05f99635b2f633048adfbaa96"
+                "reference": "adee1ba4a6885ed800021a98dd69ae2394d695ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/3cc2dd253e296ce05f99635b2f633048adfbaa96",
-                "reference": "3cc2dd253e296ce05f99635b2f633048adfbaa96",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/adee1ba4a6885ed800021a98dd69ae2394d695ec",
+                "reference": "adee1ba4a6885ed800021a98dd69ae2394d695ec",
                 "shasum": ""
             },
             "require": {
@@ -554,11 +554,12 @@
                 "ircmaxell/random-lib": "^1.1",
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
                 "moontoast/math": "^1.1",
-                "phpunit/phpunit": "^4.7",
+                "phpunit/phpunit": "^4.7|^5.0",
                 "satooshi/php-coveralls": "^0.6.1",
                 "squizlabs/php_codesniffer": "^2.3"
             },
             "suggest": {
+                "ext-libsodium": "Provides the PECL libsodium extension for use with the SodiumRandomGenerator",
                 "ext-uuid": "Provides the PECL UUID extension for use with the PeclUuidTimeGenerator and PeclUuidRandomGenerator",
                 "ircmaxell/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
                 "moontoast/math": "Provides support for converting UUID to 128-bit integer (in string form).",
@@ -597,7 +598,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2015-12-17 15:21:44"
+            "time": "2016-02-17 23:32:34"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -714,12 +715,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "c861671c1d1688d4351e791433a0ece92b755e46"
+                "reference": "8b8706fd11a19d3bca12ac3ea1926b0414167887"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/c861671c1d1688d4351e791433a0ece92b755e46",
-                "reference": "c861671c1d1688d4351e791433a0ece92b755e46",
+                "url": "https://api.github.com/repos/websharks/core/zipball/8b8706fd11a19d3bca12ac3ea1926b0414167887",
+                "reference": "8b8706fd11a19d3bca12ac3ea1926b0414167887",
                 "shasum": ""
             },
             "require": {
@@ -829,7 +830,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-02-17 06:42:20"
+            "time": "2016-02-24 06:18:25"
         },
         {
             "name": "websharks/dicer",
