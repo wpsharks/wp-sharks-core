@@ -2,13 +2,12 @@
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes;
 
-use WebSharks\WpSharks\Core\Classes\Utils;
+use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
-use WebSharks\Core\WpSharksCore\Classes\Exception;
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Utils as CoreUtils;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
@@ -20,22 +19,22 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class App extends CoreClasses\App
 {
     /**
-     * Type.
+     * Plugin type.
      *
      * @since 16xxxx
      *
      * @type string
      */
-    public $type;
+    public $plugin_type;
 
     /**
-     * File.
+     * Plugin file.
      *
      * @since 16xxxx
      *
      * @type string
      */
-    public $file;
+    public $plugin_file;
 
     /**
      * Default options.
@@ -86,18 +85,19 @@ class App extends CoreClasses\App
         $this->class     = $Class->getName();
         $this->namespace = $Class->getNamespaceName();
 
-        $this->dir          = dirname($Class->getFileName(), 4);
+        $this->file         = $Class->getFileName();
+        $this->dir          = dirname($this->file, 4);
         $this->dir_basename = basename($this->dir);
 
         if (is_file($this->dir.'/plugin.php')) {
-            $this->type = 'plugin';
-            $this->file = $this->dir.'/plugin.php';
+            $this->plugin_type = 'plugin';
+            $this->plugin_file = $this->dir.'/plugin.php';
         } elseif (is_file($this->dir.'/'.$this->dir_basename.'.php')) {
-            $this->type = 'plugin';
-            $this->file = $this->dir.'/'.$this->dir_basename.'.php';
+            $this->plugin_type = 'plugin';
+            $this->plugin_file = $this->dir.'/'.$this->dir_basename.'.php';
         } elseif (is_file($this->dir.'/style.css')) {
-            $this->type = 'theme';
-            $this->file = $this->dir.'/style.css';
+            $this->plugin_type = 'theme';
+            $this->plugin_file = $this->dir.'/style.css';
         } else {
             throw new Exception('Unable to determine type/file.');
         }
@@ -189,10 +189,10 @@ class App extends CoreClasses\App
                 'acronym' => '',
                 'prefix'  => '',
 
-                'domain'      => '',
-                'domain_path' => '',
-                'text_domain' => '',
-                'is_pro'      => null,
+                '»»domain'     => '',
+                '»domain_path' => '',
+                '»text_domain' => '',
+                '»is_pro'      => null,
             ],
 
             'di' => [
@@ -239,7 +239,7 @@ class App extends CoreClasses\App
                 'on_reinstall' => [],
             ],
         ];
-        if ($this->type === 'plugin') {
+        if ($this->plugin_type === 'plugin') {
             $lp_conflicting_base = $brand['slug'].($brand['is_pro'] ? '' : '-pro');
             $lp_conflicting_name = $brand['name'].($brand['is_pro'] ? ' Lite' : ' Pro');
 

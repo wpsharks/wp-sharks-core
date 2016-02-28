@@ -1,17 +1,13 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\Core\Classes\Utils;
+namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
-use WebSharks\WpSharks\Core\Functions as wc;
 use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
-use WebSharks\Core\WpSharksCore\Functions\__;
-use WebSharks\Core\WpSharksCore\Functions as c;
-use WebSharks\Core\WpSharksCore\Classes\Exception;
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Utils as CoreUtils;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
@@ -20,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class Nonce extends CoreClasses\AppBase
+class Nonce extends CoreClasses\Core\Base\Core
 {
     /**
      * Add an nonce to a URL.

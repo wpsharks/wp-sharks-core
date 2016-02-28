@@ -11,40 +11,39 @@ if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
 
-$AppFacades = '<?php
+$Facades = '<?php
 // This file was auto-generated:
 // '.date('F jS, Y, g:i a T').'
 
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\Core\Classes;
+namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 
-use WebSharks\WpSharks\Core\Classes\Utils;
+use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
-use WebSharks\Core\WpSharksCore\Classes\Exception;
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Utils as CoreUtils;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
 /**
- * App pseudo-static facades.
+ * Pseudo-static facades.
  *
- * @since 160223 Initial release.
+ * @since 160227 Initial release.
  */
-class AppFacades extends CoreClasses\AppFacades
+abstract class Facades
 {
 ';
 foreach (dir_recursive_regex(__DIR__, '/\.php$/ui') as $_file) {
-    if (mb_strpos(basename($_sub_path_name = $_file->getSubPathname()), '_') !== 0) {
-        $AppFacades .= '    use Traits\\Facades\\'.str_replace(['/', '.php'], ['\\', ''], $_file->getSubPathname()).';'."\n";
+    if (mb_strpos(basename($_sub_path_name = $_file->getSubPathname()), '.') !== 0) {
+        $Facades .= '    use Traits\\Facades\\'.str_replace(['/', '.php'], ['\\', ''], $_file->getSubPathname()).';'."\n";
     }
 } // unset($_file); // Housekeeping.
 
-$AppFacades .= '}'."\n"; // Close the class.
-file_put_contents(dirname(__FILE__, 3).'/classes/AppFacades.php', $AppFacades);
-echo $AppFacades; // Print for debugging purposes.
+$Facades .= '}'."\n"; // Close the class.
+file_put_contents(dirname(__FILE__, 3).'/classes/SCore/Base/Facades.php', $Facades);
+echo $Facades; // Print for debugging purposes.
 
 function dir_recursive_regex(string $dir, string $regex): \RegexIterator
 {
