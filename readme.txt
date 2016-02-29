@@ -8,7 +8,7 @@ Text Domain: wp-sharks-core
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Contributors: WebSharks, wpsharks, JasWSInc, raamdev, KristineDS, reedyseth, sitegeek
+Contributors: wpsharks, JasWSInc, raamdev, KristineDS, reedyseth, sitegeek
 Tags: websharks, wp sharks, wpsharks
 
 The WP Sharks Core is a WordPress plugin that serves as a framework for other plugins by the WP Sharks™ team.

@@ -7,8 +7,8 @@ Plugin Name: WP Sharks Core
 Author: WP Sharks™
 Author URI: https://wpsharks.com/
 
-Plugin URI: https://wpsharks.com/
-Description: The WP Sharks Core is a WordPress plugin that serves as a framework for other plugins by WP Sharks™.
+Plugin URI: https://wpsharks.com/product/core/
+Description: The WP Sharks Core is a WordPress plugin that serves as a framework for other plugins by the WP Sharks™ team.
 */
 if (!defined('WPINC')) {
     exit('Do NOT access this file directly: '.basename(__FILE__));
