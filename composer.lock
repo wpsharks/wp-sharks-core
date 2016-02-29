@@ -602,16 +602,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.2",
+            "version": "v2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda"
+                "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ee278f7c851533e58ca307f66305ccb9188aceda",
-                "reference": "ee278f7c851533e58ca307f66305ccb9188aceda",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/78c468665c9568c3faaa9c416a7134308f2d85c3",
+                "reference": "78c468665c9568c3faaa9c416a7134308f2d85c3",
                 "shasum": ""
             },
             "require": {
@@ -658,20 +658,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-13 10:28:07"
+            "time": "2016-01-27 05:14:19"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.2",
+            "version": "v2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8"
+                "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/34c8a4b51e751e7ea869b8262f883d008a2b81b8",
-                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
+                "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
                 "shasum": ""
             },
             "require": {
@@ -707,7 +707,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-13 10:28:07"
+            "time": "2016-02-23 07:41:20"
         },
         {
             "name": "websharks/core",
@@ -715,12 +715,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "8b8706fd11a19d3bca12ac3ea1926b0414167887"
+                "reference": "3444014d1c6f7f26a5d14f9da02b70bb5444c8d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/8b8706fd11a19d3bca12ac3ea1926b0414167887",
-                "reference": "8b8706fd11a19d3bca12ac3ea1926b0414167887",
+                "url": "https://api.github.com/repos/websharks/core/zipball/3444014d1c6f7f26a5d14f9da02b70bb5444c8d9",
+                "reference": "3444014d1c6f7f26a5d14f9da02b70bb5444c8d9",
                 "shasum": ""
             },
             "require": {
@@ -801,7 +801,7 @@
                     "WebSharks\\Core\\Traits\\": "src/includes/traits"
                 },
                 "files": [
-                    "src/includes/functions/_load.php"
+                    "src/includes/functions/.load.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -830,7 +830,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-02-24 06:18:25"
+            "time": "2016-02-29 06:07:51"
         },
         {
             "name": "websharks/dicer",
