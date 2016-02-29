@@ -8,6 +8,7 @@ Text Domain: wp-sharks-core
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
+Donate: https://wpsharks.com/donate/
 Contributors: wpsharks, JasWSInc, raamdev, KristineDS, reedyseth, sitegeek
 Tags: websharks, wp sharks, wpsharks
 
