@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class WpMenuPage extends CoreClasses\Core\Base\Core
+class MenuPage extends Classes\SCore\Base\Core
 {
     /**
      * Current menu page.
@@ -31,7 +31,7 @@ class WpMenuPage extends CoreClasses\Core\Base\Core
             return '';
         }
         return !empty($_REQUEST['page'])
-            ? c\mb_trim(c\unslash((string) $_REQUEST['page']))
+            ? $this->c::mbTrim($this->c::unslash((string) $_REQUEST['page']))
             : $this->now(); // `$GLOBALS['pagenow']`.
     }
 
@@ -75,7 +75,7 @@ class WpMenuPage extends CoreClasses\Core\Base\Core
         if ($page[0] === '/') {
             $regex = $page; // Treat as regex.
         } else {
-            $regex = '/^'.c\wd_regex_frag($page, '-').'$/ui';
+            $regex = '/^'.$this->c::wdRegexFrag($page, '-').'$/ui';
         }
         return (bool) preg_match($regex, $current);
     }

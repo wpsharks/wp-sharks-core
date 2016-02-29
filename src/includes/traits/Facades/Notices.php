@@ -11,29 +11,29 @@ use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
-trait MenuPage
+trait Notices
 {
     /**
      * @since 16xxxx Initial release.
      */
-    public static function currentMenuPage(...$args)
+    public static function enqueueNotice(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§MenuPage->current(...$args);
+        return $GLOBALS[static::class]->Utils->§Notices->enqueue(...$args);
     }
 
     /**
      * @since 16xxxx Initial release.
      */
-    public static function menuPageNow(...$args)
+    public static function enqueueUserNotice(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§MenuPage->now(...$args);
+        return $GLOBALS[static::class]->Utils->§Notices->userEnqueue(...$args);
     }
 
     /**
      * @since 16xxxx Initial release.
      */
-    public static function isMenuPage(...$args)
+    public static function dismissNotice(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§MenuPage->is(...$args);
+        return $GLOBALS[static::class]->Utils->§Notices->dismiss(...$args);
     }
 }

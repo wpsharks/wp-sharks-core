@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx Option utils.
  */
-class Options extends CoreClasses\Core\Base\Core
+class Options extends Classes\SCore\Base\Core
 {
     /**
      * Save action.
@@ -41,16 +41,14 @@ class Options extends CoreClasses\Core\Base\Core
      *
      * @since 16xxxx Initial release.
      *
-     * @param Plugin $Plugin Instance.
+     * @param Classes\App $App Instance.
      */
-    public function __construct(Plugin $Plugin)
+    public function __construct(Classes\App $App)
     {
-        parent::__construct($Plugin);
+        parent::__construct($App);
 
-        $Config = $this->Plugin->Config;
-
-        $this->save_action             = $Config->brand['base_var'].'_save_options';
-        $this->restore_defaults_action = $Config->brand['base_var'].'_restore_default_options';
+        $this->save_action             = $this->App->Config->©brand['©var'].'_save_options';
+        $this->restore_defaults_action = $this->App->Config->©brand['©var'].'_restore_default_options';
     }
 
     /**
@@ -60,11 +58,12 @@ class Options extends CoreClasses\Core\Base\Core
      *
      * @return string Save submit URL.
      */
-    public function saveSubmitUrl(): string
+    public function saveUrl(): string
     {
-        $url    = c\current_url();
         $action = $this->save_action;
-        $url    = wc\add_url_nonce($url, $action);
+
+        $url = $this->c::currentUrl();
+        $url = $this->s::addUrlNonce($url, $action);
 
         return $url;
     }
@@ -78,11 +77,9 @@ class Options extends CoreClasses\Core\Base\Core
      *
      * @return string Save form element ID.
      */
-    public function saveFormElementId(string $key): string
+    public function formElementId(string $key): string
     {
-        $Config = $this->Plugin->Config;
-
-        return $Config->brand['base_slug'].'-option-'.$key;
+        return $this->App->Config->©brand['©slug'].'-option-'.$key;
     }
 
     /**
@@ -94,7 +91,7 @@ class Options extends CoreClasses\Core\Base\Core
      *
      * @return string Save form element name.
      */
-    public function saveFormElementName(string $key): string
+    public function formElementName(string $key): string
     {
         return $this->save_action.'['.$key.']';
     }
@@ -106,28 +103,27 @@ class Options extends CoreClasses\Core\Base\Core
      */
     public function onAdminInitMaybeSave()
     {
-        $Config  = $this->Plugin->Config;
-        $Notices = $this->Plugin->Utils->Notices;
-        $action  = $this->save_action;
+        $action = $this->save_action;
 
         if (empty($_REQUEST[$action])) {
             return; // Nothing to do.
         }
-        c\no_cache_headers();
-        wc\require_valid_nonce($action);
+        $this->c::noCacheHeaders();
+        $this->s::requireValidNonce($action);
 
-        if (!current_user_can($Config->caps['manage'])) {
-            wc\die_forbidden();
+        if (!current_user_can($this->App->Config->§caps['§manage'])) {
+            $this->s::dieForbidden();
         }
-        $options = c\mb_trim(c\unslash($_REQUEST[$action]));
-        $Config->updateOptions($options);
+        $options = $this->c::unslash($_REQUEST[$action]);
+        $options = $this->c::mbTrim($options);
+        $this->update($options);
 
-        $url = c\current_url();
-        $url = wc\remove_url_nonce($url);
+        $url = $this->c::currentUrl();
+        $url = $this->s::removeUrlNonce($url);
 
         $markup = __('%1$s options updated successfully.');
-        $markup = sprintf($markup, esc_html($Config->brand['base_name']));
-        $Notices->uEnqueue($markup, ['type' => 'success']);
+        $markup = sprintf($markup, esc_html($this->App->Config->©brand['©name']));
+        $this->s::enqueueUserNotice($markup, ['type' => 'success']);
 
         wp_redirect($url);
         exit; // Stop.
@@ -140,9 +136,7 @@ class Options extends CoreClasses\Core\Base\Core
      */
     public function restoreDefaults()
     {
-        $Config = $this->Plugin->Config;
-
-        $Config->updateOptions($Config->default_options);
+        $this->update($this->App->Config->§default_options);
     }
 
     /**
@@ -154,10 +148,11 @@ class Options extends CoreClasses\Core\Base\Core
      */
     public function restoreDefaultsUrl(): string
     {
-        $url    = c\current_url();
         $action = $this->restore_defaults_action;
-        $url    = c\add_url_query_args([$action => ''], $url);
-        $url    = wc\add_url_nonce($url, $action);
+
+        $url = $this->c::currentUrl();
+        $url = $this->c::addUrlQueryArgs([$action => ''], $url);
+        $url = $this->s::addUrlNonce($url, $action);
 
         return $url;
     }
@@ -169,25 +164,75 @@ class Options extends CoreClasses\Core\Base\Core
      */
     public function onAdminInitMaybeRestoreDefaults()
     {
-        $Config = $this->Plugin->Config;
         $action = $this->restore_defaults_action;
 
         if (!isset($_REQUEST[$action])) {
             return; // Nothing to do.
         }
-        c\no_cache_headers();
-        wc\require_valid_nonce($action);
+        $this->c::noCacheHeaders();
+        $this->s::requireValidNonce($action);
 
-        if (!current_user_can($Config->caps['manage'])) {
-            wc\die_forbidden();
+        if (!current_user_can($this->App->Config->§caps['§manage'])) {
+            $this->s::dieForbidden();
         }
-        $this->restoreDefaultOptions();
+        $this->restoreDefaults();
 
-        $url = c\current_url();
-        $url = wc\remove_url_nonce($url);
-        $url = c\remove_url_query_args([$action], $url);
+        $url = $this->c::currentUrl();
+        $url = $this->s::removeUrlNonce($url);
+        $url = $this->c::removeUrlQueryArgs([$action], $url);
 
         wp_redirect($url);
         exit; // Stop.
+    }
+
+    /**
+     * Update config options.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param array $options Options to update.
+     *
+     * @note `null` options force a default value.
+     */
+    public function update(array $options)
+    {
+        $this->App->Config->§options = $this->merge($this->App->Config->§options, $options);
+        $this->App->Config->§options = $this->s::applyFilters('options', $this->App->Config->§options);
+
+        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+            update_network_option(null, $this->App->Config->©brand['©var'].'_options', $this->App->Config->§options);
+        } else {
+            update_option($this->App->Config->©brand['©var'].'_options', $this->App->Config->§options);
+        }
+    }
+
+    /**
+     * Merge options.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param array $base  Base array.
+     * @param array $merge Array to merge.
+     *
+     * @return array The resuling array after merging.
+     *
+     * @note `null` options force a default value.
+     */
+    public function merge(array $base, array $merge): array
+    {
+        $options = array_merge($base, $merge);
+        $options = array_intersect_key($options, $this->App->Config->§default_options);
+
+        foreach ($this->App->Config->§default_options as $_key => $_default_option_value) {
+            if (is_null($options[$_key])) {
+                $options[$_key] = $_default_option_value;
+            } elseif (!$this->App->Config->§specs['§is_pro'] && in_array($_key, $this->App->Config->§pro_option_keys, true)) {
+                $options[$_key] = $_default_option_value;
+            } else {
+                settype($options[$_key], gettype($_default_option_value));
+            }
+        } // unset($_key, $_default_option_value);
+
+        return $options;
     }
 }

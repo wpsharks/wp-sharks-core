@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx DB utils.
  */
-class Db extends CoreClasses\Core\Base\Core
+class Db extends Classes\SCore\Base\Core
 {
     /**
      * WP database.
@@ -32,11 +32,11 @@ class Db extends CoreClasses\Core\Base\Core
      *
      * @since 16xxxx DB utils.
      *
-     * @param Plugin $Plugin Instance.
+     * @param Classes\App $App Instance.
      */
-    public function __construct(Plugin $Plugin)
+    public function __construct(Classes\App $App)
     {
-        parent::__construct($Plugin);
+        parent::__construct($App);
 
         $this->wp = &$GLOBALS['wpdb'];
     }
@@ -50,9 +50,11 @@ class Db extends CoreClasses\Core\Base\Core
      */
     public function prefix(): string
     {
-        $Config = $this->Plugin->Config;
-
-        return $this->wp->prefix.$Config->brand['base_prefix'].'_';
+        if ($this->App->Config->§specs['§is_network_wide']) {
+            return $this->wp->base_prefix.$this->App->Config->©brand['©prefix'].'_';
+        } else {
+            return $this->wp->prefix.$this->App->Config->©brand['©prefix'].'_';
+        }
     }
 
     /**
@@ -60,11 +62,11 @@ class Db extends CoreClasses\Core\Base\Core
      *
      * @since 16xxxx DB utils.
      */
-    public function createMissingTables()
+    public function createTables()
     {
-        $Config     = $this->Plugin->Config;
-        $tables_dir = $Config->db['tables_dir'];
-        $Tables     = c\dir_regex_recursive_iterator($tables_dir, '/\.sql$/ui');
+        $table_prefix = $this->prefix();
+        $tables_dir   = $this->App->Config->§db['§tables_dir'];
+        $Tables       = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
 
         foreach ($Tables as $_Table) {
             if (!$_Table->isFile()) {
@@ -74,10 +76,10 @@ class Db extends CoreClasses\Core\Base\Core
 
             $_sql_file_table = basename($_sql_file, '.sql');
             $_sql_file_table = str_replace('-', '_', $_sql_file_table);
-            $_sql_file_table = $this->prefix().$_sql_file_table;
+            $_sql_file_table = $table_prefix.$_sql_file_table;
 
-            $_sql = c\mb_trim(file_get_contents($_sql_file));
-            $_sql = str_replace('%%prefix%%', $this->prefix(), $_sql);
+            $_sql = $this->c::mbTrim(file_get_contents($_sql_file));
+            $_sql = str_replace('%%prefix%%', $table_prefix, $_sql);
             $_sql = $this->fulltextCompat($_sql);
 
             if (!preg_match('/^CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\b/ui', $_sql)) {
@@ -94,11 +96,11 @@ class Db extends CoreClasses\Core\Base\Core
      *
      * @since 16xxxx DB utils.
      */
-    public function dropExistingTables()
+    public function dropTables()
     {
-        $Config     = $this->Plugin->Config;
-        $tables_dir = $Config->db['tables_dir'];
-        $Tables     = c\dir_regex_recursive_iterator($tables_dir, '/\.sql$/ui');
+        $table_prefix = $this->prefix();
+        $tables_dir   = $this->App->Config->§db['§tables_dir'];
+        $Tables       = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
 
         foreach ($Tables as $_Table) {
             if (!$_Table->isFile()) {
@@ -108,7 +110,7 @@ class Db extends CoreClasses\Core\Base\Core
 
             $_sql_file_table = basename($_sql_file, '.sql');
             $_sql_file_table = str_replace('-', '_', $_sql_file_table);
-            $_sql_file_table = $this->prefix().$_sql_file_table;
+            $_sql_file_table = $table_prefix.$_sql_file_table;
 
             if (!$this->wp->query('DROP TABLE IF EXISTS `'.esc_sql($_sql_file_table).'`')) {
                 throw new Exception(sprintf('DB table drop failure: `%1$s`.', $_sql_file_table));
@@ -132,7 +134,7 @@ class Db extends CoreClasses\Core\Base\Core
      */
     public function fulltextCompat(string $sql): string
     {
-        $sql = c\mb_trim($sql); // For accurate regex matches.
+        $sql = $this->c::mbTrim($sql); // For accurate regex matches.
 
         if (!preg_match('/^CREATE\s+TABLE\b/ui', $sql)) {
             return $sql; // Not applicable.

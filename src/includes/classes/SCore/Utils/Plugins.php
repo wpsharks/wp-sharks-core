@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class Plugins extends CoreClasses\Core\Base\Core
+class Plugins extends Classes\SCore\Base\Core
 {
     /**
      * All active plugins.
@@ -25,18 +25,15 @@ class Plugins extends CoreClasses\Core\Base\Core
      *
      * @return array All active plugins.
      */
-    public function active(): array
+    public function allActive(): array
     {
-        if (!is_null($active = &$this->cacheKey(__FUNCTION__))) {
-            return $active;
-        }
         if (!is_array($active = get_option('active_plugins'))) {
             $active = []; // Fprce an array.
         }
         if (is_multisite()) {
-            if (is_array($active_sitewide = get_site_option('active_sitewide_plugins'))) {
-                $active_sitewide = array_keys($active_sitewide);
-                $active          = array_merge($active, $active_sitewide);
+            if (is_array($network_active = get_network_option(null, 'active_sitewide_plugins'))) {
+                $network_active = array_keys($network_active);
+                $active         = array_merge($active, $network_active);
             }
         }
         return array_unique($active);

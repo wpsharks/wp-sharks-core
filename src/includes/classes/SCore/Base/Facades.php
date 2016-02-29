@@ -1,6 +1,6 @@
 <?php
 // This file was auto-generated:
-// February 28th, 2016, 2:09 am UTC
+// February 29th, 2016, 3:52 am UTC
 
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
@@ -21,9 +21,17 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  */
 abstract class Facades
 {
+    use Traits\Facades\App;
+    use Traits\Facades\Conflicts;
     use Traits\Facades\Date;
+    use Traits\Facades\Db;
     use Traits\Facades\Fatalities;
+    use Traits\Facades\Hooks;
+    use Traits\Facades\Installer;
     use Traits\Facades\MenuPage;
     use Traits\Facades\Nonce;
+    use Traits\Facades\Notices;
+    use Traits\Facades\Options;
     use Traits\Facades\Plugins;
+    use Traits\Facades\Uninstaller;
 }

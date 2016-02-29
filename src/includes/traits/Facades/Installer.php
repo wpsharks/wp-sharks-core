@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
+namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;
@@ -11,20 +11,13 @@ use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
-/**
- * Fatal error utils.
- *
- * @since 16xxxx WP notices.
- */
-class Fatalities extends CoreClasses\Core\Base\Core
+trait Installer
 {
     /**
-     * Forbidden response.
-     *
-     * @since 16xxxx First documented version.
+     * @since 16xxxx Initial release.
      */
-    public function forbidden()
+    public static function maybeInstall(...$args)
     {
-        wp_die(__('Abnormal request; forbidden.'), __('Forbidden'), ['response' => 403, 'back_link' => true]);
+        return $GLOBALS[static::class]->Utils->§Installer->maybeInstall(...$args);
     }
 }

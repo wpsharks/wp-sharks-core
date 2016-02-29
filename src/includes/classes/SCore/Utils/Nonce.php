@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class Nonce extends CoreClasses\Core\Base\Core
+class Nonce extends Classes\SCore\Base\Core
 {
     /**
      * Add an nonce to a URL.
@@ -30,7 +30,7 @@ class Nonce extends CoreClasses\Core\Base\Core
      */
     public function urlAdd(string $url, string $action = '-1'): string
     {
-        return c\add_url_query_args(['_wpnonce' => wp_create_nonce($action)], $url);
+        return $this->c::addUrlQueryArgs(['_wpnonce' => wp_create_nonce($action)], $url);
     }
 
     /**
@@ -44,7 +44,7 @@ class Nonce extends CoreClasses\Core\Base\Core
      */
     public function urlRemove(string $url): string
     {
-        return c\remove_url_query_args(['_wpnonce'], $url);
+        return $this->c::removeUrlQueryArgs(['_wpnonce'], $url);
     }
 
     /**
@@ -71,7 +71,7 @@ class Nonce extends CoreClasses\Core\Base\Core
     public function requireValid(string $action = '-1')
     {
         if (!$this->isValid($action)) {
-            wc\die_forbidden();
+            $this->s::dieForbidden();
         }
     }
 }

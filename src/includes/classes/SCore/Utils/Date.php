@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class Date extends CoreClasses\Core\Base\Core
+class Date extends Classes\SCore\Base\Core
 {
     /**
      * Date translation.
@@ -32,14 +32,14 @@ class Date extends CoreClasses\Core\Base\Core
         if (!$format) {
             $format = get_option('date_format');
             $format .= ' '.get_option('time_format');
-            $format = c\mb_trim($format);
+            $format = $this->c::mbTrim($format);
         }
         $time = $time ? abs($time) : time(); // Default time.
         $time = $utc ? $time : $time + (get_option('gmt_offset') * HOUR_IN_SECONDS);
 
         if ($utc && preg_match('/(?<!\\\\)[PIOTZe]/u', $format)) {
             $format = preg_replace('/(?<!\\\\)[PIOTZe]/u', '', $format);
-            $format = c\mb_trim(preg_replace('/\s+/', ' ', $format));
+            $format = $this->c::mbTrim(preg_replace('/\s+/', ' ', $format));
             return date_i18n($format, $time, $utc).' UTC';
         }
         return date_i18n($format, $time, $utc);

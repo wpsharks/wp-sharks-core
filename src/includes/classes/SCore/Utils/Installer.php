@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx Install utils.
  */
-class Installer extends CoreClasses\Core\Base\Core
+class Installer extends Classes\SCore\Base\Core
 {
     /**
      * Install history.
@@ -32,13 +32,11 @@ class Installer extends CoreClasses\Core\Base\Core
      *
      * @since 16xxxx Install utils.
      *
-     * @param Plugin $Plugin Instance.
+     * @param Classes\App $App Instance.
      */
-    public function __construct(Plugin $Plugin)
+    public function __construct(Classes\App $App)
     {
-        parent::__construct($Plugin);
-
-        $Config = $this->Plugin->Config;
+        parent::__construct($App);
 
         $default_history = [
             'first_time'   => 0,
@@ -46,8 +44,12 @@ class Installer extends CoreClasses\Core\Base\Core
             'last_version' => '',
             'versions'     => [],
         ];
-        if (!is_array($this->history = get_option($Config->brand['base_var'].'_install_history'))) {
-            $this->history = $default_history;
+        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+            if (!is_array($this->history = get_network_option(null, $this->App->Config->©brand['©var'].'_install_history'))) {
+                update_network_option(null, $this->App->Config->©brand['©var'].'_install_history', $this->history = $default_history);
+            }
+        } elseif (!is_array($this->history = get_option($this->App->Config->©brand['©var'].'_install_history'))) {
+            update_option($this->App->Config->©brand['©var'].'_install_history', $this->history = $default_history);
         }
         $this->history = array_merge($default_history, $this->history);
         $this->history = array_intersect_key($this->history, $default_history);
@@ -58,32 +60,29 @@ class Installer extends CoreClasses\Core\Base\Core
     }
 
     /**
+     * Maybe install.
+     *
+     * @since 16xxxx Install utils.
+     */
+    public function maybeInstall()
+    {
+        if (!$this->history['last_version']
+           || version_compare($this->history['last_version'], $this->c::version(), '<')) {
+            $this->install(); // Install (or reinstall).
+        }
+    }
+
+    /**
      * Install (or reinstall).
      *
      * @since 16xxxx Install utils.
      */
-    public function install()
+    protected function install()
     {
         $this->vsUpgrades();
         $this->createDbTables();
         $this->enqueueNotice();
         $this->updateHistory();
-    }
-
-    /**
-     * Check version.
-     *
-     * @since 16xxxx Install utils.
-     */
-    public function checkVersion()
-    {
-        if (defined('WP_UNINSTALL_PLUGIN')) {
-            return; // Not applicable.
-        }
-        if (!$this->history['last_version']
-           || version_compare($this->history['last_version'], $this->Plugin::VERSION, '<')) {
-            $this->install(); // Install (or reinstall).
-        }
     }
 
     /**
@@ -103,7 +102,7 @@ class Installer extends CoreClasses\Core\Base\Core
      */
     protected function createDbTables()
     {
-        $this->Plugin->Utils->Db->createMissingTables();
+        $this->s::createDbTables();
     }
 
     /**
@@ -113,17 +112,12 @@ class Installer extends CoreClasses\Core\Base\Core
      */
     protected function enqueueNotice()
     {
-        $Config  = $this->Plugin->Config;
-        $Notices = $this->Plugin->Utils->Notices;
-
         if (!$this->history['first_time']) {
-            if ($Config->notices['on_install']) {
-                $Notices->enqueue('', $Config->notices['on_install']);
+            if ($this->App->Config->§notices['§on_install']) {
+                $this->s::enqueueNotice('', $this->App->Config->§notices['§on_install']);
             }
-        } else {
-            if ($Config->notices['on_reinstall']) {
-                $Notices->enqueue('', $Config->notices['on_reinstall']);
-            }
+        } elseif ($this->App->Config->§notices['§on_reinstall']) {
+            $this->s::enqueueNotice('', $this->App->Config->§notices['§on_reinstall']);
         }
     }
 
@@ -134,16 +128,20 @@ class Installer extends CoreClasses\Core\Base\Core
      */
     protected function updateHistory()
     {
-        $time   = time();
-        $Config = $this->Plugin->Config;
+        $time    = time();
+        $version = $this->c::version();
 
         if (!$this->history['first_time']) {
             $this->history['first_time'] = $time;
         }
-        $this->history['last_time']                        = $time;
-        $this->history['last_version']                     = $this->Plugin::VERSION;
-        $this->history['versions'][$this->Plugin::VERSION] = $time;
+        $this->history['last_time']          = $time;
+        $this->history['last_version']       = $version;
+        $this->history['versions'][$version] = $time;
 
-        update_option($Config->brand['base_var'].'_install_history', $this->history);
+        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+            update_network_option(null, $this->App->Config->©brand['©var'].'_install_history', $this->history);
+        } else {
+            update_option($this->App->Config->©brand['©var'].'_install_history', $this->history);
+        }
     }
 }

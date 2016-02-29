@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class Notices extends CoreClasses\Core\Base\Core
+class Notices extends Classes\SCore\Base\Core
 {
     /**
      * Notice defaults.
@@ -41,13 +41,11 @@ class Notices extends CoreClasses\Core\Base\Core
      *
      * @since 16xxxx Initial release.
      *
-     * @param Plugin $Plugin Instance.
+     * @param Classes\App $App Instance.
      */
-    public function __construct(Plugin $Plugin)
+    public function __construct(Classes\App $App)
     {
-        parent::__construct($Plugin);
-
-        $Config = $this->Plugin->Config;
+        parent::__construct($App);
 
         $this->defaults = [
             'id'            => '',
@@ -56,12 +54,12 @@ class Notices extends CoreClasses\Core\Base\Core
             'markup'        => '',
             'for_user_id'   => 0,
             'for_page'      => '',
-            'requires_cap'  => $Config->caps['manage'],
+            'requires_cap'  => $this->App->Config->§caps['§manage'],
             'is_persistent' => false,
             'is_transient'  => false,
             'push_to_top'   => false,
         ];
-        $this->dismiss_action = 'dismiss_'.$Config->brand['base_var'].'_notice';
+        $this->dismiss_action = 'dismiss_'.$this->App->Config->©brand['©var'].'_notice';
     }
 
     /**
@@ -81,10 +79,10 @@ class Notices extends CoreClasses\Core\Base\Core
         $notice['id']            = (string) $notice['id'];
         $notice['type']          = (string) $notice['type'];
         $notice['style']         = (string) $notice['style'];
-        $notice['markup']        = c\mb_trim((string) $notice['markup']);
+        $notice['markup']        = $this->c::mbTrim((string) $notice['markup']);
         $notice['for_user_id']   = max(0, (int) $notice['for_user_id']);
-        $notice['for_page']      = c\mb_trim((string) $notice['for_page']);
-        $notice['requires_cap']  = c\mb_trim((string) $notice['requires_cap']);
+        $notice['for_page']      = $this->c::mbTrim((string) $notice['for_page']);
+        $notice['requires_cap']  = $this->c::mbTrim((string) $notice['requires_cap']);
         $notice['is_persistent'] = (bool) $notice['is_persistent'];
         $notice['is_transient']  = (bool) $notice['is_transient'];
         $notice['push_to_top']   = (bool) $notice['push_to_top'];
@@ -113,7 +111,7 @@ class Notices extends CoreClasses\Core\Base\Core
         if ($notice['id']) {
             return $notice['id']; // Use as key also.
         }
-        return c\sha256_keyed_hash(serialize($notice), $this->App->Config->app['keys']['salt']);
+        return $this->c::sha256KeyedHash(serialize($notice), $this->App->Config['§keys']['§salt']);
     }
 
     /**
@@ -157,11 +155,14 @@ class Notices extends CoreClasses\Core\Base\Core
      */
     protected function get(): array
     {
-        $Config = $this->Plugin->Config;
-
-        if (!is_array($notices = get_option($Config->brand['base_var'].'_notices'))) {
-            delete_option($Config->brand['base_var'].'_notices');
-            add_option($Config->brand['base_var'].'_notices', $notices = [], '', 'no');
+        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+            if (!is_array($notices = get_network_option(null, $this->App->Config->©brand['©var'].'_notices'))) {
+                delete_network_option(null, $this->App->Config->©brand['©var'].'_notices');
+                add_network_option(null, $this->App->Config->©brand['©var'].'_notices', $notices = []);
+            }
+        } elseif (!is_array($notices = get_option($this->App->Config->©brand['©var'].'_notices'))) {
+            delete_option($this->App->Config->©brand['©var'].'_notices');
+            add_option($this->App->Config->©brand['©var'].'_notices', $notices = [], '', 'no');
         }
         return $notices;
     }
@@ -175,10 +176,13 @@ class Notices extends CoreClasses\Core\Base\Core
      */
     protected function update(array $notices)
     {
-        $Config = $this->Plugin->Config;
-
-        if ($this->get() !== $notices) {
-            update_option($Config->brand['base_var'].'_notices', $notices);
+        if ($this->get() === $notices) {
+            return; // Nothing to do.
+        }
+        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+            update_network_option(null, $this->App->Config->©brand['©var'].'_notices', $notices);
+        } else {
+            update_option($this->App->Config->©brand['©var'].'_notices', $notices);
         }
     }
 
@@ -207,7 +211,7 @@ class Notices extends CoreClasses\Core\Base\Core
         $notices = $this->get();
 
         if ($notice['push_to_top']) {
-            c\array_unshift_assoc($notices, $key, $notice);
+            $this->c::arrayUnshiftAssoc($notices, $key, $notice);
         } else {
             $notices[$key] = $notice; // Default behavior.
         }
@@ -222,10 +226,13 @@ class Notices extends CoreClasses\Core\Base\Core
      * @param string $markup HTML markup containing the notice itself.
      * @param array  $args   Additional args; i.e., presentation/style.
      */
-    public function uEnqueue($markup, array $args = [])
+    public function userEnqueue($markup, array $args = [])
     {
         if (!isset($args['for_user_id'])) {
             $args['for_user_id'] = get_current_user_id();
+        }
+        if (!$args['for_user_id']) {
+            return; // Nothing to do.
         }
         $this->enqueue($markup, $args);
     }
@@ -255,10 +262,10 @@ class Notices extends CoreClasses\Core\Base\Core
      */
     protected function dismissUrl(string $key): string
     {
-        $url    = c\current_url();
         $action = $this->dismiss_action;
-        $url    = c\add_url_query_args([$action => $key], $url);
-        $url    = wc\add_url_nonce($url, $action.$key);
+        $url    = $this->c::currentUrl();
+        $url    = $this->c::addUrlQueryArgs([$action => $key], $url);
+        $url    = $this->s::addUrlNonce($url, $action.$key);
 
         return $url;
     }
@@ -267,7 +274,6 @@ class Notices extends CoreClasses\Core\Base\Core
      * Maybe dismiss.
      *
      * @since 16xxxx WP notices.
-     *
      * @see <http://jas.xyz/1Tuh3aI>
      */
     public function onAdminInitMaybeDismiss()
@@ -275,11 +281,11 @@ class Notices extends CoreClasses\Core\Base\Core
         $action = $this->dismiss_action;
         $key    = (string) ($_REQUEST[$action] ?? '');
 
-        if (!$key || !($key = c\unslash($key))) {
+        if (!$key || !($key = $this->c::unslash($key))) {
             return; // Nothing to do.
         }
-        c\no_cache_headers();
-        wc\require_valid_nonce($action.$key);
+        $this->c::noCacheHeaders();
+        $this->s::requireValidNonce($action.$key);
 
         $notices = $this->get();
 
@@ -287,13 +293,13 @@ class Notices extends CoreClasses\Core\Base\Core
             $notice = $notices[$key];
 
             if (!$this->currentUserCan($notice)) {
-                wc\die_forbidden();
+                $this->s::dieForbidden();
             }
             $this->dismiss($key);
         }
-        $url = c\current_url();
-        $url = wc\remove_url_nonce($url);
-        $url = c\remove_url_query_args([$action], $url);
+        $url = $this->c::currentUrl();
+        $url = $this->s::removeUrlNonce($url);
+        $url = $this->c::removeUrlQueryArgs([$action], $url);
 
         wp_redirect($url);
         exit; // Stop.
@@ -303,7 +309,6 @@ class Notices extends CoreClasses\Core\Base\Core
      * Render admin notices.
      *
      * @since 16xxxx WP notices.
-     *
      * @see <http://jas.xyz/1Tuh3aI>
      */
     public function onAllAdminNotices()
@@ -333,7 +338,7 @@ class Notices extends CoreClasses\Core\Base\Core
             if (!$this->currentUserCan($_notice)) {
                 continue; // Do not display.
             }
-            if ($_notice['for_page'] && !wc\is_menu_page($_notice['for_page'])) {
+            if ($_notice['for_page'] && !$this->s::isMenuPage($_notice['for_page'])) {
                 continue; // Do not display.
             }
             switch ($_notice['type']) {
@@ -368,6 +373,9 @@ class Notices extends CoreClasses\Core\Base\Core
             if (!preg_match('/^\<(?:p|div|h[1-6])[\s>]/ui', $_notice['markup'])) {
                 $_notice['markup'] = '<p>'.$_notice['markup'].'</p>';
             }
+            $_class = $this->c::mbTrim($_class);
+            $_style = $this->c::mbTrim($_style);
+
             echo '<div class="'.esc_attr($_class).'" style="'.esc_attr($_style).'">'.
                     $_notice['markup'].$_dismiss.
                  '</div>';
