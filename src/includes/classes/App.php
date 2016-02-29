@@ -47,7 +47,7 @@ class App extends CoreClasses\App
         ];
         $args = array_merge($default_args, $args);
 
-        # Define a few properties needed below.
+        # Define a few reflection-based properties.
 
         $this->reflection = new \ReflectionClass($this);
 
@@ -238,8 +238,26 @@ class App extends CoreClasses\App
             '§pro_option_keys' => [],
 
             '§notices' => [
-                '§on_install'   => [],
-                '§on_reinstall' => [],
+                '§on_install' => function ($installion_history) {
+                    return [
+                        'is_transient' => true,
+                        'markup'       => sprintf(
+                            __('<strong>%1$s</strong> v%2$s installed successfully.'),
+                            esc_html($this->Config->©brand['©name']),
+                            esc_html($this->c::version())
+                        ),
+                    ];
+                },
+                '§on_reinstall' => function ($installion_history) {
+                    return [
+                        'is_transient' => false,
+                        'markup'       => sprintf(
+                            __('<strong>%1$s</strong> detected a new version of itself &amp; recompiled successfully. You\'re now running v%2$s.'),
+                            esc_html($this->Config->©brand['©name']),
+                            esc_html($this->c::version())
+                        ),
+                    ];
+                },
             ],
 
             '§uninstall' => false,
@@ -253,7 +271,7 @@ class App extends CoreClasses\App
         }
         # Build collective instance base, instance, default options, & run parent constructor.
 
-        $instance_base                     = $this->merge($default_instance_base, $instance_base);
+        $instance_base                     = $this->mergeConfig($default_instance_base, $instance_base);
         $instance_base['§default_options'] = $instance['§default_options'] = $instance_base['§options'];
         $instance_base['§specs']           = $instance['§specs']           = $specs;
         $instance_base['©brand']           = $instance['©brand']           = $brand;

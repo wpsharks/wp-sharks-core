@@ -81,7 +81,7 @@ class Installer extends Classes\SCore\Base\Core
     {
         $this->vsUpgrades();
         $this->createDbTables();
-        $this->enqueueNotice();
+        $this->maybeEnqueueNotice();
         $this->updateHistory();
     }
 
@@ -110,14 +110,21 @@ class Installer extends Classes\SCore\Base\Core
      *
      * @since 16xxxx Install utils.
      */
-    protected function enqueueNotice()
+    protected function maybeEnqueueNotice()
     {
-        if (!$this->history['first_time']) {
-            if ($this->App->Config->§notices['§on_install']) {
-                $this->s::enqueueNotice('', $this->App->Config->§notices['§on_install']);
+        $key = !$this->history['first_time']
+            ? '§on_install' // First time?
+            : '§on_reinstall';
+
+        if ($this->App->Config->§notices[$key]) {
+            if (is_callable($this->App->Config->§notices[$key])) {
+                $notice = $this->App->Config->§notices[$key]($this->history);
+            } else {
+                $notice = $this->App->Config->§notices[$key];
             }
-        } elseif ($this->App->Config->§notices['§on_reinstall']) {
-            $this->s::enqueueNotice('', $this->App->Config->§notices['§on_reinstall']);
+            if ($notice) {
+                $this->s::enqueueNotice('', $notice);
+            }
         }
     }
 
@@ -137,6 +144,9 @@ class Installer extends Classes\SCore\Base\Core
         $this->history['last_time']          = $time;
         $this->history['last_version']       = $version;
         $this->history['versions'][$version] = $time;
+
+        uksort($this->history['versions'], 'version_compare');
+        $this->history['versions'] = array_reverse($this->history['versions'], true);
 
         if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
             update_network_option(null, $this->App->Config->©brand['©var'].'_install_history', $this->history);
