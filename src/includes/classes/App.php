@@ -242,7 +242,7 @@ class App extends CoreClasses\App
                 '§on_reinstall' => [],
             ],
 
-            '§uninstalling' => false,
+            '§uninstall' => false,
         ];
         if ($specs['§type'] === 'plugin') {
             $lp_conflicting_base = $brand['©slug'].($specs['§is_pro'] ? '' : '-pro');
@@ -278,7 +278,7 @@ class App extends CoreClasses\App
         if ($this->s::conflictsExist()) {
             return; // Stop here.
         }
-        if ($this->Config->§uninstalling) {
+        if ($this->Config->§uninstall) {
             $this->s::maybeUninstall();
             return; // Stop here.
         }
@@ -298,7 +298,7 @@ class App extends CoreClasses\App
      */
     public function onAfterSetupTheme()
     {
-        if ($this->Config->§uninstalling) {
+        if ($this->Config->§uninstall) {
             return; // Uninstalling.
         }
         if (!$this->Config->§setup['§enable']) {

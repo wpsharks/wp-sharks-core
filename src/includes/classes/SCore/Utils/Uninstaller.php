@@ -54,7 +54,7 @@ class Uninstaller extends Classes\SCore\Base\Core
         if ($this->s::conflictsExist()) {
             return; // Stop on conflicts.
         }
-        if (!$this->App->Config->§uninstalling) {
+        if (!$this->App->Config->§uninstall) {
             return; // Not uninstalling.
         }
         $this->counter = 0; // Initialize counter.
