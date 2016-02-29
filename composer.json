@@ -1,8 +1,8 @@
 {
-  "name": "websharks/wp-core",
-  "homepage": "https://github.com/websharks/wp-core",
-  "description": "Core WP library used by WebSharks, Inc.",
-  "keywords": ["websharks", "wordpress"],
+  "name": "websharks/wp-sharks-core",
+  "homepage": "https://github.com/websharks/wp-sharks-core",
+  "description": "Core WP plugin framework used by WP Sharks™",
+  "keywords": ["websharks", "wp sharks", "wordpress"],
 
   "type": "library",
   "license": "GPL-3.0+",
@@ -22,8 +22,8 @@
   }],
 
   "support": {
-    "source": "https://github.com/websharks/wp-core",
-    "issues": "https://github.com/websharks/wp-core/issues"
+    "source": "https://github.com/websharks/wp-sharks-core",
+    "issues": "https://github.com/websharks/wp-sharks-core/issues"
   },
 
   "require": {
@@ -38,12 +38,11 @@
 
   "autoload": {
     "psr-4": {
-      "WebSharks\\WpCore\\Classes\\": "src/includes/classes",
-      "WebSharks\\WpCore\\Functions\\": "src/includes/functions",
-      "WebSharks\\WpCore\\Interfaces\\": "src/includes/interfaces",
-      "WebSharks\\WpCore\\Traits\\": "src/includes/traits"
-    },
-    "files": ["src/includes/functions/_load.php"]
+      "WebSharks\\WpSharks\\Core\\Classes\\": "src/includes/classes",
+      "WebSharks\\WpSharks\\Core\\Functions\\": "src/includes/functions",
+      "WebSharks\\WpSharks\\Core\\Interfaces\\": "src/includes/interfaces",
+      "WebSharks\\WpSharks\\Core\\Traits\\": "src/includes/traits"
+    }
   },
 
   "config": {

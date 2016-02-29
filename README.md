@@ -1,5 +1,3 @@
-## WordPress Theme/Plugin Framework
+## WP Sharks™ Core
 
-Core framework for WP plugins developed by WebSharks, Inc.
-
-_~ Currently in development._
+A WordPress plugin that serves as a framework for WordPress plugins by WP Sharks™.
