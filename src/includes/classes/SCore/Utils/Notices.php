@@ -367,7 +367,7 @@ class Notices extends Classes\SCore\Base\Core
 
                 $_style .= ' padding-right:38px; position:relative;';
                 $_dismiss = '<a class="notice-dismiss" href="'.esc_attr($this->dismissUrl($_key)).'">'.
-                                '<span class="screen-reader-text">'.__('Dismiss this notice.').'</span>'.
+                                '<span class="screen-reader-text">'.__('Dismiss this notice.', 'wp-sharks-core').'</span>'.
                             '</a>';
             }
             if (!preg_match('/^\<(?:p|div|h[1-6])[\s>]/ui', $_notice['markup'])) {

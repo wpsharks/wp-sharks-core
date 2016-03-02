@@ -25,6 +25,6 @@ class Fatalities extends Classes\SCore\Base\Core
      */
     public function forbidden()
     {
-        wp_die(__('Abnormal request; forbidden.'), __('Forbidden'), ['response' => 403, 'back_link' => true]);
+        wp_die(__('Abnormal request; forbidden.', 'wp-sharks-core'), __('Forbidden', 'wp-sharks-core'), ['response' => 403, 'back_link' => true]);
     }
 }

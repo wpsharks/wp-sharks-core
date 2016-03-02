@@ -1,8 +1,8 @@
 === WP Sharks Core ===
 
-Stable tag: 160229
+Stable tag: 160302
 Requires at least: 4.4
-Tested up to: 4.4
+Tested up to: 4.5-alpha
 Text Domain: wp-sharks-core
 
 License: GPLv3 or later

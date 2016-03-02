@@ -159,7 +159,7 @@ class Conflicts extends Classes\SCore\Base\Core
                     return; // Do not show.
                 }
                 echo '<div class="notice notice-error">'.
-                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' plugin to clear this message.'), esc_html($this->App->Config->©brand['©name']), esc_html(end($this->plugins))).'</p>'.
+                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' plugin to clear this message.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html(end($this->plugins))).'</p>'.
                      '</div>';
             });
         } elseif ($this->themes) {
@@ -168,7 +168,7 @@ class Conflicts extends Classes\SCore\Base\Core
                     return; // Do not show.
                 }
                 echo '<div class="notice notice-error">'.
-                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' theme to clear this message.'), esc_html($this->App->Config->©brand['©name']), esc_html(end($this->themes))).'</p>'.
+                        '<p>'.sprintf(__('<strong>%1$s</strong> is NOT running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' theme to clear this message.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html(end($this->themes))).'</p>'.
                      '</div>';
             });
         } elseif ($this->deactivatable_plugins) {
@@ -177,8 +177,8 @@ class Conflicts extends Classes\SCore\Base\Core
                     return; // Do not show.
                 }
                 echo '<div class="notice notice-warning">'.
-                        '<p>'.sprintf(__('The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>.'), esc_html($this->App->Config->©brand['©name']), esc_html(implode(', ', $this->deactivatable_plugins))).'</p>'.
-                        '<p>'.sprintf(__('<strong>%1$s</strong> will load now. Please <a href="javascript:location.reload();">refresh</a>.'), esc_html($this->App->Config->©brand['©name'])).'</p>'.
+                        '<p>'.sprintf(__('The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html(implode(', ', $this->deactivatable_plugins))).'</p>'.
+                        '<p>'.sprintf(__('<strong>%1$s</strong> will load now. Please <a href="javascript:location.reload();">refresh</a>.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name'])).'</p>'.
                      '</div>';
             });
         }
