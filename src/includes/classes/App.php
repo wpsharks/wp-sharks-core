@@ -72,15 +72,15 @@ class App extends CoreClasses\App
             );
             $brand = array_merge(
                 [
-                    '©slug'    => 'wp-sharks-core',
-                    '©var'     => 'wp_sharks_core',
-                    '©name'    => 'WP Sharks Core',
-                    '©acronym' => 'WPSC',
-                    '©prefix'  => 'wpsc',
+                    '©slug'        => 'wp-sharks-core',
+                    '©text_domain' => 'wp-sharks-core',
+                    '©var'         => 'wp_sharks_core',
+                    '©name'        => 'WP Sharks Core',
+                    '©acronym'     => 'WPSC',
+                    '©prefix'      => 'wpsc',
 
                     '§domain'      => 'wpsharks.com',
                     '§domain_path' => '/product/core',
-                    '§text_domain' => 'wp-sharks-core',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -120,15 +120,15 @@ class App extends CoreClasses\App
             }
             $brand = array_merge(
                 [
-                    '©slug'    => '',
-                    '©var'     => '',
-                    '©name'    => '',
-                    '©acronym' => '',
-                    '©prefix'  => '',
+                    '©slug'        => '',
+                    '©text_domain' => '',
+                    '©var'         => '',
+                    '©name'        => '',
+                    '©acronym'     => '',
+                    '©prefix'      => '',
 
                     '§domain'      => '',
                     '§domain_path' => '',
-                    '§text_domain' => '',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -138,6 +138,11 @@ class App extends CoreClasses\App
                 $brand['©slug'] = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $brand['©slug']);
             } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©slug'])) {
                 throw new Exception('Please remove `lite|pro` suffix from ©slug.');
+            }
+            if (!$brand['©text_domain']) {
+                $brand['©text_domain'] = $brand['©slug'];
+            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©text_domain'])) {
+                throw new Exception('Please remove `lite|pro` suffix from ©text_domain.');
             }
             if (!$brand['©var']) {
                 $brand['©var'] = $parent->facades['c']::slugToVar($brand['©slug']);
@@ -165,11 +170,6 @@ class App extends CoreClasses\App
                 $brand['§domain']      = $parent->Config->©brand['§domain'];
                 $brand['§domain_path'] = '/product/'.$brand['©slug'];
             }
-            if (!$brand['§text_domain']) {
-                $brand['§text_domain'] = $brand['©slug'];
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['§text_domain'])) {
-                throw new Exception('Please remove `lite|pro` suffix from §text_domain.');
-            }
         }
         # Build the core/default instance base.
 
@@ -184,15 +184,15 @@ class App extends CoreClasses\App
             ],
 
             '©brand' => [
-                '©slug'    => '',
-                '©var'     => '',
-                '©name'    => '',
-                '©acronym' => '',
-                '©prefix'  => '',
+                '©text_domain' => '',
+                '©slug'        => '',
+                '©var'         => '',
+                '©name'        => '',
+                '©acronym'     => '',
+                '©prefix'      => '',
 
                 '§domain'      => '',
                 '§domain_path' => '',
-                '§text_domain' => '',
             ],
 
             '©di' => [
@@ -304,7 +304,7 @@ class App extends CoreClasses\App
 
         $GLOBALS[$this->Config->©brand['©var']] = $this->facades['a'];
 
-        load_plugin_textdomain($this->Config->©brand['§text_domain']);
+        load_plugin_textdomain($this->Config->©brand['©text_domain']);
 
         if ($this->Config->§setup['§enable']) {
             add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], $this->Config->§setup['§priority']);
