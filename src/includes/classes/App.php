@@ -304,6 +304,8 @@ class App extends CoreClasses\App
 
         $GLOBALS[$this->Config->©brand['©var']] = $this->facades['a'];
 
+        load_plugin_textdomain($this->Config->©brand['§text_domain']);
+
         if ($this->Config->§setup['§enable']) {
             add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], $this->Config->§setup['§priority']);
         }
