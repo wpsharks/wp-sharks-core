@@ -14,4 +14,6 @@ if (require(dirname(__DIR__).'/vendor/websharks/wp-php-rv/src/includes/check.php
         require_once __DIR__.'/stub.php';
         new App();
     }, -10000);
+} else {
+    wp_php_rv_notice('WP Sharks™ Core');
 }
