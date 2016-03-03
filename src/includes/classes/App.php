@@ -204,7 +204,7 @@ class App extends CoreClasses\App
 
             '§setup' => [
                 '§enable'       => true,
-                '§priority'     => -100,
+                '§priority'     => $this->class === self::class ? -10000 : -100,
                 '§enable_hooks' => true,
                 '§complete'     => false,
             ],
