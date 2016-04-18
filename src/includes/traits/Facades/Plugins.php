@@ -18,6 +18,6 @@ trait Plugins
      */
     public static function allActivePlugins(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Plugins->active(...$args);
+        return $GLOBALS[static::class]->Utils->§Plugins->allActive(...$args);
     }
 }
