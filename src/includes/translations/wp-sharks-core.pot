@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160417\n"
+"Project-Id-Version: WP Sharks Core 160418\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-04-17 05:16:06+00:00\n"
+"POT-Creation-Date: 2016-04-18 06:07:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,42 +12,52 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: src/includes/classes/App.php:245
+#: .~build/wp-sharks-core/src/includes/classes/App.php:245
+#: src/includes/classes/App.php:263
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
-#: src/includes/classes/App.php:255
+#: .~build/wp-sharks-core/src/includes/classes/App.php:255
+#: src/includes/classes/App.php:273
 msgid "<strong>%1$s</strong> detected a new version of itself &amp; recompiled successfully. You're now running v%2$s."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:162
 #: src/includes/classes/SCore/Utils/Conflicts.php:162
 msgid "<strong>%1$s</strong> is NOT running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the '%2$s' plugin to clear this message."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:171
 #: src/includes/classes/SCore/Utils/Conflicts.php:171
 msgid "<strong>%1$s</strong> is NOT running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please deactivate the '%2$s' theme to clear this message."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:180
 #: src/includes/classes/SCore/Utils/Conflicts.php:180
 msgid "The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:181
 #: src/includes/classes/SCore/Utils/Conflicts.php:181
 msgid "<strong>%1$s</strong> will load now. Please <a href=\"javascript:location.reload();\">refresh</a>."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatalities.php:28
 #: src/includes/classes/SCore/Utils/Fatalities.php:28
 msgid "Abnormal request; forbidden."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatalities.php:28
 #: src/includes/classes/SCore/Utils/Fatalities.php:28
 msgid "Forbidden"
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:370
 #: src/includes/classes/SCore/Utils/Notices.php:370
 msgid "Dismiss this notice."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Options.php:124
 #: src/includes/classes/SCore/Utils/Options.php:124
 msgid "%1$s options updated successfully."
 msgstr ""
