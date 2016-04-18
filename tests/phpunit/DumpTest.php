@@ -15,10 +15,11 @@ use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
-class ActiveTest extends \PHPUnit_Framework_TestCase
+class DumpTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActive()
+    public function testDump()
     {
-        $this->assertSame(true, c::app() instanceof Classes\App);
+        c::dump(c::app());
+        $this->assertSame(true, true);
     }
 }
