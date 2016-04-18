@@ -65,8 +65,11 @@ class Db extends Classes\SCore\Base\Core
     public function createTables()
     {
         $table_prefix = $this->prefix();
-        $tables_dir   = $this->App->Config->§db['§tables_dir'];
-        $Tables       = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
+
+        if (!is_dir($tables_dir = $this->App->Config->§db['§tables_dir'])) {
+            return; // Nothing to do; i.e., no tables.
+        }
+        $Tables = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
 
         foreach ($Tables as $_Table) {
             if (!$_Table->isFile()) {
@@ -99,8 +102,11 @@ class Db extends Classes\SCore\Base\Core
     public function dropTables()
     {
         $table_prefix = $this->prefix();
-        $tables_dir   = $this->App->Config->§db['§tables_dir'];
-        $Tables       = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
+
+        if (!is_dir($tables_dir = $this->App->Config->§db['§tables_dir'])) {
+            return; // Nothing to do; i.e., no tables.
+        }
+        $Tables = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
 
         foreach ($Tables as $_Table) {
             if (!$_Table->isFile()) {
