@@ -205,6 +205,12 @@ class App extends CoreClasses\App
                     ],
                 ],
             ],
+            '©sub_namespace_map' => [
+                'SCore' => [
+                    '©utils'   => '§',
+                    '©facades' => 's',
+                ],
+            ],
 
             '§setup' => [
                 '§enable'       => true,
