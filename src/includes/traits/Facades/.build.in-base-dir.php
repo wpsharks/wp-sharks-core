@@ -10,7 +10,6 @@ ini_set('display_errors', 'yes');
 if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
-
 $Facades = '<?php
 // This file was auto-generated:
 // '.date('F jS, Y, g:i a T').'

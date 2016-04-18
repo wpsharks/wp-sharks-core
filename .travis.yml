@@ -1,0 +1,31 @@
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Container.
+
+dist: trusty
+sudo: required
+language: generic
+script: ./.travis.bash
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Notifications.
+
+notifications:
+  email: false # Disable.
+  slack: websharks:EpVKoMF6MQKjLKVw0CAX33Og
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# <custom> build matrix.
+
+matrix: # Tests for WP Sharks Core plugin.
+
+  include: # The WP Sharks Core requires PHP v7+.
+
+    - env: CI_RUN=PHP_VERSION=7.0,WP=standard,WP_VERSION=latest
+    - env: CI_RUN=PHP_VERSION=7.0,WP=multisite,WP_VERSION=latest
+
+  fast_finish: true # Before allowed failures.
+
+# </custom>

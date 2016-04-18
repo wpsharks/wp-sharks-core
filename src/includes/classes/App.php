@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160303'; //v//
+    const VERSION = '160417'; //v//
 
     /**
      * Constructor.
@@ -145,22 +145,22 @@ class App extends CoreClasses\App
                 throw new Exception('Please remove `lite|pro` suffix from ©text_domain.');
             }
             if (!$brand['©var']) {
-                $brand['©var'] = $parent->facades['c']::slugToVar($brand['©slug']);
+                $brand['©var'] = $parent->c::slugToVar($brand['©slug']);
             } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©var'])) {
                 throw new Exception('Please remove `lite|pro` suffix from ©var.');
             }
             if (!$brand['©name']) {
-                $brand['©name'] = $parent->facades['c']::slugToName($brand['©slug']);
+                $brand['©name'] = $parent->c::slugToName($brand['©slug']);
             } elseif ($args['§validate_brand'] && preg_match('/\s+(?:Lite|Pro)$/ui', $brand['©name'])) {
                 throw new Exception('Please remove `Lite|Pro` suffix from ©name.');
             }
             if (!$brand['©acronym']) {
-                $brand['©acronym'] = $parent->facades['c']::nameToAcronym($brand['©name']);
+                $brand['©acronym'] = $parent->c::nameToAcronym($brand['©name']);
             } elseif ($args['§validate_brand'] && preg_match('/(?:LITE|PRO)$/ui', $brand['©acronym'])) {
                 throw new Exception('Please remove `LITE|PRO` suffix from ©acronym.');
             }
             if (!$brand['©prefix']) {
-                $brand['©prefix'] = $parent->facades['c']::nameToSlug($brand['©acronym']);
+                $brand['©prefix'] = $parent->c::nameToSlug($brand['©acronym']);
             } elseif ($args['§validate_brand'] && preg_match('/\s+(?:lite|pro)$/ui', $brand['©prefix'])) {
                 throw new Exception('Please remove `lite|pro` suffix from ©prefix.');
             } elseif ($args['§validate_brand'] && preg_match('/[^a-z0-9]/u', $brand['©prefix'])) {
@@ -173,8 +173,12 @@ class App extends CoreClasses\App
         }
         # Build the core/default instance base.
 
-        $wp_tmp_dir = rtrim(get_temp_dir(), '/');
-
+        if (!($wp_tmp_dir = rtrim(get_temp_dir(), '/'))) {
+            throw new Exception('Failed to acquire a temp directory.');
+        }
+        if (!($wp_salt = wp_salt()) || !($wp_salt_key = hash('sha256', $wp_salt.$brand['©slug']))) {
+            throw new Exception('Failed to generate a unique salt/key.');
+        }
         $default_instance_base = [
             '§specs' => [
                 '§is_pro'          => false,
@@ -204,7 +208,6 @@ class App extends CoreClasses\App
 
             '§setup' => [
                 '§enable'       => true,
-                '§priority'     => $this->class === self::class ? -10000 : -100,
                 '§enable_hooks' => true,
                 '§complete'     => false,
             ],
@@ -220,7 +223,16 @@ class App extends CoreClasses\App
             ],
 
             '§keys' => [
-                '§salt' => str_pad(wp_salt(), 64, 'x'),
+                '§salt' => $wp_salt_key,
+            ],
+            '©cookies' => [
+                '©encryption_key' => $wp_salt_key,
+            ],
+            '©hash_ids' => [
+                '©hash_key' => $wp_salt_key,
+            ],
+            '©passwords' => [
+                '©hash_key' => $wp_salt_key,
             ],
 
             '§conflicting' => [
@@ -263,19 +275,23 @@ class App extends CoreClasses\App
             '§uninstall' => false,
         ];
         if ($specs['§type'] === 'plugin') {
-            $lp_conflicting_base = $brand['©slug'].($specs['§is_pro'] ? '' : '-pro');
-            $lp_conflicting_name = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
+            $lp_conflicting_basename_slug = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $this->base_dir_basename);
+            $lp_conflicting_basename_slug .= ($specs['§is_pro'] ? '' : '-pro');
 
-            $default_instance_base['§conflicting']['§plugins'][$lp_conflicting_base]               = $lp_conflicting_name;
-            $default_instance_base['§conflicting']['§deactivatable_plugins'][$lp_conflicting_base] = $lp_conflicting_name;
+            $lp_conflicting_basename_slug = $brand['©slug'].($specs['§is_pro'] ? '' : '-pro');
+            $lp_conflicting_name          = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
+
+            $default_instance_base['§conflicting']['§plugins'][$lp_conflicting_basename_slug]               = $lp_conflicting_name;
+            $default_instance_base['§conflicting']['§deactivatable_plugins'][$lp_conflicting_basename_slug] = $lp_conflicting_name;
         }
-        # Build collective instance base, instance, default options, & run parent constructor.
+        # Build collective instance base & instance, then run parent constructor.
 
-        $instance_base                     = $this->mergeConfig($default_instance_base, $instance_base);
-        $instance_base['§default_options'] = $instance['§default_options'] = $instance_base['§options'];
-        $instance_base['§specs']           = $instance['§specs']           = $specs;
-        $instance_base['©brand']           = $instance['©brand']           = $brand;
-        $instance                          = apply_filters($brand['©var'].'_instance', $instance);
+        $instance_base           = $this->mergeConfig($default_instance_base, $instance_base);
+        $instance_base['§specs'] = &$specs; // Already established (in full) above.
+        $instance_base['©brand'] = &$brand; // Already established (in full) above.
+
+        unset($instance['§specs'], $instance['©brand']);
+        $instance = apply_filters($brand['©var'].'_instance', $instance, $instance_base);
 
         parent::__construct($instance_base, $instance, $parent, $args);
 
@@ -296,6 +312,8 @@ class App extends CoreClasses\App
         if ($this->s::conflictsExist()) {
             return; // Stop here.
         }
+        load_plugin_textdomain($this->Config->©brand['©text_domain']);
+
         if ($this->Config->§uninstall) {
             $this->s::maybeUninstall();
             return; // Stop here.
@@ -304,19 +322,17 @@ class App extends CoreClasses\App
 
         $GLOBALS[$this->Config->©brand['©var']] = $this->facades['a'];
 
-        load_plugin_textdomain($this->Config->©brand['©text_domain']);
-
-        if ($this->Config->§setup['§enable']) {
-            add_action('after_setup_theme', [$this, 'onAfterSetupTheme'], $this->Config->§setup['§priority']);
-        }
+        $this->onPluginsLoadedMaybeSetupHooks(); // Maybe setup hooks.
     }
 
     /**
-     * Setup handler.
+     * Maybe setup hooks.
      *
      * @since 16xxxx Initial release.
+     *
+     * @note Called by constructor, which attaches to `plugins_loaded` hook in WP core.
      */
-    public function onAfterSetupTheme()
+    public function onPluginsLoadedMaybeSetupHooks()
     {
         if ($this->Config->§uninstall) {
             return; // Uninstalling.
@@ -329,24 +345,27 @@ class App extends CoreClasses\App
         }
         $this->Config->§setup['§complete'] = true;
 
-        if ($this->Config->§setup['§enable_hooks']) {
-            add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
-            add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
-
-            add_action('admin_init', [$this->Utils->§Notices, 'onAdminInitMaybeDismiss']);
-            add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
-
-            $this->setupHooks(); // For extenders.
+        if (!$this->Config->§setup['§enable_hooks']) {
+            return; // Hooks disabled right now.
         }
+        add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
+        add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
+
+        add_action('admin_init', [$this->Utils->§Notices, 'onAdminInitMaybeDismiss']);
+        add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
+
+        $this->onPluginsLoadedSetupHooks(); // For extenders.
     }
 
     /**
      * Hook setup handler.
      *
      * @since 16xxxx Initial release.
+     *
+     * @note Called by constructor, which attaches to `plugins_loaded` hook in WP core.
      */
-    protected function setupHooks()
+    protected function onPluginsLoadedSetupHooks()
     {
-        // For extenders. This is only called upon when setup should run.
+        // For extenders; only called when setup should run.
     }
 }

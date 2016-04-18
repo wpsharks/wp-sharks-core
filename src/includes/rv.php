@@ -3,7 +3,7 @@ if (!defined('WPINC')) {
     exit('Do NOT access this file directly: '.basename(__FILE__));
 }
 $GLOBALS['wp_php_rv'] = [
-    'rv' => '7.0.1', //php-required-version//
+    'rv' => '7.0.4', //php-required-version//
     're' => [
         'SPL',
         'Phar',

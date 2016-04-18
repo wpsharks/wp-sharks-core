@@ -30,9 +30,8 @@
     "websharks/core": "dev-master",
     "websharks/wp-php-rv": "150511"
   },
-  "require-dev": {
-    "websharks/wp-i18n-tools": "dev-master"
-  },
+  "require-dev": {},
+
   "minimum-stability": "dev",
   "prefer-stable": true,
 
