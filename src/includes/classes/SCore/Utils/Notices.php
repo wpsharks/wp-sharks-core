@@ -111,7 +111,7 @@ class Notices extends Classes\SCore\Base\Core
         if ($notice['id']) {
             return $notice['id']; // Use as key also.
         }
-        return $this->c::sha256KeyedHash(serialize($notice), $this->App->Config['§keys']['§salt']);
+        return $this->c::sha256KeyedHash(serialize($notice), $this->App->Config->§keys['§salt']);
     }
 
     /**
