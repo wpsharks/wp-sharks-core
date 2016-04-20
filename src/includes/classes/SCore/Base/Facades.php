@@ -1,7 +1,4 @@
 <?php
-// This file was auto-generated:
-// April 20th, 2016, 1:25 pm UTC
-
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 

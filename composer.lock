@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5074b77a07f866fee9f5860aa4e1a79",
-    "content-hash": "74f4e559bc3acf847a225fd8051dc2b3",
+    "hash": "a6b19ec51adb55f9cff9ab117f762250",
+    "content-hash": "09be895a1e9f8f7913f6f83de6142dd4",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -770,12 +770,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "adf89aab5707bcb67063fc836382372a2b27914f"
+                "reference": "1c1f6d9dcab14eb6ee8f1a0c25982dc13fbdd54c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/adf89aab5707bcb67063fc836382372a2b27914f",
-                "reference": "adf89aab5707bcb67063fc836382372a2b27914f",
+                "url": "https://api.github.com/repos/websharks/core/zipball/1c1f6d9dcab14eb6ee8f1a0c25982dc13fbdd54c",
+                "reference": "1c1f6d9dcab14eb6ee8f1a0c25982dc13fbdd54c",
                 "shasum": ""
             },
             "require": {
@@ -885,7 +885,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-04-18 07:28:28"
+            "time": "2016-04-20 14:28:41"
         },
         {
             "name": "websharks/dicer",
@@ -940,16 +940,16 @@
         },
         {
             "name": "websharks/wp-php-rv",
-            "version": "150511",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/wp-php-rv.git",
-                "reference": "ed0a58f3647e59c740560235da1e61904dca8d84"
+                "reference": "fabaf899f2fca37e79b3732422e32f7335d2c1d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/ed0a58f3647e59c740560235da1e61904dca8d84",
-                "reference": "ed0a58f3647e59c740560235da1e61904dca8d84",
+                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/fabaf899f2fca37e79b3732422e32f7335d2c1d6",
+                "reference": "fabaf899f2fca37e79b3732422e32f7335d2c1d6",
                 "shasum": ""
             },
             "require": {
@@ -984,14 +984,27 @@
                 "websharks",
                 "wordpress"
             ],
-            "time": "2015-05-10 10:30:04"
+            "time": "2016-04-20 14:30:22"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "package/bourbon",
+            "version": "4.2.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/thoughtbot/bourbon/releases/download/v4.2.3/bourbon-v4.2.3.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "websharks/core": 20
+        "websharks/core": 20,
+        "websharks/wp-php-rv": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

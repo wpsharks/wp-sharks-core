@@ -11,9 +11,6 @@ if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
 $Facades = '<?php
-// This file was auto-generated:
-// '.date('F jS, Y, g:i a T').'
-
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 
