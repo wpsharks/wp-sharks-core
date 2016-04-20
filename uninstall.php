@@ -8,6 +8,4 @@ require dirname(__FILE__).'/src/includes/wp-php-rv.php';
 
 if (require(dirname(__FILE__).'/src/vendor/websharks/wp-php-rv/src/includes/check.php')) {
     require_once dirname(__FILE__).'/src/includes/uninstall.php';
-} else {
-    wp_php_rv_notice('WP Sharks™ Core');
 }
