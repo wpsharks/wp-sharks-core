@@ -317,7 +317,7 @@ class Notices extends Classes\SCore\Base\Core
             return; // Nothing to do.
         }
         foreach ($notices as $_key => $_notice) {
-            if (!is_string($key) || !is_array($_notice)) {
+            if (!is_string($_key) || !is_array($_notice)) {
                 unset($notices[$_key]);
                 continue; // Ignore.
             }
