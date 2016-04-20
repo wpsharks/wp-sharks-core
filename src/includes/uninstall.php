@@ -7,6 +7,5 @@ use WebSharks\WpSharks\Core\Classes\App;
 if (!defined('WPINC')) {
     exit('Do NOT access this file directly: '.basename(__FILE__));
 }
-require_once __DIR__.'/stub.php';
-
-new App(['§uninstall' => true]);
+require_once __DIR__.'/stub.php'; // Autoloader.
+new App(['§uninstall' => true]); // Uninstall flag.
