@@ -131,7 +131,8 @@ class App extends CoreClasses\App
                 $instance['©brand'] ?? []
             );
             if (!$brand['©slug']) {
-                $brand['©slug'] = preg_replace('/^wp[_\-]+/ui', '', $this->base_dir_basename);
+                $brand['©slug'] = $this->base_dir_basename;
+                $brand['©slug'] = preg_replace('/^wp(?:sc|[_\-]+sharks)?[_\-]+/ui', '', $brand['©slug']);
                 $brand['©slug'] = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $brand['©slug']);
             } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©slug'])) {
                 throw new Exception('Please remove `lite|pro` suffix from ©slug.');
