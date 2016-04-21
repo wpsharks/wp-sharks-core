@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f8dc80d5db2138d1782b5b46ee7bf7c",
-    "content-hash": "10c7c79e1b516da184ae5aa0c4db8410",
+    "hash": "c181d34558b272abb82e83584dd330c6",
+    "content-hash": "e5bf12946d7d792f088443919465602e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1003,8 +1003,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "websharks/core": 20,
-        "websharks/wp-php-rv": 20
+        "websharks/wp-php-rv": 20,
+        "websharks/core": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

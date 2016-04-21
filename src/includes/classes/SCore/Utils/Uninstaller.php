@@ -78,12 +78,13 @@ class Uninstaller extends Classes\SCore\Base\Core
     protected function uninstall()
     {
         $this->deleteOptions();
-        $this->deleteTransients();
         $this->deletePostMeta();
         $this->deleteUserMeta();
         $this->dropDbTables();
 
-        ++$this->counter;
+        $this->otherUninstallRoutines();
+
+        ++$this->counter; // Increment.
     }
 
     /**
@@ -117,41 +118,6 @@ class Uninstaller extends Classes\SCore\Base\Core
             ';
         $like1 = $WpDb->esc_like($this->App->Config->©brand['©var'].'_').'%';
         $like2 = '%'.$WpDb->esc_like('_'.$this->App->Config->©brand['©var'].'_').'%';
-
-        $WpDb->query($WpDb->prepare($sql, $like1, $like2));
-    }
-
-    /**
-     * Delete option keys.
-     *
-     * @since 16xxxx Uninstall utils.
-     */
-    protected function deleteTransients()
-    {
-        $WpDb = $this->s::wpDb();
-
-        if ($this->counter <= 0 && is_multisite()) {
-            $sql = /* Delete network transients. */ '
-                    DELETE
-                        FROM `'.esc_sql($WpDb->sitemeta).'`
-                    WHERE
-                        `meta_key` LIKE %s
-                        OR `meta_key` LIKE %s
-                ';
-            $like1 = '%'.$WpDb->esc_like('_site_transient_'.$this->App->Config->©brand['©var'].'_').'%';
-            $like2 = '%'.$WpDb->esc_like('_site_transient_timeout_'.$this->App->Config->©brand['©var'].'_').'%';
-
-            $WpDb->query($WpDb->prepare($sql, $like1, $like2));
-        }
-        $sql = /* Delete transients. */ '
-                DELETE
-                    FROM `'.esc_sql($WpDb->options).'`
-                WHERE
-                    `option_name` LIKE %s
-                    OR `option_name` LIKE %s
-            ';
-        $like1 = '%'.$WpDb->esc_like('_transient_'.$this->App->Config->©brand['©var'].'_').'%';
-        $like2 = '%'.$WpDb->esc_like('_transient_timeout_'.$this->App->Config->©brand['©var'].'_').'%';
 
         $WpDb->query($WpDb->prepare($sql, $like1, $like2));
     }
@@ -212,5 +178,15 @@ class Uninstaller extends Classes\SCore\Base\Core
         if (!$this->App->Config->§specs['§is_network_wide'] || $this->counter <= 0) {
             $this->s::dropDbTables(); // Only if the table prefix changes.
         }
+    }
+
+    /**
+     * Other uninstall routines.
+     *
+     * @since 16xxxx Install utils.
+     */
+    protected function otherUninstallRoutines()
+    {
+        $this->s::doAction('other_uninstall_routines', $this->counter);
     }
 }

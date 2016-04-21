@@ -81,6 +81,10 @@ class Installer extends Classes\SCore\Base\Core
     {
         $this->vsUpgrades();
         $this->createDbTables();
+
+        $this->otherInstallRoutines();
+
+        $this->flushRewriteRules();
         $this->maybeEnqueueNotice();
         $this->updateHistory();
     }
@@ -92,7 +96,7 @@ class Installer extends Classes\SCore\Base\Core
      */
     protected function vsUpgrades()
     {
-        // Intended for extenders.
+        $this->s::doAction('vs_upgrades', $this->history);
     }
 
     /**
@@ -103,6 +107,26 @@ class Installer extends Classes\SCore\Base\Core
     protected function createDbTables()
     {
         $this->s::createDbTables();
+    }
+
+    /**
+     * Other install routines.
+     *
+     * @since 16xxxx Install utils.
+     */
+    protected function otherInstallRoutines()
+    {
+        $this->s::doAction('other_install_routines', $this->history);
+    }
+
+    /**
+     * Flush rewrite rules.
+     *
+     * @since 16xxxx Install utils.
+     */
+    protected function flushRewriteRules()
+    {
+        flush_rewrite_rules();
     }
 
     /**

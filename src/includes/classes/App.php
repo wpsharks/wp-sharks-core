@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160420'; //v//
+    const VERSION = '160421'; //v//
 
     /**
      * Constructor.
@@ -316,17 +316,15 @@ class App extends CoreClasses\App
         if ($this->s::conflictsExist()) {
             return; // Stop here.
         }
-        load_plugin_textdomain($this->Config->©brand['©text_domain']);
-
         if ($this->Config->§uninstall) {
             $this->s::maybeUninstall();
             return; // Stop here.
         }
-        $this->s::maybeInstall(); // Maybe install (or reinstall).
-
-        $GLOBALS[$this->Config->©brand['©var']] = $this->facades['a'];
+        $GLOBALS[$this->Config->©brand['©var']] = $this;
 
         $this->onPluginsLoadedMaybeSetupHooks(); // Maybe setup hooks.
+
+        $this->s::maybeInstall(); // Maybe install (or reinstall) software.
     }
 
     /**
@@ -336,7 +334,7 @@ class App extends CoreClasses\App
      *
      * @note Called by constructor, which attaches to `plugins_loaded` hook in WP core.
      */
-    public function onPluginsLoadedMaybeSetupHooks()
+    protected function onPluginsLoadedMaybeSetupHooks()
     {
         if ($this->Config->§uninstall) {
             return; // Uninstalling.
@@ -352,6 +350,8 @@ class App extends CoreClasses\App
         if (!$this->Config->§setup['§enable_hooks']) {
             return; // Hooks disabled right now.
         }
+        load_plugin_textdomain($this->Config->©brand['©text_domain']);
+
         add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
         add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
 

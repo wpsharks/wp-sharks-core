@@ -19,6 +19,22 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class Hooks extends Classes\SCore\Base\Core
 {
     /**
+     * Add a filter.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string   $hook     A hook.
+     * @param callable $callable Callable.
+     * @param mixed ...$args Any additional args.
+     *
+     * @return bool See {@link add_filter()}
+     */
+    public function addFilter(string $hook, callable $callable, ...$args)
+    {
+        return add_filter($this->App->Config->©brand['©var'].'_'.$hook, $callable, ...$args);
+    }
+
+    /**
      * Apply filters.
      *
      * @since 16xxxx Initial release.
@@ -32,6 +48,22 @@ class Hooks extends Classes\SCore\Base\Core
     public function applyFilters(string $hook, $value, ...$args)
     {
         return apply_filters($this->App->Config->©brand['©var'].'_'.$hook, $value, ...$args);
+    }
+
+    /**
+     * Add an action.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string   $hook     A hook.
+     * @param callable $callable Callable.
+     * @param mixed ...$args Any additional args.
+     *
+     * @return bool See {@link add_action()}
+     */
+    public function addAction(string $hook, callable $callable, ...$args)
+    {
+        return add_action($this->App->Config->©brand['©var'].'_'.$hook, $callable, ...$args);
     }
 
     /**
