@@ -28,8 +28,8 @@
 
   "require": {
     "php": ">=7.0.4",
-    "websharks/core": "dev-master",
-    "websharks/wp-php-rv": "dev-master"
+    "websharks/wp-php-rv": "dev-master",
+    "websharks/core": "dev-master"
   },
   "require-dev": {
     "package/bourbon": "4.2.3"

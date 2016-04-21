@@ -51,9 +51,9 @@ class Db extends Classes\SCore\Base\Core
     public function prefix(): string
     {
         if ($this->App->Config->§specs['§is_network_wide']) {
-            return $this->wp->base_prefix.$this->App->Config->©brand['©prefix'].'_';
+            return $this->wp->base_prefix.$this->App->Config->©brand['©var'].'_';
         } else {
-            return $this->wp->prefix.$this->App->Config->©brand['©prefix'].'_';
+            return $this->wp->prefix.$this->App->Config->©brand['©var'].'_';
         }
     }
 

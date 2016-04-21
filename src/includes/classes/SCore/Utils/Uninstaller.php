@@ -138,8 +138,8 @@ class Uninstaller extends Classes\SCore\Base\Core
                         `meta_key` LIKE %s
                         OR `meta_key` LIKE %s
                 ';
-            $like1 = '%'.$WpDb->esc_like('_site_transient_'.$this->App->Config->©brand['©prefix'].'_').'%';
-            $like2 = '%'.$WpDb->esc_like('_site_transient_timeout_'.$this->App->Config->©brand['©prefix'].'_').'%';
+            $like1 = '%'.$WpDb->esc_like('_site_transient_'.$this->App->Config->©brand['©var'].'_').'%';
+            $like2 = '%'.$WpDb->esc_like('_site_transient_timeout_'.$this->App->Config->©brand['©var'].'_').'%';
 
             $WpDb->query($WpDb->prepare($sql, $like1, $like2));
         }
@@ -150,8 +150,8 @@ class Uninstaller extends Classes\SCore\Base\Core
                     `option_name` LIKE %s
                     OR `option_name` LIKE %s
             ';
-        $like1 = '%'.$WpDb->esc_like('_transient_'.$this->App->Config->©brand['©prefix'].'_').'%';
-        $like2 = '%'.$WpDb->esc_like('_transient_timeout_'.$this->App->Config->©brand['©prefix'].'_').'%';
+        $like1 = '%'.$WpDb->esc_like('_transient_'.$this->App->Config->©brand['©var'].'_').'%';
+        $like2 = '%'.$WpDb->esc_like('_transient_timeout_'.$this->App->Config->©brand['©var'].'_').'%';
 
         $WpDb->query($WpDb->prepare($sql, $like1, $like2));
     }
