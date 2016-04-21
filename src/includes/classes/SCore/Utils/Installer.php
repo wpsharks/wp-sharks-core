@@ -84,7 +84,7 @@ class Installer extends Classes\SCore\Base\Core
 
         $this->otherInstallRoutines();
 
-        $this->flushRewriteRules();
+        $this->doFlushRewriteRules();
         $this->maybeEnqueueNotice();
         $this->updateHistory();
     }
@@ -124,9 +124,13 @@ class Installer extends Classes\SCore\Base\Core
      *
      * @since 16xxxx Install utils.
      */
-    protected function flushRewriteRules()
+    protected function doFlushRewriteRules()
     {
-        flush_rewrite_rules();
+        if (!empty($GLOBALS['wp_rewrite'])) {
+            flush_rewrite_rules();
+        } else {
+            add_action('setup_theme', 'flush_rewrite_rules', -10000);
+        }
     }
 
     /**

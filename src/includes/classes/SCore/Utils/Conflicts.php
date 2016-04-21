@@ -69,6 +69,18 @@ class Conflicts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Conflicts exist hook.
+     *
+     * @since 16xxxx Install utils.
+     *
+     * @return bool Conflicts exist?
+     */
+    public function existOnPluginsLoaded(): bool
+    {
+        return $this->exist();
+    }
+
+    /**
      * Conflicts exist?
      *
      * @since 16xxxx Initial release.

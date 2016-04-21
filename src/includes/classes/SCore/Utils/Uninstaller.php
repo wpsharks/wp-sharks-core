@@ -42,7 +42,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     }
 
     /**
-     * Install (or reinstall).
+     * Maybe uninstall.
      *
      * @since 16xxxx Uninstall utils.
      */

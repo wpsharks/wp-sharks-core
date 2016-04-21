@@ -211,9 +211,10 @@ class App extends CoreClasses\App
             ],
 
             '§setup' => [
-                '§enable'       => true,
-                '§enable_hooks' => true,
-                '§complete'     => false,
+                '§enable'               => true,
+                '§enable_hooks'         => true,
+                '§early_hooks_complete' => false,
+                '§hooks_complete'       => false,
             ],
 
             '§db' => [
@@ -311,65 +312,108 @@ class App extends CoreClasses\App
         $this->Config->§options = $this->s::mergeOptions($this->Config->§options, $site_owner_options);
         $this->Config->§options = $this->s::applyFilters('options', $this->Config->§options);
 
-        # Post-construct sub-routines.
+        # Post-construct sub-routines are run now.
+
+        // Sanity check; must be on (or after) `plugins_loaded` hook.
+
+        if (!did_action('plugins_loaded')) {
+            throw new Exception('Doing it wrong! `plugins_loaded` action not done yet.');
+        }
+        // Check for any known conflicts w/ this application.
 
         if ($this->s::conflictsExist()) {
             return; // Stop here.
         }
+        // No known conflicts; load plugin text-domain.
+
+        load_plugin_textdomain($this->Config->©brand['©text_domain']);
+
+        // Maybe setup early-hooks (e.g., for install/uninstall).
+
+        $this->onPluginsLoadedMaybeSetupEarlyHooks();
+
+        // Maybe uninstall (else maybe install).
+
         if ($this->Config->§uninstall) {
             $this->s::maybeUninstall();
             return; // Stop here.
+        } else {
+            $this->s::maybeInstall();
         }
+        // Prepare global access var.
+
         $GLOBALS[$this->Config->©brand['©var']] = $this;
 
-        $this->onPluginsLoadedMaybeSetupHooks(); // Maybe setup hooks.
+        // Prepare other setup hooks now.
 
-        $this->s::maybeInstall(); // Maybe install (or reinstall) software.
+        $this->onPluginsLoadedMaybeSetupHooks();
+    }
+
+    /**
+     * Maybe setup early-hooks.
+     *
+     * @since 16xxxx Initial release.
+     */
+    protected function onPluginsLoadedMaybeSetupEarlyHooks()
+    {
+        if (!$this->Config->§setup['§enable']) {
+            return; // Setup disabled.
+        }
+        if ($this->Config->§setup['§early_hooks_complete']) {
+            return; // Already complete.
+        }
+        $this->Config->§setup['§early_hooks_complete'] = true;
+
+        if (!$this->Config->§setup['§enable_hooks']) {
+            return; // Hooks disabled right now.
+        }
+        $this->onPluginsLoadedSetupEarlyHooks();
+    }
+
+    /**
+     * Early-hook setup handler.
+     *
+     * @since 16xxxx Initial release.
+     */
+    protected function onPluginsLoadedSetupEarlyHooks()
+    {
+        // For extenders. Only runs when appropriate.
     }
 
     /**
      * Maybe setup hooks.
      *
      * @since 16xxxx Initial release.
-     *
-     * @note Called by constructor, which attaches to `plugins_loaded` hook in WP core.
      */
     protected function onPluginsLoadedMaybeSetupHooks()
     {
-        if ($this->Config->§uninstall) {
-            return; // Uninstalling.
-        }
         if (!$this->Config->§setup['§enable']) {
             return; // Setup disabled.
         }
-        if ($this->Config->§setup['§complete']) {
+        if ($this->Config->§setup['§hooks_complete']) {
             return; // Already complete.
         }
-        $this->Config->§setup['§complete'] = true;
+        $this->Config->§setup['§hooks_complete'] = true;
 
         if (!$this->Config->§setup['§enable_hooks']) {
             return; // Hooks disabled right now.
         }
-        load_plugin_textdomain($this->Config->©brand['©text_domain']);
-
         add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
         add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
 
         add_action('admin_init', [$this->Utils->§Notices, 'onAdminInitMaybeDismiss']);
         add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
 
-        $this->onPluginsLoadedSetupHooks(); // For extenders.
+        $this->onPluginsLoadedSetupHooks();
     }
 
     /**
      * Hook setup handler.
      *
      * @since 16xxxx Initial release.
-     *
-     * @note Called by constructor, which attaches to `plugins_loaded` hook in WP core.
      */
     protected function onPluginsLoadedSetupHooks()
     {
-        // For extenders; only called when setup should run.
+        // For extenders. Only runs when appropriate.
     }
 }
