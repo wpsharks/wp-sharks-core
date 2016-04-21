@@ -210,11 +210,16 @@ class App extends CoreClasses\App
                 ],
             ],
 
-            '§setup' => [
-                '§enable'               => true,
-                '§enable_hooks'         => true,
-                '§early_hooks_complete' => false,
-                '§hooks_complete'       => false,
+            '§setup' => [ // On (or after): `plugins_loaded`.
+                // Default is `after_setup_theme` for flexibility.
+                '§hook'          => 'after_setup_theme',
+                '§hook_priority' => -1000,
+
+                // Other setup flags.
+                '§enable_hooks' => true,
+
+                // Systematic setup flags.
+                '§complete' => false,
             ],
 
             '§db' => [
@@ -312,12 +317,15 @@ class App extends CoreClasses\App
         $this->Config->§options = $this->s::mergeOptions($this->Config->§options, $site_owner_options);
         $this->Config->§options = $this->s::applyFilters('options', $this->Config->§options);
 
-        # Post-construct sub-routines are run now.
+        # After-construct sub-routines are run now.
 
         // Sanity check; must be on (or after) `plugins_loaded` hook.
+        // When uninstalling, must be on (or after) `init` hook.
 
         if (!did_action('plugins_loaded')) {
-            throw new Exception('Doing it wrong! `plugins_loaded` action not done yet.');
+            throw new Exception('`plugins_loaded` action not done yet.');
+        } elseif ($this->Config->§uninstall && !did_action('init')) {
+            throw new Exception('`init` action not done yet.');
         }
         // Check for any known conflicts w/ this application.
 
@@ -328,92 +336,88 @@ class App extends CoreClasses\App
 
         load_plugin_textdomain($this->Config->©brand['©text_domain']);
 
-        // Maybe setup early-hooks (e.g., for install/uninstall).
+        // The rest of our sub-routines are based on the setup hook.
 
-        $this->onPluginsLoadedMaybeSetupEarlyHooks();
+        if (did_action($this->Config->§setup['§hook'])) {
+            $this->onSetup(); // Run setup immediately.
+        } else { // Delay setup routines; i.e., attach to hook.
+            add_action($this->Config->§setup['§hook'], [$this, 'onSetup'], $this->Config->§setup['§hook_priority']);
+        }
+    }
 
-        // Maybe uninstall (else maybe install).
+    /**
+     * Run setup routines.
+     *
+     * @since 16xxxx Initial release.
+     */
+    public function onSetup() // Public hook.
+    {
+        if ($this->Config->§setup['§complete']) {
+            return; // Already complete.
+        }
+        $this->Config->§setup['§complete'] = true;
+
+        // Maybe setup early hooks.
+
+        if ($this->Config->§setup['§enable_hooks']) {
+            $this->onSetupEarlyHooks();
+        }
+        // Maybe uninstall (and stop here).
 
         if ($this->Config->§uninstall) {
             $this->s::maybeUninstall();
             return; // Stop here.
-        } else {
-            $this->s::maybeInstall();
         }
-        // Prepare global access var.
+        // Maybe install (or reinstall).
+
+        $this->s::maybeInstall();
+
+        // Make global access var available.
 
         $GLOBALS[$this->Config->©brand['©var']] = $this;
 
-        // Prepare other setup hooks now.
+        // Plugin available hook.
 
-        $this->onPluginsLoadedMaybeSetupHooks();
+        if ($this->Config->§setup['§enable_hooks']) {
+            $this->s::doAction('available', $this);
+        }
+        // Maybe setup other hooks.
+
+        if ($this->Config->§setup['§enable_hooks']) {
+            $this->onSetupOtherHooks();
+        }
+        // Plugin setup complete hook.
+
+        if ($this->Config->§setup['§enable_hooks']) {
+            $this->s::doAction('setup_complete', $this);
+        }
     }
 
     /**
-     * Maybe setup early-hooks.
+     * Early hook setup handler.
      *
      * @since 16xxxx Initial release.
+     *
+     * @note For extenders. Only runs when appropriate.
      */
-    protected function onPluginsLoadedMaybeSetupEarlyHooks()
+    protected function onSetupEarlyHooks()
     {
-        if (!$this->Config->§setup['§enable']) {
-            return; // Setup disabled.
-        }
-        if ($this->Config->§setup['§early_hooks_complete']) {
-            return; // Already complete.
-        }
-        $this->Config->§setup['§early_hooks_complete'] = true;
-
-        if (!$this->Config->§setup['§enable_hooks']) {
-            return; // Hooks disabled right now.
-        }
-        $this->onPluginsLoadedSetupEarlyHooks();
+        // Nothing in core at this time.
     }
 
     /**
-     * Maybe setup hooks.
+     * Other hook setup handler.
      *
      * @since 16xxxx Initial release.
+     *
+     * @note For extenders. Only runs when appropriate.
      */
-    protected function onPluginsLoadedMaybeSetupHooks()
+    protected function onSetupOtherHooks()
     {
-        if (!$this->Config->§setup['§enable']) {
-            return; // Setup disabled.
-        }
-        if ($this->Config->§setup['§hooks_complete']) {
-            return; // Already complete.
-        }
-        $this->Config->§setup['§hooks_complete'] = true;
-
-        if (!$this->Config->§setup['§enable_hooks']) {
-            return; // Hooks disabled right now.
-        }
         add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
         add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
 
         add_action('admin_init', [$this->Utils->§Notices, 'onAdminInitMaybeDismiss']);
         add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
-
-        $this->onPluginsLoadedSetupHooks();
-    }
-
-    /**
-     * Early-hook setup handler.
-     *
-     * @since 16xxxx Initial release.
-     */
-    protected function onPluginsLoadedSetupEarlyHooks()
-    {
-        // For extenders. Only runs when appropriate.
-    }
-
-    /**
-     * Hook setup handler.
-     *
-     * @since 16xxxx Initial release.
-     */
-    protected function onPluginsLoadedSetupHooks()
-    {
-        // For extenders. Only runs when appropriate.
     }
 }
