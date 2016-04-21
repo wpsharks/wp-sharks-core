@@ -158,7 +158,7 @@ class App extends CoreClasses\App
                 throw new Exception('Please remove `LITE|PRO` suffix from ©acronym.');
             }
             if (!$brand['©prefix']) {
-                $brand['©prefix'] = $parent->c::nameToSlug($brand['©acronym']);
+                $brand['©prefix'] = mb_strtolower($brand['©acronym']);
             } elseif ($args['§validate_brand'] && preg_match('/\s+(?:lite|pro)$/ui', $brand['©prefix'])) {
                 throw new Exception('Please remove `lite|pro` suffix from ©prefix.');
             } elseif ($args['§validate_brand'] && preg_match('/[^a-z0-9]/u', $brand['©prefix'])) {
