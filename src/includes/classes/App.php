@@ -371,16 +371,6 @@ class App extends CoreClasses\App
     }
 
     /**
-     * Early-hook setup handler.
-     *
-     * @since 16xxxx Initial release.
-     */
-    protected function onPluginsLoadedSetupEarlyHooks()
-    {
-        // For extenders. Only runs when appropriate.
-    }
-
-    /**
      * Maybe setup hooks.
      *
      * @since 16xxxx Initial release.
@@ -405,6 +395,16 @@ class App extends CoreClasses\App
         add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
 
         $this->onPluginsLoadedSetupHooks();
+    }
+
+    /**
+     * Early-hook setup handler.
+     *
+     * @since 16xxxx Initial release.
+     */
+    protected function onPluginsLoadedSetupEarlyHooks()
+    {
+        // For extenders. Only runs when appropriate.
     }
 
     /**
