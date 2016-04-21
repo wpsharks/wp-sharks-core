@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Sharks Core 160421\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-04-21 06:30:15+00:00\n"
+"POT-Creation-Date: 2016-04-21 08:43:36+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,12 +12,12 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:263
+#: .~build/wp-sharks-core/src/includes/classes/App.php:261
 #: src/includes/classes/App.php:261
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:273
+#: .~build/wp-sharks-core/src/includes/classes/App.php:271
 #: src/includes/classes/App.php:271
 msgid "<strong>%1$s</strong> detected a new version of itself &amp; recompiled successfully. You're now running v%2$s."
 msgstr ""
