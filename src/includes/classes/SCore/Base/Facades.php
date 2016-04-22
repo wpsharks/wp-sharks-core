@@ -29,5 +29,6 @@ abstract class Facades
     use Traits\Facades\Notices;
     use Traits\Facades\Options;
     use Traits\Facades\Plugins;
+    use Traits\Facades\PostQueries;
     use Traits\Facades\Uninstaller;
 }
