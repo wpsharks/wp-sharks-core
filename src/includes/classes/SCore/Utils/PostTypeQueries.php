@@ -34,12 +34,16 @@ class PostTypeQueries extends Classes\SCore\Base\Core
         $default_args = [
             // Also used by {@link all()}.
             'filters'  => [],
+            'include'  => [],
+            'exclude'  => [],
             'no_cache' => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
         $args['filters']  = (array) $args['filters'];
+        $args['include']  = (array) $args['include'];
+        $args['exclude']  = (array) $args['exclude'];
         $args['no_cache'] = (bool) $args['no_cache'];
 
         // Check cache; already did this query?
@@ -52,7 +56,11 @@ class PostTypeQueries extends Classes\SCore\Base\Core
         }
         // Establish total post types in the query.
 
-        return $total = count(get_post_types($args['filters'], 'objects'));
+        $post_types = get_post_types($args['filters'], 'objects');
+        $post_types = $args['include'] ? array_intersect_key($post_types, array_fill_keys($args['include'], true)) : $post_types;
+        $post_types = $args['exclude'] ? array_diff_key($post_types, array_fill_keys($args['exclude'], true)) : $post_types;
+
+        return $total = count($post_types);
     }
 
     /**
@@ -75,6 +83,8 @@ class PostTypeQueries extends Classes\SCore\Base\Core
 
             // Also used by {@link total()}.
             'filters'  => [],
+            'include'  => [],
+            'exclude'  => [],
             'no_cache' => false,
         ];
         $args = array_merge($default_args, $args);
@@ -86,6 +96,8 @@ class PostTypeQueries extends Classes\SCore\Base\Core
 
         // Also used by {@link total()}.
         $args['filters']  = (array) $args['filters'];
+        $args['include']  = (array) $args['include'];
+        $args['exclude']  = (array) $args['exclude'];
         $args['no_cache'] = (bool) $args['no_cache'];
 
         // Check cache; already did this query?
@@ -103,7 +115,11 @@ class PostTypeQueries extends Classes\SCore\Base\Core
         }
         // Return the array of all post type objects now.
 
-        return $post_types = get_post_types($args['filters'], 'objects');
+        $post_types = get_post_types($args['filters'], 'objects');
+        $post_types = $args['include'] ? array_intersect_key($post_types, array_fill_keys($args['include'], true)) : $post_types;
+        $post_types = $args['exclude'] ? array_diff_key($post_types, array_fill_keys($args['exclude'], true)) : $post_types;
+
+        return $post_types;
     }
 
     /**
@@ -134,7 +150,11 @@ class PostTypeQueries extends Classes\SCore\Base\Core
 
             // Used by {@link total()}.
             // Used by {@link all()}.
-            'filters'  => [],
+            'filters' => !$is_admin
+                ? ['public' => true, 'exclude_from_search' => false]
+                : ['exclude_from_search' => false],
+            'include'  => [],
+            'exclude'  => [],
             'no_cache' => false,
         ];
         $args = array_merge($default_args, $args);
@@ -153,6 +173,8 @@ class PostTypeQueries extends Classes\SCore\Base\Core
         // Used by {@link total()}.
         // Used by {@link all()}.
         $args['filters']  = (array) $args['filters'];
+        $args['include']  = (array) $args['include'];
+        $args['exclude']  = (array) $args['exclude'];
         $args['no_cache'] = (bool) $args['no_cache'];
 
         // Check for nothing being available (or too many).
