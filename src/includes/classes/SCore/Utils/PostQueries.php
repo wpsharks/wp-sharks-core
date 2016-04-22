@@ -233,7 +233,7 @@ class PostQueries extends Classes\SCore\Base\Core
             'allow_empty'      => true,
             'allow_arbitrary'  => true,
             'option_formatter' => null,
-            'current_post_id'  => null,
+            'current_post_ids' => null,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -251,13 +251,14 @@ class PostQueries extends Classes\SCore\Base\Core
         $args['allow_empty']      = (bool) $args['allow_empty'];
         $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
         $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
-        $args['current_post_id']  = isset($args['current_post_id']) ? (int) $args['current_post_id'] : null;
+        $args['current_post_ids'] = isset($args['current_post_ids']) ? (array) $args['current_post_ids'] : null;
 
         if (!($posts = $this->all($args))) {
             return ''; // None available.
         }
         $options                 = ''; // Initialize.
-        $selected_post_id        = null; // Initialize.
+        $available_post_ids      = []; // Initialize.
+        $selected_post_ids       = []; // Initialize.
         $default_post_type_label = __('Post', 'wp-sharks-core');
         $default_post_title      = __('Untitled', 'wp-sharks-core');
 
@@ -265,9 +266,10 @@ class PostQueries extends Classes\SCore\Base\Core
             $options = '<option value="0"></option>';
         }
         foreach ($posts as $_post) { // \WP_Post objects.
-            if (!isset($selected_post_id) && isset($args['current_post_id'])
-                && selected($_post->ID, $args['current_post_id'], false)) {
-                $selected_post_id = $_post->ID; // Flag selected post ID.
+            $available_post_ids[] = $_post->ID; // Record all available.
+
+            if (isset($args['current_post_ids']) && in_array($_post->ID, $args['current_post_ids'], true)) {
+                $selected_post_ids[$_post->ID] = $_post->ID; // Flag selected post ID.
             }
             $_post_type_object = get_post_type_object($_post->post_type);
             $_post_type_label  = !empty($_post_type_object->labels->singular_name)
@@ -275,7 +277,7 @@ class PostQueries extends Classes\SCore\Base\Core
 
             $_post_title         = $_post->post_title ?: $default_post_title;
             $_post_date          = $this->s::dateI18nUtc('M jS, Y', strtotime($_post->post_date_gmt));
-            $_post_selected_attr = $selected_post_id === $_post->ID ? ' selected' : '';
+            $_post_selected_attr = isset($selected_post_ids[$_post->ID]) ? ' selected' : '';
 
             // Format `<option>` tag w/ a custom formatter?
 
@@ -299,14 +301,14 @@ class PostQueries extends Classes\SCore\Base\Core
                                 esc_html($_post_date.' — '.$_post_title).
                             '</option>';
             }
-        } // unset($_post, $_post_type_object, $_post_type_label, $_post_title, $_post_date, $_post_selected); // Housekeeping.
+        } // unset($_post, $_post_type_object, $_post_type_label, $_post_title, $_post_date, $_post_selected_attr); // Housekeeping.
 
-        if ($args['allow_arbitrary']) { // Allow arbitrary select `<option>`?
-            if (!isset($selected_post_id) && isset($args['current_post_id']) && $args['current_post_id'] > 0) {
-                $options .= '<option value="'.esc_attr($args['current_post_id']).'" selected>'.
-                                esc_html($default_post_type_label.' #'.$args['current_post_id']).
+        if ($args['allow_arbitrary'] && $args['current_post_ids']) { // Allow arbitrary select `<option>`s?
+            foreach (array_diff($args['current_post_ids'], $available_post_ids) as $_arbitrary_post_id) {
+                $options .= '<option value="'.esc_attr($_arbitrary_post_id).'" selected>'.
+                                esc_html($default_post_type_label.' #'.$_arbitrary_post_id).
                             '</option>';
-            }
+            } // unset($_arbitrary_post_id); // Housekeeping.
         }
         return $options; // HTML markup.
     }
