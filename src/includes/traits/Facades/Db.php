@@ -16,7 +16,7 @@ trait Db
     /**
      * @since 16xxxx Initial release.
      */
-    public static function wpDb(...$args)
+    public static function wpDb()
     {
         return $GLOBALS[static::class]->Utils->§Db->wp;
     }

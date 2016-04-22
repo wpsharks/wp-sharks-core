@@ -68,11 +68,11 @@ class PostQueries extends Classes\SCore\Base\Core
 
         $sql = 'SELECT SQL_CALC_FOUND_ROWS `ID` FROM `'.esc_sql($WpDb->posts).'`'.
 
-                ' WHERE `post_type` IN('.$this->c::escSqlIn($post_types).')'.
-                ($args['exclude_post_types'] ? ' AND `post_type` NOT IN('.$this->c::escSqlIn($args['exclude_post_types']).')' : '').
+                ' WHERE `post_type` IN('.$this->c::quoteSqlIn($post_types).')'.
+                ($args['exclude_post_types'] ? ' AND `post_type` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_types']).')' : '').
 
-                ' AND `post_status` IN('.$this->c::escSqlIn($post_statuses).')'.
-                ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::escSqlIn($args['exclude_post_statuses']).')' : '').
+                ' AND `post_status` IN('.$this->c::quoteSqlIn($post_statuses).')'.
+                ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_statuses']).')' : '').
 
                 ($args['exclude_password_protected'] ? " AND `post_password` = ''" : '').
 
@@ -148,11 +148,11 @@ class PostQueries extends Classes\SCore\Base\Core
 
         $sql = 'SELECT * FROM `'.esc_sql($WpDb->posts).'`'.
 
-                ' WHERE `post_type` IN('.$this->c::escSqlIn($post_types).')'.
-                ($args['exclude_post_types'] ? ' AND `post_type` NOT IN('.$this->c::escSqlIn($args['exclude_post_types']).')' : '').
+                ' WHERE `post_type` IN('.$this->c::quoteSqlIn($post_types).')'.
+                ($args['exclude_post_types'] ? ' AND `post_type` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_types']).')' : '').
 
-                ' AND `post_status` IN('.$this->c::escSqlIn($post_statuses).')'.
-                ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::escSqlIn($args['exclude_post_statuses']).')' : '').
+                ' AND `post_status` IN('.$this->c::quoteSqlIn($post_statuses).')'.
+                ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_statuses']).')' : '').
 
                 ($args['exclude_password_protected'] ? " AND `post_password` = ''" : '').
 
