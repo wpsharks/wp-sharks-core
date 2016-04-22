@@ -88,7 +88,7 @@ class Db extends Classes\SCore\Base\Core
             if (!preg_match('/^CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\b/ui', $_sql)) {
                 $_sql = preg_replace('/^CREATE\s+TABLE\b/ui', 'CREATE TABLE IF NOT EXISTS', $_sql);
             }
-            if (!$this->wp->query($_sql)) { // Table creation failure?
+            if ($this->wp->query($_sql) === false) { // Table creation failure?
                 throw new Exception(sprintf('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
             }
         } // unset($_Table, $_sql_file, $_sql_file_table, $_sql);
@@ -118,7 +118,7 @@ class Db extends Classes\SCore\Base\Core
             $_sql_file_table = str_replace('-', '_', $_sql_file_table);
             $_sql_file_table = $table_prefix.$_sql_file_table;
 
-            if (!$this->wp->query('DROP TABLE IF EXISTS `'.esc_sql($_sql_file_table).'`')) {
+            if ($this->wp->query('DROP TABLE IF EXISTS `'.esc_sql($_sql_file_table).'`') === false) {
                 throw new Exception(sprintf('DB table drop failure: `%1$s`.', $_sql_file_table));
             }
         } // unset($_Table, $_sql_file, $_sql_file_table);
