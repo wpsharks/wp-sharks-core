@@ -34,6 +34,7 @@ class PostQueries extends Classes\SCore\Base\Core
         // Establish args.
 
         $default_args = [
+            // Also used by {@link all()}.
             'for_comments_only' => false,
 
             'include_post_types' => [],
@@ -53,6 +54,7 @@ class PostQueries extends Classes\SCore\Base\Core
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
+        // Also used by {@link all()}.
         $args['for_comments_only'] = (bool) $args['for_comments_only'];
 
         $args['include_post_types'] = (array) $args['include_post_types'];
@@ -130,7 +132,7 @@ class PostQueries extends Classes\SCore\Base\Core
             'max'         => PHP_INT_MAX,
             'fail_on_max' => false,
 
-            // Same as {@link total()}.
+            // Also used by {@link total()}.
             'for_comments_only' => false,
 
             'include_post_types' => [],
@@ -150,9 +152,11 @@ class PostQueries extends Classes\SCore\Base\Core
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
+        // Unique.
         $args['max']         = max(1, (int) $args['max']);
         $args['fail_on_max'] = (bool) $args['fail_on_max'];
 
+        // Also used by {@link total()}.
         $args['for_comments_only'] = (bool) $args['for_comments_only'];
 
         $args['include_post_types'] = (array) $args['include_post_types'];
@@ -210,7 +214,7 @@ class PostQueries extends Classes\SCore\Base\Core
         if (!($results = $WpDb->get_results($sql, OBJECT_K))) {
             return $posts = []; // No posts.
         }
-        // Else we have results. Let's order them by type now.
+        // Else we have results. Order & return array.
 
         foreach ($results as $_key => $_result) {
             switch ($_result->post_type) {
@@ -268,12 +272,12 @@ class PostQueries extends Classes\SCore\Base\Core
             'option_formatter' => null,
             'current_post_ids' => null,
 
-            // Same as {@link all()}.
+            // Used by {@link all()}.
             'max'         => 1000,
             'fail_on_max' => true,
 
-            // Same as {@link all()}.
-            // Same as {@link total()}.
+            // Used by {@link total()}.
+            // Used by {@link all()}.
             'for_comments_only' => false,
 
             'include_post_types' => !$is_admin
@@ -297,9 +301,18 @@ class PostQueries extends Classes\SCore\Base\Core
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
+        // Unique.
+        $args['allow_empty']      = (bool) $args['allow_empty'];
+        $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
+        $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
+        $args['current_post_ids'] = isset($args['current_post_ids']) ? (array) $args['current_post_ids'] : null;
+
+        // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);
         $args['fail_on_max'] = (bool) $args['fail_on_max'];
 
+        // Used by {@link total()}.
+        // Used by {@link all()}.
         $args['for_comments_only'] = (bool) $args['for_comments_only'];
 
         $args['include_post_types'] = (array) $args['include_post_types'];
@@ -316,19 +329,20 @@ class PostQueries extends Classes\SCore\Base\Core
 
         $args['no_cache'] = (bool) $args['no_cache'];
 
-        $args['allow_empty']      = (bool) $args['allow_empty'];
-        $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
-        $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
-        $args['current_post_ids'] = isset($args['current_post_ids']) ? (array) $args['current_post_ids'] : null;
+        // Check for nothing being available (or too many).
 
         if (!($posts = $this->all($args))) {
             return ''; // None available.
         }
+        // Initialize several working variables needed below.
+
         $options                 = ''; // Initialize.
         $available_post_ids      = []; // Initialize.
         $selected_post_ids       = []; // Initialize.
         $default_post_type_label = __('Post', 'wp-sharks-core');
         $default_post_title      = __('Untitled', 'wp-sharks-core');
+
+        // Build & return all `<option>` tags.
 
         if ($args['allow_empty']) { // Allow `0`?
             $options = '<option value="0"></option>';
@@ -339,9 +353,8 @@ class PostQueries extends Classes\SCore\Base\Core
             if (isset($args['current_post_ids']) && in_array($_post->ID, $args['current_post_ids'], true)) {
                 $selected_post_ids[$_post->ID] = $_post->ID; // Flag selected post ID.
             }
-            $_post_type_object = get_post_type_object($_post->post_type);
-            $_post_type_label  = !empty($_post_type_object->labels->singular_name)
-                ? $_post_type_object->labels->singular_name : $default_post_type_label;
+            $_post_type_object = get_post_type_object($_post->post_type); // Anticipate a possible failure.
+            $_post_type_label  = !empty($_post_type_object->labels->singular_name) ? $_post_type_object->labels->singular_name : $default_post_type_label;
 
             $_post_title         = $_post->post_title ?: $default_post_title;
             $_post_date          = $this->s::dateI18nUtc('M jS, Y', strtotime($_post->post_date_gmt));

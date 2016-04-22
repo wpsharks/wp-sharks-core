@@ -30,5 +30,6 @@ abstract class Facades
     use Traits\Facades\Options;
     use Traits\Facades\Plugins;
     use Traits\Facades\PostQueries;
+    use Traits\Facades\PostTypeQueries;
     use Traits\Facades\Uninstaller;
 }
