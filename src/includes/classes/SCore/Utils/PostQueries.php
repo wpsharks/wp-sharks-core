@@ -34,22 +34,40 @@ class PostQueries extends Classes\SCore\Base\Core
         // Establish args.
 
         $default_args = [
-            'for_comments_only'          => false,
-            'include_post_types'         => [],
-            'exclude_post_types'         => [],
-            'exclude_post_statuses'      => [],
+            'for_comments_only' => false,
+
+            'include_post_types' => [],
+            'exclude_post_types' => [],
+
+            'include_post_statuses' => [],
+            'exclude_post_statuses' => [],
+
+            'exclude_drafts'             => true,
+            'exclude_revisions'          => true,
+            'exclude_trash'              => true,
             'exclude_password_protected' => false,
-            'no_cache'                   => false,
+            'exclude_nav_menu_items'     => true,
+
+            'no_cache' => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $args['for_comments_only']          = (bool) $args['for_comments_only'];
-        $args['include_post_types']         = (array) $args['include_post_types'];
-        $args['exclude_post_types']         = (array) $args['exclude_post_types'];
-        $args['exclude_post_statuses']      = (array) $args['exclude_post_statuses'];
+        $args['for_comments_only'] = (bool) $args['for_comments_only'];
+
+        $args['include_post_types'] = (array) $args['include_post_types'];
+        $args['exclude_post_types'] = (array) $args['exclude_post_types'];
+
+        $args['include_post_statuses'] = (array) $args['include_post_statuses'];
+        $args['exclude_post_statuses'] = (array) $args['exclude_post_statuses'];
+
+        $args['exclude_drafts']             = (bool) $args['exclude_drafts'];
+        $args['exclude_revisions']          = (bool) $args['exclude_revisions'];
+        $args['exclude_trash']              = (bool) $args['exclude_trash'];
         $args['exclude_password_protected'] = (bool) $args['exclude_password_protected'];
-        $args['no_cache']                   = (bool) $args['no_cache'];
+        $args['exclude_nav_menu_items']     = (bool) $args['exclude_nav_menu_items'];
+
+        $args['no_cache'] = (bool) $args['no_cache'];
 
         // Check cache; already did this query?
 
@@ -61,8 +79,8 @@ class PostQueries extends Classes\SCore\Base\Core
         }
         // Establish post types/statuses in the query.
 
-        $post_types    = $args['include_post_types'] ?: get_post_types(['exclude_from_search' => false]);
-        $post_statuses = get_post_stati(['exclude_from_search' => false]);
+        $post_types    = $args['include_post_types'] ?: get_post_types();
+        $post_statuses = $args['include_post_statuses'] ?: get_post_stati();
 
         // Build the full SQL based on the arguments/data above.
 
@@ -74,7 +92,11 @@ class PostQueries extends Classes\SCore\Base\Core
                 ' AND `post_status` IN('.$this->c::quoteSqlIn($post_statuses).')'.
                 ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_statuses']).')' : '').
 
+                ($args['exclude_drafts'] ? " AND `post_type` NOT IN('draft','auto-draft')" : '').
+                ($args['exclude_revisions'] ? " AND `post_type` != 'revision'" : '').
+                ($args['exclude_trash'] ? " AND `post_status` != 'trash'" : '').
                 ($args['exclude_password_protected'] ? " AND `post_password` = ''" : '').
+                ($args['exclude_nav_menu_items'] ? " AND `post_type` != 'nav_menu_item'" : '').
 
                 ($args['for_comments_only'] ? " AND (`comment_status` IN('1', 'open', 'opened') OR `comment_count` > '0')" : '').
 
@@ -104,16 +126,26 @@ class PostQueries extends Classes\SCore\Base\Core
         // Establish args.
 
         $default_args = [
+            // Unique.
             'max'         => PHP_INT_MAX,
             'fail_on_max' => false,
 
             // Same as {@link total()}.
-            'for_comments_only'          => false,
-            'include_post_types'         => [],
-            'exclude_post_types'         => [],
-            'exclude_post_statuses'      => [],
+            'for_comments_only' => false,
+
+            'include_post_types' => [],
+            'exclude_post_types' => [],
+
+            'include_post_statuses' => [],
+            'exclude_post_statuses' => [],
+
+            'exclude_drafts'             => true,
+            'exclude_revisions'          => true,
+            'exclude_trash'              => true,
             'exclude_password_protected' => false,
-            'no_cache'                   => false,
+            'exclude_nav_menu_items'     => true,
+
+            'no_cache' => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -121,12 +153,21 @@ class PostQueries extends Classes\SCore\Base\Core
         $args['max']         = max(1, (int) $args['max']);
         $args['fail_on_max'] = (bool) $args['fail_on_max'];
 
-        $args['for_comments_only']          = (bool) $args['for_comments_only'];
-        $args['include_post_types']         = (array) $args['include_post_types'];
-        $args['exclude_post_types']         = (array) $args['exclude_post_types'];
-        $args['exclude_post_statuses']      = (array) $args['exclude_post_statuses'];
+        $args['for_comments_only'] = (bool) $args['for_comments_only'];
+
+        $args['include_post_types'] = (array) $args['include_post_types'];
+        $args['exclude_post_types'] = (array) $args['exclude_post_types'];
+
+        $args['include_post_statuses'] = (array) $args['include_post_statuses'];
+        $args['exclude_post_statuses'] = (array) $args['exclude_post_statuses'];
+
+        $args['exclude_drafts']             = (bool) $args['exclude_drafts'];
+        $args['exclude_revisions']          = (bool) $args['exclude_revisions'];
+        $args['exclude_trash']              = (bool) $args['exclude_trash'];
         $args['exclude_password_protected'] = (bool) $args['exclude_password_protected'];
-        $args['no_cache']                   = (bool) $args['no_cache'];
+        $args['exclude_nav_menu_items']     = (bool) $args['exclude_nav_menu_items'];
+
+        $args['no_cache'] = (bool) $args['no_cache'];
 
         // Check cache; already did this query?
 
@@ -143,8 +184,8 @@ class PostQueries extends Classes\SCore\Base\Core
         }
         // Establish post types/statuses in the query.
 
-        $post_types    = $args['include_post_types'] ?: get_post_types(['exclude_from_search' => false]);
-        $post_statuses = get_post_stati(['exclude_from_search' => false]);
+        $post_types    = $args['include_post_types'] ?: get_post_types();
+        $post_statuses = $args['include_post_statuses'] ?: get_post_stati();
 
         $sql = 'SELECT * FROM `'.esc_sql($WpDb->posts).'`'.
 
@@ -154,7 +195,11 @@ class PostQueries extends Classes\SCore\Base\Core
                 ' AND `post_status` IN('.$this->c::quoteSqlIn($post_statuses).')'.
                 ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_statuses']).')' : '').
 
+                ($args['exclude_drafts'] ? " AND `post_type` NOT IN('draft','auto-draft')" : '').
+                ($args['exclude_revisions'] ? " AND `post_type` != 'revision'" : '').
+                ($args['exclude_trash'] ? " AND `post_status` != 'trash'" : '').
                 ($args['exclude_password_protected'] ? " AND `post_password` = ''" : '').
+                ($args['exclude_nav_menu_items'] ? " AND `post_type` != 'nav_menu_item'" : '').
 
                 ($args['for_comments_only'] ? " AND (`comment_status` IN('1', 'open', 'opened') OR `comment_count` > '0')" : '').
 
@@ -217,23 +262,37 @@ class PostQueries extends Classes\SCore\Base\Core
         // Establish args.
 
         $default_args = [
+            // Unique.
+            'allow_empty'      => true,
+            'allow_arbitrary'  => true,
+            'option_formatter' => null,
+            'current_post_ids' => null,
+
             // Same as {@link all()}.
             'max'         => 1000,
             'fail_on_max' => true,
 
             // Same as {@link all()}.
             // Same as {@link total()}.
-            'for_comments_only'          => false,
-            'include_post_types'         => [],
-            'exclude_post_types'         => [],
-            'exclude_post_statuses'      => !$is_admin ? ['future', 'draft', 'pending', 'private'] : [],
-            'exclude_password_protected' => !$is_admin,
-            'no_cache'                   => false,
+            'for_comments_only' => false,
 
-            'allow_empty'      => true,
-            'allow_arbitrary'  => true,
-            'option_formatter' => null,
-            'current_post_ids' => null,
+            'include_post_types' => !$is_admin
+                ? get_post_types(['public' => true, 'exclude_from_search' => false])
+                : get_post_types(['exclude_from_search' => false]),
+            'exclude_post_types' => [],
+
+            'include_post_statuses' => !$is_admin
+                ? get_post_stati(['public' => true, 'exclude_from_search' => false])
+                : get_post_stati(['exclude_from_search' => false]),
+            'exclude_post_statuses' => [],
+
+            'exclude_drafts'             => true,
+            'exclude_revisions'          => true,
+            'exclude_trash'              => true,
+            'exclude_password_protected' => !$is_admin,
+            'exclude_nav_menu_items'     => true,
+
+            'no_cache' => false,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
@@ -241,12 +300,21 @@ class PostQueries extends Classes\SCore\Base\Core
         $args['max']         = max(1, (int) $args['max']);
         $args['fail_on_max'] = (bool) $args['fail_on_max'];
 
-        $args['for_comments_only']          = (bool) $args['for_comments_only'];
-        $args['include_post_types']         = (array) $args['include_post_types'];
-        $args['exclude_post_types']         = (array) $args['exclude_post_types'];
-        $args['exclude_post_statuses']      = (array) $args['exclude_post_statuses'];
+        $args['for_comments_only'] = (bool) $args['for_comments_only'];
+
+        $args['include_post_types'] = (array) $args['include_post_types'];
+        $args['exclude_post_types'] = (array) $args['exclude_post_types'];
+
+        $args['include_post_statuses'] = (array) $args['include_post_statuses'];
+        $args['exclude_post_statuses'] = (array) $args['exclude_post_statuses'];
+
+        $args['exclude_drafts']             = (bool) $args['exclude_drafts'];
+        $args['exclude_revisions']          = (bool) $args['exclude_revisions'];
+        $args['exclude_trash']              = (bool) $args['exclude_trash'];
         $args['exclude_password_protected'] = (bool) $args['exclude_password_protected'];
-        $args['no_cache']                   = (bool) $args['no_cache'];
+        $args['exclude_nav_menu_items']     = (bool) $args['exclude_nav_menu_items'];
+
+        $args['no_cache'] = (bool) $args['no_cache'];
 
         $args['allow_empty']      = (bool) $args['allow_empty'];
         $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
