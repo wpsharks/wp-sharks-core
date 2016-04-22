@@ -254,6 +254,8 @@ class PostQueries extends Classes\SCore\Base\Core
      * @since 16xxxx Post query utils.
      *
      * @param array $args Behavioral args.
+     *
+     * @return string Select options.
      */
     public function selectOptions(array $args = []): string
     {

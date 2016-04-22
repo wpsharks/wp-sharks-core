@@ -18,6 +18,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  */
 abstract class Facades
 {
+    use Traits\Facades\CapQueries;
     use Traits\Facades\Conflicts;
     use Traits\Facades\Date;
     use Traits\Facades\Db;

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Sharks Core 160422\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-04-22 15:50:53+00:00\n"
+"POT-Creation-Date: 2016-04-22 18:28:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,18 +62,18 @@ msgstr ""
 msgid "%1$s options updated successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQueries.php:342
-#: src/includes/classes/SCore/Utils/PostQueries.php:342
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQueries.php:344
+#: src/includes/classes/SCore/Utils/PostQueries.php:344
 msgid "Post"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQueries.php:343
-#: src/includes/classes/SCore/Utils/PostQueries.php:343
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQueries.php:345
+#: src/includes/classes/SCore/Utils/PostQueries.php:345
 msgid "Untitled"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypeQueries.php:168
-#: src/includes/classes/SCore/Utils/PostTypeQueries.php:190
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypeQueries.php:192
+#: src/includes/classes/SCore/Utils/PostTypeQueries.php:192
 msgid "Posts"
 msgstr ""
 

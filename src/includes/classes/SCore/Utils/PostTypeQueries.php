@@ -70,7 +70,7 @@ class PostTypeQueries extends Classes\SCore\Base\Core
      *
      * @param array $args Behavioral args.
      *
-     * @return \StdClass[] Array of posts.
+     * @return \StdClass[] Array of post types.
      */
     public function all(array $args = []): array
     {
@@ -128,6 +128,8 @@ class PostTypeQueries extends Classes\SCore\Base\Core
      * @since 16xxxx Post type utils.
      *
      * @param array $args Behavioral args.
+     *
+     * @return string Select options.
      */
     public function selectOptions(array $args = []): string
     {
