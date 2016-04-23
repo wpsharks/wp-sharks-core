@@ -18,7 +18,7 @@ trait PostQueries
      */
     public static function postsQueryTotal(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§PostQueries->total(...$args);
+        return $GLOBALS[static::class]->Utils->§PostQuery->total(...$args);
     }
 
     /**
@@ -26,7 +26,7 @@ trait PostQueries
      */
     public static function postsQueryAll(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§PostQueries->all(...$args);
+        return $GLOBALS[static::class]->Utils->§PostQuery->all(...$args);
     }
 
     /**
@@ -34,6 +34,6 @@ trait PostQueries
      */
     public static function postSelectOptions(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§PostQueries->selectOptions(...$args);
+        return $GLOBALS[static::class]->Utils->§PostQuery->selectOptions(...$args);
     }
 }

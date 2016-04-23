@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160422'; //v//
+    const VERSION = '160423'; //v//
 
     /**
      * Constructor.
@@ -169,15 +169,52 @@ class App extends CoreClasses\App
                 $brand['§domain_path'] = '/product/'.$brand['©slug'];
             }
         }
-        # Build the core/default instance base.
+        # Collect essential WordPress config values.
 
         if (!($wp_tmp_dir = rtrim(get_temp_dir(), '/'))) {
             throw new Exception('Failed to acquire a temp directory.');
         }
-        if (!($wp_salt = wp_salt()) || !($wp_salt_key = hash('sha256', $wp_salt.$brand['©slug']))) {
+        if (!($wp_salt_key = hash('sha256', wp_salt().$brand['©slug']))) {
             throw new Exception('Failed to generate a unique salt/key.');
         }
+        if (!($wp_site_url_option = parse_url(get_option('siteurl')))) {
+            throw new Exception('Failed to parse site URL option.');
+        }
+        if (!($wp_site_default_scheme = $wp_site_url_option['scheme'] ?? 'http')) {
+            throw new Exception('Failed to parse site URL option scheme.');
+        }
+        if ($specs['§type'] === 'theme') { // Special case.
+            if (!($wp_app_url = parse_url(get_template_directory_uri()))) {
+                throw new Exception('Failed to parse theme dir URL.');
+            }
+        } elseif (!($wp_app_url = parse_url(plugin_dir_url($specs['§file'])))) {
+            throw new Exception('Failed to parse plugin dir URL.');
+        }
+        if (!($wp_app_url_host = $wp_app_url['host'] ?? (string) @$_SERVER['HTTP_HOST'])) {
+            throw new Exception('Failed to parse app URL host.');
+        }
+        if (!($wp_app_url_root_host = implode('.', array_slice(explode('.', $wp_app_url_host), -2)))) {
+            throw new Exception('Failed to parse app URL root host.');
+        }
+        $wp_app_url_path = rtrim($wp_app_url['path'] ?? '', '/'); // Allowed to be empty.
+
+        # Build the core/default instance base.
+
         $default_instance_base = [
+            '©di' => [
+                '©default_rule' => [
+                    'new_instances' => [
+                    ],
+                ],
+            ],
+
+            '©sub_namespace_map' => [
+                'SCore' => [
+                    '©utils'   => '§',
+                    '©facades' => 's',
+                ],
+            ],
+
             '§specs' => [
                 '§is_pro'          => false,
                 '§is_network_wide' => false,
@@ -197,17 +234,18 @@ class App extends CoreClasses\App
                 '§domain_path' => '',
             ],
 
-            '©di' => [
-                '©default_rule' => [
-                    'new_instances' => [
+            '©urls' => [
+                '©hosts' => [
+                    '©roots' => [
+                        '©app' => $wp_app_url_root_host,
                     ],
+                    '©app' => $wp_app_url_host,
                 ],
-            ],
-            '©sub_namespace_map' => [
-                'SCore' => [
-                    '©utils'   => '§',
-                    '©facades' => 's',
+                '©base_paths' => [
+                    '©app' => $wp_app_url_path.'/src',
                 ],
+                '©default_scheme' => $wp_site_default_scheme,
+                '©sig_key'        => $wp_salt_key,
             ],
 
             '§setup' => [ // On (or after): `plugins_loaded`.

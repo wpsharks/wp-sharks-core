@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx Post utils.
  */
-class PostTypeQueries extends Classes\SCore\Base\Core
+class PostTypeQuery extends Classes\SCore\Base\Core
 {
     /**
      * Total post types.

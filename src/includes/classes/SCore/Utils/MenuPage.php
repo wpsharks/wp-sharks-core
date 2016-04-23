@@ -51,6 +51,38 @@ class MenuPage extends Classes\SCore\Base\Core
     }
 
     /**
+     * Current menu page post type.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @return string Current menu page post type.
+     */
+    public function currentPostType(): string
+    {
+        if (!is_admin()) {
+            return '';
+        }
+        return !empty($_REQUEST['post_type'])
+            ? $this->c::mbTrim($this->c::unslash((string) $_REQUEST['post_type']))
+            : $this->postTypeNow(); // `$GLOBALS['typenow']`.
+    }
+
+    /**
+     * Current `$GLOBALS['typenow']`.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @return string Current `$GLOBALS['typenow']`.
+     */
+    public function postTypeNow(): string
+    {
+        if (!is_admin()) {
+            return '';
+        }
+        return !empty($GLOBALS['typenow']) ? (string) $GLOBALS['typenow'] : '';
+    }
+
+    /**
      * Is a menu page?
      *
      * @since 16xxxx First documented version.
@@ -80,5 +112,39 @@ class MenuPage extends Classes\SCore\Base\Core
         return (bool) preg_match($regex, $current);
     }
 
-    // @TODO New utils for building menu page components.
+    /**
+     * Is a menu page for a post type?
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param string $post_type Post type to check (optional).
+     *
+     *    - `*` = Zero or more chars.
+     *    - `**` = Zero or more chars != `_`.
+     *    - Check is caSe insensitive by default.
+     *    - If `$post_type` beings with `/` it is treated as regex.
+     *
+     * @return bool True if menu page is for post type.
+     */
+    public function isForPostType(string $post_type = ''): bool
+    {
+        if (!($current = $this->current())) {
+            return false; // Nope.
+        }
+        if (!($current_post_type = $this->currentPostType())) {
+            return false; // Nope.
+        }
+        if (!in_array($current, ['post-new.php', 'post.php', 'edit.php', 'edit-tags.php'], true)) {
+            return false; // Nope.
+        }
+        if (!$post_type) {
+            return true; // Simple check.
+        }
+        if ($post_type[0] === '/') {
+            $regex = $post_type; // Treat as regex.
+        } else {
+            $regex = '/^'.$this->c::wdRegexFrag($post_type, '_').'$/ui';
+        }
+        return (bool) preg_match($regex, $current_post_type);
+    }
 }

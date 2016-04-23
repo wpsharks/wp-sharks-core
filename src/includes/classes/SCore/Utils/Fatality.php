@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx WP notices.
  */
-class Fatalities extends Classes\SCore\Base\Core
+class Fatality extends Classes\SCore\Base\Core
 {
     /**
      * Forbidden response.

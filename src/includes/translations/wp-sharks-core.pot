@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160422\n"
+"Project-Id-Version: WP Sharks Core 160423\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-04-22 18:28:22+00:00\n"
+"POT-Creation-Date: 2016-04-23 06:33:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,13 +12,13 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:267
-#: src/includes/classes/App.php:267
+#: .~build/wp-sharks-core/src/includes/classes/App.php:305
+#: src/includes/classes/App.php:305
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:277
-#: src/includes/classes/App.php:277
+#: .~build/wp-sharks-core/src/includes/classes/App.php:315
+#: src/includes/classes/App.php:315
 msgid "<strong>%1$s</strong> detected a new version of itself &amp; recompiled successfully. You're now running v%2$s."
 msgstr ""
 
@@ -42,13 +42,13 @@ msgstr ""
 msgid "<strong>%1$s</strong> will load now. Please <a href=\"javascript:location.reload();\">refresh</a>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatalities.php:28
-#: src/includes/classes/SCore/Utils/Fatalities.php:28
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:28
+#: src/includes/classes/SCore/Utils/Fatality.php:28
 msgid "Abnormal request; forbidden."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatalities.php:28
-#: src/includes/classes/SCore/Utils/Fatalities.php:28
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:28
+#: src/includes/classes/SCore/Utils/Fatality.php:28
 msgid "Forbidden"
 msgstr ""
 
@@ -62,19 +62,34 @@ msgstr ""
 msgid "%1$s options updated successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQueries.php:344
-#: src/includes/classes/SCore/Utils/PostQueries.php:344
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQuery.php:344
+#: src/includes/classes/SCore/Utils/PostQuery.php:344
 msgid "Post"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQueries.php:345
-#: src/includes/classes/SCore/Utils/PostQueries.php:345
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQuery.php:345
+#: src/includes/classes/SCore/Utils/PostQuery.php:345
 msgid "Untitled"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypeQueries.php:192
-#: src/includes/classes/SCore/Utils/PostTypeQueries.php:192
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypeQuery.php:192
+#: src/includes/classes/SCore/Utils/PostTypeQuery.php:192
 msgid "Posts"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:35
+#: src/includes/classes/SCore/Utils/StylesScripts.php:35
+msgid "No results match"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:36
+#: src/includes/classes/SCore/Utils/StylesScripts.php:36
+msgid "Select Some Options"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:37
+#: src/includes/classes/SCore/Utils/StylesScripts.php:37
+msgid "Select an Option"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

@@ -770,12 +770,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "45657d096c8ab4b200d57c3e5d79e696e055a8c1"
+                "reference": "52f66cca1f1959a754c6ba4b43529b4dde1778d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/45657d096c8ab4b200d57c3e5d79e696e055a8c1",
-                "reference": "45657d096c8ab4b200d57c3e5d79e696e055a8c1",
+                "url": "https://api.github.com/repos/websharks/core/zipball/52f66cca1f1959a754c6ba4b43529b4dde1778d3",
+                "reference": "52f66cca1f1959a754c6ba4b43529b4dde1778d3",
                 "shasum": ""
             },
             "require": {
@@ -826,7 +826,8 @@
                 "phpmailer/phpmailer": "5.*",
                 "ramsey/uuid": "3.*",
                 "symfony/yaml": "2.*",
-                "websharks/dicer": "151124"
+                "websharks/dicer": "dev-master",
+                "websharks/sharkicons": "dev-master"
             },
             "require-dev": {
                 "corneltek/getoptionkit": "2.*",
@@ -885,20 +886,20 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-04-22 13:20:31"
+            "time": "2016-04-23 06:29:30"
         },
         {
             "name": "websharks/dicer",
-            "version": "151124",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
-                "reference": "b6bc024fbefa44f7003588c2a06f19ff9bf67d2b"
+                "reference": "044696b13f196f4f0ab0905de05346a0090655f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/dicer/zipball/b6bc024fbefa44f7003588c2a06f19ff9bf67d2b",
-                "reference": "b6bc024fbefa44f7003588c2a06f19ff9bf67d2b",
+                "url": "https://api.github.com/repos/websharks/dicer/zipball/044696b13f196f4f0ab0905de05346a0090655f5",
+                "reference": "044696b13f196f4f0ab0905de05346a0090655f5",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +937,58 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2015-11-24 06:22:55"
+            "time": "2016-01-10 08:24:59"
+        },
+        {
+            "name": "websharks/sharkicons",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/websharks/sharkicons.git",
+                "reference": "2e6d6663c050f343fe944b424dea1759aa67cd05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/websharks/sharkicons/zipball/2e6d6663c050f343fe944b424dea1759aa67cd05",
+                "reference": "2e6d6663c050f343fe944b424dea1759aa67cd05",
+                "shasum": ""
+            },
+            "require-dev": {
+                "package/bourbon": "4.2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "websharks",
+                    "homepage": "http://websharks-inc.com/",
+                    "role": "company"
+                },
+                {
+                    "name": "jaswsinc",
+                    "homepage": "http://jaswsinc.com/",
+                    "role": "developer"
+                },
+                {
+                    "name": "raamdev",
+                    "homepage": "http://raam.org/",
+                    "role": "developer"
+                }
+            ],
+            "description": "Font containing WebSharks logos/icons.",
+            "homepage": "https://github.com/websharks/sharkicons",
+            "keywords": [
+                "php",
+                "websharks",
+                "wordpress"
+            ],
+            "time": "2016-02-21 15:16:12"
         },
         {
             "name": "websharks/wp-php-rv",

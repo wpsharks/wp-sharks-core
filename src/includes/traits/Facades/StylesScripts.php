@@ -11,13 +11,13 @@ use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
-trait Fatalities
+trait StylesScripts
 {
     /**
      * @since 16xxxx Initial release.
      */
-    public static function dieForbidden(...$args)
+    public static function enqueueJQueryChosen(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Fatality->forbidden(...$args);
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryChosen(...$args);
     }
 }

@@ -18,7 +18,7 @@ trait PostTypeQueries
      */
     public static function postTypesQueryTotal(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§PostTypeQueries->total(...$args);
+        return $GLOBALS[static::class]->Utils->§PostTypeQuery->total(...$args);
     }
 
     /**
@@ -26,7 +26,7 @@ trait PostTypeQueries
      */
     public static function postTypesQueryAll(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§PostTypeQueries->all(...$args);
+        return $GLOBALS[static::class]->Utils->§PostTypeQuery->all(...$args);
     }
 
     /**
@@ -34,6 +34,6 @@ trait PostTypeQueries
      */
     public static function postTypeSelectOptions(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§PostTypeQueries->selectOptions(...$args);
+        return $GLOBALS[static::class]->Utils->§PostTypeQuery->selectOptions(...$args);
     }
 }

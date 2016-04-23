@@ -32,8 +32,32 @@ trait MenuPage
     /**
      * @since 16xxxx Initial release.
      */
+    public static function currentMenuPagePostType(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->currentPostType(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function menuPagePostTypeNow(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->postTypeNow(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
     public static function isMenuPage(...$args)
     {
         return $GLOBALS[static::class]->Utils->§MenuPage->is(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function isMenuPageForPostType(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->isForPostType(...$args);
     }
 }

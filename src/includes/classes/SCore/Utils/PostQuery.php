@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx Post utils.
  */
-class PostQueries extends Classes\SCore\Base\Core
+class PostQuery extends Classes\SCore\Base\Core
 {
     /**
      * Total posts.

@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx Post utils.
  */
-class CapQueries extends Classes\SCore\Base\Core
+class CapQuery extends Classes\SCore\Base\Core
 {
     /**
      * Deprecated level caps.
