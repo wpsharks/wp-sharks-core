@@ -9,7 +9,7 @@
 @mixin wp-admin-list-enable {
   ol,
   ul {
-    margin-left:              1em;
+    padding-left:             1em;
     list-style-type:          decimal;
   }
 
