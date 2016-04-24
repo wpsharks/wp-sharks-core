@@ -6,10 +6,10 @@
 /*
  * WP admin field standards.
  */
-@mixin wp-admin-field-standards {
-  select,
-  textarea,
-  input:not([type='checkbox']):not([type='radio']) {
+@mixin wp-admin-field-standards($scope: null) {
+  #{$scope}select,
+  #{$scope}textarea,
+  #{$scope}input:not([type='checkbox']):not([type='radio']) {
     border-radius:            0;
     width:                    100%;
     margin:                   1px;
@@ -31,8 +31,8 @@
     }
   }
 
-  textarea,
-  select[multiple] {
+  #{$scope}textarea,
+  #{$scope}select[multiple] {
     height:                   10em;
   }
 }

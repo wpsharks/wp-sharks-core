@@ -6,8 +6,8 @@
 /*
  * WP admin field standards.
  */
-@mixin jquery-chosen-wp-admin-field-standards {
-  .chosen-container {
+@mixin jquery-chosen-wp-admin-field-standards($scope: null) {
+  #{$scope}.chosen-container {
     .chosen-choices {
       border-radius:          0;
       width:                  100%;
