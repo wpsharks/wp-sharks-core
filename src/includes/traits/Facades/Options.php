@@ -32,6 +32,14 @@ trait Options
     /**
      * @since 16xxxx App.
      */
+    public static function getOption(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Options->get(...$args);
+    }
+
+    /**
+     * @since 16xxxx App.
+     */
     public static function mergeOptions(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Options->merge(...$args);

@@ -186,6 +186,30 @@ class Options extends Classes\SCore\Base\Core
     }
 
     /**
+     * Get config option.
+     *
+     * @since 16xxxx Initial release.
+     *
+     * @param string $key Option key.
+     *
+     * @throws Exception On unknown key.
+     *
+     * @return mixed|null Option value.
+     */
+    public function get(string $key)
+    {
+        if (isset($this->App->Config->§options[$key])) {
+            return $this->App->Config->§options[$key];
+        } // Optimized. Values CAN be `null` however.
+
+        // Else if the key does not exist at all, throw exception.
+        if (!array_key_exists($key, $this->App->Config->§options)) {
+            throw new Exception(sprintf('Unknown option key: `%1$s`.', $key));
+        }
+        return null; // Default return value.
+    }
+
+    /**
      * Update config options.
      *
      * @since 16xxxx Initial release.
