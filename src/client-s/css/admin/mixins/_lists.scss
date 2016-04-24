@@ -1,0 +1,19 @@
+/*
+ * Dependencies.
+ */
+@import '../colors/fields';
+
+/*
+ * WP admin lists enable.
+ */
+@mixin wp-admin-list-enable {
+  ol,
+  ul {
+    margin-left:              1em;
+    list-style-type:          decimal;
+  }
+
+  ul {
+    list-style-type:          disc;
+  }
+}
