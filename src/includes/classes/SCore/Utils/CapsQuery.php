@@ -16,7 +16,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  *
  * @since 16xxxx Post utils.
  */
-class CapQuery extends Classes\SCore\Base\Core
+class CapsQuery extends Classes\SCore\Base\Core
 {
     /**
      * Deprecated level caps.
@@ -38,7 +38,7 @@ class CapQuery extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
-        for ($_i = 0; $_i < 10; ++$_i) {
+        for ($_i = 0; $_i <= 10; ++$_i) {
             $this->deprecated_levels[] = 'level_'.$_i;
         }
     }
@@ -138,11 +138,6 @@ class CapQuery extends Classes\SCore\Base\Core
 
         if ($args['fail_on_max'] && $this->total($args) > $args['max']) {
             return $caps = []; // Fail; too many.
-        }
-        // Configure deprecated level caps.
-
-        for ($_i = 0; $_i < 10; ++$_i) {
-            $deprecated_levels[] = 'level_'.$_i;
         }
         // Return the array of all caps now.
 

@@ -18,7 +18,7 @@ trait CapQueries
      */
     public static function capsQueryTotal(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§CapQuery->total(...$args);
+        return $GLOBALS[static::class]->Utils->§CapsQuery->total(...$args);
     }
 
     /**
@@ -26,7 +26,7 @@ trait CapQueries
      */
     public static function capsQueryAll(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§CapQuery->all(...$args);
+        return $GLOBALS[static::class]->Utils->§CapsQuery->all(...$args);
     }
 
     /**
@@ -34,6 +34,6 @@ trait CapQueries
      */
     public static function capSelectOptions(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§CapQuery->selectOptions(...$args);
+        return $GLOBALS[static::class]->Utils->§CapsQuery->selectOptions(...$args);
     }
 }

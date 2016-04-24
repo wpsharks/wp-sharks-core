@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c181d34558b272abb82e83584dd330c6",
-    "content-hash": "e5bf12946d7d792f088443919465602e",
+    "hash": "5398a3fbef96857304497c81c09743d3",
+    "content-hash": "36c304a7b738d180e35bab5e553afd6b",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -579,16 +579,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.3.0",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "f44f53e5ceb7474a83b6e11e6623ff9d6f6da598"
+                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/f44f53e5ceb7474a83b6e11e6623ff9d6f6da598",
-                "reference": "f44f53e5ceb7474a83b6e11e6623ff9d6f6da598",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
+                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
                 "shasum": ""
             },
             "require": {
@@ -600,6 +600,8 @@
             },
             "require-dev": {
                 "apigen/apigen": "^4.1",
+                "codeception/aspect-mock": "1.0.0",
+                "goaop/framework": "1.0.0-alpha.2",
                 "ircmaxell/random-lib": "^1.1",
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
                 "mockery/mockery": "^0.9.4",
@@ -653,7 +655,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-03-22 18:40:53"
+            "time": "2016-04-24 00:08:55"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -770,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "52f66cca1f1959a754c6ba4b43529b4dde1778d3"
+                "reference": "1e99541b39c9de11b95178eac1dd0fd5b3d821fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/52f66cca1f1959a754c6ba4b43529b4dde1778d3",
-                "reference": "52f66cca1f1959a754c6ba4b43529b4dde1778d3",
+                "url": "https://api.github.com/repos/websharks/core/zipball/1e99541b39c9de11b95178eac1dd0fd5b3d821fa",
+                "reference": "1e99541b39c9de11b95178eac1dd0fd5b3d821fa",
                 "shasum": ""
             },
             "require": {
@@ -836,7 +838,6 @@
                 "ext-pspell": "*",
                 "ext-zend-opcache": "*",
                 "ext-zip": "*",
-                "package/bourbon": "4.2.3",
                 "ryakad/pandoc-php": "1.*"
             },
             "suggest": {
@@ -886,7 +887,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-04-23 06:29:30"
+            "time": "2016-04-24 10:04:16"
         },
         {
             "name": "websharks/dicer",
@@ -1039,19 +1040,7 @@
             "time": "2016-04-20 14:30:22"
         }
     ],
-    "packages-dev": [
-        {
-            "name": "package/bourbon",
-            "version": "4.2.3",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/thoughtbot/bourbon/releases/download/v4.2.3/bourbon-v4.2.3.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library"
-        }
-    ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {

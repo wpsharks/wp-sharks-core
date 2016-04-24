@@ -12,20 +12,20 @@ use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
 /**
- * Post type query utils.
+ * Role query utils.
  *
  * @since 16xxxx Post utils.
  */
-class PostTypeQuery extends Classes\SCore\Base\Core
+class RolesQuery extends Classes\SCore\Base\Core
 {
     /**
-     * Total post types.
+     * Total roles.
      *
-     * @since 16xxxx Post type utils.
+     * @since 16xxxx Role utils.
      *
      * @param array $args Behavioral args.
      *
-     * @return int Total post types.
+     * @return int Total roles.
      */
     public function total(array $args = []): int
     {
@@ -33,7 +33,6 @@ class PostTypeQuery extends Classes\SCore\Base\Core
 
         $default_args = [
             // Also used by {@link all()}.
-            'filters'  => [],
             'include'  => [],
             'exclude'  => [],
             'no_cache' => false,
@@ -41,7 +40,6 @@ class PostTypeQuery extends Classes\SCore\Base\Core
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
-        $args['filters']  = (array) $args['filters'];
         $args['include']  = (array) $args['include'];
         $args['exclude']  = (array) $args['exclude'];
         $args['no_cache'] = (bool) $args['no_cache'];
@@ -54,23 +52,23 @@ class PostTypeQuery extends Classes\SCore\Base\Core
         if (($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) !== null && !$args['no_cache']) {
             return $total; // Already cached this.
         }
-        // Establish total post types in the query.
+        // Establish total roles in the query.
 
-        $post_types = get_post_types($args['filters'], 'objects');
-        $post_types = $args['include'] ? array_intersect_key($post_types, array_fill_keys($args['include'], true)) : $post_types;
-        $post_types = $args['exclude'] ? array_diff_key($post_types, array_fill_keys($args['exclude'], true)) : $post_types;
+        $roles = wp_roles()->roles; // All possible roles.
+        $roles = $args['include'] ? array_intersect_key($roles, array_fill_keys($args['include'], true)) : $roles;
+        $roles = $args['exclude'] ? array_diff_key($roles, array_fill_keys($args['exclude'], true)) : $roles;
 
-        return $total = count($post_types);
+        return $total = count($roles);
     }
 
     /**
-     * All post types.
+     * All roles.
      *
-     * @since 16xxxx Post type utils.
+     * @since 16xxxx Role utils.
      *
      * @param array $args Behavioral args.
      *
-     * @return \StdClass[] Array of post types.
+     * @return array[] Array of roles.
      */
     public function all(array $args = []): array
     {
@@ -82,7 +80,6 @@ class PostTypeQuery extends Classes\SCore\Base\Core
             'fail_on_max' => false,
 
             // Also used by {@link total()}.
-            'filters'  => [],
             'include'  => [],
             'exclude'  => [],
             'no_cache' => false,
@@ -95,7 +92,6 @@ class PostTypeQuery extends Classes\SCore\Base\Core
         $args['fail_on_max'] = (bool) $args['fail_on_max'];
 
         // Also used by {@link total()}.
-        $args['filters']  = (array) $args['filters'];
         $args['include']  = (array) $args['include'];
         $args['exclude']  = (array) $args['exclude'];
         $args['no_cache'] = (bool) $args['no_cache'];
@@ -105,27 +101,27 @@ class PostTypeQuery extends Classes\SCore\Base\Core
         $cache_keys = $args; // Keys to consider when checking the cache.
         unset($cache_keys['no_cache']); // Cache key exclusions.
 
-        if (($post_types = &$this->cacheKey(__FUNCTION__, $cache_keys)) !== null && !$args['no_cache']) {
-            return $post_types; // Already cached this.
+        if (($roles = &$this->cacheKey(__FUNCTION__, $cache_keys)) !== null && !$args['no_cache']) {
+            return $roles; // Already cached this.
         }
         // Automatically fail if there are too many; when/if desirable.
 
         if ($args['fail_on_max'] && $this->total($args) > $args['max']) {
-            return $post_types = []; // Fail; too many.
+            return $roles = []; // Fail; too many.
         }
-        // Return the array of all post type objects now.
+        // Return the array of all roles now.
 
-        $post_types = get_post_types($args['filters'], 'objects');
-        $post_types = $args['include'] ? array_intersect_key($post_types, array_fill_keys($args['include'], true)) : $post_types;
-        $post_types = $args['exclude'] ? array_diff_key($post_types, array_fill_keys($args['exclude'], true)) : $post_types;
+        $roles = wp_roles()->roles; // All possible roles.
+        $roles = $args['include'] ? array_intersect_key($roles, array_fill_keys($args['include'], true)) : $roles;
+        $roles = $args['exclude'] ? array_diff_key($roles, array_fill_keys($args['exclude'], true)) : $roles;
 
-        return $post_types;
+        return $roles;
     }
 
     /**
-     * Post type select options.
+     * Role select options.
      *
-     * @since 16xxxx Post type utils.
+     * @since 16xxxx Role utils.
      *
      * @param array $args Behavioral args.
      *
@@ -141,10 +137,10 @@ class PostTypeQuery extends Classes\SCore\Base\Core
 
         $default_args = [
             // Unique.
-            'allow_empty'        => true,
-            'allow_arbitrary'    => true,
-            'option_formatter'   => null,
-            'current_post_types' => null,
+            'allow_empty'      => true,
+            'allow_arbitrary'  => true,
+            'option_formatter' => null,
+            'current_roles'    => null,
 
             // Used by {@link all()}.
             'max'         => 1000,
@@ -152,9 +148,6 @@ class PostTypeQuery extends Classes\SCore\Base\Core
 
             // Used by {@link total()}.
             // Used by {@link all()}.
-            'filters' => !$is_admin
-                ? ['public' => true, 'exclude_from_search' => false]
-                : ['exclude_from_search' => false],
             'include'  => [],
             'exclude'  => [],
             'no_cache' => false,
@@ -163,10 +156,10 @@ class PostTypeQuery extends Classes\SCore\Base\Core
         $args = array_intersect_key($args, $default_args);
 
         // Unique.
-        $args['allow_empty']        = (bool) $args['allow_empty'];
-        $args['allow_arbitrary']    = (bool) $args['allow_arbitrary'];
-        $args['option_formatter']   = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
-        $args['current_post_types'] = isset($args['current_post_types']) ? (array) $args['current_post_types'] : null;
+        $args['allow_empty']      = (bool) $args['allow_empty'];
+        $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
+        $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
+        $args['current_roles']    = isset($args['current_roles']) ? (array) $args['current_roles'] : null;
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);
@@ -174,60 +167,58 @@ class PostTypeQuery extends Classes\SCore\Base\Core
 
         // Used by {@link total()}.
         // Used by {@link all()}.
-        $args['filters']  = (array) $args['filters'];
         $args['include']  = (array) $args['include'];
         $args['exclude']  = (array) $args['exclude'];
         $args['no_cache'] = (bool) $args['no_cache'];
 
         // Check for nothing being available (or too many).
 
-        if (!($post_types = $this->all($args))) {
+        if (!($roles = $this->all($args))) {
             return ''; // None available.
         }
-        // Initialize several working variables needed below.
+        // Initialize several working variables.
 
-        $options                 = ''; // Initialize.
-        $available_post_types    = []; // Initialize.
-        $selected_post_types     = []; // Initialize.
-        $default_post_type_label = __('Posts', 'wp-sharks-core');
+        $options         = ''; // Initialize.
+        $available_roles = []; // Initialize.
+        $selected_roles  = []; // Initialize.
 
         // Build & return all `<option>` tags.
 
         if ($args['allow_empty']) { // Allow ``?
             $options = '<option value=""></option>';
         }
-        foreach ($post_types as $_post_type => $_post_type_object) { // \StdClass objects.
-            $available_post_types[] = $_post_type; // Record all available.
+        foreach ($roles as $_role_id => $_role) { // Array of data.
+            $available_roles[] = $_role_id; // Record all available.
 
-            if (isset($args['current_post_types']) && in_array($_post_type, $args['current_post_types'], true)) {
-                $selected_post_types[$_post_type] = $_post_type; // Flag selected post type.
+            if (isset($args['current_roles']) && in_array($_role_id, $args['current_roles'], true)) {
+                $selected_roles[$_role_id] = $_role_id; // Flag selected role.
             }
-            $_post_type_label         = !empty($_post_type_object->labels->name) ? $_post_type_object->labels->name : $default_post_type_label;
-            $_post_type_selected_attr = isset($selected_post_types[$_post_type]) ? ' selected' : '';
+            $_role_label         = !empty($_role['name']) ? $_role['name'] : $_role_id;
+            $_role_selected_attr = isset($selected_roles[$_role_id]) ? ' selected' : '';
 
             // Format `<option>` tag w/ a custom formatter?
 
             if ($args['option_formatter']) {
-                $options .= $args['option_formatter']($_post_type, $_post_type_object, [
-                        'post_type_label'         => $_post_type_label,
-                        'post_type_selected_attr' => $_post_type_selected_attr,
+                $options .= $args['option_formatter']($_role_id, [
+                        'role_label'         => $_role_label,
+                        'role_selected_attr' => $_role_selected_attr,
                     ], $args); // ↑ This allows for a custom option formatter.
                     // The formatter must always return an `<option></option>` tag.
 
             // Else format the `<option>` tag using a default behavior.
-            } else { // Both front & back-end displays are the same for post types.
-                $options .= '<option value="'.esc_attr($_post_type).'"'.$_post_type_selected_attr.'>'.
-                                esc_html($_post_type_label).
+            } else { // Both front & back-end displays are the same for roles.
+                $options .= '<option value="'.esc_attr($_role_id).'"'.$_role_selected_attr.'>'.
+                                esc_html($_role_label).
                             '</option>';
             }
-        } // unset($_post_type, $_post_type_object, $_post_type_label, $_post_selected_attr); // Housekeeping.
+        } // unset($_role_id, $_role, $_role_label, $_role_selected_attr); // Housekeeping.
 
-        if ($args['allow_arbitrary'] && $args['current_post_types']) { // Allow arbitrary select `<option>`s?
-            foreach (array_diff($args['current_post_types'], $available_post_types) as $_arbitrary_post_type) {
-                $options .= '<option value="'.esc_attr($_arbitrary_post_type).'" selected>'.
-                                esc_html($default_post_type_label).
+        if ($args['allow_arbitrary'] && $args['current_roles']) { // Allow arbitrary select `<option>`s?
+            foreach (array_diff($args['current_roles'], $available_roles) as $_arbitrary_role_id) {
+                $options .= '<option value="'.esc_attr($_arbitrary_role_id).'" selected>'.
+                                esc_html($_arbitrary_role_id).
                             '</option>';
-            } // unset($_arbitrary_post_type); // Housekeeping.
+            } // unset($_arbitrary_role_id); // Housekeeping.
         }
         return $options; // HTML markup.
     }

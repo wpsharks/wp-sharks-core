@@ -31,9 +31,7 @@
     "websharks/wp-php-rv": "dev-master",
     "websharks/core": "dev-master"
   },
-  "require-dev": {
-    "package/bourbon": "4.2.3"
-  },
+  "require-dev": {},
 
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -52,15 +50,5 @@
     "preferred-install": "dist"
   },
 
-  "repositories": [{
-    "type": "package",
-    "package": {
-      "name": "package/bourbon",
-      "version": "4.2.3",
-      "dist": {
-        "url": "https://github.com/thoughtbot/bourbon/releases/download/v4.2.3/bourbon-v4.2.3.zip",
-        "type": "zip"
-      }
-    }
-  }]
+  "repositories": []
 }

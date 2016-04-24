@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160423\n"
+"Project-Id-Version: WP Sharks Core 160424\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-04-23 06:33:34+00:00\n"
+"POT-Creation-Date: 2016-04-24 10:06:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/App.php:315
 #: src/includes/classes/App.php:315
-msgid "<strong>%1$s</strong> detected a new version of itself &amp; recompiled successfully. You're now running v%2$s."
+msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:162
@@ -62,34 +62,40 @@ msgstr ""
 msgid "%1$s options updated successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQuery.php:344
-#: src/includes/classes/SCore/Utils/PostQuery.php:344
-msgid "Post"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostQuery.php:345
-#: src/includes/classes/SCore/Utils/PostQuery.php:345
-msgid "Untitled"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypeQuery.php:192
-#: src/includes/classes/SCore/Utils/PostTypeQuery.php:192
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypesQuery.php:192
+#: src/includes/classes/SCore/Utils/PostTypesQuery.php:192
 msgid "Posts"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:35
-#: src/includes/classes/SCore/Utils/StylesScripts.php:35
-msgid "No results match"
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:344
+#: src/includes/classes/SCore/Utils/PostsQuery.php:344
+msgid "Post"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:345
+#: src/includes/classes/SCore/Utils/PostsQuery.php:345
+msgid "Untitled"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:36
-#: src/includes/classes/SCore/Utils/StylesScripts.php:36
-msgid "Select Some Options"
+#: src/includes/classes/SCore/Utils/StylesScripts.php:37
+msgid "No results!"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:37
-#: src/includes/classes/SCore/Utils/StylesScripts.php:37
-msgid "Select an Option"
+msgid "Start typing or click to select options..."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:38
+msgid "Start typing or click to select an option..."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:38
+msgid "Search or click to select options..."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:39
+msgid "Search or click to select an option..."
 msgstr ""
 
 #. Plugin Name of the plugin/theme

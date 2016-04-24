@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160423'; //v//
+    const VERSION = '160424'; //v//
 
     /**
      * Constructor.
@@ -312,7 +312,7 @@ class App extends CoreClasses\App
                     return [
                         'is_transient' => false,
                         'markup'       => sprintf(
-                            __('<strong>%1$s</strong> detected a new version of itself &amp; recompiled successfully. You\'re now running v%2$s.', 'wp-sharks-core'),
+                            __('<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You\'re now running v%2$s.', 'wp-sharks-core'),
                             esc_html($this->Config->©brand['©name']),
                             esc_html($this->c::version())
                         ),

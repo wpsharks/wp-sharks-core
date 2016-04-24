@@ -30,11 +30,13 @@ class StylesScripts extends Classes\SCore\Base\Core
 
         wp_localize_script(
             'jquery-chosen',
-            'jquery_chosen_i18n',
+            'jazssggqbtujeebgvnskynzyzwqttqqzJQueryChosenDefaults',
             [
-                'no_results_text'           => __('No results match', 'wp-sharks-core'),
-                'placeholder_text_multiple' => __('Select Some Options', 'wp-sharks-core'),
-                'placeholder_text_single'   => __('Select an Option', 'wp-sharks-core'),
+                'width'                     => '100%',
+                'search_contains'           => true,
+                'no_results_text'           => __('No results!', 'wp-sharks-core'),
+                'placeholder_text_multiple' => __('Search or click to select options...', 'wp-sharks-core'),
+                'placeholder_text_single'   => __('Search or click to select an option...', 'wp-sharks-core'),
             ]
         );
     }

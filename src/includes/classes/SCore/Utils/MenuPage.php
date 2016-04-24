@@ -89,9 +89,9 @@ class MenuPage extends Classes\SCore\Base\Core
      *
      * @param string $page Page to check (optional).
      *
-     *    - `*` = Zero or more chars.
-     *    - `**` = Zero or more chars != `-`.
-     *    - Check is caSe insensitive by default.
+     *    - `*` = Zero or more chars != `-`.
+     *    - `**` = Zero or more chars of any kind.
+     *    - Check is always caSe insensitive by default.
      *    - If `$page` beings with `/` it is treated as regex.
      *
      * @return bool True if a menu page.
@@ -119,9 +119,9 @@ class MenuPage extends Classes\SCore\Base\Core
      *
      * @param string $post_type Post type to check (optional).
      *
-     *    - `*` = Zero or more chars.
-     *    - `**` = Zero or more chars != `_`.
-     *    - Check is caSe insensitive by default.
+     *    - `*` = Zero or more chars != `_`.
+     *    - `**` = Zero or more chars of any kind.
+     *    - Check is always caSe insensitive by default.
      *    - If `$post_type` beings with `/` it is treated as regex.
      *
      * @return bool True if menu page is for post type.
