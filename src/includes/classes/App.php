@@ -171,6 +171,8 @@ class App extends CoreClasses\App
         }
         # Collect essential WordPress config values.
 
+        $wp_is_multisite = is_multisite();
+
         if (!($wp_tmp_dir = rtrim(get_temp_dir(), '/'))) {
             throw new Exception('Failed to acquire a temp directory.');
         }
@@ -290,7 +292,8 @@ class App extends CoreClasses\App
             ],
 
             '§caps' => [
-                '§manage' => 'activate_plugins',
+                '§manage' => $wp_is_multisite && $specs['§is_network_wide']
+                    ? 'manage_network_plugins' : 'activate_plugins',
             ],
 
             '§pro_option_keys' => [],
