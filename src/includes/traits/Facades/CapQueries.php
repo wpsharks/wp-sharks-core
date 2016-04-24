@@ -36,4 +36,20 @@ trait CapQueries
     {
         return $GLOBALS[static::class]->Utils->§CapsQuery->selectOptions(...$args);
     }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function capsForRole(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§CapsQuery->forRole(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function capsCollectAll(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§CapsQuery->collectAll(...$args);
+    }
 }

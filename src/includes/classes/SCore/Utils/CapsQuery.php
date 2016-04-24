@@ -81,7 +81,8 @@ class CapsQuery extends Classes\SCore\Base\Core
         }
         // Establish total caps in the query.
 
-        $caps = $this->collect(); // All possible caps.
+        $caps = $this->collectAll(); // All possible caps.
+
         $caps = $args['include'] ? array_intersect_key($caps, array_fill_keys($args['include'], true)) : $caps;
         $caps = $args['exclude'] ? array_diff_key($caps, array_fill_keys($args['exclude'], true)) : $caps;
         $caps = $args['exclude_deprecated_levels'] ? array_diff_key($caps, array_fill_keys($this->deprecated_levels, true)) : $caps;
@@ -141,7 +142,8 @@ class CapsQuery extends Classes\SCore\Base\Core
         }
         // Return the array of all caps now.
 
-        $caps = $this->collect(); // All possible caps.
+        $caps = $this->collectAll(); // All possible caps.
+
         $caps = $args['include'] ? array_intersect_key($caps, array_fill_keys($args['include'], true)) : $caps;
         $caps = $args['exclude'] ? array_diff_key($caps, array_fill_keys($args['exclude'], true)) : $caps;
         $caps = $args['exclude_deprecated_levels'] ? array_diff_key($caps, array_fill_keys($this->deprecated_levels, true)) : $caps;
@@ -257,6 +259,48 @@ class CapsQuery extends Classes\SCore\Base\Core
     }
 
     /**
+     * Collect role caps.
+     *
+     * @since 16xxxx Cap utils.
+     *
+     * @param string $role_id  Role ID.
+     * @param bool   $no_cache Bypass cache?
+     *
+     * @return array All role caps.
+     */
+    public function forRole(string $role_id, bool $no_cache = false): array
+    {
+        if (($collection = &$this->cacheKey(__FUNCTION__, $role_id)) !== null && !$no_cache) {
+            return $collection; // Already cached this.
+        }
+        $collection = []; // Initialize.
+
+        if ($role_id === 'super_admin') {
+            $role_id = 'administrator';
+
+            if (is_multisite()) {
+                $collection = array_merge($collection, [
+                    'manage_network'         => 'manage_network',
+                    'manage_sites'           => 'manage_sites',
+                    'manage_network_users'   => 'manage_network_users',
+                    'manage_network_plugins' => 'manage_network_plugins',
+                    'manage_network_themes'  => 'manage_network_themes',
+                    'manage_network_options' => 'manage_network_options',
+                ]);
+            }
+        }
+        $role = get_role($role_id); // If role exists.
+
+        foreach (array_keys($role->capabilities ?? []) as $_role_cap) {
+            $collection[$_role_cap] = $_role_cap;
+        } // unset($_role_cap); // Housekeeping.
+
+        asort($collection, SORT_NATURAL);
+
+        return $collection;
+    }
+
+    /**
      * Collect caps.
      *
      * @since 16xxxx Cap utils.
@@ -265,28 +309,37 @@ class CapsQuery extends Classes\SCore\Base\Core
      *
      * @return array All collected caps.
      */
-    protected function collect(bool $no_cache = false): array
+    public function collectAll(bool $no_cache = false): array
     {
         if (($collection = &$this->cacheKey(__FUNCTION__)) !== null && !$no_cache) {
             return $collection; // Already cached this.
         }
         $collection = []; // Initialize.
 
-        foreach (wp_roles()->roles as $_role) {
-            foreach (array_keys($_role['capabilities'] ?? []) as $_cap) {
-                $collection[$_cap] = $_cap;
+        foreach (wp_roles()->roles as $_role_id => $_role) {
+            foreach (array_keys($_role['capabilities'] ?? []) as $_role_cap) {
+                $collection[$_role_cap] = $_role_cap;
             }
-        } // unset($_role, $_cap); // Housekeeping.
+        } // unset($_role_id, $_role, $_role_cap); // Housekeeping.
 
-        foreach ($this->s::postTypesQueryAll(['no_cache' => $no_cache]) as $_post_type => $_post_type_object) {
+        $collection = array_merge($collection, $this->forRole('super_admin', $no_cache));
+
+        foreach (get_post_types([], 'objects') as $_post_type => $_post_type_object) {
             foreach ($_post_type_object->cap ?? [] as $_core_cap => $_post_type_cap) {
                 if (!in_array($_core_cap, ['read_post', 'edit_post', 'delete_post'], true)) {
-                    // ↑ Do not include meta caps; see: <http://jas.xyz/1XN7IKd>
+                    // ↑ Do not include post meta caps; see: <http://jas.xyz/1XN7IKd>
                     $collection[$_core_cap]      = $_core_cap;
                     $collection[$_post_type_cap] = $_post_type_cap;
                 }
-            }
-        } // unset($_cap, $_map_cap); // Housekeeping.
+            } // unset($_core_cap, $_post_type_cap);
+        } // unset($_post_type, $_post_type_object); // Housekeeping.
+
+        foreach (get_taxonomies([], 'objects') as $_taxonomy => $_taxonomy_object) {
+            foreach ($_taxonomy_object->cap ?? [] as $_core_cap => $_taxonomy_cap) {
+                $collection[$_core_cap]     = $_core_cap;
+                $collection[$_taxonomy_cap] = $_taxonomy_cap;
+            } // unset($_core_cap, $_taxonomy_cap);
+        } // unset($_taxonomy, $_taxonomy_object); // Housekeeping.
 
         asort($collection, SORT_NATURAL);
 
