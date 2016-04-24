@@ -248,7 +248,7 @@ class Options extends Classes\SCore\Base\Core
         $options = array_intersect_key($options, $this->App->Config->§default_options);
 
         foreach ($this->App->Config->§default_options as $_key => $_default_option_value) {
-            if (is_null($options[$_key])) {
+            if (!isset($options[$_key])) {
                 $options[$_key] = $_default_option_value;
             } elseif (!$this->App->Config->§specs['§is_pro'] && in_array($_key, $this->App->Config->§pro_option_keys, true)) {
                 $options[$_key] = $_default_option_value;

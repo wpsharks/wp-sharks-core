@@ -293,9 +293,9 @@ class App extends CoreClasses\App
                 '§manage' => 'activate_plugins',
             ],
 
+            '§pro_option_keys' => [],
             '§default_options' => [],
             '§options'         => [],
-            '§pro_option_keys' => [],
 
             '§notices' => [
                 '§on_install' => function ($installion_history) {
@@ -352,6 +352,7 @@ class App extends CoreClasses\App
         } elseif (!is_array($site_owner_options = get_option($this->Config->©brand['©var'].'_options'))) {
             update_option($this->Config->©brand['©var'].'_options', $site_owner_options = []);
         }
+        $this->Config->§options = $this->s::mergeOptions($this->Config->§default_options, $this->Config->§options);
         $this->Config->§options = $this->s::mergeOptions($this->Config->§options, $site_owner_options);
         $this->Config->§options = $this->s::applyFilters('options', $this->Config->§options);
 
