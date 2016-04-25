@@ -226,7 +226,7 @@ class PostsQuery extends Classes\SCore\Base\Core
         }
         // Else we have results. Order & return array.
 
-        $result_types = [ // Order of priority.
+        $results_of_type = [ // Order of priority.
             'page'          => [],
             'post'          => [],
             'product'       => [],
@@ -239,17 +239,17 @@ class PostsQuery extends Classes\SCore\Base\Core
         // Break them down by type now.
 
         foreach ($results as $_key => $_result) {
-            if (isset($result_types[$_result->post_type])) {
-                $result_types[$_result->post_type][$_key] = $_result;
+            if (isset($results_of_type[$_result->post_type])) {
+                $results_of_type[$_result->post_type][$_key] = $_result;
             } else {
-                $result_types['_other'][$_key] = $_result;
+                $results_of_type['_other'][$_key] = $_result;
             }
         } // unset($_key, $_result); // Housekeeping.
 
         $results = []; // In order of priority.
-        foreach ($result_types as $_result_type) {
-            $results = $results + $result_types[$_result_type];
-        } // unset($_result_type); // Housekeeping.
+        foreach ($results_of_type as $_result_type => $_results) {
+            $results += $_results; // Union of current + this type.
+        } // unset($_result_type, $_results); // Housekeeping.
 
         $posts = []; // `WP_Post` instances.
         foreach ($results as $_key => $_post) {
