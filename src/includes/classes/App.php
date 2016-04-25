@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160424'; //v//
+    const VERSION = '160425'; //v//
 
     /**
      * Constructor.

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160424\n"
+"Project-Id-Version: WP Sharks Core 160425\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-04-24 10:06:02+00:00\n"
+"POT-Creation-Date: 2016-04-25 04:32:28+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,12 +13,12 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: .~build/wp-sharks-core/src/includes/classes/App.php:305
-#: src/includes/classes/App.php:305
+#: src/includes/classes/App.php:308
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/App.php:315
-#: src/includes/classes/App.php:315
+#: src/includes/classes/App.php:318
 msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
 msgstr ""
 
@@ -77,23 +77,17 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:36
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:37
 #: src/includes/classes/SCore/Utils/StylesScripts.php:37
 msgid "No results!"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:37
-msgid "Start typing or click to select options..."
-msgstr ""
-
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:38
-msgid "Start typing or click to select an option..."
-msgstr ""
-
 #: src/includes/classes/SCore/Utils/StylesScripts.php:38
 msgid "Search or click to select options..."
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:39
 #: src/includes/classes/SCore/Utils/StylesScripts.php:39
 msgid "Search or click to select an option..."
 msgstr ""

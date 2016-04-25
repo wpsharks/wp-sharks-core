@@ -107,7 +107,7 @@ class MenuPage extends Classes\SCore\Base\Core
         if ($page[0] === '/') {
             $regex = $page; // Treat as regex.
         } else {
-            $regex = '/^'.$this->c::wdRegexFrag($page, '-').'$/ui';
+            $regex = '/^'.$this->c::wregxFrag($page, '-').'$/ui';
         }
         return (bool) preg_match($regex, $current);
     }
@@ -143,7 +143,7 @@ class MenuPage extends Classes\SCore\Base\Core
         if ($post_type[0] === '/') {
             $regex = $post_type; // Treat as regex.
         } else {
-            $regex = '/^'.$this->c::wdRegexFrag($post_type, '_').'$/ui';
+            $regex = '/^'.$this->c::wregxFrag($post_type, '_').'$/ui';
         }
         return (bool) preg_match($regex, $current_post_type);
     }

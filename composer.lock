@@ -579,16 +579,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc"
+                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
-                "reference": "fb12163881a98588bcdc4ba820a96e0ff5ad97dc",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
+                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
                 "shasum": ""
             },
             "require": {
@@ -655,7 +655,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-04-24 00:08:55"
+            "time": "2016-04-24 00:30:41"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -772,12 +772,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "1e99541b39c9de11b95178eac1dd0fd5b3d821fa"
+                "reference": "d9365312e7d854d58c31edd92696f2fd19868258"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/1e99541b39c9de11b95178eac1dd0fd5b3d821fa",
-                "reference": "1e99541b39c9de11b95178eac1dd0fd5b3d821fa",
+                "url": "https://api.github.com/repos/websharks/core/zipball/d9365312e7d854d58c31edd92696f2fd19868258",
+                "reference": "d9365312e7d854d58c31edd92696f2fd19868258",
                 "shasum": ""
             },
             "require": {
@@ -887,7 +887,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-04-24 10:04:16"
+            "time": "2016-04-25 03:33:08"
         },
         {
             "name": "websharks/dicer",
