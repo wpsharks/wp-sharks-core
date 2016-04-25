@@ -248,7 +248,7 @@ class PostsQuery extends Classes\SCore\Base\Core
 
         $results = []; // In order of priority.
         foreach ($result_types as $_result_type) {
-            $results += $result_types[$_result_type];
+            $results = $results + $result_types[$_result_type];
         } // unset($_result_type); // Housekeeping.
 
         $posts = []; // `WP_Post` instances.
