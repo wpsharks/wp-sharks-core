@@ -37,6 +37,9 @@ class PostsQuery extends Classes\SCore\Base\Core
             // Also used by {@link all()}.
             'for_comments_only' => false,
 
+            'include_post_ids' => [],
+            'exclude_post_ids' => [],
+
             'include_post_types' => [],
             'exclude_post_types' => [],
 
@@ -56,6 +59,9 @@ class PostsQuery extends Classes\SCore\Base\Core
 
         // Also used by {@link all()}.
         $args['for_comments_only'] = (bool) $args['for_comments_only'];
+
+        $args['include_post_ids'] = (array) $args['include_post_ids'];
+        $args['exclude_post_ids'] = (array) $args['exclude_post_ids'];
 
         $args['include_post_types'] = (array) $args['include_post_types'];
         $args['exclude_post_types'] = (array) $args['exclude_post_types'];
@@ -79,19 +85,19 @@ class PostsQuery extends Classes\SCore\Base\Core
         if (($total = &$this->cacheKey(__FUNCTION__, $cache_keys)) !== null && !$args['no_cache']) {
             return $total; // Already cached this.
         }
-        // Establish post types/statuses in the query.
-
-        $post_types    = $args['include_post_types'] ?: get_post_types();
-        $post_statuses = $args['include_post_statuses'] ?: get_post_stati();
-
         // Build the full SQL based on the arguments/data above.
 
         $sql = 'SELECT SQL_CALC_FOUND_ROWS `ID` FROM `'.esc_sql($WpDb->posts).'`'.
 
-                ' WHERE `post_type` IN('.$this->c::quoteSqlIn($post_types).')'.
+                ' WHERE 1=1'.// Initialize the WHERE clause in this query.
+
+                ($args['include_post_ids'] ? ' AND `ID` IN('.$this->c::quoteSqlIn($args['include_post_ids']).')' : '').
+                ($args['exclude_post_ids'] ? ' AND `ID` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_ids']).')' : '').
+
+                ($args['include_post_types'] ? ' AND `post_type` IN('.$this->c::quoteSqlIn($args['include_post_types']).')' : '').
                 ($args['exclude_post_types'] ? ' AND `post_type` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_types']).')' : '').
 
-                ' AND `post_status` IN('.$this->c::quoteSqlIn($post_statuses).')'.
+                ($args['include_post_statuses'] ? ' AND `post_status` IN('.$this->c::quoteSqlIn($args['include_post_statuses']).')' : '').
                 ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_statuses']).')' : '').
 
                 ($args['exclude_drafts'] ? " AND `post_type` NOT IN('draft','auto-draft')" : '').
@@ -135,6 +141,9 @@ class PostsQuery extends Classes\SCore\Base\Core
             // Also used by {@link total()}.
             'for_comments_only' => false,
 
+            'include_post_ids' => [],
+            'exclude_post_ids' => [],
+
             'include_post_types' => [],
             'exclude_post_types' => [],
 
@@ -158,6 +167,9 @@ class PostsQuery extends Classes\SCore\Base\Core
 
         // Also used by {@link total()}.
         $args['for_comments_only'] = (bool) $args['for_comments_only'];
+
+        $args['include_post_ids'] = (array) $args['include_post_ids'];
+        $args['exclude_post_ids'] = (array) $args['exclude_post_ids'];
 
         $args['include_post_types'] = (array) $args['include_post_types'];
         $args['exclude_post_types'] = (array) $args['exclude_post_types'];
@@ -186,17 +198,17 @@ class PostsQuery extends Classes\SCore\Base\Core
         if ($args['fail_on_max'] && $this->total($args) > $args['max']) {
             return $posts = []; // Fail; too many.
         }
-        // Establish post types/statuses in the query.
-
-        $post_types    = $args['include_post_types'] ?: get_post_types();
-        $post_statuses = $args['include_post_statuses'] ?: get_post_stati();
-
         $sql = 'SELECT * FROM `'.esc_sql($WpDb->posts).'`'.
 
-                ' WHERE `post_type` IN('.$this->c::quoteSqlIn($post_types).')'.
+                ' WHERE 1=1'.// Initialize the WHERE clause in this query.
+
+                ($args['include_post_ids'] ? ' AND `ID` IN('.$this->c::quoteSqlIn($args['include_post_ids']).')' : '').
+                ($args['exclude_post_ids'] ? ' AND `ID` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_ids']).')' : '').
+
+                ($args['include_post_types'] ? ' AND `post_type` IN('.$this->c::quoteSqlIn($args['include_post_types']).')' : '').
                 ($args['exclude_post_types'] ? ' AND `post_type` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_types']).')' : '').
 
-                ' AND `post_status` IN('.$this->c::quoteSqlIn($post_statuses).')'.
+                ($args['include_post_statuses'] ? ' AND `post_status` IN('.$this->c::quoteSqlIn($args['include_post_statuses']).')' : '').
                 ($args['exclude_post_statuses'] ? ' AND `post_status` NOT IN('.$this->c::quoteSqlIn($args['exclude_post_statuses']).')' : '').
 
                 ($args['exclude_drafts'] ? " AND `post_type` NOT IN('draft','auto-draft')" : '').
@@ -209,41 +221,40 @@ class PostsQuery extends Classes\SCore\Base\Core
 
                 ' ORDER BY `post_type` ASC, `post_date_gmt` DESC'.($args['max'] !== PHP_INT_MAX ? ' LIMIT '.(int) $args['max'] : '');
 
-        $post_results = $page_results = $media_results = $other_results = [];
-
         if (!($results = $WpDb->get_results($sql, OBJECT_K))) {
             return $posts = []; // No posts.
         }
         // Else we have results. Order & return array.
 
+        $result_types = [ // Order of priority.
+            'page'          => [],
+            'post'          => [],
+            'product'       => [],
+            'topic'         => [],
+            'reply'         => [],
+            'attachment'    => [],
+            'nav_menu_item' => [],
+            '_other'        => [],
+        ];
+        // Break them down by type now.
+
         foreach ($results as $_key => $_result) {
-            switch ($_result->post_type) {
-                // Posts.
-                case 'post':
-                    $post_results[$_key] = $_result;
-                    break;
-                // Pages.
-                case 'page':
-                    $page_results[$_key] = $_result;
-                    break;
-                // Attachments.
-                case 'attachment':
-                    $media_results[$_key] = $_result;
-                    break;
-                // Anything else.
-                default:
-                    $other_results[$_key] = $_result;
-                    break;
+            if (isset($result_types[$_result->post_type])) {
+                $result_types[$_result->post_type][$_key] = $_result;
+            } else {
+                $result_types['_other'][$_key] = $_result;
             }
         } // unset($_key, $_result); // Housekeeping.
 
-        $results = $post_results + $page_results + $other_results + $media_results;
-        $posts   = $results; // Use as posts in this order of priority.
+        $results = []; // In order of priority.
+        foreach ($result_types as $_result_type) {
+            $results += $result_types[$_result_type];
+        } // unset($_result_type); // Housekeeping.
 
-        foreach ($posts as &$_post) {
-            $_post = new \WP_Post($_post); // Convert to instance.
-        } // Always unset temporary reference.
-        unset($_post); // Housekeeping.
+        $posts = []; // `WP_Post` instances.
+        foreach ($results as $_key => $_post) {
+            $posts[$_key] = new \WP_Post($_post);
+        } // unset($_key, $_post); // Housekeeping.
 
         return $posts;
     }
@@ -282,6 +293,9 @@ class PostsQuery extends Classes\SCore\Base\Core
             // Used by {@link all()}.
             'for_comments_only' => false,
 
+            'include_post_ids' => [],
+            'exclude_post_ids' => [],
+
             'include_post_types' => !$is_admin
                 ? get_post_types(['public' => true, 'exclude_from_search' => false])
                 : get_post_types(['exclude_from_search' => false]),
@@ -316,6 +330,9 @@ class PostsQuery extends Classes\SCore\Base\Core
         // Used by {@link total()}.
         // Used by {@link all()}.
         $args['for_comments_only'] = (bool) $args['for_comments_only'];
+
+        $args['include_post_ids'] = (array) $args['include_post_ids'];
+        $args['exclude_post_ids'] = (array) $args['exclude_post_ids'];
 
         $args['include_post_types'] = (array) $args['include_post_types'];
         $args['exclude_post_types'] = (array) $args['exclude_post_types'];
