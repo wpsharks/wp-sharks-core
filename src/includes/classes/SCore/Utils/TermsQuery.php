@@ -159,10 +159,11 @@ class TermsQuery extends Classes\SCore\Base\Core
 
         $default_args = [
             // Unique.
-            'allow_empty'          => true,
-            'allow_arbitrary'      => true,
-            'option_formatter'     => null,
-            'current_tax_term_ids' => null,
+            'allow_empty'              => true,
+            'allow_arbitrary'          => true,
+            'option_child_indent_char' => '-',
+            'option_formatter'         => null,
+            'current_tax_term_ids'     => null,
 
             // Used by {@link all()}.
             'max'         => 1000,
@@ -184,11 +185,12 @@ class TermsQuery extends Classes\SCore\Base\Core
         $args = array_intersect_key($args, $default_args);
 
         // Unique.
-        $args['allow_empty']          = (bool) $args['allow_empty'];
-        $args['allow_arbitrary']      = (bool) $args['allow_arbitrary'];
-        $args['option_formatter']     = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
-        $args['current_tax_term_ids'] = isset($args['current_tax_term_ids']) ? (array) $args['current_tax_term_ids'] : null;
-        $args['current_tax_term_ids'] = array_map('strval', $args['current_tax_term_ids']);
+        $args['allow_empty']              = (bool) $args['allow_empty'];
+        $args['allow_arbitrary']          = (bool) $args['allow_arbitrary'];
+        $args['option_child_indent_char'] = (string) $args['option_child_indent_char'];
+        $args['option_formatter']         = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
+        $args['current_tax_term_ids']     = isset($args['current_tax_term_ids']) ? (array) $args['current_tax_term_ids'] : null;
+        $args['current_tax_term_ids']     = array_map('strval', $args['current_tax_term_ids']);
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);
@@ -279,12 +281,12 @@ class TermsQuery extends Classes\SCore\Base\Core
                 // Else format the `<option>` tag using a default behavior.
                 } elseif ($is_admin) { // Slightly different format in admin area.
                     $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
-                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).'-&nbsp;' : '').
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].'&nbsp;' : '').
                                     esc_html($_post_type_label.' '.$_tax_label.' #'.$_term_object->term_id.': '.$_term_label).
                                 '</option>';
                 } else { // Front-end display should be friendlier in some ways.
                     $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
-                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).'-&nbsp;' : '').
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].'&nbsp;' : '').
                                     esc_html($_post_type_label.' '.$_tax_label.': '.$_term_label).
                                 '</option>';
                 }
