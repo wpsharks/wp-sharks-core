@@ -167,6 +167,7 @@ class PostTypesQuery extends Classes\SCore\Base\Core
         $args['allow_arbitrary']    = (bool) $args['allow_arbitrary'];
         $args['option_formatter']   = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
         $args['current_post_types'] = isset($args['current_post_types']) ? (array) $args['current_post_types'] : null;
+        $args['current_post_types'] = array_map('strval', $args['current_post_types']);
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);

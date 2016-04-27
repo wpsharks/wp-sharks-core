@@ -322,6 +322,7 @@ class PostsQuery extends Classes\SCore\Base\Core
         $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
         $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
         $args['current_post_ids'] = isset($args['current_post_ids']) ? (array) $args['current_post_ids'] : null;
+        $args['current_post_ids'] = array_map('intval', $args['current_post_ids']);
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);
@@ -369,7 +370,7 @@ class PostsQuery extends Classes\SCore\Base\Core
         foreach ($posts as $_post) { // \WP_Post objects.
             $available_post_ids[] = $_post->ID; // Record all available.
 
-            if (isset($args['current_post_ids']) && in_array($_post->ID, $args['current_post_ids'], true)) {
+            if (isset($args['current_post_ids']) && in_array((int) $_post->ID, $args['current_post_ids'], true)) {
                 $selected_post_ids[$_post->ID] = $_post->ID; // Flag selected post ID.
             }
             $_post_type_object = get_post_type_object($_post->post_type); // Anticipate a possible failure.
