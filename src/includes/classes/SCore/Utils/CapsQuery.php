@@ -196,7 +196,7 @@ class CapsQuery extends Classes\SCore\Base\Core
         $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
         $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
         $args['current_caps']     = isset($args['current_caps']) ? (array) $args['current_caps'] : null;
-        $args['current_caps']     = array_map('strval', $args['current_caps']);
+        $args['current_caps']     = $this->c::removeEmptys(array_map('strval', $args['current_caps']));
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);

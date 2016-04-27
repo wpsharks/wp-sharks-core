@@ -190,7 +190,7 @@ class TermsQuery extends Classes\SCore\Base\Core
         $args['option_child_indent_char'] = (string) $args['option_child_indent_char'];
         $args['option_formatter']         = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
         $args['current_tax_term_ids']     = isset($args['current_tax_term_ids']) ? (array) $args['current_tax_term_ids'] : null;
-        $args['current_tax_term_ids']     = array_map('strval', $args['current_tax_term_ids']);
+        $args['current_tax_term_ids']     = $this->c::removeEmptys(array_map('strval', $args['current_tax_term_ids']));
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);

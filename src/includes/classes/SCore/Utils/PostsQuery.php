@@ -322,7 +322,7 @@ class PostsQuery extends Classes\SCore\Base\Core
         $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
         $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
         $args['current_post_ids'] = isset($args['current_post_ids']) ? (array) $args['current_post_ids'] : null;
-        $args['current_post_ids'] = array_map('intval', $args['current_post_ids']);
+        $args['current_post_ids'] = $this->c::removeEmptys(array_map('intval', $args['current_post_ids']));
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);

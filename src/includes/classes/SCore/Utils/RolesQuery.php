@@ -160,7 +160,7 @@ class RolesQuery extends Classes\SCore\Base\Core
         $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
         $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
         $args['current_roles']    = isset($args['current_roles']) ? (array) $args['current_roles'] : null;
-        $args['current_roles']    = array_map('strval', $args['current_roles']);
+        $args['current_roles']    = $this->c::removeEmptys(array_map('strval', $args['current_roles']));
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);
