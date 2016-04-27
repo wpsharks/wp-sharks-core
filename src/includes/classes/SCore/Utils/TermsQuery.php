@@ -39,6 +39,7 @@ class TermsQuery extends Classes\SCore\Base\Core
             'filters'            => [
                 'get'        => 'all',
                 'hide_empty' => false,
+                'orderby'    => 'name',
             ],
             'no_cache' => false,
         ];
@@ -96,6 +97,7 @@ class TermsQuery extends Classes\SCore\Base\Core
             'filters'            => [
                 'get'        => 'all',
                 'hide_empty' => false,
+                'orderby'    => 'name',
             ],
             'no_cache' => false,
         ];
@@ -174,6 +176,7 @@ class TermsQuery extends Classes\SCore\Base\Core
             'filters'            => [
                 'get'        => 'all',
                 'hide_empty' => false,
+                'orderby'    => 'name',
             ],
             'no_cache' => false,
         ];
@@ -185,6 +188,7 @@ class TermsQuery extends Classes\SCore\Base\Core
         $args['allow_arbitrary']      = (bool) $args['allow_arbitrary'];
         $args['option_formatter']     = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
         $args['current_tax_term_ids'] = isset($args['current_tax_term_ids']) ? (array) $args['current_tax_term_ids'] : null;
+        $args['current_tax_term_ids'] = array_map('strval', $args['current_tax_term_ids']);
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);
@@ -203,63 +207,92 @@ class TermsQuery extends Classes\SCore\Base\Core
         if (!($terms = $this->all($args))) {
             return ''; // None available.
         }
-        // Initialize several working variables needed below.
+        // Initialize working variables needed below.
 
-        $options                 = ''; // Initialize.
-        $available_tax_term_ids  = []; // Initialize.
-        $selected_tax_term_ids   = []; // Initialize.
+        $options                = ''; // Initialize.
+        $available_tax_term_ids = []; // Initialize.
+        $selected_tax_term_ids  = []; // Initialize.
+
         $default_post_type_label = __('Post', 'wp-sharks-core');
         $default_tax_label       = __('Taxonomy', 'wp-sharks-core');
         $default_term_label      = __('Term', 'wp-sharks-core');
+
+        $post_types = get_post_types([], 'objects'); // Everything.
+        $taxonomies = get_taxonomies($args['taxonomy_filters'], 'objects');
 
         // Build & return all `<option>` tags.
 
         if ($args['allow_empty']) { // Allow ``?
             $options = '<option value=""></option>';
         }
-        $post_types = get_post_types([], 'objects'); // Everything.
-        $taxonomies = get_taxonomies($args['taxonomy_filters'], 'objects');
+        $walk = function (// Recursive parent/child walker.
+            int $parent_term_id = 0,
+            int $parent_depth = 0
+        ) use (
+            &$walk,
+            &$is_admin,
+            &$args,
+            &$terms,
+            &$options,
+            &$available_tax_term_ids,
+            &$selected_tax_term_ids,
+            &$default_post_type_label,
+            &$default_tax_label,
+            &$default_term_label,
+            &$post_types,
+            &$taxonomies
+        ) {
+            foreach ($terms as $_term_object) { // \WP_Term objects.
+                if ((int) $_term_object->parent !== $parent_term_id) {
+                    continue; // Bypass this child for now.
+                }
+                $_tax_term_id             = $_term_object->taxonomy.':'.$_term_object->term_id;
+                $available_tax_term_ids[] = $_tax_term_id; // Record all available.
 
-        foreach ($terms as $_term_object) { // \WP_Term objects.
-            $_tax_term_id             = $_term_object->taxonomy.':'.$_term_object->term_id;
-            $available_tax_term_ids[] = $_tax_term_id; // Record all available.
+                if (isset($args['current_tax_term_ids']) && in_array($_tax_term_id, $args['current_tax_term_ids'], true)) {
+                    $selected_tax_term_ids[$_tax_term_id] = $_tax_term_id; // Flag selected post type.
+                }
+                $_post_type_label = !empty($_term_object->object_type[0])
+                    && !empty($post_types[$_term_object->object_type[0]]->labels->name)
+                        ? $post_types[$_term_object->object_type[0]]->labels->name : $default_post_type_label;
 
-            if (isset($args['current_tax_term_ids']) && in_array($_tax_term_id, $args['current_tax_term_ids'], true)) {
-                $selected_tax_term_ids[$_tax_term_id] = $_tax_term_id; // Flag selected post type.
-            }
-            $_post_type_label = !empty($_term_object->object_type[0])
-                && !empty($post_types[$_term_object->object_type[0]]->labels->name)
-                    ? $post_types[$_term_object->object_type[0]]->labels->name : $default_post_type_label;
+                $_tax_label = !empty($_term_object->taxonomy)
+                    && !empty($taxonomies[$_term_object->taxonomy]->labels->singular_name)
+                        ? $taxonomies[$_term_object->taxonomy]->labels->singular_name : $default_tax_label;
 
-            $_tax_label = !empty($_term_object->taxonomy)
-                && !empty($taxonomies[$_term_object->taxonomy]->labels->singular_name)
-                    ? $taxonomies[$_term_object->taxonomy]->labels->singular_name : $default_tax_label;
+                $_term_label                = !empty($_term_object->name) ? $_term_object->name : $default_term_label;
+                $_tax_term_id_selected_attr = isset($selected_tax_term_ids[$_tax_term_id]) ? ' selected' : '';
 
-            $_term_label                = !empty($_term_object->name) ? $_term_object->name : $default_term_label;
-            $_tax_term_id_selected_attr = isset($selected_tax_term_ids[$_tax_term_id]) ? ' selected' : '';
+                // Format `<option>` tag w/ a custom formatter?
 
-            // Format `<option>` tag w/ a custom formatter?
+                if ($args['option_formatter']) {
+                    $options .= $args['option_formatter']($_tax_term_id, $_term_object, [
+                            'parent_term_id'            => $parent_term_id,
+                            'parent_depth'              => $parent_depth,
+                            'post_type_label'           => $_post_type_label,
+                            'tax_label'                 => $_tax_label,
+                            'term_label'                => $_term_label,
+                            'tax_term_id_selected_attr' => $_tax_term_id_selected_attr,
+                        ], $args); // ↑ This allows for a custom option formatter.
+                        // The formatter must always return an `<option></option>` tag.
 
-            if ($args['option_formatter']) {
-                $options .= $args['option_formatter']($_tax_term_id, $_term_object, [
-                        'post_type_label'           => $_post_type_label,
-                        'tax_label'                 => $_tax_label,
-                        'term_label'                => $_term_label,
-                        'tax_term_id_selected_attr' => $_tax_term_id_selected_attr,
-                    ], $args); // ↑ This allows for a custom option formatter.
-                    // The formatter must always return an `<option></option>` tag.
-
-            // Else format the `<option>` tag using a default behavior.
-            } elseif ($is_admin) { // Slightly different format in admin area.
-                $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
-                                esc_html($_post_type_label.' '.$_tax_label.' #'.$_term_object->term_id.': '.$_term_label).
-                            '</option>';
-            } else { // Front-end display should be friendlier in some ways.
-                $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
-                                esc_html($_post_type_label.' '.$_tax_label.': '.$_term_label).
-                            '</option>';
-            }
-        } // unset($_tax_term_id, $_term_object, $_post_type_label, $_tax_label, $_term_label, $_tax_term_id_selected_attr); // Housekeeping.
+                // Else format the `<option>` tag using a default behavior.
+                } elseif ($is_admin) { // Slightly different format in admin area.
+                    $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).'-&nbsp;' : '').
+                                    esc_html($_post_type_label.' '.$_tax_label.' #'.$_term_object->term_id.': '.$_term_label).
+                                '</option>';
+                } else { // Front-end display should be friendlier in some ways.
+                    $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).'-&nbsp;' : '').
+                                    esc_html($_post_type_label.' '.$_tax_label.': '.$_term_label).
+                                '</option>';
+                }
+                $walk((int) $_term_object->term_id, $parent_depth + 1); // Any children this term has.
+                //
+            } // unset($_tax_term_id, $_term_object, $_post_type_label, $_tax_label, $_term_label, $_tax_term_id_selected_attr); // Housekeeping.
+        };
+        $walk(0, 0); // Start walking/building the parent » child `<option>` tags.
 
         if ($args['allow_arbitrary'] && $args['current_tax_term_ids']) { // Allow arbitrary select `<option>`s?
             foreach (array_diff($args['current_tax_term_ids'], $available_tax_term_ids) as $_arbitrary_tax_term_id) {
