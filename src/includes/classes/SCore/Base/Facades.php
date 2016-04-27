@@ -34,6 +34,7 @@ abstract class Facades
     use Traits\Facades\PostTypeQueries;
     use Traits\Facades\RoleQueries;
     use Traits\Facades\StylesScripts;
+    use Traits\Facades\TermQueries;
     use Traits\Facades\Transients;
     use Traits\Facades\Uninstaller;
 }
