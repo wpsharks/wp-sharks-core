@@ -281,12 +281,12 @@ class TermsQuery extends Classes\SCore\Base\Core
                 // Else format the `<option>` tag using a default behavior.
                 } elseif ($is_admin) { // Slightly different format in admin area.
                     $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
-                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].'&nbsp;' : '').
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].' ' : '').
                                     esc_html($_post_type_label.' '.$_tax_label.' #'.$_term_object->term_id.': '.$_term_label).
                                 '</option>';
                 } else { // Front-end display should be friendlier in some ways.
                     $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
-                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].'&nbsp;' : '').
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].' ' : '').
                                     esc_html($_post_type_label.' '.$_tax_label.': '.$_term_label).
                                 '</option>';
                 }
