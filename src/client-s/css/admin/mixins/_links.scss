@@ -1,0 +1,23 @@
+/*
+ * Dependencies.
+ */
+@import './dashicons';
+
+/*
+ * WP admin links.
+ */
+@mixin wp-admin-links($scope: null) {
+  #{$scope}a {
+    text-decoration:          none;
+
+    &[href='#'][data-toggle] {
+      border-bottom:          1px dotted;
+    }
+
+    &[target='_blank'] {
+      @include wp-admin-dashicon(external, after);
+
+      display:                inline-block;
+    }
+  }
+}

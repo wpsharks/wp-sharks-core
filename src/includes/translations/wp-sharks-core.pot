@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160427\n"
+"Project-Id-Version: WP Sharks Core 160428\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-04-27 17:42:48+00:00\n"
+"POT-Creation-Date: 2016-04-28 08:42:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,20 +62,20 @@ msgstr ""
 msgid "%1$s options updated successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypesQuery.php:192
-#: src/includes/classes/SCore/Utils/PostTypesQuery.php:192
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypesQuery.php:193
+#: src/includes/classes/SCore/Utils/PostTypesQuery.php:193
 msgid "Posts"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:361
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:216
-#: src/includes/classes/SCore/Utils/PostsQuery.php:361
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:362
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:218
+#: src/includes/classes/SCore/Utils/PostsQuery.php:362
 #: src/includes/classes/SCore/Utils/TermsQuery.php:218
 msgid "Post"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:362
-#: src/includes/classes/SCore/Utils/PostsQuery.php:362
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:363
+#: src/includes/classes/SCore/Utils/PostsQuery.php:363
 msgid "Untitled"
 msgstr ""
 
@@ -94,14 +94,19 @@ msgstr ""
 msgid "Search or click to select an option..."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:217
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:219
 #: src/includes/classes/SCore/Utils/TermsQuery.php:219
 msgid "Taxonomy"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:218
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:220
 #: src/includes/classes/SCore/Utils/TermsQuery.php:220
 msgid "Term"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/UsersQuery.php:181
+#: src/includes/classes/SCore/Utils/UsersQuery.php:181
+msgid "User"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

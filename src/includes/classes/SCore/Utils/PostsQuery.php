@@ -368,41 +368,41 @@ class PostsQuery extends Classes\SCore\Base\Core
             $options = '<option value="0"></option>';
         }
         foreach ($posts as $_post) { // \WP_Post objects.
-            $available_post_ids[] = $_post->ID; // Record all available.
+            $available_post_ids[] = (int) $_post->ID; // Record all available.
 
             if (isset($args['current_post_ids']) && in_array((int) $_post->ID, $args['current_post_ids'], true)) {
-                $selected_post_ids[$_post->ID] = $_post->ID; // Flag selected post ID.
+                $selected_post_ids[$_post->ID] = (int) $_post->ID; // Flag selected post ID.
             }
             $_post_type_object = get_post_type_object($_post->post_type); // Anticipate a possible failure.
             $_post_type_label  = !empty($_post_type_object->labels->singular_name) ? $_post_type_object->labels->singular_name : $default_post_type_label;
 
-            $_post_title         = $_post->post_title ?: $default_post_title;
-            $_post_date          = $this->s::dateI18nUtc('M jS, Y', strtotime($_post->post_date_gmt));
-            $_post_selected_attr = isset($selected_post_ids[$_post->ID]) ? ' selected' : '';
+            $_post_title            = $_post->post_title ?: $default_post_title;
+            $_post_date             = $this->s::dateI18nUtc('M jS, Y', strtotime($_post->post_date_gmt));
+            $_post_id_selected_attr = isset($selected_post_ids[$_post->ID]) ? ' selected' : '';
 
             // Format `<option>` tag w/ a custom formatter?
 
             if ($args['option_formatter']) {
                 $options .= $args['option_formatter']($_post, [
-                        'post_type_object'   => $_post_type_object,
-                        'post_type_label'    => $_post_type_label,
-                        'post_title'         => $_post_title,
-                        'post_date'          => $_post_date,
-                        'post_selected_attr' => $_post_selected_attr,
+                        'post_type_object'      => $_post_type_object,
+                        'post_type_label'       => $_post_type_label,
+                        'post_title'            => $_post_title,
+                        'post_date'             => $_post_date,
+                        'post_id_selected_attr' => $_post_id_selected_attr,
                     ], $args); // ↑ This allows for a custom option formatter.
                     // The formatter must always return an `<option></option>` tag.
 
             // Else format the `<option>` tag using a default behavior.
             } elseif ($is_admin) { // Slightly different format in admin area.
-                $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_selected_attr.'>'.
+                $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_id_selected_attr.'>'.
                                 esc_html($_post_type_label.' #'.$_post->ID.': '.$_post_title).
                             '</option>';
             } else { // Front-end display should be friendlier in some ways.
-                $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_selected_attr.'>'.
+                $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_id_selected_attr.'>'.
                                 esc_html($_post_date.' — '.$_post_title).
                             '</option>';
             }
-        } // unset($_post, $_post_type_object, $_post_type_label, $_post_title, $_post_date, $_post_selected_attr); // Housekeeping.
+        } // unset($_post, $_post_type_object, $_post_type_label, $_post_title, $_post_date, $_post_id_selected_attr); // Housekeeping.
 
         if ($args['allow_arbitrary'] && $args['current_post_ids']) { // Allow arbitrary select `<option>`s?
             foreach (array_diff($args['current_post_ids'], $available_post_ids) as $_arbitrary_post_id) {
