@@ -37,5 +37,6 @@ abstract class Facades
     use Traits\Facades\TermQueries;
     use Traits\Facades\Transients;
     use Traits\Facades\Uninstaller;
+    use Traits\Facades\UrlToPostId;
     use Traits\Facades\UserQueries;
 }

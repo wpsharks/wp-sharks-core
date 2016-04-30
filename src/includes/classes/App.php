@@ -171,6 +171,8 @@ class App extends CoreClasses\App
         }
         # Collect essential WordPress config values.
 
+        // @TODO URL generation should be dynamic in support of `switch_to_blog()`.
+
         $wp_is_multisite = is_multisite();
 
         if (!($wp_tmp_dir = rtrim(get_temp_dir(), '/'))) {
