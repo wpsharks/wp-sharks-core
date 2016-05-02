@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160430'; //v//
+    const VERSION = '160502'; //v//
 
     /**
      * Constructor.
@@ -170,8 +170,8 @@ class App extends CoreClasses\App
             }
         }
         # Collect essential WordPress config values.
-
-        // @TODO URL generation should be dynamic in support of `switch_to_blog()`.
+        // NOTE: These are not 100% compatible with `switch_to_blog()`.
+        // These represent values for the initial/current site.
 
         $wp_is_multisite = is_multisite();
 
@@ -287,10 +287,44 @@ class App extends CoreClasses\App
                 '©hash_key' => $wp_salt_key,
             ],
 
-            '§conflicting' => [
-                '§plugins'               => [],
-                '§themes'                => [],
-                '§deactivatable_plugins' => [],
+            '§conflicts' => [
+                '§plugins' => [
+                    /*
+                        '[slug]'  => '[name]',
+                    */
+                ],
+                '§themes' => [
+                    /*
+                        '[slug]'  => '[name]',
+                    */
+                ],
+                '§deactivatable_plugins' => [
+                    /*
+                        '[slug]'  => '[name]',
+                    */
+                ],
+            ],
+            '§dependencies' => [
+                '§plugins' => [
+                    /*
+                        '[slug]' => [
+                            'name'  => '',
+                            'url'   => '',
+                            'in_wp' => true,
+                            'test'  => function() {}, (optional)
+                        ],
+                    */
+                ],
+                '§themes' => [
+                    /*
+                        '[slug]' => [
+                            'name'  => '',
+                            'url'   => '',
+                            'in_wp' => true,
+                            'test'  => function() {}, (optional)
+                        ],
+                    */
+                ],
             ],
 
             '§caps' => [
@@ -328,14 +362,11 @@ class App extends CoreClasses\App
             '§uninstall' => false,
         ];
         if ($specs['§type'] === 'plugin') {
-            $lp_conflicting_basename_slug = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $this->base_dir_basename);
-            $lp_conflicting_basename_slug .= ($specs['§is_pro'] ? '' : '-pro');
-
-            $lp_conflicting_basename_slug = $brand['©slug'].($specs['§is_pro'] ? '' : '-pro');
             $lp_conflicting_name          = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
+            $lp_conflicting_basename_slug = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $this->base_dir_basename).($specs['§is_pro'] ? '' : '-pro');
 
-            $default_instance_base['§conflicting']['§plugins'][$lp_conflicting_basename_slug]               = $lp_conflicting_name;
-            $default_instance_base['§conflicting']['§deactivatable_plugins'][$lp_conflicting_basename_slug] = $lp_conflicting_name;
+            $default_instance_base['§conflicts']['§plugins'][$lp_conflicting_basename_slug]               = $lp_conflicting_name;
+            $default_instance_base['§conflicts']['§deactivatable_plugins'][$lp_conflicting_basename_slug] = $lp_conflicting_name;
         }
         # Build collective instance base & instance, then run parent constructor.
 
@@ -371,9 +402,14 @@ class App extends CoreClasses\App
         } elseif ($this->Config->§uninstall && !did_action('init')) {
             throw new Exception('`init` action not done yet.');
         }
-        // Check for any known conflicts w/ this application.
+        // Check for any known conflicts.
 
         if ($this->s::conflictsExist()) {
+            return; // Stop here.
+        }
+        // Check for any outstanding dependencies.
+
+        if ($this->s::dependenciesOutstanding()) {
             return; // Stop here.
         }
         // No known conflicts; load plugin text-domain.

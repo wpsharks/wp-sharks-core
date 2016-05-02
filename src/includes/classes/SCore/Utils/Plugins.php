@@ -19,23 +19,118 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class Plugins extends Classes\SCore\Base\Core
 {
     /**
+     * Active plugins.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param bool $slugify Slugs w/ basename keys?
+     * @note If false you'll get numerically indexed basenames.
+     *
+     * @return array Active plugin basenames.
+     */
+    public function active(bool $slugify = true): array
+    {
+        if (($active = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
+            return $active; // Cached already.
+        }
+        $active = get_option('active_plugins');
+        $active = is_array($active) ? $active : [];
+
+        if ($slugify) { // Slugs w/ basename keys.
+            $active = $this->s::pluginSlugs($active);
+        }
+        return $active;
+    }
+
+    /**
+     * Network-active plugins.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param bool $slugify Slugs w/ basename keys?
+     * @note If false you'll get numerically indexed basenames.
+     *
+     * @return array Network-active plugin basenames.
+     */
+    public function networkActive(bool $slugify = true): array
+    {
+        if (($network_active = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
+            return $network_active; // Cached already.
+        }
+        if (!is_multisite()) {
+            return $network_active = []; // Save time.
+        }
+        $network_active = get_network_option(null, 'active_sitewide_plugins');
+        $network_active = is_array($network_active) ? $network_active : [];
+        $network_active = array_keys($network_active);
+
+        if ($slugify) { // Slugs w/ basename keys.
+            $network_active = $this->s::pluginSlugs($network_active);
+        }
+        return $network_active;
+    }
+
+    /**
      * All active plugins.
      *
      * @since 16xxxx First documented version.
      *
-     * @return array All active plugins.
+     * @param bool $slugify Slugs w/ basename keys?
+     * @note If false you'll get numerically indexed basenames.
+     *
+     * @return array All active plugin basenames.
      */
-    public function allActive(): array
+    public function allActive(bool $slugify = true): array
     {
-        if (!is_array($active = get_option('active_plugins'))) {
-            $active = []; // Fprce an array.
+        if (($all_active = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
+            return $all_active; // Cached this already.
         }
-        if (is_multisite()) {
-            if (is_array($network_active = get_network_option(null, 'active_sitewide_plugins'))) {
-                $network_active = array_keys($network_active);
-                $active         = array_merge($active, $network_active);
-            }
+        $active         = $this->active($slugify);
+        $network_active = $this->networkActive($slugify);
+        $all_active     = array_merge($active, $network_active);
+
+        if (!$slugify) { // Numeric keys.
+            $all_active = array_unique($all_active);
         }
-        return array_unique($active);
+        return $all_active;
+    }
+
+    /**
+     * All installed plugins (directory scan).
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param bool $slugify Keyed by slug?
+     *
+     * @return array All installed plugins (keyed by plugin basename).
+     */
+    public function allInstalled(bool $slugify = true): array
+    {
+        if (($installed_plugins = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
+            return $installed_plugins; // Cached this already.
+        }
+        // Contains the `get_plugins()` function.
+        require_once ABSPATH.'wp-admin/includes/plugin.php';
+
+        if (is_admin()) { // Typical use case.
+            $installed_plugins = apply_filters('all_plugins', get_plugins());
+        } else { // Abnormal use case; no filter here.
+            $installed_plugins = get_plugins(); // See: <http://jas.xyz/1NN5zhk>
+            // No filter; because it may trigger routines expecting other admin functions
+            // that will not exist in this context. That could lead to fatal errors.
+        }
+        $installed_plugins = is_array($installed_plugins) ? $installed_plugins : [];
+
+        if ($slugify) { // Key by slug.
+            $installed_plugins_ = $installed_plugins;
+            $installed_plugins  = []; // Reinitialize.
+            foreach ($installed_plugins_ as $_basename => $_data) {
+                if (($_slug = $this->s::pluginSlug($_basename))) {
+                    $installed_plugins[$_slug]             = $_data;
+                    $installed_plugins[$_slug]['Basename'] = $_basename;
+                }
+            } // unset($installed_plugins_, $_basename, $_data); // Housekeeping.
+        }
+        return $installed_plugins;
     }
 }

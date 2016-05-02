@@ -23,6 +23,7 @@ abstract class Facades
     use Traits\Facades\Conflicts;
     use Traits\Facades\Date;
     use Traits\Facades\Db;
+    use Traits\Facades\Dependencies;
     use Traits\Facades\Fatalities;
     use Traits\Facades\Hooks;
     use Traits\Facades\Installer;
@@ -30,12 +31,14 @@ abstract class Facades
     use Traits\Facades\Nonce;
     use Traits\Facades\Notices;
     use Traits\Facades\Options;
+    use Traits\Facades\Plugin;
     use Traits\Facades\Plugins;
     use Traits\Facades\PostQueries;
     use Traits\Facades\PostTypeQueries;
     use Traits\Facades\RoleQueries;
     use Traits\Facades\StylesScripts;
     use Traits\Facades\TermQueries;
+    use Traits\Facades\Theme;
     use Traits\Facades\Transients;
     use Traits\Facades\Uninstaller;
     use Traits\Facades\UrlToPostId;

@@ -11,37 +11,37 @@ use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
-trait Plugins
+trait Plugin
 {
     /**
      * @since 16xxxx Initial release.
      */
-    public static function activePlugins(...$args)
+    public static function pluginSlug(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Plugins->active(...$args);
+        return $GLOBALS[static::class]->Utils->§Plugin->slug(...$args);
     }
 
     /**
      * @since 16xxxx Initial release.
      */
-    public static function networkActivePlugins(...$args)
+    public static function pluginSlugs(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Plugins->networkActive(...$args);
+        return $GLOBALS[static::class]->Utils->§Plugin->slugs(...$args);
     }
 
     /**
      * @since 16xxxx Initial release.
      */
-    public static function allActivePlugins(...$args)
+    public static function pluginIsInstalled(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Plugins->allActive(...$args);
+        return $GLOBALS[static::class]->Utils->§Plugin->isInstalled(...$args);
     }
 
     /**
      * @since 16xxxx Initial release.
      */
-    public static function allInstalledPlugins(...$args)
+    public static function installedPluginData(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Plugins->allInstalled(...$args);
+        return $GLOBALS[static::class]->Utils->§Plugin->installedData(...$args);
     }
 }
