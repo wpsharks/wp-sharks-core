@@ -11,14 +11,14 @@ use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
-trait Db
+trait Database
 {
     /**
      * @since 16xxxx Initial release.
      */
     public static function wpDb()
     {
-        return $GLOBALS[static::class]->Utils->§Db->wp;
+        return $GLOBALS[static::class]->Utils->§Database->wp;
     }
 
     /**
@@ -26,7 +26,7 @@ trait Db
      */
     public static function dbPrefix(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Db->prefix(...$args);
+        return $GLOBALS[static::class]->Utils->§Database->prefix(...$args);
     }
 
     /**
@@ -34,7 +34,7 @@ trait Db
      */
     public static function createDbTables(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Db->createTables(...$args);
+        return $GLOBALS[static::class]->Utils->§Database->createTables(...$args);
     }
 
     /**
@@ -42,7 +42,7 @@ trait Db
      */
     public static function dropDbTables(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Db->dropTables(...$args);
+        return $GLOBALS[static::class]->Utils->§Database->dropTables(...$args);
     }
 
     /**
@@ -50,6 +50,6 @@ trait Db
      */
     public static function fulltextDbCompat(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Db->fulltextCompat(...$args);
+        return $GLOBALS[static::class]->Utils->§Database->fulltextCompat(...$args);
     }
 }

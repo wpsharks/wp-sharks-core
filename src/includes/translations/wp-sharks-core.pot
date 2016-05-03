@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160502\n"
+"Project-Id-Version: WP Sharks Core 160503\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-05-02 13:55:06+00:00\n"
+"POT-Creation-Date: 2016-05-03 03:05:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,13 +12,13 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:344
-#: src/includes/classes/App.php:344
+#: .~build/wp-sharks-core/src/includes/classes/App.php:346
+#: src/includes/classes/App.php:346
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:354
-#: src/includes/classes/App.php:354
+#: .~build/wp-sharks-core/src/includes/classes/App.php:356
+#: src/includes/classes/App.php:356
 msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
 msgstr ""
 
@@ -42,98 +42,124 @@ msgstr ""
 msgid "<strong>%1$s</strong> will be able load now. Please <a href=\"javascript:location.reload();\">refresh</a>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:354
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:359
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:419
-msgid "<strong>%1$s is not active yet.</strong> It depends on the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:355
-#: src/includes/classes/SCore/Utils/Dependencies.php:355
-msgid "A simple addition is necessary. <strong><a href=\"%1$s\">Click here to install the '%2$s' dependency</a></strong>."
-msgstr ""
-
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:356
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:361
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:365
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:435
 #: src/includes/classes/SCore/Utils/Dependencies.php:356
-#: src/includes/classes/SCore/Utils/Dependencies.php:361
-msgid "<em>To remove this message install the dependency or remove %1$s from WordPress.</em>"
+#: src/includes/classes/SCore/Utils/Dependencies.php:365
+#: src/includes/classes/SCore/Utils/Dependencies.php:435
+msgid "'%1$s' %2$s Required"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:359
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:368
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:438
+#: src/includes/classes/SCore/Utils/Dependencies.php:359
+#: src/includes/classes/SCore/Utils/Dependencies.php:368
+#: src/includes/classes/SCore/Utils/Dependencies.php:438
+msgid "<strong>%1$s is not active.</strong> It depends on the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:360
 #: src/includes/classes/SCore/Utils/Dependencies.php:360
-msgid "An addition is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get the '%2$s' dependency</a></strong>."
+msgid "A simple addition is necessary. <strong><a href=\"%1$s\">Click here to install '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:420
-#: src/includes/classes/SCore/Utils/Dependencies.php:426
-msgid "A simple activation is necessary. <strong><a href=\"%1$s\">Click here to activate the '%2$s' dependency</a></strong>."
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:361
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:370
+#: src/includes/classes/SCore/Utils/Dependencies.php:361
+#: src/includes/classes/SCore/Utils/Dependencies.php:370
+msgid "<em>To remove this message, install the dependency or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:421
-#: src/includes/classes/SCore/Utils/Dependencies.php:427
-msgid "<em>To remove this message activate the dependency or deactivate %1$s until you do.</em>"
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:369
+#: src/includes/classes/SCore/Utils/Dependencies.php:369
+msgid "An addition is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:483
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:488
-#: src/includes/classes/SCore/Utils/Dependencies.php:495
-#: src/includes/classes/SCore/Utils/Dependencies.php:500
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:439
+#: src/includes/classes/SCore/Utils/Dependencies.php:439
+msgid "A simple activation is necessary. <strong><a href=\"%1$s\">Click here to activate '%2$s'</a></strong>."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:440
+#: src/includes/classes/SCore/Utils/Dependencies.php:440
+msgid "<em>To remove this message, activate the dependency or deactivate %1$s until you do.</em>"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:509
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:518
+#: src/includes/classes/SCore/Utils/Dependencies.php:509
+#: src/includes/classes/SCore/Utils/Dependencies.php:518
+msgid "'%1$s' %2$s Upgrade Required"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:512
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:521
+#: src/includes/classes/SCore/Utils/Dependencies.php:512
+#: src/includes/classes/SCore/Utils/Dependencies.php:521
 msgid "<strong>%1$s is not active.</strong> It requires <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> v%4$s (or higher)."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:484
-#: src/includes/classes/SCore/Utils/Dependencies.php:496
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:513
+#: src/includes/classes/SCore/Utils/Dependencies.php:513
 msgid "You're running an older copy (v%1$s) of the '%2$s' %3$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:485
-#: src/includes/classes/SCore/Utils/Dependencies.php:497
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:514
+#: src/includes/classes/SCore/Utils/Dependencies.php:514
 msgid "A simple update is necessary. <strong><a href=\"%1$s\">Click here to upgrade %2$s</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:489
-#: src/includes/classes/SCore/Utils/Dependencies.php:501
-msgid "You're running an older copy of the '%1$s' %2$s."
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:522
+#: src/includes/classes/SCore/Utils/Dependencies.php:522
+msgid "You're currently running an older copy of the '%1$s' %2$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:490
-#: src/includes/classes/SCore/Utils/Dependencies.php:502
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:523
+#: src/includes/classes/SCore/Utils/Dependencies.php:523
 msgid "An update is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Get the latest version of %2$s</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:552
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:558
-#: src/includes/classes/SCore/Utils/Dependencies.php:570
-#: src/includes/classes/SCore/Utils/Dependencies.php:576
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:592
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:602
+#: src/includes/classes/SCore/Utils/Dependencies.php:592
+#: src/includes/classes/SCore/Utils/Dependencies.php:602
+msgid "'%1$s' %2$s Downgrade Required"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:595
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:605
+#: src/includes/classes/SCore/Utils/Dependencies.php:595
+#: src/includes/classes/SCore/Utils/Dependencies.php:605
 msgid "<strong>%1$s is not active.</strong> It requires an older version of the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:553
-#: src/includes/classes/SCore/Utils/Dependencies.php:571
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:596
+#: src/includes/classes/SCore/Utils/Dependencies.php:596
 msgid "You're running a newer copy (v%1$s). That will not work for %2$s, unfortunately."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:554
-#: src/includes/classes/SCore/Utils/Dependencies.php:572
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:597
+#: src/includes/classes/SCore/Utils/Dependencies.php:597
 msgid "A manual downgrade is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to download the older v%2$s</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:555
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:561
-#: src/includes/classes/SCore/Utils/Dependencies.php:573
-#: src/includes/classes/SCore/Utils/Dependencies.php:579
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:598
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:608
+#: src/includes/classes/SCore/Utils/Dependencies.php:598
+#: src/includes/classes/SCore/Utils/Dependencies.php:608
 msgid "%1$s is compatible up to %2$s v%3$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:559
-#: src/includes/classes/SCore/Utils/Dependencies.php:577
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:606
+#: src/includes/classes/SCore/Utils/Dependencies.php:606
 msgid "You're running a newer copy that will not work with %1$s, unfortunately."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:560
-#: src/includes/classes/SCore/Utils/Dependencies.php:578
-msgid "A manual downgrade is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get an older version</a></strong>."
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:607
+#: src/includes/classes/SCore/Utils/Dependencies.php:607
+msgid "A manual downgrade is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get an older v%2$s</a></strong>."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:28
@@ -201,12 +227,6 @@ msgstr ""
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/UsersQuery.php:181
 #: src/includes/classes/SCore/Utils/UsersQuery.php:181
 msgid "User"
-msgstr ""
-
-#: src/includes/classes/SCore/Utils/Dependencies.php:354
-#: src/includes/classes/SCore/Utils/Dependencies.php:359
-#: src/includes/classes/SCore/Utils/Dependencies.php:425
-msgid "<strong>%1$s is not active.</strong> It depends on the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
 msgstr ""
 
 #. Plugin Name of the plugin/theme

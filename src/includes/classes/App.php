@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160502'; //v//
+    const VERSION = '160503'; //v//
 
     /**
      * Constructor.
@@ -264,7 +264,7 @@ class App extends CoreClasses\App
                 '§complete' => false,
             ],
 
-            '§db' => [
+            '§database' => [
                 '§tables_dir' => '%%app_base_dir%%/src/includes/tables',
             ],
 
@@ -308,20 +308,22 @@ class App extends CoreClasses\App
                 '§plugins' => [
                     /*
                         '[slug]' => [
-                            'name'  => '',
-                            'url'   => '',
-                            'in_wp' => true,
-                            'test'  => function() {}, (optional)
+                            'name'        => '',
+                            'url'         => '',
+                            'archive_url' => '',
+                            'in_wp'       => true,
+                            'test'        => function() {},
                         ],
                     */
                 ],
                 '§themes' => [
                     /*
                         '[slug]' => [
-                            'name'  => '',
-                            'url'   => '',
-                            'in_wp' => true,
-                            'test'  => function() {}, (optional)
+                            'name'        => '',
+                            'url'         => '',
+                            'archive_url' => '',
+                            'in_wp'       => true,
+                            'test'        => function() {},
                         ],
                     */
                 ],

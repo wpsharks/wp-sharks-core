@@ -12,11 +12,11 @@ use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 
 /**
- * Db utils.
+ * Database utils.
  *
  * @since 16xxxx DB utils.
  */
-class Db extends Classes\SCore\Base\Core
+class Database extends Classes\SCore\Base\Core
 {
     /**
      * WP database.
@@ -66,7 +66,7 @@ class Db extends Classes\SCore\Base\Core
     {
         $table_prefix = $this->prefix();
 
-        if (!is_dir($tables_dir = $this->App->Config->§db['§tables_dir'])) {
+        if (!is_dir($tables_dir = $this->App->Config->§database['§tables_dir'])) {
             return; // Nothing to do; i.e., no tables.
         }
         $Tables = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
@@ -103,7 +103,7 @@ class Db extends Classes\SCore\Base\Core
     {
         $table_prefix = $this->prefix();
 
-        if (!is_dir($tables_dir = $this->App->Config->§db['§tables_dir'])) {
+        if (!is_dir($tables_dir = $this->App->Config->§database['§tables_dir'])) {
             return; // Nothing to do; i.e., no tables.
         }
         $Tables = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
