@@ -1,0 +1,81 @@
+/*
+ * Dependencies.
+ */
+@import './lists';
+@import './links';
+@import './fields';
+@import './dashicons';
+@import './jquery-chosen/fields';
+
+/*
+ * Meta box colors.
+ */
+$wp-admin-meta-box-hidden-div-border-color: #ececec;
+
+/*
+ * WP admin meta boxes.
+ */
+@mixin wp-admin-meta-boxes($scope: null) {
+  #{$scope}.postbox {
+    > .hndle .-label {
+      opacity:                0.5;
+      float:                  right;
+    }
+
+    > .inside {
+      @include wp-admin-links;
+
+      margin:                 0 !important;
+      padding:                1em !important;
+
+      @if $scope == '#slugdiv' {
+        @include wp-admin-field-standards('>');
+      } @else {
+        .-section {
+          @include wp-admin-list-enable('>');
+
+          > h3,
+          > h4,
+          > p,
+          > ol,
+          > ul {
+            margin:           1em 0;
+
+            &:first-child {
+              margin-top:     0;
+            }
+
+            &:last-child {
+              margin-bottom:  0;
+            }
+          }
+
+          > .-heading {
+            margin-bottom:    0;
+
+            + .-field {
+              margin-top:     0;
+            }
+          }
+
+          > .-field {
+            @include wp-admin-field-standards('>');
+            @include jquery-chosen-wp-admin-field-standards;
+
+            > textarea {
+              white-space:    pre;
+              overflow:       auto;
+            }
+          }
+
+          &.-hidden {
+            display:          none;
+            margin-top:       1em;
+            padding-top:      1em;
+            border-top:       1px solid $wp-admin-meta-box-hidden-div-border-color;
+          }
+        }
+      }
+    }
+  }
+}
