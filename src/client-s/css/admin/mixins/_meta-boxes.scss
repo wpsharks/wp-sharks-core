@@ -36,10 +36,10 @@ $wp-admin-meta-box-hidden-div-border-color: #ececec;
 
           > h3,
           > h4,
-          > label,
           > p,
           > ol,
-          > ul {
+          > ul,
+          > .-field {
             margin:           1em 0;
 
             &:first-child {
@@ -51,27 +51,19 @@ $wp-admin-meta-box-hidden-div-border-color: #ececec;
             }
           }
 
-          > label,
           > p {
             line-height:      1.5;
-            display:          block;
-          }
-
-          > label {
-            margin-bottom:    0;
-
-            + .-field {
-              margin-top:     0;
-            }
           }
 
           > .-field {
             @include wp-admin-field-standards('>');
             @include jquery-chosen-wp-admin-field-standards;
 
-            > textarea {
-              white-space:    pre;
-              overflow:       auto;
+            > label {
+              margin:         0;
+              padding:        0;
+              line-height:    1.5;
+              display:        block;
             }
           }
 

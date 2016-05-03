@@ -35,4 +35,10 @@
   #{$scope}select[multiple] {
     height:                   10em;
   }
+
+  #{$scope}textarea {
+    vertical-align:           top;
+
+    /* See: <http://stackoverflow.com/a/7144960/1219741> */
+  }
 }
