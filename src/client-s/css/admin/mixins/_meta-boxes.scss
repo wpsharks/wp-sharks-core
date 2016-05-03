@@ -36,6 +36,7 @@ $wp-admin-meta-box-hidden-div-border-color: #ececec;
 
           > h3,
           > h4,
+          > label,
           > p,
           > ol,
           > ul {
@@ -48,6 +49,12 @@ $wp-admin-meta-box-hidden-div-border-color: #ececec;
             &:last-child {
               margin-bottom:  0;
             }
+          }
+
+          > label,
+          > p {
+            line-height:      1.5;
+            display:          block;
           }
 
           > .-heading {
