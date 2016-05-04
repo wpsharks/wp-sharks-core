@@ -368,7 +368,7 @@ class App extends CoreClasses\App
             '§options'         => [],
 
             '§notices' => [
-                '§on_install' => function ($installion_history) {
+                '§on_install' => function (array $installion_history) {
                     return [
                         'is_transient' => true,
                         'markup'       => sprintf(
@@ -378,7 +378,7 @@ class App extends CoreClasses\App
                         ),
                     ];
                 },
-                '§on_reinstall' => function ($installion_history) {
+                '§on_reinstall' => function (array $installion_history) {
                     return [
                         'is_transient' => false,
                         'markup'       => sprintf(
