@@ -997,12 +997,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/wp-php-rv.git",
-                "reference": "fabaf899f2fca37e79b3732422e32f7335d2c1d6"
+                "reference": "238a77c1d0220202ba33fcf8aa500a03fe831158"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/fabaf899f2fca37e79b3732422e32f7335d2c1d6",
-                "reference": "fabaf899f2fca37e79b3732422e32f7335d2c1d6",
+                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/238a77c1d0220202ba33fcf8aa500a03fe831158",
+                "reference": "238a77c1d0220202ba33fcf8aa500a03fe831158",
                 "shasum": ""
             },
             "require": {
@@ -1037,7 +1037,7 @@
                 "websharks",
                 "wordpress"
             ],
-            "time": "2016-04-20 14:30:22"
+            "time": "2016-05-04 07:14:13"
         }
     ],
     "packages-dev": [],
