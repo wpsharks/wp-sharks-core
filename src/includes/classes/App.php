@@ -316,7 +316,7 @@ class App extends CoreClasses\App
 
                             A test function is optional.
                             A successful test must return `true`.
-                            A test must return an array with:
+                            A failed test must return an array with:
                                 - `reason`      = One of: `needs-upgrade|needs-downgrade`.
                                 - `min_version` = Min version, if `reason=needs-upgrade`.
                                 - `max_version` = Max version, if `reason=needs-downgrade`.
