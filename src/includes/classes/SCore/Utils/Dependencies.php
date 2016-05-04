@@ -32,7 +32,7 @@ class Dependencies extends Classes\SCore\Base\Core
      *
      * @since 16xxxx
      *
-     * @type array Slugs.
+     * @type array Data.
      */
     protected $plugins;
 
@@ -41,9 +41,18 @@ class Dependencies extends Classes\SCore\Base\Core
      *
      * @since 16xxxx
      *
-     * @type array Slugs.
+     * @type array Data.
      */
     protected $themes;
+
+    /**
+     * Outstanding (other).
+     *
+     * @since 16xxxx
+     *
+     * @type array Data.
+     */
+    protected $others;
 
     /**
      * Class constructor.
@@ -58,6 +67,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
         $this->plugins = [];
         $this->themes  = [];
+        $this->others  = [];
         $this->checked = false;
 
         $this->check(); // On instantiation.
@@ -72,7 +82,7 @@ class Dependencies extends Classes\SCore\Base\Core
      */
     public function outstanding(): bool
     {
-        return $this->plugins || $this->themes;
+        return $this->plugins || $this->themes || $this->others;
     }
 
     /**
@@ -88,7 +98,8 @@ class Dependencies extends Classes\SCore\Base\Core
         $this->checked = true;
 
         if (!$this->App->Config->§dependencies['§plugins']
-            && !$this->App->Config->§dependencies['§themes']) {
+            && !$this->App->Config->§dependencies['§themes']
+            && !$this->App->Config->§dependencies['§others']) {
             return; // Nothing to do here.
         }
         $all_active_plugin_slugs = $this->s::allActivePlugins();
@@ -96,6 +107,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
         $plugin_dependencies = $this->App->Config->§dependencies['§plugins'];
         $theme_dependencies  = $this->App->Config->§dependencies['§themes'];
+        $other_dependencies  = $this->App->Config->§dependencies['§others'];
 
         foreach (['plugin' => 'Plugin', 'theme' => 'Theme'] as $_type => $_ucf_type) {
             foreach (${$_type.'_dependencies'} as $_dependency_slug => $_dependency_args) {
@@ -114,6 +126,14 @@ class Dependencies extends Classes\SCore\Base\Core
             } // unset($_dependency_slug, $_dependency_args, $_test_result); // Housekeeping.
         } // unset($_type, $_ucf_type); // Housekeeping.
 
+        foreach ($other_dependencies as $_dependency_key => $_dependency_args) {
+            if (!empty($_dependency_args['test']) && is_callable($_dependency_args['test'])) {
+                if (($_test_result = $_dependency_args['test']($_dependency_key)) !== true) {
+                    $this->others[$_dependency_key] = ['args' => $_dependency_args, 'test_result' => $_test_result];
+                }
+            }
+        } // unset($_dependency_key, $_dependency_args, $_test_result); // Housekeeping.
+
         $this->maybeNotify(); // If dependencies are outstanding.
     }
 
@@ -130,14 +150,14 @@ class Dependencies extends Classes\SCore\Base\Core
             return; // No conflicts.
         }
         foreach (['plugin' => 'Plugin', 'theme' => 'Theme'] as $_type => $_ucf_type) {
-            // Check `inactive` and/or `missing` (same thing in this context).
+            // Check `inactive` and/or missing (same thing in this context).
             foreach ($this->{$_type.'s'}['inactive'] ?? [] as $_dependency_slug => $_dependency_data) {
                 if ($this->s::{$_type.'IsInstalled'}($_dependency_slug)) {
                     $this->maybeEnqueueActivationNotice(array_merge($_dependency_data['args'], [
                         'type' => $_type,
                         'slug' => $_dependency_slug,
                     ]));
-                } else { // It's not even installed.
+                } else { // The `inactive` reason is considered `missing` in this case.
                     $this->maybeEnqueueInstallationNotice(array_merge($_dependency_data['args'], [
                         'type' => $_type,
                         'slug' => $_dependency_slug,
@@ -148,32 +168,31 @@ class Dependencies extends Classes\SCore\Base\Core
 
             // Check `needs-upgrade`; i.e., current version is not adequate.
             foreach ($this->{$_type.'s'}['needs-upgrade'] ?? [] as $_dependency_slug => $_dependency_data) {
-                if (!empty($_dependency_data['test_result']['min_version'])) {
-                    $this->maybeEnqueueUpgradeNotice(array_merge($_dependency_data['args'], [
-                        'type'        => $_type,
-                        'slug'        => $_dependency_slug,
-                        'min_version' => $_dependency_data['test_result']['min_version'],
-                    ]));
-                } else { // The test did not produce the expected result data.
-                    throw new Exception(sprintf('Missing `min_version` from test against: `%1$s`.', $_dependency_slug));
-                }
+                $this->maybeEnqueueUpgradeNotice(array_merge($_dependency_data['args'], $_dependency_data['test_result'], [
+                    'type' => $_type,
+                    'slug' => $_dependency_slug,
+                ]));
                 return; // Deal with one dependency at a time.
             } // unset($_dependency_slug, $_dependency_data); // Housekeeping.
 
             // Check `needs-downgrade`; i.e., current version is not adequate.
             foreach ($this->{$_type.'s'}['needs-downgrade'] ?? [] as $_dependency_slug => $_dependency_data) {
-                if (!empty($_dependency_data['test_result']['max_version'])) {
-                    $this->maybeEnqueueDowngradeNotice(array_merge($_dependency_data['args'], [
-                        'type'        => $_type,
-                        'slug'        => $_dependency_slug,
-                        'max_version' => $_dependency_data['test_result']['max_version'],
-                    ]));
-                } else { // The test did not produce the expected result data.
-                    throw new Exception(sprintf('Missing `max_version` from test against: `%1$s`.', $_dependency_slug));
-                }
+                $this->maybeEnqueueDowngradeNotice(array_merge($_dependency_data['args'], $_dependency_data['test_result'], [
+                    'type' => $_type,
+                    'slug' => $_dependency_slug,
+                ]));
                 return; // Deal with one dependency at a time.
             } // unset($_dependency_slug, $_dependency_data); // Housekeeping.
         } // unset($_type, $_ucf_type); // Housekeeping.
+
+        // Check other dependencies also; trigger a more custom notice.
+        foreach ($this->others as $_dependency_key => $_dependency_data) {
+            $this->maybeEnqueueOtherNotice(array_merge($_dependency_data['args'], $_dependency_data['test_result'], [
+                'type' => 'other',
+                'key'  => $_dependency_key,
+            ]));
+            return; // Deal with one dependency at a time.
+        } // unset($_dependency_key, $_dependency_data); // Housekeeping.
     }
 
     /**
@@ -380,7 +399,7 @@ class Dependencies extends Classes\SCore\Base\Core
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
-            echo '<div class="notice notice-warning">'.$markup.'</div>';
+            echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
     }
 
@@ -450,7 +469,7 @@ class Dependencies extends Classes\SCore\Base\Core
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
-            echo '<div class="notice notice-warning">'.$markup.'</div>';
+            echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
     }
 
@@ -533,7 +552,7 @@ class Dependencies extends Classes\SCore\Base\Core
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
-            echo '<div class="notice notice-warning">'.$markup.'</div>';
+            echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
     }
 
@@ -618,9 +637,83 @@ class Dependencies extends Classes\SCore\Base\Core
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
-            echo '<div class="notice notice-warning">'.$markup.'</div>';
+            echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
     }
+
+    /**
+     * Maybe enqueue some other dependency notice.
+     *
+     * @since 16xxxx Plugin/theme dependencies.
+     *
+     * @param array $args Required dependency args.
+     *
+     * @note Intentionally choosing not to use built-in notice utilities here.
+     *  The notice utilities set option values, and if we have outstanding dependencies
+     *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
+     *
+     * @note Not only that, but the hooks needed to use notice utilities are not attached
+     * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
+     */
+    protected function maybeEnqueueOtherNotice(array $args)
+    {
+        if (!is_admin()) {
+            return; // Not applicable.
+        }
+        $default_args = [
+            'type'           => '',
+            'key'            => '',
+            'name'           => '',
+            'description'    => '',
+            'how_to_resolve' => '',
+            'cap_to_resolve' => '',
+        ];
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
+
+        $args['type']           = (string) $args['type'];
+        $args['key']            = (string) $args['key'];
+        $args['name']           = (string) $args['name'];
+        $args['description']    = (string) $args['description'];
+        $args['how_to_resolve'] = (string) $args['how_to_resolve'];
+        $args['cap_to_resolve'] = (string) $args['cap_to_resolve'];
+
+        foreach ($args as $_arg => $_value) {
+            if (is_string($_value) && !isset($_value[0])) {
+                throw new Exception(sprintf('Missing argument: `%1$s`.', $_arg));
+            }
+        } // unset($_arg, $_value); // Housekeeping.
+
+        $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
+        $markup     .= sprintf(__('\'%1$s\' Required', 'wp-sharks-core'), esc_html($args['name']));
+        $markup .= '</p>';
+        $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
+        $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It requires %2$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), $args['description']).'<br />';
+        $markup     .= $this->arrow.' '.sprintf(__('To resolve, %1$s.', 'wp-sharks-core'), $args['how_to_resolve']).'<br />';
+        $markup .= '</p>';
+
+        add_action('all_admin_notices', function () use ($args, $markup) {
+            global $pagenow; // Needed below.
+
+            if (!current_user_can($args['cap_to_resolve'])) {
+                return; // Do not show.
+            }
+            if (in_array($pagenow, ['plugins.php', 'themes.php', 'update.php'], true)
+                && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
+                return; // Not during a plugin install/activate/update action.
+            }
+            echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
+        });
+    }
+
+    /**
+     * Notice `<div>` tag styles.
+     *
+     * @since 16xxxx Plugin/theme dependencies.
+     *
+     * @type string Notice `<div>` tag styles.
+     */
+    protected $notice_div_tag_styles = 'min-height:7.25em;';
 
     /**
      * Heading `<p>` tag styles.
