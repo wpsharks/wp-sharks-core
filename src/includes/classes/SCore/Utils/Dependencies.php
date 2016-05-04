@@ -367,6 +367,8 @@ class Dependencies extends Classes\SCore\Base\Core
             }
         } // unset($_arg, $_value); // Housekeeping.
 
+        $icon = str_replace('dashicons-admin-tools', 'dashicons-admin-'.($args['type'] === 'theme' ? 'appearance' : 'plugins'), $this->icon);
+
         if ($args['in_wp']) { // It's in WordPress?
             if (!($dep_install_url = $this->installUrl($args['slug'], $args['type']))) {
                 throw new Exception(sprintf('Unable to generate install URL for: `%1$s`.', $args['slug']));
@@ -375,18 +377,18 @@ class Dependencies extends Classes\SCore\Base\Core
             $markup     .= sprintf(__('\'%1$s\' %2$s Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
             $markup .= '</p>';
             $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-            $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It depends on the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
+            $markup     .= $icon.sprintf(__('<strong>%1$s is not active.</strong> It depends on the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
             $markup     .= $this->arrow.' '.sprintf(__('A simple addition is necessary. <strong><a href="%1$s">Click here to install \'%2$s\'</a></strong>.', 'wp-sharks-core'), esc_url($dep_install_url), esc_html($args['name'])).'<br />';
-            $markup     .= sprintf(__('<em>To remove this message, install the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
+            $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, install the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
             $markup .= '</p>';
         } else {
             $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
             $markup     .= sprintf(__('\'%1$s\' %2$s Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
             $markup .= '</p>';
             $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-            $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It depends on the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
+            $markup     .= $icon.sprintf(__('<strong>%1$s is not active.</strong> It depends on the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
             $markup     .= $this->arrow.' '.sprintf(__('An addition is necessary. <strong><a href="%1$s" target="_blank">Click here to get \'%2$s\'</a></strong>.', 'wp-sharks-core'), esc_url($args['url']), esc_html($args['name'])).'<br />';
-            $markup     .= sprintf(__('<em>To remove this message, install the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
+            $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, install the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
@@ -450,13 +452,15 @@ class Dependencies extends Classes\SCore\Base\Core
         if (!($dep_activate_url = $this->activateUrl($args['slug'], $args['type']))) {
             throw new Exception(sprintf('Unable to generate activation URL for: `%1$s`.', $args['slug']));
         }
+        $icon = str_replace('dashicons-admin-tools', 'dashicons-admin-'.($args['type'] === 'theme' ? 'appearance' : 'plugins'), $this->icon);
+
         $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
         $markup     .= sprintf(__('\'%1$s\' %2$s Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
         $markup .= '</p>';
         $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-        $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It depends on the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
+        $markup     .= $icon.sprintf(__('<strong>%1$s is not active.</strong> It depends on the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
         $markup     .= $this->arrow.' '.sprintf(__('A simple activation is necessary. <strong><a href="%1$s">Click here to activate \'%2$s\'</a></strong>.', 'wp-sharks-core'), esc_url($dep_activate_url), esc_html($args['name'])).'<br />';
-        $markup     .= sprintf(__('<em>To remove this message, activate the dependency or deactivate %1$s until you do.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
+        $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, activate the dependency or deactivate %1$s until you do.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
         $markup .= '</p>';
 
         add_action('all_admin_notices', function () use ($args, $markup) {
@@ -518,6 +522,8 @@ class Dependencies extends Classes\SCore\Base\Core
             }
         } // unset($_arg, $_value); // Housekeeping.
 
+        $icon = str_replace('dashicons-admin-tools', 'dashicons-admin-'.($args['type'] === 'theme' ? 'appearance' : 'plugins'), $this->icon);
+
         if ($args['in_wp']) { // It's in WordPress?
             if (!($dep_cur_version = $this->s::{'installed'.$args['type'].'Data'}($args['slug'], 'version'))) {
                 throw new Exception(sprintf('Unable to acquire current version for: `%1$s`.', $args['slug']));
@@ -528,18 +534,20 @@ class Dependencies extends Classes\SCore\Base\Core
             $markup     .= sprintf(__('\'%1$s\' %2$s Upgrade Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
             $markup .= '</p>';
             $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-            $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It requires <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> v%4$s (or higher).', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['min_version'])).'<br />';
+            $markup     .= $icon.sprintf(__('<strong>%1$s is not active.</strong> It requires <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> v%4$s (or higher).', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['min_version'])).'<br />';
             $markup     .= sprintf(__('You\'re running an older copy (v%1$s) of the \'%2$s\' %3$s.', 'wp-sharks-core'), esc_html($dep_cur_version), esc_html($args['name']), esc_html($args['type'])).'<br />';
-            $markup     .= $this->arrow.' '.sprintf(__('A simple update is necessary. <strong><a href="%1$s">Click here to upgrade %2$s</a></strong>.', 'wp-sharks-core'), esc_url($dep_upgrade_url), esc_html($args['name']));
+            $markup     .= $this->arrow.' '.sprintf(__('A simple update is necessary. <strong><a href="%1$s">Click here to upgrade %2$s</a></strong>.', 'wp-sharks-core'), esc_url($dep_upgrade_url), esc_html($args['name'])).'<br />';
+            $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, update the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
             $markup .= '</p>';
         } else {
             $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
             $markup     .= sprintf(__('\'%1$s\' %2$s Upgrade Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
             $markup .= '</p>';
             $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-            $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It requires <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> v%4$s (or higher).', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['min_version'])).'<br />';
+            $markup     .= $icon.sprintf(__('<strong>%1$s is not active.</strong> It requires <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> v%4$s (or higher).', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['min_version'])).'<br />';
             $markup     .= sprintf(__('You\'re currently running an older copy of the \'%1$s\' %2$s.', 'wp-sharks-core'), esc_html($args['name']), esc_html($args['type'])).'<br />';
-            $markup     .= $this->arrow.' '.sprintf(__('An update is necessary. <strong><a href="%1$s" target="_blank">Get the latest version of %2$s</a></strong>.', 'wp-sharks-core'), esc_url($args['archive_url']), esc_html($args['name']));
+            $markup     .= $this->arrow.' '.sprintf(__('An update is necessary. <strong><a href="%1$s" target="_blank">Get the latest version of %2$s</a></strong>.', 'wp-sharks-core'), esc_url($args['archive_url']), esc_html($args['name'])).'<br />';
+            $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, update the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
@@ -601,6 +609,8 @@ class Dependencies extends Classes\SCore\Base\Core
             }
         } // unset($_arg, $_value); // Housekeeping.
 
+        $icon = str_replace('dashicons-admin-tools', 'dashicons-admin-'.($args['type'] === 'theme' ? 'appearance' : 'plugins'), $this->icon);
+
         if ($args['in_wp']) { // It's in WordPress?
             if (!($dep_cur_version = $this->s::{'installed'.$args['type'].'Data'}($args['slug'], 'version'))) {
                 throw new Exception(sprintf('Unable to acquire current version for: `%1$s`.', $args['slug']));
@@ -611,20 +621,20 @@ class Dependencies extends Classes\SCore\Base\Core
             $markup     .= sprintf(__('\'%1$s\' %2$s Downgrade Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
             $markup .= '</p>';
             $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-            $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It requires an older version of the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
-            $markup     .= sprintf(__('You\'re running a newer copy (v%1$s). That will not work for %2$s, unfortunately.', 'wp-sharks-core'), esc_html($dep_cur_version), esc_html($this->App->Config->©brand['©name'])).'<br />';
+            $markup     .= $icon.sprintf(__('<strong>%1$s is not active.</strong> It requires an older version of the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
+            $markup     .= sprintf(__('This software is compatible up to %1$s v%2$s, but you\'re running the newer v%3$s.', 'wp-sharks-core'), esc_html($args['name']), esc_html($args['max_version']), esc_html($dep_cur_version)).'<br />';
             $markup     .= $this->arrow.' '.sprintf(__('A manual downgrade is necessary. <strong><a href="%1$s" target="_blank">Click here to download the older v%2$s</a></strong>.', 'wp-sharks-core'), esc_url($dep_archive_url), esc_html($args['max_version'])).'<br />';
-            $markup     .= '<span style="display:inline-block; margin:0 0 0 1.75em;"></span>'.sprintf(__('%1$s is compatible up to %2$s v%3$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html($args['name']), esc_html($args['max_version']));
+            $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, downgrade the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
             $markup .= '</p>';
         } else {
             $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
             $markup     .= sprintf(__('\'%1$s\' %2$s Downgrade Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
             $markup .= '</p>';
             $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-            $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It requires an older version of the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
-            $markup     .= sprintf(__('You\'re running a newer copy that will not work with %1$s, unfortunately.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name'])).'<br />';
+            $markup     .= $icon.sprintf(__('<strong>%1$s is not active.</strong> It requires an older version of the <a href="%2$s" target="_blank" style="text-decoration:none;">%3$s</a> %4$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_url($args['url']), esc_html($args['name']), esc_html($args['type'])).'<br />';
+            $markup     .= sprintf(__('This software is compatible up to %1$s v%2$s, but you\'re running a newer version.', 'wp-sharks-core'), esc_html($args['name']), esc_html($args['max_version'])).'<br />';
             $markup     .= $this->arrow.' '.sprintf(__('A manual downgrade is necessary. <strong><a href="%1$s" target="_blank">Click here to get an older v%2$s</a></strong>.', 'wp-sharks-core'), esc_url($args['archive_url']), esc_html($args['max_version'])).'<br />';
-            $markup     .= '<span style="display:inline-block; margin:0 0 0 1.75em;"></span>'.sprintf(__('%1$s is compatible up to %2$s v%3$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html($args['name']), esc_html($args['max_version']));
+            $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, downgrade the dependency or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
@@ -688,8 +698,9 @@ class Dependencies extends Classes\SCore\Base\Core
         $markup     .= sprintf(__('\'%1$s\' Required', 'wp-sharks-core'), esc_html($args['name']));
         $markup .= '</p>';
         $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
-        $markup     .= $this->bubble.sprintf(__('<strong>%1$s is not active.</strong> It requires %2$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), $args['description']).'<br />';
+        $markup     .= $this->icon.sprintf(__('<strong>%1$s is not active.</strong> It requires %2$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), $args['description']).'<br />';
         $markup     .= $this->arrow.' '.sprintf(__('To resolve, %1$s.', 'wp-sharks-core'), $args['how_to_resolve']).'<br />';
+        $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, resolove the issue or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
         $markup .= '</p>';
 
         add_action('all_admin_notices', function () use ($args, $markup) {
@@ -749,5 +760,5 @@ class Dependencies extends Classes\SCore\Base\Core
      *
      * @type string Styled bubble icon.
      */
-    protected $bubble = '<span class="dashicons dashicons-admin-plugins" style="display:inline-block; width:64px; height:64px; font-size:64px; float:left; margin:-5px 10px 0 -2px;"></span>';
+    protected $icon = '<span class="dashicons dashicons-admin-tools" style="display:inline-block; width:64px; height:64px; font-size:64px; float:left; margin:-5px 10px 0 -2px;"></span>';
 }
