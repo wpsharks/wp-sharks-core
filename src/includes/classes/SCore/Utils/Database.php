@@ -69,11 +69,9 @@ class Database extends Classes\SCore\Base\Core
         if (!is_dir($tables_dir = $this->App->Config->§database['§tables_dir'])) {
             return; // Nothing to do; i.e., no tables.
         }
-        $Tables = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
-
-        foreach ($Tables as $_Table) {
-            if (!$_Table->isFile()) {
-                continue; // Bypass.
+        foreach ($this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui') as $_Table) {
+            if (!$_Table->isFile()) { // Not a file?
+                continue; // Bypass; files only.
             }
             $_sql_file = $_Table->getPathname();
 
@@ -82,12 +80,9 @@ class Database extends Classes\SCore\Base\Core
             $_sql_file_table = $table_prefix.$_sql_file_table;
 
             $_sql = $this->c::mbTrim(file_get_contents($_sql_file));
-            $_sql = str_replace('%%prefix%%', $table_prefix, $_sql);
-            $_sql = $this->fulltextCompat($_sql);
+            $_sql = str_replace('%%table%%', $_sql_file_table, $_sql);
+            $_sql = $this->charsetCompat($this->engineCompat($this->ifNotExists($_sql)));
 
-            if (!preg_match('/^CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\b/ui', $_sql)) {
-                $_sql = preg_replace('/^CREATE\s+TABLE\b/ui', 'CREATE TABLE IF NOT EXISTS', $_sql);
-            }
             if ($this->wp->query($_sql) === false) { // Table creation failure?
                 throw new Exception(sprintf('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
             }
@@ -106,11 +101,9 @@ class Database extends Classes\SCore\Base\Core
         if (!is_dir($tables_dir = $this->App->Config->§database['§tables_dir'])) {
             return; // Nothing to do; i.e., no tables.
         }
-        $Tables = $this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui');
-
-        foreach ($Tables as $_Table) {
-            if (!$_Table->isFile()) {
-                continue; // Bypass.
+        foreach ($this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui') as $_Table) {
+            if (!$_Table->isFile()) { // Not a file?
+                continue; // Bypass; files only.
             }
             $_sql_file = $_Table->getPathname();
 
@@ -125,35 +118,76 @@ class Database extends Classes\SCore\Base\Core
     }
 
     /**
-     * Fulltext index compat.
+     * MySQL `IF NOT EXISTS` check.
      *
      * @since 16xxxx First documented version.
      *
      * @param string $sql SQL to check.
      *
-     * @return string Output `$sql` w/ possible engine modification.
-     *                Only MySQL v5.6.4+ supports fulltext indexes with the InnoDB engine.
-     *                Otherwise, we use MyISAM for any table that includes a fulltext index.
-     *
-     * @note  MySQL v5.6.4+ supports fulltext indexes w/ InnoDB.
-     *    See: <http://bit.ly/ZVeF42>
+     * @return string Output `$sql` with `IF NOT EXISTS`.
      */
-    public function fulltextCompat(string $sql): string
+    public function ifNotExists(string $sql): string
     {
-        $sql = $this->c::mbTrim($sql); // For accurate regex matches.
+        $sql = $this->c::mbTrim($sql);
 
         if (!preg_match('/^CREATE\s+TABLE\b/ui', $sql)) {
             return $sql; // Not applicable.
         }
-        if (!preg_match('/\bFULLTEXT\s+KEY\b/ui', $sql)) {
-            return $sql; // No fulltext index.
+        if (!preg_match('/^CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\b/ui', $sql)) {
+            $sql = preg_replace('/^CREATE\s+TABLE\b/ui', 'CREATE TABLE IF NOT EXISTS', $sql);
         }
-        if (!preg_match('/\bENGINE\=InnoDB\b/ui', $sql)) {
-            return $sql; // Not using InnoDB anyway.
+        return $sql;
+    }
+
+    /**
+     * MySQL storage engine compat.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param string $sql SQL to check.
+     *
+     * @return string Output `$sql` with engine modification.
+     */
+    public function engineCompat(string $sql): string
+    {
+        $sql = $this->c::mbTrim($sql);
+
+        if (!preg_match('/^CREATE\s+TABLE\b/ui', $sql)) {
+            return $sql; // Not applicable.
         }
-        if (version_compare($this->wp->db_version(), '5.6.4', '>=')) {
-            return $sql; // v5.6.4+ supports fulltext in InnoDB.
+        $sql = preg_replace('/\bENGINE\=[%a-z0-9_\-]*/ui', '', $sql);
+
+        if (!preg_match('/\bFULLTEXT\s+KEY\b/ui', $sql) || version_compare($this->wp->db_version(), '5.6.4', '>=')) {
+            // MySQL v5.6.4+ supports fulltext indexes w/ InnoDB. See: <http://bit.ly/ZVeF42>
+            $sql = preg_replace('/;$/u', ' ENGINE=InnoDB;', $sql);
+        } else {
+            $sql = preg_replace('/;$/u', ' ENGINE=MyISAM;', $sql);
         }
-        return preg_replace('/\bENGINE\=InnoDB\b/ui', 'ENGINE=MyISAM', $sql);
+        return $sql;
+    }
+
+    /**
+     * MySQL charset/collate compat.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @param string $sql SQL to check.
+     *
+     * @return string Output `$sql` with charset/collate modification.
+     */
+    public function charsetCompat(string $sql): string
+    {
+        $sql = $this->c::mbTrim($sql);
+
+        if (!preg_match('/^CREATE\s+TABLE\b/ui', $sql)) {
+            return $sql; // Not applicable.
+        }
+        $sql = preg_replace('/\bDEFAULT\s+CHARSET\=[%a-z0-9_\-]*/ui', '', $sql);
+        $sql = preg_replace('/\bCOLLATE\=[%a-z0-9_\-]*/ui', '', $sql);
+
+        if (!empty($this->wp->charset) && !empty($this->wp->collate)) {
+            $sql = preg_replace('/;$/u', ' DEFAULT CHARSET='.$this->wp->charset.' COLLATE='.$this->wp->collate.';', $sql);
+        }
+        return $sql;
     }
 }

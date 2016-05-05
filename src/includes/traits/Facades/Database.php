@@ -48,8 +48,24 @@ trait Database
     /**
      * @since 16xxxx Initial release.
      */
-    public static function fulltextDbCompat(...$args)
+    public static function dbIfNotExists(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Database->fulltextCompat(...$args);
+        return $GLOBALS[static::class]->Utils->§Database->ifNotExists(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function dbEngineCompat(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Database->engineCompat(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function dbCharsetCompat(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Database->charsetCompat(...$args);
     }
 }
