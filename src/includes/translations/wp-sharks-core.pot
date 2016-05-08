@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160507\n"
+"Project-Id-Version: WP Sharks Core 160508\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-05-07 07:50:19+00:00\n"
+"POT-Creation-Date: 2016-05-08 12:19:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,12 +13,12 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: .~build/wp-sharks-core/src/includes/classes/App.php:375
-#: src/includes/classes/App.php:375
+#: src/includes/classes/App.php:376
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/App.php:385
-#: src/includes/classes/App.php:385
+#: src/includes/classes/App.php:386
 msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
 msgstr ""
 
@@ -226,223 +226,122 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:50
-#: src/includes/classes/SCore/Utils/StylesScripts.php:152
-msgid "Pages: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:51
-#: src/includes/classes/SCore/Utils/StylesScripts.php:146
-msgid "Next"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:52
-#: src/includes/classes/SCore/Utils/StylesScripts.php:147
-msgid "Prev"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:53
-#: src/includes/classes/SCore/Utils/StylesScripts.php:148
-msgid "First"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:54
-#: src/includes/classes/SCore/Utils/StylesScripts.php:149
-msgid "Last"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:55
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:56
-#: src/includes/classes/SCore/Utils/StylesScripts.php:150
-#: src/includes/classes/SCore/Utils/StylesScripts.php:151
-msgid "..."
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:59
-#: src/includes/classes/SCore/Utils/StylesScripts.php:157
-msgid "Are you sure?"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:61
-msgid "Invalid data entered!"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:62
-msgid "Please, wait..."
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:63
-msgid "Not found"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:74
-#: src/includes/classes/SCore/Utils/StylesScripts.php:176
-msgid "Switch to searching"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:75
-#: src/includes/classes/SCore/Utils/StylesScripts.php:175
-msgid "Switch to inserting"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:76
-#: src/includes/classes/SCore/Utils/StylesScripts.php:168
-msgid "Edit"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:77
-#: src/includes/classes/SCore/Utils/StylesScripts.php:169
-msgid "Delete"
-msgstr ""
-
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:34
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:78
-#: src/includes/classes/SCore/Utils/StylesScripts.php:170
-msgid "Search"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:79
-#: src/includes/classes/SCore/Utils/StylesScripts.php:174
-msgid "Clear filter"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:80
-#: src/includes/classes/SCore/Utils/StylesScripts.php:171
-msgid "Insert"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:81
-#: src/includes/classes/SCore/Utils/StylesScripts.php:172
-msgid "Update"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:82
-#: src/includes/classes/SCore/Utils/StylesScripts.php:173
-msgid "Cancel edit"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:131
-msgid "M jS, Y g:i a"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:132
-msgid "M jS, Y"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:133
-msgid "g:i a"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:135
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:209
-#: src/includes/classes/SCore/Utils/StylesScripts.php:38
-msgid "en"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:140
-msgid "January"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:141
-msgid "February"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:142
-msgid "March"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:143
-msgid "April"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:144
-msgid "May"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:145
-msgid "June"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:146
-msgid "July"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:147
-msgid "August"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:148
-msgid "September"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:149
-msgid "October"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:150
-msgid "November"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:151
-msgid "December"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:154
-msgid "Sun"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:155
-msgid "Mon"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:156
-msgid "Tue"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:157
-msgid "Wed"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:158
-msgid "Thu"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:159
-msgid "Fri"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:160
-msgid "Sat"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:184
-#: src/includes/classes/SCore/Utils/StylesScripts.php:108
-msgid "No results!"
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:185
-#: src/includes/classes/SCore/Utils/StylesScripts.php:109
-msgid "Search or click to select options..."
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:186
-#: src/includes/classes/SCore/Utils/StylesScripts.php:110
-msgid "Search or click to select an option..."
-msgstr ""
-
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:205
-#: src/includes/classes/SCore/Utils/StylesScripts.php:34
-#: src/includes/classes/SCore/Utils/StylesScripts.php:78
 msgid "MMM Do, YYYY h:mm a"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:206
-#: src/includes/classes/SCore/Utils/StylesScripts.php:35
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:35
 msgid "MMM Do, YYYY"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:207
-#: src/includes/classes/SCore/Utils/StylesScripts.php:36
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:36
 msgid "h:mm a"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:38
+msgid "en"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:74
+msgid "MMM YYYY"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:76
+msgid "DD"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:77
+msgid "hh:mm a"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:108
+msgid "No results!"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:109
+msgid "Search or click to select options..."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:110
+msgid "Search or click to select an option..."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:146
+msgid "Next"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:147
+msgid "Prev"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:148
+msgid "First"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:149
+msgid "Last"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:150
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:151
+msgid "..."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:152
+msgid "Pages: {first} {prev} {pages} {next} {last} &nbsp;&nbsp; {pageIndex} of {pageCount}"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:154
+msgid "Invalid data!"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:155
+msgid "loading..."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:156
+msgid "Nothing to display."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:157
+msgid "Are you sure?"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:168
+msgid "Edit"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:169
+msgid "Delete"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:170
+msgid "Search"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:171
+msgid "Insert"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:172
+msgid "Update"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:173
+msgid "Cancel edit"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:174
+msgid "Clear filter"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:175
+msgid "Switch to inserting"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:176
+msgid "Switch to searching"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:219
@@ -460,28 +359,392 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:74
-msgid "MMM YYYY"
+#: src/includes/classes/SCore/Utils/StylesScripts.php:34
+msgctxt "moment-libs"
+msgid "MMM Do, YYYY h:mm a"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:35
+msgctxt "moment-libs"
+msgid "MMM Do, YYYY"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:36
+msgctxt "moment-libs"
+msgid "h:mm a"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:38
+msgctxt "moment-libs"
+msgid "en"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:41
+msgctxt "moment-libs"
+msgid "UTC"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:75
+msgctxt "jquery-pickadate-libs"
+msgid "mmm dd, yyyy"
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/StylesScripts.php:76
-msgid "DD"
+msgctxt "jquery-pickadate-libs"
+msgid "MMM DD, YYYY"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:77
-msgid "hh:mm a"
+#: src/includes/classes/SCore/Utils/StylesScripts.php:78
+msgctxt "jquery-pickadate-libs"
+msgid "yyyy-mm-dd"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:154
-msgid "Invalid data!"
+#: src/includes/classes/SCore/Utils/StylesScripts.php:81
+msgctxt "jquery-pickadate-libs"
+msgid "Today"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:155
+#: src/includes/classes/SCore/Utils/StylesScripts.php:82
+#: src/includes/classes/SCore/Utils/StylesScripts.php:147
+msgctxt "jquery-pickadate-libs"
+msgid "Clear"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:83
+msgctxt "jquery-pickadate-libs"
+msgid "Close"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:85
+msgctxt "jquery-pickadate-libs"
+msgid "Next Month"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:86
+msgctxt "jquery-pickadate-libs"
+msgid "Previous Month"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:87
+msgctxt "jquery-pickadate-libs"
+msgid "Select Month"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:88
+msgctxt "jquery-pickadate-libs"
+msgid "Select Year"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:91
+msgctxt "jquery-pickadate-libs"
+msgid "Sun"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:92
+msgctxt "jquery-pickadate-libs"
+msgid "Mon"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:93
+msgctxt "jquery-pickadate-libs"
+msgid "Tue"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:94
+msgctxt "jquery-pickadate-libs"
+msgid "Wed"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:95
+msgctxt "jquery-pickadate-libs"
+msgid "Thu"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:96
+msgctxt "jquery-pickadate-libs"
+msgid "Fri"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:97
+msgctxt "jquery-pickadate-libs"
+msgid "Sat"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:100
+msgctxt "jquery-pickadate-libs"
+msgid "Sunday"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:101
+msgctxt "jquery-pickadate-libs"
+msgid "Monday"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:102
+msgctxt "jquery-pickadate-libs"
+msgid "Tuesday"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:103
+msgctxt "jquery-pickadate-libs"
+msgid "Wednesday"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:104
+msgctxt "jquery-pickadate-libs"
+msgid "Thursday"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:105
+msgctxt "jquery-pickadate-libs"
+msgid "Friday"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:106
+msgctxt "jquery-pickadate-libs"
+msgid "Saturday"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:109
+msgctxt "jquery-pickadate-libs"
+msgid "Jan"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:110
+msgctxt "jquery-pickadate-libs"
+msgid "Feb"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:111
+msgctxt "jquery-pickadate-libs"
+msgid "Mar"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:112
+msgctxt "jquery-pickadate-libs"
+msgid "Apr"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:113
+#: src/includes/classes/SCore/Utils/StylesScripts.php:127
+msgctxt "jquery-pickadate-libs"
+msgid "May"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:114
+msgctxt "jquery-pickadate-libs"
+msgid "Jun"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:115
+msgctxt "jquery-pickadate-libs"
+msgid "Jul"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:116
+msgctxt "jquery-pickadate-libs"
+msgid "Aug"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:117
+msgctxt "jquery-pickadate-libs"
+msgid "Sep"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:118
+msgctxt "jquery-pickadate-libs"
+msgid "Oct"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:119
+msgctxt "jquery-pickadate-libs"
+msgid "Nov"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:120
+msgctxt "jquery-pickadate-libs"
+msgid "Dec"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:123
+msgctxt "jquery-pickadate-libs"
+msgid "January"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:124
+msgctxt "jquery-pickadate-libs"
+msgid "February"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:125
+msgctxt "jquery-pickadate-libs"
+msgid "March"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:126
+msgctxt "jquery-pickadate-libs"
+msgid "April"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:128
+msgctxt "jquery-pickadate-libs"
+msgid "June"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:129
+msgctxt "jquery-pickadate-libs"
+msgid "July"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:130
+msgctxt "jquery-pickadate-libs"
+msgid "August"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:131
+msgctxt "jquery-pickadate-libs"
+msgid "September"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:132
+msgctxt "jquery-pickadate-libs"
+msgid "October"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:133
+msgctxt "jquery-pickadate-libs"
+msgid "November"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:134
+msgctxt "jquery-pickadate-libs"
+msgid "December"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:141
+msgctxt "jquery-pickadate-libs"
+msgid "h:i A"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:142
+msgctxt "jquery-pickadate-libs"
+msgid "h:mm A"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:144
+msgctxt "jquery-pickadate-libs"
+msgid "HH:i"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:170
+msgctxt "jquery-chosen-libs"
+msgid "No results."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:171
+msgctxt "jquery-chosen-libs"
+msgid "Search or click to select options..."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:172
+msgctxt "jquery-chosen-libs"
+msgid "Search or click to select an option..."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:209
+msgctxt "jquery-jsgrid-libs"
+msgid "««"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:210
+msgctxt "jquery-jsgrid-libs"
+msgid "«"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:211
+msgctxt "jquery-jsgrid-libs"
+msgid "»"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:212
+msgctxt "jquery-jsgrid-libs"
+msgid "»»"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:213
+#: src/includes/classes/SCore/Utils/StylesScripts.php:214
+msgctxt "jquery-jsgrid-libs"
+msgid "…"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:215
+msgctxt "jquery-jsgrid-libs"
+msgid "Pages:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:218
+msgctxt "jquery-jsgrid-libs"
+msgid "A slight problem..."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:219
+msgctxt "jquery-jsgrid-libs"
 msgid "loading..."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:156
+#: src/includes/classes/SCore/Utils/StylesScripts.php:220
+msgctxt "jquery-jsgrid-libs"
 msgid "Nothing to display."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:221
+msgctxt "jquery-jsgrid-libs"
+msgid "Are you sure?"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:232
+msgctxt "jquery-jsgrid-libs"
+msgid "Edit"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:233
+msgctxt "jquery-jsgrid-libs"
+msgid "Delete"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:234
+msgctxt "jquery-jsgrid-libs"
+msgid "Search"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:235
+msgctxt "jquery-jsgrid-libs"
+msgid "Insert"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:236
+msgctxt "jquery-jsgrid-libs"
+msgid "Update"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:237
+msgctxt "jquery-jsgrid-libs"
+msgid "Cancel edit"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:238
+msgctxt "jquery-jsgrid-libs"
+msgid "Clear filter"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:239
+msgctxt "jquery-jsgrid-libs"
+msgid "Switch to inserting"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/StylesScripts.php:240
+msgctxt "jquery-jsgrid-libs"
+msgid "Switch to searching"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

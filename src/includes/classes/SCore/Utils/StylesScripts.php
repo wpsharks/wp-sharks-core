@@ -37,7 +37,8 @@ class StylesScripts extends Classes\SCore\Base\Core
 
                 'locale' => _x('en', 'moment-libs', 'wp-sharks-core'), // Override to translate.
                 'i18n'   => [ // Or, you can change the `en` language here.
-                    'en' => []// See: <http://momentjs.com/docs/#/i18n/>
+                    'en'  => [], // See: <http://momentjs.com/docs/#/i18n/>
+                    'utc' => _x('UTC', 'moment-libs', 'wp-sharks-core'),
                 ],
             ]
         );
@@ -134,7 +135,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                     ],
                 ],
                 'defaultTimeOptions' => [
-                    'interval'      => 60,
+                    'interval'      => 15,
                     'closeOnSelect' => true, 'closeOnClear' => true,
 
                     'format'       => _x('h:i A', 'jquery-pickadate-libs', 'wp-sharks-core'),
@@ -188,7 +189,7 @@ class StylesScripts extends Classes\SCore\Base\Core
         wp_enqueue_style('jquery-jsgrid-theme', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid-theme.min.css', ['jquery-jsgrid'], null, 'all');
 
         wp_enqueue_script('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.js', ['jquery'], null, true);
-        wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate'], null, true);
+        wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate'], null, true);
 
         wp_localize_script(
             'jquery-jsgrid', // See: <http://js-grid.com/docs/>
@@ -214,7 +215,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                     'pagerFormat'           => _x('Pages:', 'jquery-jsgrid-libs', 'wp-sharks-core').
                         ' {first} {prev} {pages} {next} {last}',
 
-                    'invalidMessage' => _x('Invalid data!', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                    'invalidMessage' => _x('A slight problem...', 'jquery-jsgrid-libs', 'wp-sharks-core'),
                     'loadMessage'    => _x('loading...', 'jquery-jsgrid-libs', 'wp-sharks-core'),
                     'noDataContent'  => _x('Nothing to display.', 'jquery-jsgrid-libs', 'wp-sharks-core'),
                     'deleteConfirm'  => _x('Are you sure?', 'jquery-jsgrid-libs', 'wp-sharks-core'), 'confirmDeleting' => false,
