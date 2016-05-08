@@ -392,12 +392,10 @@ class Dependencies extends Classes\SCore\Base\Core
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
-            global $pagenow; // Needed below.
-
             if (!current_user_can('install_'.$args['type'].'s')) {
                 return; // Do not show.
             }
-            if (in_array($pagenow, ['plugins.php', 'themes.php', 'update.php'], true)
+            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
@@ -464,12 +462,10 @@ class Dependencies extends Classes\SCore\Base\Core
         $markup .= '</p>';
 
         add_action('all_admin_notices', function () use ($args, $markup) {
-            global $pagenow; // Needed below.
-
             if (!current_user_can(($args['type'] === 'theme' ? 'switch' : 'activate').'_'.$args['type'].'s')) {
                 return; // Do not show.
             }
-            if (in_array($pagenow, ['plugins.php', 'themes.php', 'update.php'], true)
+            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
@@ -551,12 +547,10 @@ class Dependencies extends Classes\SCore\Base\Core
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
-            global $pagenow; // Needed below.
-
             if (!current_user_can('update_'.$args['type'].'s')) {
                 return; // Do not show.
             }
-            if (in_array($pagenow, ['plugins.php', 'themes.php', 'update.php'], true)
+            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
@@ -638,12 +632,10 @@ class Dependencies extends Classes\SCore\Base\Core
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
-            global $pagenow; // Needed below.
-
             if (!current_user_can('update_'.$args['type'].'s')) {
                 return; // Do not show.
             }
-            if (in_array($pagenow, ['plugins.php', 'themes.php', 'update.php'], true)
+            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }
@@ -704,12 +696,10 @@ class Dependencies extends Classes\SCore\Base\Core
         $markup .= '</p>';
 
         add_action('all_admin_notices', function () use ($args, $markup) {
-            global $pagenow; // Needed below.
-
             if (!current_user_can($args['cap_to_resolve'])) {
                 return; // Do not show.
             }
-            if (in_array($pagenow, ['plugins.php', 'themes.php', 'update.php'], true)
+            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
                 && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
                 return; // Not during a plugin install/activate/update action.
             }

@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160505'; //v//
+    const VERSION = '160507'; //v//
 
     /**
      * Constructor.
@@ -170,10 +170,11 @@ class App extends CoreClasses\App
             }
         }
         # Collect essential WordPress config values.
-        // NOTE: These are not 100% compatible with `switch_to_blog()`.
-        // These represent values for the initial/current site.
 
         $wp_is_multisite = is_multisite();
+
+        // NOTE: These are not compatible with `switch_to_blog()`.
+        // These represent values for the initial/current site.
 
         if (!($wp_tmp_dir = rtrim(get_temp_dir(), '/'))) {
             throw new Exception('Failed to acquire a temp directory.');

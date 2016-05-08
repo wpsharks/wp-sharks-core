@@ -16,8 +16,32 @@ trait StylesScripts
     /**
      * @since 16xxxx Initial release.
      */
-    public static function enqueueJQueryChosen(...$args)
+    public static function enqueueMomentLibs(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryChosen(...$args);
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueMomentLibs(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function enqueueJQueryPickadateLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryPickadateLibs(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function enqueueJQueryChosenLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryChosenLibs(...$args);
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function enqueueJQueryJsGridLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryJsGridLibs(...$args);
     }
 }
