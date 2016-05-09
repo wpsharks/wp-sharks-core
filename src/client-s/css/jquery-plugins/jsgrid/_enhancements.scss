@@ -14,6 +14,10 @@
 
       > tbody {
         > tr {
+          &.ui-state-highlight {
+            border:           0 !important;
+          }
+
           &.ui-sortable-helper {
             display:          table !important;
           }
