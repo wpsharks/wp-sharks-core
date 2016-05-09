@@ -8,7 +8,22 @@
     overflow-y:               auto;
   }
 
+  #{$scope}.jsgrid-grid-body {
+    > table {
+      table-layout:           auto;
+
+      > tbody {
+        > tr {
+          &.ui-sortable-helper {
+            display:          table !important;
+          }
+        }
+      }
+    }
+  }
+
   #{$scope}.jsgrid-insert-mode-button {
+    outline:                  0;
     background:               url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAUVBMVEUAAAB4j52HtUomnwA5pgA8pQA4qQA5qAA8pgA6pwA6pgA7qQB5kKA9pAB9kZ46pwA+pwB5kp02pQA8pACFtkY9pgB4j5crnAB6lJ+IuEo9qADIWlEqAAAAGHRSTlMAgIAG/oCznJWRZ/D78sChnozx/cB+QBLaqSFnAAAAnklEQVQoz33R3Q6DIAyG4Y8fFcQ/nDrm/V/oIqw0potvOCnPSZOiZvy6OgOZt0v3cpCFBehWnmPKKZwN0JxQZY4YJnV1EBx5nBKSQo6gpAiMGwuMzlSglXZgp8UqhBl459eNAq4EeNsj11t3A9MW6W1rGFjyPwPJPNM/QREfgjcQwDFo0Q8+IgKNW7rCpm9tFURPW9EFObpgHNKfhvgFX1YPnh2SbOYAAAAASUVORK5CYII=') no-repeat left top;
 
     &.jsgrid-mode-on-button {

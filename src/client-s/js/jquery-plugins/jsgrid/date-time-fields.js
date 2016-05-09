@@ -6,6 +6,9 @@
     moment.updateLocale(momentData.locale, momentData.i18n[momentData.locale]);
   } // This updates a global locale if the key exists.
 
+  var pickers = {}; // Pickers by node ID (across all instances).
+  var killingStalePickers = false; // Global kill status.
+
   jsGridDateTimeFields = function (config) {
     jsGrid.Field.call(this, config);
   };
@@ -70,6 +73,24 @@
       return this['_' + subType + 'PickerOptions'];
     },
 
+    _maybeKillStalePickers: function () {
+      if (killingStalePickers) {
+        return; // Already running.
+      }
+      killingStalePickers = true; // Killing.
+
+      for (var _id in pickers) {
+        if (!$.contains(this._grid._container[0], pickers[_id].$node[0])) {
+          console.log('Killing stale picker: ' + _id);
+          pickers[_id].stop(); // Kill (stop) the picker.
+          delete pickers[_id]; // Remove from list.
+        }
+      } // delete _id; // Housekeeping.
+      killingStalePickers = false; // Done kiling now.
+
+      console.log(pickers);
+    },
+
     _actionTimestamp: function (action, subType) {
       if (subType === 'date-time') {
         var date = $.trim(this['_$date' + this._ucf(action) + 'Input'].val());
@@ -103,26 +124,20 @@
         return this.itemTemplate(timestamp);
       }
       if (subType === 'date-time') {
-        if (this['_$date' + this._ucf(action) + 'Input']) {
-          this['_$date' + this._ucf(action) + 'Input'][this._pickerFunctionName('date')]('stop');
-        }
-        if (this['_$time' + this._ucf(action) + 'Input']) {
-          this['_$time' + this._ucf(action) + 'Input'][this._pickerFunctionName('time')]('stop');
-        }
-        this['_$date' + this._ucf(action) + 'Input'] = $('<input placeholder="' + _.escape(this.datePlaceholderText) + '" value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'date') : '') + '" />');
-        this['_$time' + this._ucf(action) + 'Input'] = $('<input placeholder="' + _.escape(this.timePlaceholderText) + '" value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'time') : '') + '" />');
+        this['_$date' + this._ucf(action) + 'Input'] = // Build input.
+          $('<input placeholder="' + _.escape(this.datePlaceholderText) + '"' +
+            ' value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'date') : '') + '" />');
 
-        setTimeout(function () { // Requires DOM insertion.
-          this['_$date' + this._ucf(action) + 'Input'][this._pickerFunctionName('date')](this._pickerOptions('date'));
-          this['_$time' + this._ucf(action) + 'Input'][this._pickerFunctionName('time')](this._pickerOptions('time'));
-        }.bind(this), 100); // Short delay between now and when the appendage occurs in jsGrid upstream.
+        this['_$time' + this._ucf(action) + 'Input'] = // Build input.
+          $('<input placeholder="' + _.escape(this.timePlaceholderText) + '"' +
+            ' value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'time') : '') + '" />');
 
         var $table = $( // Both fields at the same time.
           '<table style="box-sizing:border-box; width:100%; border:0; padding:0; margin:0;">' +
           ' <tbody>' +
           '   <tr style="border:0; padding:0; margin:0;">' +
-          '     <td class="-date" style="box-sizing:border-box; width:70%; border:0; padding:0; margin:0;"></td>' +
-          '     <td class="-time" style="box-sizing:border-box; width:30%; border:0; padding:0; margin:0;"></td>' +
+          '     <td class="-date" style="box-sizing:border-box; width:65%; border:0; padding:0; margin:0;"></td>' +
+          '     <td class="-time" style="box-sizing:border-box; width:35%; border:0; padding:0; margin:0;"></td>' +
           '   </tr>' +
           ' </tbody>' +
           '</table>'
@@ -130,17 +145,33 @@
         $table.find('.-date').append(this['_$date' + this._ucf(action) + 'Input']);
         $table.find('.-time').append(this['_$time' + this._ucf(action) + 'Input']);
 
+        this._maybeKillStalePickers(); // Kill stale pickers before adding new ones.
+
+        setTimeout(function () { // Requires DOM insertion.
+          this['_$date' + this._ucf(action) + 'Input'][this._pickerFunctionName('date')](this._pickerOptions('date'));
+          var p1 = this['_$date' + this._ucf(action) + 'Input'][this._pickerFunctionName('date')]('picker');
+
+          this['_$time' + this._ucf(action) + 'Input'][this._pickerFunctionName('time')](this._pickerOptions('time'));
+          var p2 = this['_$time' + this._ucf(action) + 'Input'][this._pickerFunctionName('time')]('picker');
+
+          pickers[p1.$node[0].id] = p1; // Adds a new picker by it's `$node` ID.
+          pickers[p2.$node[0].id] = p2; // Adds a new picker by it's `$node` ID.
+        }.bind(this), 100); // Wait for appendage in jsGrid upstream.
+
         return $table; // Both fields together in a table.
         //
       } else { // Only a single field in this case.
-        if (this['_$' + subType + this._ucf(action) + 'Input']) {
-          this['_$' + subType + this._ucf(action) + 'Input'][this._pickerFunctionName(subType)]('stop');
-        }
-        this['_$' + subType + this._ucf(action) + 'Input'] = $('<input placeholder="' + _.escape(this[subType + 'PlaceholderText']) + '" value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, subType) : '') + '" />');
+        this['_$' + subType + this._ucf(action) + 'Input'] = // Build input.
+          $('<input placeholder="' + _.escape(this[subType + 'PlaceholderText']) + '"' +
+            ' value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, subType) : '') + '" />');
+
+        this._maybeKillStalePickers(); // Kill stale pickers before adding new ones.
 
         setTimeout(function () { // Requires DOM insertion.
           this['_$' + subType + this._ucf(action) + 'Input'][this._pickerFunctionName(subType)](this._pickerOptions(subType));
-        }.bind(this), 50); // Short delay between now and when the appendage occurs in jsGrid upstream.
+          var p = this['_$' + subType + this._ucf(action) + 'Input'][this._pickerFunctionName(subType)]('picker');
+          pickers[p.$node[0].id] = p; // Adds a new picker by it's `$node` ID.
+        }.bind(this), 100); // Wait for appendage in jsGrid upstream.
 
         return this['_$' + subType + this._ucf(action) + 'Input'];
       }
@@ -193,5 +224,6 @@
       return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
   });
+
   jsGrid.fields.dateTime = jsGridDateTimeFields;
 })(jQuery);
