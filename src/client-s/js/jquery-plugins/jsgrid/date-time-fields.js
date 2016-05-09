@@ -109,8 +109,8 @@
         if (this['_$time' + this._ucf(action) + 'Input']) {
           this['_$time' + this._ucf(action) + 'Input'][this._pickerFunctionName('time')]('stop');
         }
-        this['_$date' + this._ucf(action) + 'Input'] = $('<input placeholder="' + this.datePlaceholderText + '" value="' + (action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'date') : '') + '" />');
-        this['_$time' + this._ucf(action) + 'Input'] = $('<input placeholder="' + this.timePlaceholderText + '" value="' + (action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'time') : '') + '" />');
+        this['_$date' + this._ucf(action) + 'Input'] = $('<input placeholder="' + _.escape(this.datePlaceholderText) + '" value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'date') : '') + '" />');
+        this['_$time' + this._ucf(action) + 'Input'] = $('<input placeholder="' + _.escape(this.timePlaceholderText) + '" value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, 'time') : '') + '" />');
 
         setTimeout(function () { // Requires DOM insertion.
           this['_$date' + this._ucf(action) + 'Input'][this._pickerFunctionName('date')](this._pickerOptions('date'));
@@ -136,7 +136,7 @@
         if (this['_$' + subType + this._ucf(action) + 'Input']) {
           this['_$' + subType + this._ucf(action) + 'Input'][this._pickerFunctionName(subType)]('stop');
         }
-        this['_$' + subType + this._ucf(action) + 'Input'] = $('<input placeholder="' + this[subType + 'PlaceholderText'] + '" value="' + (action === 'edit' && timestamp ? this._timestampFormat(timestamp, subType) : '') + '" />');
+        this['_$' + subType + this._ucf(action) + 'Input'] = $('<input placeholder="' + _.escape(this[subType + 'PlaceholderText']) + '" value="' + _.escape(action === 'edit' && timestamp ? this._timestampFormat(timestamp, subType) : '') + '" />');
 
         setTimeout(function () { // Requires DOM insertion.
           this['_$' + subType + this._ucf(action) + 'Input'][this._pickerFunctionName(subType)](this._pickerOptions(subType));
@@ -147,30 +147,35 @@
     },
 
     _timestampFormat: function (timestamp, subType, forDisplay) {
+      var formatted = ''; // Initialize.
+
       if (!(timestamp = parseInt(timestamp))) {
         if (forDisplay && subType === 'date-time') {
-          return this.emptyDateTimeItemText;
+          formatted = this.emptyDateTimeItemText;
         } else if (forDisplay) {
-          return this['empty' + this._ucf(subType) + 'ItemText'];
+          formatted = this['empty' + this._ucf(subType) + 'ItemText'];
+        } else {
+          formatted = ''; // Nothing to do here.
         }
-        return ''; // Default behavior on empty timestamp.
-      }
-      if (subType === 'date-time') { // Both the date & the time.
-        return moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('date').momentFormat + ' ' + this._pickerOptions('time').momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
+      } else if (subType === 'date-time') { // Both the date & the time.
+        formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('date').momentFormat + ' ' + this._pickerOptions('time').momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
       } else {
-        return moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions(subType).momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
+        formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions(subType).momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
       }
+      return forDisplay ? _.escape(formatted) : formatted;
     },
 
     _formatToTimestamp: function (formatted, subType) {
+      var timestamp = 0; // Initialize.
+
       if (!(formatted = $.trim(formatted)) || formatted === '0') {
-        return 0; // Nothing to do here.
-      }
-      if (subType === 'date-time') {
-        return parseInt(moment.utc(formatted, this._pickerOptions('date').momentFormat + ' ' + this._pickerOptions('time').momentFormat, momentData.locale).format('X'));
+        timestamp = 0; // Nothing to do here.
+      } else if (subType === 'date-time') { // Both the date & the time.
+        timestamp = parseInt(moment.utc(formatted, this._pickerOptions('date').momentFormat + ' ' + this._pickerOptions('time').momentFormat, momentData.locale).format('X'));
       } else {
-        return parseInt(moment.utc(formatted, this._pickerOptions(subType).momentFormat, momentData.locale).format('X'));
+        timestamp = parseInt(moment.utc(formatted, this._pickerOptions(subType).momentFormat, momentData.locale).format('X'));
       }
+      return timestamp;
     },
 
     _currentInputTableRow: function () {

@@ -182,15 +182,14 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueJQueryJsGridLibs()
     {
-        $this->enqueueMomentLibs(); // The `date|time-field`s depend on this.
-        $this->enqueueJQueryPickadateLibs(); // The `date|time-field`s depend on this.
-        wp_enqueue_script('jquery-ui-sortable'); // Required for sortable rows.
+        $this->enqueueMomentLibs(); // The `date-time-fields` depend on this lib.
+        $this->enqueueJQueryPickadateLibs(); // The `date-time-fields` depend on this.
 
         wp_enqueue_style('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.css', [], null, 'all');
         wp_enqueue_style('jquery-jsgrid-theme', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid-theme.min.css', ['jquery-jsgrid'], null, 'all');
 
-        wp_enqueue_script('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.js', ['jquery', 'jquery-ui-sortable'], null, true);
-        wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate'], null, true);
+        wp_enqueue_script('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.js', ['jquery'], null, true);
+        wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate', 'underscore'], null, true);
 
         wp_localize_script(
             'jquery-jsgrid', // See: <http://js-grid.com/docs/>
