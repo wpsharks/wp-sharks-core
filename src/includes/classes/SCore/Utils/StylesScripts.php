@@ -184,11 +184,12 @@ class StylesScripts extends Classes\SCore\Base\Core
     {
         $this->enqueueMomentLibs(); // The `date|time-field`s depend on this.
         $this->enqueueJQueryPickadateLibs(); // The `date|time-field`s depend on this.
+        wp_enqueue_script('jquery-ui-sortable'); // Required for sortable rows.
 
         wp_enqueue_style('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.css', [], null, 'all');
         wp_enqueue_style('jquery-jsgrid-theme', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid-theme.min.css', ['jquery-jsgrid'], null, 'all');
 
-        wp_enqueue_script('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.js', ['jquery'], null, true);
+        wp_enqueue_script('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.js', ['jquery', 'jquery-ui-sortable'], null, true);
         wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate'], null, true);
 
         wp_localize_script(
@@ -221,6 +222,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                     'deleteConfirm'  => _x('Are you sure?', 'jquery-jsgrid-libs', 'wp-sharks-core'), 'confirmDeleting' => false,
                 ],
                 'controlDefaultOptions' => [
+                    'width' => '10%',
                     'type'  => 'control',
                     'align' => 'center',
 

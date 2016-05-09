@@ -37,20 +37,22 @@
     editValue: function () {
       return this._actionTimestamp('edit', this.subType);
     },
+    editTemplate: function (value, item) {
+      return this._actionTemplate('edit', this.subType, value);
+    },
+
     insertValue: function () {
       return this._actionTimestamp('insert', this.subType);
     },
     insertTemplate: function () {
       return this._actionTemplate('insert', this.subType);
     },
-    editTemplate: function (timestamp) {
-      return this._actionTemplate('edit', this.subType, timestamp);
+
+    itemTemplate: function (value, item) {
+      return this._timestampFormat(value, this.subType, true);
     },
-    itemTemplate: function (timestamp) {
-      return this._timestampFormat(timestamp, this.subType, true);
-    },
-    sorter: function (timestamp1, timestamp2) {
-      return timestamp1 - timestamp2;
+    sorter: function (value1, value2) {
+      return value1 - value2; // Timestamp comparison.
     },
 
     _pickerFunctionName: function (subType) {
@@ -61,6 +63,9 @@
       if (!this['_' + subType + 'PickerOptions']) {
         this['_' + subType + 'PickerOptions'] = $.extend({}, pickadateData['default' + this._ucf(subType) + 'Options'], this[subType + 'PickerOptions']);
         this['_' + subType + 'PickerOptions'].container = this._grid._container.parent();
+        this['_' + subType + 'PickerOptions'].onClose = function () {
+          $(document.activeElement).blur();
+        };
       }
       return this['_' + subType + 'PickerOptions'];
     },
@@ -69,7 +74,9 @@
       if (subType === 'date-time') {
         var date = $.trim(this['_$date' + this._ucf(action) + 'Input'].val());
         var time = $.trim(this['_$time' + this._ucf(action) + 'Input'].val());
-        date = date === '0' ? '' : date, time = time === '0' ? '' : time;
+
+        date = date === '0' ? '' : date; // Special case (not empty w/ `0`).
+        time = time === '0' ? '' : time; // Special case (not empty w/ `0`).
 
         if (date && !time && this.noTimeEquals === 'startOfDay') {
           time = moment.utc().startOf('day').format(this._pickerOptions('time').momentFormat);
@@ -118,7 +125,8 @@
           '     <td class="-time" style="box-sizing:border-box; width:30%; border:0; padding:0; margin:0;"></td>' +
           '   </tr>' +
           ' </tbody>' +
-          '</table>');
+          '</table>'
+        ); // Now pop the date and time fields into place via `$.append()`.
         $table.find('.-date').append(this['_$date' + this._ucf(action) + 'Input']);
         $table.find('.-time').append(this['_$time' + this._ucf(action) + 'Input']);
 
@@ -162,6 +170,17 @@
         return parseInt(moment.utc(formatted, this._pickerOptions('date').momentFormat + ' ' + this._pickerOptions('time').momentFormat, momentData.locale).format('X'));
       } else {
         return parseInt(moment.utc(formatted, this._pickerOptions(subType).momentFormat, momentData.locale).format('X'));
+      }
+    },
+
+    _currentInputTableRow: function () {
+      var $reference = this._$dateEditInput || this._$dateInsertInput || this._$timeEditInput || this._$timeInsertInput || null;
+      var $refClosestRow = $reference ? $reference.closest('.jsgrid-edit-row, .jsgrid-insert-row') : null;
+
+      if ($refClosestRow && $refClosestRow.length === 1) {
+        return $refClosestRow; // Closest row.
+      } else {
+        return null; // Null on failure.
       }
     },
 
