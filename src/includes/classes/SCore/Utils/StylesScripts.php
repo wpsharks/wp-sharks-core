@@ -19,12 +19,58 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class StylesScripts extends Classes\SCore\Base\Core
 {
     /**
+     * Enqueued.
+     *
+     * @since 16xxxx
+     *
+     * @type array Enqueued.
+     */
+    protected $did_enqueue;
+
+    /**
+     * Class constructor.
+     *
+     * @since 16xxxx Scripts/styles.
+     *
+     * @param Classes\App $App Instance.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        $this->did_enqueue = []; // Initialize.
+    }
+
+    /**
+     * Did enqueue libs?
+     *
+     * @since 16xxxx Scripts/styles.
+     *
+     * @param string $identifier Identifier.
+     * @param bool   $flag       If setting the flag.
+     *
+     * @return bool True if identifier enqueued already.
+     */
+    protected function didEnqueue(string $identifier, bool $flag = null): bool
+    {
+        if (isset($flag)) {
+            $this->did_enqueue[$identifier] = $flag;
+        }
+        return isset($this->did_enqueue[$identifier]);
+    }
+
+    /**
      * Enqueue Moment libs.
      *
      * @since 16xxxx Moment libs.
      */
     public function enqueueMomentLibs()
     {
+        if ($this->didEnqueue(__FUNCTION__)) {
+            return; // Did this already.
+        } // We only need to enqueue these libs once.
+        $this->didEnqueue(__FUNCTION__, true); // Flag as done.
+
         wp_enqueue_script('moment', '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment-with-locales.min.js', [], null, true);
 
         wp_localize_script(
@@ -53,6 +99,11 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueJQueryPickadateLibs(string $which = 'date-time')
     {
+        if ($this->didEnqueue(__FUNCTION__)) {
+            return; // Did this already.
+        } // We only need to enqueue these libs once.
+        $this->didEnqueue(__FUNCTION__, true); // Flag as done.
+
         wp_enqueue_style('jquery-pickadate', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/themes/default.css', [], null, 'all');
         wp_enqueue_script('jquery-pickadate', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js', ['jquery'], null, true);
 
@@ -157,6 +208,11 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueJQueryChosenLibs()
     {
+        if ($this->didEnqueue(__FUNCTION__)) {
+            return; // Did this already.
+        } // We only need to enqueue these libs once.
+        $this->didEnqueue(__FUNCTION__, true); // Flag as done.
+
         wp_enqueue_style('jquery-chosen', '//cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css', [], null, 'all');
         wp_enqueue_script('jquery-chosen', '//cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js', ['jquery'], null, true);
 
@@ -182,6 +238,11 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueJQueryJsGridLibs()
     {
+        if ($this->didEnqueue(__FUNCTION__)) {
+            return; // Did this already.
+        } // We only need to enqueue these libs once.
+        $this->didEnqueue(__FUNCTION__, true); // Flag as done.
+
         $this->enqueueMomentLibs(); // The `date-time-fields` depend on this lib.
         $this->enqueueJQueryPickadateLibs(); // The `date-time-fields` depend on this.
 

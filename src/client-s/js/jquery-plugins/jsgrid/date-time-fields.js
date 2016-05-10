@@ -81,14 +81,11 @@
 
       for (var _id in pickers) {
         if (!$.contains(this._grid._container[0], pickers[_id].$node[0])) {
-          console.log('Killing stale picker: ' + _id);
           pickers[_id].stop(); // Kill (stop) the picker.
           delete pickers[_id]; // Remove from list.
         }
       } // delete _id; // Housekeeping.
       killingStalePickers = false; // Done kiling now.
-
-      console.log(pickers);
     },
 
     _actionTimestamp: function (action, subType) {
