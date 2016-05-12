@@ -59,8 +59,8 @@ class Uninstaller extends Classes\SCore\Base\Core
         }
         $this->counter = 0; // Initialize counter.
 
-        if (is_multisite() && ($sites = wp_get_sites(['limit' => 10000]))) {
-            foreach ($sites as $_site) {
+        if (is_multisite()) { // For each site in the network.
+            foreach (($sites = wp_get_sites()) ? $sites : [] as $_site) {
                 switch_to_blog($_site['blog_id']);
                 $this->uninstall();
                 restore_current_blog();

@@ -179,18 +179,20 @@
 
       if (!(timestamp = parseInt(timestamp))) {
         if (forDisplay && subType === 'date-time') {
-          formatted = this.emptyDateTimeItemText;
+          formatted = '<em>' + _.escape(this.emptyDateTimeItemText) + '</em>';
         } else if (forDisplay) {
-          formatted = this['empty' + this._ucf(subType) + 'ItemText'];
+          formatted = '<em>' + _.escape(this['empty' + this._ucf(subType) + 'ItemText']) + '</em>';
         } else {
           formatted = ''; // Nothing to do here.
         }
       } else if (subType === 'date-time') { // Both the date & the time.
         formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('date').momentFormat + ' ' + this._pickerOptions('time').momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
+        formatted = forDisplay ? _.escape(formatted) : formatted;
       } else {
         formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions(subType).momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
+        formatted = forDisplay ? _.escape(formatted) : formatted;
       }
-      return forDisplay ? _.escape(formatted) : formatted;
+      return formatted;
     },
 
     _formatToTimestamp: function (formatted, subType) {
