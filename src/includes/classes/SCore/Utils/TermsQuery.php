@@ -254,9 +254,9 @@ class TermsQuery extends Classes\SCore\Base\Core
                 if (isset($args['current_tax_term_ids']) && in_array($_tax_term_id, $args['current_tax_term_ids'], true)) {
                     $selected_tax_term_ids[$_tax_term_id] = $_tax_term_id; // Flag selected post type.
                 }
-                $_post_type_label = !empty($_term_object->object_type[0])
-                    && !empty($post_types[$_term_object->object_type[0]]->labels->name)
-                        ? $post_types[$_term_object->object_type[0]]->labels->name : $default_post_type_label;
+                $_post_type_label = !empty($taxonomies[$_term_object->taxonomy]->object_type[0])
+                    && !empty($post_types[$taxonomies[$_term_object->taxonomy]->object_type[0]]->labels->singular_name)
+                        ? $post_types[$taxonomies[$_term_object->taxonomy]->object_type[0]]->labels->singular_name : $default_post_type_label;
 
                 $_tax_label = !empty($_term_object->taxonomy)
                     && !empty($taxonomies[$_term_object->taxonomy]->labels->singular_name)
