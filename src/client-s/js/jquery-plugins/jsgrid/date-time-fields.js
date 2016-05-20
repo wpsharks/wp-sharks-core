@@ -179,18 +179,26 @@
 
       if (!(timestamp = parseInt(timestamp))) {
         if (forDisplay && subType === 'date-time') {
-          formatted = '<em>' + _.escape(this.emptyDateTimeItemText) + '</em>';
+          formatted = _.escape(this.emptyDateTimeItemText);
         } else if (forDisplay) {
-          formatted = '<em>' + _.escape(this['empty' + this._ucf(subType) + 'ItemText']) + '</em>';
+          formatted = _.escape(this['empty' + this._ucf(subType) + 'ItemText']);
         } else {
           formatted = ''; // Nothing to do here.
         }
       } else if (subType === 'date-time') { // Both the date & the time.
-        formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('date').momentFormat + ' ' + this._pickerOptions('time').momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
-        formatted = forDisplay ? _.escape(formatted) : formatted;
+        if (forDisplay) { // This adds classes so that date and time can be styled differently.
+          formatted = '<span class="-date">' + _.escape(moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('date').momentFormat)) + '</span>';
+          formatted += ' <span class="-time">' + moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('time').momentFormat) + ' ' + momentData.i18n.utc + '</span>';
+        } else {
+          formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('date').momentFormat);
+          formatted += ' ' + moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions('time').momentFormat);
+        }
       } else {
-        formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions(subType).momentFormat) + (forDisplay ? ' ' + momentData.i18n.utc : '');
-        formatted = forDisplay ? _.escape(formatted) : formatted;
+        if (forDisplay) { // This adds classes so that date and time can be styled differently.
+          formatted = '<span class="-' + _.escape(subType) + '">' + moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions(subType).momentFormat) + (subType === 'time' ? ' ' + momentData.i18n.utc : '') + '</span>';
+        } else {
+          formatted = moment.utc(timestamp, 'X', momentData.locale).format(this._pickerOptions(subType).momentFormat);
+        }
       }
       return formatted;
     },

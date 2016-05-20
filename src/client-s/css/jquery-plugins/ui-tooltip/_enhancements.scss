@@ -1,0 +1,81 @@
+/*
+ * Color definitions.
+ */
+$jquery-ui-tooltip-color: #fff;
+$jquery-ui-tooltip-bg-color: #23282d;
+$jquery-ui-tooltip-box-shadow-color: rgba(0, 0, 0, 0.5);
+$jquery-ui-tooltip-hr-color-1: rgba(255, 255, 255, 0);
+$jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
+
+/*
+ * jQuery UI tooltip enhancements.
+ {
+   position:                  {
+     my:                      'center bottom', // Or `right center`.
+     at:                      'center top-10', // Or `left-10 center`.
+     using:                   function (position, feedback) {
+       $(this).css(position).addClass(feedback.vertical + ' ' + feedback.horizontal);
+     }
+   },
+   content:                   function () {
+     return $(this).prop('title');
+   },
+   items:                     '[data-toggle~='jquery-ui-tooltip']'
+ }
+ */
+@mixin jquery-ui-tooltip-enhancements($scope: null) {
+  #{$scope}.ui-tooltip.ui-widget {
+    border:                   0;
+    font-size:               .8em;
+    max-width:                150px;
+    text-align:               center;
+    color:                    $jquery-ui-tooltip-color;
+    background:               $jquery-ui-tooltip-bg-color;
+    box-shadow:               0 0 2px $jquery-ui-tooltip-box-shadow-color;
+
+    > .ui-tooltip-content {
+      &::after {
+        width:                0;
+        content:              '';
+        border-style:         solid;
+        display:              block;
+        position:             absolute;
+      }
+
+      hr {
+        @include linear-gradient(to right, $jquery-ui-tooltip-hr-color-1, $jquery-ui-tooltip-hr-color-2, $jquery-ui-tooltip-hr-color-1);
+
+        border:               0;
+        height:               1px;
+      }
+    }
+
+    &.top > .ui-tooltip-content::after {
+      top:                   -8px;
+      left:                   calc(50% - 8px);
+      border-width:           0 8px 8px;
+      border-color:           $jquery-ui-tooltip-bg-color transparent;
+    }
+
+    &.right > .ui-tooltip-content::after {
+      right:                 -8px;
+      top:                    calc(50% - 8px);
+      border-width:           8px 0 8px 8px;
+      border-color:           transparent $jquery-ui-tooltip-bg-color;
+    }
+
+    &.bottom > .ui-tooltip-content::after {
+      bottom:                -8px;
+      left:                   calc(50% - 8px);
+      border-width:           8px 8px 0;
+      border-color:           $jquery-ui-tooltip-bg-color transparent;
+    }
+
+    &.left > .ui-tooltip-content::after {
+      left:                  -8px;
+      top:                    calc(50% - 8px);
+      border-width:           8px 8px 8px 0;
+      border-color:           transparent $jquery-ui-tooltip-bg-color;
+    }
+  }
+}
