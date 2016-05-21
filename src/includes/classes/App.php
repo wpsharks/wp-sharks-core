@@ -25,7 +25,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160516'; //v//
+    const VERSION = '160521'; //v//
 
     /**
      * Constructor.
@@ -256,7 +256,7 @@ class App extends CoreClasses\App
             '§setup' => [ // On (or after): `plugins_loaded`.
                 // Default is `after_setup_theme` for flexibility.
                 '§hook'          => 'after_setup_theme',
-                '§hook_priority' => -1000,
+                '§hook_priority' => 0, // Very early.
 
                 // Other setup flags.
                 '§enable_hooks' => true,
@@ -462,6 +462,7 @@ class App extends CoreClasses\App
         $this->Config->§setup['§complete'] = true;
 
         // Maybe setup early hooks.
+        // e.g., Install/uninstall hooks.
 
         if ($this->Config->§setup['§enable_hooks']) {
             $this->onSetupEarlyHooks();
@@ -481,16 +482,19 @@ class App extends CoreClasses\App
         $GLOBALS[$this->Config->©brand['©var']] = $this;
 
         // Plugin available hook.
+        // i.e., Global is available.
 
         if ($this->Config->§setup['§enable_hooks']) {
             $this->s::doAction('available', $this);
         }
         // Maybe setup other hooks.
+        // i.e., Functionality hooks/filters.
 
         if ($this->Config->§setup['§enable_hooks']) {
             $this->onSetupOtherHooks();
         }
-        // Plugin setup complete hook.
+        // Setup fully complete hook.
+        // e.g., For theme/plugin add-ons.
 
         if ($this->Config->§setup['§enable_hooks']) {
             $this->s::doAction('setup_complete', $this);

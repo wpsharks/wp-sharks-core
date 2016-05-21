@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160516\n"
+"Project-Id-Version: WP Sharks Core 160521\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-05-16 07:28:53+00:00\n"
+"POT-Creation-Date: 2016-05-21 21:09:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -579,117 +579,117 @@ msgid "Search or click to select an option..."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:270
-#: src/includes/classes/SCore/Utils/StylesScripts.php:270
+#: src/includes/classes/SCore/Utils/StylesScripts.php:272
 msgctxt "jquery-jsgrid-libs"
 msgid "««"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:271
-#: src/includes/classes/SCore/Utils/StylesScripts.php:271
+#: src/includes/classes/SCore/Utils/StylesScripts.php:273
 msgctxt "jquery-jsgrid-libs"
 msgid "«"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:272
-#: src/includes/classes/SCore/Utils/StylesScripts.php:272
+#: src/includes/classes/SCore/Utils/StylesScripts.php:274
 msgctxt "jquery-jsgrid-libs"
 msgid "»"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:273
-#: src/includes/classes/SCore/Utils/StylesScripts.php:273
+#: src/includes/classes/SCore/Utils/StylesScripts.php:275
 msgctxt "jquery-jsgrid-libs"
 msgid "»»"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:274
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:275
-#: src/includes/classes/SCore/Utils/StylesScripts.php:274
-#: src/includes/classes/SCore/Utils/StylesScripts.php:275
+#: src/includes/classes/SCore/Utils/StylesScripts.php:276
+#: src/includes/classes/SCore/Utils/StylesScripts.php:277
 msgctxt "jquery-jsgrid-libs"
 msgid "…"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:276
-#: src/includes/classes/SCore/Utils/StylesScripts.php:276
+#: src/includes/classes/SCore/Utils/StylesScripts.php:278
 msgctxt "jquery-jsgrid-libs"
 msgid "Pages:"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:279
-#: src/includes/classes/SCore/Utils/StylesScripts.php:279
+#: src/includes/classes/SCore/Utils/StylesScripts.php:281
 msgctxt "jquery-jsgrid-libs"
 msgid "A slight problem..."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:280
-#: src/includes/classes/SCore/Utils/StylesScripts.php:280
+#: src/includes/classes/SCore/Utils/StylesScripts.php:282
 msgctxt "jquery-jsgrid-libs"
 msgid "loading..."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:281
-#: src/includes/classes/SCore/Utils/StylesScripts.php:281
+#: src/includes/classes/SCore/Utils/StylesScripts.php:283
 msgctxt "jquery-jsgrid-libs"
 msgid "Nothing to display."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:282
-#: src/includes/classes/SCore/Utils/StylesScripts.php:282
+#: src/includes/classes/SCore/Utils/StylesScripts.php:284
 msgctxt "jquery-jsgrid-libs"
 msgid "Are you sure?"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:294
-#: src/includes/classes/SCore/Utils/StylesScripts.php:294
+#: src/includes/classes/SCore/Utils/StylesScripts.php:296
 msgctxt "jquery-jsgrid-libs"
 msgid "Edit"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:295
-#: src/includes/classes/SCore/Utils/StylesScripts.php:295
+#: src/includes/classes/SCore/Utils/StylesScripts.php:297
 msgctxt "jquery-jsgrid-libs"
 msgid "Delete"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:296
-#: src/includes/classes/SCore/Utils/StylesScripts.php:296
+#: src/includes/classes/SCore/Utils/StylesScripts.php:298
 msgctxt "jquery-jsgrid-libs"
 msgid "Search"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:297
-#: src/includes/classes/SCore/Utils/StylesScripts.php:297
+#: src/includes/classes/SCore/Utils/StylesScripts.php:299
 msgctxt "jquery-jsgrid-libs"
 msgid "Insert"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:298
-#: src/includes/classes/SCore/Utils/StylesScripts.php:298
+#: src/includes/classes/SCore/Utils/StylesScripts.php:300
 msgctxt "jquery-jsgrid-libs"
 msgid "Update"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:299
-#: src/includes/classes/SCore/Utils/StylesScripts.php:299
+#: src/includes/classes/SCore/Utils/StylesScripts.php:301
 msgctxt "jquery-jsgrid-libs"
 msgid "Cancel edit"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:300
-#: src/includes/classes/SCore/Utils/StylesScripts.php:300
+#: src/includes/classes/SCore/Utils/StylesScripts.php:302
 msgctxt "jquery-jsgrid-libs"
 msgid "Clear filter"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:301
-#: src/includes/classes/SCore/Utils/StylesScripts.php:301
+#: src/includes/classes/SCore/Utils/StylesScripts.php:303
 msgctxt "jquery-jsgrid-libs"
 msgid "Switch to inserting"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:302
-#: src/includes/classes/SCore/Utils/StylesScripts.php:302
+#: src/includes/classes/SCore/Utils/StylesScripts.php:304
 msgctxt "jquery-jsgrid-libs"
 msgid "Switch to searching"
 msgstr ""
