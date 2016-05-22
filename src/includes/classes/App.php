@@ -266,7 +266,9 @@ class App extends CoreClasses\App
             ],
 
             '§database' => [
-                '§tables_dir' => $this->base_dir.'/src/includes/mysql/tables',
+                '§tables_dir'   => $this->base_dir.'/src/includes/mysql/tables',
+                '§indexes_dir'  => $this->base_dir.'/src/includes/mysql/indexes',
+                '§triggers_dir' => $this->base_dir.'/src/includes/mysql/triggers',
             ],
 
             '©fs_paths' => [

@@ -64,16 +64,19 @@ class Database extends Classes\SCore\Base\Core
      */
     public function createTables()
     {
-        $table_prefix = $this->prefix();
+        $table_prefix = $this->prefix(); // For the app.
+        $tables_dir   = $this->App->Config->§database['§tables_dir'];
+        $indexes_dir  = $this->App->Config->§database['§indexes_dir'];
+        $triggers_dir = $this->App->Config->§database['§triggers_dir'];
 
-        if (!is_dir($tables_dir = $this->App->Config->§database['§tables_dir'])) {
-            return; // Nothing to do; i.e., no tables.
+        if (!$tables_dir || !is_dir($tables_dir)) {
+            return; // Not possible; no tables.
         }
-        foreach ($this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui') as $_Table) {
-            if (!$_Table->isFile()) { // Not a file?
+        foreach ($this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui') as $_Resource) {
+            if (!$_Resource->isFile()) { // Not a file?
                 continue; // Bypass; files only.
             }
-            $_sql_file = $_Table->getPathname();
+            $_sql_file = $_Resource->getPathname();
 
             $_sql_file_table = basename($_sql_file, '.sql');
             $_sql_file_table = str_replace('-', '_', $_sql_file_table);
@@ -86,7 +89,29 @@ class Database extends Classes\SCore\Base\Core
             if ($this->wp->query($_sql) === false) { // Table creation failure?
                 throw new Exception(sprintf('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
             }
-        } // unset($_Table, $_sql_file, $_sql_file_table, $_sql);
+        } // unset($_Resource, $_sql_file, $_sql_file_table, $_sql);
+
+        foreach ([$indexes_dir, $triggers_dir] as $_tables_after_dir) {
+            if ($_tables_after_dir && is_dir($_tables_after_dir)) {
+                foreach ($this->c::dirRegexRecursiveIterator($_tables_after_dir, '/\.sql$/ui') as $_Resource) {
+                    if (!$_Resource->isFile()) { // Not a file?
+                        continue; // Bypass; files only.
+                    }
+                    $_sql_file = $_Resource->getPathname();
+
+                    $_sql_file_table = basename($_sql_file, '.sql');
+                    $_sql_file_table = str_replace('-', '_', $_sql_file_table);
+                    $_sql_file_table = $table_prefix.$_sql_file_table;
+
+                    $_sql = $this->c::mbTrim(file_get_contents($_sql_file));
+                    $_sql = str_replace('%%table%%', $_sql_file_table, $_sql);
+
+                    if ($this->wp->query($_sql) === false) { // Index creation failure?
+                        throw new Exception(sprintf('DB query failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
+                    }
+                } // unset($_Resource, $_sql_file, $_sql_file_table, $_sql);
+            }
+        } // unset($_tables_after_dir); // Housekeeping.
     }
 
     /**
@@ -96,16 +121,17 @@ class Database extends Classes\SCore\Base\Core
      */
     public function dropTables()
     {
-        $table_prefix = $this->prefix();
+        $table_prefix = $this->prefix(); // For the app.
+        $tables_dir   = $this->App->Config->§database['§tables_dir'];
 
-        if (!is_dir($tables_dir = $this->App->Config->§database['§tables_dir'])) {
-            return; // Nothing to do; i.e., no tables.
+        if (!$tables_dir || !is_dir($tables_dir)) {
+            return; // Not possible; no tables.
         }
-        foreach ($this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui') as $_Table) {
-            if (!$_Table->isFile()) { // Not a file?
+        foreach ($this->c::dirRegexRecursiveIterator($tables_dir, '/\.sql$/ui') as $_Resource) {
+            if (!$_Resource->isFile()) { // Not a file?
                 continue; // Bypass; files only.
             }
-            $_sql_file = $_Table->getPathname();
+            $_sql_file = $_Resource->getPathname();
 
             $_sql_file_table = basename($_sql_file, '.sql');
             $_sql_file_table = str_replace('-', '_', $_sql_file_table);
@@ -114,7 +140,7 @@ class Database extends Classes\SCore\Base\Core
             if ($this->wp->query('DROP TABLE IF EXISTS `'.esc_sql($_sql_file_table).'`') === false) {
                 throw new Exception(sprintf('DB table drop failure: `%1$s`.', $_sql_file_table));
             }
-        } // unset($_Table, $_sql_file, $_sql_file_table);
+        } // unset($_Resource, $_sql_file, $_sql_file_table);
     }
 
     /**
