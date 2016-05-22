@@ -58,7 +58,7 @@ class Database extends Classes\SCore\Base\Core
     }
 
     /**
-     * Create missing DB tables.
+     * Create DB tables.
      *
      * @since 16xxxx DB utils.
      */
@@ -66,6 +66,7 @@ class Database extends Classes\SCore\Base\Core
     {
         $table_prefix = $this->prefix(); // For the app.
         $tables_dir   = $this->App->Config->§database['§tables_dir'];
+
         $indexes_dir  = $this->App->Config->§database['§indexes_dir'];
         $triggers_dir = $this->App->Config->§database['§triggers_dir'];
 
@@ -76,46 +77,46 @@ class Database extends Classes\SCore\Base\Core
             if (!$_Resource->isFile()) { // Not a file?
                 continue; // Bypass; files only.
             }
-            $_sql_file = $_Resource->getPathname();
-
+            $_sql_file       = $_Resource->getPathname();
             $_sql_file_table = basename($_sql_file, '.sql');
             $_sql_file_table = str_replace('-', '_', $_sql_file_table);
             $_sql_file_table = $table_prefix.$_sql_file_table;
 
-            $_sql = $this->c::mbTrim(file_get_contents($_sql_file));
-            $_sql = str_replace('%%table%%', $_sql_file_table, $_sql);
-            $_sql = $this->charsetCompat($this->engineCompat($this->ifNotExists($_sql)));
+            $_sql       = $this->c::mbTrim(file_get_contents($_sql_file));
+            $_sql       = str_replace('%%table%%', $_sql_file_table, $_sql);
+            $_sql       = $this->charsetCompat($this->engineCompat($this->ifNotExists($_sql)));
+            $_sql_check = $this->wp->prepare('SHOW TABLES LIKE %s', $_sql_file_table);
 
-            if ($this->wp->query($_sql) === false) { // Table creation failure?
+            if ($this->wp->get_var($_sql_check) === $_sql_file_table) {
+                continue; // Table exists already. Nothing to do.
+            }
+            if (!$_sql || $this->wp->query($_sql) === false) { // Table creation failure?
                 throw new Exception(sprintf('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
             }
-        } // unset($_Resource, $_sql_file, $_sql_file_table, $_sql);
+            foreach ([$indexes_dir, $triggers_dir] as $_tables_after_dir) {
+                if ($_tables_after_dir && is_dir($_tables_after_dir)) {
+                    // ↓ Looking for additional files for this specific table.
+                    $_tables_after_regex = '/\/'.c::escRegex(basename($_sql_file)).'$/ui';
 
-        foreach ([$indexes_dir, $triggers_dir] as $_tables_after_dir) {
-            if ($_tables_after_dir && is_dir($_tables_after_dir)) {
-                foreach ($this->c::dirRegexRecursiveIterator($_tables_after_dir, '/\.sql$/ui') as $_Resource) {
-                    if (!$_Resource->isFile()) { // Not a file?
-                        continue; // Bypass; files only.
-                    }
-                    $_sql_file = $_Resource->getPathname();
+                    foreach ($this->c::dirRegexRecursiveIterator($_tables_after_dir, $_tables_after_regex) as $__Resource) {
+                        if (!$__Resource->isFile()) { // Not a file?
+                            continue; // Bypass; files only.
+                        }
+                        $__sql_file = $__Resource->getPathname();
+                        $__sql      = $this->c::mbTrim(file_get_contents($__sql_file));
+                        $__sql      = str_replace('%%table%%', $_sql_file_table, $__sql);
 
-                    $_sql_file_table = basename($_sql_file, '.sql');
-                    $_sql_file_table = str_replace('-', '_', $_sql_file_table);
-                    $_sql_file_table = $table_prefix.$_sql_file_table;
-
-                    $_sql = $this->c::mbTrim(file_get_contents($_sql_file));
-                    $_sql = str_replace('%%table%%', $_sql_file_table, $_sql);
-
-                    if ($this->wp->query($_sql) === false) { // Index creation failure?
-                        throw new Exception(sprintf('DB query failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
-                    }
-                } // unset($_Resource, $_sql_file, $_sql_file_table, $_sql);
-            }
-        } // unset($_tables_after_dir); // Housekeeping.
+                        if ($this->wp->query($__sql) === false) { // Index creation failure?
+                            throw new Exception(sprintf('DB query failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $__sql));
+                        }
+                    } // unset($__Resource, $__sql_file, $__sql);
+                }
+            } // unset($_tables_after_dir, $_tables_after_regex);
+        } // unset($_Resource, $_sql_file, $_sql_file_table, $_sql_check, $_sql);
     }
 
     /**
-     * Drop existing DB tables.
+     * Drop DB tables.
      *
      * @since 16xxxx DB utils.
      */
