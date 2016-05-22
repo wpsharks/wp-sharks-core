@@ -171,7 +171,10 @@ class App extends CoreClasses\App
         }
         # Collect essential WordPress config values.
 
-        $wp_is_multisite = is_multisite();
+        $wp_is_multisite  = is_multisite();
+        $wp_debug         = defined('WP_DEBUG') && WP_DEBUG;
+        $wp_debug_log     = $wp_debug && defined('WP_DEBUG_LOG') && WP_DEBUG_LOG;
+        $wp_debug_display = $wp_debug && defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY;
 
         // NOTE: These are not compatible with `switch_to_blog()`.
         // These represent values for the initial/current site.
@@ -206,6 +209,16 @@ class App extends CoreClasses\App
         # Build the core/default instance base.
 
         $default_instance_base = [
+            '©debug' => [
+                '©enable'        => $wp_debug,
+                '©log'           => $wp_debug_log,
+                '©er_enable'     => false, // WP handles this.
+                '©er_display'    => false, // WP handles this.
+                '©er_assertions' => false, // Developer must enable.
+                // WordPress itself may handle assertions in the future.
+            ],
+            '©handle_exceptions' => false, // Never in a shared codespace.
+
             '©di' => [
                 '©default_rule' => [
                     'new_instances' => [
@@ -272,7 +285,7 @@ class App extends CoreClasses\App
             ],
 
             '©fs_paths' => [
-                '©logs_dir'   => $wp_tmp_dir.'/'.$brand['©slug'].'/logs',
+                '©logs_dir'   => WP_CONTENT_DIR.'/'.$brand['©slug'].'/.logs',
                 '©cache_dir'  => $wp_tmp_dir.'/'.$brand['©slug'].'/cache',
                 '©errors_dir' => '', '©config_file' => '', // N/A.
             ],

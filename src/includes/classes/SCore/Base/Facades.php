@@ -23,6 +23,7 @@ abstract class Facades
     use Traits\Facades\Conflicts;
     use Traits\Facades\Database;
     use Traits\Facades\Date;
+    use Traits\Facades\Debug;
     use Traits\Facades\Dependencies;
     use Traits\Facades\Fatalities;
     use Traits\Facades\Hooks;

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Sharks Core 160522\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-05-22 17:10:01+00:00\n"
+"POT-Creation-Date: 2016-05-22 23:50:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,12 +13,12 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: .~build/wp-sharks-core/src/includes/classes/App.php:377
-#: src/includes/classes/App.php:377
+#: src/includes/classes/App.php:390
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/classes/App.php:383
-#: src/includes/classes/App.php:383
+#: src/includes/classes/App.php:396
 msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
 msgstr ""
 
@@ -707,6 +707,56 @@ msgstr ""
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/UsersQuery.php:181
 #: src/includes/classes/SCore/Utils/UsersQuery.php:181
 msgid "User"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:80
+msgid "Microtime:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:81
+msgid "Event:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:81
+msgid "unknown event name"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:82
+msgid "Note:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:82
+msgid "no note given by caller"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:84
+msgid "System:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:85
+msgid "Software:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:91
+msgid "User:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:93
+msgid "User IP:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:93
+#: src/includes/classes/SCore/Utils/Debug.php:94
+#: src/includes/classes/SCore/Utils/Debug.php:96
+msgid "n/a; CLI process"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:94
+msgid "User Agent:"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Debug.php:96
+msgid "URL:"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
