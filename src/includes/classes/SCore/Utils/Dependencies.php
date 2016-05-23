@@ -135,7 +135,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
 
                 // Else we can run a more in-depth test if the app provides a callback.
                 } elseif (!empty($_dependency_args['test']) && is_callable($_dependency_args['test'])) {
-                    if (($_test_result = $_dependency_args['test']($_dependency_slug)) && !empty($_test_result['reason'])) {
+                    if (is_array($_test_result = $_dependency_args['test']($_dependency_slug)) && !empty($_test_result['reason'])) {
                         $this->{$_type.'s'}[$_test_result['reason']][$_dependency_slug] = ['args' => $_dependency_args, 'test_result' => $_test_result];
                     }
                 }
@@ -144,7 +144,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
 
         foreach ($other_dependencies as $_dependency_key => $_dependency_args) {
             if (!empty($_dependency_args['test']) && is_callable($_dependency_args['test'])) {
-                if (($_test_result = $_dependency_args['test']($_dependency_key))) {
+                if (is_array($_test_result = $_dependency_args['test']($_dependency_key))) {
                     $this->others[$_dependency_key] = ['args' => $_dependency_args, 'test_result' => $_test_result];
                 }
             }
