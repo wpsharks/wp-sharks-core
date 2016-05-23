@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Plugin utils.
@@ -19,6 +22,15 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 class Plugins extends Classes\SCore\Base\Core
 {
     /**
+     * Global static cache.
+     *
+     * @since 16xxxx First documented version.
+     *
+     * @type array Global static cache.
+     */
+    protected static $cache; // All WPSC usage.
+
+    /**
      * Active plugins.
      *
      * @since 16xxxx First documented version.
@@ -26,12 +38,16 @@ class Plugins extends Classes\SCore\Base\Core
      * @param bool $slugify Slugs w/ basename keys?
      * @note If false you'll get numerically indexed basenames.
      *
-     * @return array Active plugin basenames.
+     * @return array Active plugins.
      */
     public function active(bool $slugify = true): array
     {
-        if (($active = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
-            return $active; // Cached already.
+        global $blog_id; // Blog ID.
+
+        $cache_key = '_'.(int) $blog_id.(int) $slugify;
+
+        if (isset(static::$cache[__FUNCTION__][$cache_key])) {
+            return static::$cache[__FUNCTION__][$cache_key];
         }
         $active = get_option('active_plugins');
         $active = is_array($active) ? $active : [];
@@ -39,7 +55,7 @@ class Plugins extends Classes\SCore\Base\Core
         if ($slugify) { // Slugs w/ basename keys.
             $active = $this->s::pluginSlugs($active);
         }
-        return $active;
+        return static::$cache[__FUNCTION__][$cache_key] = $active;
     }
 
     /**
@@ -54,11 +70,13 @@ class Plugins extends Classes\SCore\Base\Core
      */
     public function networkActive(bool $slugify = true): array
     {
-        if (($network_active = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
-            return $network_active; // Cached already.
+        $cache_key = '_'.(int) $slugify; // Network wide.
+
+        if (isset(static::$cache[__FUNCTION__][$cache_key])) {
+            return static::$cache[__FUNCTION__][$cache_key];
         }
-        if (!is_multisite()) {
-            return $network_active = []; // Save time.
+        if (!is_multisite()) { // Not applicable.
+            return static::$cache[__FUNCTION__][$cache_key] = [];
         }
         $network_active = get_network_option(null, 'active_sitewide_plugins');
         $network_active = is_array($network_active) ? $network_active : [];
@@ -67,7 +85,7 @@ class Plugins extends Classes\SCore\Base\Core
         if ($slugify) { // Slugs w/ basename keys.
             $network_active = $this->s::pluginSlugs($network_active);
         }
-        return $network_active;
+        return static::$cache[__FUNCTION__][$cache_key] = $network_active;
     }
 
     /**
@@ -82,8 +100,12 @@ class Plugins extends Classes\SCore\Base\Core
      */
     public function allActive(bool $slugify = true): array
     {
-        if (($all_active = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
-            return $all_active; // Cached this already.
+        global $blog_id; // Blog ID.
+
+        $cache_key = '_'.(int) $blog_id.(int) $slugify;
+
+        if (isset(static::$cache[__FUNCTION__][$cache_key])) {
+            return static::$cache[__FUNCTION__][$cache_key];
         }
         $active         = $this->active($slugify);
         $network_active = $this->networkActive($slugify);
@@ -92,7 +114,7 @@ class Plugins extends Classes\SCore\Base\Core
         if (!$slugify) { // Numeric keys.
             $all_active = array_unique($all_active);
         }
-        return $all_active;
+        return static::$cache[__FUNCTION__][$cache_key] = $all_active;
     }
 
     /**
@@ -106,8 +128,10 @@ class Plugins extends Classes\SCore\Base\Core
      */
     public function allInstalled(bool $slugify = true): array
     {
-        if (($installed_plugins = &$this->cacheKey(__FUNCTION__, $slugify)) !== null) {
-            return $installed_plugins; // Cached this already.
+        $cache_key = '_'.(int) $slugify; // Network wide.
+
+        if (isset(static::$cache[__FUNCTION__][$cache_key])) {
+            return static::$cache[__FUNCTION__][$cache_key];
         }
         // Contains the `get_plugins()` function.
         require_once ABSPATH.'wp-admin/includes/plugin.php';
@@ -131,6 +155,6 @@ class Plugins extends Classes\SCore\Base\Core
                 }
             } // unset($installed_plugins_, $_basename, $_data); // Housekeeping.
         }
-        return $installed_plugins;
+        return static::$cache[__FUNCTION__][$cache_key] = $installed_plugins;
     }
 }

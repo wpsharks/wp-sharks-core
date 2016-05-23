@@ -10,14 +10,33 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
-trait Debug
+trait Conditionals
 {
     /**
      * @since 16xxxx Initial release.
      */
-    public static function debug(...$args)
+    public static function isFront()
     {
-        return $GLOBALS[static::class]->Utils->§Debug->__invoke(...$args);
+        return !is_admin();
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function doingAjax()
+    {
+        return defined('DOING_AJAX') && DOING_AJAX;
+    }
+
+    /**
+     * @since 16xxxx Initial release.
+     */
+    public static function isFrontOrAjax()
+    {
+        return !is_admin() || (defined('DOING_AJAX') && DOING_AJAX);
     }
 }

@@ -10,14 +10,44 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Dependencies.
  *
  * @since 16xxxx Dependencies.
  */
-class Dependencies extends Classes\SCore\Base\Core
+class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\SecondConstants
 {
+    /**
+     * Unsatisfied plugins.
+     *
+     * @since 16xxxx
+     *
+     * @type array Data.
+     */
+    protected $plugins;
+
+    /**
+     * Unsatisfied themes.
+     *
+     * @since 16xxxx
+     *
+     * @type array Data.
+     */
+    protected $themes;
+
+    /**
+     * Unsatisfied (other).
+     *
+     * @since 16xxxx
+     *
+     * @type array Data.
+     */
+    protected $others;
+
     /**
      * Checked?
      *
@@ -28,31 +58,13 @@ class Dependencies extends Classes\SCore\Base\Core
     protected $checked;
 
     /**
-     * Outstanding plugins.
+     * Max OK time age.
      *
      * @since 16xxxx
      *
-     * @type array Data.
+     * @type int Max age.
      */
-    protected $plugins;
-
-    /**
-     * Outstanding themes.
-     *
-     * @since 16xxxx
-     *
-     * @type array Data.
-     */
-    protected $themes;
-
-    /**
-     * Outstanding (other).
-     *
-     * @since 16xxxx
-     *
-     * @type array Data.
-     */
-    protected $others;
+    protected $max_ok_age;
 
     /**
      * Class constructor.
@@ -65,22 +77,23 @@ class Dependencies extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
-        $this->plugins = [];
-        $this->themes  = [];
-        $this->others  = [];
-        $this->checked = false;
+        $this->plugins    = [];
+        $this->themes     = [];
+        $this->others     = [];
+        $this->checked    = false;
+        $this->max_ok_age = strtotime('-15 minutes');
 
-        $this->check(); // On instantiation.
+        $this->maybeCheck(); // On instantiation.
     }
 
     /**
-     * Dependendies outstanding?
+     * Dependendies unsatisfied?
      *
      * @since 16xxxx Dependencies.
      *
-     * @return bool Dependendies outstanding?
+     * @return bool Dependendies unsatisfied?
      */
-    public function outstanding(): bool
+    public function unsatisfied(): bool
     {
         return $this->plugins || $this->themes || $this->others;
     }
@@ -90,17 +103,20 @@ class Dependencies extends Classes\SCore\Base\Core
      *
      * @since 16xxxx Dependencies.
      */
-    protected function check()
+    protected function maybeCheck()
     {
         if ($this->checked) {
             return; // Done.
         }
-        $this->checked = true;
+        $this->checked = true; // Checking now.
 
         if (!$this->App->Config->§dependencies['§plugins']
             && !$this->App->Config->§dependencies['§themes']
             && !$this->App->Config->§dependencies['§others']) {
             return; // Nothing to do here.
+        } elseif (($is_front_or_ajax = $this->s::isFrontOrAjax())
+                && $this->lastOkTime() >= $this->max_ok_age) {
+            return; // Had a successfull check recently.
         }
         $all_active_plugin_slugs = $this->s::allActivePlugins();
         $all_active_theme_slugs  = array_unique([get_template(), get_stylesheet()]);
@@ -119,7 +135,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
                 // Else we can run a more in-depth test if the app provides a callback.
                 } elseif (!empty($_dependency_args['test']) && is_callable($_dependency_args['test'])) {
-                    if (($_test_result = $_dependency_args['test']($_dependency_slug)) !== true && !empty($_test_result['reason'])) {
+                    if (($_test_result = $_dependency_args['test']($_dependency_slug)) && !empty($_test_result['reason'])) {
                         $this->{$_type.'s'}[$_test_result['reason']][$_dependency_slug] = ['args' => $_dependency_args, 'test_result' => $_test_result];
                     }
                 }
@@ -128,13 +144,47 @@ class Dependencies extends Classes\SCore\Base\Core
 
         foreach ($other_dependencies as $_dependency_key => $_dependency_args) {
             if (!empty($_dependency_args['test']) && is_callable($_dependency_args['test'])) {
-                if (($_test_result = $_dependency_args['test']($_dependency_key)) !== true) {
+                if (($_test_result = $_dependency_args['test']($_dependency_key))) {
                     $this->others[$_dependency_key] = ['args' => $_dependency_args, 'test_result' => $_test_result];
                 }
             }
         } // unset($_dependency_key, $_dependency_args, $_test_result); // Housekeeping.
 
-        $this->maybeNotify(); // If dependencies are outstanding.
+        $unsatisfied_dependencies = $this->unsatisfied(); // Any unsatisfied?
+
+        if ($is_front_or_ajax && !$unsatisfied_dependencies) {
+            $this->lastOkTime(time());
+        } elseif ($unsatisfied_dependencies) {
+            $this->lastOkTime(0);
+            $this->maybeNotify();
+        }
+    }
+
+    /**
+     * Last OK time.
+     *
+     * @since 16xxxx Dependencies.
+     *
+     * @param int|null $time Last check time.
+     *
+     * @return int Last OK time.
+     */
+    protected function lastOkTime(int $time = null): int
+    {
+        $key             = $this->App->Config->©brand['©var'].'_dependencies_last_ok_time';
+        $is_network_wide = $this->App->Config->§specs['§is_network_wide'];
+
+        if ($is_network_wide && is_multisite()) {
+            if (isset($time)) {
+                update_network_option(null, $key, $time);
+            }
+            return (int) get_network_option(null, $key);
+        } else {
+            if (isset($time)) {
+                update_option($key, $time);
+            }
+            return (int) get_option($key);
+        }
     }
 
     /**
@@ -146,7 +196,7 @@ class Dependencies extends Classes\SCore\Base\Core
     {
         if (!is_admin()) {
             return; // Not applicable.
-        } elseif (!$this->outstanding()) {
+        } elseif (!$this->unsatisfied()) {
             return; // No conflicts.
         }
         foreach (['plugin' => 'Plugin', 'theme' => 'Theme'] as $_type => $_ucf_type) {
@@ -320,7 +370,7 @@ class Dependencies extends Classes\SCore\Base\Core
                 return 'https://themes.svn.wordpress.org/'.urlencode($slug).'/';
 
             default: // Default case handler.
-                throw new Exception('Unexpected type.');
+                throw $this->c::issue('Unexpected type.');
         }
     }
 
@@ -332,7 +382,7 @@ class Dependencies extends Classes\SCore\Base\Core
      * @param array $args Required dependency args.
      *
      * @note Intentionally choosing not to use built-in notice utilities here.
-     *  The notice utilities set option values, and if we have outstanding dependencies
+     *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
      * @note Not only that, but the hooks needed to use notice utilities are not attached
@@ -363,7 +413,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
         foreach ($args as $_arg => $_value) {
             if (is_string($_value) && !isset($_value[0])) {
-                throw new Exception(sprintf('Missing argument: `%1$s`.', $_arg));
+                throw $this->c::issue(sprintf('Missing argument: `%1$s`.', $_arg));
             }
         } // unset($_arg, $_value); // Housekeeping.
 
@@ -371,7 +421,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
         if ($args['in_wp']) { // It's in WordPress?
             if (!($dep_install_url = $this->installUrl($args['slug'], $args['type']))) {
-                throw new Exception(sprintf('Unable to generate install URL for: `%1$s`.', $args['slug']));
+                throw $this->c::issue(sprintf('Unable to generate install URL for: `%1$s`.', $args['slug']));
             }
             $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
             $markup     .= sprintf(__('\'%1$s\' %2$s Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
@@ -411,7 +461,7 @@ class Dependencies extends Classes\SCore\Base\Core
      * @param array $args Required dependency args.
      *
      * @note Intentionally choosing not to use built-in notice utilities here.
-     *  The notice utilities set option values, and if we have outstanding dependencies
+     *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
      * @note Not only that, but the hooks needed to use notice utilities are not attached
@@ -442,13 +492,13 @@ class Dependencies extends Classes\SCore\Base\Core
 
         foreach ($args as $_arg => $_value) {
             if (is_string($_value) && !isset($_value[0])) {
-                throw new Exception(sprintf('Missing argument: `%1$s`.', $_arg));
+                throw $this->c::issue(sprintf('Missing argument: `%1$s`.', $_arg));
             }
         } // unset($_arg, $_value); // Housekeeping.
 
         // If we are activating the dependency, it IS in WordPress.
         if (!($dep_activate_url = $this->activateUrl($args['slug'], $args['type']))) {
-            throw new Exception(sprintf('Unable to generate activation URL for: `%1$s`.', $args['slug']));
+            throw $this->c::issue(sprintf('Unable to generate activation URL for: `%1$s`.', $args['slug']));
         }
         $icon = str_replace('dashicons-admin-tools', 'dashicons-admin-'.($args['type'] === 'theme' ? 'appearance' : 'plugins'), $this->icon);
 
@@ -481,7 +531,7 @@ class Dependencies extends Classes\SCore\Base\Core
      * @param array $args Required dependency args.
      *
      * @note Intentionally choosing not to use built-in notice utilities here.
-     *  The notice utilities set option values, and if we have outstanding dependencies
+     *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
      * @note Not only that, but the hooks needed to use notice utilities are not attached
@@ -514,7 +564,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
         foreach ($args as $_arg => $_value) {
             if (is_string($_value) && !isset($_value[0])) {
-                throw new Exception(sprintf('Missing argument: `%1$s`.', $_arg));
+                throw $this->c::issue(sprintf('Missing argument: `%1$s`.', $_arg));
             }
         } // unset($_arg, $_value); // Housekeeping.
 
@@ -522,9 +572,9 @@ class Dependencies extends Classes\SCore\Base\Core
 
         if ($args['in_wp']) { // It's in WordPress?
             if (!($dep_cur_version = $this->s::{'installed'.$args['type'].'Data'}($args['slug'], 'version'))) {
-                throw new Exception(sprintf('Unable to acquire current version for: `%1$s`.', $args['slug']));
+                throw $this->c::issue(sprintf('Unable to acquire current version for: `%1$s`.', $args['slug']));
             } elseif (!($dep_upgrade_url = $this->upgradeUrl($args['slug'], $args['type']))) {
-                throw new Exception(sprintf('Unable to generate upgrade URL for: `%1$s`.', $args['slug']));
+                throw $this->c::issue(sprintf('Unable to generate upgrade URL for: `%1$s`.', $args['slug']));
             }
             $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
             $markup     .= sprintf(__('\'%1$s\' %2$s Upgrade Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
@@ -566,7 +616,7 @@ class Dependencies extends Classes\SCore\Base\Core
      * @param array $args Required dependency args.
      *
      * @note Intentionally choosing not to use built-in notice utilities here.
-     *  The notice utilities set option values, and if we have outstanding dependencies
+     *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
      * @note Not only that, but the hooks needed to use notice utilities are not attached
@@ -599,7 +649,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
         foreach ($args as $_arg => $_value) {
             if (is_string($_value) && !isset($_value[0])) {
-                throw new Exception(sprintf('Missing argument: `%1$s`.', $_arg));
+                throw $this->c::issue(sprintf('Missing argument: `%1$s`.', $_arg));
             }
         } // unset($_arg, $_value); // Housekeeping.
 
@@ -607,9 +657,9 @@ class Dependencies extends Classes\SCore\Base\Core
 
         if ($args['in_wp']) { // It's in WordPress?
             if (!($dep_cur_version = $this->s::{'installed'.$args['type'].'Data'}($args['slug'], 'version'))) {
-                throw new Exception(sprintf('Unable to acquire current version for: `%1$s`.', $args['slug']));
+                throw $this->c::issue(sprintf('Unable to acquire current version for: `%1$s`.', $args['slug']));
             } elseif (!($dep_archive_url = $this->archiveUrl($args['slug'], $args['type'], $args['max_version']))) {
-                throw new Exception(sprintf('Unable to generate archive URL for: `%1$s`.', $args['slug']));
+                throw $this->c::issue(sprintf('Unable to generate archive URL for: `%1$s`.', $args['slug']));
             }
             $markup = '<p style="'.esc_attr($this->heading_p_tag_styles).'">';
             $markup     .= sprintf(__('\'%1$s\' %2$s Downgrade Required', 'wp-sharks-core'), esc_html($args['name']), esc_html($this->c::mbUcFirst($args['type'])));
@@ -651,7 +701,7 @@ class Dependencies extends Classes\SCore\Base\Core
      * @param array $args Required dependency args.
      *
      * @note Intentionally choosing not to use built-in notice utilities here.
-     *  The notice utilities set option values, and if we have outstanding dependencies
+     *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
      * @note Not only that, but the hooks needed to use notice utilities are not attached
@@ -682,7 +732,7 @@ class Dependencies extends Classes\SCore\Base\Core
 
         foreach ($args as $_arg => $_value) {
             if (is_string($_value) && !isset($_value[0])) {
-                throw new Exception(sprintf('Missing argument: `%1$s`.', $_arg));
+                throw $this->c::issue(sprintf('Missing argument: `%1$s`.', $_arg));
             }
         } // unset($_arg, $_value); // Housekeeping.
 

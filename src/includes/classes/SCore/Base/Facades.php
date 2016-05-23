@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Pseudo-static facades.
@@ -20,10 +23,10 @@ abstract class Facades
 {
     use Traits\Facades\BrandUrls;
     use Traits\Facades\CapQueries;
+    use Traits\Facades\Conditionals;
     use Traits\Facades\Conflicts;
     use Traits\Facades\Database;
     use Traits\Facades\Date;
-    use Traits\Facades\Debug;
     use Traits\Facades\Dependencies;
     use Traits\Facades\Fatalities;
     use Traits\Facades\Hooks;

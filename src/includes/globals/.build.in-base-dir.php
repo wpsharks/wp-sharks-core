@@ -12,7 +12,7 @@ if (PHP_SAPI !== 'cli') {
 }
 $load = '<?php
 declare (strict_types = 1);
-namespace '.__NAMESPACE__.';
+namespace WebSharks\WpSharks\Core\Globals;
 
 if (!defined(\'WPINC\')) {
     exit(\'Do NOT access this file directly: \'.basename(__FILE__));

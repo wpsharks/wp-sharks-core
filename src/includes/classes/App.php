@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * App (plugins must extend).
@@ -331,7 +334,7 @@ class App extends CoreClasses\App
                             'test'        => function(string $slug) {},
 
                             A test function is optional.
-                            A successful test must return `true`.
+                            A successful test must return nothing.
                             A failed test must return an array with:
                                 - `reason`      = One of: `needs-upgrade|needs-downgrade`.
                                 - `min_version` = Min version, if `reason=needs-upgrade`.
@@ -349,7 +352,7 @@ class App extends CoreClasses\App
                             'test'        => function(string $slug) {},
 
                             A test function is optional.
-                            A successful test must return `true`.
+                            A successful test must return nothing.
                             A failed test must return an array with:
                                 - `reason`      = One of: `needs-upgrade|needs-downgrade`.
                                 - `min_version` = Min version, if `reason=needs-upgrade`.
@@ -365,7 +368,7 @@ class App extends CoreClasses\App
                             'test'        => function(string $key) {},
 
                             A test function is required.
-                            A successful test must return `true`.
+                            A successful test must return nothing.
                             A failed test must return an array with:
                                 - `how_to_resolve` = Brief rich-text description; i.e., → To resolve, [how_to_resolve].
                                 - `cap_to_resolve` = Cap required to satisfy; e.g., `manage_options`.
@@ -446,9 +449,9 @@ class App extends CoreClasses\App
         if ($this->s::conflictsExist()) {
             return; // Stop here.
         }
-        // Check for any outstanding dependencies.
+        // Check for any unsatisfied dependencies.
 
-        if ($this->s::dependenciesOutstanding()) {
+        if ($this->s::dependenciesUnsatisfied()) {
             return; // Stop here.
         }
         // No known conflicts; load plugin text-domain.

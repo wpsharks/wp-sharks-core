@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Conflicts.
@@ -18,15 +21,6 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
  */
 class Conflicts extends Classes\SCore\Base\Core
 {
-    /**
-     * Checked?
-     *
-     * @since 16xxxx
-     *
-     * @type bool Checked?
-     */
-    protected $checked;
-
     /**
      * Conflicting plugins.
      *
@@ -55,6 +49,24 @@ class Conflicts extends Classes\SCore\Base\Core
     protected $deactivatable_plugins;
 
     /**
+     * Checked?
+     *
+     * @since 16xxxx
+     *
+     * @type bool Checked?
+     */
+    protected $checked;
+
+    /**
+     * Max OK time age.
+     *
+     * @since 16xxxx
+     *
+     * @type int Max age.
+     */
+    protected $max_ok_age;
+
+    /**
      * Class constructor.
      *
      * @since 16xxxx Initial release.
@@ -69,8 +81,9 @@ class Conflicts extends Classes\SCore\Base\Core
         $this->themes                = [];
         $this->deactivatable_plugins = [];
         $this->checked               = false;
+        $this->max_ok_age            = strtotime('-15 minutes');
 
-        $this->check(); // On instantiation.
+        $this->maybeCheck(); // On instantiation.
     }
 
     /**
@@ -96,16 +109,19 @@ class Conflicts extends Classes\SCore\Base\Core
      * @note Deactivable conflicts are considered conflicts too.
      *  However, we can deactivate them and simply show a warning w/ refresh link.
      */
-    protected function check()
+    protected function maybeCheck()
     {
         if ($this->checked) {
             return; // Done.
         }
-        $this->checked = true;
+        $this->checked = true; // Checking now.
 
         if (!$this->App->Config->§conflicts['§plugins']
             && !$this->App->Config->§conflicts['§themes']) {
             return; // Nothing to do here.
+        } elseif (($is_front_or_ajax = $this->s::isFrontOrAjax())
+                && $this->lastOkTime() >= $this->max_ok_age) {
+            return; // Had a successfull check recently.
         }
         $is_admin     = is_admin();
         $is_multisite = is_multisite();
@@ -152,7 +168,41 @@ class Conflicts extends Classes\SCore\Base\Core
             }
         } // unset($_active_theme_slug, $_conflicting_theme_slug); // Housekeeping.
 
-        $this->maybeNotify(); // If conflicts exist.
+        $conflicts_exist = $this->exist(); // Conflicts exist?
+
+        if ($is_front_or_ajax && !$conflicts_exist) {
+            $this->lastOkTime(time());
+        } elseif ($conflicts_exist) {
+            $this->lastOkTime(0);
+            $this->maybeNotify();
+        }
+    }
+
+    /**
+     * Last OK time.
+     *
+     * @since 16xxxx Dependencies.
+     *
+     * @param int|null $time Last check time.
+     *
+     * @return int Last OK time.
+     */
+    protected function lastOkTime(int $time = null): int
+    {
+        $key             = $this->App->Config->©brand['©var'].'_conflicts_last_ok_time';
+        $is_network_wide = $this->App->Config->§specs['§is_network_wide'];
+
+        if ($is_network_wide && is_multisite()) {
+            if (isset($time)) {
+                update_network_option(null, $key, $time);
+            }
+            return (int) get_network_option(null, $key);
+        } else {
+            if (isset($time)) {
+                update_option($key, $time);
+            }
+            return (int) get_option($key);
+        }
     }
 
     /**

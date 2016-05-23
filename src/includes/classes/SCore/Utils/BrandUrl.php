@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Brand URL.
@@ -30,7 +33,7 @@ class BrandUrl extends Classes\SCore\Base\Core
     public function __invoke(string $relative_uri = ''): string
     {
         if (!$this->App->Config->©brand['§domain']) {
-            throw new Exception('Missing brand domain.');
+            throw $this->c::issue('Missing brand domain.');
         }
         $url = 'https://'.$this->App->Config->©brand['§domain'];
         $url .= $this->App->Config->©brand['§domain_path'];

@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Database utils.
@@ -91,7 +94,7 @@ class Database extends Classes\SCore\Base\Core
                 continue; // Table exists already. Nothing to do.
             }
             if (!$_sql || $this->wp->query($_sql) === false) { // Table creation failure?
-                throw new Exception(sprintf('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
+                throw $this->c::issue(sprintf('DB table creation failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $_sql));
             }
             foreach ([$indexes_dir, $triggers_dir] as $_tables_after_dir) {
                 if ($_tables_after_dir && is_dir($_tables_after_dir)) {
@@ -107,7 +110,7 @@ class Database extends Classes\SCore\Base\Core
                         $__sql      = str_replace('%%table%%', $_sql_file_table, $__sql);
 
                         if ($this->wp->query($__sql) === false) { // Index creation failure?
-                            throw new Exception(sprintf('DB query failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $__sql));
+                            throw $this->c::issue(sprintf('DB query failure. Table: `%1$s`. SQL: `%2$s`.', $_sql_file_table, $__sql));
                         }
                     } // unset($__Resource, $__sql_file, $__sql);
                 }
@@ -139,7 +142,7 @@ class Database extends Classes\SCore\Base\Core
             $_sql_file_table = $table_prefix.$_sql_file_table;
 
             if ($this->wp->query('DROP TABLE IF EXISTS `'.esc_sql($_sql_file_table).'`') === false) {
-                throw new Exception(sprintf('DB table drop failure: `%1$s`.', $_sql_file_table));
+                throw $this->c::issue(sprintf('DB table drop failure: `%1$s`.', $_sql_file_table));
             }
         } // unset($_Resource, $_sql_file, $_sql_file_table);
     }

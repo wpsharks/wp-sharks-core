@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Plugin utils.
@@ -85,7 +88,7 @@ class Plugin extends Classes\SCore\Base\Core
      */
     public function installedData(string $slug, string $key): string
     {
-        if (!$slug || !$key) {
+        if (!$slug || !$key) { // Either empty?
             return ''; // Not possible.
         }
         switch ($key) {
@@ -116,10 +119,7 @@ class Plugin extends Classes\SCore\Base\Core
             default: // Default case.
                 return ''; // Unknown key.
         }
-        if (($installed_plugin = &$this->cacheKey(__FUNCTION__, $slug)) === null) {
-            $installed_plugins = $this->s::allInstalledPlugins();
-            $installed_plugin  = $installed_plugins[$slug] ?? [];
-        }
-        return !empty($installed_plugin[$key]) ? (string) $installed_plugin[$key] : '';
+        $installed_plugins = $this->s::allInstalledPlugins(); // « Cached statically.
+        return !empty($installed_plugins[$slug][$key]) ? (string) $installed_plugins[$slug][$key] : '';
     }
 }

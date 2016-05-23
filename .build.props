@@ -14,3 +14,6 @@ project_php_required_bits        = 64
 
 project_wp_required_version      = 4.5.1
 project_wp_tested_up_to_version  = 4.5.1
+
+project_wc_required_version      = 2.6.0
+project_wc_tested_up_to_version  = 2.6.0

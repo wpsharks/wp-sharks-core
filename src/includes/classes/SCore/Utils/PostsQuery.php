@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Post query utils.
@@ -113,7 +116,7 @@ class PostsQuery extends Classes\SCore\Base\Core
         // Run the query and return total.
 
         if ($WpDb->query($sql) === false) {
-            throw new Exception('Query failure.');
+            throw $this->c::issue('Query failure.');
         }
         return $total = (int) $WpDb->get_var('SELECT FOUND_ROWS()');
     }

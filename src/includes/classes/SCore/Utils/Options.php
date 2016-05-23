@@ -10,6 +10,9 @@ use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use function assert as debug;
+use function get_defined_vars as vars;
 
 /**
  * Option utils.
@@ -204,7 +207,7 @@ class Options extends Classes\SCore\Base\Core
 
         // Else if the key does not exist at all, throw exception.
         if (!array_key_exists($key, $this->App->Config->§options)) {
-            throw new Exception(sprintf('Unknown option key: `%1$s`.', $key));
+            throw $this->c::issue(sprintf('Unknown option key: `%1$s`.', $key));
         }
         return null; // Default return value.
     }
