@@ -112,15 +112,16 @@ class Debug extends Classes\SCore\Base\Core implements CoreInterfaces\ByteConsta
      */
     protected function writeLogFileLines(string $event, array $lines): int
     {
-        if (!$lines) { // Something to log?
+        if (!$lines) { // No lines?
             return; // Stop; nothing to do here.
         }
         $this->prepareLogsDir(); // Prepares (and secures) the logs directory.
         $file_name = mb_strpos($event, '#issue') !== false ? 'issues.log' : 'events.log';
-        $this->maybeRotateLogFiles($file_name); // Based on this file.
+        $file      = $this->logs_dir.'/'.$file_name;
+        $this->maybeRotateLogFiles($file);
 
         $entry = implode("\n", $lines)."\n\n".str_repeat('-', 3)."\n\n";
-        return (int) file_put_contents($dir.'/'.$file_name, $entry, FILE_APPEND);
+        return (int) file_put_contents($file, $entry, LOCK_EX | FILE_APPEND);
     }
 
     /**
@@ -179,7 +180,7 @@ class Debug extends Classes\SCore\Base\Core implements CoreInterfaces\ByteConsta
 
         rename($file, $this->uniqueSuffixLogFile($file));
 
-        foreach ($this->c::dirRegexRecursiveIterator($dir, '/\.log$/ui') as $_Resource) {
+        foreach ($this->c::dirRegexRecursiveIterator($this->logs_dir, '/\.log$/ui') as $_Resource) {
             if ($_Resource->isFile() && $_Resource->getMTime() < $this->max_log_file_age) {
                 unlink($_Resource->getPathname());
             }
