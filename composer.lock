@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cd8013d80e05f28964b32476fa38b78f",
+    "hash": "e4a5f8efb45c761ccc3957a56c81f1db",
     "content-hash": "9c87b46f36cd1cbf34c7ec95fdac9a9a",
     "packages": [
         {
@@ -771,12 +771,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "f3d1a26f97f53ef177e53557c64a4377873cd66e"
+                "reference": "1412cdcb435b9510b83094cfa5519994ba123023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/f3d1a26f97f53ef177e53557c64a4377873cd66e",
-                "reference": "f3d1a26f97f53ef177e53557c64a4377873cd66e",
+                "url": "https://api.github.com/repos/websharks/core/zipball/1412cdcb435b9510b83094cfa5519994ba123023",
+                "reference": "1412cdcb435b9510b83094cfa5519994ba123023",
                 "shasum": ""
             },
             "require": {
@@ -886,7 +886,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-05-21 21:06:39"
+            "time": "2016-05-22 23:30:33"
         },
         {
             "name": "websharks/dicer",
