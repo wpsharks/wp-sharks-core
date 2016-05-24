@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait StylesScripts
 {
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function enqueueMomentLibs(...$args)
     {
@@ -25,7 +25,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function enqueueJQueryPickadateLibs(...$args)
     {
@@ -33,7 +33,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function enqueueJQueryChosenLibs(...$args)
     {
@@ -41,7 +41,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function enqueueJQueryJsGridLibs(...$args)
     {

@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * User query utils.
  *
- * @since 16xxxx User utils.
+ * @since 160525 User utils.
  */
 class UsersQuery extends Classes\SCore\Base\Core
 {
     /**
      * Total users.
      *
-     * @since 16xxxx User utils.
+     * @since 160525 User utils.
      *
      * @param array $args Behavioral args.
      *
@@ -64,7 +64,7 @@ class UsersQuery extends Classes\SCore\Base\Core
     /**
      * All users.
      *
-     * @since 16xxxx User utils.
+     * @since 160525 User utils.
      *
      * @param array $args Behavioral args.
      *
@@ -120,7 +120,7 @@ class UsersQuery extends Classes\SCore\Base\Core
     /**
      * User select options.
      *
-     * @since 16xxxx User utils.
+     * @since 160525 User utils.
      *
      * @param array $args Behavioral args.
      *

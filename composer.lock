@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e4a5f8efb45c761ccc3957a56c81f1db",
-    "content-hash": "9c87b46f36cd1cbf34c7ec95fdac9a9a",
+    "hash": "77a7452d1fa6ecf746b873ed62e76c0c",
+    "content-hash": "e419562c7931c01aa8df6781e21d4fe1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -767,16 +767,16 @@
         },
         {
             "name": "websharks/core",
-            "version": "dev-master",
+            "version": "160525",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "27d8cfbc50f6a6410859ce92650b1d55c31453af"
+                "reference": "0d1c62bf5a446efa580552f3d0e385b61da025f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/27d8cfbc50f6a6410859ce92650b1d55c31453af",
-                "reference": "27d8cfbc50f6a6410859ce92650b1d55c31453af",
+                "url": "https://api.github.com/repos/websharks/core/zipball/0d1c62bf5a446efa580552f3d0e385b61da025f5",
+                "reference": "0d1c62bf5a446efa580552f3d0e385b61da025f5",
                 "shasum": ""
             },
             "require": {
@@ -827,8 +827,8 @@
                 "phpmailer/phpmailer": "5.*",
                 "ramsey/uuid": "3.*",
                 "symfony/yaml": "2.*",
-                "websharks/dicer": "dev-master",
-                "websharks/sharkicons": "dev-master"
+                "websharks/dicer": "160110",
+                "websharks/sharkicons": "160221"
             },
             "require-dev": {
                 "corneltek/getoptionkit": "2.*",
@@ -886,11 +886,11 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-05-24 07:15:52"
+            "time": "2016-05-24 14:27:26"
         },
         {
             "name": "websharks/dicer",
-            "version": "dev-master",
+            "version": "160110",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/dicer.git",
@@ -941,7 +941,7 @@
         },
         {
             "name": "websharks/sharkicons",
-            "version": "dev-master",
+            "version": "160221",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/sharkicons.git",
@@ -992,7 +992,7 @@
         },
         {
             "name": "websharks/wp-php-rv",
-            "version": "dev-master",
+            "version": "160525",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/wp-php-rv.git",
@@ -1042,10 +1042,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "websharks/wp-php-rv": 20,
-        "websharks/core": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

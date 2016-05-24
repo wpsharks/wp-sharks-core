@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 /**
  * Date utils.
  *
- * @since 16xxxx WP notices.
+ * @since 160525 WP notices.
  */
 class Date extends Classes\SCore\Base\Core
 {

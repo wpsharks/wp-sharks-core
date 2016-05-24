@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Theme utils.
  *
- * @since 16xxxx WP notices.
+ * @since 160525 WP notices.
  */
 class Theme extends Classes\SCore\Base\Core
 {
     /**
      * Is a theme installed?
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @param string $slug Theme slug.
      *
@@ -38,7 +38,7 @@ class Theme extends Classes\SCore\Base\Core
     /**
      * Installed theme data from slug.
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @param string $slug   Theme slug.
      * @param string $key    Data key to acquire.

@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Nonce
 {
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function addUrlNonce(...$args)
     {
@@ -25,7 +25,7 @@ trait Nonce
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function removeUrlNonce(...$args)
     {
@@ -33,7 +33,7 @@ trait Nonce
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function isNonceValid(...$args)
     {
@@ -41,7 +41,7 @@ trait Nonce
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function requireValidNonce(...$args)
     {

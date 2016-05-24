@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Transient utils.
  *
- * @since 16xxxx Transient utils.
+ * @since 160525 Transient utils.
  */
 class Transient extends Classes\SCore\Base\Core
 {
     /**
      * Get transient.
      *
-     * @since 16xxxx Transient utils.
+     * @since 160525 Transient utils.
      *
      * @param string $key Transient key.
      *
@@ -43,7 +43,7 @@ class Transient extends Classes\SCore\Base\Core
     /**
      * Set transient.
      *
-     * @since 16xxxx Transient utils.
+     * @since 160525 Transient utils.
      *
      * @param string $key           Transient key.
      * @param mixed  $value         Transient value.
@@ -61,7 +61,7 @@ class Transient extends Classes\SCore\Base\Core
     /**
      * Delete transient.
      *
-     * @since 16xxxx Transient utils.
+     * @since 160525 Transient utils.
      *
      * @param string $key Transient key.
      */

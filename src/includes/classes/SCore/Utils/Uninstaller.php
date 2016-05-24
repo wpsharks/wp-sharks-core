@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Uninstall utils.
  *
- * @since 16xxxx Install utils.
+ * @since 160525 Install utils.
  */
 class Uninstaller extends Classes\SCore\Base\Core
 {
     /**
      * Counter.
      *
-     * @since 16xxxx DB utils.
+     * @since 160525 DB utils.
      *
      * @type int Counter.
      */
@@ -33,7 +33,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 16xxxx Uninstall utils.
+     * @since 160525 Uninstall utils.
      *
      * @param Classes\App $App Instance.
      */
@@ -47,7 +47,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Maybe uninstall.
      *
-     * @since 16xxxx Uninstall utils.
+     * @since 160525 Uninstall utils.
      */
     public function maybeUninstall()
     {
@@ -76,7 +76,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Install (or reinstall).
      *
-     * @since 16xxxx Uninstall utils.
+     * @since 160525 Uninstall utils.
      */
     protected function uninstall()
     {
@@ -93,7 +93,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Delete option keys.
      *
-     * @since 16xxxx Uninstall utils.
+     * @since 160525 Uninstall utils.
      */
     protected function deleteOptions()
     {
@@ -128,7 +128,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Delete post meta keys.
      *
-     * @since 16xxxx Uninstall utils.
+     * @since 160525 Uninstall utils.
      */
     protected function deletePostMeta()
     {
@@ -150,7 +150,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Delete user meta keys.
      *
-     * @since 16xxxx Uninstall utils.
+     * @since 160525 Uninstall utils.
      */
     protected function deleteUserMeta()
     {
@@ -174,7 +174,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Drop DB tables.
      *
-     * @since 16xxxx Uninstall utils.
+     * @since 160525 Uninstall utils.
      */
     protected function dropDbTables()
     {
@@ -186,7 +186,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     /**
      * Other uninstall routines.
      *
-     * @since 16xxxx Install utils.
+     * @since 160525 Install utils.
      */
     protected function otherUninstallRoutines()
     {

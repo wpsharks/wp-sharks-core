@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Post query utils.
  *
- * @since 16xxxx Post utils.
+ * @since 160525 Post utils.
  */
 class PostsQuery extends Classes\SCore\Base\Core
 {
     /**
      * Total posts.
      *
-     * @since 16xxxx Post query utils.
+     * @since 160525 Post query utils.
      *
      * @param array $args Behavioral args.
      *
@@ -124,7 +124,7 @@ class PostsQuery extends Classes\SCore\Base\Core
     /**
      * All posts.
      *
-     * @since 16xxxx Post query utils.
+     * @since 160525 Post query utils.
      *
      * @param array $args Behavioral args.
      *
@@ -265,7 +265,7 @@ class PostsQuery extends Classes\SCore\Base\Core
     /**
      * Post select options.
      *
-     * @since 16xxxx Post query utils.
+     * @since 160525 Post query utils.
      *
      * @param array $args Behavioral args.
      *

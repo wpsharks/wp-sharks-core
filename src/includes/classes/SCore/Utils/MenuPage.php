@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Menu page utils.
  *
- * @since 16xxxx WP notices.
+ * @since 160525 WP notices.
  */
 class MenuPage extends Classes\SCore\Base\Core
 {
     /**
      * Current menu page.
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @return string Current menu page.
      */
@@ -41,7 +41,7 @@ class MenuPage extends Classes\SCore\Base\Core
     /**
      * Current `$GLOBALS['pagenow']`.
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @return string Current `$GLOBALS['pagenow']`.
      */
@@ -56,7 +56,7 @@ class MenuPage extends Classes\SCore\Base\Core
     /**
      * Current menu page post type.
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @return string Current menu page post type.
      */
@@ -73,7 +73,7 @@ class MenuPage extends Classes\SCore\Base\Core
     /**
      * Current `$GLOBALS['typenow']`.
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @return string Current `$GLOBALS['typenow']`.
      */
@@ -88,7 +88,7 @@ class MenuPage extends Classes\SCore\Base\Core
     /**
      * Is a menu page?
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @param string $page Page to check (optional).
      *
@@ -118,7 +118,7 @@ class MenuPage extends Classes\SCore\Base\Core
     /**
      * Is a menu page for a post type?
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      *
      * @param string $post_type Post type to check (optional).
      *

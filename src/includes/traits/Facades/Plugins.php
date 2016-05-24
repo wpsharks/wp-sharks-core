@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Plugins
 {
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function activePlugins(...$args)
     {
@@ -25,7 +25,7 @@ trait Plugins
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function networkActivePlugins(...$args)
     {
@@ -33,7 +33,7 @@ trait Plugins
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function allActivePlugins(...$args)
     {
@@ -41,7 +41,7 @@ trait Plugins
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function allInstalledPlugins(...$args)
     {

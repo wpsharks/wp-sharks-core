@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Option utils.
  *
- * @since 16xxxx Option utils.
+ * @since 160525 Option utils.
  */
 class Options extends Classes\SCore\Base\Core
 {
     /**
      * Save action.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      *
      * @type string Save action.
      */
@@ -33,7 +33,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Restore defaults action.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      *
      * @type string Restore defaults action.
      */
@@ -42,7 +42,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      *
      * @param Classes\App $App Instance.
      */
@@ -57,7 +57,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Save submit URL.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      *
      * @return string Save submit URL.
      */
@@ -74,7 +74,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Save form element ID.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      *
      * @param string $key Option key.
      *
@@ -88,7 +88,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Save form element name.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      *
      * @param string $key Option key.
      *
@@ -102,7 +102,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Maybe save options.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      */
     public function onAdminInitMaybeSave()
     {
@@ -135,7 +135,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Restore defaults.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      */
     public function restoreDefaults()
     {
@@ -145,7 +145,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Restore default options URL.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      *
      * @return string Restore default options URL.
      */
@@ -163,7 +163,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Maybe restore default options.
      *
-     * @since 16xxxx Option utils.
+     * @since 160525 Option utils.
      */
     public function onAdminInitMaybeRestoreDefaults()
     {
@@ -191,7 +191,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Get config option.
      *
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      *
      * @param string $key Option key.
      *
@@ -215,7 +215,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Update config options.
      *
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      *
      * @param array $options Options to update.
      *
@@ -236,7 +236,7 @@ class Options extends Classes\SCore\Base\Core
     /**
      * Merge options.
      *
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      *
      * @param array $base  Base array.
      * @param array $merge Array to merge.

@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Plugin
 {
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function pluginSlug(...$args)
     {
@@ -25,7 +25,7 @@ trait Plugin
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function pluginSlugs(...$args)
     {
@@ -33,7 +33,7 @@ trait Plugin
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function pluginIsInstalled(...$args)
     {
@@ -41,7 +41,7 @@ trait Plugin
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function installedPluginData(...$args)
     {

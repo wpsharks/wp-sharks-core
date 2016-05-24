@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Fatal error utils.
  *
- * @since 16xxxx WP notices.
+ * @since 160525 WP notices.
  */
 class Fatality extends Classes\SCore\Base\Core
 {
     /**
      * Forbidden response.
      *
-     * @since 16xxxx First documented version.
+     * @since 160525 First documented version.
      */
     public function forbidden()
     {

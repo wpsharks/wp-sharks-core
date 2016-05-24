@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait UrlToPostId
 {
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function urlToPostId(...$args)
     {

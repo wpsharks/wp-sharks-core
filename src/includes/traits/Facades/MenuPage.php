@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait MenuPage
 {
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function currentMenuPage(...$args)
     {
@@ -25,7 +25,7 @@ trait MenuPage
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function menuPageNow(...$args)
     {
@@ -33,7 +33,7 @@ trait MenuPage
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function currentMenuPagePostType(...$args)
     {
@@ -41,7 +41,7 @@ trait MenuPage
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function menuPagePostTypeNow(...$args)
     {
@@ -49,7 +49,7 @@ trait MenuPage
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function isMenuPage(...$args)
     {
@@ -57,7 +57,7 @@ trait MenuPage
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function isMenuPageForPostType(...$args)
     {

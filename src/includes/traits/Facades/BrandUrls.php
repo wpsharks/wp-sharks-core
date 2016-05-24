@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait BrandUrls
 {
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function brandUrl(...$args)
     {

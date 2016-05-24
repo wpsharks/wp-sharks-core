@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Options
 {
     /**
-     * @since 16xxxx App.
+     * @since 160525 App.
      */
     public static function options()
     {
@@ -25,7 +25,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx App.
+     * @since 160525 App.
      */
     public static function defaultOptions()
     {
@@ -33,7 +33,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx App.
+     * @since 160525 App.
      */
     public static function getOption(...$args)
     {
@@ -41,7 +41,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx App.
+     * @since 160525 App.
      */
     public static function mergeOptions(...$args)
     {
@@ -49,7 +49,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx App.
+     * @since 160525 App.
      */
     public static function updateOptions(...$args)
     {
@@ -57,7 +57,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function saveOptionsUrl(...$args)
     {
@@ -65,7 +65,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function optionFormElementId(...$args)
     {
@@ -73,7 +73,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function optionFormElementName(...$args)
     {
@@ -81,7 +81,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function restoreDefaultOptions(...$args)
     {
@@ -89,7 +89,7 @@ trait Options
     }
 
     /**
-     * @since 16xxxx Initial release.
+     * @since 160525 Initial release.
      */
     public static function restoreDefaultOptionsUrl(...$args)
     {
