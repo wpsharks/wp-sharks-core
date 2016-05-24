@@ -8,9 +8,42 @@ project_sub_namespace            = WpSharksCore
 
 project_version                  = %y%m%d
 
+project_required_os              =
+
 project_php_required_version     = 7.0.4
 project_php_tested_up_to_version = ${php.version}
 project_php_required_bits        = 64
+project_php_required_extensions  = \
+                                   SPL, \
+                                   Phar, \
+                                   Reflection, \
+                                   \
+                                   ctype, \
+                                   date, \
+                                   fileinfo, \
+                                   filter, \
+                                   gd, \
+                                   hash, \
+                                   json, \
+                                   mbstring, \
+                                   mcrypt, \
+                                   posix, \
+                                   session, \
+                                   tokenizer, \
+                                   zlib, \
+                                   \
+                                   pcre, \
+                                   openssl, \
+                                   curl, \
+                                   intl, \
+                                   iconv, \
+                                   \
+                                   dom, \
+                                   xml, \
+                                   libxml, \
+                                   xmlreader, \
+                                   xmlwriter, \
+                                   SimpleXML, \
 
-project_wp_required_version      = 4.5.1
-project_wp_tested_up_to_version  = 4.5.1
+project_wp_required_version      = 4.5.2
+project_wp_tested_up_to_version  = 4.5.2
