@@ -390,13 +390,13 @@ class App extends CoreClasses\App
                 '§on_install' => function (array $installion_history) {
                     return [
                         'is_transient' => true,
-                        'markup'       => '<p>'.sprintf(__('<strong>%1$s</strong> v%2$s installed successfully.', 'wp-sharks-core'), esc_html($this->Config->©brand['©name']), esc_html($this->c::version())).'</p>',
+                        'markup'       => '<p>'.sprintf(__('<strong>%1$s</strong> v%2$s installed successfully.', 'wp-sharks-core'), esc_html($this->Config->©brand['©name']), esc_html($this::VERSION)).'</p>',
                     ];
                 },
                 '§on_reinstall' => function (array $installion_history) {
                     return [
                         'is_transient' => false,
-                        'markup'       => '<p>'.sprintf(__('<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You\'re now running v%2$s.', 'wp-sharks-core'), esc_html($this->Config->©brand['©name']), esc_html($this->c::version())).'</p>',
+                        'markup'       => '<p>'.sprintf(__('<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You\'re now running v%2$s.', 'wp-sharks-core'), esc_html($this->Config->©brand['©name']), esc_html($this::VERSION)).'</p>',
                     ];
                 },
             ],
