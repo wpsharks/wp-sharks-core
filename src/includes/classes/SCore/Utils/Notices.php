@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Plugin notices.
  *
- * @since 160525 WP notices.
+ * @since 160524 WP notices.
  */
 class Notices extends Classes\SCore\Base\Core
 {
     /**
      * Notice defaults.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      *
      * @type array Defaults.
      */
@@ -33,7 +33,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Dismiss action.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      *
      * @type string Dismiss action.
      */
@@ -42,7 +42,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @param Classes\App $App Instance.
      */
@@ -68,7 +68,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Normalize a notice.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param array $notice Input notice.
      *
@@ -101,7 +101,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Build a notice key.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param array $notice Input notice.
      *
@@ -120,7 +120,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Current user can?
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param array $notice Input notice.
      *
@@ -152,7 +152,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Get notices.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      *
      * @return array All notices.
      */
@@ -173,7 +173,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Get notices.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      *
      * @param $notices New array of notices.
      */
@@ -192,7 +192,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Enqueue an administrative notice.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $markup HTML markup containing the notice itself.
      * @param array  $args   Additional args; i.e., presentation/style.
@@ -224,7 +224,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Enqueue an administrative notice; for a particular user.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $markup HTML markup containing the notice itself.
      * @param array  $args   Additional args; i.e., presentation/style.
@@ -243,7 +243,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Dismiss a notice.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      *
      * @param string $key A key to dismiss.
      */
@@ -257,7 +257,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Dismiss URL.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      *
      * @param string $key A key to dismiss.
      *
@@ -276,7 +276,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Maybe dismiss.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      * @see <http://jas.xyz/1Tuh3aI>
      */
     public function onAdminInitMaybeDismiss()
@@ -311,7 +311,7 @@ class Notices extends Classes\SCore\Base\Core
     /**
      * Render admin notices.
      *
-     * @since 160525 WP notices.
+     * @since 160524 WP notices.
      * @see <http://jas.xyz/1Tuh3aI>
      */
     public function onAllAdminNotices()

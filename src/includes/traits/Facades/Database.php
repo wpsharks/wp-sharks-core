@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Database
 {
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function wpDb()
     {
@@ -25,7 +25,7 @@ trait Database
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function dbPrefix(...$args)
     {
@@ -33,7 +33,7 @@ trait Database
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function createDbTables(...$args)
     {
@@ -41,7 +41,7 @@ trait Database
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function dropDbTables(...$args)
     {
@@ -49,7 +49,7 @@ trait Database
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function dbIfNotExists(...$args)
     {
@@ -57,7 +57,7 @@ trait Database
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function dbEngineCompat(...$args)
     {
@@ -65,7 +65,7 @@ trait Database
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function dbCharsetCompat(...$args)
     {

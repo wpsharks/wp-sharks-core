@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Transients
 {
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function getTransient(...$args)
     {
@@ -25,7 +25,7 @@ trait Transients
     }
 
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function setTransient(...$args)
     {
@@ -33,7 +33,7 @@ trait Transients
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function deleteTransient(...$args)
     {

@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Plugin utils.
  *
- * @since 160525 WP notices.
+ * @since 160524 WP notices.
  */
 class Plugins extends Classes\SCore\Base\Core
 {
     /**
      * Global static cache.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @type array Global static cache.
      */
@@ -33,7 +33,7 @@ class Plugins extends Classes\SCore\Base\Core
     /**
      * Active plugins.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param bool $slugify Slugs w/ basename keys?
      * @note If false you'll get numerically indexed basenames.
@@ -61,7 +61,7 @@ class Plugins extends Classes\SCore\Base\Core
     /**
      * Network-active plugins.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param bool $slugify Slugs w/ basename keys?
      * @note If false you'll get numerically indexed basenames.
@@ -91,7 +91,7 @@ class Plugins extends Classes\SCore\Base\Core
     /**
      * All active plugins.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param bool $slugify Slugs w/ basename keys?
      * @note If false you'll get numerically indexed basenames.
@@ -120,7 +120,7 @@ class Plugins extends Classes\SCore\Base\Core
     /**
      * All installed plugins (directory scan).
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param bool $slugify Keyed by slug?
      *

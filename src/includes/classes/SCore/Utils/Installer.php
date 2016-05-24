@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Install utils.
  *
- * @since 160525 Install utils.
+ * @since 160524 Install utils.
  */
 class Installer extends Classes\SCore\Base\Core
 {
     /**
      * Install history.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      *
      * @type array Install history.
      */
@@ -33,7 +33,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      *
      * @param Classes\App $App Instance.
      */
@@ -65,7 +65,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Maybe install.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     public function maybeInstall()
     {
@@ -78,7 +78,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Install (or reinstall).
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     protected function install()
     {
@@ -95,7 +95,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Version-specific upgrades.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     protected function vsUpgrades()
     {
@@ -105,7 +105,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Create DB tables.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     protected function createDbTables()
     {
@@ -115,7 +115,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Other install routines.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     protected function otherInstallRoutines()
     {
@@ -125,7 +125,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Flush rewrite rules.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     protected function doFlushRewriteRules()
     {
@@ -139,7 +139,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Install (or reinstall) notice.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     protected function maybeEnqueueNotice()
     {
@@ -162,7 +162,7 @@ class Installer extends Classes\SCore\Base\Core
     /**
      * Update installed version.
      *
-     * @since 160525 Install utils.
+     * @since 160524 Install utils.
      */
     protected function updateHistory()
     {

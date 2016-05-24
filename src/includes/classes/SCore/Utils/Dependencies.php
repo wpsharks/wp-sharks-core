@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Dependencies.
  *
- * @since 160525 Dependencies.
+ * @since 160524 Dependencies.
  */
 class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\SecondConstants
 {
     /**
      * Unsatisfied plugins.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type array Data.
      */
@@ -33,7 +33,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Unsatisfied themes.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type array Data.
      */
@@ -42,7 +42,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Unsatisfied (other).
      *
-     * @since 160525
+     * @since 160524
      *
      * @type array Data.
      */
@@ -51,7 +51,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Checked?
      *
-     * @since 160525
+     * @since 160524
      *
      * @type bool Checked?
      */
@@ -60,7 +60,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Max OK time age.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type int Max age.
      */
@@ -69,7 +69,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Class constructor.
      *
-     * @since 160525 Dependencies.
+     * @since 160524 Dependencies.
      *
      * @param Classes\App $App Instance.
      */
@@ -89,7 +89,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Dependendies unsatisfied?
      *
-     * @since 160525 Dependencies.
+     * @since 160524 Dependencies.
      *
      * @return bool Dependendies unsatisfied?
      */
@@ -101,7 +101,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Check for dependencies.
      *
-     * @since 160525 Dependencies.
+     * @since 160524 Dependencies.
      */
     protected function maybeCheck()
     {
@@ -163,7 +163,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Last OK time.
      *
-     * @since 160525 Dependencies.
+     * @since 160524 Dependencies.
      *
      * @param int|null $time Last check time.
      *
@@ -190,7 +190,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Maybe enqueue dashboard notice.
      *
-     * @since 160525 Dependencies.
+     * @since 160524 Dependencies.
      */
     protected function maybeNotify()
     {
@@ -248,7 +248,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * URL to install dependency.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param string $slug Dependency slug.
      * @param string $type Dependency type.
@@ -278,7 +278,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * URL to activate dependency.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param string $slug Dependency slug.
      * @param string $type Dependency type.
@@ -312,7 +312,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * URL to upgrade dependency.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param string $slug Dependency slug.
      * @param string $type Dependency type.
@@ -346,7 +346,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * URL to dependency archive.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param string $slug    Dependency slug.
      * @param string $type    Dependency type.
@@ -377,7 +377,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Maybe enqueue dependency installation notice.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param array $args Required dependency args.
      *
@@ -456,7 +456,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Maybe enqueue dependency activation notice.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param array $args Required dependency args.
      *
@@ -526,7 +526,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Maybe enqueue dependency upgrade notice.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param array $args Required dependency args.
      *
@@ -611,7 +611,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Maybe enqueue dependency downgrade notice.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param array $args Required dependency args.
      *
@@ -696,7 +696,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Maybe enqueue some other dependency notice.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @param array $args Required dependency args.
      *
@@ -760,7 +760,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Notice `<div>` tag styles.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @type string Notice `<div>` tag styles.
      */
@@ -769,7 +769,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Heading `<p>` tag styles.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @type string Heading `<p>` tag styles.
      */
@@ -778,7 +778,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Message `<p>` tag styles.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @type string Message `<p>` tag styles.
      */
@@ -787,7 +787,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Styled arrow icon.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @type string Styled arrow icon.
      */
@@ -796,7 +796,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Styled bubble icon.
      *
-     * @since 160525 Plugin/theme dependencies.
+     * @since 160524 Plugin/theme dependencies.
      *
      * @type string Styled bubble icon.
      */

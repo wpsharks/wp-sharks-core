@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Uninstaller
 {
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function maybeUninstall(...$args)
     {

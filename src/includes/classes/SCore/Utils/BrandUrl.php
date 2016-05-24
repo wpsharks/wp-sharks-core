@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Brand URL.
  *
- * @since 160525 URL to post ID.
+ * @since 160524 URL to post ID.
  */
 class BrandUrl extends Classes\SCore\Base\Core
 {
     /**
      * URL to brand domain/path.
      *
-     * @since 160525 URL to brand domain/path.
+     * @since 160524 URL to brand domain/path.
      *
      * @param string $relative_uri URI relative to brand domain/path.
      *

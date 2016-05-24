@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Scripts/styles.
  *
- * @since 160525 Scripts/styles.
+ * @since 160524 Scripts/styles.
  */
 class StylesScripts extends Classes\SCore\Base\Core
 {
     /**
      * Enqueued.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type array Enqueued.
      */
@@ -33,7 +33,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 160525 Scripts/styles.
+     * @since 160524 Scripts/styles.
      *
      * @param Classes\App $App Instance.
      */
@@ -47,7 +47,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Did enqueue libs?
      *
-     * @since 160525 Scripts/styles.
+     * @since 160524 Scripts/styles.
      *
      * @param string $identifier Identifier.
      * @param bool   $flag       If setting the flag.
@@ -65,7 +65,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Moment libs.
      *
-     * @since 160525 Moment libs.
+     * @since 160524 Moment libs.
      */
     public function enqueueMomentLibs()
     {
@@ -96,7 +96,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue jQuery Pickadate libs.
      *
-     * @since 160525 jQuery Pickadate libs.
+     * @since 160524 jQuery Pickadate libs.
      *
      * @param string $which One of `date-time`, `date`, `time`.
      */
@@ -207,7 +207,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue jQuery Chosen libs.
      *
-     * @since 160525 jQuery Chosen libs.
+     * @since 160524 jQuery Chosen libs.
      */
     public function enqueueJQueryChosenLibs()
     {
@@ -237,7 +237,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue jQuery grid libs.
      *
-     * @since 160525 jQuery grid libs.
+     * @since 160524 jQuery grid libs.
      */
     public function enqueueJQueryJsGridLibs()
     {

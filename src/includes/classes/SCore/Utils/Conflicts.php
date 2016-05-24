@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Conflicts.
  *
- * @since 160525 WP notices.
+ * @since 160524 WP notices.
  */
 class Conflicts extends Classes\SCore\Base\Core
 {
     /**
      * Conflicting plugins.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type array Slugs.
      */
@@ -33,7 +33,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Conflicting themes.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type array Slugs.
      */
@@ -42,7 +42,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Deactivatble plugins.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type array Slugs.
      */
@@ -51,7 +51,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Checked?
      *
-     * @since 160525
+     * @since 160524
      *
      * @type bool Checked?
      */
@@ -60,7 +60,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Max OK time age.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type int Max age.
      */
@@ -69,7 +69,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @param Classes\App $App Instance.
      */
@@ -89,7 +89,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Conflicts exist?
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @return bool Conflicts exist?
      *
@@ -104,7 +104,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Check for conflicts.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @note Deactivable conflicts are considered conflicts too.
      *  However, we can deactivate them and simply show a warning w/ refresh link.
@@ -181,7 +181,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Last OK time.
      *
-     * @since 160525 Dependencies.
+     * @since 160524 Dependencies.
      *
      * @param int|null $time Last check time.
      *
@@ -208,7 +208,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Maybe enqueue dashboard notice.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @note Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we are in conflict with another

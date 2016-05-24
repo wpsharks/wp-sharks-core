@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Role query utils.
  *
- * @since 160525 Post utils.
+ * @since 160524 Post utils.
  */
 class RolesQuery extends Classes\SCore\Base\Core
 {
     /**
      * Total roles.
      *
-     * @since 160525 Role utils.
+     * @since 160524 Role utils.
      *
      * @param array $args Behavioral args.
      *
@@ -67,7 +67,7 @@ class RolesQuery extends Classes\SCore\Base\Core
     /**
      * All roles.
      *
-     * @since 160525 Role utils.
+     * @since 160524 Role utils.
      *
      * @param array $args Behavioral args.
      *
@@ -124,7 +124,7 @@ class RolesQuery extends Classes\SCore\Base\Core
     /**
      * Role select options.
      *
-     * @since 160525 Role utils.
+     * @since 160524 Role utils.
      *
      * @param array $args Behavioral args.
      *

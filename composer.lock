@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "77a7452d1fa6ecf746b873ed62e76c0c",
-    "content-hash": "e419562c7931c01aa8df6781e21d4fe1",
+    "hash": "cad63d6fc5739641c6f778449b3d6f81",
+    "content-hash": "14726a905133e4f5eadb770b6e3c75bd",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -767,16 +767,16 @@
         },
         {
             "name": "websharks/core",
-            "version": "160525",
+            "version": "160524",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "0d1c62bf5a446efa580552f3d0e385b61da025f5"
+                "reference": "ddfab9cd66a11e98c26365ec2072407c07eeee87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/0d1c62bf5a446efa580552f3d0e385b61da025f5",
-                "reference": "0d1c62bf5a446efa580552f3d0e385b61da025f5",
+                "url": "https://api.github.com/repos/websharks/core/zipball/ddfab9cd66a11e98c26365ec2072407c07eeee87",
+                "reference": "ddfab9cd66a11e98c26365ec2072407c07eeee87",
                 "shasum": ""
             },
             "require": {
@@ -886,7 +886,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-05-24 14:27:26"
+            "time": "2016-05-24 15:25:37"
         },
         {
             "name": "websharks/dicer",
@@ -992,7 +992,7 @@
         },
         {
             "name": "websharks/wp-php-rv",
-            "version": "160525",
+            "version": "160524",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/wp-php-rv.git",

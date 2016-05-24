@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * App (plugins must extend).
  *
- * @since 160525 Initial release.
+ * @since 160524 Initial release.
  */
 class App extends CoreClasses\App
 {
     /**
      * Version.
      *
-     * @since 160525
+     * @since 160524
      *
      * @type string Version.
      */
@@ -33,7 +33,7 @@ class App extends CoreClasses\App
     /**
      * Constructor.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @param array            $instance_base Instance base.
      * @param array            $instance      Instance args.
@@ -470,7 +470,7 @@ class App extends CoreClasses\App
     /**
      * Run setup routines.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public function onSetup() // Public hook.
     {
@@ -522,7 +522,7 @@ class App extends CoreClasses\App
     /**
      * Early hook setup handler.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @note For extenders. Only runs when appropriate.
      */
@@ -534,7 +534,7 @@ class App extends CoreClasses\App
     /**
      * Other hook setup handler.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @note For extenders. Only runs when appropriate.
      */

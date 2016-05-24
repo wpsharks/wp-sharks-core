@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait UserQueries
 {
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function usersQueryTotal(...$args)
     {
@@ -25,7 +25,7 @@ trait UserQueries
     }
 
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function usersQueryAll(...$args)
     {
@@ -33,7 +33,7 @@ trait UserQueries
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function userSelectOptions(...$args)
     {

@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Plugin utils.
  *
- * @since 160525 WP notices.
+ * @since 160524 WP notices.
  */
 class Plugin extends Classes\SCore\Base\Core
 {
     /**
      * Plugin slug from basename.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $basename Plugin basename.
      *
@@ -43,7 +43,7 @@ class Plugin extends Classes\SCore\Base\Core
     /**
      * Plugin slugs from basenames.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param array $basenames Plugin basenames.
      *
@@ -65,7 +65,7 @@ class Plugin extends Classes\SCore\Base\Core
     /**
      * Is a plugin installed?
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $slug Plugin slug.
      *
@@ -79,7 +79,7 @@ class Plugin extends Classes\SCore\Base\Core
     /**
      * Installed plugin data from slug.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $slug Plugin slug.
      * @param string $key  Data key to acquire.

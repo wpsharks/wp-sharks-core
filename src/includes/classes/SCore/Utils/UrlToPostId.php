@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * URL to post ID.
  *
- * @since 160525 URL to post ID.
+ * @since 160524 URL to post ID.
  */
 class UrlToPostId extends Classes\SCore\Base\Core
 {
     /**
      * URL (or URI) to post ID.
      *
-     * @since 160525 URL to post ID.
+     * @since 160524 URL to post ID.
      *
      * @param string $url_uri_qsl Input URL, URI, or query string w/ a leading `?`.
      *

@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Hook utils.
  *
- * @since 160525 Hook utils.
+ * @since 160524 Hook utils.
  */
 class Hooks extends Classes\SCore\Base\Core
 {
     /**
      * Add a filter.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @param string   $hook     A hook.
      * @param callable $callable Callable.
@@ -40,7 +40,7 @@ class Hooks extends Classes\SCore\Base\Core
     /**
      * Apply filters.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @param string $hook  A hook.
      * @param mixed  $value Value to filter.
@@ -56,7 +56,7 @@ class Hooks extends Classes\SCore\Base\Core
     /**
      * Add an action.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @param string   $hook     A hook.
      * @param callable $callable Callable.
@@ -72,7 +72,7 @@ class Hooks extends Classes\SCore\Base\Core
     /**
      * Do an action.
      *
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      *
      * @param string $hook A hook.
      * @param mixed ...$args Any additional args.

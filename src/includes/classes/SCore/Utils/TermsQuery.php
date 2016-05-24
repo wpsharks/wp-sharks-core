@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Term query utils.
  *
- * @since 160525 Term utils.
+ * @since 160524 Term utils.
  */
 class TermsQuery extends Classes\SCore\Base\Core
 {
     /**
      * Total terms.
      *
-     * @since 160525 Term utils.
+     * @since 160524 Term utils.
      *
      * @param array $args Behavioral args.
      *
@@ -78,7 +78,7 @@ class TermsQuery extends Classes\SCore\Base\Core
     /**
      * All terms.
      *
-     * @since 160525 Term utils.
+     * @since 160524 Term utils.
      *
      * @param array $args Behavioral args.
      *
@@ -146,7 +146,7 @@ class TermsQuery extends Classes\SCore\Base\Core
     /**
      * Term select options.
      *
-     * @since 160525 Term utils.
+     * @since 160524 Term utils.
      *
      * @param array $args Behavioral args.
      *

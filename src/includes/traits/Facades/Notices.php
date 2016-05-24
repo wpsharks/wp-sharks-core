@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Notices
 {
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function enqueueNotice(...$args)
     {
@@ -25,7 +25,7 @@ trait Notices
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function enqueueUserNotice(...$args)
     {
@@ -33,7 +33,7 @@ trait Notices
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function dismissNotice(...$args)
     {

@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Database utils.
  *
- * @since 160525 DB utils.
+ * @since 160524 DB utils.
  */
 class Database extends Classes\SCore\Base\Core
 {
     /**
      * WP database.
      *
-     * @since 160525 DB utils.
+     * @since 160524 DB utils.
      *
      * @type \wpdb Reference.
      */
@@ -33,7 +33,7 @@ class Database extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 160525 DB utils.
+     * @since 160524 DB utils.
      *
      * @param Classes\App $App Instance.
      */
@@ -47,7 +47,7 @@ class Database extends Classes\SCore\Base\Core
     /**
      * Table prefix.
      *
-     * @since 160525 DB utils.
+     * @since 160524 DB utils.
      *
      * @return string Table prefix.
      */
@@ -63,7 +63,7 @@ class Database extends Classes\SCore\Base\Core
     /**
      * Create DB tables.
      *
-     * @since 160525 DB utils.
+     * @since 160524 DB utils.
      */
     public function createTables()
     {
@@ -121,7 +121,7 @@ class Database extends Classes\SCore\Base\Core
     /**
      * Drop DB tables.
      *
-     * @since 160525 DB utils.
+     * @since 160524 DB utils.
      */
     public function dropTables()
     {
@@ -150,7 +150,7 @@ class Database extends Classes\SCore\Base\Core
     /**
      * MySQL `IF NOT EXISTS` check.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $sql SQL to check.
      *
@@ -172,7 +172,7 @@ class Database extends Classes\SCore\Base\Core
     /**
      * MySQL storage engine compat.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $sql SQL to check.
      *
@@ -199,7 +199,7 @@ class Database extends Classes\SCore\Base\Core
     /**
      * MySQL charset/collate compat.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $sql SQL to check.
      *

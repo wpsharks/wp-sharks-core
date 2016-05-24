@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Theme
 {
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function themeIsInstalled(...$args)
     {
@@ -25,7 +25,7 @@ trait Theme
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function installedThemeData(...$args)
     {

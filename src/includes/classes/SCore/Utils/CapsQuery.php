@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Cap query utils.
  *
- * @since 160525 Post utils.
+ * @since 160524 Post utils.
  */
 class CapsQuery extends Classes\SCore\Base\Core
 {
     /**
      * Deprecated level caps.
      *
-     * @since 160525 Cap utils.
+     * @since 160524 Cap utils.
      *
      * @type string
      */
@@ -33,7 +33,7 @@ class CapsQuery extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 160525 Cap utils.
+     * @since 160524 Cap utils.
      *
      * @param Classes\App $App Instance.
      */
@@ -49,7 +49,7 @@ class CapsQuery extends Classes\SCore\Base\Core
     /**
      * Total caps.
      *
-     * @since 160525 Cap utils.
+     * @since 160524 Cap utils.
      *
      * @param array $args Behavioral args.
      *
@@ -96,7 +96,7 @@ class CapsQuery extends Classes\SCore\Base\Core
     /**
      * All caps.
      *
-     * @since 160525 Cap utils.
+     * @since 160524 Cap utils.
      *
      * @param array $args Behavioral args.
      *
@@ -159,7 +159,7 @@ class CapsQuery extends Classes\SCore\Base\Core
     /**
      * Cap select options.
      *
-     * @since 160525 Cap utils.
+     * @since 160524 Cap utils.
      *
      * @param array $args Behavioral args.
      *
@@ -265,7 +265,7 @@ class CapsQuery extends Classes\SCore\Base\Core
     /**
      * Collect role caps.
      *
-     * @since 160525 Cap utils.
+     * @since 160524 Cap utils.
      *
      * @param string $role_id  Role ID.
      * @param bool   $no_cache Bypass cache?
@@ -307,7 +307,7 @@ class CapsQuery extends Classes\SCore\Base\Core
     /**
      * Collect caps.
      *
-     * @since 160525 Cap utils.
+     * @since 160524 Cap utils.
      *
      * @param bool $no_cache Bypass cache?
      *

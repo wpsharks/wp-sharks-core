@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait CapQueries
 {
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function capsQueryTotal(...$args)
     {
@@ -25,7 +25,7 @@ trait CapQueries
     }
 
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function capsQueryAll(...$args)
     {
@@ -33,7 +33,7 @@ trait CapQueries
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function capSelectOptions(...$args)
     {
@@ -41,7 +41,7 @@ trait CapQueries
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function capsForRole(...$args)
     {
@@ -49,7 +49,7 @@ trait CapQueries
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function capsCollectAll(...$args)
     {

@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait Hooks
 {
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function addFilter(...$args)
     {
@@ -25,7 +25,7 @@ trait Hooks
     }
 
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function applyFilters(...$args)
     {
@@ -33,7 +33,7 @@ trait Hooks
     }
 
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function addAction(...$args)
     {
@@ -41,7 +41,7 @@ trait Hooks
     }
 
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function doAction(...$args)
     {

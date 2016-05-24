@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Nonce utils.
  *
- * @since 160525 WP notices.
+ * @since 160524 WP notices.
  */
 class Nonce extends Classes\SCore\Base\Core
 {
     /**
      * Add an nonce to a URL.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $url    Input URL.
      * @param string $action Action identifier.
@@ -39,7 +39,7 @@ class Nonce extends Classes\SCore\Base\Core
     /**
      * Remove an nonce from a URL.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $url Input URL.
      *
@@ -53,7 +53,7 @@ class Nonce extends Classes\SCore\Base\Core
     /**
      * Request contains a valid nonce?
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $action Action identifier.
      *
@@ -67,7 +67,7 @@ class Nonce extends Classes\SCore\Base\Core
     /**
      * Require a valid nonce.
      *
-     * @since 160525 First documented version.
+     * @since 160524 First documented version.
      *
      * @param string $action Action identifier.
      */

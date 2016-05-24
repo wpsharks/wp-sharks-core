@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait TermQueries
 {
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function termsQueryTotal(...$args)
     {
@@ -25,7 +25,7 @@ trait TermQueries
     }
 
     /**
-     * @since 160525 App.
+     * @since 160524 App.
      */
     public static function termsQueryAll(...$args)
     {
@@ -33,7 +33,7 @@ trait TermQueries
     }
 
     /**
-     * @since 160525 Initial release.
+     * @since 160524 Initial release.
      */
     public static function termSelectOptions(...$args)
     {
