@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160528.36091\n"
+"Project-Id-Version: WP Sharks Core 160528.39683\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-05-28 10:01:42+00:00\n"
+"POT-Creation-Date: 2016-05-28 11:01:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,699 +12,566 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:393
 #: src/includes/classes/App.php:393
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/App.php:399
 #: src/includes/classes/App.php:399
 msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:233
 #: src/includes/classes/SCore/Utils/Conflicts.php:233
 msgid "<strong>%1$s</strong> is not running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the '%2$s' plugin to clear this message."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:242
 #: src/includes/classes/SCore/Utils/Conflicts.php:242
 msgid "<strong>%1$s</strong> is not running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please switch your '%2$s' theme to clear this message."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:251
 #: src/includes/classes/SCore/Utils/Conflicts.php:251
 msgid "The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:252
 #: src/includes/classes/SCore/Utils/Conflicts.php:252
 msgid "<strong>%1$s</strong> will be able load now. Please <a href=\"javascript:location.reload();\">refresh</a>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:427
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:436
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:506
 #: src/includes/classes/SCore/Utils/Dependencies.php:427
 #: src/includes/classes/SCore/Utils/Dependencies.php:436
 #: src/includes/classes/SCore/Utils/Dependencies.php:506
 msgid "'%1$s' %2$s Required"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:430
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:439
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:509
 #: src/includes/classes/SCore/Utils/Dependencies.php:430
 #: src/includes/classes/SCore/Utils/Dependencies.php:439
 #: src/includes/classes/SCore/Utils/Dependencies.php:509
 msgid "<strong>%1$s is not active.</strong> It depends on the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:431
 #: src/includes/classes/SCore/Utils/Dependencies.php:431
 msgid "A simple addition is necessary. <strong><a href=\"%1$s\">Click here to install '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:432
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:441
 #: src/includes/classes/SCore/Utils/Dependencies.php:432
 #: src/includes/classes/SCore/Utils/Dependencies.php:441
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, install the dependency or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:440
 #: src/includes/classes/SCore/Utils/Dependencies.php:440
 msgid "An addition is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:510
 #: src/includes/classes/SCore/Utils/Dependencies.php:510
 msgid "A simple activation is necessary. <strong><a href=\"%1$s\">Click here to activate '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:511
 #: src/includes/classes/SCore/Utils/Dependencies.php:511
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, activate the dependency or deactivate %1$s until you do.</em>"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:580
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:590
 #: src/includes/classes/SCore/Utils/Dependencies.php:580
 #: src/includes/classes/SCore/Utils/Dependencies.php:590
 msgid "'%1$s' %2$s Upgrade Required"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:583
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:593
 #: src/includes/classes/SCore/Utils/Dependencies.php:583
 #: src/includes/classes/SCore/Utils/Dependencies.php:593
 msgid "<strong>%1$s is not active.</strong> It requires <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> v%4$s (or higher)."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:584
 #: src/includes/classes/SCore/Utils/Dependencies.php:584
 msgid "You're running an older copy (v%1$s) of the '%2$s' %3$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:585
 #: src/includes/classes/SCore/Utils/Dependencies.php:585
 msgid "A simple update is necessary. <strong><a href=\"%1$s\">Click here to upgrade %2$s</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:586
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:596
 #: src/includes/classes/SCore/Utils/Dependencies.php:586
 #: src/includes/classes/SCore/Utils/Dependencies.php:596
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, update the dependency or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:594
 #: src/includes/classes/SCore/Utils/Dependencies.php:594
 msgid "You're currently running an older copy of the '%1$s' %2$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:595
 #: src/includes/classes/SCore/Utils/Dependencies.php:595
 msgid "An update is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Get the latest version of %2$s</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:665
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:675
 #: src/includes/classes/SCore/Utils/Dependencies.php:665
 #: src/includes/classes/SCore/Utils/Dependencies.php:675
 msgid "'%1$s' %2$s Downgrade Required"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:668
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:678
 #: src/includes/classes/SCore/Utils/Dependencies.php:668
 #: src/includes/classes/SCore/Utils/Dependencies.php:678
 msgid "<strong>%1$s is not active.</strong> It requires an older version of the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:669
 #: src/includes/classes/SCore/Utils/Dependencies.php:669
 msgid "This software is compatible up to %1$s v%2$s, but you're running the newer v%3$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:670
 #: src/includes/classes/SCore/Utils/Dependencies.php:670
 msgid "A manual downgrade is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to download the older v%2$s</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:671
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:681
 #: src/includes/classes/SCore/Utils/Dependencies.php:671
 #: src/includes/classes/SCore/Utils/Dependencies.php:681
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, downgrade the dependency or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:679
 #: src/includes/classes/SCore/Utils/Dependencies.php:679
 msgid "This software is compatible up to %1$s v%2$s, but you're running a newer version."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:680
 #: src/includes/classes/SCore/Utils/Dependencies.php:680
 msgid "A manual downgrade is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get an older v%2$s</a></strong>."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:740
 #: src/includes/classes/SCore/Utils/Dependencies.php:740
 msgid "'%1$s' Required"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:743
 #: src/includes/classes/SCore/Utils/Dependencies.php:743
 msgid "<strong>%1$s is not active.</strong> It requires %2$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:744
 #: src/includes/classes/SCore/Utils/Dependencies.php:744
 msgid "To resolve, %1$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:745
 #: src/includes/classes/SCore/Utils/Dependencies.php:745
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, resolove the issue or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:31
 #: src/includes/classes/SCore/Utils/Fatality.php:31
 msgid "Abnormal request; forbidden."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:31
 #: src/includes/classes/SCore/Utils/Fatality.php:31
 msgid "Forbidden"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:373
 #: src/includes/classes/SCore/Utils/Notices.php:373
 msgid "Dismiss this notice."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Options.php:127
 #: src/includes/classes/SCore/Utils/Options.php:127
 msgid "%1$s options updated successfully."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostTypesQuery.php:196
 #: src/includes/classes/SCore/Utils/PostTypesQuery.php:196
 msgid "Posts"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:365
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:221
 #: src/includes/classes/SCore/Utils/PostsQuery.php:365
 #: src/includes/classes/SCore/Utils/TermsQuery.php:221
 msgid "Post"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/PostsQuery.php:366
 #: src/includes/classes/SCore/Utils/PostsQuery.php:366
 msgid "Untitled"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:83
 #: src/includes/classes/SCore/Utils/StylesScripts.php:83
 msgctxt "moment-libs"
 msgid "MMM Do, YYYY h:mm a"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:84
 #: src/includes/classes/SCore/Utils/StylesScripts.php:84
 msgctxt "moment-libs"
 msgid "MMM Do, YYYY"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:85
 #: src/includes/classes/SCore/Utils/StylesScripts.php:85
 msgctxt "moment-libs"
 msgid "h:mm a"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:87
 #: src/includes/classes/SCore/Utils/StylesScripts.php:87
 msgctxt "moment-libs"
 msgid "en"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:90
 #: src/includes/classes/SCore/Utils/StylesScripts.php:90
 msgctxt "moment-libs"
 msgid "UTC"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:129
 #: src/includes/classes/SCore/Utils/StylesScripts.php:129
 msgctxt "jquery-pickadate-libs"
 msgid "mmm dd, yyyy"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:130
 #: src/includes/classes/SCore/Utils/StylesScripts.php:130
 msgctxt "jquery-pickadate-libs"
 msgid "MMM DD, YYYY"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:132
 #: src/includes/classes/SCore/Utils/StylesScripts.php:132
 msgctxt "jquery-pickadate-libs"
 msgid "yyyy-mm-dd"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:135
 #: src/includes/classes/SCore/Utils/StylesScripts.php:135
 msgctxt "jquery-pickadate-libs"
 msgid "Today"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:136
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:201
 #: src/includes/classes/SCore/Utils/StylesScripts.php:136
 #: src/includes/classes/SCore/Utils/StylesScripts.php:201
 msgctxt "jquery-pickadate-libs"
 msgid "Clear"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:137
 #: src/includes/classes/SCore/Utils/StylesScripts.php:137
 msgctxt "jquery-pickadate-libs"
 msgid "Close"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:139
 #: src/includes/classes/SCore/Utils/StylesScripts.php:139
 msgctxt "jquery-pickadate-libs"
 msgid "Next Month"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:140
 #: src/includes/classes/SCore/Utils/StylesScripts.php:140
 msgctxt "jquery-pickadate-libs"
 msgid "Previous Month"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:141
 #: src/includes/classes/SCore/Utils/StylesScripts.php:141
 msgctxt "jquery-pickadate-libs"
 msgid "Select Month"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:142
 #: src/includes/classes/SCore/Utils/StylesScripts.php:142
 msgctxt "jquery-pickadate-libs"
 msgid "Select Year"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:145
 #: src/includes/classes/SCore/Utils/StylesScripts.php:145
 msgctxt "jquery-pickadate-libs"
 msgid "Sun"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:146
 #: src/includes/classes/SCore/Utils/StylesScripts.php:146
 msgctxt "jquery-pickadate-libs"
 msgid "Mon"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:147
 #: src/includes/classes/SCore/Utils/StylesScripts.php:147
 msgctxt "jquery-pickadate-libs"
 msgid "Tue"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:148
 #: src/includes/classes/SCore/Utils/StylesScripts.php:148
 msgctxt "jquery-pickadate-libs"
 msgid "Wed"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:149
 #: src/includes/classes/SCore/Utils/StylesScripts.php:149
 msgctxt "jquery-pickadate-libs"
 msgid "Thu"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:150
 #: src/includes/classes/SCore/Utils/StylesScripts.php:150
 msgctxt "jquery-pickadate-libs"
 msgid "Fri"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:151
 #: src/includes/classes/SCore/Utils/StylesScripts.php:151
 msgctxt "jquery-pickadate-libs"
 msgid "Sat"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:154
 #: src/includes/classes/SCore/Utils/StylesScripts.php:154
 msgctxt "jquery-pickadate-libs"
 msgid "Sunday"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:155
 #: src/includes/classes/SCore/Utils/StylesScripts.php:155
 msgctxt "jquery-pickadate-libs"
 msgid "Monday"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:156
 #: src/includes/classes/SCore/Utils/StylesScripts.php:156
 msgctxt "jquery-pickadate-libs"
 msgid "Tuesday"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:157
 #: src/includes/classes/SCore/Utils/StylesScripts.php:157
 msgctxt "jquery-pickadate-libs"
 msgid "Wednesday"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:158
 #: src/includes/classes/SCore/Utils/StylesScripts.php:158
 msgctxt "jquery-pickadate-libs"
 msgid "Thursday"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:159
 #: src/includes/classes/SCore/Utils/StylesScripts.php:159
 msgctxt "jquery-pickadate-libs"
 msgid "Friday"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:160
 #: src/includes/classes/SCore/Utils/StylesScripts.php:160
 msgctxt "jquery-pickadate-libs"
 msgid "Saturday"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:163
 #: src/includes/classes/SCore/Utils/StylesScripts.php:163
 msgctxt "jquery-pickadate-libs"
 msgid "Jan"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:164
 #: src/includes/classes/SCore/Utils/StylesScripts.php:164
 msgctxt "jquery-pickadate-libs"
 msgid "Feb"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:165
 #: src/includes/classes/SCore/Utils/StylesScripts.php:165
 msgctxt "jquery-pickadate-libs"
 msgid "Mar"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:166
 #: src/includes/classes/SCore/Utils/StylesScripts.php:166
 msgctxt "jquery-pickadate-libs"
 msgid "Apr"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:167
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:181
 #: src/includes/classes/SCore/Utils/StylesScripts.php:167
 #: src/includes/classes/SCore/Utils/StylesScripts.php:181
 msgctxt "jquery-pickadate-libs"
 msgid "May"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:168
 #: src/includes/classes/SCore/Utils/StylesScripts.php:168
 msgctxt "jquery-pickadate-libs"
 msgid "Jun"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:169
 #: src/includes/classes/SCore/Utils/StylesScripts.php:169
 msgctxt "jquery-pickadate-libs"
 msgid "Jul"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:170
 #: src/includes/classes/SCore/Utils/StylesScripts.php:170
 msgctxt "jquery-pickadate-libs"
 msgid "Aug"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:171
 #: src/includes/classes/SCore/Utils/StylesScripts.php:171
 msgctxt "jquery-pickadate-libs"
 msgid "Sep"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:172
 #: src/includes/classes/SCore/Utils/StylesScripts.php:172
 msgctxt "jquery-pickadate-libs"
 msgid "Oct"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:173
 #: src/includes/classes/SCore/Utils/StylesScripts.php:173
 msgctxt "jquery-pickadate-libs"
 msgid "Nov"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:174
 #: src/includes/classes/SCore/Utils/StylesScripts.php:174
 msgctxt "jquery-pickadate-libs"
 msgid "Dec"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:177
 #: src/includes/classes/SCore/Utils/StylesScripts.php:177
 msgctxt "jquery-pickadate-libs"
 msgid "January"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:178
 #: src/includes/classes/SCore/Utils/StylesScripts.php:178
 msgctxt "jquery-pickadate-libs"
 msgid "February"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:179
 #: src/includes/classes/SCore/Utils/StylesScripts.php:179
 msgctxt "jquery-pickadate-libs"
 msgid "March"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:180
 #: src/includes/classes/SCore/Utils/StylesScripts.php:180
 msgctxt "jquery-pickadate-libs"
 msgid "April"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:182
 #: src/includes/classes/SCore/Utils/StylesScripts.php:182
 msgctxt "jquery-pickadate-libs"
 msgid "June"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:183
 #: src/includes/classes/SCore/Utils/StylesScripts.php:183
 msgctxt "jquery-pickadate-libs"
 msgid "July"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:184
 #: src/includes/classes/SCore/Utils/StylesScripts.php:184
 msgctxt "jquery-pickadate-libs"
 msgid "August"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:185
 #: src/includes/classes/SCore/Utils/StylesScripts.php:185
 msgctxt "jquery-pickadate-libs"
 msgid "September"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:186
 #: src/includes/classes/SCore/Utils/StylesScripts.php:186
 msgctxt "jquery-pickadate-libs"
 msgid "October"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:187
 #: src/includes/classes/SCore/Utils/StylesScripts.php:187
 msgctxt "jquery-pickadate-libs"
 msgid "November"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:188
 #: src/includes/classes/SCore/Utils/StylesScripts.php:188
 msgctxt "jquery-pickadate-libs"
 msgid "December"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:195
 #: src/includes/classes/SCore/Utils/StylesScripts.php:195
 msgctxt "jquery-pickadate-libs"
 msgid "h:i A"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:196
 #: src/includes/classes/SCore/Utils/StylesScripts.php:196
 msgctxt "jquery-pickadate-libs"
 msgid "h:mm A"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:198
 #: src/includes/classes/SCore/Utils/StylesScripts.php:198
 msgctxt "jquery-pickadate-libs"
 msgid "HH:i"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:229
 #: src/includes/classes/SCore/Utils/StylesScripts.php:229
 msgctxt "jquery-chosen-libs"
 msgid "No results."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:230
 #: src/includes/classes/SCore/Utils/StylesScripts.php:230
 msgctxt "jquery-chosen-libs"
 msgid "Search or click to select options..."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:231
 #: src/includes/classes/SCore/Utils/StylesScripts.php:231
 msgctxt "jquery-chosen-libs"
 msgid "Search or click to select an option..."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:275
 #: src/includes/classes/SCore/Utils/StylesScripts.php:275
 msgctxt "jquery-jsgrid-libs"
 msgid "««"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:276
 #: src/includes/classes/SCore/Utils/StylesScripts.php:276
 msgctxt "jquery-jsgrid-libs"
 msgid "«"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:277
 #: src/includes/classes/SCore/Utils/StylesScripts.php:277
 msgctxt "jquery-jsgrid-libs"
 msgid "»"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:278
 #: src/includes/classes/SCore/Utils/StylesScripts.php:278
 msgctxt "jquery-jsgrid-libs"
 msgid "»»"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:279
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:280
 #: src/includes/classes/SCore/Utils/StylesScripts.php:279
 #: src/includes/classes/SCore/Utils/StylesScripts.php:280
 msgctxt "jquery-jsgrid-libs"
 msgid "…"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:281
 #: src/includes/classes/SCore/Utils/StylesScripts.php:281
 msgctxt "jquery-jsgrid-libs"
 msgid "Pages:"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:284
 #: src/includes/classes/SCore/Utils/StylesScripts.php:284
 msgctxt "jquery-jsgrid-libs"
 msgid "A slight problem..."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:285
 #: src/includes/classes/SCore/Utils/StylesScripts.php:285
 msgctxt "jquery-jsgrid-libs"
 msgid "loading..."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:286
 #: src/includes/classes/SCore/Utils/StylesScripts.php:286
 msgctxt "jquery-jsgrid-libs"
 msgid "Nothing to display."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:287
 #: src/includes/classes/SCore/Utils/StylesScripts.php:287
 msgctxt "jquery-jsgrid-libs"
 msgid "Are you sure?"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:299
 #: src/includes/classes/SCore/Utils/StylesScripts.php:299
 msgctxt "jquery-jsgrid-libs"
 msgid "Edit"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:300
 #: src/includes/classes/SCore/Utils/StylesScripts.php:300
 msgctxt "jquery-jsgrid-libs"
 msgid "Delete"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:301
 #: src/includes/classes/SCore/Utils/StylesScripts.php:301
 msgctxt "jquery-jsgrid-libs"
 msgid "Search"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:302
 #: src/includes/classes/SCore/Utils/StylesScripts.php:302
 msgctxt "jquery-jsgrid-libs"
 msgid "Insert"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:303
 #: src/includes/classes/SCore/Utils/StylesScripts.php:303
 msgctxt "jquery-jsgrid-libs"
 msgid "Update"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:304
 #: src/includes/classes/SCore/Utils/StylesScripts.php:304
 msgctxt "jquery-jsgrid-libs"
 msgid "Cancel edit"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:305
 #: src/includes/classes/SCore/Utils/StylesScripts.php:305
 msgctxt "jquery-jsgrid-libs"
 msgid "Clear filter"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:306
 #: src/includes/classes/SCore/Utils/StylesScripts.php:306
 msgctxt "jquery-jsgrid-libs"
 msgid "Switch to inserting"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/StylesScripts.php:307
 #: src/includes/classes/SCore/Utils/StylesScripts.php:307
 msgctxt "jquery-jsgrid-libs"
 msgid "Switch to searching"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:222
 #: src/includes/classes/SCore/Utils/TermsQuery.php:222
 msgid "Taxonomy"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/TermsQuery.php:223
 #: src/includes/classes/SCore/Utils/TermsQuery.php:223
 msgid "Term"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/UsersQuery.php:184
 #: src/includes/classes/SCore/Utils/UsersQuery.php:184
 msgid "User"
 msgstr ""

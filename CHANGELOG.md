@@ -1,4 +1,4 @@
-## v160528.1258
+## v160528.39683
 
 - Updating phing build system.
 - Updating to latest websharks/core.
