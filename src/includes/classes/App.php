@@ -57,7 +57,8 @@ class App extends CoreClasses\App
         $this->class     = $this->reflection->getName();
         $this->namespace = $this->reflection->getNamespaceName();
 
-        $this->base_dir          = dirname($this->reflection->getFileName(), 4);
+        $this->file              = $this->reflection->getFileName();
+        $this->base_dir          = dirname($this->file, 4);
         $this->base_dir_basename = basename($this->base_dir);
 
         # Establish specs & brand for parent constructor.
@@ -114,11 +115,12 @@ class App extends CoreClasses\App
                 } elseif (is_file($this->base_dir.'/style.css')) {
                     $specs['§type'] = 'theme';
                     $specs['§file'] = $this->base_dir.'/style.css';
-                } else {
-                    throw new Exception('Unable to determine type/file.');
-                }
-                // Note: Another supported type is `mu-plugin`, but that requires
-                // the MU plugin give its type explicitly; i.e., can't guess that here.
+                } elseif (is_file($this->base_dir.'/src/wp-content/mu-plugins/site.php')) {
+                    $specs['§type'] = 'mu-plugin';
+                    $specs['§file'] = $this->base_dir.'/src/wp-content/mu-plugins/site.php';
+                } else { // Hard failure in this unexpected case.
+                    throw new Exception('Unable to determine `§type`/`§file`.');
+                } // The app will need to give its §type/§file explicitly.
             }
             $brand = array_merge(
                 [
@@ -196,13 +198,20 @@ class App extends CoreClasses\App
         if (!($wp_site_default_scheme = $wp_site_url_option['scheme'] ?? 'http')) {
             throw new Exception('Failed to parse site URL option scheme.');
         }
-        if ($specs['§type'] === 'theme') { // Special case.
+        if ($specs['§type'] === 'plugin') {
+            if (!($wp_app_url = parse_url(plugin_dir_url($specs['§file'])))) {
+                throw new Exception('Failed to parse plugin dir URL.');
+            }
+        } elseif ($specs['§type'] === 'theme') {
             if (!($wp_app_url = parse_url(get_template_directory_uri()))) {
                 throw new Exception('Failed to parse theme dir URL.');
             }
-        } elseif (!($wp_app_url = parse_url(plugin_dir_url($specs['§file'])))) {
-            // Note: `plugin_dir_url()` works for MU plugins also.
-            throw new Exception('Failed to parse plugin dir URL.');
+        } elseif ($specs['§type'] === 'mu-plugin') {
+            if (!($wp_app_url = parse_url(site_url('/')))) {
+                throw new Exception('Failed to parse site URL.');
+            }
+        } else { // Unexpected application `§type` in this case.
+            throw new Exception('Failed to parse URL for unexpected `§type`.');
         }
         if (!($wp_app_url_host = $wp_app_url['host'] ?? (string) @$_SERVER['HTTP_HOST'])) {
             throw new Exception('Failed to parse app URL host.');
@@ -210,7 +219,8 @@ class App extends CoreClasses\App
         if (!($wp_app_url_root_host = implode('.', array_slice(explode('.', $wp_app_url_host), -2)))) {
             throw new Exception('Failed to parse app URL root host.');
         }
-        $wp_app_url_path = rtrim($wp_app_url['path'] ?? '', '/'); // Allowed to be empty.
+        $wp_app_url_base_path = rtrim($wp_app_url['path'] ?? '', '/'); // Allowed to be empty.
+        $wp_app_url_base_path .= $specs['§type'] === 'theme' || $specs['§type'] === 'plugin' ? '/src' : '';
 
         # Build the core/default instance base.
 
@@ -266,7 +276,7 @@ class App extends CoreClasses\App
                     '©app' => $wp_app_url_host,
                 ],
                 '©base_paths' => [
-                    '©app' => $wp_app_url_path.'/src',
+                    '©app' => $wp_app_url_base_path,
                 ],
                 '©default_scheme' => $wp_site_default_scheme,
                 '©sig_key'        => $wp_salt_key,
