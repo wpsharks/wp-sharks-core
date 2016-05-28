@@ -1,4 +1,4 @@
-## v${[project_version]}
+## v160528.1258
 
 - Updating phing build system.
 - Updating to latest websharks/core.
