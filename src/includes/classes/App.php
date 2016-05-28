@@ -117,6 +117,8 @@ class App extends CoreClasses\App
                 } else {
                     throw new Exception('Unable to determine type/file.');
                 }
+                // Note: Another supported type is `mu-plugin`, but that requires
+                // the MU plugin give its type explicitly; i.e., can't guess that here.
             }
             $brand = array_merge(
                 [
@@ -199,6 +201,7 @@ class App extends CoreClasses\App
                 throw new Exception('Failed to parse theme dir URL.');
             }
         } elseif (!($wp_app_url = parse_url(plugin_dir_url($specs['§file'])))) {
+            // Note: `plugin_dir_url()` works for MU plugins also.
             throw new Exception('Failed to parse plugin dir URL.');
         }
         if (!($wp_app_url_host = $wp_app_url['host'] ?? (string) @$_SERVER['HTTP_HOST'])) {
