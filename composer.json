@@ -29,7 +29,7 @@
   "require": {
     "php-64bit": ">=7.0.4",
     "websharks/wp-php-rv": "dev-master",
-    "websharks/core": "160528.35724"
+    "websharks/core": "160530.85346"
   },
   "require-dev": {},
 
