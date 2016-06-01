@@ -21,6 +21,7 @@ use function get_defined_vars as vars;
  */
 abstract class Facades
 {
+    use Traits\Facades\Action;
     use Traits\Facades\BrandUrls;
     use Traits\Facades\CapQueries;
     use Traits\Facades\Conditionals;

@@ -31,15 +31,6 @@ class Notices extends Classes\SCore\Base\Core
     protected $defaults;
 
     /**
-     * Dismiss action.
-     *
-     * @since 160524 WP notices.
-     *
-     * @type string Dismiss action.
-     */
-    protected $dismiss_action;
-
-    /**
      * Class constructor.
      *
      * @since 160524 Initial release.
@@ -51,18 +42,25 @@ class Notices extends Classes\SCore\Base\Core
         parent::__construct($App);
 
         $this->defaults = [
-            'id'            => '',
-            'type'          => 'info',
-            'style'         => '',
-            'markup'        => '',
-            'for_user_id'   => 0,
-            'for_page'      => '',
-            'requires_cap'  => $this->App->Config->§caps['§manage'],
-            'is_persistent' => false,
-            'is_transient'  => false,
-            'push_to_top'   => false,
+            'id' => '',
+
+            'type'   => 'info',
+            'style'  => '',
+            'markup' => '',
+
+            'for_user_id' => 0,
+            'for_page'    => '',
+
+            // Requires `§manage` by default, but apps
+            // can change this behavior so care should be taken.
+            'requires_cap' => $this->App->Config->§caps['§manage'],
+
+            'is_persistent'  => false,
+            'is_dismissable' => false,
+
+            'is_transient' => false,
+            'push_to_top'  => false,
         ];
-        $this->dismiss_action = 'dismiss_'.$this->App->Config->©brand['©var'].'_notice';
     }
 
     /**
@@ -79,21 +77,27 @@ class Notices extends Classes\SCore\Base\Core
         $notice = array_merge($this->defaults, $notice);
         $notice = array_intersect_key($notice, $this->defaults);
 
-        $notice['id']            = (string) $notice['id'];
-        $notice['type']          = (string) $notice['type'];
-        $notice['style']         = (string) $notice['style'];
-        $notice['markup']        = $this->c::mbTrim((string) $notice['markup']);
-        $notice['for_user_id']   = max(0, (int) $notice['for_user_id']);
-        $notice['for_page']      = $this->c::mbTrim((string) $notice['for_page']);
-        $notice['requires_cap']  = $this->c::mbTrim((string) $notice['requires_cap']);
-        $notice['is_persistent'] = (bool) $notice['is_persistent'];
-        $notice['is_transient']  = (bool) $notice['is_transient'];
-        $notice['push_to_top']   = (bool) $notice['push_to_top'];
+        $notice['id'] = (string) $notice['id'];
 
-        if (!in_array($notice['type'], ['notice', 'error', 'warning'], true)) {
-            $notice['type'] = 'notice'; // Use default type.
+        $notice['type']   = (string) $notice['type'];
+        $notice['style']  = (string) $notice['style'];
+        $notice['markup'] = $this->c::mbTrim((string) $notice['markup']);
+
+        $notice['for_user_id'] = max(0, (int) $notice['for_user_id']);
+        $notice['for_page']    = $this->c::mbTrim((string) $notice['for_page']);
+
+        $notice['requires_cap'] = $this->c::mbTrim((string) $notice['requires_cap']);
+
+        $notice['is_persistent']  = (bool) $notice['is_persistent'];
+        $notice['is_dismissable'] = (bool) $notice['is_dismissable'];
+
+        $notice['is_transient'] = (bool) $notice['is_transient'];
+        $notice['push_to_top']  = (bool) $notice['push_to_top'];
+
+        if (!in_array($notice['type'], ['info', 'success', 'warning', 'error'], true)) {
+            $notice['type'] = 'info'; // Use default type.
         }
-        ksort($notice); // Sort by key.
+        ksort($notice); // Sort by key for hashing.
 
         return $notice;
     }
@@ -128,22 +132,19 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function currentUserCan(array $notice): bool
     {
-        $notice = $this->normalize($notice);
-        $user   = wp_get_current_user();
+        $notice  = $this->normalize($notice);
+        $user    = wp_get_current_user();
+        $user_id = (int) $user->ID;
 
-        if ($notice['for_user_id'] && $user->ID !== $notice['for_user_id']) {
-            return false;
+        if ($notice['for_user_id'] && $user_id !== $notice['for_user_id']) {
+            return false; // Not allowed to view notice.
+        } elseif (!$notice['requires_cap']) {
+            return true; // No requirements.
         }
-        if (!$notice['requires_cap']) {
-            return true;
-        }
-        // Pipe-delimited `|` OR logic. Can view if any are true.
-        $caps = preg_split('/\|+/u', $notice['requires_cap']);
-
-        foreach ($caps as $_cap) {
+        foreach (preg_split('/\|+/u', $notice['requires_cap']) as $_cap) {
             if ($_cap && $user->has_cap($_cap)) {
-                return true;
-            }
+                return true; // If any, return true.
+            } // Pipe-delimited caps = OR logic.
         } // unset($_caps, $_cap);
 
         return false;
@@ -158,10 +159,8 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function get(): array
     {
-        $notices = $this->s::sysOption('notices', null, false);
-        $notices = is_array($notices) ? $notices : [];
-
-        return $notices;
+        $notices        = $this->s::sysOption('notices', null, false);
+        return $notices = is_array($notices) ? $notices : [];
     }
 
     /**
@@ -222,7 +221,7 @@ class Notices extends Classes\SCore\Base\Core
     public function userEnqueue($markup, array $args = [])
     {
         if (!isset($args['for_user_id'])) {
-            $args['for_user_id'] = get_current_user_id();
+            $args['for_user_id'] = (int) get_current_user_id();
         }
         if (!$args['for_user_id']) {
             return; // Nothing to do.
@@ -255,34 +254,21 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function dismissUrl(string $key): string
     {
-        $action = $this->dismiss_action;
-        $url    = $this->c::currentUrl();
-        $url    = $this->c::addUrlQueryArgs([$action => $key], $url);
-        $url    = $this->s::addUrlNonce($url, $action.$key);
-
-        return $url;
+        $url        = $this->c::currentUrl();
+        return $url = $this->s::addUrlAction($url, '§dismiss-notice', $key);
     }
 
     /**
-     * Maybe dismiss.
+     * Dismiss action handler.
      *
      * @since 160524 WP notices.
-     * @see <http://jas.xyz/1Tuh3aI>
      */
-    public function onAdminInitMaybeDismiss()
+    public function onActionDismissNotice()
     {
-        $action = $this->dismiss_action;
-        $key    = (string) ($_REQUEST[$action] ?? '');
-
-        if (!$key || !($key = $this->c::unslash($key))) {
-            return; // Nothing to do.
-        }
-        $this->c::noCacheHeaders();
-        $this->s::requireValidNonce($action.$key);
-
         $notices = $this->get();
+        $key     = (string) $this->s::actionData();
 
-        if (isset($notices[$key])) {
+        if ($key && isset($notices[$key])) {
             $notice = $notices[$key];
 
             if (!$this->currentUserCan($notice)) {
@@ -291,11 +277,10 @@ class Notices extends Classes\SCore\Base\Core
             $this->dismiss($key);
         }
         $url = $this->c::currentUrl();
-        $url = $this->s::removeUrlNonce($url);
-        $url = $this->c::removeUrlQueryArgs([$action], $url);
+        $url = $this->s::removeUrlAction($url);
 
         wp_redirect($url);
-        exit; // Stop.
+        exit; // Stop on redirection.
     }
 
     /**
@@ -351,15 +336,15 @@ class Notices extends Classes\SCore\Base\Core
                     $_class .= ' notice-error';
                     break;
 
-                default: // Default behavior.
+                default: // Default (info).
                     $_class .= ' notice-info';
             }
-            if ($_notice['is_persistent']) {
+            if ($_notice['is_persistent'] && $_notice['is_dismissable']) {
                 // $_class .= ' is-dismissible';
                 // We use a different approach for dismissals.
 
                 $_style .= ' padding-right:38px; position:relative;';
-                $_dismiss = '<a class="notice-dismiss" href="'.esc_attr($this->dismissUrl($_key)).'">'.
+                $_dismiss = '<a class="notice-dismiss" style="text-decoration:none;" href="'.esc_attr($this->dismissUrl($_key)).'">'.
                                 '<span class="screen-reader-text">'.__('Dismiss this notice.', 'wp-sharks-core').'</span>'.
                             '</a>';
             }

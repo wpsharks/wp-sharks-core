@@ -22,24 +22,6 @@ use function get_defined_vars as vars;
 class Options extends Classes\SCore\Base\Core
 {
     /**
-     * Save action.
-     *
-     * @since 160524 Option utils.
-     *
-     * @type string Save action.
-     */
-    protected $save_action;
-
-    /**
-     * Restore defaults action.
-     *
-     * @since 160524 Option utils.
-     *
-     * @type string Restore defaults action.
-     */
-    protected $restore_defaults_action;
-
-    /**
      * Class constructor.
      *
      * @since 160524 Initial release.
@@ -49,9 +31,6 @@ class Options extends Classes\SCore\Base\Core
     public function __construct(Classes\App $App)
     {
         parent::__construct($App);
-
-        $this->save_action             = $this->App->Config->©brand['©var'].'_save_options';
-        $this->restore_defaults_action = $this->App->Config->©brand['©var'].'_restore_default_options';
     }
 
     /**
@@ -63,73 +42,59 @@ class Options extends Classes\SCore\Base\Core
      */
     public function saveUrl(): string
     {
-        $action = $this->save_action;
-
-        $url = $this->c::currentUrl();
-        $url = $this->s::addUrlNonce($url, $action);
-
-        return $url;
+        $url        = $this->c::currentUrl();
+        return $url = $this->s::addUrlAction($url, '§save-options');
     }
 
     /**
-     * Save form element ID.
-     *
-     * @since 160524 Option utils.
-     *
-     * @param string $key Option key.
-     *
-     * @return string Save form element ID.
-     */
-    public function formElementId(string $key): string
-    {
-        return $this->App->Config->©brand['©slug'].'-option-'.$key;
-    }
-
-    /**
-     * Save form element name.
-     *
-     * @since 160524 Option utils.
-     *
-     * @param string $key Option key.
-     *
-     * @return string Save form element name.
-     */
-    public function formElementName(string $key): string
-    {
-        return $this->save_action.'['.$key.']';
-    }
-
-    /**
-     * Maybe save options.
+     * Save options action handler.
      *
      * @since 160524 Option utils.
      */
-    public function onAdminInitMaybeSave()
+    public function onActionSaveOptions()
     {
-        $action = $this->save_action;
-
-        if (empty($_REQUEST[$action])) {
-            return; // Nothing to do.
-        }
-        $this->c::noCacheHeaders();
-        $this->s::requireValidNonce($action);
-
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
-            $this->s::dieForbidden();
+            $this->s::dieForbidden(); // Not allowed!
         }
-        $options = $this->c::unslash($_REQUEST[$action]);
-        $options = $this->c::mbTrim($options);
-        $this->update($options);
+        $this->update((array) $this->s::actionData());
 
         $url = $this->c::currentUrl();
-        $url = $this->s::removeUrlNonce($url);
+        $url = $this->s::removeUrlAction($url);
 
         $markup = __('%1$s options updated successfully.', 'wp-sharks-core');
         $markup = sprintf($markup, esc_html($this->App->Config->©brand['©name']));
         $this->s::enqueueUserNotice($markup, ['type' => 'success']);
 
         wp_redirect($url);
-        exit; // Stop.
+        exit; // Stop on redirection.
+    }
+
+    /**
+     * Save via AJAX URL.
+     *
+     * @since 160531 Option utils.
+     *
+     * @return string Save via AJAX URL.
+     */
+    public function saveViaAjaxUrl(): string
+    {
+        $url        = $this->c::currentUrl();
+        return $url = $this->s::addUrlAction($url, '§save-options-via-ajax');
+    }
+
+    /**
+     * Save options via AJAX action handler.
+     *
+     * @since 160531 Option utils.
+     */
+    public function onActionSaveOptionsViaAjax()
+    {
+        if (!current_user_can($this->App->Config->§caps['§manage'])) {
+            $this->s::dieForbidden(); // Not allowed!
+        }
+        $this->update((array) $this->s::actionData());
+
+        exit(json_encode(['success' => true]));
     }
 
     /**
@@ -151,41 +116,27 @@ class Options extends Classes\SCore\Base\Core
      */
     public function restoreDefaultsUrl(): string
     {
-        $action = $this->restore_defaults_action;
-
-        $url = $this->c::currentUrl();
-        $url = $this->c::addUrlQueryArgs([$action => ''], $url);
-        $url = $this->s::addUrlNonce($url, $action);
-
-        return $url;
+        $url        = $this->c::currentUrl();
+        return $url = $this->s::addUrlAction($url, '§restore-default-options');
     }
 
     /**
-     * Maybe restore default options.
+     * Restore default options action handler.
      *
      * @since 160524 Option utils.
      */
-    public function onAdminInitMaybeRestoreDefaults()
+    public function onActionRestoreDefaultOptions()
     {
-        $action = $this->restore_defaults_action;
-
-        if (!isset($_REQUEST[$action])) {
-            return; // Nothing to do.
-        }
-        $this->c::noCacheHeaders();
-        $this->s::requireValidNonce($action);
-
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
-            $this->s::dieForbidden();
+            $this->s::dieForbidden(); // Not allowed!
         }
         $this->restoreDefaults();
 
         $url = $this->c::currentUrl();
-        $url = $this->s::removeUrlNonce($url);
-        $url = $this->c::removeUrlQueryArgs([$action], $url);
+        $url = $this->s::removeUrlAction($url);
 
         wp_redirect($url);
-        exit; // Stop.
+        exit; // Stop on redirection.
     }
 
     /**
@@ -225,11 +176,10 @@ class Options extends Classes\SCore\Base\Core
     {
         $this->App->Config->§options = $this->merge($this->App->Config->§options, $options);
         $this->App->Config->§options = $this->s::applyFilters('options', $this->App->Config->§options);
+        $this->s::sysOption('options', $this->App->Config->§options);
 
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
-            update_network_option(null, $this->App->Config->©brand['©var'].'_options', $this->App->Config->§options);
-        } else {
-            update_option($this->App->Config->©brand['©var'].'_options', $this->App->Config->§options);
+        if ($this->App->Config->§options['§license_key']) {
+            $this->s::dismissNotice('§license-key');
         }
     }
 

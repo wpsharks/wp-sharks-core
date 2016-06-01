@@ -28,7 +28,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160601.3262'; //v//
+    const VERSION = '160601.58007'; //v//
 
     /**
      * Constructor.
@@ -37,10 +37,10 @@ class App extends CoreClasses\App
      *
      * @param array            $instance_base Instance base.
      * @param array            $instance      Instance args.
-     * @param Classes\App|null $parent        Parent app (optional).
+     * @param Classes\App|null $Parent        Parent app (optional).
      * @param array            $args          Any additional behavioral args.
      */
-    public function __construct(array $instance_base = [], array $instance = [], Classes\App $parent = null, array $args = [])
+    public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null, array $args = [])
     {
         # Establish arguments.
 
@@ -52,12 +52,12 @@ class App extends CoreClasses\App
 
         # Define a few reflection-based properties.
 
-        $this->reflection = new \ReflectionClass($this);
+        $this->Reflection = new \ReflectionClass($this);
 
-        $this->class     = $this->reflection->getName();
-        $this->namespace = $this->reflection->getNamespaceName();
+        $this->class     = $this->Reflection->getName();
+        $this->namespace = $this->Reflection->getNamespaceName();
 
-        $this->file              = $this->reflection->getFileName();
+        $this->file              = $this->Reflection->getFileName();
         $this->base_dir          = dirname($this->file, 4);
         $this->base_dir_basename = basename($this->base_dir);
 
@@ -94,7 +94,7 @@ class App extends CoreClasses\App
             if (!isset($GLOBALS[self::class])) {
                 throw new Exception('Missing core instance.');
             }
-            $parent = $parent ?? $GLOBALS[self::class];
+            $Parent = $Parent ?? $GLOBALS[self::class];
 
             $specs = array_merge(
                 [
@@ -155,17 +155,17 @@ class App extends CoreClasses\App
                 throw new Exception('Please remove `lite|pro` suffix from ©text_domain.');
             }
             if (!$brand['©var']) {
-                $brand['©var'] = $parent->c::slugToVar($brand['©slug']);
+                $brand['©var'] = $Parent->c::slugToVar($brand['©slug']);
             } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©var'])) {
                 throw new Exception('Please remove `lite|pro` suffix from ©var.');
             }
             if (!$brand['©name']) {
-                $brand['©name'] = $parent->c::slugToName($brand['©slug']);
+                $brand['©name'] = $Parent->c::slugToName($brand['©slug']);
             } elseif ($args['§validate_brand'] && preg_match('/\s+(?:Lite|Pro)$/ui', $brand['©name'])) {
                 throw new Exception('Please remove `Lite|Pro` suffix from ©name.');
             }
             if (!$brand['©acronym']) {
-                $brand['©acronym'] = $parent->c::nameToAcronym($brand['©name']);
+                $brand['©acronym'] = $Parent->c::nameToAcronym($brand['©name']);
             } elseif ($args['§validate_brand'] && preg_match('/(?:LITE|PRO)$/ui', $brand['©acronym'])) {
                 throw new Exception('Please remove `LITE|PRO` suffix from ©acronym.');
             }
@@ -177,7 +177,7 @@ class App extends CoreClasses\App
                 throw new Exception('Please remove `[^a-z0-9]` chars from ©prefix.');
             }
             if (!$brand['§domain']) {
-                $brand['§domain']      = $parent->Config->©brand['§domain'];
+                $brand['§domain']      = $Parent->Config->©brand['§domain'];
                 $brand['§domain_path'] = '/product/'.$brand['©slug'];
             }
         }
@@ -406,26 +406,15 @@ class App extends CoreClasses\App
                     ? 'manage_network_plugins' : 'activate_plugins',
             ],
 
-            '§pro_option_keys' => [],
-            '§default_options' => [],
-            '§options'         => [],
-
-            '§notices' => [
-                '§on_install' => function (array $installion_history) {
-                    return [
-                        'is_transient' => true,
-                        'markup'       => '<p>'.sprintf(__('<strong>%1$s</strong> v%2$s installed successfully.', 'wp-sharks-core'), esc_html($this->Config->©brand['©name']), esc_html($this::VERSION)).'</p>',
-                    ];
-                },
-                '§on_reinstall' => function (array $installion_history) {
-                    return [
-                        'is_transient' => false,
-                        'markup'       => '<p>'.sprintf(__('<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You\'re now running v%2$s.', 'wp-sharks-core'), esc_html($this->Config->©brand['©name']), esc_html($this::VERSION)).'</p>',
-                    ];
-                },
+            '§pro_option_keys' => [
+                '§license_key' => '', // Pro-only.
             ],
+            '§default_options' => [
+                '§license_key' => '', // Pro-only.
+            ],
+            '§options' => [], // Filled automatically (see below).
 
-            '§uninstall' => false,
+            '§uninstall' => false, // Perform uninstall?
         ];
         if ($specs['§type'] === 'plugin') {
             $lp_conflicting_name          = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
@@ -443,7 +432,7 @@ class App extends CoreClasses\App
         unset($instance['§specs'], $instance['©brand']);
         $instance = apply_filters($brand['©var'].'_instance', $instance, $instance_base);
 
-        parent::__construct($instance_base, $instance, $parent, $args);
+        parent::__construct($instance_base, $instance, $Parent, $args);
 
         # Merge site owner options (highest precedence).
 
@@ -548,7 +537,7 @@ class App extends CoreClasses\App
      *
      * @since 160524 Initial release.
      *
-     * @note For extenders. Only runs when appropriate.
+     * @note Only runs when appropriate.
      */
     protected function onSetupEarlyHooks()
     {
@@ -560,20 +549,19 @@ class App extends CoreClasses\App
      *
      * @since 160524 Initial release.
      *
-     * @note For extenders. Only runs when appropriate.
+     * @note Only runs when appropriate.
      */
     protected function onSetupOtherHooks()
     {
+        /* @TODO Enable this once the API is ready.
         if ($this->Config->§specs['§type'] === 'theme') {
             add_filter('site_transient_update_themes', [$this->Utils->§Updater, 'onGetSiteTransientUpdateThemes']);
         } elseif ($this->App->Config->§specs['§type'] === 'plugin') {
             add_filter('site_transient_update_plugins', [$this->Utils->§Updater, 'onGetSiteTransientUpdatePlugins']);
-        }
-        if (is_admin()) { // Optimize this; i.e., only in admin area.
-            add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
-            add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
+        } */
+        add_action('wp_loaded', [$this->Utils->§Action, 'onWpLoaded']);
 
-            add_action('admin_init', [$this->Utils->§Notices, 'onAdminInitMaybeDismiss']);
+        if (is_admin()) { // Optimize this; i.e., only in admin area.
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
         }
     }

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160601.3262\n"
+"Project-Id-Version: WP Sharks Core 160601.58007\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-06-01 00:54:35+00:00\n"
+"POT-Creation-Date: 2016-06-01 16:07:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,246 +12,237 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/App.php:406
-#: .~build/wp-sharks-core/src/includes/classes/App.php:406
-#: src/includes/classes/App.php:417
-msgid "<strong>%1$s</strong> v%2$s installed successfully."
-msgstr ""
-
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/App.php:412
-#: .~build/wp-sharks-core/src/includes/classes/App.php:412
-#: src/includes/classes/App.php:423
-msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
-msgstr ""
-
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:233
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:233
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:220
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:220
 #: src/includes/classes/SCore/Utils/Conflicts.php:220
 msgid "<strong>%1$s</strong> is not running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the '%2$s' plugin to clear this message."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:242
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:242
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:229
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:229
 #: src/includes/classes/SCore/Utils/Conflicts.php:229
 msgid "<strong>%1$s</strong> is not running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please switch your '%2$s' theme to clear this message."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:251
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:251
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:238
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:238
 #: src/includes/classes/SCore/Utils/Conflicts.php:238
 msgid "The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:252
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:252
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:239
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Conflicts.php:239
 #: src/includes/classes/SCore/Utils/Conflicts.php:239
 msgid "<strong>%1$s</strong> will be able load now. Please <a href=\"javascript:location.reload();\">refresh</a>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:427
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:436
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:506
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:427
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:436
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:506
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:414
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:423
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:493
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:414
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:423
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:493
 #: src/includes/classes/SCore/Utils/Dependencies.php:414
 #: src/includes/classes/SCore/Utils/Dependencies.php:423
 #: src/includes/classes/SCore/Utils/Dependencies.php:493
 msgid "'%1$s' %2$s Required"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:430
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:439
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:509
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:430
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:439
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:509
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:417
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:426
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:496
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:417
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:426
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:496
 #: src/includes/classes/SCore/Utils/Dependencies.php:417
 #: src/includes/classes/SCore/Utils/Dependencies.php:426
 #: src/includes/classes/SCore/Utils/Dependencies.php:496
 msgid "<strong>%1$s is not active.</strong> It depends on the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:431
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:431
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:418
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:418
 #: src/includes/classes/SCore/Utils/Dependencies.php:418
 msgid "A simple addition is necessary. <strong><a href=\"%1$s\">Click here to install '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:432
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:441
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:432
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:441
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:419
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:428
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:419
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:428
 #: src/includes/classes/SCore/Utils/Dependencies.php:419
 #: src/includes/classes/SCore/Utils/Dependencies.php:428
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, install the dependency or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:440
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:440
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:427
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:427
 #: src/includes/classes/SCore/Utils/Dependencies.php:427
 msgid "An addition is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:510
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:510
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:497
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:497
 #: src/includes/classes/SCore/Utils/Dependencies.php:497
 msgid "A simple activation is necessary. <strong><a href=\"%1$s\">Click here to activate '%2$s'</a></strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:511
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:511
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:498
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:498
 #: src/includes/classes/SCore/Utils/Dependencies.php:498
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, activate the dependency or deactivate %1$s until you do.</em>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:580
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:590
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:580
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:590
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:567
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:577
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:567
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:577
 #: src/includes/classes/SCore/Utils/Dependencies.php:567
 #: src/includes/classes/SCore/Utils/Dependencies.php:577
 msgid "'%1$s' %2$s Upgrade Required"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:583
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:593
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:583
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:593
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:570
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:580
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:570
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:580
 #: src/includes/classes/SCore/Utils/Dependencies.php:570
 #: src/includes/classes/SCore/Utils/Dependencies.php:580
 msgid "<strong>%1$s is not active.</strong> It requires <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> v%4$s (or higher)."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:584
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:584
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:571
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:571
 #: src/includes/classes/SCore/Utils/Dependencies.php:571
 msgid "You're running an older copy (v%1$s) of the '%2$s' %3$s."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:585
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:585
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:572
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:572
 #: src/includes/classes/SCore/Utils/Dependencies.php:572
 msgid "A simple update is necessary. <strong><a href=\"%1$s\">Click here to upgrade %2$s</a></strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:586
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:596
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:586
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:596
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:573
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:583
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:573
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:583
 #: src/includes/classes/SCore/Utils/Dependencies.php:573
 #: src/includes/classes/SCore/Utils/Dependencies.php:583
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, update the dependency or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:594
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:594
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:581
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:581
 #: src/includes/classes/SCore/Utils/Dependencies.php:581
 msgid "You're currently running an older copy of the '%1$s' %2$s."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:595
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:595
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:582
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:582
 #: src/includes/classes/SCore/Utils/Dependencies.php:582
 msgid "An update is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Get the latest version of %2$s</a></strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:665
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:675
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:665
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:675
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:652
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:662
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:652
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:662
 #: src/includes/classes/SCore/Utils/Dependencies.php:652
 #: src/includes/classes/SCore/Utils/Dependencies.php:662
 msgid "'%1$s' %2$s Downgrade Required"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:668
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:678
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:668
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:678
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:655
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:665
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:655
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:665
 #: src/includes/classes/SCore/Utils/Dependencies.php:655
 #: src/includes/classes/SCore/Utils/Dependencies.php:665
 msgid "<strong>%1$s is not active.</strong> It requires an older version of the <a href=\"%2$s\" target=\"_blank\" style=\"text-decoration:none;\">%3$s</a> %4$s."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:669
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:669
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:656
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:656
 #: src/includes/classes/SCore/Utils/Dependencies.php:656
 msgid "This software is compatible up to %1$s v%2$s, but you're running the newer v%3$s."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:670
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:670
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:657
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:657
 #: src/includes/classes/SCore/Utils/Dependencies.php:657
 msgid "A manual downgrade is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to download the older v%2$s</a></strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:671
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:681
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:671
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:681
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:658
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:668
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:658
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:668
 #: src/includes/classes/SCore/Utils/Dependencies.php:658
 #: src/includes/classes/SCore/Utils/Dependencies.php:668
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, downgrade the dependency or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:679
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:679
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:666
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:666
 #: src/includes/classes/SCore/Utils/Dependencies.php:666
 msgid "This software is compatible up to %1$s v%2$s, but you're running a newer version."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:680
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:680
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:667
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:667
 #: src/includes/classes/SCore/Utils/Dependencies.php:667
 msgid "A manual downgrade is necessary. <strong><a href=\"%1$s\" target=\"_blank\">Click here to get an older v%2$s</a></strong>."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:740
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:740
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:727
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:727
 #: src/includes/classes/SCore/Utils/Dependencies.php:727
 msgid "'%1$s' Required"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:743
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:743
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:730
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:730
 #: src/includes/classes/SCore/Utils/Dependencies.php:730
 msgid "<strong>%1$s is not active.</strong> It requires %2$s."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:744
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:744
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:731
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:731
 #: src/includes/classes/SCore/Utils/Dependencies.php:731
 msgid "To resolve, %1$s."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:745
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:745
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:732
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Dependencies.php:732
 #: src/includes/classes/SCore/Utils/Dependencies.php:732
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, resolove the issue or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:31
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:31
-#: src/includes/classes/SCore/Utils/Fatality.php:31
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:42
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:46
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:42
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:46
+#: src/includes/classes/SCore/Utils/Fatality.php:42
+#: src/includes/classes/SCore/Utils/Fatality.php:46
 msgid "Abnormal request; forbidden."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:31
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:31
-#: src/includes/classes/SCore/Utils/Fatality.php:31
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:46
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Fatality.php:46
+#: src/includes/classes/SCore/Utils/Fatality.php:46
 msgid "Forbidden"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:373
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:373
-#: src/includes/classes/SCore/Utils/Notices.php:363
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:340
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:340
+#: src/includes/classes/SCore/Utils/Notices.php:344
 msgid "Dismiss this notice."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Options.php:127
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Options.php:127
-#: src/includes/classes/SCore/Utils/Options.php:127
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Options.php:64
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Options.php:64
+#: src/includes/classes/SCore/Utils/Options.php:64
 msgid "%1$s options updated successfully."
 msgstr ""
 
@@ -840,6 +831,36 @@ msgstr ""
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/UsersQuery.php:184
 #: src/includes/classes/SCore/Utils/UsersQuery.php:184
 msgid "User"
+msgstr ""
+
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:19
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:19
+#: src/includes/templates/s-core/notices/license-key.php:19
+msgid "<strong>%1$s</strong> License Key"
+msgstr ""
+
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:21
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:21
+#: src/includes/templates/s-core/notices/license-key.php:21
+msgid "Save"
+msgstr ""
+
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:23
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:23
+#: src/includes/templates/s-core/notices/license-key.php:23
+msgid "Please enter your license key for automatic updates."
+msgstr ""
+
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/on-install.php:19
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/on-install.php:19
+#: src/includes/templates/s-core/notices/on-install.php:19
+msgid "<strong>%1$s</strong> v%2$s installed successfully."
+msgstr ""
+
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/on-reinstall.php:19
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/on-reinstall.php:19
+#: src/includes/templates/s-core/notices/on-reinstall.php:19
+msgid "<strong>%1$s</strong> detected a new version of itself. Recompiled successfully. You're now running v%2$s."
 msgstr ""
 
 #. Plugin Name of the plugin/theme

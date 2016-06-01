@@ -59,6 +59,14 @@ trait Options
     /**
      * @since 160524 Initial release.
      */
+    public static function restoreDefaultOptions(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Options->restoreDefaults(...$args);
+    }
+
+    /**
+     * @since 160524 Initial release.
+     */
     public static function saveOptionsUrl(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Options->saveUrl(...$args);
@@ -67,25 +75,9 @@ trait Options
     /**
      * @since 160524 Initial release.
      */
-    public static function optionFormElementId(...$args)
+    public static function saveOptionsViaAjaxUrl(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Options->formElementId(...$args);
-    }
-
-    /**
-     * @since 160524 Initial release.
-     */
-    public static function optionFormElementName(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§Options->formElementName(...$args);
-    }
-
-    /**
-     * @since 160524 Initial release.
-     */
-    public static function restoreDefaultOptions(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§Options->restoreDefaults(...$args);
+        return $GLOBALS[static::class]->Utils->§Options->saveViaAjaxUrl(...$args);
     }
 
     /**

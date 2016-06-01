@@ -74,10 +74,10 @@ class Updater extends Classes\SCore\Base\Core
         }
         $theme_url      = $this->s::brandUrl();
         $theme_slug     = $this->App->Config->©brand['©slug'];
-        $latest_version = $this->latestVersion(); // Or last known.
+        $latest_version = $this->latestVersion(); // Latest available.
 
         if (version_compare($latest_version, $this->App::VERSION, '>')) {
-            if (($latest_package = $this->latestPackage($latest_version))) {
+            if (($latest_package = $this->latestPackage())) {
                 $report->response[$theme_slug] = (object) [
                     'theme'       => $theme_slug,
                     'url'         => $theme_url,
@@ -120,10 +120,10 @@ class Updater extends Classes\SCore\Base\Core
         $plugin_url      = $this->s::brandUrl();
         $plugin_slug     = $this->App->Config->©brand['©slug'];
         $plugin_basename = plugin_basename($this->App->Config->§specs['§file']);
-        $latest_version  = $this->latestVersion(); // Or last known.
+        $latest_version  = $this->latestVersion(); // Latest available.
 
         if (version_compare($latest_version, $this->App::VERSION, '>')) {
-            if (($latest_package = $this->latestPackage($latest_version))) {
+            if (($latest_package = $this->latestPackage())) {
                 $report->response[$plugin_basename] = (object) [
                     'id'          => -1,
                     'slug'        => $plugin_slug,
@@ -150,14 +150,11 @@ class Updater extends Classes\SCore\Base\Core
         $version    = $this->App::VERSION; // Fallback.
 
         if ($last_check['time'] > $this->outdated_check_time) {
-            if ($last_check['version'] // Use the last-check version?
-                    && version_compare($last_check['version'], $this->App::VERSION, '>=')) {
-                $version = $last_check['version'];
-            }
-            return $version; // Last check or latest version.
-        } // Already checked recently. Don't do it again (yet).
+            return $last_check['version']; // According to last check.
+        } // Already checked this recently. Don't do it again (yet).
 
-        if (!is_wp_error($response = wp_remote_get($this->latestVersionUrl()))
+        if (($get_latest_version_url = $this->getLatestVersionUrl())
+            && !is_wp_error($response = wp_remote_get($get_latest_version_url))
                 && ($remote_version = $this->c::mbTrim((string) $response['body']))
                 && $this->c::isWsVersion($remote_version) // Avoid odd body.
                 && version_compare($remote_version, $this->App::VERSION, '>=')
@@ -174,28 +171,24 @@ class Updater extends Classes\SCore\Base\Core
      *
      * @since 160530 Update utils.
      *
-     * @param string $version Package version.
-     *
-     * @return string Latest package matching `$version`.
+     * @return string Latest package.
      */
-    protected function latestPackage(string $version): string
+    protected function latestPackage(): string
     {
         $last_check = $this->lastPackageCheck();
         $package    = ''; // No fallback possible.
 
         if ($last_check['time'] > $this->outdated_check_time) {
-            if ($version === $last_check['version'] && $last_check['package']) {
-                $package = $last_check['package']; // Matching version.
-            }
-            return $package; // Last check or latest package.
-        } // Already checked recently. Don't do it again (yet).
+            return $last_check['package']; // According to last check.
+        } // Already checked this recently. Don't do it again (yet).
 
-        if (!is_wp_error($response = wp_remote_get($this->latestPackageUrl($version)))
+        if (($get_latest_package_url = $this->getLatestPackageUrl())
+            && !is_wp_error($response = wp_remote_get($get_latest_package_url))
                 && ($remote_package = $this->c::mbTrim((string) $response['body']))
                 && preg_match('/^http/ui', $remote_package)) { // Avoid odd body.
             $package = $remote_package; // Latest available package.
         }
-        $this->lastPackageCheck(['time' => time(), 'version' => $version, 'package' => $package]);
+        $this->lastPackageCheck(['time' => time(), 'package' => $package]);
 
         return $version;
     }
@@ -205,9 +198,9 @@ class Updater extends Classes\SCore\Base\Core
      *
      * @since 160530 Update utils.
      *
-     * @return string Latest version URL.
+     * @return string URL (ready for GET request).
      */
-    protected function latestVersionUrl(): string
+    protected function getLatestVersionUrl(): string
     {
         if ($this->App->Config->©debug['©edge']) {
             return 'https://cdn.wpsharks.com/software/bleeding-edge/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
@@ -221,22 +214,26 @@ class Updater extends Classes\SCore\Base\Core
      *
      * @since 160530 Update utils.
      *
-     * @return string Latest package URL.
+     * @return string URL (ready for GET request).
      */
-    protected function latestPackageUrl(string $version): string
+    protected function getLatestPackageUrl(): string
     {
-        // @TODO Once an API is in place at wpsharks.com.
-        // The API should accept `license_key`, `slug`, `version`, and `edge=0|1`.
-        // The API should return a transient URL leading to a ZIP file via redirection.
-        // The transient URL should be allowed to live for no less than 15 minutes.
-
-        // @TODO Also clear OPcache on any update.
-
         if ($this->App->Config->©debug['©edge']) {
-            return 'https://cdn.wpsharks.com/software/bleeding-edge/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
+            $action = 'get-bleeding-edge-package-url';
         } else {
-            return 'https://cdn.wpsharks.com/software/latest/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
+            $action = 'get-latest-package-url';
+        } // Defaults to latest stable package URL.
+
+        $license_key = $this->s::getOption('§license_key');
+        if ($this->App->Config->§specs['§is_pro'] && !$license_key) {
+            return ''; // Not possible w/o license key.
         }
+        $args = [
+            'action'      => $action,
+            'license_key' => $license_key,
+            'slug'        => $this->App->Config->©brand['©slug'],
+        ];
+        return $this->c::addUrlQueryArgs($args, 'https://wpsharks.com/api/v1.0/');
     }
 
     /**
@@ -271,7 +268,7 @@ class Updater extends Classes\SCore\Base\Core
      *
      * @since 160530 Update utils.
      *
-     * @param array|null `[time,version,package]`.
+     * @param array|null `[time,package]`.
      *
      * @return array Last package-check data.
      */
@@ -279,7 +276,6 @@ class Updater extends Classes\SCore\Base\Core
     {
         $default_data = [
             'time'    => 0,
-            'version' => '',
             'package' => '',
         ];
         $data = $this->s::sysOption('updater_last_package_check', $data);
@@ -289,7 +285,6 @@ class Updater extends Classes\SCore\Base\Core
         $data = array_intersect_key($data, $default_data);
 
         $data['time']    = (int) $data['time'];
-        $data['version'] = (string) $data['version'];
         $data['package'] = (string) $data['package'];
 
         return $data;

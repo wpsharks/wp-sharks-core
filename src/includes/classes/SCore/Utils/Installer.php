@@ -84,7 +84,7 @@ class Installer extends Classes\SCore\Base\Core
         $this->otherInstallRoutines();
 
         $this->doFlushRewriteRules();
-        $this->maybeEnqueueNotice();
+        $this->maybeEnqueueNotices();
         $this->updateHistory();
     }
 
@@ -133,25 +133,32 @@ class Installer extends Classes\SCore\Base\Core
     }
 
     /**
-     * Install (or reinstall) notice.
+     * Install (or reinstall) notices.
      *
      * @since 160524 Install utils.
      */
-    protected function maybeEnqueueNotice()
+    protected function maybeEnqueueNotices()
     {
-        $key = !$this->history['first_time']
-            ? '§on_install' // First time?
-            : '§on_reinstall';
-
-        if ($this->App->Config->§notices[$key]) {
-            if (is_callable($this->App->Config->§notices[$key])) {
-                $notice = $this->App->Config->§notices[$key]($this->history);
-            } else {
-                $notice = $this->App->Config->§notices[$key];
-            }
-            if ($notice) {
-                $this->s::enqueueNotice('', $notice);
-            }
+        if (!$this->history['first_time']) {
+            $template_file = 's-core/notices/on-install.php';
+        } else {
+            $template_file = 's-core/notices/on-reinstall.php';
+        }
+        $Template      = $this->c::getTemplate($template_file);
+        $notice_markup = $Template->parse(['history' => $this->history]);
+        $this->s::enqueueNotice($notice_markup, [
+            'type'         => 'success',
+            'is_transient' => !$this->history['first_time'],
+        ]);
+        if ($this->App->Config->§specs['§is_pro'] && !$this->s::getOption('§license_key')) {
+            $license_key_Template      = $this->c::getTemplate('s-core/notices/license-key.php');
+            $license_key_notice_markup = $license_key_Template->parse();
+            $this->s::enqueueNotice($license_key_notice_markup, [
+                'id'             => '§license-key',
+                'type'           => 'info',
+                'is_persistent'  => true,
+                'is_dismissable' => false,
+            ]);
         }
     }
 
