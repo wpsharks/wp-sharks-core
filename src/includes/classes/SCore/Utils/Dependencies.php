@@ -24,7 +24,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Unsatisfied plugins.
      *
-     * @since 160524
+     * @since 160524 Dependencies.
      *
      * @type array Data.
      */
@@ -33,7 +33,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Unsatisfied themes.
      *
-     * @since 160524
+     * @since 160524 Dependencies.
      *
      * @type array Data.
      */
@@ -42,7 +42,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Unsatisfied (other).
      *
-     * @since 160524
+     * @since 160524 Dependencies.
      *
      * @type array Data.
      */
@@ -51,20 +51,20 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     /**
      * Checked?
      *
-     * @since 160524
+     * @since 160524 Dependencies.
      *
      * @type bool Checked?
      */
     protected $checked;
 
     /**
-     * Max OK time age.
+     * Outdated check time.
      *
-     * @since 160524
+     * @since 160524 Dependencies.
      *
-     * @type int Max age.
+     * @type int Outdated check time.
      */
-    protected $max_ok_age;
+    protected $outdated_check_time;
 
     /**
      * Class constructor.
@@ -77,11 +77,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
     {
         parent::__construct($App);
 
-        $this->plugins    = [];
-        $this->themes     = [];
-        $this->others     = [];
-        $this->checked    = false;
-        $this->max_ok_age = strtotime('-15 minutes');
+        $this->plugins             = [];
+        $this->themes              = [];
+        $this->others              = [];
+        $this->checked             = false;
+        $this->outdated_check_time = strtotime('-15 minutes');
 
         $this->maybeCheck(); // On instantiation.
     }
@@ -115,7 +115,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
             && !$this->App->Config->§dependencies['§others']) {
             return; // Nothing to do here.
         } elseif (($is_front_or_ajax = $this->s::isFrontOrAjax())
-                && $this->lastOkTime() >= $this->max_ok_age) {
+                && $this->lastOkTime() > $this->outdated_check_time) {
             return; // Had a successfull check recently.
         }
         $all_active_plugin_slugs = $this->s::allActivePlugins();
@@ -165,26 +165,13 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Dependencies.
      *
-     * @param int|null $time Last check time.
+     * @param int|null $time Last OK time.
      *
      * @return int Last OK time.
      */
     protected function lastOkTime(int $time = null): int
     {
-        $key             = $this->App->Config->©brand['©var'].'_dependencies_last_ok_time';
-        $is_network_wide = $this->App->Config->§specs['§is_network_wide'];
-
-        if ($is_network_wide && is_multisite()) {
-            if (isset($time)) {
-                update_network_option(null, $key, $time);
-            }
-            return (int) get_network_option(null, $key);
-        } else {
-            if (isset($time)) {
-                update_option($key, $time);
-            }
-            return (int) get_option($key);
-        }
+        return (int) $this->s::sysOption('dependencies_last_ok_time', $time);
     }
 
     /**

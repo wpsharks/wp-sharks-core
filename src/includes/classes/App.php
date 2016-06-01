@@ -28,7 +28,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160530.85723'; //v//
+    const VERSION = '160601.3262'; //v//
 
     /**
      * Constructor.
@@ -67,6 +67,7 @@ class App extends CoreClasses\App
             $specs = array_merge(
                 [
                     '§is_pro'          => false,
+                    '§in_wp'           => false,
                     '§is_network_wide' => false,
                     '§type'            => 'plugin',
                     '§file'            => $this->base_dir.'/plugin.php',
@@ -98,6 +99,7 @@ class App extends CoreClasses\App
             $specs = array_merge(
                 [
                     '§is_pro'          => null,
+                    '§in_wp'           => null,
                     '§is_network_wide' => false,
                     '§type'            => '',
                     '§file'            => '',
@@ -107,6 +109,9 @@ class App extends CoreClasses\App
             );
             if (!isset($specs['§is_pro'])) {
                 $specs['§is_pro'] = mb_stripos($this->namespace, '\\Pro\\') !== false;
+            }
+            if (!isset($specs['§in_wp'])) {
+                $specs['§in_wp'] = $specs['§is_pro'] ? false : true;
             }
             if (!$specs['§type'] || !$specs['§file']) {
                 if (is_file($this->base_dir.'/plugin.php')) {
@@ -180,6 +185,7 @@ class App extends CoreClasses\App
 
         $wp_is_multisite  = is_multisite();
         $wp_debug         = defined('WP_DEBUG') && WP_DEBUG;
+        $wp_debug_edge    = $wp_debug && defined('WP_DEBUG_EDGE') && WP_DEBUG_EDGE;
         $wp_debug_log     = $wp_debug && defined('WP_DEBUG_LOG') && WP_DEBUG_LOG;
         $wp_debug_display = $wp_debug && defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY;
 
@@ -226,8 +232,12 @@ class App extends CoreClasses\App
 
         $default_instance_base = [
             '©debug' => [
-                '©enable'        => $wp_debug,
-                '©log'           => $wp_debug_log,
+                '©enable' => $wp_debug,
+                '©edge'   => $wp_debug_edge,
+
+                '©log'          => $wp_debug_log,
+                '©log_callback' => null, // For extenders.
+
                 '©er_enable'     => false, // WP handles this.
                 '©er_display'    => false, // WP handles this.
                 '©er_assertions' => false, // Developer must enable.
@@ -251,6 +261,7 @@ class App extends CoreClasses\App
 
             '§specs' => [
                 '§is_pro'          => false,
+                '§in_wp'           => false,
                 '§is_network_wide' => false,
                 '§type'            => '',
                 '§file'            => '',
@@ -553,10 +564,17 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
-        add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
-        add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
+        if ($this->Config->§specs['§type'] === 'theme') {
+            add_filter('site_transient_update_themes', [$this->Utils->§Updater, 'onGetSiteTransientUpdateThemes']);
+        } elseif ($this->App->Config->§specs['§type'] === 'plugin') {
+            add_filter('site_transient_update_plugins', [$this->Utils->§Updater, 'onGetSiteTransientUpdatePlugins']);
+        }
+        if (is_admin()) { // Optimize this; i.e., only in admin area.
+            add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeSave']);
+            add_action('admin_init', [$this->Utils->§Options, 'onAdminInitMaybeRestoreDefaults']);
 
-        add_action('admin_init', [$this->Utils->§Notices, 'onAdminInitMaybeDismiss']);
-        add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
+            add_action('admin_init', [$this->Utils->§Notices, 'onAdminInitMaybeDismiss']);
+            add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
+        }
     }
 }

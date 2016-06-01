@@ -158,15 +158,9 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function get(): array
     {
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
-            if (!is_array($notices = get_network_option(null, $this->App->Config->©brand['©var'].'_notices'))) {
-                delete_network_option(null, $this->App->Config->©brand['©var'].'_notices');
-                add_network_option(null, $this->App->Config->©brand['©var'].'_notices', $notices = []);
-            }
-        } elseif (!is_array($notices = get_option($this->App->Config->©brand['©var'].'_notices'))) {
-            delete_option($this->App->Config->©brand['©var'].'_notices');
-            add_option($this->App->Config->©brand['©var'].'_notices', $notices = [], '', 'no');
-        }
+        $notices = $this->s::sysOption('notices', null, false);
+        $notices = is_array($notices) ? $notices : [];
+
         return $notices;
     }
 
@@ -182,11 +176,7 @@ class Notices extends Classes\SCore\Base\Core
         if ($this->get() === $notices) {
             return; // Nothing to do.
         }
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
-            update_network_option(null, $this->App->Config->©brand['©var'].'_notices', $notices);
-        } else {
-            update_option($this->App->Config->©brand['©var'].'_notices', $notices);
-        }
+        $this->s::sysOption('notices', $notices, false);
     }
 
     /**

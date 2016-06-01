@@ -41,6 +41,7 @@ abstract class Facades
     use Traits\Facades\PostTypeQueries;
     use Traits\Facades\RoleQueries;
     use Traits\Facades\StylesScripts;
+    use Traits\Facades\SysOption;
     use Traits\Facades\TermQueries;
     use Traits\Facades\Theme;
     use Traits\Facades\Transients;

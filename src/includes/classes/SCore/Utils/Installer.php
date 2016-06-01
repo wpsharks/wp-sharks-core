@@ -28,7 +28,7 @@ class Installer extends Classes\SCore\Base\Core
      *
      * @type array Install history.
      */
-    public $history;
+    protected $history;
 
     /**
      * Class constructor.
@@ -47,12 +47,8 @@ class Installer extends Classes\SCore\Base\Core
             'last_version' => '',
             'versions'     => [],
         ];
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
-            if (!is_array($this->history = get_network_option(null, $this->App->Config->©brand['©var'].'_install_history'))) {
-                update_network_option(null, $this->App->Config->©brand['©var'].'_install_history', $this->history = $default_history);
-            }
-        } elseif (!is_array($this->history = get_option($this->App->Config->©brand['©var'].'_install_history'))) {
-            update_option($this->App->Config->©brand['©var'].'_install_history', $this->history = $default_history);
+        if (!is_array($this->history = $this->s::sysOption('install_history'))) {
+            $this->history = $default_history; // Defaults.
         }
         $this->history = array_merge($default_history, $this->history);
         $this->history = array_intersect_key($this->history, $default_history);
@@ -179,10 +175,6 @@ class Installer extends Classes\SCore\Base\Core
         uksort($this->history['versions'], 'version_compare');
         $this->history['versions'] = array_reverse($this->history['versions'], true);
 
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
-            update_network_option(null, $this->App->Config->©brand['©var'].'_install_history', $this->history);
-        } else {
-            update_option($this->App->Config->©brand['©var'].'_install_history', $this->history);
-        }
+        $this->s::sysOption('install_history', $this->history);
     }
 }

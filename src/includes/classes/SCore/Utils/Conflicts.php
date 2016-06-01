@@ -17,14 +17,14 @@ use function get_defined_vars as vars;
 /**
  * Conflicts.
  *
- * @since 160524 WP notices.
+ * @since 160524 Conflicts.
  */
 class Conflicts extends Classes\SCore\Base\Core
 {
     /**
      * Conflicting plugins.
      *
-     * @since 160524
+     * @since 160524 Conflicts.
      *
      * @type array Slugs.
      */
@@ -33,7 +33,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Conflicting themes.
      *
-     * @since 160524
+     * @since 160524 Conflicts.
      *
      * @type array Slugs.
      */
@@ -42,7 +42,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Deactivatble plugins.
      *
-     * @since 160524
+     * @since 160524 Conflicts.
      *
      * @type array Slugs.
      */
@@ -51,25 +51,25 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Checked?
      *
-     * @since 160524
+     * @since 160524 Conflicts.
      *
      * @type bool Checked?
      */
     protected $checked;
 
     /**
-     * Max OK time age.
+     * Outdated check time.
      *
-     * @since 160524
+     * @since 160524 Conflicts.
      *
-     * @type int Max age.
+     * @type int Outdated check time.
      */
-    protected $max_ok_age;
+    protected $outdated_check_time;
 
     /**
      * Class constructor.
      *
-     * @since 160524 Initial release.
+     * @since 160524 Conflicts.
      *
      * @param Classes\App $App Instance.
      */
@@ -81,7 +81,7 @@ class Conflicts extends Classes\SCore\Base\Core
         $this->themes                = [];
         $this->deactivatable_plugins = [];
         $this->checked               = false;
-        $this->max_ok_age            = strtotime('-15 minutes');
+        $this->outdated_check_time   = strtotime('-15 minutes');
 
         $this->maybeCheck(); // On instantiation.
     }
@@ -89,7 +89,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Conflicts exist?
      *
-     * @since 160524 Initial release.
+     * @since 160524 Conflicts.
      *
      * @return bool Conflicts exist?
      *
@@ -104,7 +104,7 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Check for conflicts.
      *
-     * @since 160524 Initial release.
+     * @since 160524 Conflicts.
      *
      * @note Deactivable conflicts are considered conflicts too.
      *  However, we can deactivate them and simply show a warning w/ refresh link.
@@ -120,7 +120,7 @@ class Conflicts extends Classes\SCore\Base\Core
             && !$this->App->Config->§conflicts['§themes']) {
             return; // Nothing to do here.
         } elseif (($is_front_or_ajax = $this->s::isFrontOrAjax())
-                && $this->lastOkTime() >= $this->max_ok_age) {
+                && $this->lastOkTime() > $this->outdated_check_time) {
             return; // Had a successfull check recently.
         }
         $is_admin     = is_admin();
@@ -181,34 +181,21 @@ class Conflicts extends Classes\SCore\Base\Core
     /**
      * Last OK time.
      *
-     * @since 160524 Dependencies.
+     * @since 160524 Conflicts.
      *
-     * @param int|null $time Last check time.
+     * @param int|null $time Last OK time.
      *
      * @return int Last OK time.
      */
     protected function lastOkTime(int $time = null): int
     {
-        $key             = $this->App->Config->©brand['©var'].'_conflicts_last_ok_time';
-        $is_network_wide = $this->App->Config->§specs['§is_network_wide'];
-
-        if ($is_network_wide && is_multisite()) {
-            if (isset($time)) {
-                update_network_option(null, $key, $time);
-            }
-            return (int) get_network_option(null, $key);
-        } else {
-            if (isset($time)) {
-                update_option($key, $time);
-            }
-            return (int) get_option($key);
-        }
+        return (int) $this->s::sysOption('conflicts_last_ok_time', $time);
     }
 
     /**
      * Maybe enqueue dashboard notice.
      *
-     * @since 160524 Initial release.
+     * @since 160524 Conflicts.
      *
      * @note Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we are in conflict with another
