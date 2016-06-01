@@ -1,4 +1,4 @@
-## v${[project_version]}
+## v160601.61851
 
 - Bumping to `websharks/core` v160601.61090.
 - Enhancing/refactoring action handlers and exposing them to plugins.
