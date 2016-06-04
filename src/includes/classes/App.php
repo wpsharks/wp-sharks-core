@@ -28,7 +28,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160601.61851'; //v//
+    const VERSION = '160604.10223'; //v//
 
     /**
      * Constructor.
@@ -553,16 +553,18 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
-        /* @TODO Enable this once the API is ready.
-        if ($this->Config->§specs['§type'] === 'theme') {
-            add_filter('site_transient_update_themes', [$this->Utils->§Updater, 'onGetSiteTransientUpdateThemes']);
-        } elseif ($this->App->Config->§specs['§type'] === 'plugin') {
-            add_filter('site_transient_update_plugins', [$this->Utils->§Updater, 'onGetSiteTransientUpdatePlugins']);
-        } */
         add_action('wp_loaded', [$this->Utils->§Action, 'onWpLoaded']);
 
         if (is_admin()) { // Optimize this; i.e., only in admin area.
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
+        }
+        if ($this->Config->§specs['§type'] === 'theme' || $this->Config->§specs['§type'] === 'plugin') {
+            /* @TODO Enable this once the API is ready.
+            if ($this->Config->§specs['§type'] === 'theme') {
+                add_filter('site_transient_update_themes', [$this->Utils->§Updater, 'onGetSiteTransientUpdateThemes']);
+            } elseif ($this->App->Config->§specs['§type'] === 'plugin') {
+                add_filter('site_transient_update_plugins', [$this->Utils->§Updater, 'onGetSiteTransientUpdatePlugins']);
+            } */
         }
     }
 }

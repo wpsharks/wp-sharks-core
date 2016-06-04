@@ -1,4 +1,10 @@
-## v${[project_version]}
+## $v
+
+- Updating dotfiles.
+- Improving default `App->onSetupOtherHooks()` handler.
+- Updating to the latest release of `websharks/core`.
+
+## v160604.10223
 
 - Delay license key request until after the welcome notification.
 - Adding several new configurable options for notices.
