@@ -48,9 +48,12 @@ class Notices extends Classes\SCore\Base\Core
             'style'  => '',
             'markup' => '',
 
-            'for_user_id' => 0,
-            'for_page'    => '',
+            'if_expr'          => '',
+            'for_page'         => '',
+            'not_for_page'     => '',
+            'delay_until_time' => 0,
 
+            'for_user_id' => 0,
             // Requires `§manage` by default, but apps
             // can change this behavior so care should be taken.
             'requires_cap' => $this->App->Config->§caps['§manage'],
@@ -83,10 +86,13 @@ class Notices extends Classes\SCore\Base\Core
         $notice['style']  = (string) $notice['style'];
         $notice['markup'] = $this->c::mbTrim((string) $notice['markup']);
 
-        $notice['for_user_id'] = max(0, (int) $notice['for_user_id']);
-        $notice['for_page']    = $this->c::mbTrim((string) $notice['for_page']);
+        $notice['if_expr']          = $this->c::mbTrim((string) $notice['if_expr']);
+        $notice['for_page']         = $this->c::mbTrim((string) $notice['for_page']);
+        $notice['not_for_page']     = $this->c::mbTrim((string) $notice['not_for_page']);
+        $notice['delay_until_time'] = max(0, (int) $notice['delay_until_time']);
 
         $notice['requires_cap'] = $this->c::mbTrim((string) $notice['requires_cap']);
+        $notice['for_user_id']  = max(0, (int) $notice['for_user_id']);
 
         $notice['is_persistent']  = (bool) $notice['is_persistent'];
         $notice['is_dismissable'] = (bool) $notice['is_dismissable'];
@@ -94,6 +100,9 @@ class Notices extends Classes\SCore\Base\Core
         $notice['is_transient'] = (bool) $notice['is_transient'];
         $notice['push_to_top']  = (bool) $notice['push_to_top'];
 
+        if ($notice['delay_until_time']) { // Sanity check.
+            $notice['is_transient'] = false; // Implies NOT transient.
+        }
         if (!in_array($notice['type'], ['info', 'success', 'warning', 'error'], true)) {
             $notice['type'] = 'info'; // Use default type.
         }
@@ -141,13 +150,21 @@ class Notices extends Classes\SCore\Base\Core
         } elseif (!$notice['requires_cap']) {
             return true; // No requirements.
         }
-        foreach (preg_split('/\|+/u', $notice['requires_cap']) as $_cap) {
-            if ($_cap && $user->has_cap($_cap)) {
-                return true; // If any, return true.
-            } // Pipe-delimited caps = OR logic.
-        } // unset($_caps, $_cap);
-
-        return false;
+        if (mb_strpos($notice['requires_cap'], '|') !== false) {
+            foreach (preg_split('/[|\s]+/u', $notice['requires_cap']) as $_cap) {
+                if ($_cap && $user->has_cap($_cap)) {
+                    return true;
+                }
+            } // unset($_caps, $_cap);
+            return false; // Unable to satisfy any.
+        } else {
+            foreach (preg_split('/[&,\s]+/u', $notice['requires_cap']) as $_cap) {
+                if ($_cap && !$user->has_cap($_cap)) {
+                    return false;
+                }
+            } // unset($_caps, $_cap);
+            return true; // Able to satisfy all.
+        }
     }
 
     /**
@@ -315,26 +332,31 @@ class Notices extends Classes\SCore\Base\Core
             }
             if (!$this->currentUserCan($_notice)) {
                 continue; // Do not display.
-            }
-            if ($_notice['for_page'] && !$this->s::isMenuPage($_notice['for_page'])) {
+            } elseif ($_notice['if_expr'] && !$this->c::phpEval($_notice['if_expr'])) {
+                continue; // Do not display.
+            } elseif ($_notice['for_page'] && !$this->s::isMenuPage($_notice['for_page'])) {
+                continue; // Do not display.
+            } elseif ($_notice['not_for_page'] && $this->s::isMenuPage($_notice['not_for_page'])) {
+                continue; // Do not display.
+            } elseif ($_notice['delay_until_time'] && $_notice['delay_until_time'] > time()) {
                 continue; // Do not display.
             }
             switch ($_notice['type']) {
                 case 'info':
                     $_class .= ' notice-info';
-                    break;
+                    break; // Blue coloration.
 
                 case 'success':
                     $_class .= ' notice-success';
-                    break;
+                    break; // Green coloration.
 
                 case 'warning':
                     $_class .= ' notice-warning';
-                    break;
+                    break; // Orange/yellow coloration.
 
                 case 'error':
                     $_class .= ' notice-error';
-                    break;
+                    break; // Red coloration.
 
                 default: // Default (info).
                     $_class .= ' notice-info';

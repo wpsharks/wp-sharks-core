@@ -283,10 +283,11 @@ class PostsQuery extends Classes\SCore\Base\Core
 
         $default_args = [
             // Unique.
-            'allow_empty'      => true,
-            'allow_arbitrary'  => true,
-            'option_formatter' => null,
-            'current_post_ids' => null,
+            'allow_empty'              => true,
+            'allow_arbitrary'          => true,
+            'option_child_indent_char' => '-',
+            'option_formatter'         => null,
+            'current_post_ids'         => null,
 
             // Used by {@link all()}.
             'max'         => 1000,
@@ -321,11 +322,12 @@ class PostsQuery extends Classes\SCore\Base\Core
         $args = array_intersect_key($args, $default_args);
 
         // Unique.
-        $args['allow_empty']      = (bool) $args['allow_empty'];
-        $args['allow_arbitrary']  = (bool) $args['allow_arbitrary'];
-        $args['option_formatter'] = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
-        $args['current_post_ids'] = isset($args['current_post_ids']) ? (array) $args['current_post_ids'] : null;
-        $args['current_post_ids'] = $this->c::removeEmptys(array_map('intval', $args['current_post_ids']));
+        $args['allow_empty']              = (bool) $args['allow_empty'];
+        $args['allow_arbitrary']          = (bool) $args['allow_arbitrary'];
+        $args['option_child_indent_char'] = (string) $args['option_child_indent_char'];
+        $args['option_formatter']         = is_callable($args['option_formatter']) ? $args['option_formatter'] : null;
+        $args['current_post_ids']         = isset($args['current_post_ids']) ? (array) $args['current_post_ids'] : null;
+        $args['current_post_ids']         = $this->c::removeEmptys(array_map('intval', $args['current_post_ids']));
 
         // Used by {@link all()}.
         $args['max']         = max(1, (int) $args['max']);
@@ -370,42 +372,67 @@ class PostsQuery extends Classes\SCore\Base\Core
         if ($args['allow_empty']) { // Allow `0`?
             $options = '<option value="0"></option>';
         }
-        foreach ($posts as $_post) { // \WP_Post objects.
-            $available_post_ids[] = (int) $_post->ID; // Record all available.
+        $walk = function (// Recursive parent/child walker.
+            int $parent_post_id = 0,
+            int $parent_depth = 0
+        ) use (
+            &$walk,
+            &$is_admin,
+            &$args,
+            &$posts,
+            &$options,
+            &$available_post_ids,
+            &$selected_post_ids,
+            &$default_post_type_label,
+            &$default_post_title
+        ) {
+            foreach ($posts as $_post) { // \WP_Post objects.
+                if ((int) $_post->post_parent !== $parent_post_id) {
+                    continue; // Bypass this child for now.
+                }
+                $available_post_ids[] = (int) $_post->ID; // Record all available.
 
-            if (isset($args['current_post_ids']) && in_array((int) $_post->ID, $args['current_post_ids'], true)) {
-                $selected_post_ids[$_post->ID] = (int) $_post->ID; // Flag selected post ID.
-            }
-            $_post_type_object = get_post_type_object($_post->post_type); // Anticipate a possible failure.
-            $_post_type_label  = !empty($_post_type_object->labels->singular_name) ? $_post_type_object->labels->singular_name : $default_post_type_label;
+                if (isset($args['current_post_ids']) && in_array((int) $_post->ID, $args['current_post_ids'], true)) {
+                    $selected_post_ids[$_post->ID] = (int) $_post->ID; // Flag selected post ID.
+                }
+                $_post_type_object = get_post_type_object($_post->post_type); // Anticipate a possible failure.
+                $_post_type_label  = !empty($_post_type_object->labels->singular_name) ? $_post_type_object->labels->singular_name : $default_post_type_label;
 
-            $_post_title            = $_post->post_title ?: $default_post_title;
-            $_post_date             = $this->s::dateI18nUtc('M jS, Y', strtotime($_post->post_date_gmt));
-            $_post_id_selected_attr = isset($selected_post_ids[$_post->ID]) ? ' selected' : '';
+                $_post_title            = $_post->post_title ?: $default_post_title;
+                $_post_date             = $this->s::dateI18nUtc('M jS, Y', strtotime($_post->post_date_gmt));
+                $_post_id_selected_attr = isset($selected_post_ids[$_post->ID]) ? ' selected' : '';
 
-            // Format `<option>` tag w/ a custom formatter?
+                // Format `<option>` tag w/ a custom formatter?
 
-            if ($args['option_formatter']) {
-                $options .= $args['option_formatter']($_post, [
-                        'post_type_object'      => $_post_type_object,
-                        'post_type_label'       => $_post_type_label,
-                        'post_title'            => $_post_title,
-                        'post_date'             => $_post_date,
-                        'post_id_selected_attr' => $_post_id_selected_attr,
-                    ], $args); // ↑ This allows for a custom option formatter.
-                    // The formatter must always return an `<option></option>` tag.
+                if ($args['option_formatter']) {
+                    $options .= $args['option_formatter']($_post, [
+                            'parent_post_id'        => $parent_post_id,
+                            'parent_depth'          => $parent_depth,
+                            'post_type_object'      => $_post_type_object,
+                            'post_type_label'       => $_post_type_label,
+                            'post_title'            => $_post_title,
+                            'post_date'             => $_post_date,
+                            'post_id_selected_attr' => $_post_id_selected_attr,
+                        ], $args); // ↑ This allows for a custom option formatter.
+                        // The formatter must always return an `<option></option>` tag.
 
-            // Else format the `<option>` tag using a default behavior.
-            } elseif ($is_admin) { // Slightly different format in admin area.
-                $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_id_selected_attr.'>'.
-                                esc_html($_post_type_label.' #'.$_post->ID.': '.$_post_title).
-                            '</option>';
-            } else { // Front-end display should be friendlier in some ways.
-                $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_id_selected_attr.'>'.
-                                esc_html($_post_date.' — '.$_post_title).
-                            '</option>';
-            }
-        } // unset($_post, $_post_type_object, $_post_type_label, $_post_title, $_post_date, $_post_id_selected_attr); // Housekeeping.
+                // Else format the `<option>` tag using a default behavior.
+                } elseif ($is_admin) { // Slightly different format in admin area.
+                    $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_id_selected_attr.'>'.
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].' ' : '').
+                                    esc_html($_post_type_label.' #'.$_post->ID.': '.$_post_title).
+                                '</option>';
+                } else { // Front-end display should be friendlier in some ways.
+                    $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_id_selected_attr.'>'.
+                                    ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].' ' : '').
+                                    esc_html($_post_date.' — '.$_post_title).
+                                '</option>';
+                }
+                $walk((int) $_post->ID, $parent_depth + 1); // Any children this term has.
+                //
+            } // unset($_post, $_post_type_object, $_post_type_label, $_post_title, $_post_date, $_post_id_selected_attr); // Housekeeping.
+        };
+        $walk(0, 0); // Start walking/building the parent » child `<option>` tags.
 
         if ($args['allow_arbitrary'] && $args['current_post_ids']) { // Allow arbitrary select `<option>`s?
             foreach (array_diff($args['current_post_ids'], $available_post_ids) as $_arbitrary_post_id) {

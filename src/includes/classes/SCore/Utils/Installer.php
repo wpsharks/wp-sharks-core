@@ -139,7 +139,7 @@ class Installer extends Classes\SCore\Base\Core
      */
     protected function maybeEnqueueNotices()
     {
-        if (!$this->history['first_time']) {
+        if (($is_install = !$this->history['first_time'])) {
             $template_file = 's-core/notices/on-install.php';
         } else {
             $template_file = 's-core/notices/on-reinstall.php';
@@ -148,16 +148,17 @@ class Installer extends Classes\SCore\Base\Core
         $notice_markup = $Template->parse(['history' => $this->history]);
         $this->s::enqueueNotice($notice_markup, [
             'type'         => 'success',
-            'is_transient' => !$this->history['first_time'],
+            'is_transient' => $is_install,
         ]);
         if ($this->App->Config->§specs['§is_pro'] && !$this->s::getOption('§license_key')) {
             $license_key_Template      = $this->c::getTemplate('s-core/notices/license-key.php');
             $license_key_notice_markup = $license_key_Template->parse();
             $this->s::enqueueNotice($license_key_notice_markup, [
-                'id'             => '§license-key',
-                'type'           => 'info',
-                'is_persistent'  => true,
-                'is_dismissable' => false,
+                'id'               => '§license-key',
+                'type'             => 'info',
+                'is_persistent'    => true,
+                'is_dismissable'   => false,
+                'delay_until_time' => $is_install ? time() + 5 : 0,
             ]);
         }
     }

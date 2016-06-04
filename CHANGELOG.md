@@ -1,3 +1,9 @@
+## v${[project_version]}
+
+- Delay license key request until after the welcome notification.
+- Adding several new configurable options for notices.
+- Enhance `PostsQuery` to allow for nested lists that show parent/child relationships.
+
 ## v160601.61851
 
 - Bumping to `websharks/core` v160601.61090.
