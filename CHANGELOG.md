@@ -1,4 +1,4 @@
-## $v
+## v160604.79078
 
 - Updating dotfiles.
 - Improving default `App->onSetupOtherHooks()` handler.
