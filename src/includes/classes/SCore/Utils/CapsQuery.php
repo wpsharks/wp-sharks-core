@@ -167,10 +167,6 @@ class CapsQuery extends Classes\SCore\Base\Core
      */
     public function selectOptions(array $args = []): string
     {
-        // In an admin area?
-
-        $is_admin = is_admin();
-
         // Establish args.
 
         $default_args = [

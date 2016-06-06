@@ -151,15 +151,14 @@ class Updater extends Classes\SCore\Base\Core
 
         if ($last_check['time'] > $this->outdated_check_time) {
             return $last_check['version']; // According to last check.
-        } // Already checked this recently. Don't do it again (yet).
+        } // Already checked this recently. Don't do it again right now.
 
         if (($get_latest_version_url = $this->getLatestVersionUrl())
-            && !is_wp_error($response = wp_remote_get($get_latest_version_url))
-                && ($remote_version = $this->c::mbTrim((string) $response['body']))
-                && $this->c::isWsVersion($remote_version) // Avoid odd body.
-                && version_compare($remote_version, $this->App::VERSION, '>=')
-            ) {
-            $version = $remote_version; // Latest available version.
+            && !is_wp_error($remote_response = wp_remote_get($get_latest_version_url))
+                && ($remote_api_response = $this->c::mbTrim((string) $remote_response['body']))
+                && $this->c::isWsVersion($remote_api_response) // Avoid odd response body.
+                && version_compare($remote_api_response, $this->App::VERSION, '>=')) {
+            $version = $remote_api_response; // Latest available version.
         }
         $this->lastVersionCheck(['time' => time(), 'version' => $version]);
 
@@ -180,17 +179,17 @@ class Updater extends Classes\SCore\Base\Core
 
         if ($last_check['time'] > $this->outdated_check_time) {
             return $last_check['package']; // According to last check.
-        } // Already checked this recently. Don't do it again (yet).
+        } // Already checked this recently. Don't do it again right now.
 
         if (($get_latest_package_url = $this->getLatestPackageUrl())
-            && !is_wp_error($response = wp_remote_get($get_latest_package_url))
-                && ($remote_package = $this->c::mbTrim((string) $response['body']))
-                && preg_match('/^http/ui', $remote_package)) { // Avoid odd body.
-            $package = $remote_package; // Latest available package.
+            && !is_wp_error($remote_response = wp_remote_get($get_latest_package_url))
+                && is_object($remote_api_response = json_decode((string) $remote_response['body']))
+                && !empty($remote_api_response->success) && !empty($remote_api_response->data->url)) {
+            $package = $remote_api_response->data->url; // Latest available package.
         }
         $this->lastPackageCheck(['time' => time(), 'package' => $package]);
 
-        return $version;
+        return $package;
     }
 
     /**
@@ -202,11 +201,10 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function getLatestVersionUrl(): string
     {
-        if ($this->App->Config->©debug['©edge']) {
-            return 'https://cdn.wpsharks.com/software/bleeding-edge/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
-        } else {
-            return 'https://cdn.wpsharks.com/software/latest/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
-        }
+        $url = 'https://cdn.wpsharks.com/software';
+        $url .= $this->App->Config->©debug['©edge'] ? '/bleeding-edge' : '/latest';
+        $url .= '/'.urlencode($this->App->Config->©brand['©slug']);
+        return $url .= '/version.txt';
     }
 
     /**
@@ -218,22 +216,23 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function getLatestPackageUrl(): string
     {
-        if ($this->App->Config->©debug['©edge']) {
-            $action = 'get-bleeding-edge-package-url';
-        } else {
-            $action = 'get-latest-package-url';
-        } // Defaults to latest stable package URL.
-
         $license_key = $this->s::getOption('§license_key');
+
         if ($this->App->Config->§specs['§is_pro'] && !$license_key) {
             return ''; // Not possible w/o license key.
         }
         $args = [
-            'action'      => $action,
-            'license_key' => $license_key,
-            'slug'        => $this->App->Config->©brand['©slug'],
+            'wps_action'      => 'get-product-package-url...via-api',
+            'wps_action_data' => [
+                'api_version' => '1.0',
+                'product'     => [
+                    'license_key' => $license_key,
+                    'slug'        => $this->App->Config->©brand['©slug'],
+                ],
+                'type' => $this->App->Config->©debug['©edge'] ? 'bleeding-edge' : 'latest',
+            ],
         ];
-        return $this->c::addUrlQueryArgs($args, 'https://wpsharks.com/api/v1.0/');
+        return $this->c::addUrlQueryArgs($args, 'https://api.wpsharks.com/');
     }
 
     /**

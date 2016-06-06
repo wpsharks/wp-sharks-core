@@ -22,13 +22,38 @@ use function get_defined_vars as vars;
 class Fatality extends Classes\SCore\Base\Core
 {
     /**
-     * Forbidden response.
+     * Invalid.
+     *
+     * @since 160606 Fatalities.
+     */
+    public function invalid()
+    {
+        if ($this->c::isAjax() || $this->c::isApi()) {
+            // Via JSON response.
+            $this->c::statusHeader(400);
+            $this->c::noCacheHeaders();
+            header('content-type: application/json; charset=utf-8');
+
+            // Standard JSON response data w/ `success` as `false`.
+            die(json_encode([
+                'success' => false,
+                'error'   => [
+                    'code'    => 400,
+                    'message' => __('Bad request.', 'wp-sharks-core'),
+                ],
+            ]));
+        }
+        wp_die(__('Bad request.', 'wp-sharks-core'), __('Forbidden', 'wp-sharks-core'), ['response' => 400, 'back_link' => true]);
+    }
+
+    /**
+     * Forbidden.
      *
      * @since 160524 Fatalities.
      */
     public function forbidden()
     {
-        if ($this->c::isAjax()) {
+        if ($this->c::isAjax() || $this->c::isApi()) {
             // Via JSON response.
             $this->c::statusHeader(403);
             $this->c::noCacheHeaders();
@@ -39,10 +64,10 @@ class Fatality extends Classes\SCore\Base\Core
                 'success' => false,
                 'error'   => [
                     'code'    => 403,
-                    'message' => __('Abnormal request; forbidden.', 'wp-sharks-core'),
+                    'message' => __('Forbidden.', 'wp-sharks-core'),
                 ],
             ]));
         }
-        wp_die(__('Abnormal request; forbidden.', 'wp-sharks-core'), __('Forbidden', 'wp-sharks-core'), ['response' => 403, 'back_link' => true]);
+        wp_die(__('Forbidden.', 'wp-sharks-core'), __('Forbidden', 'wp-sharks-core'), ['response' => 403, 'back_link' => true]);
     }
 }

@@ -271,8 +271,7 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function dismissUrl(string $key): string
     {
-        $url        = $this->c::currentUrl();
-        return $url = $this->s::addUrlAction($url, '§dismiss-notice', $key);
+        return $this->s::addUrlAction('§dismiss-notice', null, $key);
     }
 
     /**

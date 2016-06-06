@@ -17,7 +17,15 @@ use function get_defined_vars as vars;
 trait Fatalities
 {
     /**
-     * @since 160524 Initial release.
+     * @since 160606 Fatalities.
+     */
+    public static function dieInvalid(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Fatality->invalid(...$args);
+    }
+
+    /**
+     * @since 160524 Fatalities.
      */
     public static function dieForbidden(...$args)
     {

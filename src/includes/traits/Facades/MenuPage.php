@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 trait MenuPage
 {
     /**
-     * @since 160524 Initial release.
+     * @since 160524 Menu page utils.
      */
     public static function currentMenuPage(...$args)
     {
@@ -25,7 +25,7 @@ trait MenuPage
     }
 
     /**
-     * @since 160524 Initial release.
+     * @since 160524 Menu page utils.
      */
     public static function menuPageNow(...$args)
     {
@@ -33,23 +33,7 @@ trait MenuPage
     }
 
     /**
-     * @since 160524 Initial release.
-     */
-    public static function currentMenuPagePostType(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§MenuPage->currentPostType(...$args);
-    }
-
-    /**
-     * @since 160524 Initial release.
-     */
-    public static function menuPagePostTypeNow(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§MenuPage->postTypeNow(...$args);
-    }
-
-    /**
-     * @since 160524 Initial release.
+     * @since 160524 Menu page utils.
      */
     public static function isMenuPage(...$args)
     {
@@ -57,7 +41,55 @@ trait MenuPage
     }
 
     /**
-     * @since 160524 Initial release.
+     * @since 160606 Menu page utils.
+     */
+    public static function isOwnMenuPage(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->isOwn(...$args);
+    }
+
+    /**
+     * @since 160606 Menu page utils.
+     */
+    public static function currentMenuPageTab(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->currentTab(...$args);
+    }
+
+    /**
+     * @since 160606 Menu page utils.
+     */
+    public static function isMenuPageTab(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->isTab(...$args);
+    }
+
+    /**
+     * @since 160606 Menu page utils.
+     */
+    public static function isOwnMenuPageTab(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->isOwnTab(...$args);
+    }
+
+    /**
+     * @since 160524 Menu page utils.
+     */
+    public static function currentMenuPagePostType(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->currentPostType(...$args);
+    }
+
+    /**
+     * @since 160524 Menu page utils.
+     */
+    public static function menuPagePostTypeNow(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->postTypeNow(...$args);
+    }
+
+    /**
+     * @since 160524 Menu page utils.
      */
     public static function isMenuPageForPostType(...$args)
     {

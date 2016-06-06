@@ -113,8 +113,8 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
         if (!$this->App->Config->§dependencies['§plugins']
             && !$this->App->Config->§dependencies['§themes']
             && !$this->App->Config->§dependencies['§others']) {
-            return; // Nothing to do here.
-        } elseif (($is_front_or_ajax = $this->s::isFrontOrAjax())
+            return; // Nothing to do; we can stop here.
+        } elseif (($is_front_or_ajax = !is_admin() || $this->c::isAjax())
                 && $this->lastOkTime() > $this->outdated_check_time) {
             return; // Had a successfull check recently.
         }

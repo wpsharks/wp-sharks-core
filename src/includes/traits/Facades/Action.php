@@ -25,6 +25,14 @@ trait Action
     }
 
     /**
+     * @since 160606 Action utils.
+     */
+    public static function bestActionUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Action->bestUrl(...$args);
+    }
+
+    /**
      * @since 160531 Action utils.
      */
     public static function addUrlAction(...$args)
@@ -62,5 +70,13 @@ trait Action
     public static function actionFormElementName(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Action->formElementName(...$args);
+    }
+
+    /**
+     * @since 160606 Action utils.
+     */
+    public static function registerAction(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Action->register(...$args);
     }
 }

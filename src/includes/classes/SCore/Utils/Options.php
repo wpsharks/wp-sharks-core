@@ -42,8 +42,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function saveUrl(): string
     {
-        $url        = $this->c::currentUrl();
-        return $url = $this->s::addUrlAction($url, '§save-options');
+        return $this->s::addUrlAction('§save-options');
     }
 
     /**
@@ -78,8 +77,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function saveViaAjaxUrl(): string
     {
-        $url        = $this->c::currentUrl();
-        return $url = $this->s::addUrlAction($url, '§save-options-via-ajax');
+        return $this->s::addUrlAction('§save-options...via-ajax');
     }
 
     /**
@@ -116,8 +114,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function restoreDefaultsUrl(): string
     {
-        $url        = $this->c::currentUrl();
-        return $url = $this->s::addUrlAction($url, '§restore-default-options');
+        return $this->s::addUrlAction('§restore-default-options');
     }
 
     /**

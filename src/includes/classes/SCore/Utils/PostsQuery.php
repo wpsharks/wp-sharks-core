@@ -273,8 +273,6 @@ class PostsQuery extends Classes\SCore\Base\Core
      */
     public function selectOptions(array $args = []): string
     {
-        $WpDb = $this->s::wpDb();
-
         // In an admin area?
 
         $is_admin = is_admin();

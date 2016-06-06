@@ -84,6 +84,7 @@ class App extends CoreClasses\App
                     '©acronym'     => 'WPSC',
                     '©prefix'      => 'wpsc',
 
+                    '§action_base' => '©var',
                     '§domain'      => 'wpsharks.com',
                     '§domain_path' => '/product/core',
                 ],
@@ -136,6 +137,7 @@ class App extends CoreClasses\App
                     '©acronym'     => '',
                     '©prefix'      => '',
 
+                    '§action_base' => '',
                     '§domain'      => '',
                     '§domain_path' => '',
                 ],
@@ -175,6 +177,11 @@ class App extends CoreClasses\App
                 throw new Exception('Please remove `lite|pro` suffix from ©prefix.');
             } elseif ($args['§validate_brand'] && preg_match('/[^a-z0-9]/u', $brand['©prefix'])) {
                 throw new Exception('Please remove `[^a-z0-9]` chars from ©prefix.');
+            }
+            if (!$brand['§action_base']) {
+                $brand['§action_base'] = '©var'; // Or `©prefix`.
+            } elseif ($args['§validate_brand'] && !in_array($brand['§action_base'], ['©var', '©prefix'], true)) {
+                throw new Exception('Please set §action_base to `©var` or `©prefix`.');
             }
             if (!$brand['§domain']) {
                 $brand['§domain']      = $Parent->Config->©brand['§domain'];
@@ -275,6 +282,7 @@ class App extends CoreClasses\App
                 '©acronym'     => '',
                 '©prefix'      => '',
 
+                '§action_base' => '',
                 '§domain'      => '',
                 '§domain_path' => '',
             ],
@@ -436,7 +444,7 @@ class App extends CoreClasses\App
 
         # Merge site owner options (highest precedence).
 
-        if ($this->Config->§specs['§is_network_wide'] && is_multisite()) {
+        if ($this->Config->§specs['§is_network_wide'] && $wp_is_multisite) {
             if (!is_array($site_owner_options = get_network_option(null, $this->Config->©brand['©var'].'_options'))) {
                 update_network_option(null, $this->Config->©brand['©var'].'_options', $site_owner_options = []);
             }
@@ -555,16 +563,15 @@ class App extends CoreClasses\App
     {
         add_action('wp_loaded', [$this->Utils->§Action, 'onWpLoaded']);
 
-        if (is_admin()) { // Optimize this; i.e., only in admin area.
+        if (is_admin()) { // Optimizes this hook.
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
         }
         if ($this->Config->§specs['§type'] === 'theme' || $this->Config->§specs['§type'] === 'plugin') {
-            /* @TODO Enable this once the API is ready.
             if ($this->Config->§specs['§type'] === 'theme') {
                 add_filter('site_transient_update_themes', [$this->Utils->§Updater, 'onGetSiteTransientUpdateThemes']);
             } elseif ($this->App->Config->§specs['§type'] === 'plugin') {
                 add_filter('site_transient_update_plugins', [$this->Utils->§Updater, 'onGetSiteTransientUpdatePlugins']);
-            } */
+            }
         }
     }
 }

@@ -114,17 +114,17 @@ class Conflicts extends Classes\SCore\Base\Core
         if ($this->checked) {
             return; // Done.
         }
-        $this->checked = true; // Checking now.
+        $this->checked = true;
 
         if (!$this->App->Config->§conflicts['§plugins']
             && !$this->App->Config->§conflicts['§themes']) {
-            return; // Nothing to do here.
-        } elseif (($is_front_or_ajax = $this->s::isFrontOrAjax())
+            return; // Nothing to do; we can stop here.
+        }
+        if (($is_front_or_ajax = !($is_admin = is_admin()) || $this->c::isAjax())
                 && $this->lastOkTime() > $this->outdated_check_time) {
             return; // Had a successfull check recently.
         }
-        $is_admin     = is_admin();
-        $is_multisite = is_multisite();
+        $is_multisite = is_multisite(); // Needed below.
 
         $all_active_plugin_slugs     = $this->s::allActivePlugins();
         $network_active_plugin_slugs = $is_multisite ? $this->s::networkActivePlugins() : [];
