@@ -1,3 +1,7 @@
+## v160606.46332
+
+- Updating to latest websharks/core.
+
 ## v160604.79078
 
 - Updating dotfiles.

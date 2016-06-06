@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "82415a769ceb57bbdf29359e3edf1597",
-    "content-hash": "e9f5c2d7e5eb63cea9cd7dd43538b758",
+    "hash": "834635d426d0ca820d53bf9447ea7379",
+    "content-hash": "b238483e07c0be9bb00b5d98f64ea851",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -518,16 +518,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.15",
+            "version": "v5.2.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c"
+                "reference": "1d85f9ef3ecfc42bbc4f3c70d5e37ca9a65f629a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c",
-                "reference": "d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/1d85f9ef3ecfc42bbc4f3c70d5e37ca9a65f629a",
+                "reference": "1d85f9ef3ecfc42bbc4f3c70d5e37ca9a65f629a",
                 "shasum": ""
             },
             "require": {
@@ -574,7 +574,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2016-05-10 18:39:36"
+            "time": "2016-06-06 09:09:37"
         },
         {
             "name": "ramsey/uuid",
@@ -767,16 +767,16 @@
         },
         {
             "name": "websharks/core",
-            "version": "160601.61090",
+            "version": "160606.45353",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "02fec69b9b28f5496c19a70bf76efb0f3b445999"
+                "reference": "44dbebbfdb84717f44f15f5d491f0bfc12379ee6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/02fec69b9b28f5496c19a70bf76efb0f3b445999",
-                "reference": "02fec69b9b28f5496c19a70bf76efb0f3b445999",
+                "url": "https://api.github.com/repos/websharks/core/zipball/44dbebbfdb84717f44f15f5d491f0bfc12379ee6",
+                "reference": "44dbebbfdb84717f44f15f5d491f0bfc12379ee6",
                 "shasum": ""
             },
             "require": {
@@ -886,7 +886,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-06-01 16:59:11"
+            "time": "2016-06-06 12:37:25"
         },
         {
             "name": "websharks/dicer",
