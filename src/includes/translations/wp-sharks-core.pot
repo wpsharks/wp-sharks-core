@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160606.50319\n"
+"Project-Id-Version: WP Sharks Core 160606.79543\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-06-06 14:02:42+00:00\n"
+"POT-Creation-Date: 2016-06-06 22:06:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -141,18 +141,24 @@ msgstr ""
 
 #: src/includes/classes/SCore/Utils/Fatality.php:42
 #: src/includes/classes/SCore/Utils/Fatality.php:46
-msgid "Abnormal request; forbidden."
+msgid "Bad request."
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/Fatality.php:46
+#: src/includes/classes/SCore/Utils/Fatality.php:71
 msgid "Forbidden"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/Notices.php:370
+#: src/includes/classes/SCore/Utils/Fatality.php:67
+#: src/includes/classes/SCore/Utils/Fatality.php:71
+msgid "Forbidden."
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/Notices.php:369
 msgid "Dismiss this notice."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/Options.php:64
+#: src/includes/classes/SCore/Utils/Options.php:63
 msgid "%1$s options updated successfully."
 msgstr ""
 
@@ -160,12 +166,12 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/PostsQuery.php:367
+#: src/includes/classes/SCore/Utils/PostsQuery.php:365
 #: src/includes/classes/SCore/Utils/TermsQuery.php:221
 msgid "Post"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/PostsQuery.php:368
+#: src/includes/classes/SCore/Utils/PostsQuery.php:366
 msgid "Untitled"
 msgstr ""
 

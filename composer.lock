@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "834635d426d0ca820d53bf9447ea7379",
-    "content-hash": "b238483e07c0be9bb00b5d98f64ea851",
+    "hash": "3eda530b265ccade737ad9bea96882e1",
+    "content-hash": "0ac216154e195d48da9f8bc8679a1d0c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -658,16 +658,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.6",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "a158f13992a3147d466af7a23b564ac719a4ddd8"
+                "reference": "2a6b8713f8bdb582058cfda463527f195b066110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/a158f13992a3147d466af7a23b564ac719a4ddd8",
-                "reference": "a158f13992a3147d466af7a23b564ac719a4ddd8",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/2a6b8713f8bdb582058cfda463527f195b066110",
+                "reference": "2a6b8713f8bdb582058cfda463527f195b066110",
                 "shasum": ""
             },
             "require": {
@@ -714,20 +714,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-03 18:59:18"
+            "time": "2016-06-06 11:11:27"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.6",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "e4fbcc65f90909c999ac3b4dfa699ee6563a9940"
+                "reference": "815fabf3f48c7d1df345a69d1ad1a88f59757b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/e4fbcc65f90909c999ac3b4dfa699ee6563a9940",
-                "reference": "e4fbcc65f90909c999ac3b4dfa699ee6563a9940",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/815fabf3f48c7d1df345a69d1ad1a88f59757b34",
+                "reference": "815fabf3f48c7d1df345a69d1ad1a88f59757b34",
                 "shasum": ""
             },
             "require": {
@@ -763,20 +763,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-29 19:00:15"
+            "time": "2016-06-06 11:11:27"
         },
         {
             "name": "websharks/core",
-            "version": "160606.45353",
+            "version": "160606.65620",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "44dbebbfdb84717f44f15f5d491f0bfc12379ee6"
+                "reference": "0b8c4b8c117b01f1b5dcfdd23c265196e93614ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/44dbebbfdb84717f44f15f5d491f0bfc12379ee6",
-                "reference": "44dbebbfdb84717f44f15f5d491f0bfc12379ee6",
+                "url": "https://api.github.com/repos/websharks/core/zipball/0b8c4b8c117b01f1b5dcfdd23c265196e93614ea",
+                "reference": "0b8c4b8c117b01f1b5dcfdd23c265196e93614ea",
                 "shasum": ""
             },
             "require": {
@@ -886,7 +886,7 @@
             "keywords": [
                 "websharks"
             ],
-            "time": "2016-06-06 12:37:25"
+            "time": "2016-06-06 18:14:39"
         },
         {
             "name": "websharks/dicer",
