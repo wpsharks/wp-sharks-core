@@ -1,3 +1,8 @@
+## $v
+
+- Enhancing actions, fatalities, updater, and more.
+- Updating to the latest websharks/core.
+
 ## v160606.50319
 
 - Updating to latest websharks/core.
