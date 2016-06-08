@@ -1,3 +1,7 @@
+## $v
+
+- Moving Order Item utilities from s2X to the WPSC.
+
 ## v160608.38368
 
 - Bug fix. Should not fail on missing `$report`.
