@@ -21,7 +21,6 @@ use function get_defined_vars as vars;
  */
 abstract class Facades
 {
-    use Traits\Facades\Action;
     use Traits\Facades\BrandUrls;
     use Traits\Facades\CapQueries;
     use Traits\Facades\Conflicts;
@@ -39,6 +38,7 @@ abstract class Facades
     use Traits\Facades\Plugins;
     use Traits\Facades\PostQueries;
     use Traits\Facades\PostTypeQueries;
+    use Traits\Facades\RestAction;
     use Traits\Facades\RoleQueries;
     use Traits\Facades\StylesScripts;
     use Traits\Facades\SysOption;
