@@ -84,9 +84,9 @@ class App extends CoreClasses\App
                     '©acronym'     => 'WPSC',
                     '©prefix'      => 'wpsc',
 
-                    '§action_base' => '©var',
-                    '§domain'      => 'wpsharks.com',
-                    '§domain_path' => '/product/core',
+                    '§rest_action_base' => '©var',
+                    '§domain'           => 'wpsharks.com',
+                    '§domain_path'      => '/product/core',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -137,9 +137,9 @@ class App extends CoreClasses\App
                     '©acronym'     => '',
                     '©prefix'      => '',
 
-                    '§action_base' => '',
-                    '§domain'      => '',
-                    '§domain_path' => '',
+                    '§rest_action_base' => '',
+                    '§domain'           => '',
+                    '§domain_path'      => '',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -178,10 +178,10 @@ class App extends CoreClasses\App
             } elseif ($args['§validate_brand'] && preg_match('/[^a-z0-9]/u', $brand['©prefix'])) {
                 throw new Exception('Please remove `[^a-z0-9]` chars from ©prefix.');
             }
-            if (!$brand['§action_base']) {
-                $brand['§action_base'] = '©var'; // Or `©prefix`.
-            } elseif ($args['§validate_brand'] && !in_array($brand['§action_base'], ['©var', '©prefix'], true)) {
-                throw new Exception('Please set §action_base to `©var` or `©prefix`.');
+            if (!$brand['§rest_action_base']) {
+                $brand['§rest_action_base'] = '©var'; // Or `©prefix`.
+            } elseif ($args['§validate_brand'] && !in_array($brand['§rest_action_base'], ['©var', '©prefix'], true)) {
+                throw new Exception('Please set §rest_action_base to `©var` or `©prefix`.');
             }
             if (!$brand['§domain']) {
                 $brand['§domain']      = $Parent->Config->©brand['§domain'];
@@ -282,9 +282,9 @@ class App extends CoreClasses\App
                 '©acronym'     => '',
                 '©prefix'      => '',
 
-                '§action_base' => '',
-                '§domain'      => '',
-                '§domain_path' => '',
+                '§rest_action_base' => '',
+                '§domain'           => '',
+                '§domain_path'      => '',
             ],
 
             '©urls' => [
@@ -561,7 +561,7 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
-        add_action('wp_loaded', [$this->Utils->§Action, 'onWpLoaded']);
+        add_action('wp_loaded', [$this->Utils->§RestAction, 'onWpLoaded']);
 
         if (is_admin()) { // Optimizes this hook.
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);

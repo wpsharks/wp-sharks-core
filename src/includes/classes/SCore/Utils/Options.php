@@ -42,7 +42,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function saveUrl(): string
     {
-        return $this->s::addUrlAction('§save-options');
+        return $this->s::addUrlRestAction('§save-options');
     }
 
     /**
@@ -55,10 +55,10 @@ class Options extends Classes\SCore\Base\Core
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!
         }
-        $this->update((array) $this->s::actionData());
+        $this->update((array) $this->s::restActionData());
 
         $url = $this->c::currentUrl();
-        $url = $this->s::removeUrlAction($url);
+        $url = $this->s::removeUrlRestAction($url);
 
         $markup = __('%1$s options updated successfully.', 'wp-sharks-core');
         $markup = sprintf($markup, esc_html($this->App->Config->©brand['©name']));
@@ -77,7 +77,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function saveViaAjaxUrl(): string
     {
-        return $this->s::addUrlAction('§save-options...via-ajax');
+        return $this->s::addUrlRestAction('§save-options...via-ajax');
     }
 
     /**
@@ -90,7 +90,7 @@ class Options extends Classes\SCore\Base\Core
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!
         }
-        $this->update((array) $this->s::actionData());
+        $this->update((array) $this->s::restActionData());
 
         exit(json_encode(['success' => true]));
     }
@@ -114,7 +114,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function restoreDefaultsUrl(): string
     {
-        return $this->s::addUrlAction('§restore-default-options');
+        return $this->s::addUrlRestAction('§restore-default-options');
     }
 
     /**
@@ -130,7 +130,7 @@ class Options extends Classes\SCore\Base\Core
         $this->restoreDefaults();
 
         $url = $this->c::currentUrl();
-        $url = $this->s::removeUrlAction($url);
+        $url = $this->s::removeUrlRestAction($url);
 
         wp_redirect($url);
         exit; // Stop on redirection.

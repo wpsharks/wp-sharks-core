@@ -15,16 +15,16 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Action utils.
+ * ReST action utils.
  *
- * @since 160531 Action utils.
+ * @since 160608 Action utils.
  */
-class Action extends Classes\SCore\Base\Core
+class RestAction extends Classes\SCore\Base\Core
 {
     /**
      * Action var.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @type string Action var.
      */
@@ -33,7 +33,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Data var.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @type string Data var.
      */
@@ -42,7 +42,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Data slug.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @type string Data slug.
      */
@@ -51,7 +51,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Current action.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @type string Current action.
      */
@@ -60,7 +60,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Registered actions.
      *
-     * @since 160606 Action utils.
+     * @since 160608 ReST utils.
      *
      * @type array Registered actions.
      */
@@ -69,7 +69,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @param Classes\App $App Instance.
      */
@@ -77,7 +77,7 @@ class Action extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
-        $var_base                 = $this->App->Config->©brand['§action_base'];
+        $var_base                 = $this->App->Config->©brand['§rest_action_base'];
         $this->var                = $this->App->Config->©brand[$var_base].'_action';
         $this->data_var           = $this->App->Config->©brand[$var_base].'_action_data';
         $this->data_slug          = $this->App->Config->©brand['©slug'].'-action-data';
@@ -93,7 +93,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Handle actions.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      */
     public function onWpLoaded()
     {
@@ -116,7 +116,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Handle actions.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @note Only runs when appropriate.
      */
@@ -130,7 +130,7 @@ class Action extends Classes\SCore\Base\Core
         if ($actor['requires_valid_nonce']) {
             $this->s::requireValidNonce($this->action);
         }
-        $this->c::doingAction($this->action);
+        $this->c::doingRestAction($this->action);
 
         $Utility = $this->App->Utils->{$actor['class']};
         $Utility->{$actor['method']}($this->action);
@@ -139,7 +139,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Action data.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @return mixed Action data.
      */
@@ -147,7 +147,7 @@ class Action extends Classes\SCore\Base\Core
     {
         if (!$this->action) {
             return; // Not applicable.
-        } elseif (!$this->c::doingAction()) {
+        } elseif (!$this->c::doingRestAction()) {
             return; // Not appliable.
         }
         if (($data = $_REQUEST[$this->data_var] ?? null)) {
@@ -159,7 +159,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Best URL for the action.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @param string $action Action identifier.
      *
@@ -183,7 +183,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Add action to a URL.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @param string      $action Action identifier.
      * @param string|null $url    Input URL (optional).
@@ -202,7 +202,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Remove an nonce from a URL.
      *
-     * @since 160524 First documented version.
+     * @since 160608 ReST utils.
      *
      * @param string $url Input URL.
      *
@@ -217,7 +217,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Data form element ID.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @param string $action Action identifier.
      * @param string $var    Data var (array key).
@@ -232,7 +232,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Data form element class.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @param string $var Data var (array key).
      *
@@ -246,7 +246,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Data form element name.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @param string $var Data var (array key).
      *
@@ -260,7 +260,7 @@ class Action extends Classes\SCore\Base\Core
     /**
      * Registers an action.
      *
-     * @since 160531 Action utils.
+     * @since 160608 ReST utils.
      *
      * @param string $action Action identifier.
      * @param string $class  A utility class name.

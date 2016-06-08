@@ -271,7 +271,7 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function dismissUrl(string $key): string
     {
-        return $this->s::addUrlAction('§dismiss-notice', null, $key);
+        return $this->s::addUrlRestAction('§dismiss-notice', null, $key);
     }
 
     /**
@@ -282,7 +282,7 @@ class Notices extends Classes\SCore\Base\Core
     public function onActionDismissNotice()
     {
         $notices = $this->get();
-        $key     = (string) $this->s::actionData();
+        $key     = (string) $this->s::restActionData();
 
         if ($key && isset($notices[$key])) {
             $notice = $notices[$key];
@@ -293,7 +293,7 @@ class Notices extends Classes\SCore\Base\Core
             $this->dismiss($key);
         }
         $url = $this->c::currentUrl();
-        $url = $this->s::removeUrlAction($url);
+        $url = $this->s::removeUrlRestAction($url);
 
         wp_redirect($url);
         exit; // Stop on redirection.
