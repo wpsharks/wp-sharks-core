@@ -48,4 +48,5 @@ abstract class Facades
     use Traits\Facades\Uninstaller;
     use Traits\Facades\UrlToPostId;
     use Traits\Facades\UserQueries;
+    use Traits\Facades\WcOrderItem;
 }
