@@ -64,9 +64,8 @@ class Updater extends Classes\SCore\Base\Core
             return $report; // Not applicable.
         } // i.e., Applies only to theme instances.
 
-        if (!is_object($report)) { // Should not occur.
-            debug(0, $this->c::issue(vars(), 'Unexpected report.'));
-            return $report; // Not possible.
+        if (!is_object($report)) { // e.g., Does not exist yet?
+            $report = new \StdClass(); // Force object instance.
         }
         if (!isset($report->response) || !is_array($report->response)) {
             $report->response = []; // Force an array value.
@@ -109,9 +108,8 @@ class Updater extends Classes\SCore\Base\Core
             return $report; // Not applicable.
         } // i.e., Applies only to plugin instances.
 
-        if (!is_object($report)) { // Should not occur.
-            debug(0, $this->c::issue(vars(), 'Unexpected report.'));
-            return $report; // Not possible.
+        if (!is_object($report)) { // e.g., Does not exist yet?
+            $report = new \StdClass(); // Force object instance.
         }
         if (!isset($report->response) || !is_array($report->response)) {
             $report->response = []; // Force an array value.
