@@ -1,3 +1,7 @@
+## v160620.27545
+
+- Updating to websharks/core v160620.27266.
+
 ## v160608.72986
 
 - Moving Order Item utilities from s2X to the WPSC.
