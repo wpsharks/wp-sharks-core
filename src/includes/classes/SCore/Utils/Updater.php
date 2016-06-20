@@ -45,6 +45,22 @@ class Updater extends Classes\SCore\Base\Core
     }
 
     /**
+     * Flush the OPcache.
+     *
+     * @since 160620 Update utils.
+     */
+    public function onUpgraderProcessComplete()
+    {
+        add_action('shutdown', function () {
+            // NOTE: Avoid relying on objects in the shutdown phase.
+            // PHP's shutdown phase is known to destruct objects randomly.
+            if (function_exists('opcache_reset')) {
+                @opcache_reset();
+            }
+        });
+    }
+
+    /**
      * Transient filter.
      *
      * @since 160530 Update utils.

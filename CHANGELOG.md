@@ -1,3 +1,7 @@
+## $v
+
+- Now flushing the OPcache automatically whenever a theme, plugin, or core upgrade occurs. Referencing: <https://core.trac.wordpress.org/ticket/36455>
+
 ## v160620.27545
 
 - Updating to websharks/core v160620.27266.

@@ -573,5 +573,8 @@ class App extends CoreClasses\App
                 add_filter('site_transient_update_plugins', [$this->Utils->§Updater, 'onGetSiteTransientUpdatePlugins']);
             }
         }
+        if ($this->class === self::class) { // Flushes the OPcache.
+            add_action('upgrader_process_complete', [$this->Utils->§Updater, 'onUpgraderProcessComplete']);
+        }
     }
 }
