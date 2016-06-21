@@ -85,7 +85,7 @@ class RestAction extends Classes\SCore\Base\Core
         $this->registered_actions = []; // Initialize.
 
         $this->register('§save-options', '§Options', 'onActionSaveOptions');
-        $this->register('§save-options...via-ajax', '§Options', 'onActionSaveOptionsViaAjax');
+        $this->register('ajax.§save-options', '§Options', 'onActionSaveOptionsViaAjax');
         $this->register('§restore-default-options', '§Options', 'onActionRestoreDefaultOptions');
         $this->register('§dismiss-notice', '§Notices', 'onActionDismissNotice');
     }
@@ -103,10 +103,10 @@ class RestAction extends Classes\SCore\Base\Core
         $this->c::noCacheFlags();
         $this->c::noCacheHeaders();
 
-        if (preg_match('/\.{3}via\-ajax$/u', $this->action)) {
+        if (preg_match('/^ajax\./u', $this->action)) {
             header('content-type: application/json; charset=utf-8');
             $this->c::isAjax(true);
-        } elseif (preg_match('/\.{3}via\-api$/u', $this->action)) {
+        } elseif (preg_match('/^api\./u', $this->action)) {
             header('content-type: application/json; charset=utf-8');
             $this->c::isApi(true);
         }
@@ -167,7 +167,7 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function bestUrl(string $action): string
     {
-        if (preg_match('/\.{3}via\-(?:ajax|api)$/u', $action)) {
+        if (preg_match('/^(?:ajax|api)\./u', $action)) {
             return home_url('/'); // Both ride on index.
         }
         $is_admin = is_admin(); // Need this for the checks below.
@@ -273,7 +273,7 @@ class RestAction extends Classes\SCore\Base\Core
             throw $this->c::issue('Action args empty.');
         }
         $default_args = [
-            'requires_valid_nonce' => !preg_match('/\.{3}via\-api$/u', $action),
+            'requires_valid_nonce' => !preg_match('/^api\./u', $action),
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);

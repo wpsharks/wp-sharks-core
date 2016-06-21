@@ -236,7 +236,7 @@ class Updater extends Classes\SCore\Base\Core
             return ''; // Not possible w/o license key.
         }
         $args = [
-            'wps_action'      => 'get-product-package-url...via-api',
+            'wps_action'      => 'api.get-product-package-url',
             'wps_action_data' => [
                 'api_version' => '1.0',
                 'product'     => [

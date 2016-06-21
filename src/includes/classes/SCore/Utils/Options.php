@@ -77,7 +77,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function saveViaAjaxUrl(): string
     {
-        return $this->s::addUrlRestAction('§save-options...via-ajax');
+        return $this->s::addUrlRestAction('ajax.§save-options');
     }
 
     /**

@@ -1,3 +1,8 @@
+## $v
+
+- Updating to latest core with MailChimp utils.
+- Enhancing ReST action utilities.
+
 ## v160620.31255
 
 - Now flushing the OPcache automatically whenever a theme, plugin, or core upgrade occurs. Referencing: <https://core.trac.wordpress.org/ticket/36455>
