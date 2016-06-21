@@ -1,3 +1,7 @@
+## $v
+
+- Updating to latest core with enhanced MailChimp utils.
+
 ## v160621.35874
 
 - Updating to latest core with MailChimp utils.
