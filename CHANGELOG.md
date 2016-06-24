@@ -1,3 +1,7 @@
+## v160624.33470
+
+- Upgrading to latest websharks/core.
+
 ## v160622.85801
 
 - Upgrading to latest websharks/core w/ enhanced output utils.
