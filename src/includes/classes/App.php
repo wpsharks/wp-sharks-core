@@ -69,24 +69,28 @@ class App extends CoreClasses\App
                     '§is_pro'          => false,
                     '§in_wp'           => false,
                     '§is_network_wide' => false,
-                    '§type'            => 'plugin',
-                    '§file'            => $this->base_dir.'/plugin.php',
+
+                    '§type' => 'plugin',
+                    '§file' => $this->base_dir.'/plugin.php',
                 ],
                 $instance_base['§specs'] ?? [],
                 $instance['§specs'] ?? []
             );
             $brand = array_merge(
                 [
-                    '©slug'        => 'wp-sharks-core',
-                    '©text_domain' => 'wp-sharks-core',
-                    '©var'         => 'wp_sharks_core',
-                    '©name'        => 'WP Sharks Core',
-                    '©acronym'     => 'WPSC',
-                    '©prefix'      => 'wpsc',
+                    '©name'    => 'WP Sharks Core',
+                    '©acronym' => 'WPS Core',
 
-                    '§rest_action_base' => '©var',
-                    '§domain'           => 'wpsharks.com',
-                    '§domain_path'      => '/product/core',
+                    '©text_domain' => 'wp-sharks-core',
+
+                    '©slug' => 'wp-sharks-core',
+                    '©var'  => 'wp_sharks_core',
+
+                    '©short_slug' => 'wps-core',
+                    '©short_var'  => 'wps_core',
+
+                    '§domain'      => 'wpsharks.com',
+                    '§domain_path' => '/product/core',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -102,8 +106,9 @@ class App extends CoreClasses\App
                     '§is_pro'          => null,
                     '§in_wp'           => null,
                     '§is_network_wide' => false,
-                    '§type'            => '',
-                    '§file'            => '',
+
+                    '§type' => '',
+                    '§file' => '',
                 ],
                 $instance_base['§specs'] ?? [],
                 $instance['§specs'] ?? []
@@ -130,36 +135,30 @@ class App extends CoreClasses\App
             }
             $brand = array_merge(
                 [
-                    '©slug'        => '',
-                    '©text_domain' => '',
-                    '©var'         => '',
-                    '©name'        => '',
-                    '©acronym'     => '',
-                    '©prefix'      => '',
+                    '©name'    => '',
+                    '©acronym' => '',
 
-                    '§rest_action_base' => '',
-                    '§domain'           => '',
-                    '§domain_path'      => '',
+                    '©text_domain' => '',
+
+                    '©slug' => '',
+                    '©var'  => '',
+
+                    '©short_slug' => '',
+                    '©short_var'  => '',
+
+                    '§domain'      => '',
+                    '§domain_path' => '',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
             );
+            // Check slug first. It's the basis for others.
+
             if (!$brand['©slug']) {
-                $brand['©slug'] = $this->base_dir_basename;
-                $brand['©slug'] = preg_replace('/^wp(?:sc|[_\-]+sharks)?[_\-]+/ui', '', $brand['©slug']);
+                $brand['©slug'] = $Parent->c::nameToSlug($this->base_dir_basename);
                 $brand['©slug'] = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $brand['©slug']);
             } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©slug'])) {
                 throw new Exception('Please remove `lite|pro` suffix from ©slug.');
-            }
-            if (!$brand['©text_domain']) {
-                $brand['©text_domain'] = $brand['©slug'];
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©text_domain'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©text_domain.');
-            }
-            if (!$brand['©var']) {
-                $brand['©var'] = $Parent->c::slugToVar($brand['©slug']);
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©var'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©var.');
             }
             if (!$brand['©name']) {
                 $brand['©name'] = $Parent->c::slugToName($brand['©slug']);
@@ -171,17 +170,29 @@ class App extends CoreClasses\App
             } elseif ($args['§validate_brand'] && preg_match('/(?:LITE|PRO)$/ui', $brand['©acronym'])) {
                 throw new Exception('Please remove `LITE|PRO` suffix from ©acronym.');
             }
-            if (!$brand['©prefix']) {
-                $brand['©prefix'] = mb_strtolower($brand['©acronym']);
-            } elseif ($args['§validate_brand'] && preg_match('/\s+(?:lite|pro)$/ui', $brand['©prefix'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©prefix.');
-            } elseif ($args['§validate_brand'] && preg_match('/[^a-z0-9]/u', $brand['©prefix'])) {
-                throw new Exception('Please remove `[^a-z0-9]` chars from ©prefix.');
+            if (!$brand['©text_domain']) {
+                $brand['©text_domain'] = $brand['©slug'];
+            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©text_domain'])) {
+                throw new Exception('Please remove `lite|pro` suffix from ©text_domain.');
             }
-            if (!$brand['§rest_action_base']) {
-                $brand['§rest_action_base'] = '©var'; // Or `©prefix`.
-            } elseif ($args['§validate_brand'] && !in_array($brand['§rest_action_base'], ['©var', '©prefix'], true)) {
-                throw new Exception('Please set §rest_action_base to `©var` or `©prefix`.');
+            if (!$brand['©var']) {
+                $brand['©var'] = $Parent->c::slugToVar($brand['©slug']);
+            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©var'])) {
+                throw new Exception('Please remove `lite|pro` suffix from ©var.');
+            }
+            if (!$brand['©short_slug']) {
+                $brand['©short_slug'] = strlen($brand['©slug']) <= 10 ? $brand['©slug'] : 's'.substr(md5($brand['©slug']), 0, 9);
+            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_var'])) {
+                throw new Exception('Please remove `lite|pro` suffix from ©short_var.');
+            } elseif ($args['§validate_brand'] && strlen($brand['©short_slug']) > 10) {
+                throw new Exception('Please fix ©short_slug; must be <= 10 bytes.');
+            }
+            if (!$brand['©short_var']) {
+                $brand['©short_var'] = strlen($brand['©var']) <= 10 ? $brand['©var'] : 's'.substr(md5($brand['©slug']), 0, 9);
+            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_var'])) {
+                throw new Exception('Please remove `lite|pro` suffix from ©short_var.');
+            } elseif ($args['§validate_brand'] && strlen($brand['©short_var']) > 10) {
+                throw new Exception('Please fix ©short_var; must be <= 10 bytes.');
             }
             if (!$brand['§domain']) {
                 $brand['§domain']      = $Parent->Config->©brand['§domain'];
@@ -270,21 +281,25 @@ class App extends CoreClasses\App
                 '§is_pro'          => false,
                 '§in_wp'           => false,
                 '§is_network_wide' => false,
-                '§type'            => '',
-                '§file'            => '',
+
+                '§type' => '',
+                '§file' => '',
             ],
 
             '©brand' => [
-                '©text_domain' => '',
-                '©slug'        => '',
-                '©var'         => '',
-                '©name'        => '',
-                '©acronym'     => '',
-                '©prefix'      => '',
+                '©name'    => '',
+                '©acronym' => '',
 
-                '§rest_action_base' => '',
-                '§domain'           => '',
-                '§domain_path'      => '',
+                '©text_domain' => '',
+
+                '©slug' => '',
+                '©var'  => '',
+
+                '©short_slug' => '',
+                '©short_var'  => '',
+
+                '§domain'      => '',
+                '§domain_path' => '',
             ],
 
             '©urls' => [

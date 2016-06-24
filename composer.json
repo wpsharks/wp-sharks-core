@@ -2,22 +2,22 @@
   "name": "websharks/wp-sharks-core",
   "homepage": "https://github.com/websharks/wp-sharks-core",
   "description": "Core WP plugin framework used by WP Sharks™",
-  "keywords": ["websharks", "wp sharks", "wordpress"],
+  "keywords": ["websharks", "wpsharks", "wordpress"],
 
   "type": "library",
   "license": "GPL-3.0+",
 
   "authors": [{
-    "name": "websharks",
-    "homepage": "http://websharks-inc.com/",
+    "name": "wpsharks",
+    "homepage": "https://wpsharks.com",
     "role": "company"
   }, {
     "name": "jaswsinc",
-    "homepage": "http://jaswsinc.com/",
+    "homepage": "https://jaswsinc.com",
     "role": "developer"
   }, {
     "name": "raamdev",
-    "homepage": "http://raam.org/",
+    "homepage": "http://raam.org",
     "role": "developer"
   }],
 
@@ -29,7 +29,7 @@
   "require": {
     "php-64bit": ">=7.0.4",
     "websharks/wp-php-rv": "dev-master",
-    "websharks/core": "160622.85452"
+    "websharks/core": "160624.33052"
   },
   "require-dev": {},
 
