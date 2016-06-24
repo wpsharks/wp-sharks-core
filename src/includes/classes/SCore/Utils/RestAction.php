@@ -77,9 +77,8 @@ class RestAction extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
-        $short_var                = $this->App->Config->©brand['©short_var'];
-        $this->var                = $this->App->Config->©brand[$short_var].'_action';
-        $this->data_var           = $this->App->Config->©brand[$short_var].'_action_data';
+        $this->var                = $this->App->Config->©brand['©short_var'].'_action';
+        $this->data_var           = $this->App->Config->©brand['©short_var'].'_data';
         $this->data_slug          = $this->App->Config->©brand['©slug'].'-action-data';
         $this->action             = $_REQUEST[$this->var] ?? '';
         $this->registered_actions = []; // Initialize.
