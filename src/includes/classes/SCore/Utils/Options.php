@@ -50,7 +50,7 @@ class Options extends Classes\SCore\Base\Core
      *
      * @since 160524 Option utils.
      */
-    public function onActionSaveOptions()
+    public function onRestActionSaveOptions()
     {
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!
@@ -85,7 +85,7 @@ class Options extends Classes\SCore\Base\Core
      *
      * @since 160531 Option utils.
      */
-    public function onActionSaveOptionsViaAjax()
+    public function onAjaxRestActionSaveOptions()
     {
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!
@@ -122,7 +122,7 @@ class Options extends Classes\SCore\Base\Core
      *
      * @since 160524 Option utils.
      */
-    public function onActionRestoreDefaultOptions()
+    public function onRestActionRestoreDefaultOptions()
     {
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!

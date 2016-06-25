@@ -1,3 +1,15 @@
+## $v
+
+- Adding support for ReST action API versions.
+- Adding brand URLs for API, CDN, and stats.
+- Adding new brand URL utilities for API, CDN, and stats.
+- Updating API calls back to wpsharks.com for licensing.
+- Adding support for custom fatal error messages associated w/ AJAX and API calls.
+- Adding `REST_ACTION_API_VERSION` constant to base App class.
+- Forcing an API version into all API action URLs.
+- Upgrading to the latest websharks/core release.
+- Future-proofing WC utility methods.
+
 ## v160624.38294
 
 - Enhancing action vars.

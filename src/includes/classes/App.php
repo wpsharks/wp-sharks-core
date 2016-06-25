@@ -31,6 +31,15 @@ class App extends CoreClasses\App
     const VERSION = '160624.38294'; //v//
 
     /**
+     * ReST action API version.
+     *
+     * @since 160625 ReST actions.
+     *
+     * @type string API version.
+     */
+    const REST_ACTION_API_VERSION = '1.0';
+
+    /**
      * Constructor.
      *
      * @since 160524 Initial release.
@@ -91,6 +100,15 @@ class App extends CoreClasses\App
 
                     '§domain'      => 'wpsharks.com',
                     '§domain_path' => '/product/core',
+
+                    '§api_domain'      => 'wpsharks.com',
+                    '§api_domain_path' => '/',
+
+                    '§cdn_domain'      => 'cdn.wpsharks.com',
+                    '§cdn_domain_path' => '/',
+
+                    '§stats_domain'      => 'stats.wpsharks.io',
+                    '§stats_domain_path' => '/',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -148,6 +166,15 @@ class App extends CoreClasses\App
 
                     '§domain'      => '',
                     '§domain_path' => '',
+
+                    '§api_domain'      => '',
+                    '§api_domain_path' => '',
+
+                    '§cdn_domain'      => '',
+                    '§cdn_domain_path' => '',
+
+                    '§stats_domain'      => '',
+                    '§stats_domain_path' => '',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -198,6 +225,18 @@ class App extends CoreClasses\App
                 $brand['§domain']      = $Parent->Config->©brand['§domain'];
                 $brand['§domain_path'] = '/product/'.$brand['©slug'];
             }
+            if (!$brand['§api_domain']) {
+                $brand['§api_domain']      = $brand['§domain'];
+                $brand['§api_domain_path'] = $brand['§domain_path'];
+            }
+            if (!$brand['§cdn_domain']) {
+                $brand['§cdn_domain']      = $brand['§domain'];
+                $brand['§cdn_domain_path'] = $brand['§domain_path'];
+            }
+            if (!$brand['§stats_domain']) {
+                $brand['§stats_domain']      = $brand['§domain'];
+                $brand['§stats_domain_path'] = $brand['§domain_path'];
+            }
         }
         # Collect essential WordPress config values.
 
@@ -237,14 +276,15 @@ class App extends CoreClasses\App
         } else { // Unexpected application `§type` in this case.
             throw new Exception('Failed to parse URL for unexpected `§type`.');
         }
-        if (!($wp_app_url_host = $wp_app_url['host'] ?? (string) @$_SERVER['HTTP_HOST'])) {
+        if (!($wp_app_url_host = $wp_app_url['host'] ?? (string) ($_SERVER['HTTP_HOST'] ?? ''))) {
             throw new Exception('Failed to parse app URL host.');
         }
         if (!($wp_app_url_root_host = implode('.', array_slice(explode('.', $wp_app_url_host), -2)))) {
             throw new Exception('Failed to parse app URL root host.');
         }
-        $wp_app_url_base_path = rtrim($wp_app_url['path'] ?? '', '/'); // Allowed to be empty.
-        $wp_app_url_base_path .= $specs['§type'] === 'theme' || $specs['§type'] === 'plugin' ? '/src' : '';
+        $wp_app_url_base_path = rtrim($wp_app_url['path'] ?? '', '/');
+        $wp_app_url_base_path .= in_array($specs['§type'], ['theme', 'plugin'], true) ? '/src' : '';
+        $wp_app_url_base_path .= '/'; // Always; i.e., this is a directory location.
 
         # Build the core/default instance base.
 
@@ -254,7 +294,7 @@ class App extends CoreClasses\App
                 '©edge'   => $wp_debug_edge,
 
                 '©log'          => $wp_debug_log,
-                '©log_callback' => null, // For extenders.
+                '©log_callback' => false, // For extenders.
 
                 '©er_enable'     => false, // WP handles this.
                 '©er_display'    => false, // WP handles this.
@@ -300,6 +340,15 @@ class App extends CoreClasses\App
 
                 '§domain'      => '',
                 '§domain_path' => '',
+
+                '§api_domain'      => '',
+                '§api_domain_path' => '',
+
+                '§cdn_domain'      => '',
+                '§cdn_domain_path' => '',
+
+                '§stats_domain'      => '',
+                '§stats_domain_path' => '',
             ],
 
             '©urls' => [
@@ -581,12 +630,8 @@ class App extends CoreClasses\App
         if (is_admin()) { // Optimizes this hook.
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
         }
-        if ($this->Config->§specs['§type'] === 'theme' || $this->Config->§specs['§type'] === 'plugin') {
-            if ($this->Config->§specs['§type'] === 'theme') {
-                add_filter('site_transient_update_themes', [$this->Utils->§Updater, 'onGetSiteTransientUpdateThemes']);
-            } elseif ($this->App->Config->§specs['§type'] === 'plugin') {
-                add_filter('site_transient_update_plugins', [$this->Utils->§Updater, 'onGetSiteTransientUpdatePlugins']);
-            }
+        if ((!$this->Config->§specs['§is_network_wide'] || !is_multisite() || is_main_site()) && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
+            add_filter('site_transient_update_'.$this->Config->§specs['§type'].'s', [$this->Utils->§Updater, 'onGetSiteTransientUpdate'.$this->Config->§specs['§type'].'s']);
         }
         if ($this->class === self::class) { // Flushes the OPcache.
             add_action('upgrader_process_complete', [$this->Utils->§Updater, 'onUpgraderProcessComplete']);

@@ -130,7 +130,7 @@ class WcOrderItem extends Classes\SCore\Base\Core
         foreach ($WC_Order->get_items() as $_item_id => $_item) {
             if ($_item_id === $item_id) {
                 $WC_Product = $WC_Order->get_product_from_item($_item);
-                return $WC_Product instanceof \WC_Product ? $WC_Product : null;
+                return $WC_Product instanceof \WC_Product && $WC_Product->exists() ? $WC_Product : null;
             }
         } // unset($_item_id, $_item); // Housekeeping.
 

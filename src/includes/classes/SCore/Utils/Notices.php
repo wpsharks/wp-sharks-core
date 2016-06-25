@@ -279,7 +279,7 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160524 WP notices.
      */
-    public function onActionDismissNotice()
+    public function onRestActionDismissNotice()
     {
         $notices = $this->get();
         $key     = (string) $this->s::restActionData();

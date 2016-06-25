@@ -25,12 +25,18 @@ class Fatality extends Classes\SCore\Base\Core
      * Invalid.
      *
      * @since 160606 Fatalities.
+     *
+     * @param string $message Custom message.
      */
-    public function invalid()
+    public function invalid(string $message = '')
     {
+        if (!$message) { // Use default?
+            $message = __('Bad request.', 'wp-sharks-core');
+        }
         if ($this->c::isAjax() || $this->c::isApi()) {
             // Via JSON response.
             $this->c::statusHeader(400);
+            $this->c::noCacheFlags();
             $this->c::noCacheHeaders();
             header('content-type: application/json; charset=utf-8');
 
@@ -39,23 +45,29 @@ class Fatality extends Classes\SCore\Base\Core
                 'success' => false,
                 'error'   => [
                     'code'    => 400,
-                    'message' => __('Bad request.', 'wp-sharks-core'),
+                    'message' => $message,
                 ],
             ]));
         }
-        wp_die(__('Bad request.', 'wp-sharks-core'), __('Forbidden', 'wp-sharks-core'), ['response' => 400, 'back_link' => true]);
+        wp_die($message, __('Bad request.', 'wp-sharks-core'), ['response' => 400, 'back_link' => true]);
     }
 
     /**
      * Forbidden.
      *
      * @since 160524 Fatalities.
+     *
+     * @param string $message Custom message.
      */
-    public function forbidden()
+    public function forbidden(string $message = '')
     {
+        if (!$message) { // Use default?
+            $message = __('Forbidden.', 'wp-sharks-core');
+        }
         if ($this->c::isAjax() || $this->c::isApi()) {
             // Via JSON response.
             $this->c::statusHeader(403);
+            $this->c::noCacheFlags();
             $this->c::noCacheHeaders();
             header('content-type: application/json; charset=utf-8');
 
@@ -64,10 +76,10 @@ class Fatality extends Classes\SCore\Base\Core
                 'success' => false,
                 'error'   => [
                     'code'    => 403,
-                    'message' => __('Forbidden.', 'wp-sharks-core'),
+                    'message' => $message,
                 ],
             ]));
         }
-        wp_die(__('Forbidden.', 'wp-sharks-core'), __('Forbidden', 'wp-sharks-core'), ['response' => 403, 'back_link' => true]);
+        wp_die($message, __('Forbidden', 'wp-sharks-core'), ['response' => 403, 'back_link' => true]);
     }
 }

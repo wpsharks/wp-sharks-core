@@ -25,6 +25,14 @@ trait RestAction
     }
 
     /**
+     * @since 160625 ReST utils.
+     */
+    public static function restActionApiVersion(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§RestAction->apiVersion(...$args);
+    }
+
+    /**
      * @since 160608 ReST utils.
      */
     public static function bestRestActionUrl(...$args)

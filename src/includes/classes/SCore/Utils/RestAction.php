@@ -58,6 +58,15 @@ class RestAction extends Classes\SCore\Base\Core
     protected $action;
 
     /**
+     * Action API version.
+     *
+     * @since 160608 ReST utils.
+     *
+     * @type string Action API version.
+     */
+    protected $api_version;
+
+    /**
      * Registered actions.
      *
      * @since 160608 ReST utils.
@@ -77,16 +86,17 @@ class RestAction extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
-        $this->var                = $this->App->Config->©brand['©short_var'].'_action';
-        $this->data_var           = $this->App->Config->©brand['©short_var'].'_data';
-        $this->data_slug          = $this->App->Config->©brand['©slug'].'-action-data';
-        $this->action             = $_REQUEST[$this->var] ?? '';
-        $this->registered_actions = []; // Initialize.
+        $this->var       = $this->App->Config->©brand['©short_var'].'_action';
+        $this->data_var  = $this->App->Config->©brand['©short_var'].'_data';
+        $this->data_slug = $this->App->Config->©brand['©slug'].'-action-data';
 
-        $this->register('§save-options', '§Options', 'onActionSaveOptions');
-        $this->register('ajax.§save-options', '§Options', 'onActionSaveOptionsViaAjax');
-        $this->register('§restore-default-options', '§Options', 'onActionRestoreDefaultOptions');
-        $this->register('§dismiss-notice', '§Notices', 'onActionDismissNotice');
+        $this->action             = $this->api_version             = '';
+        $this->registered_actions = []; // Initialize registered actions.
+
+        $this->register('§save-options', '§Options', 'onRestActionSaveOptions');
+        $this->register('ajax.§save-options', '§Options', 'onAjaxRestActionSaveOptions');
+        $this->register('§restore-default-options', '§Options', 'onRestActionRestoreDefaultOptions');
+        $this->register('§dismiss-notice', '§Notices', 'onRestActionDismissNotice');
     }
 
     /**
@@ -96,31 +106,27 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function onWpLoaded()
     {
-        if (!$this->action) {
-            return; // N/A.
+        if (empty($_REQUEST[$this->var])) {
+            return; // Not applicable.
         }
-        $this->c::noCacheFlags();
-        $this->c::noCacheHeaders();
+        $this->action = (string) $_REQUEST[$this->var];
+        $this->action = $this->c::unslash($this->action);
+        $this->action = $this->c::mbTrim($this->action);
 
-        if (preg_match('/^ajax\./u', $this->action)) {
+        $this->c::noCacheFlags(); // Flag as do NOT cache.
+        $this->c::noCacheHeaders(); // Send headers also.
+
+        if ($this->viaAjax($this->action)) {
             header('content-type: application/json; charset=utf-8');
             $this->c::isAjax(true);
-        } elseif (preg_match('/^api\./u', $this->action)) {
+        } elseif ($this->viaApi($this->action)) {
             header('content-type: application/json; charset=utf-8');
+            $this->api_version = $this->parseApiVersion($this->action);
+            $this->action      = $this->stripApiVersion($this->action);
             $this->c::isApi(true);
         }
-        $this->handle(); // See below.
-    }
+        $this->c::doingRestAction($this->action);
 
-    /**
-     * Handle actions.
-     *
-     * @since 160608 ReST utils.
-     *
-     * @note Only runs when appropriate.
-     */
-    protected function handle()
-    {
         if (!isset($this->registered_actions[$this->action])) {
             $this->s::dieInvalid(); // Unregistered!
         }
@@ -129,8 +135,6 @@ class RestAction extends Classes\SCore\Base\Core
         if ($actor['requires_valid_nonce']) {
             $this->s::requireValidNonce($this->action);
         }
-        $this->c::doingRestAction($this->action);
-
         $Utility = $this->App->Utils->{$actor['class']};
         $Utility->{$actor['method']}($this->action);
     }
@@ -146,13 +150,26 @@ class RestAction extends Classes\SCore\Base\Core
     {
         if (!$this->action) {
             return; // Not applicable.
-        } elseif (!$this->c::doingRestAction()) {
-            return; // Not appliable.
         }
         if (($data = $_REQUEST[$this->data_var] ?? null)) {
             $data = $this->c::mbTrim($this->c::unslash($data));
         }
         return $data; // Trimmed and stripped data (possible `null` value).
+    }
+
+    /**
+     * Action API version.
+     *
+     * @since 160625 ReST utils.
+     *
+     * @return mixed Action data.
+     */
+    public function apiVersion()
+    {
+        if (!$this->action) {
+            return ''; // Not applicable.
+        }
+        return $this->api_version; // For API actions.
     }
 
     /**
@@ -166,7 +183,7 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function bestUrl(string $action): string
     {
-        if (preg_match('/^(?:ajax|api)\./u', $action)) {
+        if (preg_match('/^(?:ajax\.|api(?:\.|\-v(?:[0-9]\.)+))/u', $action)) {
             return home_url('/'); // Both ride on index.
         }
         $is_admin = is_admin(); // Need this for the checks below.
@@ -192,6 +209,11 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function urlAdd(string $action, string $url = null, $data = null): string
     {
+        if (preg_match('/^api\./u', $action)) {
+            $action = preg_replace('/^api\./u', '', $action);
+            $action = 'api-v'.$this->App::REST_ACTION_API_VERSION.'.'.$action;
+        } // This forces a version into URLs that call upon an API action.
+
         $url        = $url ?? $this->bestUrl($action);
         $url        = $this->c::addUrlQueryArgs([$this->var => $action], $url);
         $url        = isset($data) ? $this->c::addUrlQueryArgs([$this->data_var => $data], $url) : $url;
@@ -271,12 +293,80 @@ class RestAction extends Classes\SCore\Base\Core
         if (!$action || !$class || !$method) {
             throw $this->c::issue('Action args empty.');
         }
-        $default_args = [
-            'requires_valid_nonce' => !preg_match('/^api\./u', $action),
+        if (($via_api = $this->viaApi($action))) {
+            $action = $this->stripApiVersion($action);
+        }
+        $default_args = [ // API = no nonce (default).
+            'requires_valid_nonce' => $via_api ? false : true,
         ];
         $args = array_merge($default_args, $args);
         $args = array_intersect_key($args, $default_args);
 
         $this->registered_actions[$action] = array_merge($args, compact('class', 'method'));
+    }
+
+    /**
+     * An action via AJAX?
+     *
+     * @since 160625 ReST utils.
+     *
+     * @param string $action Action identifier.
+     *
+     * @return bool True if it's an action via AJAX.
+     */
+    protected function viaAjax(string $action): bool
+    {
+        return mb_strpos($action, 'ajax.') === 0;
+    }
+
+    /**
+     * An action via API?
+     *
+     * @since 160625 ReST utils.
+     *
+     * @param string $action Action identifier.
+     *
+     * @return bool True if it's an action via API.
+     */
+    protected function viaApi(string $action): bool
+    {
+        if (mb_strpos($action, 'api.') === 0) {
+            return true; // Saves time in many cases.
+        }
+        return mb_strpos($action, 'api-v') === 0 && preg_match('/^api\-v[0-9]+[0-9.]*\./u', $action);
+    }
+
+    /**
+     * Parse API version.
+     *
+     * @since 160625 ReST utils.
+     *
+     * @param string $action Action identifier.
+     *
+     * @return string API version from action identifier.
+     */
+    protected function parseApiVersion(string $action): string
+    {
+        if (mb_strpos($action, 'api-v') === 0) {
+            $version = preg_replace('/^api\-v([0-9]+[0-9.]*)\..+$/u', '${1}', $action);
+        }
+        return $version ?? ''; // API version from action identifier.
+    }
+
+    /**
+     * Strip API version.
+     *
+     * @since 160625 ReST utils.
+     *
+     * @param string $action Action identifier.
+     *
+     * @return string Action w/o the API version.
+     */
+    protected function stripApiVersion(string $action): string
+    {
+        if (mb_strpos($action, 'api-v') === 0) {
+            $action = preg_replace('/^api\-v[0-9]+[0-9.]*\./u', 'api.', $action);
+        }
+        return $action; // Without an API version.
     }
 }

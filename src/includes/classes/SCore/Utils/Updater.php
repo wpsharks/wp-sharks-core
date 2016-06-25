@@ -215,10 +215,10 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function getLatestVersionUrl(): string
     {
-        $url = 'https://cdn.wpsharks.com/software';
-        $url .= $this->App->Config->©debug['©edge'] ? '/bleeding-edge' : '/latest';
-        $url .= '/'.urlencode($this->App->Config->©brand['©slug']);
-        return $url .= '/version.txt';
+        $uri .= $this->App->Config->©debug['©edge'] ? '/software/bleeding-edge' : '/software/latest';
+        $uri .= '/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
+
+        return $this->s::coreBrandCdnUrl($uri);
     }
 
     /**
@@ -236,17 +236,15 @@ class Updater extends Classes\SCore\Base\Core
             return ''; // Not possible w/o license key.
         }
         $args = [
-            'wps_action'      => 'api.get-product-package-url',
-            'wps_action_data' => [
-                'api_version' => '1.0',
-                'product'     => [
-                    'license_key' => $license_key,
-                    'slug'        => $this->App->Config->©brand['©slug'],
-                ],
-                'type' => $this->App->Config->©debug['©edge'] ? 'bleeding-edge' : 'latest',
+            'wps_action' => 'api-v1.0.get-product-package-url',
+            'wps_data'   => [ // Action data.
+                'license_key' => $license_key,
+                'location'    => site_url(),
+                'slug'        => $this->App->Config->©brand['©slug'],
+                'type'        => $this->App->Config->©debug['©edge'] ? 'bleeding-edge' : 'latest',
             ],
         ];
-        return $this->c::addUrlQueryArgs($args, 'https://api.wpsharks.com/');
+        return $this->c::addUrlQueryArgs($args, $this->s::coreBrandApiUrl());
     }
 
     /**
