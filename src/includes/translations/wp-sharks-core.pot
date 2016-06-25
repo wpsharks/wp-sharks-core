@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160624.38294\n"
+"Project-Id-Version: WP Sharks Core 160625.60388\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-06-24 10:38:36+00:00\n"
+"POT-Creation-Date: 2016-06-25 16:48:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -139,19 +139,17 @@ msgstr ""
 msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, resolove the issue or remove %1$s from WordPress.</em>"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/Fatality.php:42
-#: src/includes/classes/SCore/Utils/Fatality.php:46
+#: src/includes/classes/SCore/Utils/Fatality.php:34
+#: src/includes/classes/SCore/Utils/Fatality.php:52
 msgid "Bad request."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/Fatality.php:46
-#: src/includes/classes/SCore/Utils/Fatality.php:71
-msgid "Forbidden"
+#: src/includes/classes/SCore/Utils/Fatality.php:65
+msgid "Forbidden."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/Fatality.php:67
-#: src/includes/classes/SCore/Utils/Fatality.php:71
-msgid "Forbidden."
+#: src/includes/classes/SCore/Utils/Fatality.php:83
+msgid "Forbidden"
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/Notices.php:369

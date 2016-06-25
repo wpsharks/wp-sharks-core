@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fcd711c39c2019cd0c6d0e93489c981c",
-    "content-hash": "8c67b4d0adc70532d153a9c44f554f86",
+    "hash": "da527e395b814f301222d2e04caed58f",
+    "content-hash": "137af978a5e6e58c727b2ddb4c0b60b1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -767,16 +767,16 @@
         },
         {
             "name": "websharks/core",
-            "version": "160624.33052",
+            "version": "160625.59856",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "df53780b15f2d66338074cef06b2134f4dbfe337"
+                "reference": "b3ecd3d36df6d829f8dcf2b527bffba91486820f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/df53780b15f2d66338074cef06b2134f4dbfe337",
-                "reference": "df53780b15f2d66338074cef06b2134f4dbfe337",
+                "url": "https://api.github.com/repos/websharks/core/zipball/b3ecd3d36df6d829f8dcf2b527bffba91486820f",
+                "reference": "b3ecd3d36df6d829f8dcf2b527bffba91486820f",
                 "shasum": ""
             },
             "require": {
@@ -887,7 +887,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2016-06-24 09:11:45"
+            "time": "2016-06-25 16:41:29"
         },
         {
             "name": "websharks/dicer",
