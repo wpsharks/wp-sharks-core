@@ -1,3 +1,10 @@
+## v160629.60185
+
+- Updating to latest WSC.
+- Updating to latest phings.
+- Updating `.build.props` file.
+- Updating Git dotfiles.
+
 ## v160625.60388
 
 - Adding support for ReST action API versions.
