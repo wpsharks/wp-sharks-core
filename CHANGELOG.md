@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. `$uri` in Updater class was not initialized properly.
+
 ## v160629.60185
 
 - Updating to latest WSC.

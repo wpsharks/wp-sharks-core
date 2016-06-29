@@ -215,7 +215,7 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function getLatestVersionUrl(): string
     {
-        $uri .= $this->App->Config->©debug['©edge'] ? '/software/bleeding-edge' : '/software/latest';
+        $uri = $this->App->Config->©debug['©edge'] ? '/software/bleeding-edge' : '/software/latest';
         $uri .= '/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
 
         return $this->s::coreBrandCdnUrl($uri);
