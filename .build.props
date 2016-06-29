@@ -2,6 +2,7 @@ project_title                    = WP Sharks Core
 
 project_owner                    = websharks
 project_slug                     = wp-sharks-core
+project_text_domain              = wp-sharks-core
 
 project_namespace                = WebSharks\\WpSharks\\Core
 project_sub_namespace            = WpSharksCore
