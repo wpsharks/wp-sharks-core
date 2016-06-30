@@ -15,11 +15,11 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Brand URLs.
+ * Brand URL utils.
  *
  * @since 160625 Brand URLs.
  */
-class BrandUrls extends Classes\SCore\Base\Core
+class BrandUrl extends Classes\SCore\Base\Core
 {
     /**
      * URL to brand.
@@ -45,6 +45,21 @@ class BrandUrls extends Classes\SCore\Base\Core
     }
 
     /**
+     * Brand URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandArg(string $arg = ''): string
+    {
+        return $this->App->Config->©brand['§domain_short_var'].
+            ($this->App->Config->©brand['§domain_short_var'] && $arg ? '_' : '').$arg;
+    }
+
+    /**
      * URL to parent brand.
      *
      * @since 160625 Brand URLs.
@@ -55,7 +70,21 @@ class BrandUrls extends Classes\SCore\Base\Core
      */
     public function toBrandParent(string $uri = ''): string
     {
-        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrls->toBrand($uri) : $this->toBrand($uri);
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrand($uri) : $this->toBrand($uri);
+    }
+
+    /**
+     * Brand parent URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandParentArg(string $arg = ''): string
+    {
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->brandArg($arg) : $this->brandArg($arg);
     }
 
     /**
@@ -70,9 +99,26 @@ class BrandUrls extends Classes\SCore\Base\Core
     public function toBrandCore(string $uri = ''): string
     {
         if ($this->App->Parent) { // Looking for the root core.
-            return $this->App->Parent->Utils->§BrandUrls->toBrandCore($uri);
+            return $this->App->Parent->Utils->§BrandUrl->toBrandCore($uri);
         }
         return $this->toBrand($uri);
+    }
+
+    /**
+     * Brand core URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandCoreArg(string $arg = ''): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->§BrandUrl->brandCoreArg($arg);
+        }
+        return $this->brandArg($arg);
     }
 
     /**
@@ -99,6 +145,21 @@ class BrandUrls extends Classes\SCore\Base\Core
     }
 
     /**
+     * Brand API URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandApiArg(string $arg = ''): string
+    {
+        return $this->App->Config->©brand['§api_domain_short_var'].
+            ($this->App->Config->©brand['§api_domain_short_var'] && $arg ? '_' : '').$arg;
+    }
+
+    /**
      * URL to parent brand API.
      *
      * @since 160625 Brand URLs.
@@ -109,7 +170,21 @@ class BrandUrls extends Classes\SCore\Base\Core
      */
     public function toBrandParentApi(string $uri = ''): string
     {
-        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrls->toBrandApi($uri) : $this->toBrandApi($uri);
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrandApi($uri) : $this->toBrandApi($uri);
+    }
+
+    /**
+     * Brand parent API URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandParentApiArg(string $arg = ''): string
+    {
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->brandApiArg($arg) : $this->brandApiArg($arg);
     }
 
     /**
@@ -124,9 +199,26 @@ class BrandUrls extends Classes\SCore\Base\Core
     public function toBrandCoreApi(string $uri = ''): string
     {
         if ($this->App->Parent) { // Looking for the root core.
-            return $this->App->Parent->Utils->§BrandUrls->toBrandCoreApi($uri);
+            return $this->App->Parent->Utils->§BrandUrl->toBrandCoreApi($uri);
         }
         return $this->toBrandApi($uri);
+    }
+
+    /**
+     * Brand core API URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandCoreApiArg(string $arg = ''): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->§BrandUrl->brandCoreApiArg($arg);
+        }
+        return $this->brandApiArg($arg);
     }
 
     /**
@@ -153,6 +245,21 @@ class BrandUrls extends Classes\SCore\Base\Core
     }
 
     /**
+     * Brand CDN URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandCdnArg(string $arg = ''): string
+    {
+        return $this->App->Config->©brand['§cdn_domain_short_var'].
+            ($this->App->Config->©brand['§cdn_domain_short_var'] && $arg ? '_' : '').$arg;
+    }
+
+    /**
      * URL to parent brand CDN.
      *
      * @since 160625 Brand URLs.
@@ -163,7 +270,21 @@ class BrandUrls extends Classes\SCore\Base\Core
      */
     public function toBrandParentCdn(string $uri = ''): string
     {
-        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrls->toBrandCdn($uri) : $this->toBrandCdn($uri);
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrandCdn($uri) : $this->toBrandCdn($uri);
+    }
+
+    /**
+     * Brand parent CDN URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandParentCdnArg(string $arg = ''): string
+    {
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->brandCdnArg($arg) : $this->brandCdnArg($arg);
     }
 
     /**
@@ -178,9 +299,26 @@ class BrandUrls extends Classes\SCore\Base\Core
     public function toBrandCoreCdn(string $uri = ''): string
     {
         if ($this->App->Parent) { // Looking for the root core.
-            return $this->App->Parent->Utils->§BrandUrls->toBrandCoreCdn($uri);
+            return $this->App->Parent->Utils->§BrandUrl->toBrandCoreCdn($uri);
         }
         return $this->toBrandCdn($uri);
+    }
+
+    /**
+     * Brand core CDN URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandCoreCdnArg(string $arg = ''): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->§BrandUrl->brandCoreCdnArg($arg);
+        }
+        return $this->brandCdnArg($arg);
     }
 
     /**
@@ -207,6 +345,21 @@ class BrandUrls extends Classes\SCore\Base\Core
     }
 
     /**
+     * Brand stats URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandStatsArg(string $arg = ''): string
+    {
+        return $this->App->Config->©brand['§stats_domain_short_var'].
+            ($this->App->Config->©brand['§stats_domain_short_var'] && $arg ? '_' : '').$arg;
+    }
+
+    /**
      * URL to parent brand stats.
      *
      * @since 160625 Brand URLs.
@@ -217,7 +370,21 @@ class BrandUrls extends Classes\SCore\Base\Core
      */
     public function toBrandParentStats(string $uri = ''): string
     {
-        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrls->toBrandStats($uri) : $this->toBrandStats($uri);
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrandStats($uri) : $this->toBrandStats($uri);
+    }
+
+    /**
+     * Brand parent stats URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandParentStatsArg(string $arg = ''): string
+    {
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->brandStatsArg($arg) : $this->brandStatsArg($arg);
     }
 
     /**
@@ -232,8 +399,25 @@ class BrandUrls extends Classes\SCore\Base\Core
     public function toBrandCoreStats(string $uri = ''): string
     {
         if ($this->App->Parent) { // Looking for the root core.
-            return $this->App->Parent->Utils->§BrandUrls->toBrandCoreStats($uri);
+            return $this->App->Parent->Utils->§BrandUrl->toBrandCoreStats($uri);
         }
         return $this->toBrandStats($uri);
+    }
+
+    /**
+     * Brand core stats URL arg.
+     *
+     * @since 160629 Brand URL args.
+     *
+     * @param string $arg Arg to create.
+     *
+     * @return string URL arg.
+     */
+    public function brandCoreStatsArg(string $arg = ''): string
+    {
+        if ($this->App->Parent) { // Looking for the root core.
+            return $this->App->Parent->Utils->§BrandUrl->brandCoreStatsArg($arg);
+        }
+        return $this->brandStatsArg($arg);
     }
 }

@@ -1,5 +1,8 @@
 ## $v
 
+- Updating to the latest WSC.
+- Adding additional brand-related config keys and URL generators.
+- Enhancing transient utilities. Adding support for DB-driven transients via hash IDs.
 - Bug fix. `$uri` in Updater class was not initialized properly.
 
 ## v160629.60185

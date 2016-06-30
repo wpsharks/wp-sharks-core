@@ -236,8 +236,8 @@ class Updater extends Classes\SCore\Base\Core
             return ''; // Not possible w/o license key.
         }
         $args = [
-            'wps_action' => 'api-v1.0.get-product-package-url',
-            'wps_data'   => [ // Action data.
+            $this->s::coreBrandApiUrlArg('action') => 'api-v1.0.get-product-package-url',
+            $this->s::coreBrandApiUrlArg('data')   => [
                 'license_key' => $license_key,
                 'location'    => site_url(),
                 'slug'        => $this->App->Config->©brand['©slug'],

@@ -98,17 +98,21 @@ class App extends CoreClasses\App
                     '©short_slug' => 'wps-core',
                     '©short_var'  => 'wps_core',
 
-                    '§domain'      => 'wpsharks.com',
-                    '§domain_path' => '/product/core',
+                    '§domain'           => 'wpsharks.com',
+                    '§domain_path'      => '/product/core',
+                    '§domain_short_var' => 'wps',
 
-                    '§api_domain'      => 'wpsharks.com',
-                    '§api_domain_path' => '/',
+                    '§api_domain'           => 'api.wpsharks.com',
+                    '§api_domain_path'      => '/',
+                    '§api_domain_short_var' => 'wps',
 
-                    '§cdn_domain'      => 'cdn.wpsharks.com',
-                    '§cdn_domain_path' => '/',
+                    '§cdn_domain'           => 'cdn.wpsharks.com',
+                    '§cdn_domain_path'      => '/',
+                    '§cdn_domain_short_var' => 'wps',
 
-                    '§stats_domain'      => 'stats.wpsharks.io',
-                    '§stats_domain_path' => '/',
+                    '§stats_domain'           => 'stats.wpsharks.io',
+                    '§stats_domain_path'      => '/',
+                    '§stats_domain_short_var' => 'wps',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -164,17 +168,21 @@ class App extends CoreClasses\App
                     '©short_slug' => '',
                     '©short_var'  => '',
 
-                    '§domain'      => '',
-                    '§domain_path' => '',
+                    '§domain'           => '',
+                    '§domain_path'      => '',
+                    '§domain_short_var' => '',
 
-                    '§api_domain'      => '',
-                    '§api_domain_path' => '',
+                    '§api_domain'           => '',
+                    '§api_domain_path'      => '',
+                    '§api_domain_short_var' => '',
 
-                    '§cdn_domain'      => '',
-                    '§cdn_domain_path' => '',
+                    '§cdn_domain'           => '',
+                    '§cdn_domain_path'      => '',
+                    '§cdn_domain_short_var' => '',
 
-                    '§stats_domain'      => '',
-                    '§stats_domain_path' => '',
+                    '§stats_domain'           => '',
+                    '§stats_domain_path'      => '',
+                    '§stats_domain_short_var' => '',
                 ],
                 $instance_base['©brand'] ?? [],
                 $instance['©brand'] ?? []
@@ -222,20 +230,24 @@ class App extends CoreClasses\App
                 throw new Exception('Please fix ©short_var; must be <= 10 bytes.');
             }
             if (!$brand['§domain']) {
-                $brand['§domain']      = $Parent->Config->©brand['§domain'];
-                $brand['§domain_path'] = '/product/'.$brand['©slug'];
+                $brand['§domain']           = $Parent->Config->©brand['§domain'];
+                $brand['§domain_path']      = '/product/'.$brand['©slug'];
+                $brand['§domain_short_var'] = $Parent->Config->©brand['§domain_short_var'];
             }
             if (!$brand['§api_domain']) {
-                $brand['§api_domain']      = $brand['§domain'];
-                $brand['§api_domain_path'] = $brand['§domain_path'];
+                $brand['§api_domain']           = 'api.'.$brand['§domain'];
+                $brand['§api_domain_path']      = '/';
+                $brand['§api_domain_short_var'] = $brand['§domain_short_var'];
             }
             if (!$brand['§cdn_domain']) {
-                $brand['§cdn_domain']      = $brand['§domain'];
-                $brand['§cdn_domain_path'] = $brand['§domain_path'];
+                $brand['§cdn_domain']           = 'cdn.'.$brand['§domain'];
+                $brand['§cdn_domain_path']      = '/';
+                $brand['§cdn_domain_short_var'] = $brand['§domain_short_var'];
             }
             if (!$brand['§stats_domain']) {
-                $brand['§stats_domain']      = $brand['§domain'];
-                $brand['§stats_domain_path'] = $brand['§domain_path'];
+                $brand['§stats_domain']           = 'stats.'.$brand['§domain'];
+                $brand['§stats_domain_path']      = '/';
+                $brand['§stats_domain_short_var'] = $brand['§domain_short_var'];
             }
         }
         # Collect essential WordPress config values.
@@ -338,17 +350,21 @@ class App extends CoreClasses\App
                 '©short_slug' => '',
                 '©short_var'  => '',
 
-                '§domain'      => '',
-                '§domain_path' => '',
+                '§domain'           => '',
+                '§domain_path'      => '',
+                '§domain_short_var' => '',
 
-                '§api_domain'      => '',
-                '§api_domain_path' => '',
+                '§api_domain'           => '',
+                '§api_domain_path'      => '',
+                '§api_domain_short_var' => '',
 
-                '§cdn_domain'      => '',
-                '§cdn_domain_path' => '',
+                '§cdn_domain'           => '',
+                '§cdn_domain_path'      => '',
+                '§cdn_domain_short_var' => '',
 
-                '§stats_domain'      => '',
-                '§stats_domain_path' => '',
+                '§stats_domain'           => '',
+                '§stats_domain_path'      => '',
+                '§stats_domain_short_var' => '',
             ],
 
             '©urls' => [
