@@ -1,4 +1,4 @@
-## $v
+## v160630.69234
 
 - Updating to the latest WSC.
 - Adding additional brand-related config keys and URL generators.
