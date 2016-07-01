@@ -390,8 +390,8 @@ class App extends CoreClasses\App
             ],
 
             '©fs_paths' => [
-                '©logs_dir'   => WP_CONTENT_DIR.'/'.$brand['©slug'].'/.logs',
-                '©cache_dir'  => $wp_tmp_dir.'/'.$brand['©slug'].'/cache',
+                '©logs_dir'   => $wp_tmp_dir.'/.wp-sharks/'.$brand['©slug'].'/logs',
+                '©cache_dir'  => $wp_tmp_dir.'/.wp-sharks/'.$brand['©slug'].'/cache',
                 '©errors_dir' => '', '©config_file' => '', // N/A.
             ],
 
