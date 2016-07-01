@@ -1,3 +1,7 @@
+## $v
+
+- Enhance license key placeholder in installation notice.
+
 ## v160701.57880
 
 - Updating to latest WSC.
