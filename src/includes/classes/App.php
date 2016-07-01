@@ -234,21 +234,6 @@ class App extends CoreClasses\App
                 $brand['§domain_path']      = '/product/'.$brand['©slug'];
                 $brand['§domain_short_var'] = $Parent->Config->©brand['§domain_short_var'];
             }
-            if (!$brand['§api_domain']) {
-                $brand['§api_domain']           = 'api.'.$brand['§domain'];
-                $brand['§api_domain_path']      = '/';
-                $brand['§api_domain_short_var'] = $brand['§domain_short_var'];
-            }
-            if (!$brand['§cdn_domain']) {
-                $brand['§cdn_domain']           = 'cdn.'.$brand['§domain'];
-                $brand['§cdn_domain_path']      = '/';
-                $brand['§cdn_domain_short_var'] = $brand['§domain_short_var'];
-            }
-            if (!$brand['§stats_domain']) {
-                $brand['§stats_domain']           = 'stats.'.$brand['§domain'];
-                $brand['§stats_domain_path']      = '/';
-                $brand['§stats_domain_short_var'] = $brand['§domain_short_var'];
-            }
         }
         # Collect essential WordPress config values.
 
@@ -369,16 +354,21 @@ class App extends CoreClasses\App
 
             '©urls' => [
                 '©hosts' => [
+                    '©app' => $wp_app_url_host,
+                    '©cdn' => 'cdn.'.$wp_app_url_root_host,
+
                     '©roots' => [
                         '©app' => $wp_app_url_root_host,
+                        '©cdn' => $wp_app_url_root_host,
                     ],
-                    '©app' => $wp_app_url_host,
                 ],
                 '©base_paths' => [
                     '©app' => $wp_app_url_base_path,
+                    '©cdn' => '/',
                 ],
-                '©default_scheme' => $wp_site_default_scheme,
-                '©sig_key'        => $wp_salt_key,
+                '©cdn_filter_enable' => false,
+                '©default_scheme'    => $wp_site_default_scheme,
+                '©sig_key'           => $wp_salt_key,
             ],
 
             '§setup' => [ // On (or after): `plugins_loaded`.
