@@ -1,4 +1,4 @@
-## $v
+## v160701.57880
 
 - Updating to latest WSC.
 - Nest all theme/plugin logs/cache into `.wp-sharks` sub-directory.
