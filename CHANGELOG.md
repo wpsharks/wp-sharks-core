@@ -1,4 +1,4 @@
-## $v
+## v160702.65139
 
 - Enhance license key placeholder in installation notice.
 - Security hardening; disallow multi-dimensional ReST action data by default.
