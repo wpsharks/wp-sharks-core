@@ -144,17 +144,29 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @return mixed Action data.
+     * @param bool $allow_dimensions Allow?
+     *
+     * @return array|string|null Action data.
      */
-    public function data()
+    public function data(bool $allow_dimensions = false)
     {
         if (!$this->action) {
             return; // Not applicable.
+        } elseif (!isset($_REQUEST[$this->data_var])) {
+            return; // Not applicable.
         }
-        if (($data = $_REQUEST[$this->data_var] ?? null)) {
-            $data = $this->c::mbTrim($this->c::unslash($data));
+        $data = $_REQUEST[$this->data_var];
+
+        if (is_object($data)) {
+            $data = (array) $data;
         }
-        return $data; // Trimmed and stripped data (possible `null` value).
+        if (!$allow_dimensions && is_array($data)) {
+            $data = array_map('strval', $data);
+        }
+        $data = $this->c::unslash($data);
+        $data = $this->c::mbTrim($data);
+
+        return $data;
     }
 
     /**

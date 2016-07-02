@@ -27,9 +27,13 @@ class Fatality extends Classes\SCore\Base\Core
      * @since 160606 Fatalities.
      *
      * @param string $message Custom message.
+     * @param string $slug    Custom error slug.
      */
-    public function invalid(string $message = '')
+    public function invalid(string $message = '', string $slug = '')
     {
+        if (!$slug) { // Use default?
+            $slug = 'invalid';
+        }
         if (!$message) { // Use default?
             $message = __('Bad request.', 'wp-sharks-core');
         }
@@ -45,6 +49,7 @@ class Fatality extends Classes\SCore\Base\Core
                 'success' => false,
                 'error'   => [
                     'code'    => 400,
+                    'slug'    => $slug,
                     'message' => $message,
                 ],
             ]));
@@ -58,9 +63,13 @@ class Fatality extends Classes\SCore\Base\Core
      * @since 160524 Fatalities.
      *
      * @param string $message Custom message.
+     * @param string $slug    Custom error slug.
      */
-    public function forbidden(string $message = '')
+    public function forbidden(string $message = '', string $slug = '')
     {
+        if (!$slug) { // Use default?
+            $slug = 'forbidden';
+        }
         if (!$message) { // Use default?
             $message = __('Forbidden.', 'wp-sharks-core');
         }
@@ -76,6 +85,7 @@ class Fatality extends Classes\SCore\Base\Core
                 'success' => false,
                 'error'   => [
                     'code'    => 403,
+                    'slug'    => $slug,
                     'message' => $message,
                 ],
             ]));

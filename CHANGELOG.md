@@ -1,6 +1,8 @@
 ## $v
 
 - Enhance license key placeholder in installation notice.
+- Security hardening; disallow multi-dimensional ReST action data by default.
+- Adding ability to define a custom `$slug` for fatalities that occur in AJAX/API handlers.
 
 ## v160701.57880
 
