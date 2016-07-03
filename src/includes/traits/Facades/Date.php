@@ -31,4 +31,20 @@ trait Date
     {
         return $GLOBALS[static::class]->Utils->§Date->i18nUtc(...$args);
     }
+
+    /**
+     * @since 160702 UTC conversions.
+     */
+    public static function localToUtc(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Date->toUtc(...$args);
+    }
+
+    /**
+     * @since 160702 UTC conversions.
+     */
+    public static function utcToLocal(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Date->toLocal(...$args);
+    }
 }

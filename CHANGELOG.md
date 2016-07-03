@@ -1,3 +1,12 @@
+## $v
+
+- Adding `s::localToUtc()`. Converts a local timestamp into UTC time.
+- Adding `s::utcToLocal()`. Converts a UTCE timestamp into a local time.
+- Bug fix in `s::i18nUtc()` with respect to timezone chars not handled properly by `date_i18n()` in WordPress.
+- API call for package URL (in pro software) now uses `site` instead of `location` following an update at wpsharks.com.
+- Adding `CORE_CONTAINER_SLUG` constant to base `App{}` class. Used in a few default directory locations at this time.
+- Extending `Template{}` class in WSC to allow for WP themes to override any default templates.
+
 ## v160702.65139
 
 - Enhance license key placeholder in installation notice.

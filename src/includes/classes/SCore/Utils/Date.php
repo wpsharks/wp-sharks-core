@@ -37,13 +37,24 @@ class Date extends Classes\SCore\Base\Core
             $format .= ' '.get_option('time_format');
             $format = $this->c::mbTrim($format);
         }
-        $time = $time ? abs($time) : time(); // Default time.
-        $time = $utc ? $time : $time + (get_option('gmt_offset') * HOUR_IN_SECONDS);
+        $time = $time ? abs($time) : time(); // UTC time.
+
+        // If UTC enabled, leave `$time` as-is.
+        // Otherwise, convert it to a local timestamp.
+        // This is necessary because `date_i18n()` doesn't do the conversion.
+        // The `date_i18n()` function only works w/UTC (by default), if no `$time` is given.
+        $time = $utc ? $time : $this->toLocal($time); // Adjusted time, based on `$utc` param.
 
         if ($utc && preg_match('/(?<!\\\\)[PIOTZe]/u', $format)) {
-            $format = preg_replace('/(?<!\\\\)[PIOTZe]/u', '', $format);
-            $format = $this->c::mbTrim(preg_replace('/\s+/', ' ', $format));
-            return date_i18n($format, $time, $utc).' UTC';
+            // If UTC is enabled and the date format includes a TZ char.
+            // Necessary, because `date_i18n()` doesn't handle this properly.
+            // `date_i18n()` translates TZ chars into a local timezone regardless.
+
+            // So here, we escape TZ chars and then apply them in UTC.
+            $format = preg_replace('/(?<!\\\\)([PIOTZe])/u', '#\\\\${1}', $format);
+            return preg_replace_callback('/(#)([PIOTZe])/u', function ($m) use ($time) {
+                return gmdate($m[2], $time); // UTC-based TZ chars.
+            }, date_i18n($format, $time, $utc));
         }
         return date_i18n($format, $time, $utc);
     }
@@ -59,5 +70,29 @@ class Date extends Classes\SCore\Base\Core
     public function i18nUtc(string $format = '', int $time = 0): string
     {
         return $this->i18n($format, $time, true);
+    }
+
+    /**
+     * Convert local to UTC time.
+     *
+     * @param int $time Timestamp (local time).
+     *
+     * @return int Timestamp (UTC time).
+     */
+    public function toUtc(int $time): int
+    {
+        return (int) ($time - (get_option('gmt_offset') * HOUR_IN_SECONDS));
+    }
+
+    /**
+     * Convert UTC to local time.
+     *
+     * @param int $time Timestamp (UTC time).
+     *
+     * @return int Timestamp (local time).
+     */
+    public function toLocal(int $time): int
+    {
+        return (int) ($time + (get_option('gmt_offset') * HOUR_IN_SECONDS));
     }
 }

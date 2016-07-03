@@ -239,7 +239,7 @@ class Updater extends Classes\SCore\Base\Core
             $this->s::coreBrandApiUrlArg('action') => 'api-v1.0.get-product-package-url',
             $this->s::coreBrandApiUrlArg('data')   => [
                 'license_key' => $license_key,
-                'location'    => site_url(),
+                'site'        => site_url(),
                 'slug'        => $this->App->Config->©brand['©slug'],
                 'type'        => $this->App->Config->©debug['©edge'] ? 'bleeding-edge' : 'latest',
             ],

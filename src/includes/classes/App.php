@@ -40,6 +40,15 @@ class App extends CoreClasses\App
     const REST_ACTION_API_VERSION = '1.0';
 
     /**
+     * Core container slug.
+     *
+     * @since 160702 Core container.
+     *
+     * @type string Core container slug.
+     */
+    const CORE_CONTAINER_SLUG = 'wp-sharks';
+
+    /**
      * Constructor.
      *
      * @since 160524 Initial release.
@@ -390,13 +399,15 @@ class App extends CoreClasses\App
             ],
 
             '©fs_paths' => [
-                '©logs_dir'   => $wp_tmp_dir.'/.wp-sharks/'.$brand['©slug'].'/logs',
-                '©cache_dir'  => $wp_tmp_dir.'/.wp-sharks/'.$brand['©slug'].'/cache',
-                '©errors_dir' => '', '©config_file' => '', // N/A.
+                '©logs_dir'                 => $wp_tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/logs',
+                '©cache_dir'                => $wp_tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/cache',
+                '§templates_theme_base_dir' => $this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'],
+                '©templates_dir'            => $this->base_dir.'/src/includes/templates',
+                '©errors_dir'               => '', '©config_file' => '', // N/A.
             ],
 
-            '§keys' => [
-                '§salt' => $wp_salt_key,
+            '©encryption' => [
+                '©key' => $wp_salt_key,
             ],
             '©cookies' => [
                 '©encryption_key' => $wp_salt_key,
@@ -503,11 +514,13 @@ class App extends CoreClasses\App
         }
         # Build collective instance base & instance, then run parent constructor.
 
-        $instance_base           = $this->mergeConfig($default_instance_base, $instance_base);
-        $instance_base['§specs'] = &$specs; // Already established (in full) above.
-        $instance_base['©brand'] = &$brand; // Already established (in full) above.
+        $instance_base                              = $this->mergeConfig($default_instance_base, $instance_base);
+        $instance_base['§specs']                    = &$specs; // Already established (in full) above.
+        $instance_base['©brand']                    = &$brand; // Already established (in full) above.
+        $instance_base['©fs_paths']['©config_file'] = ''; // Do not allow the use of a config file.
+        // Not allowed because we pre-parse config values above to build `§specs` and `©brand`.
 
-        unset($instance['§specs'], $instance['©brand']);
+        unset($instance['§specs'], $instance['©brand'], $instance['©fs_paths']['©config_file']);
         $instance = apply_filters($brand['©var'].'_instance', $instance, $instance_base);
 
         parent::__construct($instance_base, $instance, $Parent, $args);
