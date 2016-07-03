@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
+namespace WebSharks\WpSharks\Core\Classes\Core\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;

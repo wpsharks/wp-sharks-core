@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. Template utility class w/ wrong namespace.
+
 ## v160703.71419
 
 - Adding `s::localToUtc()`. Converts a local timestamp into UTC time.
