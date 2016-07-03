@@ -1,4 +1,4 @@
-## $v
+## v160703.71419
 
 - Adding `s::localToUtc()`. Converts a local timestamp into UTC time.
 - Adding `s::utcToLocal()`. Converts a UTCE timestamp into a local time.
