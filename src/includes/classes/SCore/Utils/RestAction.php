@@ -28,16 +28,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @type string Action var.
      */
-    protected $var;
-
-    /**
-     * Short action var.
-     *
-     * @since 160608 ReST utils.
-     *
-     * @type string Short action var.
-     */
-    protected $short_var;
+    public $var;
 
     /**
      * Data var.
@@ -46,16 +37,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @type string Data var.
      */
-    protected $data_var;
-
-    /**
-     * Short data var.
-     *
-     * @since 160608 ReST utils.
-     *
-     * @type string Short data var.
-     */
-    protected $short_data_var;
+    public $data_var;
 
     /**
      * Data slug.
@@ -64,7 +46,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @type string Data slug.
      */
-    protected $data_slug;
+    public $data_slug;
 
     /**
      * Current action.
@@ -105,11 +87,7 @@ class RestAction extends Classes\SCore\Base\Core
         parent::__construct($App);
 
         $this->var       = $this->App->Config->©brand['©short_var'].'_action';
-        $this->short_var = $this->App->Config->©brand['©short_var'].'_a';
-
-        $this->data_var       = $this->App->Config->©brand['©short_var'].'_data';
-        $this->short_data_var = $this->App->Config->©brand['©short_var'].'_d';
-
+        $this->data_var  = $this->App->Config->©brand['©short_var'].'_data';
         $this->data_slug = $this->App->Config->©brand['©slug'].'-action-data';
 
         $this->action             = $this->api_version             = '';
@@ -130,14 +108,10 @@ class RestAction extends Classes\SCore\Base\Core
     {
         if ($this->c::isCli()) {
             return; // Not applicable.
-        }
-        if (!empty($_REQUEST[$this->var])) {
-            $this->action = (string) $_REQUEST[$this->var];
-        } elseif (!empty($_REQUEST[$this->short_var])) {
-            $this->action = (string) $_REQUEST[$this->short_var];
-        } else {
+        } elseif (empty($_REQUEST[$this->var])) {
             return; // Not applicable.
         }
+        $this->action = (string) $_REQUEST[$this->var];
         $this->action = $this->c::unslash($this->action);
         $this->action = $this->c::mbTrim($this->action);
 
@@ -153,7 +127,7 @@ class RestAction extends Classes\SCore\Base\Core
             $this->action      = $this->stripApiVersion($this->action);
             $this->c::isApi(true);
         }
-        $this->c::doingRestAction($this->action);
+        $this->c::doingRestAction($this->action); // w/o API version.
 
         if (!isset($this->registered_actions[$this->action])) {
             $this->s::dieInvalid(); // Unregistered!
@@ -165,6 +139,21 @@ class RestAction extends Classes\SCore\Base\Core
         }
         $Utility = $this->App->Utils->{$actor['class']};
         $Utility->{$actor['method']}($this->action);
+    }
+
+    /**
+     * Action API version; parsed `onWpLoaded()`.
+     *
+     * @since 160625 ReST utils; API version parsing.
+     *
+     * @return mixed Action API version; parsed `onWpLoaded()`.
+     */
+    public function apiVersion()
+    {
+        if (!$this->action) {
+            return ''; // Not applicable.
+        }
+        return $this->api_version; // Parsed `onWpLoaded()`.
     }
 
     /**
@@ -180,14 +169,11 @@ class RestAction extends Classes\SCore\Base\Core
     {
         if (!$this->action) {
             return; // Not applicable.
-        }
-        if (isset($_REQUEST[$this->data_var])) {
-            $data = $_REQUEST[$this->data_var];
-        } elseif (isset($_REQUEST[$this->short_data_var])) {
-            $data = $_REQUEST[$this->short_data_var];
-        } else {
+        } elseif (!isset($_REQUEST[$this->data_var])) {
             return; // Not applicable.
         }
+        $data = $_REQUEST[$this->data_var];
+
         if (is_object($data)) {
             $data = (array) $data;
         }
@@ -201,21 +187,6 @@ class RestAction extends Classes\SCore\Base\Core
     }
 
     /**
-     * Action API version.
-     *
-     * @since 160625 ReST utils.
-     *
-     * @return mixed Action data.
-     */
-    public function apiVersion()
-    {
-        if (!$this->action) {
-            return ''; // Not applicable.
-        }
-        return $this->api_version; // For API actions.
-    }
-
-    /**
      * Best URL for the action.
      *
      * @since 160608 ReST utils.
@@ -226,7 +197,7 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function bestUrl(string $action): string
     {
-        if (preg_match('/^(?:ajax\.|api(?:\.|\-v(?:[0-9]\.)+))/u', $action)) {
+        if ($this->viaAjax($action) || $this->viaApi($action)) {
             return home_url('/'); // Both ride on index.
         }
         $is_admin = is_admin(); // Need this for the checks below.
@@ -247,25 +218,16 @@ class RestAction extends Classes\SCore\Base\Core
      * @param string      $action Action identifier.
      * @param mixed|null  $data   Action data (optional).
      * @param string|null $url    Input URL (optional).
-     * @param array       $args   Behavioral args (optional).
      *
      * @return string URL w/ an action.
      */
-    public function urlAdd(string $action, $data = null, string $url = null, array $args = []): string
+    public function urlAdd(string $action, $data = null, string $url = null): string
     {
-        $default_args = [
-            'use_short_vars'      => false,
-            'exclude_api_version' => false,
-        ];
-        $args = array_merge($default_args, $args);
-        $args = array_intersect_key($args, $default_args);
-
-        $var      = $args['use_short_vars'] ? $this->short_var : $this->var;
-        $data_var = $args['use_short_vars'] ? $this->short_data_var : $this->data_var;
-        $action   = $this->{$args['exclude_api_version'] ? 'stripApiVersion' : 'addApiVersion'}($action);
-
+        if ($this->viaApi($action)) {
+            $action = $this->addApiVersion($action);
+        }
         $url = $this->urlRemove($url ?: $this->bestUrl($action));
-        $url = $this->c::addUrlQueryArgs([$var => $action, $data_var => $data], $url);
+        $url = $this->c::addUrlQueryArgs([$this->var => $action, $this->data_var => $data], $url);
         // NOTE: If `$data` is null, it will simply not be included in the URL.
 
         if (!empty($this->registered_actions[$action]['requires_valid_nonce'])) {
@@ -331,9 +293,9 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @return string Data form element name.
      */
-    public function formElementName(string $var, array $args = []): string
+    public function formElementName(string $var): string
     {
-        return (!empty($args['use_short_var']) ? $this->short_data_var : $this->data_var).'['.$var.']';
+        return $this->data_var.'['.$var.']';
     }
 
     /**

@@ -17,11 +17,19 @@ use function get_defined_vars as vars;
 trait RestAction
 {
     /**
-     * @since 160608 ReST utils.
+     * @since 160705 ReST utils.
      */
-    public static function restActionData(...$args)
+    public static function restActionVar(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§RestAction->data(...$args);
+        return $GLOBALS[static::class]->Utils->§RestAction->var;
+    }
+
+    /**
+     * @since 160705 ReST utils.
+     */
+    public static function restActionDataVar(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§RestAction->data_var;
     }
 
     /**
@@ -35,9 +43,25 @@ trait RestAction
     /**
      * @since 160608 ReST utils.
      */
+    public static function restActionData(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§RestAction->data(...$args);
+    }
+
+    /**
+     * @since 160608 ReST utils.
+     */
     public static function bestRestActionUrl(...$args)
     {
         return $GLOBALS[static::class]->Utils->§RestAction->bestUrl(...$args);
+    }
+
+    /**
+     * @since 160705 ReST utils.
+     */
+    public static function restActionUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§RestAction->urlAdd(...$args);
     }
 
     /**

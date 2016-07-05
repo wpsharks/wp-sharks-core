@@ -1,3 +1,9 @@
+## $v
+
+- Adding `s::restActionUrl()`.
+- Adding `s::restActionVar()`.
+- Adding `s::restActionDataVar()`.
+
 ## v160705.60576
 
 - Bug fix. `Shortlink` is a one-word reference.
