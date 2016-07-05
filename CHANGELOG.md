@@ -1,3 +1,7 @@
+## v160705.60576
+
+- Bug fix. `Shortlink` is a one-word reference.
+
 ## v160705.21987
 
 - Adding `transientShortlink()` API and Facade.
