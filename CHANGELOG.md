@@ -1,6 +1,7 @@
-## $v
+## v160705.21987
 
-- Adding `transientShortlink()` Facade.
+- Adding `transientShortlink()` API and Facade.
+- Enhancing ReST action handlers. New method `addApiVersion()`.
 
 ## v160705.16389
 

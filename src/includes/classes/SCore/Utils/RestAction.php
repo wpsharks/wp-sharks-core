@@ -128,6 +128,9 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function onWpLoaded()
     {
+        if ($this->c::isCli()) {
+            return; // Not applicable.
+        }
         if (!empty($_REQUEST[$this->var])) {
             $this->action = (string) $_REQUEST[$this->var];
         } elseif (!empty($_REQUEST[$this->short_var])) {
@@ -250,19 +253,20 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function urlAdd(string $action, $data = null, string $url = null, array $args = []): string
     {
-        if (preg_match('/^api\./u', $action)) {
-            $action = preg_replace('/^api\./u', '', $action);
-            $action = 'api-v'.$this->App::REST_ACTION_API_VERSION.'.'.$action;
-        } // This forces a version into URLs that call upon an API action.
+        $default_args = [
+            'use_short_vars'      => false,
+            'exclude_api_version' => false,
+        ];
+        $args = array_merge($default_args, $args);
+        $args = array_intersect_key($args, $default_args);
 
-        $url = $url ?: $this->bestUrl($action);
-        $url = $this->urlRemove($url); // Start clean.
+        $var      = $args['use_short_vars'] ? $this->short_var : $this->var;
+        $data_var = $args['use_short_vars'] ? $this->short_data_var : $this->data_var;
+        $action   = $this->{$args['exclude_api_version'] ? 'stripApiVersion' : 'addApiVersion'}($action);
 
-        $var      = !empty($args['use_short_vars']) ? $this->short_var : $this->var;
-        $data_var = !empty($args['use_short_vars']) ? $this->short_data_var : $this->data_var;
-
-        $url = $this->c::addUrlQueryArgs([$var => $action], $url);
-        $url = isset($data) ? $this->c::addUrlQueryArgs([$data_var => $data], $url) : $url;
+        $url = $this->urlRemove($url ?: $this->bestUrl($action));
+        $url = $this->c::addUrlQueryArgs([$var => $action, $data_var => $data], $url);
+        // NOTE: If `$data` is null, it will simply not be included in the URL.
 
         if (!empty($this->registered_actions[$action]['requires_valid_nonce'])) {
             $url = $this->s::addUrlNonce($url, $action);
@@ -405,6 +409,23 @@ class RestAction extends Classes\SCore\Base\Core
             $version = preg_replace('/^api\-v([0-9]+[0-9.]*)\..+$/u', '${1}', $action);
         }
         return $version ?? ''; // API version from action identifier.
+    }
+
+    /**
+     * Add API version.
+     *
+     * @since 160705 ReST utils.
+     *
+     * @param string $action Action identifier.
+     *
+     * @return string Action w/ the API version.
+     */
+    protected function addApiVersion(string $action): string
+    {
+        if (mb_strpos($action, 'api.') === 0) {
+            $action = preg_replace('/^api\./u', 'api-v'.$this->App::REST_ACTION_API_VERSION.'.', $action);
+        }
+        return $action; // With an API version.
     }
 
     /**

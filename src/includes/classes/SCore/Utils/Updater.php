@@ -236,13 +236,13 @@ class Updater extends Classes\SCore\Base\Core
         $data_var   = $this->s::coreBrandApiUrlArg('data');
 
         $args = [ // API call leading back to the core brand site.
-            $action_var => 'api-v1.0.get-product-download-url-via-license-key',
-              $data_var => [
-                'license_key' => $license_key,
-                'site'        => site_url(),
-                'slug'        => $this->App->Config->©brand['©slug'],
-                'type'        => $this->App->Config->©debug['©edge'] ? 'bleeding-edge' : 'latest',
-            ],
+            $action_var   => 'api-v1.0.get-product-download-url-via-license-key',
+                $data_var => [
+                    'license_key' => $license_key,
+                    'site'        => site_url(),
+                    'slug'        => $this->App->Config->©brand['©slug'],
+                    'type'        => $this->App->Config->©debug['©edge'] ? 'bleeding-edge' : 'latest',
+                ],
         ];
         return $this->c::addUrlQueryArgs($args, $this->s::coreBrandApiUrl());
     }

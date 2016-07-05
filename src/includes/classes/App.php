@@ -28,7 +28,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160705.16466'; //v//
+    const VERSION = '160705.21987'; //v//
 
     /**
      * ReST action API version.
@@ -644,8 +644,8 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
-        add_action('wp_loaded', [$this->Utils->§TransientShortLink, 'onWpLoaded']);
         add_action('wp_loaded', [$this->Utils->§RestAction, 'onWpLoaded']);
+        add_action('wp_loaded', [$this->Utils->§TransientShortLink, 'onWpLoaded']);
 
         if (is_admin()) { // Optimizes this hook.
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);

@@ -19,16 +19,25 @@ use function get_defined_vars as vars;
  *
  * @since 160704 Transient shortlink utils.
  */
-class TransientShortLink extends Classes\SCore\Base\Core implements CoreInterfaces\SecondConstants
+class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfaces\SecondConstants
 {
     /**
-     * Transient shortlink var.
+     * Shortlink var.
      *
-     * @since 160704 Transient shortlink utils.
+     * @since 160704 Shortlink var.
      *
-     * @type string Transient shortlink var.
+     * @type string Shortlink var.
      */
     protected $var;
+
+    /**
+     * Shortlink slug.
+     *
+     * @since 160704 Shortlink slug.
+     *
+     * @type string Shortlink slug.
+     */
+    protected $slug;
 
     /**
      * Class constructor.
@@ -41,7 +50,8 @@ class TransientShortLink extends Classes\SCore\Base\Core implements CoreInterfac
     {
         parent::__construct($App);
 
-        $this->var = $this->App->Config->©brand['©short_var'].'_ts';
+        $this->var  = $this->App->Config->©brand['©short_var'].'_ts';
+        $this->slug = $this->App->Config->©brand['©short_slug'].'-ts';
     }
 
     /**
@@ -50,16 +60,28 @@ class TransientShortLink extends Classes\SCore\Base\Core implements CoreInterfac
      * @since 160704 Transient utils.
      *
      * @param string $long_url      URL to shorten.
+     * @param string $descriptor    Optional descriptor.
      * @param int    $expires_after Expires after (in seconds).
      *
      * @return string Transient shortlink.
      */
-    public function __invoke(string $long_url, int $expires_after = null): string
+    public function __invoke(string $long_url, string $descriptor = '', int $expires_after = null): string
     {
-        $expires_after    = $expires_after ?? $this::SECONDS_IN_DAY;
-        $transient_key    = sha1('transient-shortlink-'.$long_url);
-        $transient_hash   = $this->s::setTransient($transient_key, $long_url, $expires_after, true);
-        return $shortlink = $this->c::addUrlQueryArgs([$this->var => $transient_hash], home_url('/'));
+        global $wp_rewrite;
+
+        if (!$long_url) {
+            return ''; // Not possible.
+        }
+        $expires_after  = $expires_after ?? $this::SECONDS_IN_DAY;
+        $transient_key  = sha1('transient-shortlink-'.$long_url);
+        $transient_hash = $this->s::setTransient($transient_key, $long_url, $expires_after, true);
+
+        if ($wp_rewrite->using_mod_rewrite_permalinks()) {
+            $descriptor       = $this->c::mbTrim($descriptor, '/'); // Only works with fancy permalinks.
+            return $shortlink = home_url('/'.$this->slug.'/'.$transient_hash.($descriptor ? '/'.urlencode($descriptor) : ''));
+        } else {
+            return $shortlink = $this->c::addUrlQueryArgs([$this->var => $transient_hash], home_url('/'));
+        }
     }
 
     /**
@@ -69,8 +91,22 @@ class TransientShortLink extends Classes\SCore\Base\Core implements CoreInterfac
      */
     public function onWpLoaded()
     {
+        global $wp_rewrite;
+
+        if ($this->c::isCli()) {
+            return; // Not applicable.
+        }
         if (!empty($_REQUEST[$this->var])) {
             $transient_hash = (string) $_REQUEST[$this->var];
+        } elseif (mb_stripos($_SERVER['REQUEST_URI'] ?? '', '/'.$this->slug.'/') !== false && $wp_rewrite->using_mod_rewrite_permalinks()) {
+            $base_path = $this->c::mbRTrim((string) $this->c::parseUrl(home_url('/'), PHP_URL_PATH), '/');
+            $path      = $base_path ? mb_substr($this->c::currentPath(), mb_strlen($base_path)) : $this->c::currentPath();
+
+            if ($path && preg_match('/^\/'.$this->c::escRegex($this->slug).'\/(?<transient_hash>[^\/]+)(?:\/|$)/ui', $path, $_m)) {
+                $transient_hash = $_m['transient_hash'];
+            } else {
+                return; // Not appplicable; i.e., unable to find transient hash in path.
+            }
         } else {
             return; // Not applicable.
         }
