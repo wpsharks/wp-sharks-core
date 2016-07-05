@@ -1,3 +1,9 @@
+## v160705.16389
+
+- Enhancing `RestAction{}` utils.
+- Adding new `RestAction{}` behavioral arg: `use_short_vars`.
+- Bug fix. `RestAction{}` URLs should only contain an Nonce if applicable.
+
 ## v160703.72161
 
 - Bug fix. Template utility class w/ wrong namespace.

@@ -31,6 +31,15 @@ class RestAction extends Classes\SCore\Base\Core
     protected $var;
 
     /**
+     * Short action var.
+     *
+     * @since 160608 ReST utils.
+     *
+     * @type string Short action var.
+     */
+    protected $short_var;
+
+    /**
      * Data var.
      *
      * @since 160608 ReST utils.
@@ -38,6 +47,15 @@ class RestAction extends Classes\SCore\Base\Core
      * @type string Data var.
      */
     protected $data_var;
+
+    /**
+     * Short data var.
+     *
+     * @since 160608 ReST utils.
+     *
+     * @type string Short data var.
+     */
+    protected $short_data_var;
 
     /**
      * Data slug.
@@ -87,7 +105,11 @@ class RestAction extends Classes\SCore\Base\Core
         parent::__construct($App);
 
         $this->var       = $this->App->Config->©brand['©short_var'].'_action';
-        $this->data_var  = $this->App->Config->©brand['©short_var'].'_data';
+        $this->short_var = $this->App->Config->©brand['©short_var'].'_a';
+
+        $this->data_var       = $this->App->Config->©brand['©short_var'].'_data';
+        $this->short_data_var = $this->App->Config->©brand['©short_var'].'_d';
+
         $this->data_slug = $this->App->Config->©brand['©slug'].'-action-data';
 
         $this->action             = $this->api_version             = '';
@@ -106,10 +128,13 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function onWpLoaded()
     {
-        if (empty($_REQUEST[$this->var])) {
+        if (!empty($_REQUEST[$this->var])) {
+            $this->action = (string) $_REQUEST[$this->var];
+        } elseif (!empty($_REQUEST[$this->short_var])) {
+            $this->action = (string) $_REQUEST[$this->short_var];
+        } else {
             return; // Not applicable.
         }
-        $this->action = (string) $_REQUEST[$this->var];
         $this->action = $this->c::unslash($this->action);
         $this->action = $this->c::mbTrim($this->action);
 
@@ -152,11 +177,14 @@ class RestAction extends Classes\SCore\Base\Core
     {
         if (!$this->action) {
             return; // Not applicable.
-        } elseif (!isset($_REQUEST[$this->data_var])) {
+        }
+        if (isset($_REQUEST[$this->data_var])) {
+            $data = $_REQUEST[$this->data_var];
+        } elseif (isset($_REQUEST[$this->short_data_var])) {
+            $data = $_REQUEST[$this->short_data_var];
+        } else {
             return; // Not applicable.
         }
-        $data = $_REQUEST[$this->data_var];
-
         if (is_object($data)) {
             $data = (array) $data;
         }
@@ -202,7 +230,7 @@ class RestAction extends Classes\SCore\Base\Core
 
         if ($is_admin && ($this->s::isOwnMenuPage() || $this->s::isOwnMenuPageTab())) {
             return $this->urlRemove($this->c::currentUrl());
-        } elseif ($is_admin && !$this->c::isAjax()) {
+        } elseif ($is_admin) {
             return self_admin_url('/');
         }
         return home_url('/'); // Fallback (default).
@@ -214,22 +242,32 @@ class RestAction extends Classes\SCore\Base\Core
      * @since 160608 ReST utils.
      *
      * @param string      $action Action identifier.
-     * @param string|null $url    Input URL (optional).
      * @param mixed|null  $data   Action data (optional).
+     * @param string|null $url    Input URL (optional).
+     * @param array       $args   Behavioral args (optional).
      *
      * @return string URL w/ an action.
      */
-    public function urlAdd(string $action, string $url = null, $data = null): string
+    public function urlAdd(string $action, $data = null, string $url = null, array $args = []): string
     {
         if (preg_match('/^api\./u', $action)) {
             $action = preg_replace('/^api\./u', '', $action);
             $action = 'api-v'.$this->App::REST_ACTION_API_VERSION.'.'.$action;
         } // This forces a version into URLs that call upon an API action.
 
-        $url        = $url ?? $this->bestUrl($action);
-        $url        = $this->c::addUrlQueryArgs([$this->var => $action], $url);
-        $url        = isset($data) ? $this->c::addUrlQueryArgs([$this->data_var => $data], $url) : $url;
-        return $url = $this->s::addUrlNonce($url, $action);
+        $url = $url ?: $this->bestUrl($action);
+        $url = $this->urlRemove($url); // Start clean.
+
+        $var      = !empty($args['use_short_vars']) ? $this->short_var : $this->var;
+        $data_var = !empty($args['use_short_vars']) ? $this->short_data_var : $this->data_var;
+
+        $url = $this->c::addUrlQueryArgs([$var => $action], $url);
+        $url = isset($data) ? $this->c::addUrlQueryArgs([$data_var => $data], $url) : $url;
+
+        if (!empty($this->registered_actions[$action]['requires_valid_nonce'])) {
+            $url = $this->s::addUrlNonce($url, $action);
+        }
+        return $url;
     }
 
     /**
@@ -243,7 +281,11 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function urlRemove(string $url): string
     {
-        $url        = $this->c::removeUrlQueryArgs([$this->var, $this->data_var], $url);
+        $args_to_remove = [
+            $this->var, $this->short_var,
+            $this->data_var, $this->short_data_var,
+        ];
+        $url        = $this->c::removeUrlQueryArgs($args_to_remove, $url);
         return $url = $this->s::removeUrlNonce($url);
     }
 
@@ -285,9 +327,9 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @return string Data form element name.
      */
-    public function formElementName(string $var): string
+    public function formElementName(string $var, array $args = []): string
     {
-        return $this->data_var.'['.$var.']';
+        return (!empty($args['use_short_var']) ? $this->short_data_var : $this->data_var).'['.$var.']';
     }
 
     /**
