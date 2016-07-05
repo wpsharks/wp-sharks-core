@@ -215,10 +215,9 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function getLatestVersionUrl(): string
     {
-        $uri = $this->App->Config->©debug['©edge'] ? '/software/bleeding-edge' : '/software/latest';
-        $uri .= '/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
-
-        return $this->s::coreBrandCdnUrl($uri);
+        $base       = $this->App->Config->©debug['©edge'] ? 'software/bleeding-edge' : 'software/latest';
+        $uri        = '/'.$base.'/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
+        return $url = $this->s::coreBrandCdnUrl($uri);
     }
 
     /**
@@ -230,14 +229,15 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function getLatestPackageUrl(): string
     {
-        $license_key = $this->s::getOption('§license_key');
-
-        if ($this->App->Config->§specs['§is_pro'] && !$license_key) {
+        if (!($license_key = $this->s::getOption('§license_key'))) {
             return ''; // Not possible w/o license key.
         }
-        $args = [
-            $this->s::coreBrandApiUrlArg('action') => 'api-v1.0.get-product-package-url',
-            $this->s::coreBrandApiUrlArg('data')   => [
+        $action_var = $this->s::coreBrandApiUrlArg('action');
+        $data_var   = $this->s::coreBrandApiUrlArg('data');
+
+        $args = [ // API call leading back to the core brand site.
+            $action_var => 'api-v1.0.get-product-download-url-via-license-key',
+              $data_var => [
                 'license_key' => $license_key,
                 'site'        => site_url(),
                 'slug'        => $this->App->Config->©brand['©slug'],

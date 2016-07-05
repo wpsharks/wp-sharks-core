@@ -644,6 +644,7 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
+        add_action('wp_loaded', [$this->Utils->§TransientShortLink, 'onWpLoaded']);
         add_action('wp_loaded', [$this->Utils->§RestAction, 'onWpLoaded']);
 
         if (is_admin()) { // Optimizes this hook.

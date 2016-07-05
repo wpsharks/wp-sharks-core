@@ -1,3 +1,7 @@
+## $v
+
+- Adding `transientShortlink()` Facade.
+
 ## v160705.16389
 
 - Enhancing `RestAction{}` utils.
