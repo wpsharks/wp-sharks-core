@@ -144,11 +144,11 @@ class App extends CoreClasses\App
                 $instance_base['§specs'] ?? [],
                 $instance['§specs'] ?? []
             );
+            if (!isset($specs['§in_wp'])) {
+                $specs['§in_wp'] = false;
+            }
             if (!isset($specs['§is_pro'])) {
                 $specs['§is_pro'] = mb_stripos($this->namespace, '\\Pro\\') !== false;
-            }
-            if (!isset($specs['§in_wp'])) {
-                $specs['§in_wp'] = $specs['§is_pro'] ? false : true;
             }
             if (!$specs['§type'] || !$specs['§file']) {
                 if (is_file($this->base_dir.'/plugin.php')) {
