@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. `short_var` and `short_data_var` removed in favor of Transient Shortlinks.
+
 ## v160705.82876
 
 - Adding `s::restActionUrl()`.

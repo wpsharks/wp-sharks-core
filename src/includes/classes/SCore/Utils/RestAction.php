@@ -247,11 +247,7 @@ class RestAction extends Classes\SCore\Base\Core
      */
     public function urlRemove(string $url): string
     {
-        $args_to_remove = [
-            $this->var, $this->short_var,
-            $this->data_var, $this->short_data_var,
-        ];
-        $url        = $this->c::removeUrlQueryArgs($args_to_remove, $url);
+        $url        = $this->c::removeUrlQueryArgs([$this->var, $this->data_var], $url);
         return $url = $this->s::removeUrlNonce($url);
     }
 
