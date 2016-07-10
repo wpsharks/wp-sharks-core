@@ -1,3 +1,11 @@
+## v160710.23515
+
+- Adding `s::addMenuPage()`
+- Adding `s::addMenuPageItem()`
+- Adding `Classes\App::CORE_CONTAINER_VAR`
+- Adding `Classes\App::CORE_CONTAINER_NAME`
+- Adding `Classes\SCore\Utils::DbMenuPage{}`
+
 ## v160709.27823
 
 - Upgrading to latest websharks/core.

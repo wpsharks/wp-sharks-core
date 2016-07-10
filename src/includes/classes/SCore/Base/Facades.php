@@ -31,6 +31,7 @@ abstract class Facades
     use Traits\Facades\Hooks;
     use Traits\Facades\Installer;
     use Traits\Facades\MenuPage;
+    use Traits\Facades\MenuPageMarkup;
     use Traits\Facades\Nonce;
     use Traits\Facades\Notices;
     use Traits\Facades\Options;

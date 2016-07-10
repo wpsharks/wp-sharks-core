@@ -15,7 +15,8 @@ $jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
      at:                      'center top-10', // Or `left-10 center`.
      using:                   function (position, feedback) {
        $(this).css(position).addClass(feedback.vertical + ' ' + feedback.horizontal);
-     }
+     },
+     collision:               'flip'
    },
    content:                   function () {
      return $(this).prop('title');
@@ -27,6 +28,8 @@ $jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
   #{$scope}.ui-tooltip.ui-widget {
     border:                   0;
     font-size:               .8em;
+    border-radius:           .25em;
+    padding:                 .5em;
     max-width:                150px;
     text-align:               center;
     color:                    $jquery-ui-tooltip-color;

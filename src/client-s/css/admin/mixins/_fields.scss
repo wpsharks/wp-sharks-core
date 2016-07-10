@@ -31,6 +31,14 @@
     }
   }
 
+  #{$scope}input[type='range'] {
+    width:                    100%;
+  }
+
+  #{$scope}input[type='color'] {
+    padding:                  0;
+  }
+
   #{$scope}textarea,
   #{$scope}select[multiple] {
     height:                   10em;

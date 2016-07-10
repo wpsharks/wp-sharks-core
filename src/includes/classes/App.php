@@ -28,7 +28,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160709.27823'; //v//
+    const VERSION = '160710.28269'; //v//
 
     /**
      * ReST action API version.
@@ -47,6 +47,24 @@ class App extends CoreClasses\App
      * @type string Core container slug.
      */
     const CORE_CONTAINER_SLUG = 'wp-sharks';
+
+    /**
+     * Core container var.
+     *
+     * @since 160702 Core container.
+     *
+     * @type string Core container var.
+     */
+    const CORE_CONTAINER_VAR = 'wp_sharks';
+
+    /**
+     * Core container name.
+     *
+     * @since 160702 Core container.
+     *
+     * @type string Core container name.
+     */
+    const CORE_CONTAINER_NAME = 'WP Sharks';
 
     /**
      * Constructor.
@@ -312,6 +330,7 @@ class App extends CoreClasses\App
             '©di' => [
                 '©default_rule' => [
                     'new_instances' => [
+                        Classes\SCore\MenuPageForm::class,
                     ],
                 ],
             ],
@@ -644,16 +663,23 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
+        $is_admin = is_admin();
+
         add_action('wp_loaded', [$this->Utils->§RestAction, 'onWpLoaded']);
         add_action('wp_loaded', [$this->Utils->§TransientShortlink, 'onWpLoaded']);
 
-        if (is_admin()) { // Optimizes this hook.
+        if ($is_admin) {
+            if ($this->class === self::class) {
+                add_action('admin_menu', [$this->Utils->§DbMenuPage, 'onAdminMenu']);
+                add_action('admin_enqueue_scripts', [$this->Utils->§StylesScripts, 'enqueueMenuPageLibs']);
+            }
+            add_filter('admin_body_class', [$this->Utils->§MenuPage, 'onAdminBodyClass']);
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
         }
         if ((!$this->Config->§specs['§is_network_wide'] || !is_multisite() || is_main_site()) && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
             add_filter('site_transient_update_'.$this->Config->§specs['§type'].'s', [$this->Utils->§Updater, 'onGetSiteTransientUpdate'.$this->Config->§specs['§type'].'s']);
         }
-        if ($this->class === self::class) { // Flushes the OPcache.
+        if ($this->class === self::class) {
             add_action('upgrader_process_complete', [$this->Utils->§Updater, 'onUpgraderProcessComplete']);
         }
     }

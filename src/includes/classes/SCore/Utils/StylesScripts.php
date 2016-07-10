@@ -21,6 +21,9 @@ use function get_defined_vars as vars;
  */
 class StylesScripts extends Classes\SCore\Base\Core
 {
+    // @TODO Versions used in these libs should come from the core in most cases.
+    // i.e., the version should be that from the core. Not from the app.
+
     /**
      * Enqueued.
      *
@@ -60,6 +63,21 @@ class StylesScripts extends Classes\SCore\Base\Core
             $this->did_enqueue[$identifier] = $flag;
         }
         return isset($this->did_enqueue[$identifier]);
+    }
+
+    /**
+     * Enqueue Sharkicon libs.
+     *
+     * @since 160709 Sharkicon libs.
+     */
+    public function enqueueSharkiconLibs()
+    {
+        if ($this->didEnqueue(__FUNCTION__)) {
+            return; // Did this already.
+        } // We only need to enqueue these libs once.
+        $this->didEnqueue(__FUNCTION__, true); // Flag as done.
+
+        wp_enqueue_style('sharkicons', $this->c::appCoreUrl('/vendor/websharks/sharkicons/src/long-classes.min.css'), [], $this->App::VERSION, 'all');
     }
 
     /**
@@ -253,9 +271,9 @@ class StylesScripts extends Classes\SCore\Base\Core
         wp_enqueue_style('jquery-jsgrid-theme', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid-theme.min.css', ['jquery-jsgrid'], null, 'all');
 
         wp_enqueue_script('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.1/jsgrid.min.js', ['jquery'], null, true);
-        wp_enqueue_script('jquery-jsgrid-select-field', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/select-field.min.js'), ['jquery-jsgrid', 'underscore'], null, true);
-        wp_enqueue_script('jquery-jsgrid-control-field', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/control-field.min.js'), ['jquery-jsgrid', 'underscore'], null, true);
-        wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate', 'underscore'], null, true);
+        wp_enqueue_script('jquery-jsgrid-select-field', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/select-field.min.js'), ['jquery-jsgrid', 'underscore'], $this->App::VERSION, true);
+        wp_enqueue_script('jquery-jsgrid-control-field', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/control-field.min.js'), ['jquery-jsgrid', 'underscore'], $this->App::VERSION, true);
+        wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate', 'underscore'], $this->App::VERSION, true);
 
         wp_localize_script(
             'jquery-jsgrid', // See: <http://js-grid.com/docs/>
@@ -306,6 +324,37 @@ class StylesScripts extends Classes\SCore\Base\Core
                     'insertModeButtonTooltip'  => _x('Switch to inserting', 'jquery-jsgrid-libs', 'wp-sharks-core'),
                     'searchModeButtonTooltip'  => _x('Switch to searching', 'jquery-jsgrid-libs', 'wp-sharks-core'),
                 ],
+            ]
+        );
+    }
+
+    /**
+     * Enqueue menu-page libs.
+     *
+     * @since 160709 Menu page libs.
+     */
+    public function enqueueMenuPageLibs()
+    {
+        if ($this->didEnqueue(__FUNCTION__)) {
+            return; // Did this already.
+        } // We only need to enqueue these libs once.
+        $this->didEnqueue(__FUNCTION__, true); // Flag as done.
+
+        $this->enqueueSharkiconLibs(); // Depends on this lib.
+
+        wp_enqueue_style($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/css/admin/menu-page/core.min.css'), ['sharkicons'], $this->App::VERSION, 'all');
+        wp_enqueue_script($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/js/admin/menu-page/core.min.js'), ['jquery', 'jquery-ui-tooltip', 'underscore'], $this->App::VERSION, true);
+
+        wp_localize_script(
+            $this->App::CORE_CONTAINER_SLUG.'-menu-page',
+            'nuqvUt59Aqv9RhzvhjafETjNS5hAFScXMenuPageData',
+            [
+                'coreContainerSlug' => $this->App::CORE_CONTAINER_SLUG,
+                'coreContainerVar'  => $this->App::CORE_CONTAINER_VAR,
+                'coreContainerName' => $this->App::CORE_CONTAINER_NAME,
+
+                'currentMenuPage'    => $this->s::currentMenuPage(),
+                'currentMenuPageTab' => $this->s::currentMenuPageTab(),
             ]
         );
     }

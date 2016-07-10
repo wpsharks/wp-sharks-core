@@ -17,6 +17,14 @@ use function get_defined_vars as vars;
 trait StylesScripts
 {
     /**
+     * @since 160709 Sharkicon libs.
+     */
+    public static function enqueueSharkiconLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSharkiconLibs(...$args);
+    }
+
+    /**
      * @since 160524 Initial release.
      */
     public static function enqueueMomentLibs(...$args)
@@ -46,5 +54,13 @@ trait StylesScripts
     public static function enqueueJQueryJsGridLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryJsGridLibs(...$args);
+    }
+
+    /**
+     * @since 160709 Menu page libs.
+     */
+    public static function enqueueMenuPageLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueMenuPageLibs(...$args);
     }
 }

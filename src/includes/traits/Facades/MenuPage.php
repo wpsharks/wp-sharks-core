@@ -95,4 +95,20 @@ trait MenuPage
     {
         return $GLOBALS[static::class]->Utils->§MenuPage->isForPostType(...$args);
     }
+
+    /**
+     * @since 160709 Menu page utils.
+     */
+    public static function addMenuPage(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->addMenu(...$args);
+    }
+
+    /**
+     * @since 160709 Menu page utils.
+     */
+    public static function addMenuPageItem(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->addMenuItem(...$args);
+    }
 }
