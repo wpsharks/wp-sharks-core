@@ -333,9 +333,13 @@ class Notices extends Classes\SCore\Base\Core
             $_markup           = '';
             $_current_user_can = false;
             $_is_applicable    = false;
-            $_class            = 'notice';
-            $_style            = $_notice['style'];
-            $_dismiss          = ''; // Default; n/a.
+
+            $_class = $this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
+            $_class            .= ' -notice';
+            $_class            .= ' notice';
+
+            $_style   = $_notice['style'];
+            $_dismiss = ''; // Default; n/a.
 
             # Check for empty markup.
 
@@ -411,8 +415,6 @@ class Notices extends Classes\SCore\Base\Core
                 }
             }
             # Setup notice classes for CSS in WP core.
-
-            $_class .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
 
             switch ($_notice['type']) {
                 case 'info':

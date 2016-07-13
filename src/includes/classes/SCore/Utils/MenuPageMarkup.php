@@ -80,17 +80,13 @@ class MenuPageMarkup extends Classes\SCore\Base\Core
         }
         $markup  = ''; // Initialize markup.
         $heading = $heading && mb_strpos($heading, '</i>') === false
-            ? '<i class="sharkicon sharkicon-enty-exclamation" style="color:#E03A39;"></i> '.$heading : $heading;
+            ? '<i class="sharkicon sharkicon-enty-exclamation"></i> '.$heading : $heading;
         $error_messages = $this->c::markdown($error_messages, ['no_p' => true]);
 
-        if ($heading) { // Heading is always optional here.
-            $markup .= '<h3 style="margin:1em 0 1em 0; padding:0; line-height:1em;">'.$heading.'</h3>';
+        if ($heading) { // Optional.
+            $markup .= '<h3>'.$heading.'</h3>';
         }
-        $markup .= '<ul style="margin:1em 0 1em 0; padding:0 0 0 3em; list-style:disc;">'.
-                       '<li style="margin:0; padding:0; list-style:disc;">'.
-                           implode('</li><li class="margin:.5em 0 0 0; padding:0; list-style:disc;">', $error_messages).
-                       '</li>'.
-                   '</ul>';
+        $markup .= '<ul><li>'.implode('</li><li>', $error_messages).'</li></ul>';
 
         return $markup;
     }

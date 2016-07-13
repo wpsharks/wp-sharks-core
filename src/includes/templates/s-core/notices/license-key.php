@@ -17,7 +17,7 @@ use function get_defined_vars as vars;
 extract($¤vars); // Template variables.
 ?>
 <p>
-    <?= sprintf(__('%1$s™ License Key for: <strong>%2$s</strong>', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->App->Config->©brand['©name'])); ?>
+    <?= sprintf(__('%1$s™ License Key for: <strong>%2$s</strong>', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->App->Config->©brand['§product_name'])); ?>
 
     <small class="-note" style="display:inline-block; margin:0 0 0 2em;"><?= __('(enables automatic updates)', 'wp-sharks-core'); ?></small>
     <?= $this->s::menuPageTip(sprintf(__('Get your license key from the \'My Account → My Downloads\' page at %1$s™.', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME))); ?>

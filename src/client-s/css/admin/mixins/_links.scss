@@ -10,11 +10,11 @@
   #{$scope}a {
     text-decoration:          none;
 
-    &[href='#'][data-toggle] {
+    &[href='#'][data-toggle]:not(.-no-dots) {
       border-bottom:          1px dotted;
     }
 
-    &[target='_blank'] {
+    &[target='_blank']:not(.-no-icon) {
       @include wp-admin-dashicon(external, after);
 
       display:                inline-block;

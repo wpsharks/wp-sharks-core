@@ -33,7 +33,7 @@ $rest_action_data['license_keys'] = (array) ($rest_action_data['license_keys'] ?
 
             <?php foreach ($apps_by_type['theme'] as $_App) : ?>
                 <?= $Form->inputRow([
-                    'label' => esc_html($_App->Config->©brand['©name']),
+                    'label' => esc_html($_App->Config->©brand['§product_name']),
                     'tip'   => sprintf(__('Get your license key from the \'My Account → My Downloads\' page at %1$s™.', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME)),
 
                     'name'        => '[license_keys]['.$_App->Config->©brand['©slug'].']',
@@ -53,7 +53,7 @@ $rest_action_data['license_keys'] = (array) ($rest_action_data['license_keys'] ?
 
             <?php foreach ($apps_by_type['plugin'] as $_App) : ?>
                 <?= $Form->inputRow([
-                    'label' => esc_html($_App->Config->©brand['©name']),
+                    'label' => esc_html($_App->Config->©brand['§product_name']),
                     'tip'   => sprintf(__('Get your license key from the \'My Account → My Downloads\' page at %1$s™.', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME)),
 
                     'name'        => '[license_keys]['.$_App->Config->©brand['©slug'].']',

@@ -39,7 +39,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160713.39957'; //v//
+    const VERSION = '160713.54642'; //v//
 
     /**
      * ReST action API version.
@@ -76,6 +76,15 @@ class App extends CoreClasses\App
      * @type string Core container name.
      */
     const CORE_CONTAINER_NAME = 'WP Sharks';
+
+    /**
+     * Core container domain.
+     *
+     * @since 160713 Core container.
+     *
+     * @type string Core container domain.
+     */
+    const CORE_CONTAINER_DOMAIN = 'wpsharks.com';
 
     /**
      * Constructor.
@@ -125,6 +134,7 @@ class App extends CoreClasses\App
             '©short_slug' => '',
             '©short_var'  => '',
 
+            '§product_name' => '',
             '§product_slug' => '',
 
             '©text_domain' => '',
@@ -173,6 +183,7 @@ class App extends CoreClasses\App
                     '©short_slug' => 'wps-core',
                     '©short_var'  => 'wps_core',
 
+                    '§product_name' => 'WP Sharks Core',
                     '§product_slug' => 'wp-sharks-core',
 
                     '©text_domain' => 'wp-sharks-core',
@@ -234,6 +245,7 @@ class App extends CoreClasses\App
             $brand['©short_slug'] = $brand['©short_slug'] ?: (strlen($brand['©slug']) <= 10 ? $brand['©slug'] : 's'.substr(md5($brand['©slug']), 0, 9));
             $brand['©short_var']  = $brand['©short_var'] ?: $Parent->c::slugToVar($brand['©short_slug']);
 
+            $brand['§product_name'] = $brand['§product_name'] ?: $brand['©name'].($specs['§is_pro'] ? ' Pro' : '');
             $brand['§product_slug'] = $brand['§product_slug'] ?: $this->base_dir_basename;
 
             $brand['©text_domain'] = $brand['©text_domain'] ?: $brand['©slug'];

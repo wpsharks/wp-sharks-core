@@ -26,6 +26,7 @@ abstract class Facades
     use Traits\Facades\Conflicts;
     use Traits\Facades\CoreOnly\Apps;
     use Traits\Facades\CoreOnly\LicenseKeys;
+    use Traits\Facades\CoreUrls;
     use Traits\Facades\Database;
     use Traits\Facades\Date;
     use Traits\Facades\Dependencies;
