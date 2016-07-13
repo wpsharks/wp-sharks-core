@@ -1,4 +1,4 @@
-## $v
+## v160713.39957
 
 - Updating to latest websharks/core.
 - Adding App collection utilities needed by licensing system.
