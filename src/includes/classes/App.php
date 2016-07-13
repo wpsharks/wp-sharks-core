@@ -125,6 +125,8 @@ class App extends CoreClasses\App
             '©short_slug' => '',
             '©short_var'  => '',
 
+            '§product_slug' => '',
+
             '©text_domain' => '',
 
             '§domain'           => '',
@@ -171,10 +173,12 @@ class App extends CoreClasses\App
                     '©short_slug' => 'wps-core',
                     '©short_var'  => 'wps_core',
 
+                    '§product_slug' => 'wp-sharks-core',
+
                     '©text_domain' => 'wp-sharks-core',
 
                     '§domain'           => 'wpsharks.com',
-                    '§domain_path'      => '/product/core',
+                    '§domain_path'      => '/product/wp-sharks-core',
                     '§domain_short_var' => 'wps',
 
                     '§api_domain'           => 'api.wpsharks.com',
@@ -230,11 +234,13 @@ class App extends CoreClasses\App
             $brand['©short_slug'] = $brand['©short_slug'] ?: (strlen($brand['©slug']) <= 10 ? $brand['©slug'] : 's'.substr(md5($brand['©slug']), 0, 9));
             $brand['©short_var']  = $brand['©short_var'] ?: $Parent->c::slugToVar($brand['©short_slug']);
 
+            $brand['§product_slug'] = $brand['§product_slug'] ?: $this->base_dir_basename;
+
             $brand['©text_domain'] = $brand['©text_domain'] ?: $brand['©slug'];
 
             if (!$brand['§domain']) {
                 $brand['§domain']           = $Parent->Config->©brand['§domain'];
-                $brand['§domain_path']      = '/product/'.$brand['©slug'];
+                $brand['§domain_path']      = '/product/'.$brand['§product_slug'];
                 $brand['§domain_short_var'] = $Parent->Config->©brand['§domain_short_var'];
             }
             if ($this->Wp->debug) {
@@ -269,6 +275,9 @@ class App extends CoreClasses\App
                     //
                 } elseif (!$Parent->c::isSlug($brand['©text_domain'])) {
                     throw new Exception('Please fix; `©text_domain` has invalid chars.');
+                    //
+                } elseif (!$Parent->c::isSlug($brand['§product_slug'])) {
+                    throw new Exception('Please fix; `§product_slug` has invalid chars.');
                 }
             }
         }

@@ -52,7 +52,7 @@ class Updater extends Classes\SCore\Base\Core
     public function onUpgraderProcessComplete()
     {
         add_action('shutdown', function () {
-            // NOTE: Avoid relying on objects in the shutdown phase.
+            // NOTE: Avoid relying on utils in the shutdown phase.
             // PHP's shutdown phase is known to destruct objects randomly.
             if (function_exists('opcache_reset')) {
                 @opcache_reset();
@@ -88,7 +88,7 @@ class Updater extends Classes\SCore\Base\Core
             // This may not exist due to HTTP errors or other quirks.
         }
         $theme_url      = $this->s::brandUrl();
-        $theme_slug     = $this->App->Config->©brand['©slug'];
+        $theme_slug     = $this->App->Config->©brand['§product_slug'];
         $latest_version = $this->latestVersion(); // Latest available.
 
         if (version_compare($latest_version, $this->App::VERSION, '>')) {
@@ -132,7 +132,7 @@ class Updater extends Classes\SCore\Base\Core
             // This may not exist due to HTTP errors or other quirks.
         }
         $plugin_url      = $this->s::brandUrl();
-        $plugin_slug     = $this->App->Config->©brand['©slug'];
+        $plugin_slug     = $this->App->Config->©brand['§product_slug'];
         $plugin_basename = plugin_basename($this->App->Config->§specs['§file']);
         $latest_version  = $this->latestVersion(); // Latest available.
 
@@ -216,7 +216,7 @@ class Updater extends Classes\SCore\Base\Core
     protected function getLatestVersionUrl(): string
     {
         $base       = $this->App->Config->©debug['©edge'] ? 'software/bleeding-edge' : 'software/latest';
-        $uri        = '/'.$base.'/'.urlencode($this->App->Config->©brand['©slug']).'/version.txt';
+        $uri        = '/'.$base.'/'.urlencode($this->App->Config->©brand['§product_slug']).'/version.txt';
         return $url = $this->s::coreBrandCdnUrl($uri);
     }
 
@@ -240,7 +240,7 @@ class Updater extends Classes\SCore\Base\Core
                 $data_var => [
                     'license_key' => $license_key,
                     'site'        => site_url(),
-                    'slug'        => $this->App->Config->©brand['©slug'],
+                    'slug'        => $this->App->Config->©brand['§product_slug'],
                     'type'        => $this->App->Config->©debug['©edge'] ? 'bleeding-edge' : 'latest',
                 ],
         ];
@@ -258,19 +258,31 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function lastVersionCheck(array $data = null): array
     {
-        $default_data = [
-            'time'    => 0,
-            'version' => '',
+        $default_empty_data = [
+            'time'         => 0,
+            'version'      => '',
+            'product_slug' => '',
         ];
+        if (isset($data)) { // Set automatically.
+            $data['product_slug'] = $this->App->Config->©brand['§product_slug'];
+        }
         $data = $this->s::sysOption('updater_last_version_check', $data);
         $data = is_array($data) ? $data : []; // Force array.
 
-        $data = array_merge($default_data, $data);
-        $data = array_intersect_key($data, $default_data);
+        $data = array_merge($default_empty_data, $data);
+        $data = array_intersect_key($data, $default_empty_data);
 
-        $data['time']    = (int) $data['time'];
-        $data['version'] = (string) $data['version'];
+        $data['time']         = (int) $data['time'];
+        $data['version']      = (string) $data['version'];
+        $data['product_slug'] = (string) $data['product_slug'];
 
+        // NOTE: Must ensure product slug is a match.
+        // e.g., If they started w/ lite and upgraded to pro.
+
+        if (!$data['time'] || !$data['version'] || !$data['product_slug']
+            || $data['product_slug'] !== $this->App->Config->©brand['§product_slug']) {
+            $data = $default_empty_data; // Return all or none.
+        }
         return $data;
     }
 
@@ -285,19 +297,31 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function lastPackageCheck(array $data = null): array
     {
-        $default_data = [
-            'time'    => 0,
-            'package' => '',
+        $default_empty_data = [
+            'time'         => 0,
+            'package'      => '',
+            'product_slug' => '',
         ];
+        if (isset($data)) { // Set automatically.
+            $data['product_slug'] = $this->App->Config->©brand['§product_slug'];
+        }
         $data = $this->s::sysOption('updater_last_package_check', $data);
         $data = is_array($data) ? $data : []; // Force array.
 
-        $data = array_merge($default_data, $data);
-        $data = array_intersect_key($data, $default_data);
+        $data = array_merge($default_empty_data, $data);
+        $data = array_intersect_key($data, $default_empty_data);
 
-        $data['time']    = (int) $data['time'];
-        $data['package'] = (string) $data['package'];
+        $data['time']         = (int) $data['time'];
+        $data['package']      = (string) $data['package'];
+        $data['product_slug'] = (string) $data['product_slug'];
 
+        // NOTE: Must ensure product slug is a match.
+        // e.g., If they started w/ lite and upgraded to pro.
+
+        if (!$data['time'] || !$data['package'] || !$data['product_slug']
+            || $data['product_slug'] !== $this->App->Config->©brand['§product_slug']) {
+            $data = $default_empty_data; // Return all or none.
+        }
         return $data;
     }
 }

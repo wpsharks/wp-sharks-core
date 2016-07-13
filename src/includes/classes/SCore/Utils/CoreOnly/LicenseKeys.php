@@ -179,7 +179,7 @@ class LicenseKeys extends Classes\SCore\Base\Core
             $this->s::coreBrandApiUrlArg('data')   => [
                 'license_key' => $license_key,
                 'site'        => site_url(),
-                'slug'        => $App->Config->©brand['©slug'],
+                'slug'        => $App->Config->©brand['§product_slug'],
             ],
         ];
         $remote_response     = wp_remote_post($remote_post_url, ['body' => $remote_post_body]);
@@ -216,7 +216,7 @@ class LicenseKeys extends Classes\SCore\Base\Core
             $this->s::coreBrandApiUrlArg('data')   => [
                 'license_key' => $license_key,
                 'site'        => site_url(),
-                'slug'        => $App->Config->©brand['©slug'],
+                'slug'        => $App->Config->©brand['§product_slug'],
             ],
         ];
         $remote_response     = wp_remote_post($remote_post_url, ['body' => $remote_post_body]);
