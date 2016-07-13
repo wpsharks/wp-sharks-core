@@ -661,8 +661,15 @@ class App extends CoreClasses\App
             add_filter('admin_body_class', [$this->Utils->§MenuPage, 'onAdminBodyClass']);
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
         }
-        if ((!$this->Config->§specs['§is_network_wide'] || !$this->Wp->is_multisite || $this->Wp->is_main_site) && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
-            add_filter('site_transient_update_'.$this->Config->§specs['§type'].'s', [$this->Utils->§Updater, 'onGetSiteTransientUpdate'.$this->Config->§specs['§type'].'s']);
+        if ((!$this->Config->§specs['§is_network_wide'] || !$this->Wp->is_multisite || $this->Wp->is_main_site)
+                && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
+            if ($this->Wp->is_admin) {
+                add_filter('admin_init', [$this->Utils->§Updater, 'onAdminInit']);
+            }
+            add_filter(// Filter update responses.
+                'site_transient_update_'.$this->Config->§specs['§type'].'s',
+                [$this->Utils->§Updater, 'onGetSiteTransientUpdate'.$this->Config->§specs['§type'].'s']
+            );
         }
         if ($this->is_core) {
             add_action('upgrader_process_complete', [$this->Utils->§Updater, 'onUpgraderProcessComplete']);

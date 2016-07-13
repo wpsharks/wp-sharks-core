@@ -87,7 +87,7 @@ class Updater extends Classes\SCore\Base\Core
             $report->response = []; // Force an array value.
             // This may not exist due to HTTP errors or other quirks.
         }
-        $theme_url      = $this->s::brandUrl();
+        $theme_url      = $this->s::brandUrl('/changelog');
         $theme_slug     = $this->App->Config->©brand['§product_slug'];
         $latest_version = $this->latestVersion(); // Latest available.
 
@@ -131,7 +131,7 @@ class Updater extends Classes\SCore\Base\Core
             $report->response = []; // Force an array value.
             // This may not exist due to HTTP errors or other quirks.
         }
-        $plugin_url      = $this->s::brandUrl();
+        $plugin_url      = $this->s::brandUrl('/changelog');
         $plugin_slug     = $this->App->Config->©brand['§product_slug'];
         $plugin_basename = plugin_basename($this->App->Config->§specs['§file']);
         $latest_version  = $this->latestVersion(); // Latest available.
@@ -149,6 +149,31 @@ class Updater extends Classes\SCore\Base\Core
             } // ↑ If we can acquire latest package also.
         }
         return $report; // With possible update for this app.
+    }
+
+    /**
+     * On admin init.
+     *
+     * @since 160713 Update utils.
+     */
+    public function onAdminInit()
+    {
+        if ($this->App->Config->§specs['§in_wp']) {
+            return $report; // Not applicable.
+        } // i.e., Available inside WordPress already.
+        // i.e., The project is hosted by WordPress.org.
+
+        switch ($this->App->Config->§specs['§type']) {
+            case 'plugin': // Redirect to changelog for plugin.
+                if (($_REQUEST['plugin'] ?? '') !== $this->App->Config->©brand['§product_slug']) {
+                    return; // Not applicable.
+                } elseif (($_REQUEST['tab'] ?? '') !== 'plugin-information') {
+                    return; // Not applicable.
+                } elseif (!$this->s::isMenuPage('plugin-install.php')) {
+                    return; // Not applicable.
+                }
+                wp_redirect($this->s::brandUrl('/changelog')).exit();
+        }
     }
 
     /**
