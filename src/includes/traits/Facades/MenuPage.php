@@ -17,6 +17,14 @@ use function get_defined_vars as vars;
 trait MenuPage
 {
     /**
+     * @since 160712 Menu page utils.
+     */
+    public static function menuPageUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->url(...$args);
+    }
+
+    /**
      * @since 160524 Menu page utils.
      */
     public static function currentMenuPage(...$args)

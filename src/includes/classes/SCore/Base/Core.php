@@ -21,5 +21,26 @@ use function get_defined_vars as vars;
  */
 abstract class Core extends CoreClasses\Core\Base\Core
 {
-    // Placeholder in case we need this in the future.
+    /**
+     * WP common.
+     *
+     * @since 160524
+     *
+     * @type WpCommon
+     */
+    protected $Wp;
+
+    /**
+     * Class constructor.
+     *
+     * @since 160223 Initial release.
+     *
+     * @param Classes\App|null $App Instance of App.
+     */
+    public function __construct(Classes\App $App = null)
+    {
+        parent::__construct($App);
+
+        $this->Wp = &$this->App->Wp;
+    }
 }

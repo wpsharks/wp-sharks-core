@@ -128,10 +128,6 @@ class UsersQuery extends Classes\SCore\Base\Core
      */
     public function selectOptions(array $args = []): string
     {
-        // In an admin area?
-
-        $is_admin = is_admin();
-
         // Establish args.
 
         $default_args = [
@@ -209,7 +205,7 @@ class UsersQuery extends Classes\SCore\Base\Core
                     // The formatter must always return an `<option></option>` tag.
 
             // Else format the `<option>` tag using a default behavior.
-            } elseif ($is_admin) { // Slightly different format in admin area.
+            } elseif ($this->Wp->is_admin) { // Slightly different format in admin area.
                 $options .= '<option value="'.esc_attr($_user->ID).'"'.$_user_id_selected_attr.'>'.
                                 esc_html($_user_label.' #'.$_user->ID.': '.$_user->user_login).
                             '</option>';

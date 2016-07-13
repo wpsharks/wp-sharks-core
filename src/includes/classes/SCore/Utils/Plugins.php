@@ -75,7 +75,7 @@ class Plugins extends Classes\SCore\Base\Core
         if (isset(static::$cache[__FUNCTION__][$cache_key])) {
             return static::$cache[__FUNCTION__][$cache_key];
         }
-        if (!is_multisite()) { // Not applicable.
+        if (!$this->Wp->is_multisite) { // Not applicable.
             return static::$cache[__FUNCTION__][$cache_key] = [];
         }
         $network_active = get_network_option(null, 'active_sitewide_plugins');
@@ -136,7 +136,7 @@ class Plugins extends Classes\SCore\Base\Core
         // Contains the `get_plugins()` function.
         require_once ABSPATH.'wp-admin/includes/plugin.php';
 
-        if (is_admin()) { // Typical use case.
+        if ($this->Wp->is_admin) { // Typical use case.
             $installed_plugins = apply_filters('all_plugins', get_plugins());
         } else { // Abnormal use case; no filter here.
             $installed_plugins = get_plugins(); // See: <http://jas.xyz/1NN5zhk>

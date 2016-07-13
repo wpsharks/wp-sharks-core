@@ -1,3 +1,16 @@
+## $v
+
+- Updating to latest websharks/core.
+- Adding App collection utilities needed by licensing system.
+- Adding `s::addApp()`
+- Adding `s::getApps()`
+- Adding `s::getAppsByType()`
+- Adding `s::getAppsBySlug()`
+- Forcing `Classes\App::$Parent` to `null` when `$is_core`.
+- Making Dicer aware of `Classes\SCore\MenuPageForm{}`.
+- Refactoring to help optimize apps based on core.
+- New utilities related to menu pages, styles, URLs.
+
 ## v160710.23515
 
 - Adding `s::addMenuPage()`

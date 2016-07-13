@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
+namespace WebSharks\WpSharks\Core\Classes\SCore\Utils\CoreOnly;
 
 use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;
@@ -15,16 +15,32 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Dashboard menu page utils.
+ * Core menu page utils.
  *
- * @since 160524 Dashboard menu page utils.
+ * @since 160524 Core menu page utils.
  */
-class DbMenuPage extends Classes\SCore\Base\Core
+class MenuPages extends Classes\SCore\Base\Core
 {
+    /**
+     * Class constructor.
+     *
+     * @since 160710 License key utils.
+     *
+     * @param Classes\App $App Instance.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        if (!$this->App->is_core) {
+            throw $this->c::issue('Core only.');
+        }
+    }
+
     /**
      * On admin menu.
      *
-     * @since 160708 Dashboard menu page utils.
+     * @since 160524 Core menu page utils.
      *
      * @param array $args Configuration args.
      */
@@ -38,8 +54,8 @@ class DbMenuPage extends Classes\SCore\Base\Core
             'template_file' => 's-core/menu-pages/dashboard/default.php',
 
             'tabs' => [
-                'default'      => $this->App::CORE_CONTAINER_NAME,
-                'license-keys' => __('License Keys', 'wp-sharks-core'),
+                'default' => __('License Keys', 'wp-sharks-core'),
+                'about'   => sprintf(__('About %1$s', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME)).'  <i class="sharkicon sharkicon-wp-sharks-fin"></i>',
             ],
         ]);
     }

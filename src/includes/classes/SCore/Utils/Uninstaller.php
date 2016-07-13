@@ -62,7 +62,7 @@ class Uninstaller extends Classes\SCore\Base\Core
         }
         $this->counter = 0; // Initialize counter.
 
-        if (is_multisite()) { // For each site in the network.
+        if ($this->Wp->is_multisite) { // For each site in the network.
             foreach (($sites = wp_get_sites()) ? $sites : [] as $_site) {
                 switch_to_blog($_site['blog_id']);
                 $this->uninstall();
@@ -99,7 +99,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     {
         $WpDb = $this->s::wpDb();
 
-        if ($this->counter <= 0 && is_multisite()) {
+        if ($this->counter <= 0 && $this->Wp->is_multisite) {
             $sql = /* Delete network options. */ '
                     DELETE
                         FROM `'.esc_sql($WpDb->sitemeta).'`

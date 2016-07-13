@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\Core;
+namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;
@@ -14,6 +14,13 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-extract($¤vars); // Template variables.
-?>
-<p><?= sprintf(__('<strong>%1$s</strong> updated successfully. You\'re now running v%2$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html($this->App::VERSION)) ?></p>
+trait Errors
+{
+    /**
+     * @since 160710 Error utils.
+     */
+    public static function wpErrorConvert(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Error->fromWp(...$args);
+    }
+}

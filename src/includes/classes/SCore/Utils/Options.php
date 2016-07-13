@@ -64,8 +64,7 @@ class Options extends Classes\SCore\Base\Core
         $markup = sprintf($markup, esc_html($this->App->Config->©brand['©name']));
         $this->s::enqueueUserNotice($markup, ['type' => 'success']);
 
-        wp_redirect($url);
-        exit; // Stop on redirection.
+        wp_redirect($url).exit(); // Stop on redirection.
     }
 
     /**
@@ -90,7 +89,7 @@ class Options extends Classes\SCore\Base\Core
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!
         }
-        $this->update((array) $this->s::restActionData());
+        $this->update((array) $this->s::restActionData(true));
 
         exit(json_encode(['success' => true]));
     }
@@ -132,8 +131,7 @@ class Options extends Classes\SCore\Base\Core
         $url = $this->c::currentUrl();
         $url = $this->s::removeUrlRestAction($url);
 
-        wp_redirect($url);
-        exit; // Stop on redirection.
+        wp_redirect($url).exit(); // Stop on redirection.
     }
 
     /**

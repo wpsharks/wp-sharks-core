@@ -22,29 +22,6 @@ use function get_defined_vars as vars;
 class MenuPage extends Classes\SCore\Base\Core
 {
     /**
-     * In admin area?
-     *
-     * @since 160524 Initial release.
-     *
-     * @type bool In admin area?
-     */
-    protected $is_admin;
-
-    /**
-     * Class constructor.
-     *
-     * @since 160524 Initial release.
-     *
-     * @param Classes\App $App Instance.
-     */
-    public function __construct(Classes\App $App)
-    {
-        parent::__construct($App);
-
-        $this->is_admin = is_admin();
-    }
-
-    /**
      * Current menu page.
      *
      * @since 160524 Menu page utils.
@@ -53,7 +30,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function current(): string
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return ''; // Not applicable.
         }
         return !empty($_GET['page'])
@@ -70,7 +47,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function now(): string
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return ''; // Not applicable.
         }
         return (string) ($GLOBALS['pagenow'] ?? '');
@@ -92,7 +69,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function is(string $page = ''): bool
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return false; // Not applicable.
         } elseif (!($current = $this->current())) {
             return false; // Nope.
@@ -124,7 +101,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function isOwn(string $page = ''): bool
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return false; // Not applicable.
         }
         $page = $page ?: '{-**,}'; // Any sub-page (or base).
@@ -141,7 +118,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function currentTab(): string
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return ''; // Not applicable.
         }
         return !empty($_GET['tab'])
@@ -165,7 +142,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function isTab(string $tab = ''): bool
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return false; // Not applicable.
         } elseif (!($current = $this->current())) {
             return false; // Nope.
@@ -199,7 +176,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function isOwnTab(string $tab = ''): bool
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return false; // Not applicable.
         }
         $tab = $tab ?: '{-**,}'; // Any sub-tab (or base).
@@ -216,7 +193,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function currentPostType(): string
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return ''; // Not applicable.
         }
         return !empty($_GET['post_type'])
@@ -233,7 +210,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function postTypeNow(): string
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return ''; // Not applicable.
         }
         return (string) ($GLOBALS['typenow'] ?? '');
@@ -255,7 +232,7 @@ class MenuPage extends Classes\SCore\Base\Core
      */
     public function isForPostType(string $post_type = ''): bool
     {
-        if (!$this->is_admin) {
+        if (!$this->Wp->is_admin) {
             return false; // Not applicable.
         } elseif (!($current = $this->current())) {
             return false; // Nope.
@@ -349,6 +326,7 @@ class MenuPage extends Classes\SCore\Base\Core
             $cfg['slug'] = $this->App->Config->©brand['©slug'];
         }
         $cfg['class'] .= ($cfg['class'] ? ' ' : '').'wrap';
+        $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
         $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
         $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
         $cfg['class'] .= $cfg['slug'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['slug'].'-menu-page-wrapper' : '';
@@ -427,6 +405,7 @@ class MenuPage extends Classes\SCore\Base\Core
             $cfg['slug'] = $this->App->Config->©brand['©slug'];
         }
         $cfg['class'] .= ($cfg['class'] ? ' ' : '').'wrap';
+        $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
         $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
         $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
         $cfg['class'] .= $cfg['slug'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['slug'].'-menu-page-wrapper' : '';
@@ -518,5 +497,77 @@ class MenuPage extends Classes\SCore\Base\Core
             throw $this->c::issue('Missing `default` tab.');
         }
         return $markup .= '</nav>';
+    }
+
+    /**
+     * Menu page URL.
+     *
+     * @since 160712 Menu page utils.
+     *
+     * @param string       $page_path  Page (or path).
+     * @param array|string $query_args Query args (or tab).
+     * @param string       $context    `admin`, `network`, `self`.
+     *
+     * @return string Current menu page.
+     */
+    public function url(string $page_path = '', $query_args = [], string $context = ''): string
+    {
+        switch ($context) {
+            case 'admin':
+                $admin_url = 'admin_url';
+                break;
+
+            case 'network':
+                $admin_url = 'network_admin_url';
+                break;
+
+            case 'self':
+            default: // Default case handler.
+                $admin_url = 'self_admin_url';
+                break;
+        }
+        if (!is_array($query_args)) {
+            if ($query_args && is_string($query_args)) {
+                $query_args = ['tab' => $query_args];
+            } else {
+                $query_args = []; // Force array.
+            }
+        }
+        $_tmp_query_args = $query_args;
+        $query_args      = []; // Reinitialize.
+
+        $brand_slug       = $this->App->Config->©brand['©slug'];
+        $brand_short_slug = $this->App->Config->©brand['©short_slug'];
+
+        $brand_var       = $this->App->Config->©brand['©var'];
+        $brand_short_var = $this->App->Config->©brand['©short_var'];
+
+        foreach ($_tmp_query_args as $_key => $_value) {
+            if ($_key && is_string($_key)) {
+                $_key = str_replace('~', $brand_var, $_key);
+                $_key = str_replace('%', $brand_short_var, $_key);
+            }
+            if ($_value && is_string($_value)) {
+                $_value = str_replace('~', $brand_slug, $_value);
+                $_value = str_replace('%', $brand_short_slug, $_value);
+            }
+            $query_args[$_key] = $_value; // New `key` => `value`.
+        } // unset($_tmp_query_args, $_key, $_value); // Housekeeping.
+
+        $page_path = $page_path ?: $brand_slug;
+        $page_path = str_replace('~', $brand_slug, $page_path);
+        $page_path = str_replace('%', $brand_short_slug, $page_path);
+
+        if (!$page_path || mb_strpos($page_path, '/') !== false || mb_substr($page_path, -4) === '.php') {
+            $path       = '/'.$this->c::mbLTrim($page_path, '/');
+            $page       = ''; // No `page`; treating this as a `/path`.
+            return $url = $this->c::addUrlQueryArgs($query_args, $admin_url($path));
+            //
+        } else { // Treat it as a `?page` instead of a path.
+            $page       = $page_path;
+            $path       = ''; // No `path`; treating as a `?page`.
+            $query_args = array_merge(['page' => $page], $query_args);
+            return $url = $this->c::addUrlQueryArgs($query_args, $admin_url('/'));
+        }
     }
 }

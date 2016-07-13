@@ -42,13 +42,10 @@ class Notices extends Classes\SCore\Base\Core
         parent::__construct($App);
 
         $this->defaults = [
-            'id' => '',
+            'id'    => '',
+            'type'  => 'info',
+            'style' => '',
 
-            'type'   => 'info',
-            'style'  => '',
-            'markup' => '',
-
-            'if_expr'          => '',
             'for_page'         => '',
             'not_for_page'     => '',
             'delay_until_time' => 0,
@@ -58,11 +55,14 @@ class Notices extends Classes\SCore\Base\Core
             // can change this behavior so care should be taken.
             'requires_cap' => $this->App->Config->§caps['§manage'],
 
+            'is_applicable'  => '',
             'is_persistent'  => false,
             'is_dismissable' => false,
 
             'is_transient' => false,
             'push_to_top'  => false,
+
+            'markup' => '',
         ];
     }
 
@@ -80,20 +80,22 @@ class Notices extends Classes\SCore\Base\Core
         $notice = array_merge($this->defaults, $notice);
         $notice = array_intersect_key($notice, $this->defaults);
 
-        $notice['id'] = (string) $notice['id'];
+        $notice['id']    = (string) $notice['id'];
+        $notice['type']  = (string) $notice['type'];
+        $notice['style'] = (string) $notice['style'];
 
-        $notice['type']   = (string) $notice['type'];
-        $notice['style']  = (string) $notice['style'];
-        $notice['markup'] = $this->c::mbTrim((string) $notice['markup']);
-
-        $notice['if_expr']          = $this->c::mbTrim((string) $notice['if_expr']);
-        $notice['for_page']         = $this->c::mbTrim((string) $notice['for_page']);
-        $notice['not_for_page']     = $this->c::mbTrim((string) $notice['not_for_page']);
+        $notice['for_page']         = (string) $notice['for_page'];
+        $notice['not_for_page']     = (string) $notice['not_for_page'];
         $notice['delay_until_time'] = max(0, (int) $notice['delay_until_time']);
 
-        $notice['requires_cap'] = $this->c::mbTrim((string) $notice['requires_cap']);
+        $notice['requires_cap'] = (string) $notice['requires_cap'];
         $notice['for_user_id']  = max(0, (int) $notice['for_user_id']);
 
+        if ($notice['is_applicable'] instanceof \Closure) {
+            $notice['is_applicable'] = $this->c::serializeClosure($notice['is_applicable']);
+        } else {
+            $notice['is_applicable'] = (string) $notice['is_applicable'];
+        }
         $notice['is_persistent']  = (bool) $notice['is_persistent'];
         $notice['is_dismissable'] = (bool) $notice['is_dismissable'];
 
@@ -105,6 +107,11 @@ class Notices extends Classes\SCore\Base\Core
         }
         if (!in_array($notice['type'], ['info', 'success', 'warning', 'error'], true)) {
             $notice['type'] = 'info'; // Use default type.
+        }
+        if ($notice['markup'] instanceof \Closure) {
+            $notice['markup'] = $this->c::serializeClosure($notice['markup']);
+        } else {
+            $notice['markup'] = (string) $notice['markup'];
         }
         ksort($notice); // Sort by key for hashing.
 
@@ -200,10 +207,10 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160524 First documented version.
      *
-     * @param string $markup HTML markup containing the notice itself.
-     * @param array  $args   Additional args; i.e., presentation/style.
+     * @param string|\Closure $markup HTML (or closure) containing the notice.
+     * @param array           $args   Additional args; i.e., presentation/style.
      */
-    public function enqueue(string $markup, array $args = [])
+    public function enqueue($markup, array $args = [])
     {
         $notice = $args; // As notice.
 
@@ -232,8 +239,8 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160524 First documented version.
      *
-     * @param string $markup HTML markup containing the notice itself.
-     * @param array  $args   Additional args; i.e., presentation/style.
+     * @param string|\Closure $markup HTML (or closure) containing the notice.
+     * @param array           $args   Additional args; i.e., presentation/style.
      */
     public function userEnqueue($markup, array $args = [])
     {
@@ -295,8 +302,7 @@ class Notices extends Classes\SCore\Base\Core
         $url = $this->c::currentUrl();
         $url = $this->s::removeUrlRestAction($url);
 
-        wp_redirect($url);
-        exit; // Stop on redirection.
+        wp_redirect($url).exit(); // Stop on redirection.
     }
 
     /**
@@ -311,27 +317,40 @@ class Notices extends Classes\SCore\Base\Core
             return; // Nothing to do.
         }
         foreach ($notices as $_key => $_notice) {
+            # Catch invalid/corrupted notices.
+
             if (!is_string($_key) || !is_array($_notice)) {
                 unset($notices[$_key]);
                 continue; // Ignore.
             }
+
+            # Normalize the notice.
+
             $_notice = $this->normalize($_notice);
 
+            # Initialize a few variables.
+
+            $_markup           = '';
             $_current_user_can = false;
+            $_is_applicable    = false;
             $_class            = 'notice';
             $_style            = $_notice['style'];
             $_dismiss          = ''; // Default; n/a.
 
-            if (!$_notice['markup']) {
+            # Check for empty markup.
+
+            if (!($_markup = $_notice['markup'])) {
                 unset($notices[$_key]);
                 continue; // Ignore.
             }
+            # If transient, wipe it away after a single pass.
+
             if ($_notice['is_transient']) {
                 unset($notices[$_key]);
             }
+            # Check conditions; i.e., is notice applicable?
+
             if (!$this->currentUserCan($_notice)) {
-                continue; // Do not display.
-            } elseif ($_notice['if_expr'] && !$this->c::phpEval($_notice['if_expr'])) {
                 continue; // Do not display.
             } elseif ($_notice['for_page'] && !$this->s::isMenuPage($_notice['for_page'])) {
                 continue; // Do not display.
@@ -340,6 +359,61 @@ class Notices extends Classes\SCore\Base\Core
             } elseif ($_notice['delay_until_time'] && $_notice['delay_until_time'] > time()) {
                 continue; // Do not display.
             }
+            # If `is_applicable` is a closure, check it's return value also.
+
+            if ($this->c::isSerialized($_notice['is_applicable'])) {
+                try { // Maybe catch exceptions here.
+
+                    $_is_applicable = $this->c::unserializeClosure($_notice['is_applicable']);
+                    $_is_applicable = $_is_applicable($this->App); // Should return (bool) or `null`.
+                    $_is_applicable = $_is_applicable === null ? $_is_applicable : (bool) $_is_applicable;
+
+                    // NOTE: A special return value of `null` indicates the notice
+                    // is no longer applicable (at all) and should be dequeued entirely.
+
+                    if ($_is_applicable === null) {
+                        unset($notices[$_key]);
+                        continue; // Ignore.
+                    } elseif (!$_is_applicable) {
+                        continue; // Do not display.
+                    }
+                } catch (\Throwable $Throwable) {
+                    unset($notices[$_key]); // Avoid repeats.
+
+                    if ($this->App->Config->©debug['©enable']) {
+                        throw $Throwable;
+                    }
+                    continue; // Ignore.
+                }
+            }
+            # If `markup` is a closure, call upon the closure now.
+
+            if ($this->c::isSerialized($_notice['markup'])) {
+                try { // Maybe catch exceptions here.
+
+                    $_markup = $this->c::unserializeClosure($_notice['markup']);
+                    $_markup = (string) $_markup($this->App); // Should return a string.
+
+                    // NOTE: A special return value (empty) indicates the notice
+                    // is no longer applicable (at all) and should be dequeued entirely.
+
+                    if (!$_markup) {
+                        unset($notices[$_key]);
+                        continue; // Ignore.
+                    }
+                } catch (\Throwable $Throwable) {
+                    unset($notices[$_key]); // Avoid repeats.
+
+                    if ($this->App->Config->©debug['©enable']) {
+                        throw $Throwable;
+                    }
+                    continue; // Ignore.
+                }
+            }
+            # Setup notice classes for CSS in WP core.
+
+            $_class .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
+
             switch ($_notice['type']) {
                 case 'info':
                     $_class .= ' notice-info';
@@ -360,6 +434,8 @@ class Notices extends Classes\SCore\Base\Core
                 default: // Default (info).
                     $_class .= ' notice-info';
             }
+            // Create dismiss icon if applicable.
+
             if ($_notice['is_persistent'] && $_notice['is_dismissable']) {
                 // $_class .= ' is-dismissible';
                 // We use a different approach for dismissals.
@@ -369,20 +445,23 @@ class Notices extends Classes\SCore\Base\Core
                                 '<span class="screen-reader-text">'.__('Dismiss this notice.', 'wp-sharks-core').'</span>'.
                             '</a>';
             }
-            if (!preg_match('/^\<(?:p|div|h[1-6])[\s>]/ui', $_notice['markup'])) {
-                $_notice['markup'] = '<p>'.$_notice['markup'].'</p>';
+            # Make sure markup is wrapped in a block-level tag so margins will exist.
+
+            if (!preg_match('/^\<(?:p|div|h[1-6])[\s>]/ui', $_markup)) {
+                $_markup = '<p>'.$_markup.'</p>'; // Add `<p>` tag.
             }
-            $_class = $this->c::mbTrim($_class);
-            $_style = $this->c::mbTrim($_style);
+            # Display notice `<div>` with the markup and a possible dismiss icon.
 
             echo '<div class="'.esc_attr($_class).'" style="'.esc_attr($_style).'">'.
-                    $_notice['markup'].$_dismiss.
+                    $_markup.$_dismiss.// Possible dismiss icon.
                  '</div>';
+
+            # Notice seen! If not persistent, remove it from the queue now.
 
             if (!$_notice['is_persistent']) {
                 unset($notices[$_key]);
             }
-        } // unset($_key, $_notice, $_current_user_can, $_class, $_style, $_dismiss);
+        } // unset($_key, $_notice, $_markup, $_current_user_can, $_is_applicable, $_class, $_style, $_dismiss);
 
         $this->update($notices);
     }

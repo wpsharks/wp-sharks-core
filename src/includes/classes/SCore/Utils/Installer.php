@@ -66,7 +66,7 @@ class Installer extends Classes\SCore\Base\Core
     public function maybeInstall()
     {
         if (!$this->history['last_version']
-           || version_compare($this->history['last_version'], $this->c::version(), '<')) {
+           || version_compare($this->history['last_version'], $this->App::VERSION, '<')) {
             $this->install(); // Install (or reinstall).
         }
     }
@@ -140,26 +140,16 @@ class Installer extends Classes\SCore\Base\Core
     protected function maybeEnqueueNotices()
     {
         if (($is_install = !$this->history['first_time'])) {
-            $template_file = 's-core/notices/on-install.php';
-        } else {
-            $template_file = 's-core/notices/on-reinstall.php';
+            $notice_template_file = 's-core/notices/on-install.php';
+        } else { // Reinstalling (notify about update).
+            $notice_template_file = 's-core/notices/on-reinstall.php';
         }
-        $Template      = $this->c::getTemplate($template_file);
-        $notice_markup = $Template->parse(['history' => $this->history]);
-        $this->s::enqueueNotice($notice_markup, [
-            'type'         => 'success',
-            'is_transient' => $is_install,
-        ]);
-        if ($this->App->Config->§specs['§is_pro'] && !$this->s::getOption('§license_key')) {
-            $license_key_Template      = $this->c::getTemplate('s-core/notices/license-key.php');
-            $license_key_notice_markup = $license_key_Template->parse();
-            $this->s::enqueueNotice($license_key_notice_markup, [
-                'id'               => '§license-key',
-                'type'             => 'info',
-                'is_persistent'    => true,
-                'is_dismissable'   => false,
-                'delay_until_time' => $is_install ? time() + 5 : 0,
-            ]);
+        $notice_Template = $this->c::getTemplate($notice_template_file);
+        $notice_markup   = $notice_Template->parse(['history' => $this->history]);
+        $this->s::enqueueNotice($notice_markup, ['type' => 'success', 'is_transient' => $is_install]);
+
+        if ($this->App->Parent && $this->App->Parent->is_core) {
+            $this->App->Parent->s::maybeRequestLicenseKeyViaNotice($this->App->Config->©brand['©slug']);
         }
     }
 
@@ -171,7 +161,7 @@ class Installer extends Classes\SCore\Base\Core
     protected function updateHistory()
     {
         $time    = time();
-        $version = $this->c::version();
+        $version = $this->App::VERSION;
 
         if (!$this->history['first_time']) {
             $this->history['first_time'] = $time;

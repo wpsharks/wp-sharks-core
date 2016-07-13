@@ -24,9 +24,12 @@ abstract class Facades
     use Traits\Facades\BrandUrls;
     use Traits\Facades\CapQueries;
     use Traits\Facades\Conflicts;
+    use Traits\Facades\CoreOnly\Apps;
+    use Traits\Facades\CoreOnly\LicenseKeys;
     use Traits\Facades\Database;
     use Traits\Facades\Date;
     use Traits\Facades\Dependencies;
+    use Traits\Facades\Errors;
     use Traits\Facades\Fatalities;
     use Traits\Facades\Hooks;
     use Traits\Facades\Installer;

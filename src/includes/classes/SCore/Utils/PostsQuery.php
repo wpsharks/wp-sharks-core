@@ -273,10 +273,6 @@ class PostsQuery extends Classes\SCore\Base\Core
      */
     public function selectOptions(array $args = []): string
     {
-        // In an admin area?
-
-        $is_admin = is_admin();
-
         // Establish args.
 
         $default_args = [
@@ -298,12 +294,12 @@ class PostsQuery extends Classes\SCore\Base\Core
             'include_post_ids' => [],
             'exclude_post_ids' => [],
 
-            'include_post_types' => !$is_admin
+            'include_post_types' => !$this->Wp->is_admin
                 ? get_post_types(['public' => true, 'exclude_from_search' => false])
                 : get_post_types(['exclude_from_search' => false]),
             'exclude_post_types' => [],
 
-            'include_post_statuses' => !$is_admin
+            'include_post_statuses' => !$this->Wp->is_admin
                 ? get_post_stati(['public' => true, 'exclude_from_search' => false])
                 : get_post_stati(['exclude_from_search' => false]),
             'exclude_post_statuses' => [],
@@ -311,7 +307,7 @@ class PostsQuery extends Classes\SCore\Base\Core
             'exclude_drafts'             => true,
             'exclude_revisions'          => true,
             'exclude_trash'              => true,
-            'exclude_password_protected' => !$is_admin,
+            'exclude_password_protected' => !$this->Wp->is_admin,
             'exclude_nav_menu_items'     => true,
 
             'no_cache' => false,
@@ -375,7 +371,6 @@ class PostsQuery extends Classes\SCore\Base\Core
             int $parent_depth = 0
         ) use (
             &$walk,
-            &$is_admin,
             &$args,
             &$posts,
             &$options,
@@ -415,7 +410,7 @@ class PostsQuery extends Classes\SCore\Base\Core
                         // The formatter must always return an `<option></option>` tag.
 
                 // Else format the `<option>` tag using a default behavior.
-                } elseif ($is_admin) { // Slightly different format in admin area.
+                } elseif ($this->Wp->is_admin) { // Slightly different format in admin area.
                     $options .= '<option value="'.esc_attr($_post->ID).'"'.$_post_id_selected_attr.'>'.
                                     ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].' ' : '').
                                     esc_html($_post_type_label.' #'.$_post->ID.': '.$_post_title).

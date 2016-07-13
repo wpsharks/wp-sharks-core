@@ -68,10 +68,10 @@ class Database extends Classes\SCore\Base\Core
     public function createTables()
     {
         $table_prefix = $this->prefix(); // For the app.
-        $tables_dir   = $this->App->Config->§database['§tables_dir'];
+        $tables_dir   = $this->App->Config->©fs_paths['§mysql']['§tables_dir'];
 
-        $indexes_dir  = $this->App->Config->§database['§indexes_dir'];
-        $triggers_dir = $this->App->Config->§database['§triggers_dir'];
+        $indexes_dir  = $this->App->Config->©fs_paths['§mysql']['§indexes_dir'];
+        $triggers_dir = $this->App->Config->©fs_paths['§mysql']['§triggers_dir'];
 
         if (!$tables_dir || !is_dir($tables_dir)) {
             return; // Not possible; no tables.
@@ -126,7 +126,7 @@ class Database extends Classes\SCore\Base\Core
     public function dropTables()
     {
         $table_prefix = $this->prefix(); // For the app.
-        $tables_dir   = $this->App->Config->§database['§tables_dir'];
+        $tables_dir   = $this->App->Config->©fs_paths['§mysql']['§tables_dir'];
 
         if (!$tables_dir || !is_dir($tables_dir)) {
             return; // Not possible; no tables.

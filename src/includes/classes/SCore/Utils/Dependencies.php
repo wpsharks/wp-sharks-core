@@ -114,7 +114,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
             && !$this->App->Config->§dependencies['§themes']
             && !$this->App->Config->§dependencies['§others']) {
             return; // Nothing to do; we can stop here.
-        } elseif (($is_front_or_ajax = !is_admin() || $this->c::isAjax())
+        } elseif (($is_front_or_ajax = !$this->Wp->is_admin || $this->c::isAjax())
                 && $this->lastOkTime() > $this->outdated_check_time) {
             return; // Had a successfull check recently.
         }
@@ -181,7 +181,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      */
     protected function maybeNotify()
     {
-        if (!is_admin()) {
+        if (!$this->Wp->is_admin) {
             return; // Not applicable.
         } elseif (!$this->unsatisfied()) {
             return; // No conflicts.
@@ -249,11 +249,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
         $nonce_action_prefix = 'install'; // Same for both.
 
         $args = [
-            'action'     => 'install-'.$type,
-            'action_via' => $this->App->Config->©brand['©slug'],
-            $identifier  => $qualifier, // Dependency.
+            'action'        => 'install-'.$type,
+            '___action_via' => $this->App->Config->©brand['©slug'],
+            $identifier     => $qualifier, // Dependency.
         ];
-        $admin_url = is_multisite() ? 'network_admin_url' : 'self_admin_url';
+        $admin_url = $this->Wp->is_multisite ? 'network_admin_url' : 'self_admin_url';
 
         $url = $admin_url('/update.php');
         $url = $this->c::addUrlQueryArgs($args, $url);
@@ -283,9 +283,9 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
         } // Possible empty string on failure. Please check return value.
 
         $args = [
-            'action'     => 'activate',
-            'action_via' => $this->App->Config->©brand['©slug'],
-            $identifier  => $qualifier, // Dependency.
+            'action'        => 'activate',
+            '___action_via' => $this->App->Config->©brand['©slug'],
+            $identifier     => $qualifier, // Dependency.
         ];
         // Activations always use `self_admin_url()`.
 
@@ -317,11 +317,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
         } // Possible empty string on failure. Please check return value.
 
         $args = [
-            'action'     => 'upgrade-'.$type,
-            'action_via' => $this->App->Config->©brand['©slug'],
-            $identifier  => $qualifier, // Dependency.
+            'action'        => 'upgrade-'.$type,
+            '___action_via' => $this->App->Config->©brand['©slug'],
+            $identifier     => $qualifier, // Dependency.
         ];
-        $admin_url = is_multisite() ? 'network_admin_url' : 'self_admin_url';
+        $admin_url = $this->Wp->is_multisite ? 'network_admin_url' : 'self_admin_url';
 
         $url = $admin_url('/update.php');
         $url = $this->c::addUrlQueryArgs($args, $url);
@@ -377,7 +377,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      */
     protected function maybeEnqueueInstallationNotice(array $args)
     {
-        if (!is_admin()) {
+        if (!$this->Wp->is_admin) {
             return; // Not applicable.
         }
         $default_args = [
@@ -429,12 +429,14 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
+            global $pagenow; // Needed below.
+
             if (!current_user_can('install_'.$args['type'].'s')) {
                 return; // Do not show.
-            }
-            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
-                && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
-                return; // Not during a plugin install/activate/update action.
+            } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                return; // Not during core update.
+            } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                return; // Not during a plugin install/activate/update.
             }
             echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
@@ -456,7 +458,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      */
     protected function maybeEnqueueActivationNotice(array $args)
     {
-        if (!is_admin()) {
+        if (!$this->Wp->is_admin) {
             return; // Not applicable.
         }
         $default_args = [
@@ -499,12 +501,14 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
         $markup .= '</p>';
 
         add_action('all_admin_notices', function () use ($args, $markup) {
+            global $pagenow; // Needed below.
+
             if (!current_user_can(($args['type'] === 'theme' ? 'switch' : 'activate').'_'.$args['type'].'s')) {
                 return; // Do not show.
-            }
-            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
-                && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
-                return; // Not during a plugin install/activate/update action.
+            } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                return; // Not during core update.
+            } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                return; // Not during a plugin install/activate/update.
             }
             echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
@@ -526,7 +530,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      */
     protected function maybeEnqueueUpgradeNotice(array $args)
     {
-        if (!is_admin()) {
+        if (!$this->Wp->is_admin) {
             return; // Not applicable.
         }
         $default_args = [
@@ -584,12 +588,14 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
+            global $pagenow; // Needed below.
+
             if (!current_user_can('update_'.$args['type'].'s')) {
                 return; // Do not show.
-            }
-            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
-                && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
-                return; // Not during a plugin install/activate/update action.
+            } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                return; // Not during core update.
+            } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                return; // Not during a plugin install/activate/update.
             }
             echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
@@ -611,7 +617,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      */
     protected function maybeEnqueueDowngradeNotice(array $args)
     {
-        if (!is_admin()) {
+        if (!$this->Wp->is_admin) {
             return; // Not applicable.
         }
         $default_args = [
@@ -669,12 +675,14 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
             $markup .= '</p>';
         }
         add_action('all_admin_notices', function () use ($args, $markup) {
+            global $pagenow; // Needed below.
+
             if (!current_user_can('update_'.$args['type'].'s')) {
                 return; // Do not show.
-            }
-            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
-                && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
-                return; // Not during a plugin install/activate/update action.
+            } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                return; // Not during core update.
+            } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                return; // Not during a plugin install/activate/update.
             }
             echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });
@@ -696,7 +704,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      */
     protected function maybeEnqueueOtherNotice(array $args)
     {
-        if (!is_admin()) {
+        if (!$this->Wp->is_admin) {
             return; // Not applicable.
         }
         $default_args = [
@@ -733,12 +741,14 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
         $markup .= '</p>';
 
         add_action('all_admin_notices', function () use ($args, $markup) {
+            global $pagenow; // Needed below.
+
             if (!current_user_can($args['cap_to_resolve'])) {
                 return; // Do not show.
-            }
-            if (in_array($this->s::menuPageNow(), ['plugins.php', 'themes.php', 'update.php'], true)
-                && ($_REQUEST['action_via'] ?? '') === $this->App->Config->©brand['©slug']) {
-                return; // Not during a plugin install/activate/update action.
+            } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                return; // Not during core update.
+            } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                return; // Not during a plugin install/activate/update.
             }
             echo '<div class="notice notice-warning" style="'.esc_attr($this->notice_div_tag_styles).'">'.$markup.'</div>';
         });

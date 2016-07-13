@@ -136,10 +136,6 @@ class PostTypesQuery extends Classes\SCore\Base\Core
      */
     public function selectOptions(array $args = []): string
     {
-        // In an admin area?
-
-        $is_admin = is_admin();
-
         // Establish args.
 
         $default_args = [
@@ -155,7 +151,7 @@ class PostTypesQuery extends Classes\SCore\Base\Core
 
             // Used by {@link total()}.
             // Used by {@link all()}.
-            'filters' => !$is_admin
+            'filters' => !$this->Wp->is_admin
                 ? ['public' => true, 'exclude_from_search' => false]
                 : ['exclude_from_search' => false],
             'include'  => [],

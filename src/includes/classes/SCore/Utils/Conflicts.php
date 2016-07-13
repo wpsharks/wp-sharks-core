@@ -120,14 +120,12 @@ class Conflicts extends Classes\SCore\Base\Core
             && !$this->App->Config->§conflicts['§themes']) {
             return; // Nothing to do; we can stop here.
         }
-        if (($is_front_or_ajax = !($is_admin = is_admin()) || $this->c::isAjax())
+        if (($is_front_or_ajax = !$this->Wp->is_admin || $this->c::isAjax())
                 && $this->lastOkTime() > $this->outdated_check_time) {
             return; // Had a successfull check recently.
         }
-        $is_multisite = is_multisite(); // Needed below.
-
         $all_active_plugin_slugs     = $this->s::allActivePlugins();
-        $network_active_plugin_slugs = $is_multisite ? $this->s::networkActivePlugins() : [];
+        $network_active_plugin_slugs = $this->Wp->is_multisite ? $this->s::networkActivePlugins() : [];
         $all_active_theme_slugs      = array_unique([get_template(), get_stylesheet()]);
 
         $conflicting_plugin_slugs   = array_keys($this->App->Config->§conflicts['§plugins']);
@@ -143,8 +141,8 @@ class Conflicts extends Classes\SCore\Base\Core
             $_conflicting_plugin_basename = &$_active_plugin_basename;
             $_conflicting_plugin_slug     = &$_active_plugin_slug;
 
-            if ($is_admin && !defined('WP_UNINSTALL_PLUGIN') && in_array($_conflicting_plugin_slug, $deactivatable_plugin_slugs, true)
-                && (!$is_multisite || !in_array($_conflicting_plugin_slug, $network_active_plugin_slugs, true))) {
+            if ($this->Wp->is_admin && !defined('WP_UNINSTALL_PLUGIN') && in_array($_conflicting_plugin_slug, $deactivatable_plugin_slugs, true)
+                && (!$this->Wp->is_multisite || !in_array($_conflicting_plugin_slug, $network_active_plugin_slugs, true))) {
                 // ↑ Note that we do not deactivate network-wide plugins, as that could impact other sites.
 
                 // Add it to the deactivatable array and enqueue automatic deactivation of this plugin.
@@ -206,15 +204,21 @@ class Conflicts extends Classes\SCore\Base\Core
      */
     protected function maybeNotify()
     {
-        if (!is_admin()) {
-            return; // Not applicable.
+        if (!$this->Wp->is_admin) {
+            return; // N/A.
         } elseif (!$this->exist()) {
             return; // No conflicts.
         }
         if ($this->plugins) {
             add_action('all_admin_notices', function () {
+                global $pagenow; // Needed below.
+
                 if (!current_user_can('activate_plugins')) {
                     return; // Do not show.
+                } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                    return; // Not during core update.
+                } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                    return; // Not during a plugin install/activate/update.
                 }
                 echo '<div class="notice notice-error">'.
                         '<p>'.sprintf(__('<strong>%1$s</strong> is not running yet. A conflicting plugin, <strong>%2$s</strong>, is currently active. Please deactivate the \'%2$s\' plugin to clear this message.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html(end($this->plugins))).'</p>'.
@@ -222,8 +226,14 @@ class Conflicts extends Classes\SCore\Base\Core
             });
         } elseif ($this->themes) {
             add_action('all_admin_notices', function () {
+                global $pagenow; // Needed below.
+
                 if (!current_user_can('switch_themes')) {
                     return; // Do not show.
+                } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                    return; // Not during core update.
+                } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                    return; // Not during a plugin install/activate/update.
                 }
                 echo '<div class="notice notice-error">'.
                         '<p>'.sprintf(__('<strong>%1$s</strong> is not running yet. A conflicting theme, <strong>%2$s</strong>, is currently active. Please switch your \'%2$s\' theme to clear this message.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html(end($this->themes))).'</p>'.
@@ -231,8 +241,14 @@ class Conflicts extends Classes\SCore\Base\Core
             });
         } elseif ($this->deactivatable_plugins) {
             add_action('all_admin_notices', function () {
+                global $pagenow; // Needed below.
+
                 if (!current_user_can('activate_plugins')) {
                     return; // Do not show.
+                } elseif (in_array($pagenow, ['update-core.php'], true)) {
+                    return; // Not during core update.
+                } elseif (in_array($pagenow, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
+                    return; // Not during a plugin install/activate/update.
                 }
                 echo '<div class="notice notice-warning">'.
                         '<p>'.sprintf(__('The following plugins were deactivated automatically because they conflict with <strong>%1$s</strong>. Deactivated: <em>%2$s</em>; in favor of <strong>%1$s</strong>.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html(implode(', ', $this->deactivatable_plugins))).'</p>'.

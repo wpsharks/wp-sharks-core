@@ -38,7 +38,7 @@ class Transient extends Classes\SCore\Base\Core
             $key                                  = $this->hashToKey($hash);
             $do_restore_wp_using_ext_object_cache = true; // See below.
         }
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+        if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             $value = get_site_transient($this->App->Config->©brand['©var'].'_'.$key);
         } else {
             $value = get_transient($this->App->Config->©brand['©var'].'_'.$key);
@@ -69,7 +69,7 @@ class Transient extends Classes\SCore\Base\Core
             $transient_key                        = $this->App->Config->©brand['©var'].'_'.$key;
             $do_restore_wp_using_ext_object_cache = true; // See below.
 
-            if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+            if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
                 set_site_transient($transient_key, $value, $expires_after);
 
                 $sql = /* SQL to acquire site transient ID. */ '
@@ -99,7 +99,7 @@ class Transient extends Classes\SCore\Base\Core
             }
             return $this->c::hashIds($transient_id); // Encoded hash ID.
             //
-        } elseif ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+        } elseif ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             set_site_transient($this->App->Config->©brand['©var'].'_'.$key, $value, $expires_after);
         } else {
             set_transient($this->App->Config->©brand['©var'].'_'.$key, $value, $expires_after);
@@ -121,7 +121,7 @@ class Transient extends Classes\SCore\Base\Core
             $key                                  = $this->hashToKey($hash);
             $do_restore_wp_using_ext_object_cache = true; // See below.
         }
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+        if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             delete_site_transient($this->App->Config->©brand['©var'].'_'.$key);
         } else {
             delete_transient($this->App->Config->©brand['©var'].'_'.$key);
@@ -151,7 +151,7 @@ class Transient extends Classes\SCore\Base\Core
         } elseif (!($id = $ids[0] ?? 0)) {
             return $key = ''; // Not possible.
         }
-        if ($this->App->Config->§specs['§is_network_wide'] && is_multisite()) {
+        if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             $sql = 'SELECT `meta_key` FROM `'.esc_sql($WpDb->sitemeta).'` WHERE `meta_id` = %s LIMIT 1';
             $key = (string) $WpDb->get_var($WpDb->prepare($sql, $id));
         } else {

@@ -16,8 +16,13 @@ use function get_defined_vars as vars;
 
 extract($¤vars); // Template variables.
 ?>
-<p><?= sprintf(__('<strong>%1$s License Key</strong> <small>(to enable automatic updates)</small>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), esc_html($this->App::VERSION)) ?></p>
-<form method="post" action="<?= esc_url($this->s::saveOptionsUrl()) ?>" style="margin:0.5em 0;">
-    <input type="text" name="<?= esc_attr($this->s::restActionFormElementName('§license_key')) ?>" placeholder="<?= esc_attr(__('XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX', 'wp-sharks-core')) ?>" style="width:400px; max-width:75%;" />
+<p>
+    <?= sprintf(__('%1$s™ License Key for: <strong>%2$s</strong>', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->App->Config->©brand['©name'])); ?>
+
+    <small class="-note" style="display:inline-block; margin:0 0 0 2em;"><?= __('(enables automatic updates)', 'wp-sharks-core'); ?></small>
+    <?= $this->s::menuPageTip(sprintf(__('Get your license key from the \'My Account → My Downloads\' page at %1$s™.', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME))); ?>
+</p>
+<form method="post" action="<?= esc_url($this->App->Parent->s::restActionUrl('§update-license-keys')) ?>" style="margin:0.5em 0 .75em 0;">
+    <input type="text" name="<?= esc_attr($this->App->Parent->s::restActionFormElementName('[license_keys]['.$this->App->Config->©brand['©slug'].']')) ?>" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX" style="width:400px; max-width:75%;" />
     <button type="submit" class="button button-primary"><?= __('Save', 'wp-sharks-core') ?></button>
 </form>

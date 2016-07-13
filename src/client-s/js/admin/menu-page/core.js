@@ -10,12 +10,13 @@
      * Element cache.
      */
     var $menuPage = $('.' + x.coreContainerSlug + '-menu-page');
+    var $menuPageArea = $('.' + x.coreContainerSlug + '-menu-page-area');
     var $menuPageWrapper = $menuPage.find('.' + x.coreContainerSlug + '-menu-page-wrapper');
 
     /*
      * Block-level tooltips.
      */
-    $menuPageWrapper.tooltip({
+    $menuPageArea.tooltip({
       show: false, // No animation.
       hide: false, // No animation.
 

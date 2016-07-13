@@ -93,6 +93,9 @@ class RestAction extends Classes\SCore\Base\Core
         $this->action             = $this->api_version             = '';
         $this->registered_actions = []; // Initialize registered actions.
 
+        if ($this->App->is_core) { // License key handler in the core.
+            $this->register('§update-license-keys', '§CoreOnly\\LicenseKeys', 'onRestActionUpdateLicenseKeys');
+        }
         $this->register('§save-options', '§Options', 'onRestActionSaveOptions');
         $this->register('ajax.§save-options', '§Options', 'onAjaxRestActionSaveOptions');
         $this->register('§restore-default-options', '§Options', 'onRestActionRestoreDefaultOptions');
@@ -200,11 +203,9 @@ class RestAction extends Classes\SCore\Base\Core
         if ($this->viaAjax($action) || $this->viaApi($action)) {
             return home_url('/'); // Both ride on index.
         }
-        $is_admin = is_admin(); // Need this for the checks below.
-
-        if ($is_admin && ($this->s::isOwnMenuPage() || $this->s::isOwnMenuPageTab())) {
+        if ($this->Wp->is_admin && ($this->s::isOwnMenuPage() || $this->s::isOwnMenuPageTab())) {
             return $this->urlRemove($this->c::currentUrl());
-        } elseif ($is_admin) {
+        } elseif ($this->Wp->is_admin) {
             return self_admin_url('/');
         }
         return home_url('/'); // Fallback (default).
@@ -256,14 +257,14 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @param string $action Action identifier.
-     * @param string $var    Data var (array key).
+     * @param string $action   Action identifier.
+     * @param string $var_name Data var name.
      *
      * @return string Data form element ID.
      */
-    public function formElementId(string $action, string $var): string
+    public function formElementId(string $action, string $var_name): string
     {
-        return $this->data_slug.'-'.$this->c::varToSlug($action).'-'.$this->c::varToSlug($var);
+        return $this->data_slug.'-'.$this->c::nameToSlug($action).'-'.$this->c::nameToSlug($var_name);
     }
 
     /**
@@ -271,13 +272,13 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @param string $var Data var (array key).
+     * @param string $var_name Data var name.
      *
      * @return string Data form element class.
      */
-    public function formElementClass(string $var): string
+    public function formElementClass(string $var_name): string
     {
-        return $this->data_slug.'-'.$this->c::varToSlug($var);
+        return $this->data_slug.'-'.$this->c::nameToSlug($var_name);
     }
 
     /**
@@ -285,13 +286,13 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @param string $var Data var (array key).
+     * @param string $var_name Data var name.
      *
      * @return string Data form element name.
      */
-    public function formElementName(string $var): string
+    public function formElementName(string $var_name): string
     {
-        return $this->data_var.'['.$var.']';
+        return ($var_name[0] ?? '') === '[' ? $this->data_var.$var_name : $this->data_var.'['.$var_name.']';
     }
 
     /**

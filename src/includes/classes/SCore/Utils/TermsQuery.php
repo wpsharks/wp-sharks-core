@@ -154,10 +154,6 @@ class TermsQuery extends Classes\SCore\Base\Core
      */
     public function selectOptions(array $args = []): string
     {
-        // In an admin area?
-
-        $is_admin = is_admin();
-
         // Establish args.
 
         $default_args = [
@@ -174,7 +170,7 @@ class TermsQuery extends Classes\SCore\Base\Core
 
             // Used by {@link total()}.
             // Used by {@link all()}.
-            'taxonomy_filters'   => !$is_admin ? ['public' => true] : [],
+            'taxonomy_filters'   => !$this->Wp->is_admin ? ['public' => true] : [],
             'taxonomies_include' => [],
             'taxonomies_exclude' => [],
             'filters'            => [
@@ -235,7 +231,6 @@ class TermsQuery extends Classes\SCore\Base\Core
             int $parent_depth = 0
         ) use (
             &$walk,
-            &$is_admin,
             &$args,
             &$terms,
             &$options,
@@ -282,7 +277,7 @@ class TermsQuery extends Classes\SCore\Base\Core
                         // The formatter must always return an `<option></option>` tag.
 
                 // Else format the `<option>` tag using a default behavior.
-                } elseif ($is_admin) { // Slightly different format in admin area.
+                } elseif ($this->Wp->is_admin) { // Slightly different format in admin area.
                     $options .= '<option value="'.esc_attr($_tax_term_id).'"'.$_tax_term_id_selected_attr.'>'.
                                     ($parent_depth > 0 ? str_repeat('&nbsp;', $parent_depth).$args['option_child_indent_char'].' ' : '').
                                     esc_html($_post_type_label.' '.$_tax_label.' #'.$_term_object->term_id.': '.$_term_label).

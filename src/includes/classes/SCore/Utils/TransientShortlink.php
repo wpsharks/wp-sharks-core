@@ -113,7 +113,6 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
         if (!($long_url = $this->s::getTransient('', $transient_hash))) {
             dieInvalid(__('Sorry, link expired.', 'wp-sharks-core'));
         }
-        wp_redirect($long_url, 301);
-        exit; // Stop here.
+        wp_redirect($long_url, 301).exit(); // Stop on redirection.
     }
 }

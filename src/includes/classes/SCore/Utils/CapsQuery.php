@@ -278,7 +278,7 @@ class CapsQuery extends Classes\SCore\Base\Core
         if ($role_id === 'super_admin') {
             $role_id = 'administrator';
 
-            if (is_multisite()) {
+            if ($this->Wp->is_multisite) {
                 $collection = array_merge($collection, [
                     'manage_network'         => 'manage_network',
                     'manage_sites'           => 'manage_sites',

@@ -19,7 +19,82 @@ $core-container-name: 'WP Sharks';
 $core-nav-tabs-border-color: #ccc;
 
 /*
- * Based on body class.
+ * Menu page area; anywhere.
+ */
+.#{$core-container-slug}-menu-page-area {
+  @include wp-admin-field-standards;
+
+  /*
+   * Hidden utility.
+   */
+  .-hidden {
+    display:                  none;
+  }
+
+  /*
+   * Tooltips.
+   */
+  .-tip {
+    @include sharkicon(question-circle);
+
+    cursor:                   help;
+    opacity:                  0.75;
+    margin:                   0 0 0 .35em;
+    display:                  inline-block;
+
+    &::before {
+      font-size:              13px;
+      line-height:            13px;
+      width:                  13px;
+      height:                 13px;
+      vertical-align:         middle;
+    }
+
+    &:hover {
+      opacity:                1;
+    }
+
+    + .-tip {
+      margin-left:            2px;
+    }
+  }
+
+  /*
+   * Notes.
+   */
+  .-note {
+    opacity:                  0.75;
+    font-size:               .85em;
+    margin:                   0 0 0 .25em;
+  }
+
+  /*
+   * Form tables.
+   */
+  .-form-table {
+    > tbody {
+      > tr {
+        > th {
+          .-tip {
+            float:            right;
+            margin:           0 -10px 0 0;
+          }
+        }
+
+        > td {
+          select,
+          textarea,
+          input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='image']):not([type='submit']):not([type='button']) {
+            max-width:        600px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+ * Menu page; based on body class.
  */
 .#{$core-container-slug}-menu-page {
   /*
@@ -31,102 +106,32 @@ $core-nav-tabs-border-color: #ccc;
       margin:                 1.5em 1.5em 1.5em 0;
     }
   }
+}
 
+/*
+ * Menu page wrapper.
+ */
+.#{$core-container-slug}-menu-page-wrapper {
   /*
-   * Menu page wrapper.
+   * General layout styles.
    */
-  .#{$core-container-slug}-menu-page-wrapper {
-    /*
-     * General layout styles.
-     */
-    margin:                   1.5em 1.5em 0 0;
+  margin:                     1.5em 1.5em 0 0;
 
-    .-container {
-      > .-nav-tabs {
-        border-bottom:        1px solid $core-nav-tabs-border-color;
-      }
-
-      > .-content {
-        margin:               1.5em 0 0;
-
-        > :first-child {
-          margin-top:         0;
-        }
-
-        > h1:first-child,
-        > h2:first-child {
-          padding-top:        0;
-        }
-      }
+  .-container {
+    > .-nav-tabs {
+      border-bottom:          1px solid $core-nav-tabs-border-color;
     }
 
-    /*
-     * Hidden utility.
-     */
-    .-hidden {
-      display:                none;
-    }
+    > .-content {
+      margin:                 1.5em 0 0;
 
-    /*
-     * Tooltips.
-     */
-    .-tip {
-      @include sharkicon(question-circle);
-
-      cursor:                 help;
-      opacity:                0.75;
-      margin:                 0 0 0 .35em;
-      display:                inline-block;
-
-      &::before {
-        font-size:            13px;
-        line-height:          13px;
-        width:                13px;
-        height:               13px;
-        vertical-align:       middle;
+      > :first-child {
+        margin-top:           0;
       }
 
-      &:hover {
-        opacity:              1;
-      }
-
-      + .-tip {
-        margin-left:          2px;
-      }
-    }
-
-    /*
-     * Notes.
-     */
-    .-note {
-      opacity:                0.75;
-      font-size:             .85em;
-      margin:                 0 0 0 .25em;
-    }
-
-    /*
-     * Form tables.
-     */
-    .-form-table {
-      > tbody {
-        > tr {
-          > th {
-            .-tip {
-              float:          right;
-              margin:         0 -10px 0 0;
-            }
-          }
-
-          > td {
-            @include wp-admin-field-standards;
-
-            select,
-            textarea,
-            input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='image']):not([type='submit']):not([type='button']) {
-              max-width:      600px;
-            }
-          }
-        }
+      > h1:first-child,
+      > h2:first-child {
+        padding-top:          0;
       }
     }
   }

@@ -37,7 +37,7 @@ class SysOption extends Classes\SCore\Base\Core
         $key             = $this->App->Config->©brand['©var'].'_'.$key;
         $is_network_wide = $this->App->Config->§specs['§is_network_wide'];
 
-        if ($is_network_wide && is_multisite()) {
+        if ($is_network_wide && $this->Wp->is_multisite) {
             if (isset($value)) {
                 update_network_option(null, $key, $value);
             }

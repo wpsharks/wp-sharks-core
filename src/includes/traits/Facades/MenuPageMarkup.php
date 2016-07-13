@@ -19,9 +19,9 @@ trait MenuPageMarkup
     /**
      * @since 160709 Menu page utils.
      */
-    public static function menuPageForm(...$args)
+    public static function menuPageNote(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§MenuPageMarkup->form(...$args);
+        return $GLOBALS[static::class]->Utils->§MenuPageMarkup->note(...$args);
     }
 
     /**
@@ -35,8 +35,16 @@ trait MenuPageMarkup
     /**
      * @since 160709 Menu page utils.
      */
-    public static function menuPageNote(...$args)
+    public static function menuPageForm(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§MenuPageMarkup->note(...$args);
+        return $GLOBALS[static::class]->Utils->§MenuPageMarkup->form(...$args);
+    }
+
+    /**
+     * @since 160711 Menu page utils.
+     */
+    public static function menuPageNoticeErrors(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPageMarkup->noticeErrors(...$args);
     }
 }

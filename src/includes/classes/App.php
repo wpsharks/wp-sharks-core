@@ -13,6 +13,8 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
+#
+use WebSharks\WpSharks\Core\Classes\SCore\Base\Wp;
 
 /**
  * App (plugins must extend).
@@ -22,13 +24,22 @@ use function get_defined_vars as vars;
 class App extends CoreClasses\App
 {
     /**
+     * WP common.
+     *
+     * @since 160524
+     *
+     * @type Wp Common props.
+     */
+    public $Wp; // Common props.
+
+    /**
      * Version.
      *
      * @since 160524
      *
      * @type string Version.
      */
-    const VERSION = '160710.28269'; //v//
+    const VERSION = '160713.23361'; //v//
 
     /**
      * ReST action API version.
@@ -74,17 +85,12 @@ class App extends CoreClasses\App
      * @param array            $instance_base Instance base.
      * @param array            $instance      Instance args.
      * @param Classes\App|null $Parent        Parent app (optional).
-     * @param array            $args          Any additional behavioral args.
      */
-    public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null, array $args = [])
+    public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null)
     {
-        # Establish arguments.
+        # WordPress common properties.
 
-        $default_args = [
-            '©use_server_cfgs' => false,
-            '§validate_brand'  => true,
-        ];
-        $args = array_merge($default_args, $args);
+        $this->Wp = $Parent ? $Parent->Wp : new Wp();
 
         # Define a few reflection-based properties.
 
@@ -97,10 +103,51 @@ class App extends CoreClasses\App
         $this->base_dir          = dirname($this->file, 4);
         $this->base_dir_basename = basename($this->base_dir);
 
+        $this->is_core = $this->class === self::class;
+
         # Establish specs & brand for parent constructor.
 
-        if ($this->class === self::class) {
+        $default_specs = [
+            '§is_pro'          => null,
+            '§in_wp'           => null,
+            '§is_network_wide' => false,
+
+            '§type' => '',
+            '§file' => '',
+        ];
+        $brand_defaults = [
+            '©acronym' => '',
+            '©name'    => '',
+
+            '©slug' => '',
+            '©var'  => '',
+
+            '©short_slug' => '',
+            '©short_var'  => '',
+
+            '©text_domain' => '',
+
+            '§domain'           => '',
+            '§domain_path'      => '',
+            '§domain_short_var' => '',
+
+            '§api_domain'           => '',
+            '§api_domain_path'      => '',
+            '§api_domain_short_var' => '',
+
+            '§cdn_domain'           => '',
+            '§cdn_domain_path'      => '',
+            '§cdn_domain_short_var' => '',
+
+            '§stats_domain'           => '',
+            '§stats_domain_path'      => '',
+            '§stats_domain_short_var' => '',
+        ];
+        if ($this->is_core) {
+            $Parent = null; // Core.
+
             $specs = array_merge(
+                $default_specs,
                 [
                     '§is_pro'          => false,
                     '§in_wp'           => false,
@@ -113,17 +160,18 @@ class App extends CoreClasses\App
                 $instance['§specs'] ?? []
             );
             $brand = array_merge(
+                $brand_defaults,
                 [
-                    '©name'    => 'WP Sharks Core',
                     '©acronym' => 'WPS Core',
-
-                    '©text_domain' => 'wp-sharks-core',
+                    '©name'    => 'WP Sharks Core',
 
                     '©slug' => 'wp-sharks-core',
                     '©var'  => 'wp_sharks_core',
 
                     '©short_slug' => 'wps-core',
                     '©short_var'  => 'wps_core',
+
+                    '©text_domain' => 'wp-sharks-core',
 
                     '§domain'           => 'wpsharks.com',
                     '§domain_path'      => '/product/core',
@@ -150,24 +198,10 @@ class App extends CoreClasses\App
             }
             $Parent = $Parent ?? $GLOBALS[self::class];
 
-            $specs = array_merge(
-                [
-                    '§is_pro'          => null,
-                    '§in_wp'           => null,
-                    '§is_network_wide' => false,
+            $specs            = array_merge($default_specs, $instance_base['§specs'] ?? [], $instance['§specs'] ?? []);
+            $specs['§in_wp']  = $specs['§in_wp'] ?? false; // Defaults to false. If it's in WP, please specify.
+            $specs['§is_pro'] = $specs['§is_pro'] ?? mb_stripos($this->namespace, '\\Pro\\') !== false;
 
-                    '§type' => '',
-                    '§file' => '',
-                ],
-                $instance_base['§specs'] ?? [],
-                $instance['§specs'] ?? []
-            );
-            if (!isset($specs['§in_wp'])) {
-                $specs['§in_wp'] = false;
-            }
-            if (!isset($specs['§is_pro'])) {
-                $specs['§is_pro'] = mb_stripos($this->namespace, '\\Pro\\') !== false;
-            }
             if (!$specs['§type'] || !$specs['§file']) {
                 if (is_file($this->base_dir.'/plugin.php')) {
                     $specs['§type'] = 'plugin';
@@ -182,142 +216,96 @@ class App extends CoreClasses\App
                     throw new Exception('Unable to determine `§type`/`§file`.');
                 } // The app will need to give its §type/§file explicitly.
             }
-            $brand = array_merge(
-                [
-                    '©name'    => '',
-                    '©acronym' => '',
+            $brand = array_merge($brand_defaults, $instance_base['©brand'] ?? [], $instance['©brand'] ?? []);
 
-                    '©text_domain' => '',
-
-                    '©slug' => '',
-                    '©var'  => '',
-
-                    '©short_slug' => '',
-                    '©short_var'  => '',
-
-                    '§domain'           => '',
-                    '§domain_path'      => '',
-                    '§domain_short_var' => '',
-
-                    '§api_domain'           => '',
-                    '§api_domain_path'      => '',
-                    '§api_domain_short_var' => '',
-
-                    '§cdn_domain'           => '',
-                    '§cdn_domain_path'      => '',
-                    '§cdn_domain_short_var' => '',
-
-                    '§stats_domain'           => '',
-                    '§stats_domain_path'      => '',
-                    '§stats_domain_short_var' => '',
-                ],
-                $instance_base['©brand'] ?? [],
-                $instance['©brand'] ?? []
-            );
-            // Check slug first. It's the basis for others.
-
-            if (!$brand['©slug']) {
+            if (!$brand['©slug']) { // This is the basis for others.
                 $brand['©slug'] = $Parent->c::nameToSlug($this->base_dir_basename);
                 $brand['©slug'] = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $brand['©slug']);
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©slug'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©slug.');
             }
-            if (!$brand['©name']) {
-                $brand['©name'] = $Parent->c::slugToName($brand['©slug']);
-            } elseif ($args['§validate_brand'] && preg_match('/\s+(?:Lite|Pro)$/ui', $brand['©name'])) {
-                throw new Exception('Please remove `Lite|Pro` suffix from ©name.');
-            }
-            if (!$brand['©acronym']) {
-                $brand['©acronym'] = $Parent->c::nameToAcronym($brand['©name']);
-            } elseif ($args['§validate_brand'] && preg_match('/(?:LITE|PRO)$/ui', $brand['©acronym'])) {
-                throw new Exception('Please remove `LITE|PRO` suffix from ©acronym.');
-            }
-            if (!$brand['©text_domain']) {
-                $brand['©text_domain'] = $brand['©slug'];
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©text_domain'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©text_domain.');
-            }
-            if (!$brand['©var']) {
-                $brand['©var'] = $Parent->c::slugToVar($brand['©slug']);
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©var'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©var.');
-            }
-            if (!$brand['©short_slug']) {
-                $brand['©short_slug'] = strlen($brand['©slug']) <= 10 ? $brand['©slug'] : 's'.substr(md5($brand['©slug']), 0, 9);
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_var'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©short_var.');
-            } elseif ($args['§validate_brand'] && strlen($brand['©short_slug']) > 10) {
-                throw new Exception('Please fix ©short_slug; must be <= 10 bytes.');
-            }
-            if (!$brand['©short_var']) {
-                $brand['©short_var'] = strlen($brand['©var']) <= 10 ? $brand['©var'] : 's'.substr(md5($brand['©slug']), 0, 9);
-            } elseif ($args['§validate_brand'] && preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_var'])) {
-                throw new Exception('Please remove `lite|pro` suffix from ©short_var.');
-            } elseif ($args['§validate_brand'] && strlen($brand['©short_var']) > 10) {
-                throw new Exception('Please fix ©short_var; must be <= 10 bytes.');
-            }
+            $brand['©var'] = $brand['©var'] ?: $Parent->c::slugToVar($brand['©slug']);
+
+            $brand['©name']    = $brand['©name'] ?: $Parent->c::slugToName($brand['©slug']);
+            $brand['©acronym'] = $brand['©acronym'] ?: $Parent->c::nameToAcronym($brand['©name']);
+
+            $brand['©short_slug'] = $brand['©short_slug'] ?: (strlen($brand['©slug']) <= 10 ? $brand['©slug'] : 's'.substr(md5($brand['©slug']), 0, 9));
+            $brand['©short_var']  = $brand['©short_var'] ?: $Parent->c::slugToVar($brand['©short_slug']);
+
+            $brand['©text_domain'] = $brand['©text_domain'] ?: $brand['©slug'];
+
             if (!$brand['§domain']) {
                 $brand['§domain']           = $Parent->Config->©brand['§domain'];
                 $brand['§domain_path']      = '/product/'.$brand['©slug'];
                 $brand['§domain_short_var'] = $Parent->Config->©brand['§domain_short_var'];
             }
+            if ($this->Wp->debug) {
+                if (preg_match('/(?:LITE|PRO)$/ui', $brand['©acronym'])) {
+                    throw new Exception('Please remove `LITE|PRO` suffix from `©acronym`.');
+                } elseif (preg_match('/\s+(?:Lite|Pro)$/ui', $brand['©name'])) {
+                    throw new Exception('Please remove `Lite|Pro` suffix from `©name`.');
+                    //
+                } elseif (!$Parent->c::isSlug($brand['©slug'])) {
+                    throw new Exception('Please fix; `©slug` has invalid chars.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©slug'])) {
+                    throw new Exception('Please remove `lite|pro` suffix from `©slug`.');
+                    //
+                } elseif (!$Parent->c::isVar($brand['©var'])) {
+                    throw new Exception('Please fix; `©var` has invalid chars.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©var'])) {
+                    throw new Exception('Please remove `lite|pro` suffix from `©var`.');
+                    //
+                } elseif (strlen($brand['©short_slug']) > 10) {
+                    throw new Exception('Please fix; `©short_slug` is > 10 bytes.');
+                } elseif (!$Parent->c::isSlug($brand['©short_slug'])) {
+                    throw new Exception('Please fix; `©short_slug` has invalid chars.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_slug'])) {
+                    throw new Exception('Please remove `lite|pro` suffix from `©short_slug`.');
+                    //
+                } elseif (strlen($brand['©short_var']) > 10) {
+                    throw new Exception('Please fix; `©short_var` is > 10 bytes.');
+                } elseif (!$Parent->c::isVar($brand['©short_var'])) {
+                    throw new Exception('Please fix; `©short_var` has invalid chars.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_var'])) {
+                    throw new Exception('Please remove `lite|pro` suffix from `©short_var`.');
+                    //
+                } elseif (!$Parent->c::isSlug($brand['©text_domain'])) {
+                    throw new Exception('Please fix; `©text_domain` has invalid chars.');
+                }
+            }
         }
-        # Collect essential WordPress config values.
+        # Collect additional WordPress config values.
 
-        $wp_is_multisite  = is_multisite();
-        $wp_debug         = defined('WP_DEBUG') && WP_DEBUG;
-        $wp_debug_edge    = $wp_debug && defined('WP_DEBUG_EDGE') && WP_DEBUG_EDGE;
-        $wp_debug_log     = $wp_debug && defined('WP_DEBUG_LOG') && WP_DEBUG_LOG;
-        $wp_debug_display = $wp_debug && defined('WP_DEBUG_DISPLAY') && WP_DEBUG_DISPLAY;
-
-        // NOTE: These are not compatible with `switch_to_blog()`.
-        // These represent values for the initial/current site.
-
-        if (!($wp_tmp_dir = rtrim(get_temp_dir(), '/'))) {
-            throw new Exception('Failed to acquire a temp directory.');
-        }
-        if (!($wp_salt_key = hash('sha256', wp_salt().$brand['©slug']))) {
+        if (!($wp_app_salt_key = hash('sha256', $this->Wp->salt.$brand['©slug']))) {
             throw new Exception('Failed to generate a unique salt/key.');
         }
-        if (!($wp_site_url_option = parse_url(get_option('siteurl')))) {
-            throw new Exception('Failed to parse site URL option.');
-        }
-        if (!($wp_site_default_scheme = $wp_site_url_option['scheme'] ?? 'http')) {
-            throw new Exception('Failed to parse site URL option scheme.');
-        }
         if ($specs['§type'] === 'plugin') {
-            if (!($wp_app_url = parse_url(plugin_dir_url($specs['§file'])))) {
-                throw new Exception('Failed to parse plugin dir URL.');
+            if (!($wp_app_url_parts = parse_url(plugin_dir_url($specs['§file'])))) {
+                throw new Exception('Failed to parse plugin dir URL parts.');
             }
         } elseif ($specs['§type'] === 'theme') {
-            if (!($wp_app_url = parse_url(get_template_directory_uri()))) {
-                throw new Exception('Failed to parse theme dir URL.');
+            if (!($wp_app_url_parts = $this->Wp->template_directory_url_parts)) {
+                throw new Exception('Failed to parse theme dir URL parts.');
             }
         } elseif ($specs['§type'] === 'mu-plugin') {
-            if (!($wp_app_url = parse_url(site_url('/')))) {
-                throw new Exception('Failed to parse site URL.');
+            if (!($wp_app_url_parts = $this->Wp->site_url_parts)) {
+                throw new Exception('Failed to parse app URL parts.');
             }
         } else { // Unexpected application `§type` in this case.
             throw new Exception('Failed to parse URL for unexpected `§type`.');
         }
-        if (!($wp_app_url_host = $wp_app_url['host'] ?? (string) ($_SERVER['HTTP_HOST'] ?? ''))) {
-            throw new Exception('Failed to parse app URL host.');
-        }
-        if (!($wp_app_url_root_host = implode('.', array_slice(explode('.', $wp_app_url_host), -2)))) {
-            throw new Exception('Failed to parse app URL root host.');
-        }
-        $wp_app_url_base_path = rtrim($wp_app_url['path'] ?? '', '/');
+        $wp_app_url_base_path = rtrim($wp_app_url_parts['path'] ?? '', '/');
         $wp_app_url_base_path .= in_array($specs['§type'], ['theme', 'plugin'], true) ? '/src' : '';
         $wp_app_url_base_path .= '/'; // Always; i.e., this is a directory location.
 
         # Build the core/default instance base.
 
         $default_instance_base = [
-            '©debug' => [
-                '©enable' => $wp_debug,
-                '©edge'   => $wp_debug_edge,
+            '©use_server_cfgs' => false,
 
-                '©log'          => $wp_debug_log,
+            '©debug' => [
+                '©enable' => $this->Wp->debug,
+                '©edge'   => $this->Wp->debug_edge,
+
+                '©log'          => $this->Wp->debug_log,
                 '©log_callback' => false, // For extenders.
 
                 '©er_enable'     => false, // WP handles this.
@@ -325,7 +313,7 @@ class App extends CoreClasses\App
                 '©er_assertions' => false, // Developer must enable.
                 // WordPress itself may handle assertions in the future.
             ],
-            '©handle_exceptions' => false, // Never in a shared codespace.
+            '©handle_throwables' => false, // Never in a shared codespace.
 
             '©di' => [
                 '©default_rule' => [
@@ -342,52 +330,17 @@ class App extends CoreClasses\App
                 ],
             ],
 
-            '§specs' => [
-                '§is_pro'          => false,
-                '§in_wp'           => false,
-                '§is_network_wide' => false,
-
-                '§type' => '',
-                '§file' => '',
-            ],
-
-            '©brand' => [
-                '©name'    => '',
-                '©acronym' => '',
-
-                '©text_domain' => '',
-
-                '©slug' => '',
-                '©var'  => '',
-
-                '©short_slug' => '',
-                '©short_var'  => '',
-
-                '§domain'           => '',
-                '§domain_path'      => '',
-                '§domain_short_var' => '',
-
-                '§api_domain'           => '',
-                '§api_domain_path'      => '',
-                '§api_domain_short_var' => '',
-
-                '§cdn_domain'           => '',
-                '§cdn_domain_path'      => '',
-                '§cdn_domain_short_var' => '',
-
-                '§stats_domain'           => '',
-                '§stats_domain_path'      => '',
-                '§stats_domain_short_var' => '',
-            ],
+            '§specs' => $default_specs, // Already established above.
+            '©brand' => $brand_defaults, // Established already.
 
             '©urls' => [
                 '©hosts' => [
-                    '©app' => $wp_app_url_host,
-                    '©cdn' => 'cdn.'.$wp_app_url_root_host,
+                    '©app' => $this->Wp->site_url_host,
+                    '©cdn' => 'cdn.'.$this->Wp->site_url_root_host,
 
                     '©roots' => [
-                        '©app' => $wp_app_url_root_host,
-                        '©cdn' => $wp_app_url_root_host,
+                        '©app' => $this->Wp->site_url_root_host,
+                        '©cdn' => $this->Wp->site_url_root_host,
                     ],
                 ],
                 '©base_paths' => [
@@ -395,8 +348,8 @@ class App extends CoreClasses\App
                     '©cdn' => '/',
                 ],
                 '©cdn_filter_enable' => false,
-                '©default_scheme'    => $wp_site_default_scheme,
-                '©sig_key'           => $wp_salt_key,
+                '©default_scheme'    => $this->Wp->site_default_scheme,
+                '©sig_key'           => $wp_app_salt_key,
             ],
 
             '§setup' => [ // On (or after): `plugins_loaded`.
@@ -411,31 +364,31 @@ class App extends CoreClasses\App
                 '§complete' => false,
             ],
 
-            '§database' => [
-                '§tables_dir'   => $this->base_dir.'/src/includes/mysql/tables',
-                '§indexes_dir'  => $this->base_dir.'/src/includes/mysql/indexes',
-                '§triggers_dir' => $this->base_dir.'/src/includes/mysql/triggers',
-            ],
-
             '©fs_paths' => [
-                '©logs_dir'                 => $wp_tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/logs',
-                '©cache_dir'                => $wp_tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/cache',
+                '©logs_dir'                 => $this->Wp->tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/logs',
+                '©cache_dir'                => $this->Wp->tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/cache',
                 '§templates_theme_base_dir' => $this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'],
                 '©templates_dir'            => $this->base_dir.'/src/includes/templates',
-                '©errors_dir'               => '', '©config_file' => '', // N/A.
+                '©errors_dir'               => '', // Not applicable.
+
+                '§mysql' => [
+                    '§tables_dir'   => $this->base_dir.'/src/includes/mysql/tables',
+                    '§indexes_dir'  => $this->base_dir.'/src/includes/mysql/indexes',
+                    '§triggers_dir' => $this->base_dir.'/src/includes/mysql/triggers',
+                ],
             ],
 
             '©encryption' => [
-                '©key' => $wp_salt_key,
+                '©key' => $wp_app_salt_key,
             ],
             '©cookies' => [
-                '©encryption_key' => $wp_salt_key,
+                '©encryption_key' => $wp_app_salt_key,
             ],
             '©hash_ids' => [
-                '©hash_key' => $wp_salt_key,
+                '©hash_key' => $wp_app_salt_key,
             ],
             '©passwords' => [
-                '©hash_key' => $wp_salt_key,
+                '©hash_key' => $wp_app_salt_key,
             ],
 
             '§conflicts' => [
@@ -510,43 +463,57 @@ class App extends CoreClasses\App
             ],
 
             '§caps' => [
-                '§manage' => $wp_is_multisite && $specs['§is_network_wide']
+                '§manage' => $this->Wp->is_multisite && $specs['§is_network_wide']
                     ? 'manage_network_plugins' : 'activate_plugins',
             ],
 
             '§pro_option_keys' => [
-                '§license_key' => '', // Pro-only.
+                /*
+                    '[key]',
+                */
             ],
             '§default_options' => [
-                '§license_key' => '', // Pro-only.
+                '§license_key' => '',
+                /*
+                    '[key]' => '[value]',
+                */
             ],
-            '§options' => [], // Filled automatically (see below).
+            '§options' => [
+                /*
+                    '[key]' => '[value]',
+                */
+            ], // Filled automatically (see below).
 
             '§uninstall' => false, // Perform uninstall?
         ];
-        if ($specs['§type'] === 'plugin') {
-            $lp_conflicting_name          = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
-            $lp_conflicting_basename_slug = preg_replace('/[_\-]+(?:lite|pro)/ui', '', $this->base_dir_basename).($specs['§is_pro'] ? '' : '-pro');
+        # Automatically add lite/pro conflict to the array.
 
-            $default_instance_base['§conflicts']['§plugins'][$lp_conflicting_basename_slug]               = $lp_conflicting_name;
-            $default_instance_base['§conflicts']['§deactivatable_plugins'][$lp_conflicting_basename_slug] = $lp_conflicting_name;
+        if ($specs['§type'] === 'plugin') { // Only for plugins, since just one theme can be active at a time anyway.
+            $_lp_conflicting_name                                                                 = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
+            $_lp_conflicting_slug                                                                 = $brand['©slug'].($specs['§is_pro'] ? '' : '-pro');
+            $default_instance_base['§conflicts']['§plugins'][$_lp_conflicting_slug]               = $_lp_conflicting_name;
+            $default_instance_base['§conflicts']['§deactivatable_plugins'][$_lp_conflicting_slug] = $_lp_conflicting_name;
         }
-        # Build collective instance base & instance, then run parent constructor.
+        # Merge `$default_instance_base` w/ `$instance_base` param.
 
-        $instance_base                              = $this->mergeConfig($default_instance_base, $instance_base);
-        $instance_base['§specs']                    = &$specs; // Already established (in full) above.
-        $instance_base['©brand']                    = &$brand; // Already established (in full) above.
-        $instance_base['©fs_paths']['©config_file'] = ''; // Do not allow the use of a config file.
-        // Not allowed because we pre-parse config values above to build `§specs` and `©brand`.
+        $instance_base           = $this->mergeConfig($default_instance_base, $instance_base);
+        $instance_base['§specs'] = &$specs; // Already established (in full) above.
+        $instance_base['©brand'] = &$brand; // Already established (in full) above.
 
-        unset($instance['§specs'], $instance['©brand'], $instance['©fs_paths']['©config_file']);
+        # Give plugins/extensions a chance to filter `$instance`.
+
         $instance = apply_filters($brand['©var'].'_instance', $instance, $instance_base);
+        unset($instance['§specs'], $instance['©brand']); // Already established (in full) above.
 
-        parent::__construct($instance_base, $instance, $Parent, $args);
+        # Call parent app-constructor (i.e., websharks/core).
+
+        parent::__construct($instance_base, $instance, $Parent);
+
+        /* Post-construct sub-routines are run now -------------------------------------------------------------- */
 
         # Merge site owner options (highest precedence).
 
-        if ($this->Config->§specs['§is_network_wide'] && $wp_is_multisite) {
+        if ($this->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             if (!is_array($site_owner_options = get_network_option(null, $this->Config->©brand['©var'].'_options'))) {
                 update_network_option(null, $this->Config->©brand['©var'].'_options', $site_owner_options = []);
             }
@@ -557,31 +524,30 @@ class App extends CoreClasses\App
         $this->Config->§options = $this->s::mergeOptions($this->Config->§options, $site_owner_options);
         $this->Config->§options = $this->s::applyFilters('options', $this->Config->§options);
 
-        # After-construct sub-routines are run now.
-
-        // Sanity check; must be on (or after) `plugins_loaded` hook.
-        // When uninstalling, must be on (or after) `init` hook.
+        # Sanity check; must be on (or after) `plugins_loaded` hook.
+        # When uninstalling, must be on (or after) `init` hook.
 
         if (!did_action('plugins_loaded')) {
             throw new Exception('`plugins_loaded` action not done yet.');
         } elseif ($this->Config->§uninstall && !did_action('init')) {
             throw new Exception('`init` action not done yet.');
         }
-        // Check for any known conflicts.
+        # Check for any known conflicts.
 
         if ($this->s::conflictsExist()) {
             return; // Stop here.
         }
-        // Check for any unsatisfied dependencies.
+        # Check for any unsatisfied dependencies.
 
         if ($this->s::dependenciesUnsatisfied()) {
             return; // Stop here.
         }
-        // No known conflicts; load plugin text-domain.
+        # Add app instance to collection.
 
-        load_plugin_textdomain($this->Config->©brand['©text_domain']);
-
-        // The rest of our sub-routines are based on the setup hook.
+        if ($this->Parent && $this->Parent->is_core) {
+            $this->Parent->s::addApp($this);
+        }
+        # Remaining routines are driven by setup hook.
 
         if (did_action($this->Config->§setup['§hook'])) {
             $this->onSetup(); // Run setup immediately.
@@ -595,7 +561,7 @@ class App extends CoreClasses\App
      *
      * @since 160524 Initial release.
      */
-    public function onSetup() // Public hook.
+    public function onSetup()
     {
         if ($this->Config->§setup['§complete']) {
             return; // Already complete.
@@ -663,23 +629,21 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
-        $is_admin = is_admin();
-
         add_action('wp_loaded', [$this->Utils->§RestAction, 'onWpLoaded']);
         add_action('wp_loaded', [$this->Utils->§TransientShortlink, 'onWpLoaded']);
 
-        if ($is_admin) {
-            if ($this->class === self::class) {
-                add_action('admin_menu', [$this->Utils->§DbMenuPage, 'onAdminMenu']);
+        if ($this->Wp->is_admin) {
+            if ($this->is_core) {
+                add_action('admin_menu', [$this->Utils->{'§CoreOnly\\MenuPages'}, 'onAdminMenu']);
                 add_action('admin_enqueue_scripts', [$this->Utils->§StylesScripts, 'enqueueMenuPageLibs']);
             }
             add_filter('admin_body_class', [$this->Utils->§MenuPage, 'onAdminBodyClass']);
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
         }
-        if ((!$this->Config->§specs['§is_network_wide'] || !is_multisite() || is_main_site()) && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
+        if ((!$this->Config->§specs['§is_network_wide'] || !$this->Wp->is_multisite || $this->Wp->is_main_site) && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
             add_filter('site_transient_update_'.$this->Config->§specs['§type'].'s', [$this->Utils->§Updater, 'onGetSiteTransientUpdate'.$this->Config->§specs['§type'].'s']);
         }
-        if ($this->class === self::class) {
+        if ($this->is_core) {
             add_action('upgrader_process_complete', [$this->Utils->§Updater, 'onUpgraderProcessComplete']);
         }
     }

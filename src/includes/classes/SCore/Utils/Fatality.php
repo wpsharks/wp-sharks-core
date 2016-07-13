@@ -45,7 +45,7 @@ class Fatality extends Classes\SCore\Base\Core
             header('content-type: application/json; charset=utf-8');
 
             // Standard JSON response data w/ `success` as `false`.
-            die(json_encode([
+            exit(json_encode([
                 'success' => false,
                 'error'   => [
                     'code'    => 400,
@@ -81,7 +81,7 @@ class Fatality extends Classes\SCore\Base\Core
             header('content-type: application/json; charset=utf-8');
 
             // Standard JSON response data w/ `success` as `false`.
-            die(json_encode([
+            exit(json_encode([
                 'success' => false,
                 'error'   => [
                     'code'    => 403,
