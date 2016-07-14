@@ -1,3 +1,7 @@
+## $v
+
+- Adding `eval()` as a new PHP requirement.
+
 ## v160714.36264
 
 - Updating to latest websharks/core.
