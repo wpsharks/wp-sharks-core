@@ -678,6 +678,7 @@ class App extends CoreClasses\App
                 && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
             if ($this->Wp->is_admin) {
                 add_filter('admin_init', [$this->Utils->§Updater, 'onAdminInit']);
+                add_filter('admin_init', [$this->Utils->§AppStats, 'onAdminInit']);
             }
             add_filter(// Filter updater API responses in WordPress.
                 'site_transient_update_'.$this->Config->§specs['§type'].'s',

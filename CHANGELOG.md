@@ -1,3 +1,8 @@
+## $v
+
+- Updating to latest websharks/core.
+- Adding anonymous stats collection via stats.wpsharks.io.
+
 ## v160714.26941
 
 - Enhancing license key integration.
