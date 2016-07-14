@@ -52,6 +52,8 @@ class LicenseKeys extends Classes\SCore\Base\Core
             return; // Not necessary.
         } elseif ($App->s::getOption('§license_key')) {
             return; // Already have a license key.
+        } elseif (!in_array($App->Config->§specs['§type'], ['theme', 'plugin'], true)) {
+            return; // Only applies to themes & plugins.
         }
         $App->s::enqueueNotice('', [
             'id'   => '§license-key-request',

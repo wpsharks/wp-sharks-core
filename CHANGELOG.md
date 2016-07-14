@@ -1,3 +1,7 @@
+## $v
+
+- License key request for type: `theme`, `plugin` only.
+
 ## v160714.36962
 
 - Adding `eval()` as a new PHP requirement.
