@@ -163,16 +163,14 @@ class Updater extends Classes\SCore\Base\Core
         } // i.e., Available inside WordPress already.
         // i.e., The project is hosted by WordPress.org.
 
-        switch ($this->App->Config->§specs['§type']) {
-            case 'plugin': // Redirect to changelog for plugin.
-                if (($_REQUEST['plugin'] ?? '') !== $this->App->Config->©brand['§product_slug']) {
-                    return; // Not applicable.
-                } elseif (($_REQUEST['tab'] ?? '') !== 'plugin-information') {
-                    return; // Not applicable.
-                } elseif (!$this->s::isMenuPage('plugin-install.php')) {
-                    return; // Not applicable.
-                }
+        if ($this->App->Config->§specs['§type'] === 'plugin') {
+            // This redirects the 'details' page for a plugin, to the product changelog
+            // at the brand domain for the app; i.e., instead of pulling all details into WP.
+            if (($_REQUEST['plugin'] ?? '') === $this->App->Config->©brand['§product_slug']
+                && ($_REQUEST['tab'] ?? '') === 'plugin-information'
+                && $this->s::isMenuPage('plugin-install.php')) {
                 wp_redirect($this->s::brandUrl('/changelog')).exit();
+            }
         }
     }
 
@@ -192,11 +190,11 @@ class Updater extends Classes\SCore\Base\Core
             return $last_check['version']; // According to last check.
         } // Already checked this recently. Don't do it again right now.
 
-        if (($get_latest_version_url = $this->getLatestVersionUrl())
-            && !is_wp_error($remote_response = wp_remote_get($get_latest_version_url))
+        if (($api_url_for_latest_version = $this->apiUrlForLatestVersion())
+            && !is_wp_error($remote_response = wp_remote_get($api_url_for_latest_version))
                 && ($remote_api_response = $this->c::mbTrim((string) $remote_response['body']))
                 && $this->c::isWsVersion($remote_api_response) // Avoid odd response body.
-                && version_compare($remote_api_response, $this->App::VERSION, '>=')) {
+                && version_compare($remote_api_response, $version, '>=')) {
             $version = $remote_api_response; // Latest available version.
         }
         $this->lastVersionCheck(['time' => time(), 'version' => $version]);
@@ -220,11 +218,32 @@ class Updater extends Classes\SCore\Base\Core
             return $last_check['package']; // According to last check.
         } // Already checked this recently. Don't do it again right now.
 
-        if (($get_latest_package_url = $this->getLatestPackageUrl())
-            && !is_wp_error($remote_response = wp_remote_get($get_latest_package_url))
-                && is_object($remote_api_response = json_decode((string) $remote_response['body']))
-                && !empty($remote_api_response->success) && !empty($remote_api_response->data->url)) {
-            $package = $remote_api_response->data->url; // Latest available package.
+        if (($api_url_for_latest_package_via_license_key = $this->apiUrlForLatestPackageViaLicenseKey())
+            && !is_wp_error($remote_response = wp_remote_get($api_url_for_latest_package_via_license_key))
+            && is_object($remote_api_response = json_decode((string) $remote_response['body']))) {
+            //
+            if ($remote_api_response->success && $remote_api_response->data->url) {
+                $package = $remote_api_response->data->url; // Latest available package.
+                //
+            } elseif (mb_strpos($remote_api_response->error->slug, 'notice::') === 0 && $remote_api_response->error->message) {
+                $notice_heading = __('%1$s™ » \'%2$s\' license key error:', 'wp-sharks-core');
+                $notice_heading = sprintf($notice_heading, esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->App->Config->©brand['§product_name']));
+                $notice_markup  = $this->s::menuPageNoticeErrors($notice_heading, [$remote_api_response->error->message]);
+
+                $this->s::enqueueNotice('', [
+                    'id'   => '§license-key-error',
+                    'type' => 'error',
+
+                    'is_persistent'  => true,
+                    'is_dismissable' => true,
+
+                    'for_page' => $this->App->Config->§specs['§type'] === 'theme'
+                        ? '/^(?:index|update\-core|themes)\.php$/ui'
+                        : '/^(?:index|update\-core|plugins)\.php$/ui',
+
+                    'markup' => $notice_markup,
+                ]);
+            }
         }
         $this->lastPackageCheck(['time' => time(), 'package' => $package]);
 
@@ -232,13 +251,13 @@ class Updater extends Classes\SCore\Base\Core
     }
 
     /**
-     * Latest version URL.
+     * API URL for latest version.
      *
      * @since 160530 Update utils.
      *
      * @return string URL (ready for GET request).
      */
-    protected function getLatestVersionUrl(): string
+    protected function apiUrlForLatestVersion(): string
     {
         $base       = $this->App->Config->©debug['©edge'] ? 'software/bleeding-edge' : 'software/latest';
         $uri        = '/'.$base.'/'.urlencode($this->App->Config->©brand['§product_slug']).'/version.txt';
@@ -246,13 +265,13 @@ class Updater extends Classes\SCore\Base\Core
     }
 
     /**
-     * Latest package URL.
+     * API URL for latest package (via license key).
      *
      * @since 160530 Update utils.
      *
      * @return string URL (ready for GET request).
      */
-    protected function getLatestPackageUrl(): string
+    protected function apiUrlForLatestPackageViaLicenseKey(): string
     {
         if (!($license_key = $this->s::getOption('§license_key'))) {
             return ''; // Not possible w/o license key.

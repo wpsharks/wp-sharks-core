@@ -1,3 +1,10 @@
+## $v
+
+- Enhancing license key integration.
+- Enhancing license key templates and notices.
+- Updating to the latest websharks/core.
+- Enhancing compatibility with a lite-to-pro transition in terms of how this impacts license keys.
+
 ## v160713.39957
 
 - Updating to latest websharks/core.

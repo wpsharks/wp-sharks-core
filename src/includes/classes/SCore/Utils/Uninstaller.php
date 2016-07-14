@@ -51,13 +51,14 @@ class Uninstaller extends Classes\SCore\Base\Core
      */
     public function maybeUninstall()
     {
-        if (!defined('WP_UNINSTALL_PLUGIN')) {
+        // See: <https://core.trac.wordpress.org/ticket/14955>
+        if ($this->App->Config->§specs['§type'] !== 'plugin') {
+            return; // For plugins only at this time.
+        } elseif (!defined('WP_UNINSTALL_PLUGIN')) {
             return; // Not applicable.
-        }
-        if ($this->s::conflictsExist()) {
+        } elseif ($this->s::conflictsExist()) {
             return; // Stop on conflicts.
-        }
-        if (!$this->App->Config->§uninstall) {
+        } elseif (!$this->App->Config->§uninstall) {
             return; // Not uninstalling.
         }
         $this->counter = 0; // Initialize counter.
@@ -80,11 +81,13 @@ class Uninstaller extends Classes\SCore\Base\Core
      */
     protected function uninstall()
     {
+        // Uninstallers.
         $this->deleteOptions();
         $this->deletePostMeta();
         $this->deleteUserMeta();
         $this->dropDbTables();
 
+        // Other uninstallers.
         $this->otherUninstallRoutines();
 
         ++$this->counter; // Increment.

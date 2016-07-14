@@ -65,8 +65,11 @@ class Installer extends Classes\SCore\Base\Core
      */
     public function maybeInstall()
     {
-        if (!$this->history['last_version']
-           || version_compare($this->history['last_version'], $this->App::VERSION, '<')) {
+        if ($this->App->Config->§uninstall) {
+            return; // Sanity check.
+        } elseif ($this->App->Config->§force_install // Forcing install (or reinstall)?
+                    || version_compare($this->history['last_version'], $this->App::VERSION, '<')
+                    || version_compare($this->s::getOption('§for_version'), $this->App::VERSION, '<')) {
             $this->install(); // Install (or reinstall).
         }
     }
@@ -78,24 +81,30 @@ class Installer extends Classes\SCore\Base\Core
      */
     protected function install()
     {
-        $this->vsUpgrades();
+        // Version-specific.
+        $this->maybeRunVsUpgrades();
+
+        // Misc installers.
         $this->createDbTables();
-
         $this->otherInstallRoutines();
-
         $this->doFlushRewriteRules();
         $this->maybeEnqueueNotices();
+
+        // History/options.
         $this->updateHistory();
+        $this->updateOptions();
     }
 
     /**
      * Version-specific upgrades.
      *
-     * @since 160524 Install utils.
+     * @since 160713 Install utils.
      */
-    protected function vsUpgrades()
+    protected function maybeRunVsUpgrades()
     {
-        $this->s::doAction('vs_upgrades', $this->history);
+        if ($this->history['last_version']) {
+            $this->s::doAction('vs_upgrades', $this->history);
+        }
     }
 
     /**
@@ -174,5 +183,15 @@ class Installer extends Classes\SCore\Base\Core
         $this->history['versions'] = array_reverse($this->history['versions'], true);
 
         $this->s::sysOption('install_history', $this->history);
+    }
+
+    /**
+     * Update options version.
+     *
+     * @since 160713 Install utils.
+     */
+    protected function updateOptions()
+    {
+        $this->s::updateOptions(['§for_version' => $this->App::VERSION]);
     }
 }

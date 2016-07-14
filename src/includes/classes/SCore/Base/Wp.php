@@ -67,7 +67,5 @@ class Wp // Stand-alone class.
             throw new Exception('Failed to parse template directory URL parts.');
         }
         $this->is_wc_active = defined('WC_VERSION'); // WooCommerce.
-
-        // NOTE: Properties in this class are public, but only for performance gains & accessibility. Do NOT alter at runtime.
     }
 }

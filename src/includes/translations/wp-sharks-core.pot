@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160713.54642\n"
+"Project-Id-Version: WP Sharks Core 160714.26596\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-07-13 15:10:50+00:00\n"
+"POT-Creation-Date: 2016-07-14 07:23:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,23 +43,17 @@ msgid "<strong>%1$s</strong> will be able load now. Please <a href=\"javascript:
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:151
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:151
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:151
 msgid "The following errors occurred while updating license keys:"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:155
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:155
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:155
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:160
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:160
 msgid "%1$s™ license keys updated successfully."
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:191
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:228
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:191
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:228
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:191
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:228
 msgid "Unknown error. Please wait 5 minutes & try again."
 msgstr ""
 
@@ -279,8 +273,8 @@ msgstr ""
 msgid "Forbidden"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:445
-#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:445
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:447
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:447
 #: src/includes/classes/SCore/Utils/Notices.php:447
 msgid "Dismiss this notice."
 msgstr ""
@@ -884,6 +878,14 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:21
+msgid "We're a globally-distributed team of developers who design software for WordPress. <a href=\"%2$s\" target=\"_blank\">%1$s™</a> was founded by business partners <a href=\"%3$s\" target=\"_blank\">Jason Caldwell</a> and <a href=\"%4$s\" target=\"_blank\">Raam Dev</a>. Since then the team has grown and now includes hard-working WordPress gurus from other parts of the in the Phillipines, MexicoOver the years we've built everything from simple contact forms to ecommerce platforms, administrative tools, cache engines, and beyond. All on top of WordPress!"
+msgstr ""
+
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:25
+msgid "We pride ourselves on our level of customer support and responsiveness to member requests. Your WordPress experience will never be the same"
+msgstr ""
+
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:30
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:30
 #: src/includes/templates/s-core/menu-pages/dashboard/default.php:30
@@ -904,10 +906,10 @@ msgstr ""
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:23
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:37
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:57
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:23
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:23
 #: src/includes/templates/s-core/menu-pages/dashboard/default.php:37
 #: src/includes/templates/s-core/menu-pages/dashboard/default.php:57
-#: src/includes/templates/s-core/notices/license-key.php:23
+#: src/includes/templates/s-core/notices/license-key-request.php:23
 msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
 msgstr ""
 
@@ -933,20 +935,20 @@ msgid "No themes/plugins by %1$s are active at this time."
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:20
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:20
-#: src/includes/templates/s-core/notices/license-key.php:20
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:20
+#: src/includes/templates/s-core/notices/license-key-request.php:20
 msgid "%1$s™ License Key for: <strong>%2$s</strong>"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:22
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:22
-#: src/includes/templates/s-core/notices/license-key.php:22
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:22
+#: src/includes/templates/s-core/notices/license-key-request.php:22
 msgid "(enables automatic updates)"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:27
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key.php:27
-#: src/includes/templates/s-core/notices/license-key.php:27
+#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:27
+#: src/includes/templates/s-core/notices/license-key-request.php:27
 msgid "Save"
 msgstr ""
 
@@ -960,6 +962,23 @@ msgstr ""
 #: .~build/wp-sharks-core/src/includes/templates/s-core/notices/on-reinstall.php:19
 #: src/includes/templates/s-core/notices/on-reinstall.php:19
 msgid "<strong>%1$s</strong> updated successfully. You're now running v%2$s."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:155
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:155
+msgid "Problem updating %1$s™ license keys:"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:196
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:233
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:196
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:233
+msgid "Unknown error. Please try again later."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Updater.php:229
+#: src/includes/classes/SCore/Utils/Updater.php:229
+msgid "%1$s™ » '%2$s' license key error:"
 msgstr ""
 
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:22
@@ -1053,12 +1072,29 @@ msgstr ""
 msgid "Default Options"
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:21
 #: src/includes/templates/s-core/menu-pages/dashboard/about.php:21
-msgid "We're a globally-distributed team of developers who design software for WordPress. <a href=\"%2$s\" target=\"_blank\">%1$s™</a> was founded by business partners <a href=\"%3$s\" target=\"_blank\">Jason Caldwell</a> and <a href=\"%4$s\" target=\"_blank\">Raam Dev</a>. Since then the team has grown and now includes hard-working WordPress gurus from other parts of the in the Phillipines, MexicoOver the years we've built everything from simple contact forms to ecommerce platforms, administrative tools, cache engines, and beyond. All on top of WordPress!"
+msgid "We're a globally-distributed team of enthusiastic open-source developers who build software for WordPress"
 msgstr ""
 
+#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:25
 #: src/includes/templates/s-core/menu-pages/dashboard/about.php:25
-msgid "We pride ourselves on our level of customer support and responsiveness to member requests. Your WordPress experience will never be the same"
+msgid "<a href=\"%2$s\" target=\"_blank\">%1$s</a> was founded by business partners <a href=\"%3$s\" target=\"_blank\">Jason Caldwell</a> and <a href=\"%4$s\" target=\"_blank\">Raam Dev</a>. Over the years we've built everything from simple contact forms, to ecommerce platforms, cache engines, social-media tools, and more. <em style=\"display:inline-block; margin-left:.5em;\">Always on top of WordPress.</em>"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:29
+#: src/includes/templates/s-core/menu-pages/dashboard/about.php:29
+msgid "Today, our team includes talented individuals from Florida, Georgia, Alaska, the Phillipines, Mexico, India, and occassionally from aquatic habitats at various temperatures where there's plenty of other fish to feed on 🐟 — we are Sharks after all"
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:33
+#: src/includes/templates/s-core/menu-pages/dashboard/about.php:33
+msgid "A developer's life is filled with fun and we all love what we do. We find great pleasure in working with each other, with our customers, and with others in the WordPress community. While there is distance between us, we're a really tight group (good at online collaboration), and we work very hard on common goals; e.g., to produce great software and help others. We pride ourselves on our level of <a href=\"%1$s\" target=\"_blank\">customer support</a> and response time."
+msgstr ""
+
+#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:37
+#: src/includes/templates/s-core/menu-pages/dashboard/about.php:37
+msgid "Your WordPress experience will never be the same."
 msgstr ""
 
 #. Plugin Name of the plugin/theme

@@ -174,8 +174,9 @@ class Options extends Classes\SCore\Base\Core
         $this->s::sysOption('options', $this->App->Config->§options);
 
         if ($this->App->Config->§options['§license_key']) {
-            $this->s::dismissNotice('§license-key');
+            $this->s::dismissNotice('§license-key-request');
         }
+        $this->s::dismissNotice('§license-key-error'); // Always.
     }
 
     /**

@@ -37,7 +37,7 @@ $rest_action_data['license_keys'] = (array) ($rest_action_data['license_keys'] ?
                     'tip'   => sprintf(__('Get your license key from the \'My Account → My Downloads\' page at %1$s™.', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME)),
 
                     'name'        => '[license_keys]['.$_App->Config->©brand['©slug'].']',
-                    'value'       => $rest_action_data['license_keys'][$_App->Config->©brand['©slug']] ?? $_App->Config->§options['§license_key'],
+                    'value'       => $rest_action_data['license_keys'][$_App->Config->©brand['©slug']] ?? $_App->s::getOption('§license_key'),
                     'placeholder' => __('XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX', 'wp-sharks-core'),
                 ]); ?>
             <?php endforeach; ?>
@@ -57,7 +57,7 @@ $rest_action_data['license_keys'] = (array) ($rest_action_data['license_keys'] ?
                     'tip'   => sprintf(__('Get your license key from the \'My Account → My Downloads\' page at %1$s™.', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME)),
 
                     'name'        => '[license_keys]['.$_App->Config->©brand['©slug'].']',
-                    'value'       => $rest_action_data['license_keys'][$_App->Config->©brand['©slug']] ?? $_App->Config->§options['§license_key'],
+                    'value'       => $rest_action_data['license_keys'][$_App->Config->©brand['©slug']] ?? $_App->s::getOption('§license_key'),
                     'placeholder' => __('XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX', 'wp-sharks-core'),
                 ]); ?>
             <?php endforeach; ?>

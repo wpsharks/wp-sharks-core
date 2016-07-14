@@ -54,8 +54,8 @@ class LicenseKeys extends Classes\SCore\Base\Core
             return; // Already have a license key.
         }
         $App->s::enqueueNotice('', [
-            'id'   => '§license-key',
-            'type' => 'info',
+            'id'   => '§license-key-request',
+            'type' => 'info', // Simple request.
 
             'is_persistent'  => true,
             'is_dismissable' => true,
@@ -106,7 +106,7 @@ class LicenseKeys extends Classes\SCore\Base\Core
     public function requestViaNoticeMarkup(string $app_slug): string
     {
         if (($App = $this->s::getAppsBySlug()[$app_slug] ?? null)) {
-            return $App->c::getTemplate('s-core/notices/license-key.php')->parse();
+            return $App->c::getTemplate('s-core/notices/license-key-request.php')->parse();
         }
         return ''; // Dequeue entirely.
     }
@@ -128,27 +128,32 @@ class LicenseKeys extends Classes\SCore\Base\Core
 
         foreach ($license_keys as $_app_slug => $_license_key) {
             if (!$_app_slug || !is_string($_app_slug) || !is_string($_license_key)) {
-                continue; // Bypass; invalid data.
+                continue; // Bypass; invalid request data.
             } elseif (!($_App = $apps_by_slug[$_app_slug] ?? null)) {
-                continue; // App no longer active.
+                continue; // App is no longer active.
             }
+            $_existing_license_key = $_App->s::getOption('§license_key');
+
             if ($_license_key) { // Activate (or reactivate) a license key.
+                if ($_existing_license_key && $_existing_license_key !== $_license_key) {
+                    $this->deactivate($_app_slug, $_existing_license_key);
+                } // ↑ Deactivate existing license key.
+
                 if ($this->c::isError($_Error = $this->activate($_app_slug, $_license_key))) {
-                    $Errors->add($_Error->slug(), '**'.$_App->Config->©brand['©name'].':** '.$_Error->message());
+                    $Errors->add($_Error->slug(), '**'.$_App->Config->©brand['§product_name'].':** '.$_Error->message());
+                    $_App->s::updateOptions(['§license_key' => '']); // Empty; problem w/ license key.
                 } else {
                     $_App->s::updateOptions(['§license_key' => $_license_key]);
                 }
-            } elseif (!$_license_key && $_App->Config->§options['§license_key']) { // Deactivate.
-                if ($this->c::isError($_Error = $this->deactivate($_app_slug, $_App->Config->§options['§license_key']))) {
-                    $Errors->add($_Error->slug(), '**'.$_App->Config->©brand['©name'].':** '.$_Error->message());
-                } else {
-                    $_App->s::updateOptions(['§license_key' => '']);
-                }
+            } elseif (!$_license_key && $_existing_license_key) { // Deactivation.
+                $this->deactivate($_app_slug, $_existing_license_key);
+                $_App->s::updateOptions(['§license_key' => '']);
             }
-        } // unset($_app_slug, $_license_key, $_App, $_Error); // Housekeeping.
+        } // unset($_app_slug, $_license_key, $_App, $_existing_license_key, $_Error);
 
-        if ($Errors->exist()) {
-            $notice_heading = sprintf(__('The following errors occurred while updating license keys:', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME));
+        if ($Errors->exist()) { // Display a full list of all errors.
+            $notice_heading = __('Problem updating %1$s™ license keys:', 'wp-sharks-core');
+            $notice_heading = sprintf($notice_heading, esc_html($this->App::CORE_CONTAINER_NAME));
             $notice_markup  = $this->s::menuPageNoticeErrors($notice_heading, $Errors->messages());
             $this->s::enqueueUserNotice($notice_markup, ['type' => 'error']);
         } else {
@@ -188,7 +193,7 @@ class LicenseKeys extends Classes\SCore\Base\Core
         if (is_wp_error($remote_response)) {
             return $this->s::wpErrorConvert($remote_response);
         } elseif (!is_object($remote_api_response)) {
-            return $this->c::error('non-object-response', __('Unknown error. Please wait 5 minutes & try again.', 'wp-sharks-core'));
+            return $this->c::error('non-object-response', __('Unknown error. Please try again later.', 'wp-sharks-core'));
         } elseif (!$remote_api_response->success) {
             return $this->c::error($remote_api_response->error->slug, $remote_api_response->error->message);
         }
@@ -225,7 +230,7 @@ class LicenseKeys extends Classes\SCore\Base\Core
         if (is_wp_error($remote_response)) {
             return $this->s::wpErrorConvert($remote_response);
         } elseif (!is_object($remote_api_response)) {
-            return $this->c::error('non-object-response', __('Unknown error. Please wait 5 minutes & try again.', 'wp-sharks-core'));
+            return $this->c::error('non-object-response', __('Unknown error. Please try again later.', 'wp-sharks-core'));
         } elseif (!$remote_api_response->success) {
             return $this->c::error($remote_api_response->error->slug, $remote_api_response->error->message);
         }

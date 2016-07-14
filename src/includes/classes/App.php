@@ -39,7 +39,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160713.54642'; //v//
+    const VERSION = '160714.26596'; //v//
 
     /**
      * ReST action API version.
@@ -373,8 +373,7 @@ class App extends CoreClasses\App
                 '©sig_key'           => $wp_app_salt_key,
             ],
 
-            '§setup' => [ // On (or after): `plugins_loaded`.
-                // Default is `after_setup_theme` for flexibility.
+            '§setup' => [ // On (or after) `plugins_loaded`.
                 '§hook'          => 'after_setup_theme',
                 '§hook_priority' => 0, // Very early.
 
@@ -494,10 +493,9 @@ class App extends CoreClasses\App
                 */
             ],
             '§default_options' => [
-                '§license_key' => '',
-                /*
-                    '[key]' => '[value]',
-                */
+                '§for_version'      => $this::VERSION,
+                '§for_product_slug' => $brand['§product_slug'],
+                '§license_key'      => '', // For product slug.
             ],
             '§options' => [
                 /*
@@ -505,11 +503,12 @@ class App extends CoreClasses\App
                 */
             ], // Filled automatically (see below).
 
-            '§uninstall' => false, // Perform uninstall?
+            '§force_install' => false, // Force install (or reinstall)?
+            '§uninstall'     => false, // Uninstall? e.g., on deletion.
         ];
         # Automatically add lite/pro conflict to the array.
 
-        if ($specs['§type'] === 'plugin') { // Only for plugins, since just one theme can be active at a time anyway.
+        if ($specs['§type'] === 'plugin') { // Only for plugins. Only one theme can be active at a time.
             $_lp_conflicting_name                                                                 = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
             $_lp_conflicting_slug                                                                 = $brand['©slug'].($specs['§is_pro'] ? '' : '-pro');
             $default_instance_base['§conflicts']['§plugins'][$_lp_conflicting_slug]               = $_lp_conflicting_name;
@@ -545,8 +544,21 @@ class App extends CoreClasses\App
         $this->Config->§options = $this->s::mergeOptions($this->Config->§options, $site_owner_options);
         $this->Config->§options = $this->s::applyFilters('options', $this->Config->§options);
 
+        # Handle option transitions from one variation of the software to another; e.g., pro upgrade.
+
+        if ($this->Config->§options['§for_product_slug'] !== $this->Config->©brand['§product_slug']) {
+            $this->Config->§options['§for_product_slug'] = $this->Config->©brand['§product_slug'];
+            $this->Config->§options['§license_key']      = ''; // No longer applicable.
+
+            if ($this->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
+                update_network_option(null, $this->Config->©brand['©var'].'_options', $this->Config->§options);
+            } else {
+                update_option($this->Config->©brand['©var'].'_options', $this->Config->§options);
+            }
+            $this->Config->§force_install = !$this->Config->§uninstall; // Force reinstall (if not uninstalling).
+        }
         # Sanity check; must be on (or after) `plugins_loaded` hook.
-        # When uninstalling, must be on (or after) `init` hook.
+        # If uninstalling, must be on (or after) `init` hook.
 
         if (!did_action('plugins_loaded')) {
             throw new Exception('`plugins_loaded` action not done yet.');
@@ -565,12 +577,13 @@ class App extends CoreClasses\App
         }
         # Add app instance to collection.
 
-        if ($this->Parent && $this->Parent->is_core) {
+        if ($this->Parent && $this->Parent->is_core && !$this->Config->§uninstall) {
+            // NOTE: If uninstalling, don't expose it to the parent/core.
             $this->Parent->s::addApp($this);
         }
         # Remaining routines are driven by setup hook.
 
-        if (did_action($this->Config->§setup['§hook'])) {
+        if ($this->Config->§uninstall || did_action($this->Config->§setup['§hook'])) {
             $this->onSetup(); // Run setup immediately.
         } else { // Delay setup routines; i.e., attach to hook.
             add_action($this->Config->§setup['§hook'], [$this, 'onSetup'], $this->Config->§setup['§hook_priority']);
@@ -666,7 +679,7 @@ class App extends CoreClasses\App
             if ($this->Wp->is_admin) {
                 add_filter('admin_init', [$this->Utils->§Updater, 'onAdminInit']);
             }
-            add_filter(// Filter update responses.
+            add_filter(// Filter updater API responses in WordPress.
                 'site_transient_update_'.$this->Config->§specs['§type'].'s',
                 [$this->Utils->§Updater, 'onGetSiteTransientUpdate'.$this->Config->§specs['§type'].'s']
             );
