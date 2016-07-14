@@ -1,4 +1,4 @@
-## $v
+## v160714.36264
 
 - Updating to latest websharks/core.
 - Adding anonymous stats collection via stats.wpsharks.io.
