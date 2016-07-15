@@ -273,7 +273,9 @@ class Updater extends Classes\SCore\Base\Core
      */
     protected function apiUrlForLatestPackageViaLicenseKey(): string
     {
-        if (!($license_key = $this->s::getOption('§license_key'))) {
+        if ($this->App->is_core) { // Core itself?
+            $license_key = $this->App::CORE_LICENSE_KEY;
+        } elseif (!($license_key = $this->s::getOption('§license_key'))) {
             return ''; // Not possible w/o license key.
         }
         $action_var = $this->s::coreBrandApiUrlArg('action');

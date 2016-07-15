@@ -87,6 +87,15 @@ class App extends CoreClasses\App
     const CORE_CONTAINER_DOMAIN = 'wpsharks.com';
 
     /**
+     * Core license key.
+     *
+     * @since 160715 Core container.
+     *
+     * @type string Core license key.
+     */
+    const CORE_LICENSE_KEY = 'WP-SHARKS-CORE-XXXX-XXXX-XXXX-XXXX-XXXX';
+
+    /**
      * Constructor.
      *
      * @since 160524 Initial release.

@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. Core itself should ship with it's own license key.
+
 ## v160715.31125
 
 - License key request for type: `theme`, `plugin` only.
