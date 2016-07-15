@@ -1,4 +1,4 @@
-## $v
+## v160715.33981
 
 - Bug fix. Core itself should ship with it's own license key.
 
