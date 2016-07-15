@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160715.36147\n"
+"Project-Id-Version: WP Sharks Core 160715.43859\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-07-15 10:02:34+00:00\n"
+"POT-Creation-Date: 2016-07-15 12:11:07+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -880,7 +880,7 @@ msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Updater.php:229
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Updater.php:229
-#: src/includes/classes/SCore/Utils/Updater.php:229
+#: src/includes/classes/SCore/Utils/Updater.php:230
 msgid "%1$s™ » '%2$s' license key error:"
 msgstr ""
 
