@@ -1,6 +1,7 @@
 ## $v
 
 - License key request for type: `theme`, `plugin` only.
+- Updating to latest websharks/core with Simple Expression bug fixes.
 
 ## v160714.36962
 
