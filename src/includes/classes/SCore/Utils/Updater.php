@@ -145,6 +145,7 @@ class Updater extends Classes\SCore\Base\Core
                     'url'         => $plugin_url,
                     'new_version' => $latest_version,
                     'package'     => $latest_package,
+                    'tested'      => WP_VERSION,
                 ];
             } // ↑ If we can acquire latest package also.
         }
