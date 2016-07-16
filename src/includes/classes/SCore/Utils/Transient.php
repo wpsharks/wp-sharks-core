@@ -142,6 +142,7 @@ class Transient extends Classes\SCore\Base\Core
      */
     protected function hashToKey(string $hash)
     {
+        $WpDb    = $this->s::wpDb(); // DB class.
         $blog_id = get_current_blog_id(); // Use in cache keys.
 
         if (($key = &$this->cacheKey(__FUNCTION__, [$blog_id, $hash])) !== null) {
