@@ -57,6 +57,9 @@ class AppStats extends Classes\SCore\Base\Core
             return; // Not applicable; themes/plugins only.
         } // e.g., We don't collect stats for a simple MU plugin.
 
+        if (!$this->c::appCore()->s::applyFilters('app_stats_enable', true)) {
+            return; // Stats disabled via filter.
+        }
         $last_posted = $this->lastPosted();
 
         if ($last_posted['time'] > $this->outdated_stats_time) {
