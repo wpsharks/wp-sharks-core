@@ -326,7 +326,9 @@ class Updater extends Classes\SCore\Base\Core
         // NOTE: Must ensure product slug is a match.
         // e.g., If they started w/ lite and upgraded to pro.
 
-        if (!$data['time'] || !$data['version'] || !$data['product_slug']
+        if (!empty($_REQUEST['force-check'])) {
+            $data = $default_empty_data; // Forcing a new check.
+        } elseif (!$data['time'] || !$data['version'] || !$data['product_slug']
             || $data['product_slug'] !== $this->App->Config->©brand['§product_slug']) {
             $data = $default_empty_data; // Return all or none.
         }
@@ -365,7 +367,9 @@ class Updater extends Classes\SCore\Base\Core
         // NOTE: Must ensure product slug is a match.
         // e.g., If they started w/ lite and upgraded to pro.
 
-        if (!$data['time'] || !$data['package'] || !$data['product_slug']
+        if (!empty($_REQUEST['force-check'])) {
+            $data = $default_empty_data; // Forcing a new check.
+        } elseif (!$data['time'] || !$data['package'] || !$data['product_slug']
             || $data['product_slug'] !== $this->App->Config->©brand['§product_slug']) {
             $data = $default_empty_data; // Return all or none.
         }
