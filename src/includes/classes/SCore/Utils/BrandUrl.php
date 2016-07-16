@@ -26,11 +26,12 @@ class BrandUrl extends Classes\SCore\Base\Core
      *
      * @since 160625 Brand URLs.
      *
-     * @param string $uri URI to append.
+     * @param string    $uri URI to append.
+     * @param bool|null $pro Force pro variation?
      *
      * @return string Output URL.
      */
-    public function toBrand(string $uri = ''): string
+    public function toBrand(string $uri = '', bool $pro = null): string
     {
         if (!($host = $this->App->Config->©brand['§domain'])) {
             throw $this->c::issue('Missing brand domain.');
@@ -38,7 +39,11 @@ class BrandUrl extends Classes\SCore\Base\Core
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
         $uri = $uri ? '/'.$uri : ''; // Force leading slash.
 
-        $base_path = $this->App->Config->©brand['§domain_path'];
+        if ($pro && !$this->App->Config->§specs['§is_pro'] && $this->App->Config->§specs['§has_pro']) {
+            $base_path = $this->App->Config->©brand['§domain_pro_path'];
+        } else {
+            $base_path = $this->App->Config->©brand['§domain_path'];
+        }
         $base_path = $base_path && $uri ? $this->c::mbRTrim($base_path, '/') : $base_path;
 
         return $url = 'https://'.$host.$base_path.$uri;
@@ -64,13 +69,14 @@ class BrandUrl extends Classes\SCore\Base\Core
      *
      * @since 160625 Brand URLs.
      *
-     * @param string $uri URI to append.
+     * @param string    $uri URI to append.
+     * @param bool|null $pro Force pro variation?
      *
      * @return string Output URL.
      */
-    public function toBrandParent(string $uri = ''): string
+    public function toBrandParent(string $uri = '', bool $pro = null): string
     {
-        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrand($uri) : $this->toBrand($uri);
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrand($uri, $pro) : $this->toBrand($uri, $pro);
     }
 
     /**
@@ -92,16 +98,17 @@ class BrandUrl extends Classes\SCore\Base\Core
      *
      * @since 160625 Brand URLs.
      *
-     * @param string $uri URI to append.
+     * @param string    $uri URI to append.
+     * @param bool|null $pro Force pro variation?
      *
      * @return string Output URL.
      */
-    public function toBrandCore(string $uri = ''): string
+    public function toBrandCore(string $uri = '', bool $pro = null): string
     {
         if ($this->App->Parent) { // Looking for the root core.
-            return $this->App->Parent->Utils->§BrandUrl->toBrandCore($uri);
+            return $this->App->Parent->Utils->§BrandUrl->toBrandCore($uri, $pro);
         }
-        return $this->toBrand($uri);
+        return $this->toBrand($uri, $pro);
     }
 
     /**

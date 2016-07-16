@@ -37,7 +37,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @type array Array of all apps.
      */
-    protected $apps_by_type;
+    protected $apps_by_slug;
 
     /**
      * Array of all apps.
@@ -46,7 +46,16 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @type array Array of all apps.
      */
-    protected $apps_by_slug;
+    protected $apps_by_type;
+
+    /**
+     * Array of all apps.
+     *
+     * @since 160715 App utils.
+     *
+     * @type array Array of all apps.
+     */
+    protected $apps_by_network_wide;
 
     /**
      * Class constructor.
@@ -62,9 +71,10 @@ class Apps extends Classes\SCore\Base\Core
         if (!$this->App->is_core) {
             throw $this->c::issue('Core only.');
         }
-        $this->apps         = [];
-        $this->apps_by_type = [];
-        $this->apps_by_slug = [];
+        $this->apps                 = [];
+        $this->apps_by_slug         = [];
+        $this->apps_by_type         = [];
+        $this->apps_by_network_wide = [];
     }
 
     /**
@@ -76,9 +86,14 @@ class Apps extends Classes\SCore\Base\Core
      */
     public function add(Classes\App $App)
     {
-        $this->apps[]                                                                     = &$App;
-        $this->apps_by_type[$App->Config->§specs['§type']][$App->Config->©brand['©slug']] = &$App;
-        $this->apps_by_slug[$App->Config->©brand['©slug']]                                = &$App;
+        $slug            = $App->Config->©brand['©slug'];
+        $type            = $App->Config->§specs['§type'];
+        $is_network_wide = $App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite;
+
+        $this->apps[]                                                     = &$App;
+        $this->apps_by_slug[$slug]                                        = &$App;
+        $this->apps_by_type[$type][$slug]                                 = &$App;
+        $this->apps_by_network_wide[(int) $is_network_wide][$type][$slug] = &$App;
     }
 
     /**
@@ -86,7 +101,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @return Classes\App[] Apps.
+     * @return array Apps.
      */
     public function get(): array
     {
@@ -98,11 +113,17 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @return Classes\App[] Apps.
+     * @param string|null $slug Specific slug?
+     *
+     * @return array|Classes\App|null Apps.
      */
-    public function getByType(): array
+    public function bySlug(string $slug = null)
     {
-        return $this->apps_by_type;
+        if (isset($slug)) {
+            return $this->apps_by_slug[$slug] ?? null;
+        } else {
+            return $this->apps_by_slug;
+        }
     }
 
     /**
@@ -110,10 +131,53 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @return Classes\App[] Apps.
+     * @param string|null $type Specific type?
+     * @param string|null $slug Specific slug?
+     *
+     * @return array|Classes\App|null Apps.
      */
-    public function getBySlug(): array
+    public function byType(string $type = null, string $slug = null)
     {
-        return $this->apps_by_slug;
+        if (isset($type, $slug)) {
+            return isset($this->apps_by_type[$type][$slug])
+                ? $this->apps_by_type[$type][$slug] : null;
+            //
+        } elseif (isset($type) && !isset($slug)) {
+            return $this->apps_by_type[$type] ?? [];
+            //
+        } elseif (!isset($type) && !isset($slug)) {
+            return $this->apps_by_type;
+        }
+        throw $this->c::issue('Invalid parameters.');
+    }
+
+    /**
+     * Get app instances.
+     *
+     * @since 160710 App utils.
+     *
+     * @param bool|null   $is_network_wide True or false.
+     * @param string|null $type            Specific type?
+     * @param string|null $slug            Specific slug?
+     *
+     * @return array|Classes\App|null Apps.
+     */
+    public function byNetworkWide(bool $is_network_wide = null, string $type = null, string $slug = null): array
+    {
+        if (isset($is_network_wide, $type, $slug)) {
+            return isset($this->apps_by_network_wide[(int) $is_network_wide][$type][$slug])
+                ? $this->apps_by_network_wide[(int) $is_network_wide][$type][$slug] : null;
+            //
+        } elseif (isset($is_network_wide, $type) && !isset($slug)) {
+            return isset($this->apps_by_network_wide[(int) $is_network_wide][$type])
+                ? $this->apps_by_network_wide[(int) $is_network_wide][$type] : [];
+            //
+        } elseif (isset($is_network_wide) && !isset($type) && !isset($slug)) {
+            return $this->apps_by_network_wide[(int) $is_network_wide] ?? [];
+            //
+        } elseif (!isset($is_network_wide) && !isset($type) && !isset($slug)) {
+            return $this->apps_by_network_wide;
+        }
+        throw $this->c::issue('Invalid parameters.');
     }
 }

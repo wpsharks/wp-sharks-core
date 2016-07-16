@@ -34,18 +34,17 @@ class SysOption extends Classes\SCore\Base\Core
      */
     public function __invoke(string $key, $value = null, bool $autoload = true)
     {
-        $key             = $this->App->Config->©brand['©var'].'_'.$key;
-        $is_network_wide = $this->App->Config->§specs['§is_network_wide'];
+        $key = $this->App->Config->©brand['©var'].'_'.$key;
 
-        if ($is_network_wide && $this->Wp->is_multisite) {
+        if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             if (isset($value)) {
                 update_network_option(null, $key, $value);
             }
             if (($value = get_network_option(null, $key)) === null || $value === false) {
                 add_network_option(null, $key, ':null'); // Autoload impossible.
-                // These will not autoload and there is no way to change this yet.
+                // These will not autoload and there is no way to change this.
             }
-        } else {
+        } else { // Default.
             if (isset($value)) {
                 update_option($key, $value);
             }

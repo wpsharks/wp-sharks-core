@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
+namespace WebSharks\WpSharks\Core\Classes\Core;
 
 use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;
@@ -15,32 +15,30 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Core abstraction.
+ * Template.
  *
- * @since 160227 Initial release.
+ * @since 160715 Template.
  */
-abstract class Core extends CoreClasses\Core\Base\Core
+class Template extends CoreClasses\Core\Template
 {
     /**
      * WP common.
      *
-     * @since 160524
+     * @since 160715
      *
-     * @type Wp
+     * @type Wp|null
      */
     protected $Wp;
 
     /**
-     * Class constructor.
+     * Additional props.
      *
-     * @since 160223 Initial release.
-     *
-     * @param Classes\App|null $App Instance of App.
+     * @since 160715 Additional props.
      */
-    public function __construct(Classes\App $App = null)
+    protected function setAdditionalProps()
     {
-        parent::__construct($App);
-
-        $this->Wp = &$this->App->Wp;
+        if (isset($this->App->Wp)) {
+            $this->Wp = &$this->App->Wp;
+        }
     }
 }

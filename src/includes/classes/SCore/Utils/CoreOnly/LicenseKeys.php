@@ -62,6 +62,9 @@ class LicenseKeys extends Classes\SCore\Base\Core
             'is_persistent'  => true,
             'is_dismissable' => true,
 
+            'for_context' => $App->Config->§specs['§is_network_wide']
+                && $this->Wp->is_multisite ? 'network' : 'admin',
+
             'is_applicable' => function (Classes\App $App) {
                 return $App->Parent->s::licenseKeyRequestViaNoticeIsApplicable($App->Config->©brand['©slug']);
             },
@@ -85,7 +88,13 @@ class LicenseKeys extends Classes\SCore\Base\Core
         if (!($App = $this->s::getAppsBySlug()[$app_slug] ?? null)) {
             return null; // Dequeue entirely.
         } elseif ($App->s::getOption('§license_key')) {
-            return null; // Dequeue entirely.
+            return null; // Dequeue entirely; got license key.
+            //
+        } elseif ($App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite && !$this->Wp->is_network_admin) {
+            return false; // Should only be shown in the network admin area.
+        } elseif (!$App->Config->§specs['§is_network_wide'] && $this->Wp->is_network_admin) {
+            return false; // Should not be shown in network admin. Requires site-specific keys.
+            //
         } elseif ($this->s::isOwnMenuPage()) {
             return false; // Not on core pages.
         } elseif (in_array($menu_page = $this->s::currentMenuPage(), ['update-core.php'], true)) {
@@ -121,10 +130,10 @@ class LicenseKeys extends Classes\SCore\Base\Core
     public function onRestActionUpdateLicenseKeys()
     {
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
-            $this->s::dieForbidden(); // Not allowed!
+            $this->s::dieForbidden(); // Disallow.
         }
         $apps_by_slug = $this->s::getAppsBySlug();
-        $data         = (array) $this->s::restActionData(true);
+        $data         = (array) $this->s::restActionData('', true);
         $license_keys = (array) ($data['license_keys'] ?? []);
         $Errors       = $this->c::error();
 
@@ -185,8 +194,9 @@ class LicenseKeys extends Classes\SCore\Base\Core
             $this->s::coreBrandApiUrlArg('action') => 'api-v1.0.activate-product-license-key',
             $this->s::coreBrandApiUrlArg('data')   => [
                 'license_key' => $license_key,
-                'site'        => site_url(),
-                'slug'        => $App->Config->©brand['§product_slug'],
+                'site'        => $App->Config->§specs['§is_network_wide']
+                    && $this->Wp->is_multisite ? network_site_url() : site_url(),
+                'slug' => $App->Config->©brand['§product_slug'],
             ],
         ];
         $remote_response     = wp_remote_post($remote_post_url, ['body' => $remote_post_body]);
@@ -222,8 +232,9 @@ class LicenseKeys extends Classes\SCore\Base\Core
             $this->s::coreBrandApiUrlArg('action') => 'api-v1.0.deactivate-product-license-key',
             $this->s::coreBrandApiUrlArg('data')   => [
                 'license_key' => $license_key,
-                'site'        => site_url(),
-                'slug'        => $App->Config->©brand['§product_slug'],
+                'site'        => $App->Config->§specs['§is_network_wide']
+                    && $this->Wp->is_multisite ? network_site_url() : site_url(),
+                'slug' => $App->Config->©brand['§product_slug'],
             ],
         ];
         $remote_response     = wp_remote_post($remote_post_url, ['body' => $remote_post_body]);

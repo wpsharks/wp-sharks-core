@@ -22,6 +22,29 @@ use function get_defined_vars as vars;
 class MenuPage extends Classes\SCore\Base\Core
 {
     /**
+     * Menu page hook names.
+     *
+     * @since 160715 Conflicts.
+     *
+     * @type array Menu page hook names.
+     */
+    protected $hook_names;
+
+    /**
+     * Class constructor.
+     *
+     * @since 160715 Conflicts.
+     *
+     * @param Classes\App $App Instance.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        $this->hook_names = [];
+    }
+
+    /**
      * Current menu page.
      *
      * @since 160524 Menu page utils.
@@ -278,6 +301,41 @@ class MenuPage extends Classes\SCore\Base\Core
     }
 
     /**
+     * Filter action links.
+     *
+     * @since 160715 Menu page utils.
+     *
+     * @param array $actions Current action links.
+     *
+     * @return array Filtered action links.
+     */
+    public function onPluginActionLinks(array $actions): array
+    {
+        if ($this->App->Config->§specs['§type'] !== 'plugin') {
+            return $actions; // Not applicable.
+        }
+        if (!empty($this->hook_names[$this->App->Config->©brand['©slug']])) {
+            $actions[] = '<a href="'.esc_url($this->url()).'">'.__('Settings', 'wp-sharks-core').'</a>';
+            //
+        } else { // Search for sub-menu item matching slug regex pattern.
+            $_slug_regex = $this->c::escRegex($this->App->Config->©brand['©slug']);
+
+            foreach ($this->hook_names as $_slug => $_hook_name) {
+                if (preg_match('/^[^:]+\:\:(?<page>'.$_slug_regex.')$/u', $_slug)) {
+                    $actions[] = '<a href="'.esc_url($this->url()).'">'.__('Settings', 'wp-sharks-core').'</a>';
+                    break; // Only need to add one action link.
+                }
+            } // unset($_slug_regex, $_slug, $_hook_name); // Houskeeping.
+        }
+        if (!$this->App->Config->§specs['§is_pro'] && $this->App->Config->§specs['§has_pro']) {
+            $actions[] = '<a href="'.esc_url($this->s::brandUrl('/', true)).'" target="_blank">'.__('Upgrade', 'wp-sharks-core').' <i class="sharkicon sharkicon-octi-tag"></i></a>';
+        } elseif ($this->App->is_core) {
+            $actions[] = '<a href="'.esc_url($this->s::coreUrl('/shop')).'" target="_blank">'.esc_html($this->App::CORE_CONTAINER_NAME).'™ <i class="sharkicon sharkicon-wp-sharks-fin"></i></a>';
+        }
+        return $actions;
+    }
+
+    /**
      * Adds a new top-level menu.
      *
      * @since 160708 Menu page utils.
@@ -331,20 +389,23 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
         $cfg['class'] .= $cfg['slug'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['slug'].'-menu-page-wrapper' : '';
 
-        if (!$cfg['template_file']) {
-            throw $this->c::issue('Missing template file.');
-        }
         if (!$cfg['icon']) {
             $cfg['icon'] = 'dashicons-admin-generic';
         }
         if (!isset($cfg['position'][0])) {
             $cfg['position'] = null; // No preference.
         }
+        $cfg = $this->s::applyFilters('menu_page', $cfg, $args, $default_args);
+
+        if (!$cfg['template_file']) {
+            throw $this->c::issue('Missing template file.');
+        }
         $cfg['nav_tabs'] = $this->buildNavTabs($cfg);
         $cfg['callback'] = $cfg['callback'] ?: function () use (&$cfg) {
             echo $this->c::getTemplate('s-core/menu-pages/template.php')->parse(compact('cfg'));
         };
-        add_menu_page($cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['slug'], $cfg['callback'], $cfg['icon'], $cfg['position']);
+        $this->hook_names[$cfg['slug']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_menu_page/>
+            add_menu_page($cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['slug'], $cfg['callback'], $cfg['icon'], $cfg['position']);
     }
 
     /**
@@ -410,6 +471,8 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
         $cfg['class'] .= $cfg['slug'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['slug'].'-menu-page-wrapper' : '';
 
+        $cfg = $this->s::applyFilters('menu_page_item', $cfg, $args, $default_args);
+
         if (!$cfg['template_file']) {
             throw $this->c::issue('Missing template file.');
         }
@@ -417,7 +480,8 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg['callback'] = $cfg['callback'] ?: function () use (&$cfg) {
             echo $this->c::getTemplate('s-core/menu-pages/template.php')->parse(compact('cfg'));
         };
-        add_submenu_page($cfg['parent_slug'], $cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['slug'], $cfg['callback']);
+        $this->hook_names[$cfg['parent_slug'].'::'.$cfg['slug']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_submenu_page/>
+            add_submenu_page($cfg['parent_slug'], $cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['slug'], $cfg['callback']);
     }
 
     /**
@@ -448,11 +512,13 @@ class MenuPage extends Classes\SCore\Base\Core
                 $_tab = ['label' => $_tab];
             }
             $_tab = array_merge([
-                'slug'   => '',
-                'url'    => '',
-                'target' => '',
-                'class'  => '',
-                'label'  => '',
+                'slug'          => '',
+                'url'           => '',
+                'target'        => '',
+                'class'         => '',
+                'label'         => '',
+                'template_file' => '',
+                'template_dir'  => '',
             ], (array) $_tab); // Force array.
 
             $_tab['slug'] = $this->c::nameToSlug($_key);
@@ -470,13 +536,22 @@ class MenuPage extends Classes\SCore\Base\Core
             }
             $_tab['class'] .= ($_tab['class'] ? ' ' : '').'-nav-tab nav-tab';
 
-            if ($_tab['slug'] === 'default') {
-                if ($is_this_menu_page && !$current_tab) {
-                    $_tab['class'] .= ' -active nav-tab-active';
-                }
-            } elseif ($is_this_menu_page && $current_tab === $_tab['slug']) {
+            if ($is_this_menu_page && ($_tab['slug'] === $current_tab || $_tab['slug'] === 'default' && !$current_tab)) {
                 $_tab['class'] .= ' -active nav-tab-active';
-                $cfg['template_file'] = dirname($cfg['template_file']).'/'.$current_tab.'.php';
+
+                // NOTE: This allows a tab to set it's own template.
+                // Helpful to extensions that filter menu page config values.
+                // This is made possible 'by reference'; i.e., `&$cfgs`.
+
+                if ($_tab['template_file']) {
+                    // Swap template if set by tab config.
+                    $cfg['template_file'] = $_tab['template_file'];
+                    $cfg['template_dir']  = $_tab['template_dir'];
+                    //
+                } elseif ($current_tab) { // Use default swap behavior; i.e., add tab suffix.
+                    // NOTE: In the case of there being no `$current_tab`, leaving default template as-is.
+                    $cfg['template_file'] = dirname($cfg['template_file']).'/'.$current_tab.'.php';
+                }
             }
             $_tab['class'] .= ' -'.$_tab['slug']; // Tab-specific class.
 
@@ -558,7 +633,7 @@ class MenuPage extends Classes\SCore\Base\Core
         $page_path = str_replace('~', $brand_slug, $page_path);
         $page_path = str_replace('%', $brand_short_slug, $page_path);
 
-        if (!$page_path || mb_strpos($page_path, '/') !== false || mb_substr($page_path, -4) === '.php') {
+        if (!$page_path || $page_path[0] === '/' || mb_substr($page_path, -4) === '.php') {
             $path       = '/'.$this->c::mbLTrim($page_path, '/');
             $page       = ''; // No `page`; treating this as a `/path`.
             return $url = $this->c::addUrlQueryArgs($query_args, $admin_url($path));

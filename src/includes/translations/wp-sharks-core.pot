@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160716.9604\n"
+"Project-Id-Version: WP Sharks Core 160716.38727\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-07-16 02:40:11+00:00\n"
+"POT-Creation-Date: 2016-07-16 10:46:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,13 +44,13 @@ msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:157
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:157
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:157
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:166
 msgid "Problem updating %1$s™ license keys:"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:162
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:162
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:162
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:171
 msgid "%1$s™ license keys updated successfully."
 msgstr ""
 
@@ -58,20 +58,20 @@ msgstr ""
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:235
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:198
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:235
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:198
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:235
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:208
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:246
 msgid "Unknown error. Please try again later."
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:57
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:57
-#: src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:57
+#: src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:85
 msgid "License Keys"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:58
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:58
-#: src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:58
+#: src/includes/classes/SCore/Utils/CoreOnly/MenuPages.php:86
 msgid "About %1$s"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:447
 #: .~build/wp-sharks-core/src/includes/classes/SCore/Utils/Notices.php:447
-#: src/includes/classes/SCore/Utils/Notices.php:447
+#: src/includes/classes/SCore/Utils/Notices.php:570
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -922,7 +922,6 @@ msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:30
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:30
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:30
 msgid "Themes by %1$s"
 msgstr ""
 
@@ -930,8 +929,6 @@ msgstr ""
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:51
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:31
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:51
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:31
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:51
 msgid "Activating a license key enables automatic updates. <em>If you need to deactivate a license key, simply empty the field and click 'Save Changes'.</em>"
 msgstr ""
 
@@ -941,8 +938,8 @@ msgstr ""
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:37
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:57
 #: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:23
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:37
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:57
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:53
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:81
 #: src/includes/templates/s-core/notices/license-key-request.php:23
 msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
 msgstr ""
@@ -951,20 +948,18 @@ msgstr ""
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:61
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:41
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:61
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:41
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:61
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:57
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:85
 msgid "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:50
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:50
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:50
 msgid "Plugins by %1$s"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:71
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:71
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:71
 msgid "No themes/plugins by %1$s are active at this time."
 msgstr ""
 
@@ -1087,6 +1082,56 @@ msgstr ""
 #: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:106
 #: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:106
 msgid "Default Options"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/MenuPage.php:298
+msgid "Settings"
+msgstr ""
+
+#: src/includes/classes/SCore/Utils/MenuPage.php:301
+msgid "Upgrade"
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:22
+msgid "Active Network-Only"
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:23
+msgid "These can only be activated network-wide, and therefore only require a single license key, which covers all child sites in the network."
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:25
+msgid "Active Child-Site"
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:26
+msgid "These require a license key to be entered for each child site in the network; i.e., if you activate them on a child site."
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:28
+msgid "Active"
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:46
+msgid "%1$s Themes by %2$s"
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:47
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:75
+msgid "%1$sActivating a license key enables automatic updates. <em>If you need to deactivate a license key, simply empty the field and click 'Save Changes'.</em>"
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:74
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:94
+msgid "%1$s Plugins by %2$s"
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:95
+msgid "%1$sActivating a license key enables automatic updates."
+msgstr ""
+
+#: src/includes/templates/s-core/menu-pages/dashboard/default.php:99
+msgid "No %1$s plugins at this time."
 msgstr ""
 
 #. Plugin Name of the plugin/theme

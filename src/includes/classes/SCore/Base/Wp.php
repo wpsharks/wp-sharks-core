@@ -15,9 +15,9 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * WP common utils.
+ * WP utils.
  *
- * @since 160710 WP common utils.
+ * @since 160710 WP utils.
  */
 class Wp // Stand-alone class.
 {
@@ -32,7 +32,8 @@ class Wp // Stand-alone class.
         $this->is_main_site = !$this->is_multisite || is_main_site();
 
         $this->is_admin         = is_admin();
-        $this->is_network_admin = $this->is_multisite && $this->is_admin && is_network_admin();
+        $this->is_user_admin    = $this->is_admin && is_user_admin();
+        $this->is_network_admin = $this->is_admin && $this->is_multisite && is_network_admin();
 
         $this->debug         = defined('WP_DEBUG') && WP_DEBUG;
         $this->debug_edge    = $this->debug && defined('WP_DEBUG_EDGE') && WP_DEBUG_EDGE;

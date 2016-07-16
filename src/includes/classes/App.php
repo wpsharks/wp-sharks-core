@@ -28,9 +28,9 @@ class App extends CoreClasses\App
      *
      * @since 160524
      *
-     * @type Wp Common props.
+     * @type Wp
      */
-    public $Wp; // Common props.
+    public $Wp;
 
     /**
      * Version.
@@ -39,7 +39,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160716.9604'; //v//
+    const VERSION = '160716.38727'; //v//
 
     /**
      * ReST action API version.
@@ -127,11 +127,11 @@ class App extends CoreClasses\App
 
         $default_specs = [
             '§is_pro'          => null,
+            '§has_pro'         => null,
             '§in_wp'           => null,
             '§is_network_wide' => false,
-
-            '§type' => '',
-            '§file' => '',
+            '§type'            => '',
+            '§file'            => '',
         ];
         $brand_defaults = [
             '©acronym' => '',
@@ -150,6 +150,7 @@ class App extends CoreClasses\App
 
             '§domain'           => '',
             '§domain_path'      => '',
+            '§domain_pro_path'  => '',
             '§domain_short_var' => '',
 
             '§api_domain'           => '',
@@ -171,15 +172,17 @@ class App extends CoreClasses\App
                 $default_specs,
                 [
                     '§is_pro'          => false,
+                    '§has_pro'         => false,
                     '§in_wp'           => false,
                     '§is_network_wide' => false,
-
-                    '§type' => 'plugin',
-                    '§file' => $this->base_dir.'/plugin.php',
+                    '§type'            => 'plugin',
+                    '§file'            => $this->base_dir.'/plugin.php',
                 ],
                 $instance_base['§specs'] ?? [],
                 $instance['§specs'] ?? []
             );
+            $specs['§is_network_wide'] = $specs['§is_network_wide'] && $this->Wp->is_multisite;
+
             $brand = array_merge(
                 $brand_defaults,
                 [
@@ -199,6 +202,7 @@ class App extends CoreClasses\App
 
                     '§domain'           => 'wpsharks.com',
                     '§domain_path'      => '/product/wp-sharks-core',
+                    '§domain_pro_path'  => '', // Not applicable.
                     '§domain_short_var' => 'wps',
 
                     '§api_domain'           => 'api.wpsharks.com',
@@ -222,9 +226,11 @@ class App extends CoreClasses\App
             }
             $Parent = $Parent ?? $GLOBALS[self::class];
 
-            $specs            = array_merge($default_specs, $instance_base['§specs'] ?? [], $instance['§specs'] ?? []);
-            $specs['§in_wp']  = $specs['§in_wp'] ?? false; // Defaults to false. If it's in WP, please specify.
-            $specs['§is_pro'] = $specs['§is_pro'] ?? mb_stripos($this->namespace, '\\Pro\\') !== false;
+            $specs                     = array_merge($default_specs, $instance_base['§specs'] ?? [], $instance['§specs'] ?? []);
+            $specs['§in_wp']           = $specs['§in_wp'] ?? false; // Defaults to false. If it's in WP, please specify.
+            $specs['§is_pro']          = $specs['§is_pro'] ?? mb_stripos($this->namespace, '\\Pro\\') !== false;
+            $specs['§has_pro']         = $specs['§is_pro'] ?: true; // Assume this is true.
+            $specs['§is_network_wide'] = $specs['§is_network_wide'] && $this->Wp->is_multisite;
 
             if (!$specs['§type'] || !$specs['§file']) {
                 if (is_file($this->base_dir.'/plugin.php')) {
@@ -259,9 +265,13 @@ class App extends CoreClasses\App
 
             $brand['©text_domain'] = $brand['©text_domain'] ?: $brand['©slug'];
 
-            if (!$brand['§domain']) {
-                $brand['§domain']           = $Parent->Config->©brand['§domain'];
-                $brand['§domain_path']      = '/product/'.$brand['§product_slug'];
+            if (!$brand['§domain'] || !$brand['§domain_path'] || !$brand['§domain_short_var']) {
+                $brand['§domain']      = $Parent->Config->©brand['§domain'];
+                $brand['§domain_path'] = '/product/'.$brand['§product_slug'];
+
+                $brand['§domain_pro_path'] = $specs['§is_pro'] ? $brand['§domain_path']
+                    : ($specs['§has_pro'] ? '/product/'.$brand['§product_slug'].'-pro' : '');
+
                 $brand['§domain_short_var'] = $Parent->Config->©brand['§domain_short_var'];
             }
             if ($this->Wp->debug) {
@@ -492,7 +502,7 @@ class App extends CoreClasses\App
             ],
 
             '§caps' => [
-                '§manage' => $this->Wp->is_multisite && $specs['§is_network_wide']
+                '§manage' => $specs['§is_network_wide'] && $this->Wp->is_multisite
                     ? 'manage_network_plugins' : 'activate_plugins',
             ],
 
@@ -672,29 +682,35 @@ class App extends CoreClasses\App
      */
     protected function onSetupOtherHooks()
     {
+        $is_theme  = $this->Config->§specs['§type'] === 'theme';
+        $is_plugin = $this->Config->§specs['§type'] === 'plugin';
+
         add_action('wp_loaded', [$this->Utils->§RestAction, 'onWpLoaded']);
         add_action('wp_loaded', [$this->Utils->§TransientShortlink, 'onWpLoaded']);
 
         if ($this->Wp->is_admin) {
+            add_action('admin_init', [$this->Utils->§AppStats, 'onAdminInit']);
+            add_action('admin_init', [$this->Utils->§Updater, 'onAdminInit']);
+
             if ($this->is_core) {
+                add_action('network_admin_menu', [$this->Utils->{'§CoreOnly\\MenuPages'}, 'onNetworkAdminMenu']);
                 add_action('admin_menu', [$this->Utils->{'§CoreOnly\\MenuPages'}, 'onAdminMenu']);
                 add_action('admin_enqueue_scripts', [$this->Utils->§StylesScripts, 'enqueueMenuPageLibs']);
             }
             add_filter('admin_body_class', [$this->Utils->§MenuPage, 'onAdminBodyClass']);
             add_action('all_admin_notices', [$this->Utils->§Notices, 'onAllAdminNotices']);
-        }
-        if ((!$this->Config->§specs['§is_network_wide'] || !$this->Wp->is_multisite || $this->Wp->is_main_site)
-                && in_array($this->Config->§specs['§type'], ['theme', 'plugin'], true)) {
-            if ($this->Wp->is_admin) {
-                add_filter('admin_init', [$this->Utils->§Updater, 'onAdminInit']);
-                add_filter('admin_init', [$this->Utils->§AppStats, 'onAdminInit']);
+
+            if ($is_plugin) { // This is specifically for a plugin, and only for a plugin.
+                add_filter('plugin_action_links_'.plugin_basename($this->Config->§specs['§file']), [$this->Utils->§MenuPage, 'onPluginActionLinks']);
             }
-            add_filter(// Filter updater API responses in WordPress.
-                'site_transient_update_'.$this->Config->§specs['§type'].'s',
+        }
+        if ($is_theme || $is_plugin) { // This attaches in all contexts for compatibility w/ third-party update tools; e.g., ManageWP.
+            add_filter(// This is so WordPress will know about available updates for our products; i.e., those not listed @ WordPress.org.
+                'site_transient_update_'.$this->Config->§specs['§type'].'s', // i.e., a `get_site_transient()` filter.
                 [$this->Utils->§Updater, 'onGetSiteTransientUpdate'.$this->Config->§specs['§type'].'s']
             );
         }
-        if ($this->is_core) {
+        if ($this->is_core) { // Deals with OPcache resets in core.
             add_action('upgrader_process_complete', [$this->Utils->§Updater, 'onUpgraderProcessComplete']);
         }
     }

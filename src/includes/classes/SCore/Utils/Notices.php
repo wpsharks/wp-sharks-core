@@ -31,6 +31,15 @@ class Notices extends Classes\SCore\Base\Core
     protected $defaults;
 
     /**
+     * Outdated notice time.
+     *
+     * @since 160715 WP notices.
+     *
+     * @type int Outdated notice time.
+     */
+    protected $outdated_notice_time;
+
+    /**
      * Class constructor.
      *
      * @since 160524 Initial release.
@@ -42,12 +51,18 @@ class Notices extends Classes\SCore\Base\Core
         parent::__construct($App);
 
         $this->defaults = [
+            'insertion_time' => time(),
+
             'id'    => '',
             'type'  => 'info',
             'style' => '',
 
-            'for_page'         => '',
-            'not_for_page'     => '',
+            'for_context'     => 'network|admin',
+            'not_for_context' => '',
+
+            'for_page'     => '',
+            'not_for_page' => '',
+
             'delay_until_time' => 0,
 
             'for_user_id' => 0,
@@ -64,6 +79,7 @@ class Notices extends Classes\SCore\Base\Core
 
             'markup' => '',
         ];
+        $this->outdated_notice_time = strtotime('-90 days');
     }
 
     /**
@@ -80,12 +96,18 @@ class Notices extends Classes\SCore\Base\Core
         $notice = array_merge($this->defaults, $notice);
         $notice = array_intersect_key($notice, $this->defaults);
 
+        $notice['insertion_time'] = (int) $notice['insertion_time'];
+
         $notice['id']    = (string) $notice['id'];
         $notice['type']  = (string) $notice['type'];
         $notice['style'] = (string) $notice['style'];
 
-        $notice['for_page']         = (string) $notice['for_page'];
-        $notice['not_for_page']     = (string) $notice['not_for_page'];
+        $notice['for_context']     = (string) $notice['for_context'];
+        $notice['not_for_context'] = (string) $notice['not_for_context'];
+
+        $notice['for_page']     = (string) $notice['for_page'];
+        $notice['not_for_page'] = (string) $notice['not_for_page'];
+
         $notice['delay_until_time'] = max(0, (int) $notice['delay_until_time']);
 
         $notice['requires_cap'] = (string) $notice['requires_cap'];
@@ -129,12 +151,13 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function key(array $notice): string
     {
-        $notice = $this->normalize($notice);
+        $hashable_notice = $this->normalize($notice);
+        unset($hashable_notice['insertion_time']);
 
-        if ($notice['id']) {
-            return $notice['id']; // Use as key also.
+        if ($hashable_notice['id']) {
+            return $hashable_notice['id']; // Use as key.
         }
-        return $this->c::sha256KeyedHash(serialize($notice));
+        return $this->c::sha256KeyedHash(serialize($hashable_notice));
     }
 
     /**
@@ -148,30 +171,122 @@ class Notices extends Classes\SCore\Base\Core
      */
     protected function currentUserCan(array $notice): bool
     {
+        $WP_User = wp_get_current_user();
         $notice  = $this->normalize($notice);
-        $user    = wp_get_current_user();
-        $user_id = (int) $user->ID;
 
-        if ($notice['for_user_id'] && $user_id !== $notice['for_user_id']) {
-            return false; // Not allowed to view notice.
-        } elseif (!$notice['requires_cap']) {
-            return true; // No requirements.
+        if ($notice['for_user_id'] && (int) $WP_User->ID !== $notice['for_user_id']) {
+            return false; // Not for current user.
+        } // ↓ Everything else is related to CAP checks.
+
+        if (!$notice['requires_cap']) {
+            return true; // No CAP requirements.
+        } elseif (!$WP_User->exists()) { // Not logged in?
+            return false; // Not possible to satisfy anything.
         }
-        if (mb_strpos($notice['requires_cap'], '|') !== false) {
-            foreach (preg_split('/[|\s]+/u', $notice['requires_cap']) as $_cap) {
-                if ($_cap && $user->has_cap($_cap)) {
-                    return true;
+        if (mb_strpos($notice['requires_cap'], '&') !== false) {
+            $all_required_caps = preg_split('/[&\s]+/u', $notice['requires_cap'], -1, PREG_SPLIT_NO_EMPTY);
+            // e.g., `edit_posts & manage_options`. NOTE: Do not mix `&|` logic.
+            // A double `&&` is also OK to use here; e.g., `edit_posts && manage_options`.
+
+            foreach ($all_required_caps as $_cap) {
+                if (!$WP_User->has_cap($_cap)) {
+                    return false; // i.e., AND logic.
                 }
-            } // unset($_caps, $_cap);
-            return false; // Unable to satisfy any.
-        } else {
-            foreach (preg_split('/[&,\s]+/u', $notice['requires_cap']) as $_cap) {
-                if ($_cap && !$user->has_cap($_cap)) {
-                    return false;
+            } // unset($_cap); // Just a little housekeeping.
+            return true; // Able to satisfy all if we get here.
+            //
+        } else { // Default is OR logic; i.e., if any are true.
+            $any_required_caps = preg_split('/[|\s]+/u', $notice['requires_cap'], -1, PREG_SPLIT_NO_EMPTY);
+            // e.g., `edit_posts|manage_options`. NOTE: Do not mix `&|` logic.
+            // A double `||` is also OK to use here; e.g., `edit_posts || manage_options`.
+
+            foreach ($any_required_caps as $_cap) {
+                if ($WP_User->has_cap($_cap)) {
+                    return true; // i.e., OR logic.
                 }
-            } // unset($_caps, $_cap);
-            return true; // Able to satisfy all.
+            } // unset($_cap); // Just a little housekeeping.
+            return false; // Unable to satisfy any if we get here.
         }
+    }
+
+    /**
+     * Is an applicable context?
+     *
+     * @since 160715 Notice contexts.
+     *
+     * @param array $notice Input notice.
+     *
+     * @return bool True if an applicable context.
+     */
+    protected function isApplicableContext(array $notice): bool
+    {
+        if ($this->Wp->is_network_admin) {
+            $context = 'network';
+        } elseif ($this->Wp->is_user_admin) {
+            $context = 'user';
+        } elseif ($this->Wp->is_admin) {
+            $context = 'admin';
+        } else { // Should not happen, but just in case.
+            debug(0, $this->c::issue(vars(), 'Context unknown.'));
+            return false; // Unknown w/ debugger.
+        }
+        $notice                  = $this->normalize($notice);
+        $applicable_contexts     = preg_split('/[|\s]+/u', $notice['for_context'], -1, PREG_SPLIT_NO_EMPTY);
+        $not_applicable_contexts = preg_split('/[|\s]+/u', $notice['not_for_context'], -1, PREG_SPLIT_NO_EMPTY);
+        // e.g., `network|admin`, `network || admin`, or `network admin`.
+
+        if ($applicable_contexts && !in_array($context, $applicable_contexts, true)) {
+            return false; // Not applicable in this context.
+        } elseif ($not_applicable_contexts && in_array($context, $not_applicable_contexts, true)) {
+            return false; // Not applicable in this context.
+        }
+        return true; // Applicable context (default behavior).
+    }
+
+    /**
+     * Is an applicable page?
+     *
+     * @since 160715 Notice contexts.
+     *
+     * @param array $notice Input notice.
+     *
+     * @return bool True if an applicable page.
+     */
+    protected function isApplicablePage(array $notice): bool
+    {
+        $notice = $this->normalize($notice);
+
+        if ($notice['for_page'] && $notice['for_page'][0] === '/') {
+            // If it begins with a `/`, treat it as pure regex like `isMenuPage()` does.
+            $applicable_pages = [$notice['for_page']]; // Delimiters not supported here.
+        } else { // May contain WRegx, but `|` is not a reserved char, so this is OK.
+            $applicable_pages = preg_split('/[|\s]+/u', $notice['for_page'], -1, PREG_SPLIT_NO_EMPTY);
+            // e.g., `index.php|post.php`, `page-slug{-*,} || another-page-slug`, or `slug1{-*,} slug2`.
+        }
+        if ($notice['not_for_page'] && $notice['not_for_page'][0] === '/') {
+            // If it begins with a `/`, treat it as pure regex like `isMenuPage()` does.
+            $not_applicable_pages = [$notice['not_for_page']]; // Delimiters not supported here.
+        } else { // May contain WRegx, but `|` is not a reserved char, so this is OK.
+            $not_applicable_pages = preg_split('/[|\s]+/u', $notice['not_for_page'], -1, PREG_SPLIT_NO_EMPTY);
+            // e.g., `index.php|post.php`, `page-slug{-*,} || another-page-slug`, or `slug1{-*,} slug2`.
+        }
+        foreach ($applicable_pages as $_applicable_page) {
+            if ($this->s::isMenuPage($_applicable_page)) {
+                $is_an_applicable_page = true;
+                break; // Have what's needed here.
+            } // In short, if any match current page.
+        } // unset($_applicable_page); // Housekeeping.
+
+        if ($applicable_pages && empty($is_an_applicable_page)) {
+            return false; // Not an applicable page.
+        }
+        foreach ($not_applicable_pages as $_not_applicable_page) {
+            if ($this->s::isMenuPage($_not_applicable_page)) {
+                return false; // Not applicable.
+            } // In short, if any match current page.
+        } // unset($_not_applicable_page); // Housekeeping.
+
+        return true; // Applicable page (default behavior).
     }
 
     /**
@@ -316,6 +431,8 @@ class Notices extends Classes\SCore\Base\Core
         if (!($notices = $this->get())) {
             return; // Nothing to do.
         }
+        $time = time(); // The current time.
+
         foreach ($notices as $_key => $_notice) {
             # Catch invalid/corrupted notices.
 
@@ -347,20 +464,26 @@ class Notices extends Classes\SCore\Base\Core
                 unset($notices[$_key]);
                 continue; // Ignore.
             }
-            # If transient, wipe it away after a single pass.
+            # If transient, wipe after a single pass.
 
             if ($_notice['is_transient']) {
                 unset($notices[$_key]);
+            }
+            # Has notice become too old; i.e., lingering?
+
+            if ($_notice['insertion_time'] < $this->outdated_notice_time
+                && /* Not intentially delayed. */ $_notice['delay_until_time'] < $time) {
+                unset($notices[$_key]); // Ancient history after this pass.
             }
             # Check conditions; i.e., is notice applicable?
 
             if (!$this->currentUserCan($_notice)) {
                 continue; // Do not display.
-            } elseif ($_notice['for_page'] && !$this->s::isMenuPage($_notice['for_page'])) {
+            } elseif (!$this->isApplicableContext($_notice)) {
                 continue; // Do not display.
-            } elseif ($_notice['not_for_page'] && $this->s::isMenuPage($_notice['not_for_page'])) {
+            } elseif (!$this->isApplicablePage($_notice)) {
                 continue; // Do not display.
-            } elseif ($_notice['delay_until_time'] && $_notice['delay_until_time'] > time()) {
+            } elseif ($_notice['delay_until_time'] > $time) {
                 continue; // Do not display.
             }
             # If `is_applicable` is a closure, check it's return value also.

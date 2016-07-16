@@ -53,6 +53,10 @@ class AppStats extends Classes\SCore\Base\Core
      */
     public function onAdminInit()
     {
+        if (!in_array($this->App->Config->§specs['§type'], ['theme', 'plugin'], true)) {
+            return; // Not applicable; themes/plugins only.
+        } // e.g., We don't collect stats for a simple MU plugin.
+
         $last_posted = $this->lastPosted();
 
         if ($last_posted['time'] > $this->outdated_stats_time) {

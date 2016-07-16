@@ -164,13 +164,18 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @param bool $allow_dimensions Allow?
+     * @param string $action           Action identifier.
+     * @param bool   $allow_dimensions Allow multiple dimensions?
      *
      * @return array|string|null Action data.
      */
-    public function data(bool $allow_dimensions = false)
+    public function data(string $action = '', bool $allow_dimensions = false)
     {
+        $action = $action ?: $this->action;
+
         if (!$this->action) {
+            return; // Not applicable.
+        } elseif ($action !== $this->action) {
             return; // Not applicable.
         } elseif (!isset($_REQUEST[$this->data_var])) {
             return; // Not applicable.

@@ -38,6 +38,22 @@ class MenuPages extends Classes\SCore\Base\Core
     }
 
     /**
+     * On network admin menu.
+     *
+     * @since 160715 Core menu page utils.
+     *
+     * @param array $args Configuration args.
+     *
+     * @note Requires core to be activated network-wide.
+     */
+    public function onNetworkAdminMenu()
+    {
+        if ($this->s::getAppsByNetworkWide(true)) {
+            $this->addMenuPages();
+        }
+    }
+
+    /**
      * On admin menu.
      *
      * @since 160524 Core menu page utils.
@@ -45,6 +61,18 @@ class MenuPages extends Classes\SCore\Base\Core
      * @param array $args Configuration args.
      */
     public function onAdminMenu()
+    {
+        $this->addMenuPages();
+    }
+
+    /**
+     * Adds menu pages.
+     *
+     * @since 160524 Core menu page utils.
+     *
+     * @param array $args Configuration args.
+     */
+    protected function addMenuPages()
     {
         $this->s::addMenuPageItem([
             'auto_prefix'   => false,

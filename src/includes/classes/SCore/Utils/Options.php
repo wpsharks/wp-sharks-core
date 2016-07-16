@@ -55,7 +55,7 @@ class Options extends Classes\SCore\Base\Core
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!
         }
-        $this->update((array) $this->s::restActionData(true));
+        $this->update((array) $this->s::restActionData('', true));
 
         $url = $this->c::currentUrl();
         $url = $this->s::removeUrlRestAction($url);
@@ -89,7 +89,7 @@ class Options extends Classes\SCore\Base\Core
         if (!current_user_can($this->App->Config->§caps['§manage'])) {
             $this->s::dieForbidden(); // Not allowed!
         }
-        $this->update((array) $this->s::restActionData(true));
+        $this->update((array) $this->s::restActionData('', true));
 
         exit(json_encode(['success' => true]));
     }

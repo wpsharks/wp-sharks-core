@@ -22,13 +22,13 @@ use function get_defined_vars as vars;
 class Uninstaller extends Classes\SCore\Base\Core
 {
     /**
-     * Counter.
+     * Site counter.
      *
-     * @since 160524 DB utils.
+     * @since 160715 DB utils.
      *
-     * @type int Counter.
+     * @type int Site counter.
      */
-    protected $counter;
+    protected $site_counter;
 
     /**
      * Class constructor.
@@ -41,7 +41,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
-        $this->counter = 0; // Initialize.
+        $this->site_counter = 0;
     }
 
     /**
@@ -61,15 +61,17 @@ class Uninstaller extends Classes\SCore\Base\Core
         } elseif (!$this->App->Config->§uninstall) {
             return; // Not uninstalling.
         }
-        $this->counter = 0; // Initialize counter.
+        $this->site_counter = 0; // Initialize site counter.
 
         if ($this->Wp->is_multisite) { // For each site in the network.
             foreach (($sites = wp_get_sites()) ? $sites : [] as $_site) {
+                ++$this->site_counter;
                 switch_to_blog($_site['blog_id']);
                 $this->uninstall();
                 restore_current_blog();
             } // unset($_site);
         } else {
+            ++$this->site_counter;
             $this->uninstall();
         }
     }
@@ -89,8 +91,6 @@ class Uninstaller extends Classes\SCore\Base\Core
 
         // Other uninstallers.
         $this->otherUninstallRoutines();
-
-        ++$this->counter; // Increment.
     }
 
     /**
@@ -102,7 +102,7 @@ class Uninstaller extends Classes\SCore\Base\Core
     {
         $WpDb = $this->s::wpDb();
 
-        if ($this->counter <= 0 && $this->Wp->is_multisite) {
+        if ($this->Wp->is_multisite && $this->site_counter === 1) {
             $sql = /* Delete network options. */ '
                     DELETE
                         FROM `'.esc_sql($WpDb->sitemeta).'`
@@ -181,8 +181,15 @@ class Uninstaller extends Classes\SCore\Base\Core
      */
     protected function dropDbTables()
     {
-        if (!$this->App->Config->§specs['§is_network_wide'] || $this->counter <= 0) {
-            $this->s::dropDbTables(); // Only if the table prefix changes.
+        // NOTE: This is optimized to avoid trying to delete tables over & over again.
+        // If the app is network-wide and this is a network, there is only one set of tables.
+
+        if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite && $this->site_counter === 1) {
+            $this->s::dropDbTables(); // Drop the network-wide tables for this app, just once.
+            //
+        } elseif (!$this->App->Config->§specs['§is_network_wide'] || !$this->Wp->is_multisite) {
+            $this->s::dropDbTables(); // The table prefix changes for each site.
+            // And, of course, this covers a standard WP installation also.
         }
     }
 
@@ -193,6 +200,6 @@ class Uninstaller extends Classes\SCore\Base\Core
      */
     protected function otherUninstallRoutines()
     {
-        $this->s::doAction('other_uninstall_routines', $this->counter);
+        $this->s::doAction('other_uninstall_routines', $this->site_counter);
     }
 }

@@ -81,7 +81,7 @@ class Transient extends Classes\SCore\Base\Core
                 if (!($transient_id = (int) $WpDb->get_var($sql))) {
                     throw $this->c::issue('Unable to acquire site transient ID.');
                 }
-            } else {
+            } else { // Default site-specific behavior.
                 set_transient($transient_key, $value, $expires_after);
 
                 $sql = /* SQL to acquire transient ID. */ '

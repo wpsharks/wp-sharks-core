@@ -37,7 +37,7 @@ trait Apps
      */
     public static function getAppsByType(...$args)
     {
-        return $GLOBALS[static::class]->Utils->{'§CoreOnly\\Apps'}->getByType(...$args);
+        return $GLOBALS[static::class]->Utils->{'§CoreOnly\\Apps'}->byType(...$args);
     }
 
     /**
@@ -45,6 +45,14 @@ trait Apps
      */
     public static function getAppsBySlug(...$args)
     {
-        return $GLOBALS[static::class]->Utils->{'§CoreOnly\\Apps'}->getBySlug(...$args);
+        return $GLOBALS[static::class]->Utils->{'§CoreOnly\\Apps'}->bySlug(...$args);
+    }
+
+    /**
+     * @since 160715 Initial release.
+     */
+    public static function getAppsByNetworkWide(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->{'§CoreOnly\\Apps'}->byNetworkWide(...$args);
     }
 }

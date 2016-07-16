@@ -2,6 +2,9 @@
 
 - Bug fix. Missing `$WpDb` variable in transient utils.
 - Adding support for 'Check Again' functionality in `update-core.php` via `$_REQUEST['force-check']`.
+- Enhancing/optimizing notice utilities.
+- Enhancing/optimizing support for multisite networks and network-wide, network-only plugins.
+- Enhancing menu page utilities.
 
 ## v160715.33981
 

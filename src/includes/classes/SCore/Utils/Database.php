@@ -53,7 +53,7 @@ class Database extends Classes\SCore\Base\Core
      */
     public function prefix(): string
     {
-        if ($this->App->Config->§specs['§is_network_wide']) {
+        if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             return $this->wp->base_prefix.$this->App->Config->©brand['©var'].'_';
         } else {
             return $this->wp->prefix.$this->App->Config->©brand['©var'].'_';
