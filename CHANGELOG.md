@@ -1,4 +1,4 @@
-##
+## v160716.46700
 
 - Bug fix. Missing `$WpDb` variable in transient utils.
 - Adding support for 'Check Again' functionality in `update-core.php` via `$_REQUEST['force-check']`.
