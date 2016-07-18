@@ -10,14 +10,18 @@
   #{$scope}a {
     text-decoration:          none;
 
-    &[href='#'][data-toggle]:not(.-no-dots) {
+    &[href='#'][data-toggle]:not(.button):not(.btn):not(.-no-dots) {
       border-bottom:          1px dotted;
     }
 
-    &[target='_blank']:not(.-no-icon) {
+    &[target='_blank']:not(.button):not(.btn):not(.-no-icon) {
       @include wp-admin-dashicon(external, after);
 
-      display:                inline-block;
+      &::after {
+        font-size:           .75em;
+        margin-left:         .25em;
+        display:              inline-block;
+      }
     }
   }
 }

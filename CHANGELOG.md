@@ -1,3 +1,7 @@
+## $v
+
+- Enhancing core menu page styles. The external link icons were being applied to buttons.
+
 ## v160716.46700
 
 - Bug fix. Missing `$WpDb` variable in transient utils.
