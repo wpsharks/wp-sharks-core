@@ -1,3 +1,10 @@
+## $v
+
+- Dropping `PDO` extension requirement (now optional).
+- Dropping `posix` extension requirement (now optional).
+- Dropping explicit PHP version requirement, because it's already specified by the websharks/core.
+- Updating to the latest `websharks/core` library.
+
 ## v160718.53795
 
 - Enhancing core menu page styles. The external link icons were being applied to buttons.

@@ -27,7 +27,6 @@ project_php_required_extensions  = \
                                    json, \
                                    mbstring, \
                                    mcrypt, \
-                                   posix, \
                                    session, \
                                    tokenizer, \
                                    zlib, \
