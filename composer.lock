@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f48ec31a758351b4cf3dcb3f2392e14c",
-    "content-hash": "ad0b5b9d910fb4e769805f1d4ae68a56",
+    "hash": "6f1d16f1ffd60aaac751fe8b27cb0287",
+    "content-hash": "c91f3dfe63d81a34c66c20bda401be84",
     "packages": [
         {
             "name": "embedly/embedly-php",
@@ -699,7 +699,7 @@
         },
         {
             "name": "websharks/core",
-            "version": "dev-master",
+            "version": "dev-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",

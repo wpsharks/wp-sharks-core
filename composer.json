@@ -28,7 +28,7 @@
 
   "require": {
     "websharks/wp-php-rv": "dev-master",
-    "websharks/core": "dev-master"
+    "websharks/core": "dev-dev"
   },
   "require-dev": {},
 
