@@ -1,4 +1,4 @@
-## $v
+## v160719.39226
 
 - Dropping `PDO` extension requirement (now optional).
 - Dropping `posix` extension requirement (now optional).
