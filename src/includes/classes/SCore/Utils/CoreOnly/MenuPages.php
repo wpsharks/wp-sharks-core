@@ -76,7 +76,7 @@ class MenuPages extends Classes\SCore\Base\Core
     {
         $this->s::addMenuPageItem([
             'auto_prefix'   => false,
-            'parent_slug'   => 'index.php',
+            'parent_page'   => 'index.php',
             'page_title'    => $this->App::CORE_CONTAINER_NAME,
             'menu_title'    => $this->App::CORE_CONTAINER_NAME.' <i class="sharkicon sharkicon-wp-sharks-fin"></i>',
             'template_file' => 's-core/menu-pages/dashboard/default.php',

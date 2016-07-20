@@ -318,14 +318,14 @@ class MenuPage extends Classes\SCore\Base\Core
             $actions[] = '<a href="'.esc_url($this->url()).'">'.__('Settings', 'wp-sharks-core').'</a>';
             //
         } else { // Search for sub-menu item matching slug regex pattern.
-            $_slug_regex = $this->c::escRegex($this->App->Config->©brand['©slug']);
+            $_page_regex = $this->c::escRegex($this->App->Config->©brand['©slug']);
 
-            foreach ($this->hook_names as $_slug => $_hook_name) {
-                if (preg_match('/^[^:]+\:\:(?<page>'.$_slug_regex.')$/u', $_slug)) {
-                    $actions[] = '<a href="'.esc_url($this->url()).'">'.__('Settings', 'wp-sharks-core').'</a>';
+            foreach ($this->hook_names as $_hook_page_key => $_hook_name) {
+                if (preg_match('/^(?<parent_page>[^:]+)\:(?<page>'.$_page_regex.')$/u', $_hook_page_key, $_m)) {
+                    $actions[] = '<a href="'.esc_url($this->url($_m['parent_page'], ['page' => $_m['page']])).'">'.__('Settings', 'wp-sharks-core').'</a>';
                     break; // Only need to add one action link.
                 }
-            } // unset($_slug_regex, $_slug, $_hook_name); // Houskeeping.
+            } // unset($_page_regex, $_hook_page_key, $_hook_name); // Houskeeping.
         }
         if (!$this->App->Config->§specs['§is_pro'] && $this->App->Config->§specs['§has_pro']) {
             $actions[] = '<a href="'.esc_url($this->s::brandUrl('/', true)).'" target="_blank">'.__('Upgrade', 'wp-sharks-core').' <i class="sharkicon sharkicon-octi-tag"></i></a>';
@@ -348,7 +348,7 @@ class MenuPage extends Classes\SCore\Base\Core
             'page_title'    => '',
             'menu_title'    => '',
             'capability'    => '',
-            'slug'          => '',
+            'page'          => '',
             'class'         => '',
             'template_file' => '',
             'template_dir'  => '',
@@ -363,7 +363,7 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg['page_title']    = (string) $cfg['page_title'];
         $cfg['menu_title']    = (string) $cfg['menu_title'];
         $cfg['capability']    = (string) $cfg['capability'];
-        $cfg['slug']          = (string) $cfg['slug'];
+        $cfg['page']          = (string) $cfg['page'];
         $cfg['class']         = (string) $cfg['class'];
         $cfg['template_file'] = (string) $cfg['template_file'];
         $cfg['template_dir']  = (string) $cfg['template_dir'];
@@ -380,14 +380,14 @@ class MenuPage extends Classes\SCore\Base\Core
         if (!$cfg['capability']) {
             $cfg['capability'] = $this->App->Config->§caps['§manage'];
         }
-        if (!$cfg['slug']) {
-            $cfg['slug'] = $this->App->Config->©brand['©slug'];
+        if (!$cfg['page']) {
+            $cfg['page'] = $this->App->Config->©brand['©slug'];
         }
         $cfg['class'] .= ($cfg['class'] ? ' ' : '').'wrap';
         $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
         $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
         $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
-        $cfg['class'] .= $cfg['slug'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['slug'].'-menu-page-wrapper' : '';
+        $cfg['class'] .= $cfg['page'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['page'].'-menu-page-wrapper' : '';
 
         if (!$cfg['icon']) {
             $cfg['icon'] = 'dashicons-admin-generic';
@@ -400,12 +400,12 @@ class MenuPage extends Classes\SCore\Base\Core
         if (!$cfg['template_file']) {
             throw $this->c::issue('Missing template file.');
         }
-        $cfg['nav_tabs'] = $this->buildNavTabs($cfg);
+        $cfg['nav_tabs'] = $this->is($cfg['page']) ? $this->buildNavTabs($cfg) : '';
         $cfg['callback'] = $cfg['callback'] ?: function () use (&$cfg) {
             echo $this->c::getTemplate('s-core/menu-pages/template.php')->parse(compact('cfg'));
         };
-        $this->hook_names[$cfg['slug']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_menu_page/>
-            add_menu_page($cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['slug'], $cfg['callback'], $cfg['icon'], $cfg['position']);
+        $this->hook_names[$cfg['page']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_menu_page/>
+            add_menu_page($cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['page'], $cfg['callback'], $cfg['icon'], $cfg['position']);
     }
 
     /**
@@ -419,11 +419,11 @@ class MenuPage extends Classes\SCore\Base\Core
     {
         $default_args = [
             'auto_prefix'   => true,
-            'parent_slug'   => '',
+            'parent_page'   => '',
             'page_title'    => '',
             'menu_title'    => '',
             'capability'    => '',
-            'slug'          => '',
+            'page'          => '',
             'class'         => '',
             'template_file' => '',
             'template_dir'  => '',
@@ -434,20 +434,20 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg = array_intersect_key($cfg, $default_args);
 
         $cfg['auto_prefix']   = (bool) $cfg['auto_prefix'];
-        $cfg['parent_slug']   = (string) $cfg['parent_slug'];
+        $cfg['parent_page']   = (string) $cfg['parent_page'];
         $cfg['page_title']    = (string) $cfg['page_title'];
         $cfg['menu_title']    = (string) $cfg['menu_title'];
         $cfg['capability']    = (string) $cfg['capability'];
-        $cfg['slug']          = (string) $cfg['slug'];
+        $cfg['page']          = (string) $cfg['page'];
         $cfg['class']         = (string) $cfg['class'];
         $cfg['template_file'] = (string) $cfg['template_file'];
         $cfg['template_dir']  = (string) $cfg['template_dir'];
         $cfg['tabs']          = (array) $cfg['tabs'];
 
-        if ($cfg['parent_slug'] && $cfg['auto_prefix']) {
-            $cfg['parent_slug'] = $this->App->Config->©brand['©slug'].'-'.$cfg['parent_slug'];
-        } elseif (!$cfg['parent_slug']) {
-            $cfg['parent_slug'] = $this->App->Config->©brand['©slug'];
+        if ($cfg['parent_page'] && $cfg['auto_prefix']) {
+            $cfg['parent_page'] = $this->App->Config->©brand['©slug'].'-'.$cfg['parent_page'];
+        } elseif (!$cfg['parent_page']) {
+            $cfg['parent_page'] = $this->App->Config->©brand['©slug'];
         }
         if ($cfg['page_title'] && $cfg['auto_prefix']) {
             $cfg['page_title'] = $cfg['page_title'].' | '.$this->App->Config->©brand['©name'];
@@ -460,28 +460,28 @@ class MenuPage extends Classes\SCore\Base\Core
         if (!$cfg['capability']) {
             $cfg['capability'] = $this->App->Config->§caps['§manage'];
         }
-        if ($cfg['slug'] && $cfg['auto_prefix']) {
-            $cfg['slug'] = $this->App->Config->©brand['©slug'].'-'.$cfg['slug'];
-        } elseif (!$cfg['slug']) {
-            $cfg['slug'] = $this->App->Config->©brand['©slug'];
+        if ($cfg['page'] && $cfg['auto_prefix']) {
+            $cfg['page'] = $this->App->Config->©brand['©slug'].'-'.$cfg['page'];
+        } elseif (!$cfg['page']) {
+            $cfg['page'] = $this->App->Config->©brand['©slug'];
         }
         $cfg['class'] .= ($cfg['class'] ? ' ' : '').'wrap';
         $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
         $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
         $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
-        $cfg['class'] .= $cfg['slug'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['slug'].'-menu-page-wrapper' : '';
+        $cfg['class'] .= $cfg['page'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['page'].'-menu-page-wrapper' : '';
 
         $cfg = $this->s::applyFilters('menu_page_item', $cfg, $args, $default_args);
 
         if (!$cfg['template_file']) {
             throw $this->c::issue('Missing template file.');
         }
-        $cfg['nav_tabs'] = $this->buildNavTabs($cfg);
+        $cfg['nav_tabs'] = $this->is($cfg['page']) ? $this->buildNavTabs($cfg) : '';
         $cfg['callback'] = $cfg['callback'] ?: function () use (&$cfg) {
             echo $this->c::getTemplate('s-core/menu-pages/template.php')->parse(compact('cfg'));
         };
-        $this->hook_names[$cfg['parent_slug'].'::'.$cfg['slug']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_submenu_page/>
-            add_submenu_page($cfg['parent_slug'], $cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['slug'], $cfg['callback']);
+        $this->hook_names[$cfg['parent_page'].':'.$cfg['page']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_submenu_page/>
+            add_submenu_page($cfg['parent_page'], $cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['page'], $cfg['callback']);
     }
 
     /**
@@ -496,11 +496,16 @@ class MenuPage extends Classes\SCore\Base\Core
     protected function buildNavTabs(array &$cfg): string
     {
         if (!$cfg['tabs']) {
-            return ''; // N/A.
+            return ''; // Nothing.
+        } elseif (!$this->is($cfg['page'])) {
+            return ''; // Not necessary.
         }
-        $has_default_tab   = false; // Initialize.
-        $is_this_menu_page = $this->is($cfg['slug']);
-        $current_tab       = $this->currentTab();
+        $has_default_tab  = false;
+        $current_tab      = $this->currentTab();
+        $current_page_url = $this->c::currentUrl();
+        $current_page_url = $this->s::removeUrlNonce($current_page_url);
+        $current_page_url = $this->s::removeUrlRestAction($current_page_url);
+        $current_page_url = $this->c::removeUrlQueryArgs(['tab'], $current_page_url);
 
         $markup = '<nav class="-nav-tabs nav-tab-wrapper">';
 
@@ -525,18 +530,16 @@ class MenuPage extends Classes\SCore\Base\Core
 
             if (!$_tab['url'] || $_tab['slug'] === 'default') {
                 if ($_tab['slug'] === 'default') {
-                    $_tab['url'] = $this->c::currentUrl();
-                    $_tab['url'] = $this->c::removeUrlQueryArgs(['tab'], $_tab['url']);
-                } else {
-                    $_tab['url'] = $this->c::currentUrl();
-                    $_tab['url'] = $this->c::addUrlQueryArgs(['tab' => $_tab['slug']], $_tab['url']);
+                    $_tab['url'] = $current_page_url;
+                } else { // Add `&tab=` to the current page URL.
+                    $_tab['url'] = $this->c::addUrlQueryArgs(['tab' => $_tab['slug']], $current_page_url);
                 }
-                $_tab['url'] = $this->s::removeUrlRestAction($_tab['url']);
-                $_tab['url'] = $this->s::removeUrlNonce($_tab['url']);
-            }
-            $_tab['class'] .= ($_tab['class'] ? ' ' : '').'-nav-tab nav-tab';
+            } // ↑ This constructs the URL leading to a given tab.
 
-            if ($is_this_menu_page && ($_tab['slug'] === $current_tab || $_tab['slug'] === 'default' && !$current_tab)) {
+            $_tab['class'] .= ($_tab['class'] ? ' ' : '').'-nav-tab nav-tab';
+            $_tab['class'] .= ' -'.$_tab['slug']; // Tab-specific class.
+
+            if ($_tab['slug'] === $current_tab || ($_tab['slug'] === 'default' && !$current_tab)) {
                 $_tab['class'] .= ' -active nav-tab-active';
 
                 // NOTE: This allows a tab to set it's own template.
@@ -553,8 +556,6 @@ class MenuPage extends Classes\SCore\Base\Core
                     $cfg['template_file'] = dirname($cfg['template_file']).'/'.$current_tab.'.php';
                 }
             }
-            $_tab['class'] .= ' -'.$_tab['slug']; // Tab-specific class.
-
             if (!$_tab['label']) {
                 $_tab['label'] = esc_html($this->c::slugToName($_tab['slug']));
             }
@@ -607,7 +608,8 @@ class MenuPage extends Classes\SCore\Base\Core
             } else {
                 $query_args = []; // Force array.
             }
-        }
+        } // ↑ Tab as 2nd parameter if it's a string.
+
         $_tmp_query_args = $query_args;
         $query_args      = []; // Reinitialize.
 
@@ -635,12 +637,10 @@ class MenuPage extends Classes\SCore\Base\Core
 
         if (!$page_path || $page_path[0] === '/' || mb_substr($page_path, -4) === '.php') {
             $path       = '/'.$this->c::mbLTrim($page_path, '/');
-            $page       = ''; // No `page`; treating this as a `/path`.
             return $url = $this->c::addUrlQueryArgs($query_args, $admin_url($path));
             //
         } else { // Treat it as a `?page` instead of a path.
-            $page       = $page_path;
-            $path       = ''; // No `path`; treating as a `?page`.
+            $page       = $this->c::mbTrim($page_path, '/');
             $query_args = array_merge(['page' => $page], $query_args);
             return $url = $this->c::addUrlQueryArgs($query_args, $admin_url('/'));
         }

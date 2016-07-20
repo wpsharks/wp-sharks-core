@@ -1,3 +1,9 @@
+## $v
+
+- Refactoring menu page tab generation.
+- Refactoring menu page argument names.
+- Fixing a bug in automatic action links for plugins.
+
 ## v160719.39226
 
 - Dropping `PDO` extension requirement (now optional).
