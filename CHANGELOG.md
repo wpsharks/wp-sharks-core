@@ -1,3 +1,8 @@
+## [coming soon]
+
+- Updating to the latest websharks/core.
+- Adding Jetpack utils for Markdown parsing.
+
 ## v160720.31351
 
 - Refactoring menu page tab generation.

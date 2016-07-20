@@ -34,6 +34,7 @@ abstract class Facades
     use Traits\Facades\Fatalities;
     use Traits\Facades\Hooks;
     use Traits\Facades\Installer;
+    use Traits\Facades\Jetpack;
     use Traits\Facades\MenuPage;
     use Traits\Facades\MenuPageMarkup;
     use Traits\Facades\Nonce;
