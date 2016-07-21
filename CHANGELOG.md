@@ -1,7 +1,9 @@
-## [coming soon]
+## $v
 
 - Updating to the latest websharks/core.
 - Adding Jetpack utils for Markdown parsing.
+- Bug fix in select form field generator. Use `[]` when `multiple` is true.
+- Bug fix in `s::restActionFormElementName()` when passing `[]` as an array.
 
 ## v160720.31351
 

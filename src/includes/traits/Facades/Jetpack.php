@@ -31,4 +31,12 @@ trait Jetpack
     {
         return $GLOBALS[static::class]->Utils->§Jetpack->canMarkdown(...$args);
     }
+
+    /**
+     * @since 160720 Jetpack utils.
+     */
+    public static function jetpackCanLatex(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Jetpack->canLatex(...$args);
+    }
 }

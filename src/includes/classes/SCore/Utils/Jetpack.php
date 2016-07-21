@@ -52,7 +52,7 @@ class Jetpack extends Classes\SCore\Base\Core
      *
      * @since 160720 Jetpack utils.
      *
-     * @return bool Can markdown?
+     * @return bool Can markdown via Jetpack?
      */
     public function canMarkdown(): bool
     {
@@ -61,5 +61,17 @@ class Jetpack extends Classes\SCore\Base\Core
                 ? \WPCom_Markdown::get_instance() : false;
         }
         return (bool) $this->WPCom_Markdown;
+    }
+
+    /**
+     * Can LaTeX via Jetpack?
+     *
+     * @since 160720 Jetpack utils.
+     *
+     * @return bool Can LaTeX via Jetpack?
+     */
+    public function canLatex(): bool
+    {
+        return $this->Wp->is_jetpack_active && $this->c::canCallFunc('latex_markup');
     }
 }

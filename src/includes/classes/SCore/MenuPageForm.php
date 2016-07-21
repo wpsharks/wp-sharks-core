@@ -293,8 +293,8 @@ class MenuPageForm extends Classes\SCore\Base\Core
             }
         } // unset($_key, $_value); // Housekeeping.
 
-        if (!$cfg['label'] || !$cfg['name'] || !$cfg['options']) {
-            throw $this->c::issue('`label`, `name`, and `options` required.');
+        if (!$cfg['label'] || !$cfg['name']) {
+            throw $this->c::issue('`label` and `name` required.');
         }
         if (is_array($cfg['options'])) {
             $_options       = $cfg['options'];
@@ -324,8 +324,8 @@ class MenuPageForm extends Classes\SCore\Base\Core
             // unset($_value, $_label, $_selected, $_in_optgroup, $_options); // Housekeeping.
         }
         $cfg['var_name'] = $cfg['name']; // Internal copy.
-        $cfg['name']     = $this->s::restActionFormElementName($cfg['var_name']);
         $cfg['id']       = $this->s::restActionFormElementId($this->action, $cfg['var_name']);
+        $cfg['name']     = $this->s::restActionFormElementName($cfg['var_name'].($cfg['multiple'] ? '[]' : ''));
         $cfg['class']    = $this->c::mbTrim($cfg['class'].' '.$this->s::restActionFormElementClass($cfg['var_name']));
 
         $cfg['tip']  = $cfg['tip'] ? $this->s::menuPageTip($cfg['tip']) : '';

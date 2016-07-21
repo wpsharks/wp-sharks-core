@@ -47,6 +47,17 @@ $jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
         position:             absolute;
       }
 
+      code {
+        margin:               0;
+        border-radius:       .25em;
+        padding:             .025em .5em;
+        white-space:          nowrap;
+        font-size:            inherit;
+        color:                inherit;
+        display:              inline-block;
+        background:           lighten($jquery-ui-tooltip-bg-color, 10%);
+      }
+
       hr {
         @include linear-gradient(to right, $jquery-ui-tooltip-hr-color-1, $jquery-ui-tooltip-hr-color-2, $jquery-ui-tooltip-hr-color-1);
 

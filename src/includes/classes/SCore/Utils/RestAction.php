@@ -267,9 +267,9 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @return string Data form element ID.
      */
-    public function formElementId(string $action, string $var_name): string
+    public function formElementId(string $action, string $var_name = ''): string
     {
-        return $this->data_slug.'-'.$this->c::nameToSlug($action).'-'.$this->c::nameToSlug($var_name);
+        return $this->data_slug.'-'.$this->c::nameToSlug($action).($var_name ? '-'.$this->c::nameToSlug($var_name) : '');
     }
 
     /**
@@ -281,9 +281,9 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @return string Data form element class.
      */
-    public function formElementClass(string $var_name): string
+    public function formElementClass(string $var_name = ''): string
     {
-        return $this->data_slug.'-'.$this->c::nameToSlug($var_name);
+        return $this->data_slug.($var_name ? '-'.$this->c::nameToSlug($var_name) : '');
     }
 
     /**
@@ -295,9 +295,18 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @return string Data form element name.
      */
-    public function formElementName(string $var_name): string
+    public function formElementName(string $var_name = ''): string
     {
-        return ($var_name[0] ?? '') === '[' ? $this->data_var.$var_name : $this->data_var.'['.$var_name.']';
+        $parts = $var_name // This is optional.
+            ? preg_split('/(\[[^[\]]*\])/u', $var_name, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY)
+            : []; // An empty value could occur either way.
+
+        if (!$parts) {
+            return $this->data_var;
+        } elseif (mb_strpos($parts[0], '[') === 0) {
+            return $this->data_var.implode($parts);
+        }
+        return $this->data_var.'['.$parts[0].']'.implode(array_slice($parts, 1));
     }
 
     /**
