@@ -1,4 +1,4 @@
-## $v
+## [coming soon]
 
 - Updating to the latest websharks/core.
 - Adding Jetpack utils for Markdown parsing.
