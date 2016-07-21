@@ -141,9 +141,7 @@ class Options extends Classes\SCore\Base\Core
      *
      * @param string $key Option key.
      *
-     * @throws Exception On unknown key.
-     *
-     * @return mixed|null Option value.
+     * @return mixed Option value.
      */
     public function get(string $key)
     {
@@ -193,7 +191,7 @@ class Options extends Classes\SCore\Base\Core
      */
     public function merge(array $base, array $merge): array
     {
-        $options = array_merge($base, $merge);
+        $options = array_merge($base, $merge); // Base should include all existing.
         $options = array_intersect_key($options, $this->App->Config->§default_options);
 
         foreach ($this->App->Config->§default_options as $_key => $_default_option_value) {

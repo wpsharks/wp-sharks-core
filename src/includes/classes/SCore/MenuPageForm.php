@@ -349,6 +349,12 @@ class MenuPageForm extends Classes\SCore\Base\Core
                            ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
                            '>'.$cfg['options'].'</select>';
         $markup .=         $cfg['note'];
+
+        if ($cfg['multiple']) { // Flag used to detect a case where nothing is selected.
+            // NOTE: Browsers will not submit an empty array. If nothing selected, nothing submitted.
+            // With this flag, something will always be submitted, because we're hard-coding an array element.
+            $markup .= '<input type="hidden" name="'.esc_attr(mb_substr($cfg['name'], 0, -2).'[___ignore]').'" />';
+        }
         $markup .=     '</td>';
 
         $markup .= '</tr>';

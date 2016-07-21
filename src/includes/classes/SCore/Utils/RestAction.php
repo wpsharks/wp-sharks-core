@@ -185,6 +185,9 @@ class RestAction extends Classes\SCore\Base\Core
         if (is_object($data)) {
             $data = (array) $data;
         }
+        $data = $this->c::removeKey($data, '___ignore');
+        // Removes keys needed to make forms submit an empty array.
+
         if (!$allow_dimensions && is_array($data)) {
             $data = array_map('strval', $data);
         }
