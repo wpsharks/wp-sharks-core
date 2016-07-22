@@ -14,7 +14,7 @@
  * License: GPL-3.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
- * Plugin URI: https://wpsharks.com/product/core/
+ * Plugin URI: https://wpsharks.com/product/wp-sharks-core
  * Description: The WP Sharks Core is a WordPress plugin that serves as a framework for other plugins by the WP Sharks™ team.
  */
 // PHP v5.2 compatible.
