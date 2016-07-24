@@ -1,4 +1,4 @@
-## $v
+## v160724.1675
 
 - Adding `s::postMetaKey()`.
 - Adding `s::getPostMeta()`.
