@@ -17,48 +17,81 @@ use function get_defined_vars as vars;
 /**
  * Menu page form.
  *
- * @since 160709 Menu page markup utils.
+ * @since 160709 Menu page utils.
  */
 class MenuPageForm extends Classes\SCore\Base\Core
 {
     /**
      * ReST action identifier.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @type string ReST action identifier.
      */
     public $action;
 
     /**
+     * Form configuration args.
+     *
+     * @since 160723 Menu page utils.
+     *
+     * @type \StdClass Form configuration args.
+     */
+    public $cfg; // Also for extenders.
+
+    /**
      * Class constructor.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @param Classes\App $App    Instance.
      * @param string      $action ReST action identifier.
+     * @param array       $args   Any additional behavioral args.
      */
-    public function __construct(Classes\App $App, string $action)
+    public function __construct(Classes\App $App, string $action, array $args = [])
     {
         parent::__construct($App);
 
-        if (!($this->action = $action)) {
-            throw $this->c::issue('Missing action.');
+        $default_args = [
+            'auto_prefix' => true,
+            'action'      => '',
+            'method'      => 'post',
+            'slug'        => '',
+        ];
+        $this->cfg = (object) array_merge($default_args, $args);
+
+        $this->cfg->auto_prefix = (bool) $this->cfg->auto_prefix;
+        $this->cfg->action      = (string) $this->cfg->action;
+        $this->cfg->method      = (string) $this->cfg->method;
+        $this->cfg->slug        = (string) $this->cfg->slug;
+
+        if ($this->cfg->slug && $this->cfg->auto_prefix) {
+            $this->cfg->slug = $this->App->Config->©brand['©slug'].'-'.$this->cfg->slug;
+        } elseif (!$this->cfg->slug) {
+            $this->cfg->slug = $this->App->Config->©brand['©slug'];
+        }
+        if (!($this->action = $action) && !$this->cfg->slug) {
+            throw $this->c::issue('Must have an `action` or `slug`.');
         }
     }
 
     /**
      * Open `<form>` tag for action.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @return string Raw HTML markup.
      */
     public function openTag()
     {
         return '<form'.
-               ' method="post"'.
-               ' action="'.esc_url($this->s::restActionUrl($this->action)).'"'.
+               ' method="'.esc_attr($this->cfg->method).'"'.
+
+               ($this->action
+                    ? ' action="'.esc_url($this->s::restActionUrl($this->action)).'"'
+                    : ' action="'.esc_url($this->cfg->action).'"'
+               ).// NOTE: The `action` can also be empty.
+
                ' enctype="multipart/form-data"'.
                ' accept-charset="utf-8"'.
                ' autocomplete="off"'.
@@ -68,7 +101,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Open `<table>` tag.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @param string $heading     Optional heading.
      * @param string $description Optional description.
@@ -89,7 +122,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Creates an input row.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @param array $args Configuration args.
      *
@@ -127,38 +160,43 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $cfg = array_intersect_key($cfg, $default_args);
         $cfg = array_map('strval', $cfg);
 
-        if (!$cfg['label'] || !$cfg['name']) {
-            throw $this->c::issue('`label` and `name` required.');
+        if (!$cfg['name']) {
+            throw $this->c::issue('Arg `name` required.');
         } elseif (in_array($cfg['type'], ['checkbox', 'radio', 'reset', 'button', 'image'], true)) {
             throw $this->c::issue(sprintf('Input `type="%1$s"` unsupported at this time.', $cfg['type']));
         }
         $cfg['var_name'] = $cfg['name']; // Internal copy.
-        $cfg['name']     = $this->s::restActionFormElementName($cfg['var_name']);
-        $cfg['id']       = $this->s::restActionFormElementId($this->action, $cfg['var_name']);
-        $cfg['class']    = $this->c::mbTrim($cfg['class'].' '.$this->s::restActionFormElementClass($cfg['var_name']));
+        $cfg['id']       = $this->elementId($cfg['var_name']);
+        $cfg['name']     = $this->elementName($cfg['var_name']);
+        $cfg['class']    = $this->c::mbTrim($cfg['class'].' '.$this->elementClass($cfg['var_name']));
 
         $cfg['tip']  = $cfg['tip'] ? $this->s::menuPageTip($cfg['tip']) : '';
         $cfg['note'] = $cfg['note'] ? $this->s::menuPageNote($cfg['note']) : '';
 
-        $markup = '<tr valign="top">';
+        $markup = '<tr>';
 
-        $markup .=     '<th scope="row">';
-        $markup .=         $cfg['tip']; // Floats right.
-        $markup .=         '<label for="'.esc_attr($cfg['id']).'">'.
-                                $cfg['label'].
-                           '</label>';
-        $markup .=     '</th>';
-
-        $markup .=     '<td>';
-        $markup .=         '<input'.
-                           ' type="'.esc_attr($cfg['type']).'"'.
-                           ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
-                           ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
-                           ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
-                           ' value="'.($cfg['type'] === 'url' ? esc_url($cfg['value']) : esc_attr($cfg['value'])).'"'.
-                           ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
-                           ' />';
-        $markup .=         $cfg['note'];
+        if ($cfg['label']) {
+            $markup .= '<th scope="row">';
+            $markup .=      '<div>'; // For positioning.
+            $markup .=          $cfg['tip'];
+            $markup .=          '<label for="'.esc_attr($cfg['id']).'">'.
+                                    $cfg['label'].
+                                '</label>';
+            $markup .=      '</div>';
+            $markup .= '</th>';
+        }
+        $markup .=     '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
+        $markup .=         '<div>'; // For positioning.
+        $markup .=              '<input'.
+                                ' type="'.esc_attr($cfg['type']).'"'.
+                                ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
+                                ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
+                                ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
+                                ' value="'.($cfg['type'] === 'url' ? esc_url($cfg['value']) : esc_attr($cfg['value'])).'"'.
+                                ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
+                                ' />';
+        $markup .=              $cfg['note'];
+        $markup .=          '</div>';
         $markup .=     '</td>';
 
         $markup .= '</tr>';
@@ -169,7 +207,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Creates a textarea row.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @param array $args Configuration args.
      *
@@ -204,35 +242,40 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $cfg = array_intersect_key($cfg, $default_args);
         $cfg = array_map('strval', $cfg);
 
-        if (!$cfg['label'] || !$cfg['name']) {
-            throw $this->c::issue('`label` and `name` required.');
+        if (!$cfg['name']) {
+            throw $this->c::issue('Arg `name` required.');
         }
         $cfg['var_name'] = $cfg['name']; // Internal copy.
-        $cfg['name']     = $this->s::restActionFormElementName($cfg['var_name']);
-        $cfg['id']       = $this->s::restActionFormElementId($this->action, $cfg['var_name']);
-        $cfg['class']    = $this->c::mbTrim($cfg['class'].' '.$this->s::restActionFormElementClass($cfg['var_name']));
+        $cfg['id']       = $this->elementId($cfg['var_name']);
+        $cfg['name']     = $this->elementName($cfg['var_name']);
+        $cfg['class']    = $this->c::mbTrim($cfg['class'].' '.$this->elementClass($cfg['var_name']));
 
         $cfg['tip']  = $cfg['tip'] ? $this->s::menuPageTip($cfg['tip']) : '';
         $cfg['note'] = $cfg['note'] ? $this->s::menuPageNote($cfg['note']) : '';
 
-        $markup = '<tr valign="top">';
+        $markup = '<tr>';
 
-        $markup .=     '<th scope="row">';
-        $markup .=         $cfg['tip']; // Floats right.
-        $markup .=         '<label for="'.esc_attr($cfg['id']).'">'.
-                                $cfg['label'].
-                           '</label>';
-        $markup .=     '</th>';
-
-        $markup .=     '<td>';
-        $markup .=         '<textarea'.
-                           ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
-                           ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
-                           ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
-                           ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
-                           '>'.esc_textarea($cfg['value']).'</textarea>';
-        $markup .=         $cfg['note'];
-        $markup .=     '</td>';
+        if ($cfg['label']) {
+            $markup .= '<th scope="row">';
+            $markup .=      '<div>'; // For positioning.
+            $markup .=          $cfg['tip'];
+            $markup .=          '<label for="'.esc_attr($cfg['id']).'">'.
+                                    $cfg['label'].
+                                '</label>';
+            $markup .=      '</div>';
+            $markup .= '</th>';
+        }
+        $markup .=     '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
+        $markup .=          '<div>'; // For positioning.
+        $markup .=              '<textarea'.
+                                ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
+                                ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
+                                ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
+                                ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
+                                '>'.esc_textarea($cfg['value']).'</textarea>';
+        $markup .=              $cfg['note'];
+        $markup .=          '</div>';
+        $markup .=      '</td>';
 
         $markup .= '</tr>';
 
@@ -242,7 +285,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Creates a select row.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @param array $args Configuration args.
      *
@@ -293,8 +336,8 @@ class MenuPageForm extends Classes\SCore\Base\Core
             }
         } // unset($_key, $_value); // Housekeeping.
 
-        if (!$cfg['label'] || !$cfg['name']) {
-            throw $this->c::issue('`label` and `name` required.');
+        if (!$cfg['name']) {
+            throw $this->c::issue('Arg `name` required.');
         }
         if (is_array($cfg['options'])) {
             $_options       = $cfg['options'];
@@ -324,37 +367,46 @@ class MenuPageForm extends Classes\SCore\Base\Core
             // unset($_value, $_label, $_selected, $_in_optgroup, $_options); // Housekeeping.
         }
         $cfg['var_name'] = $cfg['name']; // Internal copy.
-        $cfg['id']       = $this->s::restActionFormElementId($this->action, $cfg['var_name']);
-        $cfg['name']     = $this->s::restActionFormElementName($cfg['var_name'].($cfg['multiple'] ? '[]' : ''));
-        $cfg['class']    = $this->c::mbTrim($cfg['class'].' '.$this->s::restActionFormElementClass($cfg['var_name']));
+        $cfg['id']       = $this->elementId($cfg['var_name']);
+        $cfg['name']     = $this->elementName($cfg['var_name'].($cfg['multiple'] ? '[]' : ''));
+        $cfg['class']    = $this->c::mbTrim($cfg['class'].' '.$this->elementClass($cfg['var_name']));
 
+        if ($cfg['multiple'] && (!$cfg['tip'] || mb_strpos($cfg['tip'], 'Ctrl key') === false)) {
+            $cfg['tip'] = __('Use Ctrl key (or ⌘) to select multiple items from the list.', 'wp-sharks-core').
+                            ($cfg['tip'] ? '<hr />' : '').$cfg['tip'];
+        }
         $cfg['tip']  = $cfg['tip'] ? $this->s::menuPageTip($cfg['tip']) : '';
         $cfg['note'] = $cfg['note'] ? $this->s::menuPageNote($cfg['note']) : '';
 
-        $markup = '<tr valign="top">';
+        $markup = '<tr>';
 
-        $markup .=     '<th scope="row">';
-        $markup .=         $cfg['tip']; // Floats right.
-        $markup .=         '<label for="'.esc_attr($cfg['id']).'">'.
-                                $cfg['label'].
-                           '</label>';
-        $markup .=     '</th>';
-
-        $markup .=     '<td>';
-        $markup .=         '<select'.
-                           ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
-                           ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
-                           ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
-                           ($cfg['multiple'] ? ' multiple' : '').
-                           ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
-                           '>'.$cfg['options'].'</select>';
-        $markup .=         $cfg['note'];
+        if ($cfg['label']) {
+            $markup .= '<th scope="row">';
+            $markup .=      '<div>'; // For positioning.
+            $markup .=          $cfg['tip'];
+            $markup .=          '<label for="'.esc_attr($cfg['id']).'">'.
+                                    $cfg['label'].
+                                '</label>';
+            $markup .=      '</div>';
+            $markup .= '</th>';
+        }
+        $markup .=     '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
+        $markup .=          '<div>'; // For positioning.
+        $markup .=              '<select'.
+                                ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
+                                ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
+                                ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
+                                ($cfg['multiple'] ? ' multiple' : '').
+                                ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
+                                '>'.$cfg['options'].'</select>';
+        $markup .=              $cfg['note'];
 
         if ($cfg['multiple']) { // Flag used to detect a case where nothing is selected.
             // NOTE: Browsers will not submit an empty array. If nothing selected, nothing submitted.
             // With this flag, something will always be submitted, because we're hard-coding an array element.
-            $markup .= '<input type="hidden" name="'.esc_attr(mb_substr($cfg['name'], 0, -2).'[___ignore]').'" />';
+            $markup .=      '<input type="hidden" name="'.esc_attr(mb_substr($cfg['name'], 0, -2).'[___ignore]').'" />';
         }
+        $markup .=          '</div>';
         $markup .=     '</td>';
 
         $markup .= '</tr>';
@@ -365,7 +417,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Close `</table>` tag.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @return string Raw HTML markup.
      */
@@ -377,7 +429,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Create submit button.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @param string $label Optional label.
      *
@@ -397,12 +449,72 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Close `</form>` tag.
      *
-     * @since 160709 Menu page markup utils.
+     * @since 160709 Menu page utils.
      *
      * @return string Raw HTML markup.
      */
     public function closeTag()
     {
         return '</form>';
+    }
+
+    /**
+     * Form element ID.
+     *
+     * @since 160723 Menu page utils.
+     *
+     * @param string $var_name Var name.
+     *
+     * @return string Form element ID.
+     */
+    protected function elementId(string $var_name = ''): string
+    {
+        if ($this->action) {
+            return $this->s::restActionFormElementId($this->action, $var_name);
+        }
+        return $this->cfg->slug.($var_name ? '-'.$this->c::nameToSlug($var_name) : '');
+    }
+
+    /**
+     * Form element class.
+     *
+     * @since 160723 Menu page utils.
+     *
+     * @param string $var_name Var name.
+     *
+     * @return string Form element class.
+     */
+    protected function elementClass(string $var_name = ''): string
+    {
+        if ($this->action) {
+            return $this->s::restActionFormElementClass($var_name);
+        }
+        return $this->cfg->slug.($var_name ? '-'.$this->c::nameToSlug($var_name) : '');
+    }
+
+    /**
+     * Form element name.
+     *
+     * @since 160723 Menu page utils.
+     *
+     * @param string $var_name Var name.
+     *
+     * @return string Form element name.
+     */
+    protected function elementName(string $var_name = ''): string
+    {
+        if ($this->action) {
+            return $this->s::restActionFormElementName($var_name);
+        }
+        $parts = $var_name // This is optional.
+            ? preg_split('/(\[[^[\]]*\])/u', $var_name, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY)
+            : []; // An empty value could occur either way.
+
+        if (!$parts) {
+            return $this->c::slugToVar($this->cfg->slug);
+        } elseif (mb_strpos($parts[0], '[') === 0) {
+            return $this->c::slugToVar($this->cfg->slug).implode($parts);
+        }
+        return $this->c::slugToVar($this->cfg->slug).'['.$parts[0].']'.implode(array_slice($parts, 1));
     }
 }

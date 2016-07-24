@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160722.57494\n"
+"Project-Id-Version: WP Sharks Core 160723.70827\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-07-22 15:59:28+00:00\n"
+"POT-Creation-Date: 2016-07-23 19:40:33+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,9 +12,9 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/MenuPageForm.php:390
-#: .~build/wp-sharks-core/src/includes/classes/SCore/MenuPageForm.php:390
-#: src/includes/classes/SCore/MenuPageForm.php:390
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/classes/SCore/MenuPageForm.php:423
+#: .~build/wp-sharks-core/src/includes/classes/SCore/MenuPageForm.php:423
+#: src/includes/classes/SCore/MenuPageForm.php:442
 msgid "Save Changes"
 msgstr ""
 
@@ -905,242 +905,246 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:21
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:21
-#: src/includes/templates/s-core/menu-pages/dashboard/about.php:21
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:21
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:21
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:21
 msgid "We're a globally-distributed team of enthusiastic open-source developers who build software for WordPress"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:25
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:25
-#: src/includes/templates/s-core/menu-pages/dashboard/about.php:25
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:25
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:25
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:25
 msgid "<a href=\"%2$s\" target=\"_blank\">%1$s</a> was founded by business partners <a href=\"%3$s\" target=\"_blank\">Jason Caldwell</a> and <a href=\"%4$s\" target=\"_blank\">Raam Dev</a>. Over the years we've built everything from simple contact forms, to ecommerce platforms, cache engines, social-media tools, and more. <em style=\"display:inline-block; margin-left:.5em;\">Always on top of WordPress.</em>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:29
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:29
-#: src/includes/templates/s-core/menu-pages/dashboard/about.php:29
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:29
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:29
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:29
 msgid "Today, our team includes talented individuals from Florida, Georgia, Alaska, the Phillipines, Mexico, India, and occassionally from aquatic habitats at various temperatures where there's plenty of other fish to feed on 🐟 — we are Sharks after all"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:33
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:33
-#: src/includes/templates/s-core/menu-pages/dashboard/about.php:33
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:33
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:33
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:33
 msgid "A developer's life is filled with fun and we all love what we do. We find great pleasure in working with each other, with our customers, and with others in the WordPress community. While there is distance between us, we're a really tight group (good at online collaboration), and we work very hard on common goals; e.g., to produce great software and help others. We pride ourselves on our level of <a href=\"%1$s\" target=\"_blank\">customer support</a> and response time."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:37
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/about.php:37
-#: src/includes/templates/s-core/menu-pages/dashboard/about.php:37
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:37
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:37
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:37
 msgid "Your WordPress experience will never be the same."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:22
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:22
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:22
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:22
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:22
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:22
 msgid "Active Network-Only"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:23
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:23
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:23
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:23
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:23
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:23
 msgid "These can only be activated network-wide, and therefore only require a single license key, which covers all child sites in the network."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:25
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:25
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:25
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:25
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:25
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:25
 msgid "Active Child-Site"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:26
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:26
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:26
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:26
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:26
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:26
 msgid "These require a license key to be entered for each child site in the network; i.e., if you activate them on a child site."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:28
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:28
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:28
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:28
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:28
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:28
 msgid "Active"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:46
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:46
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:46
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:46
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:46
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:46
 msgid "%1$s Themes by %2$s"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:47
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:75
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:47
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:75
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:47
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:75
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:47
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:75
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:47
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:75
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:47
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:75
 msgid "%1$sActivating a license key enables automatic updates. <em>If you need to deactivate a license key, simply empty the field and click 'Save Changes'.</em>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:53
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:81
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:23
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:53
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:81
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:23
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:53
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:81
-#: src/includes/templates/s-core/notices/license-key-request.php:23
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:53
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:81
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:23
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:53
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:81
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:23
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:53
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:81
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:23
 msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:57
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:85
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:57
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:85
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:57
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:85
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:57
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:85
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:57
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:85
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:57
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:85
 msgid "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:74
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:94
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:74
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:94
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:74
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:94
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:74
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:94
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:74
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:94
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:74
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:94
 msgid "%1$s Plugins by %2$s"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:95
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:95
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:95
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:95
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:95
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:95
 msgid "%1$sActivating a license key enables automatic updates."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:99
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/default.php:99
-#: src/includes/templates/s-core/menu-pages/dashboard/default.php:99
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:99
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:99
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:99
 msgid "No %1$s plugins at this time."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:20
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:20
-#: src/includes/templates/s-core/notices/license-key-request.php:20
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:20
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:20
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:20
 msgid "%1$s™ License Key for: <strong>%2$s</strong>"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:22
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:22
-#: src/includes/templates/s-core/notices/license-key-request.php:22
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:22
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:22
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:22
 msgid "(enables automatic updates)"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:27
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/license-key-request.php:27
-#: src/includes/templates/s-core/notices/license-key-request.php:27
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:27
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/notices/license-key-request.php:27
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:27
 msgid "Save"
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/on-install.php:19
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/on-install.php:19
-#: src/includes/templates/s-core/notices/on-install.php:19
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/notices/on-install.php:19
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/notices/on-install.php:19
+#: src/includes/templates/s-core/admin/notices/on-install.php:19
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
-#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/notices/on-reinstall.php:19
-#: .~build/wp-sharks-core/src/includes/templates/s-core/notices/on-reinstall.php:19
-#: src/includes/templates/s-core/notices/on-reinstall.php:19
+#: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/notices/on-reinstall.php:19
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/notices/on-reinstall.php:19
+#: src/includes/templates/s-core/admin/notices/on-reinstall.php:19
 msgid "<strong>%1$s</strong> updated successfully. You're now running v%2$s."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:22
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:22
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:22
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:22
 msgid "General Options"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:22
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:22
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:22
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:22
 msgid "This are all required fields."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:25
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:35
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:46
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:57
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:68
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:79
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:90
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:100
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:25
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:35
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:46
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:57
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:68
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:79
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:90
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:100
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:25
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:35
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:46
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:57
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:68
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:79
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:90
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:100
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:25
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:35
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:46
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:57
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:68
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:79
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:90
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:100
 msgid "Test Label"
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:26
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:36
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:47
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:58
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:69
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:80
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:91
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:101
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:26
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:36
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:47
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:58
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:69
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:80
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:91
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:101
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:26
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:36
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:47
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:58
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:69
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:80
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:91
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:101
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:26
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:36
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:47
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:58
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:69
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:80
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:91
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:101
 msgid "This is a test tooltip."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:30
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:41
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:52
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:63
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:74
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:85
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:95
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:111
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:30
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:41
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:52
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:63
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:74
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:85
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:95
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:111
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:30
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:41
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:52
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:63
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:74
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:85
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:95
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:111
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:30
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:41
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:52
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:63
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:74
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:85
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:95
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:111
 msgid "This is a placeholder."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:31
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:42
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:53
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:64
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:75
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:86
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:96
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:112
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:31
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:42
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:53
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:64
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:75
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:86
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:96
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:112
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:31
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:42
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:53
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:64
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:75
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:86
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:96
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:112
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:31
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:42
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:53
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:64
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:75
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:86
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:96
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:112
 msgid "This is a test note."
 msgstr ""
 
-#: .~build/wp-sharks-core/src/includes/templates/s-core/menu-pages/dashboard/.~example.php:106
-#: src/includes/templates/s-core/menu-pages/dashboard/.~example.php:106
+#: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:106
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/.~example.php:106
 msgid "Default Options"
+msgstr ""
+
+#: src/includes/classes/SCore/MenuPageForm.php:375
+msgid "Use Ctrl key (or ⌘) to select multiple content filters."
 msgstr ""
 
 #. Plugin Name of the plugin/theme

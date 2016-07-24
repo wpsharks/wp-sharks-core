@@ -119,4 +119,12 @@ trait MenuPage
     {
         return $GLOBALS[static::class]->Utils->§MenuPage->addMenuItem(...$args);
     }
+
+    /**
+     * @since 160709 Menu page utils.
+     */
+    public static function menuPageForm(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->form(...$args);
+    }
 }

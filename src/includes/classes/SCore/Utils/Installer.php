@@ -149,9 +149,9 @@ class Installer extends Classes\SCore\Base\Core
     protected function maybeEnqueueNotices()
     {
         if (($is_install = !$this->history['first_time'])) {
-            $notice_template_file = 's-core/notices/on-install.php';
+            $notice_template_file = 's-core/admin/notices/on-install.php';
         } else { // Reinstalling (notify about update).
-            $notice_template_file = 's-core/notices/on-reinstall.php';
+            $notice_template_file = 's-core/admin/notices/on-reinstall.php';
         }
         $notice_Template = $this->c::getTemplate($notice_template_file);
         $notice_markup   = $notice_Template->parse(['history' => $this->history]);

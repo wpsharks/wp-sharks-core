@@ -12,17 +12,19 @@ $jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
  * jQuery UI tooltip enhancements.
  {
    position:                  {
-     my:                      'center bottom', // Or `right center`.
-     at:                      'center top-10', // Or `left-10 center`.
+     my:                      'center bottom', // Floating tooltip.
+     at:                      'center top-10', // e.g., a `.-tip` icon.
      using:                   function (position, feedback) {
-       $(this).css(position).addClass(feedback.vertical + ' ' + feedback.horizontal);
+       $(this).css(position) // Position tip overlay.
+         .addClass(feedback.horizontal + ' ' + feedback.vertical);
      },
-     collision:               'flip'
+     collision:               'flipfit' // Flip & fit (best available).
    },
    content:                   function () {
      return $(this).prop('title');
    },
-   items:                     '[data-toggle~='jquery-ui-tooltip']'
+   items:                     '[data-toggle~='-jquery-ui-tooltip']',
+   tooltipClass: x.coreContainerSlug + '-jquery-ui-tooltip'
  }
  */
 @mixin jquery-ui-tooltip-enhancements($scope: null) {
@@ -43,8 +45,8 @@ $jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
         width:                0;
         content:              '';
         border-style:         solid;
-        display:              block;
         position:             absolute;
+        display:              none;
       }
 
       code {
@@ -66,32 +68,20 @@ $jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
       }
     }
 
-    &.top > .ui-tooltip-content::after {
+    &.center.top[class$=' center top'] > .ui-tooltip-content::after {
+      display:                block;
       top:                   -8px;
-      left:                   calc(50% - 8px);
       border-width:           0 8px 8px;
-      border-color:           $jquery-ui-tooltip-bg-color transparent;
-    }
-
-    &.right > .ui-tooltip-content::after {
-      right:                 -8px;
-      top:                    calc(50% - 8px);
-      border-width:           8px 0 8px 8px;
-      border-color:           transparent $jquery-ui-tooltip-bg-color;
-    }
-
-    &.bottom > .ui-tooltip-content::after {
-      bottom:                -8px;
       left:                   calc(50% - 8px);
-      border-width:           8px 8px 0;
       border-color:           $jquery-ui-tooltip-bg-color transparent;
     }
 
-    &.left > .ui-tooltip-content::after {
-      left:                  -8px;
-      top:                    calc(50% - 8px);
-      border-width:           8px 8px 8px 0;
-      border-color:           transparent $jquery-ui-tooltip-bg-color;
+    &.center.bottom[class$=' center bottom'] > .ui-tooltip-content::after {
+      display:                block;
+      bottom:                -8px;
+      border-width:           8px 8px 0;
+      left:                   calc(50% - 8px);
+      border-color:           $jquery-ui-tooltip-bg-color transparent;
     }
   }
 }

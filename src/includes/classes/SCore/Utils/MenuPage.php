@@ -345,6 +345,7 @@ class MenuPage extends Classes\SCore\Base\Core
     public function addMenu(array $args = [])
     {
         $default_args = [
+            'auto_prefix'   => true,
             'page_title'    => '',
             'menu_title'    => '',
             'capability'    => '',
@@ -357,55 +358,59 @@ class MenuPage extends Classes\SCore\Base\Core
             'tabs'          => [],
             'callback'      => null,
         ];
-        $cfg = array_merge($default_args, $args);
-        $cfg = array_intersect_key($cfg, $default_args);
+        $cfg = (object) array_merge($default_args, $args);
 
-        $cfg['page_title']    = (string) $cfg['page_title'];
-        $cfg['menu_title']    = (string) $cfg['menu_title'];
-        $cfg['capability']    = (string) $cfg['capability'];
-        $cfg['page']          = (string) $cfg['page'];
-        $cfg['class']         = (string) $cfg['class'];
-        $cfg['template_file'] = (string) $cfg['template_file'];
-        $cfg['template_dir']  = (string) $cfg['template_dir'];
-        $cfg['icon']          = (string) $cfg['icon'];
-        $cfg['position']      = (string) $cfg['position'];
-        $cfg['tabs']          = (array) $cfg['tabs'];
+        $cfg->auto_prefix   = (bool) $cfg->auto_prefix;
+        $cfg->page_title    = (string) $cfg->page_title;
+        $cfg->menu_title    = (string) $cfg->menu_title;
+        $cfg->capability    = (string) $cfg->capability;
+        $cfg->page          = (string) $cfg->page;
+        $cfg->class         = (string) $cfg->class;
+        $cfg->template_file = (string) $cfg->template_file;
+        $cfg->template_dir  = (string) $cfg->template_dir;
+        $cfg->icon          = (string) $cfg->icon;
+        $cfg->position      = (string) $cfg->position;
+        $cfg->tabs          = (array) $cfg->tabs;
 
-        if (!$cfg['page_title']) {
-            $cfg['page_title'] = $this->App->Config->©brand['©name'];
+        if ($cfg->page_title && $cfg->auto_prefix) {
+            $cfg->page_title = $cfg->page_title.' | '.$this->App->Config->©brand['©name'];
+        } elseif (!$cfg->page_title) {
+            $cfg->page_title = $this->App->Config->©brand['©name'];
         }
-        if (!$cfg['menu_title']) {
-            $cfg['menu_title'] = $this->App->Config->©brand['©name'];
+        if (!$cfg->menu_title) {
+            $cfg->menu_title = $this->App->Config->©brand['©name'];
         }
-        if (!$cfg['capability']) {
-            $cfg['capability'] = $this->App->Config->§caps['§manage'];
+        if (!$cfg->capability) {
+            $cfg->capability = $this->App->Config->§caps['§manage'];
         }
-        if (!$cfg['page']) {
-            $cfg['page'] = $this->App->Config->©brand['©slug'];
+        if ($cfg->page && $cfg->auto_prefix) {
+            $cfg->page = $this->App->Config->©brand['©slug'].'-'.$cfg->page;
+        } elseif (!$cfg->page) {
+            $cfg->page = $this->App->Config->©brand['©slug'];
         }
-        $cfg['class'] .= ($cfg['class'] ? ' ' : '').'wrap';
-        $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
-        $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
-        $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
-        $cfg['class'] .= $cfg['page'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['page'].'-menu-page-wrapper' : '';
+        $cfg->class .= ($cfg->class ? ' ' : '').'wrap';
+        $cfg->class .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
+        $cfg->class .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
+        $cfg->class .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
+        $cfg->class .= $cfg->page !== $this->App->Config->©brand['©slug'] ? ' '.$cfg->page.'-menu-page-wrapper' : '';
 
-        if (!$cfg['icon']) {
-            $cfg['icon'] = 'dashicons-admin-generic';
+        if (!$cfg->icon) {
+            $cfg->icon = 'dashicons-admin-generic';
         }
-        if (!isset($cfg['position'][0])) {
-            $cfg['position'] = null; // No preference.
+        if (!isset($cfg->position[0])) {
+            $cfg->position = null; // No preference.
         }
         $cfg = $this->s::applyFilters('menu_page', $cfg, $args, $default_args);
 
-        if (!$cfg['template_file']) {
+        if (!$cfg->template_file) {
             throw $this->c::issue('Missing template file.');
         }
-        $cfg['nav_tabs'] = $this->is($cfg['page']) ? $this->buildNavTabs($cfg) : '';
-        $cfg['callback'] = $cfg['callback'] ?: function () use (&$cfg) {
-            echo $this->c::getTemplate('s-core/menu-pages/template.php')->parse(compact('cfg'));
+        $cfg->nav_tabs = $this->is($cfg->page) ? $this->buildNavTabs($cfg) : '';
+        $cfg->callback = $cfg->callback ?: function () use ($cfg) {
+            echo $this->c::getTemplate('s-core/admin/menu-pages/template.php')->parse(compact('cfg'));
         };
-        $this->hook_names[$cfg['page']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_menu_page/>
-            add_menu_page($cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['page'], $cfg['callback'], $cfg['icon'], $cfg['position']);
+        $this->hook_names[$cfg->page] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_menu_page/>
+            add_menu_page($cfg->page_title, $cfg->menu_title, $cfg->capability, $cfg->page, $cfg->callback, $cfg->icon, $cfg->position);
     }
 
     /**
@@ -430,58 +435,57 @@ class MenuPage extends Classes\SCore\Base\Core
             'tabs'          => [],
             'callback'      => null,
         ];
-        $cfg = array_merge($default_args, $args);
-        $cfg = array_intersect_key($cfg, $default_args);
+        $cfg = (object) array_merge($default_args, $args);
 
-        $cfg['auto_prefix']   = (bool) $cfg['auto_prefix'];
-        $cfg['parent_page']   = (string) $cfg['parent_page'];
-        $cfg['page_title']    = (string) $cfg['page_title'];
-        $cfg['menu_title']    = (string) $cfg['menu_title'];
-        $cfg['capability']    = (string) $cfg['capability'];
-        $cfg['page']          = (string) $cfg['page'];
-        $cfg['class']         = (string) $cfg['class'];
-        $cfg['template_file'] = (string) $cfg['template_file'];
-        $cfg['template_dir']  = (string) $cfg['template_dir'];
-        $cfg['tabs']          = (array) $cfg['tabs'];
+        $cfg->auto_prefix   = (bool) $cfg->auto_prefix;
+        $cfg->parent_page   = (string) $cfg->parent_page;
+        $cfg->page_title    = (string) $cfg->page_title;
+        $cfg->menu_title    = (string) $cfg->menu_title;
+        $cfg->capability    = (string) $cfg->capability;
+        $cfg->page          = (string) $cfg->page;
+        $cfg->class         = (string) $cfg->class;
+        $cfg->template_file = (string) $cfg->template_file;
+        $cfg->template_dir  = (string) $cfg->template_dir;
+        $cfg->tabs          = (array) $cfg->tabs;
 
-        if ($cfg['parent_page'] && $cfg['auto_prefix']) {
-            $cfg['parent_page'] = $this->App->Config->©brand['©slug'].'-'.$cfg['parent_page'];
-        } elseif (!$cfg['parent_page']) {
-            $cfg['parent_page'] = $this->App->Config->©brand['©slug'];
+        if ($cfg->parent_page && $cfg->auto_prefix) {
+            $cfg->parent_page = $this->App->Config->©brand['©slug'].'-'.$cfg->parent_page;
+        } elseif (!$cfg->parent_page) {
+            $cfg->parent_page = $this->App->Config->©brand['©slug'];
         }
-        if ($cfg['page_title'] && $cfg['auto_prefix']) {
-            $cfg['page_title'] = $cfg['page_title'].' | '.$this->App->Config->©brand['©name'];
-        } elseif (!$cfg['page_title']) {
-            $cfg['page_title'] = $this->App->Config->©brand['©name'];
+        if ($cfg->page_title && $cfg->auto_prefix) {
+            $cfg->page_title = $cfg->page_title.' | '.$this->App->Config->©brand['©name'];
+        } elseif (!$cfg->page_title) {
+            $cfg->page_title = $this->App->Config->©brand['©name'];
         }
-        if (!$cfg['menu_title']) {
-            $cfg['menu_title'] = $this->App->Config->©brand['©name'];
+        if (!$cfg->menu_title) {
+            $cfg->menu_title = $this->App->Config->©brand['©name'];
         }
-        if (!$cfg['capability']) {
-            $cfg['capability'] = $this->App->Config->§caps['§manage'];
+        if (!$cfg->capability) {
+            $cfg->capability = $this->App->Config->§caps['§manage'];
         }
-        if ($cfg['page'] && $cfg['auto_prefix']) {
-            $cfg['page'] = $this->App->Config->©brand['©slug'].'-'.$cfg['page'];
-        } elseif (!$cfg['page']) {
-            $cfg['page'] = $this->App->Config->©brand['©slug'];
+        if ($cfg->page && $cfg->auto_prefix) {
+            $cfg->page = $this->App->Config->©brand['©slug'].'-'.$cfg->page;
+        } elseif (!$cfg->page) {
+            $cfg->page = $this->App->Config->©brand['©slug'];
         }
-        $cfg['class'] .= ($cfg['class'] ? ' ' : '').'wrap';
-        $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
-        $cfg['class'] .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
-        $cfg['class'] .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
-        $cfg['class'] .= $cfg['page'] !== $this->App->Config->©brand['©slug'] ? ' '.$cfg['page'].'-menu-page-wrapper' : '';
+        $cfg->class .= ($cfg->class ? ' ' : '').'wrap';
+        $cfg->class .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
+        $cfg->class .= ' '.$this->App::CORE_CONTAINER_SLUG.'-menu-page-wrapper';
+        $cfg->class .= ' '.$this->App->Config->©brand['©slug'].'-menu-page-wrapper';
+        $cfg->class .= $cfg->page !== $this->App->Config->©brand['©slug'] ? ' '.$cfg->page.'-menu-page-wrapper' : '';
 
         $cfg = $this->s::applyFilters('menu_page_item', $cfg, $args, $default_args);
 
-        if (!$cfg['template_file']) {
+        if (!$cfg->template_file) {
             throw $this->c::issue('Missing template file.');
         }
-        $cfg['nav_tabs'] = $this->is($cfg['page']) ? $this->buildNavTabs($cfg) : '';
-        $cfg['callback'] = $cfg['callback'] ?: function () use (&$cfg) {
-            echo $this->c::getTemplate('s-core/menu-pages/template.php')->parse(compact('cfg'));
+        $cfg->nav_tabs = $this->is($cfg->page) ? $this->buildNavTabs($cfg) : '';
+        $cfg->callback = $cfg->callback ?: function () use ($cfg) {
+            echo $this->c::getTemplate('s-core/admin/menu-pages/template.php')->parse(compact('cfg'));
         };
-        $this->hook_names[$cfg['parent_page'].':'.$cfg['page']] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_submenu_page/>
-            add_submenu_page($cfg['parent_page'], $cfg['page_title'], $cfg['menu_title'], $cfg['capability'], $cfg['page'], $cfg['callback']);
+        $this->hook_names[$cfg->parent_page.':'.$cfg->page] = // By slug. See: <https://developer.wordpress.org/reference/functions/add_submenu_page/>
+            add_submenu_page($cfg->parent_page, $cfg->page_title, $cfg->menu_title, $cfg->capability, $cfg->page, $cfg->callback);
     }
 
     /**
@@ -489,15 +493,15 @@ class MenuPage extends Classes\SCore\Base\Core
      *
      * @since 160708 Menu page utils.
      *
-     * @param array &$cfg Menu page config.
+     * @param \StdClass $cfg Menu page config.
      *
      * @return string Markup for navigation tabs.
      */
-    protected function buildNavTabs(array &$cfg): string
+    protected function buildNavTabs(\StdClass $cfg): string
     {
-        if (!$cfg['tabs']) {
+        if (!$cfg->tabs) {
             return ''; // Nothing.
-        } elseif (!$this->is($cfg['page'])) {
+        } elseif (!$this->is($cfg->page)) {
             return ''; // Not necessary.
         }
         $has_default_tab  = false;
@@ -509,7 +513,7 @@ class MenuPage extends Classes\SCore\Base\Core
 
         $markup = '<nav class="-nav-tabs nav-tab-wrapper">';
 
-        foreach ($cfg['tabs'] as $_key => &$_tab) {
+        foreach ($cfg->tabs as $_key => &$_tab) {
             if (!$_key || !is_string($_key)) {
                 throw $this->c::issue('Invalid key.');
             }
@@ -544,16 +548,16 @@ class MenuPage extends Classes\SCore\Base\Core
 
                 // NOTE: This allows a tab to set it's own template.
                 // Helpful to extensions that filter menu page config values.
-                // This is made possible 'by reference'; i.e., `&$cfgs`.
+                // This is made possible 'by reference'.
 
                 if ($_tab['template_file']) {
                     // Swap template if set by tab config.
-                    $cfg['template_file'] = $_tab['template_file'];
-                    $cfg['template_dir']  = $_tab['template_dir'];
+                    $cfg->template_file = $_tab['template_file'];
+                    $cfg->template_dir  = $_tab['template_dir'];
                     //
                 } elseif ($current_tab) { // Use default swap behavior; i.e., add tab suffix.
                     // NOTE: In the case of there being no `$current_tab`, leaving default template as-is.
-                    $cfg['template_file'] = dirname($cfg['template_file']).'/'.$current_tab.'.php';
+                    $cfg->template_file = dirname($cfg->template_file).'/'.$current_tab.'.php';
                 }
             }
             if (!$_tab['label']) {
@@ -644,5 +648,20 @@ class MenuPage extends Classes\SCore\Base\Core
             $query_args = array_merge(['page' => $page], $query_args);
             return $url = $this->c::addUrlQueryArgs($query_args, $admin_url('/'));
         }
+    }
+
+    /**
+     * A menu page form class instance.
+     *
+     * @since 160524 Menu page markup utils.
+     *
+     * @param string $action ReST action identifier.
+     * @param array  $args   Any additional behavioral args.
+     *
+     * @return Classes\SCore\MenuPageForm Class instance.
+     */
+    public function form(string $action, array $args = []): Classes\SCore\MenuPageForm
+    {
+        return $this->App->Di->get(Classes\SCore\MenuPageForm::class, compact('action', 'args'));
     }
 }

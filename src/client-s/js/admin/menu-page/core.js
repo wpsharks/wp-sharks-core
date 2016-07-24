@@ -21,17 +21,19 @@
       hide: false, // No animation.
 
       position: {
-        my: 'center bottom',
-        at: 'center top-10',
+        my: 'center bottom', // Floating tooltip.
+        at: 'center top-10', // e.g., a `.-tip` icon.
+
         using: function (position, feedback) {
-          $(this).css(position).addClass(feedback.vertical + ' ' + feedback.horizontal);
+          $(this).css(position) // Position tip overlay.
+            .addClass(feedback.horizontal + ' ' + feedback.vertical);
         },
-        collision: 'flip' // Flip if unable to see it.
+        collision: 'flipfit' // Flip & fit (best available).
       },
       content: function () {
         return $(this).prop('title');
       },
-      items: '[data-toggle~="core.jquery-ui-tooltip"]',
+      items: '[data-toggle~="-jquery-ui-tooltip"]',
       tooltipClass: x.coreContainerSlug + '-jquery-ui-tooltip'
     });
   });

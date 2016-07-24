@@ -1,3 +1,14 @@
+## $v
+
+- Adding `s::postMetaKey()`.
+- Adding `s::getPostMeta()`.
+- Adding `s::updatePostMeta()`.
+- Adding `s::deletePostMeta()`.
+- Adding `s::setPostMeta()`.
+- Adding `s::unsetPostMeta()`.
+- Adding `s::addPostMetaBox()`.
+- Adding `s::postMetaBoxForm()`.
+
 ## v160721.58752
 
 - Updating to the latest websharks/core.

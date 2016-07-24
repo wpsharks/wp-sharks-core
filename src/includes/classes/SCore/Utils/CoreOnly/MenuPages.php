@@ -79,7 +79,7 @@ class MenuPages extends Classes\SCore\Base\Core
             'parent_page'   => 'index.php',
             'page_title'    => $this->App::CORE_CONTAINER_NAME,
             'menu_title'    => $this->App::CORE_CONTAINER_NAME.' <i class="sharkicon sharkicon-wp-sharks-fin"></i>',
-            'template_file' => 's-core/menu-pages/dashboard/default.php',
+            'template_file' => 's-core/admin/menu-pages/dashboard/default.php',
 
             'tabs' => [
                 'default' => __('License Keys', 'wp-sharks-core'),

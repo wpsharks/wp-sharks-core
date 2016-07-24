@@ -46,21 +46,7 @@ class MenuPageMarkup extends Classes\SCore\Base\Core
      */
     public function tip(string $tip): string
     {
-        return '<i class="-tip" data-toggle="core.jquery-ui-tooltip" title="'.esc_attr($tip).'"></i>';
-    }
-
-    /**
-     * A menu page form class instance.
-     *
-     * @since 160524 Menu page markup utils.
-     *
-     * @param string $action ReST action identifier.
-     *
-     * @return Classes\SCore\MenuPageForm Class instance.
-     */
-    public function form(string $action): Classes\SCore\MenuPageForm
-    {
-        return $this->App->Di->get(Classes\SCore\MenuPageForm::class, compact('action'));
+        return '<i class="-tip" data-toggle="-jquery-ui-tooltip" title="'.esc_attr($tip).'"></i>';
     }
 
     /**

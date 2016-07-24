@@ -16,15 +16,11 @@ use function get_defined_vars as vars;
 
 extract($this->current_vars); // Template variables.
 ?>
-<div class="<?= esc_attr($cfg['class']); ?>">
-    <h1 class="-hidden" data-wp-notices-here></h1>
-
+<div class="<?= esc_attr($cfg->class); ?>">
     <div class="-container">
 
-        <?= $cfg['nav_tabs']; ?>
-
         <div class="-content">
-            <?= $this->get($cfg['template_file'], $this->current_vars, $cfg['template_dir']); ?>
+            <?= $this->get($cfg->template_file, $this->current_vars, $cfg->template_dir); ?>
         </div>
 
     </div>

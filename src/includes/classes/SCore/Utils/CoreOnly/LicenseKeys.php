@@ -117,7 +117,7 @@ class LicenseKeys extends Classes\SCore\Base\Core
     public function requestViaNoticeMarkup(string $app_slug): string
     {
         if (($App = $this->s::getAppsBySlug()[$app_slug] ?? null)) {
-            return $App->c::getTemplate('s-core/notices/license-key-request.php')->parse();
+            return $App->c::getTemplate('s-core/admin/notices/license-key-request.php')->parse();
         }
         return ''; // Dequeue entirely.
     }

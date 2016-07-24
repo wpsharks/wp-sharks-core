@@ -42,6 +42,7 @@ abstract class Facades
     use Traits\Facades\Options;
     use Traits\Facades\Plugin;
     use Traits\Facades\Plugins;
+    use Traits\Facades\PostMeta;
     use Traits\Facades\PostQueries;
     use Traits\Facades\PostTypeQueries;
     use Traits\Facades\RestAction;

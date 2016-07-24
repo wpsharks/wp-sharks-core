@@ -33,14 +33,6 @@ trait MenuPageMarkup
     }
 
     /**
-     * @since 160709 Menu page utils.
-     */
-    public static function menuPageForm(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§MenuPageMarkup->form(...$args);
-    }
-
-    /**
      * @since 160711 Menu page utils.
      */
     public static function menuPageNoticeErrors(...$args)
