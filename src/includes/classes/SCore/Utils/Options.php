@@ -131,6 +131,10 @@ class Options extends Classes\SCore\Base\Core
         $url = $this->c::currentUrl();
         $url = $this->s::removeUrlRestAction($url);
 
+        $markup = __('Default options for \'%1$s\' restored successfully.', 'wp-sharks-core');
+        $markup = sprintf($markup, esc_html($this->App->Config->©brand['©name']));
+        $this->s::enqueueUserNotice($markup, ['type' => 'success']);
+
         wp_redirect($url).exit(); // Stop on redirection.
     }
 

@@ -524,6 +524,7 @@ class MenuPage extends Classes\SCore\Base\Core
                 'slug'          => '',
                 'url'           => '',
                 'target'        => '',
+                'onclick'       => '',
                 'class'         => '',
                 'label'         => '',
                 'template_file' => '',
@@ -540,6 +541,9 @@ class MenuPage extends Classes\SCore\Base\Core
                 }
             } // ↑ This constructs the URL leading to a given tab.
 
+            if ($_tab['onclick'] === 'confirm') { // Automatic confirmation.
+                $_tab['onclick'] = 'if(!confirm(\''.__('Are you sure?', 'wp-sharks-core').'\')) return false;';
+            }
             $_tab['class'] .= ($_tab['class'] ? ' ' : '').'-nav-tab nav-tab';
             $_tab['class'] .= ' -'.$_tab['slug']; // Tab-specific class.
 
@@ -566,6 +570,7 @@ class MenuPage extends Classes\SCore\Base\Core
             $markup .= '<a'.// Builds tab.
                        ' href="'.esc_url($_tab['url']).'"'.
                        ' target="'.esc_attr($_tab['target']).'"'.
+                       ' onclick="'.esc_attr($_tab['onclick']).'"'.
                        ' class="'.esc_attr($_tab['class']).'"'.
                        ' >'.$_tab['label'].'</a>';
 

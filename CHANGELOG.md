@@ -1,3 +1,8 @@
+## $v
+
+- Adding `onclick` configuration key for menu page tabs.
+- Adding `?in-wp` flag to brand-based URLs that open inside WordPress; e.g., changelog for a new release.
+
 ## v160724.1675
 
 - Adding `s::postMetaKey()`.

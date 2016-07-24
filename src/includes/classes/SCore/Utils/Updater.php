@@ -62,7 +62,7 @@ class Updater extends Classes\SCore\Base\Core
             if (($_REQUEST['plugin'] ?? '') === $this->App->Config->©brand['§product_slug']
                 && ($_REQUEST['tab'] ?? '') === 'plugin-information'
                 && $this->s::isMenuPage('plugin-install.php')) {
-                wp_redirect($this->s::brandUrl('/changelog')).exit();
+                wp_redirect($this->s::brandUrl('/changelog?in-wp')).exit();
             }
         }
     }

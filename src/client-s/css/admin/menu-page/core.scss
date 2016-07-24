@@ -34,6 +34,18 @@ $core-nav-tabs-border-color: #ccc;
   @include wp-admin-field-standards;
 
   /*
+   * Inline code.
+   */
+  code {
+    font-size:                inherit;
+    padding:                 .15em .35em;
+
+    a {
+      text-decoration:        none;
+    }
+  }
+
+  /*
    * Hidden utility.
    */
   .-hidden {
