@@ -1,4 +1,4 @@
-## $v
+## v160724.64804
 
 - Adding `onclick` configuration key for menu page tabs.
 - Adding `?in-wp` flag to brand-based URLs that open inside WordPress; e.g., changelog for a new release.
