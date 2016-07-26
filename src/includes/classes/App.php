@@ -39,7 +39,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160726.57755'; //v//
+    const VERSION = '160726.77065'; //v//
 
     /**
      * ReST action API version.
