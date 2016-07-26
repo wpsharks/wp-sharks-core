@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>WebSharks\WpSharks\Core\Classes\SCore\Utils\Dependencies | WP Sharks Core</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/sami.css">
+        <script src="../../../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../../../js/typeahead.min.js"></script>
+        <script src="../../../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+            <link rel="shortcut icon" href="https://wpsharks.com/favicon.ico" />
+    
+    </head>
+
+    <body id="class" data-name="class:WebSharks_WpSharks_Core_Classes_SCore_Utils_Dependencies" data-root-path="../../../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../../../index.html"><img src="https://wpsharks.com/wp-content/uploads/2016/07/fin-512.png" />WP Sharks Core</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../../../../WebSharks.html">WebSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks.html">WpSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core.html">Core</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes.html">Classes</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore.html">SCore</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Utils.html">Utils</a></li>
+    
+                <li>Dependencies</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Dependencies
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Dependencies</strong>        extends <a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a>        implements
+        <abbr title="WebSharks\Core\WpSharksCore\Interfaces\SecondConstants">SecondConstants</abbr>        (<a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php">View source</a>)
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Dependencies.</p>                    </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_Wp">
+                                        protected                                        
+                </td>
+                <td>$Wp</td>
+                <td class="last">WP common.</td>
+                <td><small>from&nbsp;<a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html#property_Wp"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_plugins">
+                                        protected                                        
+                </td>
+                <td>$plugins</td>
+                <td class="last">Unsatisfied plugins.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_themes">
+                                        protected                                        
+                </td>
+                <td>$themes</td>
+                <td class="last">Unsatisfied themes.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_others">
+                                        protected                                        
+                </td>
+                <td>$others</td>
+                <td class="last">Unsatisfied (other).</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_checked">
+                                        protected                                        
+                </td>
+                <td>$checked</td>
+                <td class="last">Checked?</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_outdated_check_time">
+                                        protected                                        
+                </td>
+                <td>$outdated_check_time</td>
+                <td class="last">Outdated check time.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_notice_div_tag_styles">
+                                        protected                                        
+                </td>
+                <td>$notice_div_tag_styles</td>
+                <td class="last">Notice <code>&lt;div&gt;</code> tag styles.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_heading_p_tag_styles">
+                                        protected                                        
+                </td>
+                <td>$heading_p_tag_styles</td>
+                <td class="last">Heading <code>&lt;p&gt;</code> tag styles.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_message_p_tag_styles">
+                                        protected                                        
+                </td>
+                <td>$message_p_tag_styles</td>
+                <td class="last">Message <code>&lt;p&gt;</code> tag styles.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_arrow">
+                                        protected                                        
+                </td>
+                <td>$arrow</td>
+                <td class="last">Styled arrow icon.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_icon">
+                                        protected                                        
+                </td>
+                <td>$icon</td>
+                <td class="last">Styled bubble icon.</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        
+                                            <p>Class constructor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_unsatisfied">unsatisfied</a>()
+        
+                                            <p>Dependendies unsatisfied?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_maybeCheck">maybeCheck</a>()
+        
+                                            <p>Check for dependencies.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    int
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_lastOkTime">lastOkTime</a>(int $time = null)
+        
+                                            <p>Last OK time.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_maybeNotify">maybeNotify</a>()
+        
+                                            <p>Maybe enqueue dashboard notice.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_installUrl">installUrl</a>(string $slug, string $type)
+        
+                                            <p>URL to install dependency.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_activateUrl">activateUrl</a>(string $slug, string $type)
+        
+                                            <p>URL to activate dependency.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_upgradeUrl">upgradeUrl</a>(string $slug, string $type)
+        
+                                            <p>URL to upgrade dependency.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_archiveUrl">archiveUrl</a>(string $slug, string $type, string $version = &#039;&#039;)
+        
+                                            <p>URL to dependency archive.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_maybeEnqueueInstallationNotice">maybeEnqueueInstallationNotice</a>(array $args)
+        
+                                            <p>Maybe enqueue dependency installation notice.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_maybeEnqueueActivationNotice">maybeEnqueueActivationNotice</a>(array $args)
+        
+                                            <p>Maybe enqueue dependency activation notice.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_maybeEnqueueUpgradeNotice">maybeEnqueueUpgradeNotice</a>(array $args)
+        
+                                            <p>Maybe enqueue dependency upgrade notice.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_maybeEnqueueDowngradeNotice">maybeEnqueueDowngradeNotice</a>(array $args)
+        
+                                            <p>Maybe enqueue dependency downgrade notice.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_maybeEnqueueOtherNotice">maybeEnqueueOtherNotice</a>(array $args)
+        
+                                            <p>Maybe enqueue some other dependency notice.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L76">line 76</a></div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Class constructor.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a></td>
+                                  <td>$App</td>
+                                <td>Instance of App.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_unsatisfied">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L96">line 96</a></div>
+        <code>                    bool
+    <strong>unsatisfied</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Dependendies unsatisfied?</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>Dependendies unsatisfied?</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_maybeCheck">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L106">line 106</a></div>
+        <code>            protected        
+    <strong>maybeCheck</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Check for dependencies.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_lastOkTime">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L172">line 172</a></div>
+        <code>            protected        int
+    <strong>lastOkTime</strong>(int $time = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Last OK time.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>int</td>
+                                  <td>$time</td>
+                                <td>Last OK time.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>int</td>
+            <td>Last OK time.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_maybeNotify">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L182">line 182</a></div>
+        <code>            protected        
+    <strong>maybeNotify</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Maybe enqueue dashboard notice.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_installUrl">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L245">line 245</a></div>
+        <code>            protected        string
+    <strong>installUrl</strong>(string $slug, string $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>URL to install dependency.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$slug</td>
+                                <td>Dependency slug.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$type</td>
+                                <td>Dependency type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL to install dependency.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_activateUrl">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L275">line 275</a></div>
+        <code>            protected        string
+    <strong>activateUrl</strong>(string $slug, string $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>URL to activate dependency.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$slug</td>
+                                <td>Dependency slug.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$type</td>
+                                <td>Dependency type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL to activate dependency; else empty string.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_upgradeUrl">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L309">line 309</a></div>
+        <code>            protected        string
+    <strong>upgradeUrl</strong>(string $slug, string $type)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>URL to upgrade dependency.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$slug</td>
+                                <td>Dependency slug.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$type</td>
+                                <td>Dependency type.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL to upgrade dependency; else empty string.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_archiveUrl">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L344">line 344</a></div>
+        <code>            protected        string
+    <strong>archiveUrl</strong>(string $slug, string $type, string $version = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>URL to dependency archive.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$slug</td>
+                                <td>Dependency slug.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$type</td>
+                                <td>Dependency type.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$version</td>
+                                <td>Specific version.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL to archive (or direct download if <code>$version</code> is given).</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_maybeEnqueueInstallationNotice">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L378">line 378</a></div>
+        <code>            protected        
+    <strong>maybeEnqueueInstallationNotice</strong>(array $args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Maybe enqueue dependency installation notice.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Required dependency args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                            <h4>Internal Note</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">Intentionally choosing not to use built-in notice utilities here.
+ The notice utilities set option values, and if we have unsatisfied dependencies
+ (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.</td>
+            </tr>
+                    <tr>
+                <td colspan="2">Not only that, but the hooks needed to use notice utilities are not attached
+until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.</td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_maybeEnqueueActivationNotice">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L459">line 459</a></div>
+        <code>            protected        
+    <strong>maybeEnqueueActivationNotice</strong>(array $args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Maybe enqueue dependency activation notice.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Required dependency args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                            <h4>Internal Note</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">Intentionally choosing not to use built-in notice utilities here.
+ The notice utilities set option values, and if we have unsatisfied dependencies
+ (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.</td>
+            </tr>
+                    <tr>
+                <td colspan="2">Not only that, but the hooks needed to use notice utilities are not attached
+until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.</td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_maybeEnqueueUpgradeNotice">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L531">line 531</a></div>
+        <code>            protected        
+    <strong>maybeEnqueueUpgradeNotice</strong>(array $args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Maybe enqueue dependency upgrade notice.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Required dependency args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                            <h4>Internal Note</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">Intentionally choosing not to use built-in notice utilities here.
+ The notice utilities set option values, and if we have unsatisfied dependencies
+ (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.</td>
+            </tr>
+                    <tr>
+                <td colspan="2">Not only that, but the hooks needed to use notice utilities are not attached
+until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.</td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_maybeEnqueueDowngradeNotice">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L618">line 618</a></div>
+        <code>            protected        
+    <strong>maybeEnqueueDowngradeNotice</strong>(array $args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Maybe enqueue dependency downgrade notice.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Required dependency args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                            <h4>Internal Note</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">Intentionally choosing not to use built-in notice utilities here.
+ The notice utilities set option values, and if we have unsatisfied dependencies
+ (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.</td>
+            </tr>
+                    <tr>
+                <td colspan="2">Not only that, but the hooks needed to use notice utilities are not attached
+until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.</td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_maybeEnqueueOtherNotice">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Dependencies.php#L705">line 705</a></div>
+        <code>            protected        
+    <strong>maybeEnqueueOtherNotice</strong>(array $args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Maybe enqueue some other dependency notice.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Required dependency args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                            <h4>Internal Note</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">Intentionally choosing not to use built-in notice utilities here.
+ The notice utilities set option values, and if we have unsatisfied dependencies
+ (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.</td>
+            </tr>
+                    <tr>
+                <td colspan="2">Not only that, but the hooks needed to use notice utilities are not attached
+until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.</td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami</a> <strong>(enhanced by WebSharks)</strong>
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

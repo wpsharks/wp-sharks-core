@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>WebSharks\WpSharks\Core\Traits\Facades\MenuPage | WP Sharks Core</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../css/sami.css">
+        <script src="../../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../../js/typeahead.min.js"></script>
+        <script src="../../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+            <link rel="shortcut icon" href="https://wpsharks.com/favicon.ico" />
+    
+    </head>
+
+    <body id="class" data-name="class:WebSharks_WpSharks_Core_Traits_Facades_MenuPage" data-root-path="../../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../../index.html"><img src="https://wpsharks.com/wp-content/uploads/2016/07/fin-512.png" />WP Sharks Core</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">trait</span></li>
+                                                            <li><a href="../../../../../WebSharks.html">WebSharks</a></li>
+                                        <li><a href="../../../../../WebSharks/WpSharks.html">WpSharks</a></li>
+                                        <li><a href="../../../../../WebSharks/WpSharks/Core.html">Core</a></li>
+                                        <li><a href="../../../../../WebSharks/WpSharks/Core/Traits.html">Traits</a></li>
+                                        <li><a href="../../../../../WebSharks/WpSharks/Core/Traits/Facades.html">Facades</a></li>
+    
+                <li>MenuPage</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            MenuPage
+                
+        </h1>
+    </div>
+
+    <p>    trait
+    <strong>MenuPage</strong>        (<a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php">View source</a>)
+</p>
+
+        
+    
+
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_menuPageUrl">menuPageUrl</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_currentMenuPage">currentMenuPage</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_menuPageNow">menuPageNow</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isMenuPage">isMenuPage</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isOwnMenuPage">isOwnMenuPage</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_currentMenuPageTab">currentMenuPageTab</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isMenuPageTab">isMenuPageTab</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isOwnMenuPageTab">isOwnMenuPageTab</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_currentMenuPagePostType">currentMenuPagePostType</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_menuPagePostTypeNow">menuPagePostTypeNow</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isMenuPageForPostType">isMenuPageForPostType</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addMenuPage">addMenuPage</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addMenuPageItem">addMenuPageItem</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_menuPageForm">menuPageForm</a>(mixed               ...$args)
+        
+                                                                      <p class="no-description">This is a Facade; see underlying utility.</p>
+                                                            </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_menuPageUrl">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L26">line 26</a></div>
+        <code>        static            
+    <strong>menuPageUrl</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_url">Classes\SCore\Utils\MenuPage::url()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_currentMenuPage">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L38">line 38</a></div>
+        <code>        static            
+    <strong>currentMenuPage</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_current">Classes\SCore\Utils\MenuPage::current()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_menuPageNow">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L50">line 50</a></div>
+        <code>        static            
+    <strong>menuPageNow</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_now">Classes\SCore\Utils\MenuPage::now()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isMenuPage">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L62">line 62</a></div>
+        <code>        static            
+    <strong>isMenuPage</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_is">Classes\SCore\Utils\MenuPage::is()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isOwnMenuPage">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L74">line 74</a></div>
+        <code>        static            
+    <strong>isOwnMenuPage</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_isOwn">Classes\SCore\Utils\MenuPage::isOwn()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_currentMenuPageTab">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L86">line 86</a></div>
+        <code>        static            
+    <strong>currentMenuPageTab</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_currentTab">Classes\SCore\Utils\MenuPage::currentTab()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isMenuPageTab">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L98">line 98</a></div>
+        <code>        static            
+    <strong>isMenuPageTab</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_isTab">Classes\SCore\Utils\MenuPage::isTab()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isOwnMenuPageTab">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L110">line 110</a></div>
+        <code>        static            
+    <strong>isOwnMenuPageTab</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_isOwnTab">Classes\SCore\Utils\MenuPage::isOwnTab()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_currentMenuPagePostType">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L122">line 122</a></div>
+        <code>        static            
+    <strong>currentMenuPagePostType</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_currentPostType">Classes\SCore\Utils\MenuPage::currentPostType()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_menuPagePostTypeNow">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L134">line 134</a></div>
+        <code>        static            
+    <strong>menuPagePostTypeNow</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_postTypeNow">Classes\SCore\Utils\MenuPage::postTypeNow()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isMenuPageForPostType">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L146">line 146</a></div>
+        <code>        static            
+    <strong>isMenuPageForPostType</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_isForPostType">Classes\SCore\Utils\MenuPage::isForPostType()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addMenuPage">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L158">line 158</a></div>
+        <code>        static            
+    <strong>addMenuPage</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_addMenu">Classes\SCore\Utils\MenuPage::addMenu()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addMenuPageItem">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L170">line 170</a></div>
+        <code>        static            
+    <strong>addMenuPageItem</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_addMenuItem">Classes\SCore\Utils\MenuPage::addMenuItem()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_menuPageForm">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/traits/Facades/MenuPage.php#L182">line 182</a></div>
+        <code>        static            
+    <strong>menuPageForm</strong>(mixed               ...$args)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                                  <td>...$args <span class="label label-default">variadic</span></td>
+                                <td>Variadic args to underlying utility.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>Facade (Psuedo-Static Access)</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td colspan="2">
+                  <big><span class="label label-default">Underlying Utility</span></big> <i class="glyphicon glyphicon-hand-right"></i>
+                  
+                                          <a href="../../Classes\SCore\Utils\MenuPage.html#method_form">Classes\SCore\Utils\MenuPage::form()</a>
+                    
+                                  </td>
+            </tr>
+            </table>
+
+
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami</a> <strong>(enhanced by WebSharks)</strong>
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

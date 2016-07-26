@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>WebSharks\WpSharks\Core\Classes\SCore\Utils\MenuPage | WP Sharks Core</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/sami.css">
+        <script src="../../../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../../../js/typeahead.min.js"></script>
+        <script src="../../../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+            <link rel="shortcut icon" href="https://wpsharks.com/favicon.ico" />
+    
+    </head>
+
+    <body id="class" data-name="class:WebSharks_WpSharks_Core_Classes_SCore_Utils_MenuPage" data-root-path="../../../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../../../index.html"><img src="https://wpsharks.com/wp-content/uploads/2016/07/fin-512.png" />WP Sharks Core</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../../../../WebSharks.html">WebSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks.html">WpSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core.html">Core</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes.html">Classes</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore.html">SCore</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Utils.html">Utils</a></li>
+    
+                <li>MenuPage</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            MenuPage
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>MenuPage</strong>        extends <a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a>        (<a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php">View source</a>)
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Menu page utils.</p>                    </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_Wp">
+                                        protected                                        
+                </td>
+                <td>$Wp</td>
+                <td class="last">WP common.</td>
+                <td><small>from&nbsp;<a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html#property_Wp"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_hook_names">
+                                        protected                                        
+                </td>
+                <td>$hook_names</td>
+                <td class="last">Menu page hook names.</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        
+                                            <p>Class constructor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_current">current</a>()
+        
+                                            <p>Current menu page.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_now">now</a>()
+        
+                                            <p>Current <code>$GLOBALS['pagenow']</code>.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_is">is</a>(string $page = &#039;&#039;)
+        
+                                            <p>Is a menu page?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isOwn">isOwn</a>(string $page = &#039;&#039;)
+        
+                                            <p>Is own menu page?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_currentTab">currentTab</a>()
+        
+                                            <p>Current menu page tab.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isTab">isTab</a>(string $tab = &#039;&#039;)
+        
+                                            <p>Is a menu page tab?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isOwnTab">isOwnTab</a>(string $tab = &#039;&#039;)
+        
+                                            <p>Is own menu page tab?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_currentPostType">currentPostType</a>()
+        
+                                            <p>Current menu page post type.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_postTypeNow">postTypeNow</a>()
+        
+                                            <p>Current <code>$GLOBALS['typenow']</code>.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isForPostType">isForPostType</a>(string $post_type = &#039;&#039;)
+        
+                                            <p>Is a menu page for a post type?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_onAdminBodyClass">onAdminBodyClass</a>($class)
+        
+                                            <p>Admin body class filter.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_onPluginActionLinks">onPluginActionLinks</a>(array $actions)
+        
+                                            <p>Filter action links.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addMenu">addMenu</a>(array $args = [])
+        
+                                            <p>Adds a new top-level menu.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addMenuItem">addMenuItem</a>(array $args = [])
+        
+                                            <p>Adds a new menu item.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_buildNavTabs">buildNavTabs</a>(<a target="_blank" href="http://php.net/StdClass">StdClass</a> $cfg)
+        
+                                            <p>Builds navigation tabs.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_url">url</a>(string $page_path = &#039;&#039;, array|string $query_args = [], string $context = &#039;&#039;)
+        
+                                            <p>Menu page URL.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/MenuPageForm.html"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\MenuPageForm">MenuPageForm</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_form">form</a>(string $action, array $args = [])
+        
+                                            <p>A menu page form class instance.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L40">line 40</a></div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Class constructor.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a></td>
+                                  <td>$App</td>
+                                <td>Instance of App.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_current">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L54">line 54</a></div>
+        <code>                    string
+    <strong>current</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Current menu page.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Current menu page.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_now">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L71">line 71</a></div>
+        <code>                    string
+    <strong>now</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Current <code>$GLOBALS['pagenow']</code>.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Current <code>$GLOBALS['pagenow']</code>.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_is">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L93">line 93</a></div>
+        <code>                    bool
+    <strong>is</strong>(string $page = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is a menu page?</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$page</td>
+                                <td>Page to check (optional).</p>
+
+<ul>
+<li><code>*</code> = Zero or more chars != <code>-</code>.</li>
+<li><code>**</code> = Zero or more chars of any kind.</li>
+<li>Check is always caSe insensitive by default.</li>
+<li>If <code>$page</code> begins with <code>/</code> it is treated as regex.</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if a menu page.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isOwn">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L125">line 125</a></div>
+        <code>                    bool
+    <strong>isOwn</strong>(string $page = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is own menu page?</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$page</td>
+                                <td>Page to check (optional).</p>
+
+<ul>
+<li><code>*</code> = Zero or more chars != <code>-</code>.</li>
+<li><code>**</code> = Zero or more chars of any kind.</li>
+<li>Check is always caSe insensitive by default.</li>
+<li>If <code>$page</code> begins with <code>/</code> it is treated as regex.</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if own menu page.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_currentTab">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L142">line 142</a></div>
+        <code>                    string
+    <strong>currentTab</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Current menu page tab.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Current menu page post type.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isTab">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L166">line 166</a></div>
+        <code>                    bool
+    <strong>isTab</strong>(string $tab = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is a menu page tab?</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$tab</td>
+                                <td>Tab to check (optional).</p>
+
+<ul>
+<li><code>*</code> = Zero or more chars != <code>-</code>.</li>
+<li><code>**</code> = Zero or more chars of any kind.</li>
+<li>Check is always caSe insensitive by default.</li>
+<li>If <code>$tab</code> begins with <code>/</code> it is treated as regex.</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if a menu page tab.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isOwnTab">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L200">line 200</a></div>
+        <code>                    bool
+    <strong>isOwnTab</strong>(string $tab = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is own menu page tab?</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$tab</td>
+                                <td>Tab to check (optional).</p>
+
+<ul>
+<li><code>*</code> = Zero or more chars != <code>-</code>.</li>
+<li><code>**</code> = Zero or more chars of any kind.</li>
+<li>Check is always caSe insensitive by default.</li>
+<li>If <code>$page</code> begins with <code>/</code> it is treated as regex.</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if own menu page tab.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_currentPostType">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L217">line 217</a></div>
+        <code>                    string
+    <strong>currentPostType</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Current menu page post type.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Current menu page post type.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_postTypeNow">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L234">line 234</a></div>
+        <code>                    string
+    <strong>postTypeNow</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Current <code>$GLOBALS['typenow']</code>.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Current <code>$GLOBALS['typenow']</code>.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isForPostType">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L256">line 256</a></div>
+        <code>                    bool
+    <strong>isForPostType</strong>(string $post_type = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Is a menu page for a post type?</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$post_type</td>
+                                <td>Post type to check (optional).</p>
+
+<ul>
+<li><code>*</code> = Zero or more chars != <code>_</code>.</li>
+<li><code>**</code> = Zero or more chars of any kind.</li>
+<li>Check is always caSe insensitive by default.</li>
+<li>If <code>$post_type</code> beings with <code>/</code> it is treated as regex.</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if menu page is for post type.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_onAdminBodyClass">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L286">line 286</a></div>
+        <code>                    
+    <strong>onAdminBodyClass</strong>($class)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Admin body class filter.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                                  <td>$class</td>
+                                <td></td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_onPluginActionLinks">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L312">line 312</a></div>
+        <code>                    array
+    <strong>onPluginActionLinks</strong>(array $actions)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Filter action links.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$actions</td>
+                                <td>Current action links.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>Filtered action links.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addMenu">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L345">line 345</a></div>
+        <code>                    
+    <strong>addMenu</strong>(array $args = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Adds a new top-level menu.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Configuration args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addMenuItem">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L423">line 423</a></div>
+        <code>                    
+    <strong>addMenuItem</strong>(array $args = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Adds a new menu item.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Configuration args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_buildNavTabs">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L500">line 500</a></div>
+        <code>            protected        string
+    <strong>buildNavTabs</strong>(<a target="_blank" href="http://php.net/StdClass">StdClass</a> $cfg)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Builds navigation tabs.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/StdClass">StdClass</a></td>
+                                  <td>$cfg</td>
+                                <td>Menu page config.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Markup for navigation tabs.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_url">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L598">line 598</a></div>
+        <code>                    string
+    <strong>url</strong>(string $page_path = &#039;&#039;, array|string $query_args = [], string $context = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Menu page URL.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$page_path</td>
+                                <td>Page (or path).</td>
+            </tr>
+                    <tr>
+                <td>array|string</td>
+                                  <td>$query_args</td>
+                                <td>Query args (or tab).</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$context</td>
+                                <td><code>admin</code>, <code>network</code>, <code>self</code>.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Current menu page.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_form">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/MenuPage.php#L668">line 668</a></div>
+        <code>                    <a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/MenuPageForm.html"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\MenuPageForm">MenuPageForm</abbr></a>
+    <strong>form</strong>(string $action, array $args = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>A menu page form class instance.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>ReST action identifier.</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Any additional behavioral args.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/MenuPageForm.html"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\MenuPageForm">MenuPageForm</abbr></a></td>
+            <td>Class instance.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami</a> <strong>(enhanced by WebSharks)</strong>
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

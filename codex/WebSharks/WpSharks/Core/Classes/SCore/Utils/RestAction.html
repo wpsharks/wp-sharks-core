@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>WebSharks\WpSharks\Core\Classes\SCore\Utils\RestAction | WP Sharks Core</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/sami.css">
+        <script src="../../../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../../../js/typeahead.min.js"></script>
+        <script src="../../../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+            <link rel="shortcut icon" href="https://wpsharks.com/favicon.ico" />
+    
+    </head>
+
+    <body id="class" data-name="class:WebSharks_WpSharks_Core_Classes_SCore_Utils_RestAction" data-root-path="../../../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../../../index.html"><img src="https://wpsharks.com/wp-content/uploads/2016/07/fin-512.png" />WP Sharks Core</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../../../../WebSharks.html">WebSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks.html">WpSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core.html">Core</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes.html">Classes</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore.html">SCore</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Utils.html">Utils</a></li>
+    
+                <li>RestAction</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            RestAction
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>RestAction</strong>        extends <a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a>        (<a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php">View source</a>)
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>ReST action utils.</p>                    </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_Wp">
+                                        protected                                        
+                </td>
+                <td>$Wp</td>
+                <td class="last">WP common.</td>
+                <td><small>from&nbsp;<a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html#property_Wp"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_var">
+                                                                                
+                </td>
+                <td>$var</td>
+                <td class="last">Action var.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_data_var">
+                                                                                
+                </td>
+                <td>$data_var</td>
+                <td class="last">Data var.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_data_slug">
+                                                                                
+                </td>
+                <td>$data_slug</td>
+                <td class="last">Data slug.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_action">
+                                        protected                                        
+                </td>
+                <td>$action</td>
+                <td class="last">Current action.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_api_version">
+                                        protected                                        
+                </td>
+                <td>$api_version</td>
+                <td class="last">Action API version.</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_registered_actions">
+                                        protected                                        
+                </td>
+                <td>$registered_actions</td>
+                <td class="last">Registered actions.</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        
+                                            <p>Class constructor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_onWpLoaded">onWpLoaded</a>()
+        
+                                            <p>Handle actions.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_apiVersion">apiVersion</a>()
+        
+                                            <p>Action API version; parsed <code>onWpLoaded()</code>.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array|string|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_data">data</a>(string $action = &#039;&#039;, bool $allow_dimensions = false)
+        
+                                            <p>Action data.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_bestUrl">bestUrl</a>(string $action)
+        
+                                            <p>Best URL for the action.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_urlAdd">urlAdd</a>(string $action, mixed|null $data = null, string $url = null)
+        
+                                            <p>Add action to a URL.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_urlRemove">urlRemove</a>(string $url)
+        
+                                            <p>Remove an nonce from a URL.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_formElementId">formElementId</a>(string $action, string $var_name = &#039;&#039;)
+        
+                                            <p>Data form element ID.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_formElementClass">formElementClass</a>(string $var_name = &#039;&#039;)
+        
+                                            <p>Data form element class.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_formElementName">formElementName</a>(string $var_name = &#039;&#039;)
+        
+                                            <p>Data form element name.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_register">register</a>(string $action, string $class, string $method, array $args = [])
+        
+                                            <p>Registers an action.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_viaAjax">viaAjax</a>(string $action)
+        
+                                            <p>An action via AJAX?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_viaApi">viaApi</a>(string $action)
+        
+                                            <p>An action via API?</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_parseApiVersion">parseApiVersion</a>(string $action)
+        
+                                            <p>Parse API version.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addApiVersion">addApiVersion</a>(string $action)
+        
+                                            <p>Add API version.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_stripApiVersion">stripApiVersion</a>(string $action)
+        
+                                            <p>Strip API version.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L85">line 85</a></div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Class constructor.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a></td>
+                                  <td>$App</td>
+                                <td>Instance of App.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_onWpLoaded">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L110">line 110</a></div>
+        <code>                    
+    <strong>onWpLoaded</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Handle actions.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_apiVersion">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L154">line 154</a></div>
+        <code>                    mixed
+    <strong>apiVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Action API version; parsed <code>onWpLoaded()</code>.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>Action API version; parsed <code>onWpLoaded()</code>.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_data">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L172">line 172</a></div>
+        <code>                    array|string|null
+    <strong>data</strong>(string $action = &#039;&#039;, bool $allow_dimensions = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Action data.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                                  <td>$allow_dimensions</td>
+                                <td>Allow multiple dimensions?</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array|string|null</td>
+            <td>Action data.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_bestUrl">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L209">line 209</a></div>
+        <code>                    string
+    <strong>bestUrl</strong>(string $action)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Best URL for the action.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Best URL for the action.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_urlAdd">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L233">line 233</a></div>
+        <code>                    string
+    <strong>urlAdd</strong>(string $action, mixed|null $data = null, string $url = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add action to a URL.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+                    <tr>
+                <td>mixed|null</td>
+                                  <td>$data</td>
+                                <td>Action data (optional).</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$url</td>
+                                <td>Input URL (optional).</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL w/ an action.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_urlRemove">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L257">line 257</a></div>
+        <code>                    string
+    <strong>urlRemove</strong>(string $url)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Remove an nonce from a URL.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$url</td>
+                                <td>Input URL.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL w/o an nonce.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_formElementId">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L273">line 273</a></div>
+        <code>                    string
+    <strong>formElementId</strong>(string $action, string $var_name = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Data form element ID.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$var_name</td>
+                                <td>Data var name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Data form element ID.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_formElementClass">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L287">line 287</a></div>
+        <code>                    string
+    <strong>formElementClass</strong>(string $var_name = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Data form element class.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$var_name</td>
+                                <td>Data var name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Data form element class.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_formElementName">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L301">line 301</a></div>
+        <code>                    string
+    <strong>formElementName</strong>(string $var_name = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Data form element name.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$var_name</td>
+                                <td>Data var name.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Data form element name.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_register">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L325">line 325</a></div>
+        <code>                    
+    <strong>register</strong>(string $action, string $class, string $method, array $args = [])
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Registers an action.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$class</td>
+                                <td>A utility class name.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                                  <td>$method</td>
+                                <td>A utility class method callback.</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                                  <td>$args</td>
+                                <td>Any additional behavioral args.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_viaAjax">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L351">line 351</a></div>
+        <code>            protected        bool
+    <strong>viaAjax</strong>(string $action)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>An action via AJAX?</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if it's an action via AJAX.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_viaApi">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L365">line 365</a></div>
+        <code>            protected        bool
+    <strong>viaApi</strong>(string $action)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>An action via API?</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td>True if it's an action via API.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_parseApiVersion">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L382">line 382</a></div>
+        <code>            protected        string
+    <strong>parseApiVersion</strong>(string $action)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Parse API version.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>API version from action identifier.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addApiVersion">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L399">line 399</a></div>
+        <code>            protected        string
+    <strong>addApiVersion</strong>(string $action)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add API version.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Action w/ the API version.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_stripApiVersion">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/RestAction.php#L416">line 416</a></div>
+        <code>            protected        string
+    <strong>stripApiVersion</strong>(string $action)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Strip API version.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                                  <td>$action</td>
+                                <td>Action identifier.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Action w/o the API version.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami</a> <strong>(enhanced by WebSharks)</strong>
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

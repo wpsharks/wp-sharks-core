@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>WebSharks\WpSharks\Core\Classes\SCore\Utils\Updater | WP Sharks Core</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../../css/sami.css">
+        <script src="../../../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../../../js/typeahead.min.js"></script>
+        <script src="../../../../../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+            <link rel="shortcut icon" href="https://wpsharks.com/favicon.ico" />
+    
+    </head>
+
+    <body id="class" data-name="class:WebSharks_WpSharks_Core_Classes_SCore_Utils_Updater" data-root-path="../../../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../../../index.html"><img src="https://wpsharks.com/wp-content/uploads/2016/07/fin-512.png" />WP Sharks Core</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../../../../WebSharks.html">WebSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks.html">WpSharks</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core.html">Core</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes.html">Classes</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore.html">SCore</a></li>
+                                        <li><a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Utils.html">Utils</a></li>
+    
+                <li>Updater</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Updater
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Updater</strong>        extends <a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a>        (<a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php">View source</a>)
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Update utils.</p>                    </div>
+    
+    
+    
+            <h2>Properties</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td class="type" id="property_Wp">
+                                        protected                                        
+                </td>
+                <td>$Wp</td>
+                <td class="last">WP common.</td>
+                <td><small>from&nbsp;<a href="../../../../../../WebSharks/WpSharks/Core/Classes/SCore/Base/Core.html#property_Wp"><abbr title="WebSharks\WpSharks\Core\Classes\SCore\Base\Core">Core</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type" id="property_outdated_check_time">
+                                        protected                                        
+                </td>
+                <td>$outdated_check_time</td>
+                <td class="last">Outdated check time.</td>
+                <td></td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        
+                                            <p>Class constructor.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_onAdminInit">onAdminInit</a>()
+        
+                                            <p>On admin init.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_onGetSiteTransientUpdateThemes">onGetSiteTransientUpdateThemes</a>(<a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed $report)
+        
+                                            <p>Transient filter.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_onGetSiteTransientUpdatePlugins">onGetSiteTransientUpdatePlugins</a>(<a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed $report)
+        
+                                            <p>Transient filter.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_onUpgraderProcessComplete">onUpgraderProcessComplete</a>()
+        
+                                            <p>Flush the OPcache.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_latestVersion">latestVersion</a>()
+        
+                                            <p>Latest version.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_latestPackage">latestPackage</a>()
+        
+                                            <p>Latest package.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_apiUrlForLatestVersion">apiUrlForLatestVersion</a>()
+        
+                                            <p>API URL for latest version.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_apiUrlForLatestPackageViaLicenseKey">apiUrlForLatestPackageViaLicenseKey</a>()
+        
+                                            <p>API URL for latest package (via license key).</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_lastVersionCheck">lastVersionCheck</a>(array $data = null)
+        
+                                            <p>Last version-check data.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_lastPackageCheck">lastPackageCheck</a>(array $data = null)
+        
+                                            <p>Last package-check data.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L40">line 40</a></div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a> $App)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Class constructor.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../../WebSharks/WpSharks/Core/Classes/App.html"><abbr title="WebSharks\WpSharks\Core\Classes\App">App</abbr></a></td>
+                                  <td>$App</td>
+                                <td>Instance of App.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_onAdminInit">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L52">line 52</a></div>
+        <code>                    
+    <strong>onAdminInit</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>On admin init.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_onGetSiteTransientUpdateThemes">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L88">line 88</a></div>
+        <code>                    <a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed
+    <strong>onGetSiteTransientUpdateThemes</strong>(<a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed $report)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Transient filter.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed</td>
+                                  <td>$report</td>
+                                <td>Report details.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed</td>
+            <td>Report details.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_onGetSiteTransientUpdatePlugins">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L132">line 132</a></div>
+        <code>                    <a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed
+    <strong>onGetSiteTransientUpdatePlugins</strong>(<a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed $report)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Transient filter.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed</td>
+                                  <td>$report</td>
+                                <td>Report details.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a target="_blank" href="http://php.net/StdClass">StdClass</a>|mixed</td>
+            <td>Report details.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_onUpgraderProcessComplete">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L176">line 176</a></div>
+        <code>                    
+    <strong>onUpgraderProcessComplete</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Flush the OPcache.</p>                                </div>
+                <div class="tags">
+            
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_latestVersion">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L194">line 194</a></div>
+        <code>            protected        string
+    <strong>latestVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Latest version.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Latest version.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_latestPackage">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L222">line 222</a></div>
+        <code>            protected        string
+    <strong>latestPackage</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Latest package.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>Latest package.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_apiUrlForLatestVersion">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L273">line 273</a></div>
+        <code>            protected        string
+    <strong>apiUrlForLatestVersion</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>API URL for latest version.</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL (ready for GET request).</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_apiUrlForLatestPackageViaLicenseKey">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L287">line 287</a></div>
+        <code>            protected        string
+    <strong>apiUrlForLatestPackageViaLicenseKey</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>API URL for latest package (via license key).</p>                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>URL (ready for GET request).</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_lastVersionCheck">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L319">line 319</a></div>
+        <code>            protected        array
+    <strong>lastVersionCheck</strong>(array $data = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Last version-check data.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$data</td>
+                                <td><code>[time,version]</code>.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>Last version-check data.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_lastPackageCheck">
+        <div class="location">at         <a target="_blank" href="https://github.com/websharks/wp-sharks-core/blob/master/src/includes/classes/SCore/Utils/Updater.php#L363">line 363</a></div>
+        <code>            protected        array
+    <strong>lastPackageCheck</strong>(array $data = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Last package-check data.</p>                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                                  <td>$data</td>
+                                <td><code>[time,package]</code>.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>Last package-check data.</td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami</a> <strong>(enhanced by WebSharks)</strong>
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
