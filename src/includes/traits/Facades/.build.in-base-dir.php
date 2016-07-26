@@ -11,6 +11,12 @@ if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
 $Facades = '<?php
+/**
+ * Facades.
+ *
+ * @author @jaswsinc
+ * @copyright WP Sharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 

@@ -14,13 +14,13 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-extract($this->current_vars); // Template variables.
+extract($this->vars); // Template variables.
 ?>
 <div class="<?= esc_attr($cfg->class); ?>">
     <div class="-container">
 
         <div class="-content">
-            <?= $this->get($cfg->template_file, $this->current_vars, $cfg->template_dir); ?>
+            <?= $this->get($cfg->template_file, [], $cfg->template_dir); ?>
         </div>
 
     </div>

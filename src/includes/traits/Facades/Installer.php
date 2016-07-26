@@ -18,6 +18,10 @@ trait Installer
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Installer::maybeInstall()
      */
     public static function maybeInstall(...$args)
     {

@@ -18,6 +18,10 @@ trait PostMeta
 {
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::key()
      */
     public static function postMetaKey(...$args)
     {
@@ -26,6 +30,10 @@ trait PostMeta
 
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::get()
      */
     public static function getPostMeta(...$args)
     {
@@ -34,6 +42,10 @@ trait PostMeta
 
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::update()
      */
     public static function updatePostMeta(...$args)
     {
@@ -42,6 +54,10 @@ trait PostMeta
 
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::delete()
      */
     public static function deletePostMeta(...$args)
     {
@@ -50,6 +66,10 @@ trait PostMeta
 
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::set()
      */
     public static function setPostMeta(...$args)
     {
@@ -58,6 +78,10 @@ trait PostMeta
 
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::unset()
      */
     public static function unsetPostMeta(...$args)
     {
@@ -66,6 +90,10 @@ trait PostMeta
 
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMetaBox::add()
      */
     public static function addPostMetaBox(...$args)
     {
@@ -74,6 +102,10 @@ trait PostMeta
 
     /**
      * @since 160723 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMetaBox::form()
      */
     public static function postMetaBoxForm(...$args)
     {

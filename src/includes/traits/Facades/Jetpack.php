@@ -18,6 +18,10 @@ trait Jetpack
 {
     /**
      * @since 160720 Jetpack utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Jetpack::markdown()
      */
     public static function jetpackMarkdown(...$args)
     {
@@ -26,6 +30,10 @@ trait Jetpack
 
     /**
      * @since 160720 Jetpack utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Jetpack::canMarkdown()
      */
     public static function jetpackCanMarkdown(...$args)
     {
@@ -34,6 +42,10 @@ trait Jetpack
 
     /**
      * @since 160720 Jetpack utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Jetpack::canLatex()
      */
     public static function jetpackCanLatex(...$args)
     {

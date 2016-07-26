@@ -18,6 +18,7 @@ trait Options
 {
     /**
      * @since 160524 App.
+     * @see Classes/App::$Config
      */
     public static function options()
     {
@@ -26,6 +27,7 @@ trait Options
 
     /**
      * @since 160524 App.
+     * @see Classes/App::$Config
      */
     public static function defaultOptions()
     {
@@ -34,6 +36,10 @@ trait Options
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::get()
      */
     public static function getOption(...$args)
     {
@@ -42,6 +48,10 @@ trait Options
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::merge()
      */
     public static function mergeOptions(...$args)
     {
@@ -50,6 +60,10 @@ trait Options
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::update()
      */
     public static function updateOptions(...$args)
     {
@@ -58,6 +72,10 @@ trait Options
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::restoreDefaults()
      */
     public static function restoreDefaultOptions(...$args)
     {
@@ -66,6 +84,10 @@ trait Options
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::saveUrl()
      */
     public static function saveOptionsUrl(...$args)
     {
@@ -74,6 +96,10 @@ trait Options
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::saveViaAjaxUrl()
      */
     public static function saveOptionsViaAjaxUrl(...$args)
     {
@@ -82,6 +108,10 @@ trait Options
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::restoreDefaultsUrl()
      */
     public static function restoreDefaultOptionsUrl(...$args)
     {

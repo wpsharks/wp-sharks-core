@@ -18,6 +18,10 @@ trait Theme
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Theme::isInstalled()
      */
     public static function themeIsInstalled(...$args)
     {
@@ -26,6 +30,10 @@ trait Theme
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Theme::installedData()
      */
     public static function installedThemeData(...$args)
     {

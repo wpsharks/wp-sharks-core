@@ -18,6 +18,10 @@ trait UrlToPostId
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\UrlToPostId::__invoke()
      */
     public static function urlToPostId(...$args)
     {

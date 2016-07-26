@@ -18,6 +18,10 @@ trait BrandUrls
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrand()
      */
     public static function brandUrl(...$args)
     {
@@ -26,6 +30,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandArg()
      */
     public static function brandUrlArg(...$args)
     {
@@ -34,6 +42,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandParent()
      */
     public static function parentBrandUrl(...$args)
     {
@@ -42,6 +54,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandParentArg()
      */
     public static function parentBrandUrlArg(...$args)
     {
@@ -50,6 +66,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandCore()
      */
     public static function coreBrandUrl(...$args)
     {
@@ -58,6 +78,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandCoreArg()
      */
     public static function coreBrandUrlArg(...$args)
     {
@@ -66,6 +90,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandApi()
      */
     public static function brandApiUrl(...$args)
     {
@@ -74,6 +102,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandApiArg()
      */
     public static function brandApiUrlArg(...$args)
     {
@@ -82,6 +114,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandParentApi()
      */
     public static function parentBrandApiUrl(...$args)
     {
@@ -90,6 +126,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandParentApiArg()
      */
     public static function parentBrandApiUrlArg(...$args)
     {
@@ -98,6 +138,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandCoreApi()
      */
     public static function coreBrandApiUrl(...$args)
     {
@@ -106,6 +150,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandCoreApiArg()
      */
     public static function coreBrandApiUrlArg(...$args)
     {
@@ -114,6 +162,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandCdn()
      */
     public static function brandCdnUrl(...$args)
     {
@@ -122,6 +174,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandCdnArg()
      */
     public static function brandCdnUrlArg(...$args)
     {
@@ -130,6 +186,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandParentCdn()
      */
     public static function parentBrandCdnUrl(...$args)
     {
@@ -138,6 +198,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandParentCdnArg()
      */
     public static function parentBrandCdnUrlArg(...$args)
     {
@@ -146,6 +210,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandCoreCdn()
      */
     public static function coreBrandCdnUrl(...$args)
     {
@@ -154,6 +222,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandCoreCdnArg()
      */
     public static function coreBrandCdnUrlArg(...$args)
     {
@@ -162,6 +234,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandStats()
      */
     public static function brandStatsUrl(...$args)
     {
@@ -170,6 +246,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandStatsArg()
      */
     public static function brandStatsUrlArg(...$args)
     {
@@ -178,6 +258,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandParentStats()
      */
     public static function parentBrandStatsUrl(...$args)
     {
@@ -186,6 +270,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandParentStatsArg()
      */
     public static function parentBrandStatsUrlArg(...$args)
     {
@@ -194,6 +282,10 @@ trait BrandUrls
 
     /**
      * @since 160625 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::toBrandCoreStats()
      */
     public static function coreBrandStatsUrl(...$args)
     {
@@ -202,6 +294,10 @@ trait BrandUrls
 
     /**
      * @since 160629 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\BrandUrl::brandCoreStatsArg()
      */
     public static function coreBrandStatsUrlArg(...$args)
     {

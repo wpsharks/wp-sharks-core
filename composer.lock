@@ -703,12 +703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "e4d3cb8b423630ca9f600b0aa6b1942c9406fbb4"
+                "reference": "54c5c60c73c22e3f27646764befd91b61a829ba1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/e4d3cb8b423630ca9f600b0aa6b1942c9406fbb4",
-                "reference": "e4d3cb8b423630ca9f600b0aa6b1942c9406fbb4",
+                "url": "https://api.github.com/repos/websharks/core/zipball/54c5c60c73c22e3f27646764befd91b61a829ba1",
+                "reference": "54c5c60c73c22e3f27646764befd91b61a829ba1",
                 "shasum": ""
             },
             "require": {
@@ -769,6 +769,7 @@
                 "ext-pspell": "*",
                 "ext-zend-opcache": "*",
                 "ext-zip": "*",
+                "gossi/docblock": "1.*",
                 "lusitanian/oauth": "0.*",
                 "ryakad/pandoc-php": "1.*"
             },
@@ -784,6 +785,7 @@
                 "ext-pdo_mysql": "* :: Required when using PDO utilities.",
                 "ext-pspell": "* :: Required by routines that deal with spellcheck.",
                 "ext-zip": "* :: Required by routines that deal with ZIP files.",
+                "gossi/docblock": "1.* :: Required by routines that parse docBlocks.",
                 "lusitanian/oauth": "0.* :: Required when using SSO and other related utils.",
                 "ryakad/pandoc-php": "1.* :: Required by routines that use Pandoc."
             },
@@ -826,7 +828,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2016-07-22 15:54:51"
+            "time": "2016-07-26 03:42:51"
         },
         {
             "name": "websharks/dicer",

@@ -18,6 +18,10 @@ trait WcOrderItem
 {
     /**
      * @since 160608 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\WcOrderItem::orderByItemId()
      */
     public static function wcOrderByItemId(...$args)
     {
@@ -26,6 +30,10 @@ trait WcOrderItem
 
     /**
      * @since 160608 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\WcOrderItem::orderItemById()
      */
     public static function wcOrderItemById(...$args)
     {
@@ -34,6 +42,10 @@ trait WcOrderItem
 
     /**
      * @since 160608 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\WcOrderItem::productIdFromItem()
      */
     public static function wcProductIdFromItem(...$args)
     {
@@ -42,6 +54,10 @@ trait WcOrderItem
 
     /**
      * @since 160608 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\WcOrderItem::productByOrderItemId()
      */
     public static function wcProductByOrderItemId(...$args)
     {

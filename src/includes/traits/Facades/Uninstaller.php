@@ -18,6 +18,10 @@ trait Uninstaller
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Uninstaller::maybeUninstall()
      */
     public static function maybeUninstall(...$args)
     {

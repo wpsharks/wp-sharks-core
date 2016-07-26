@@ -14,7 +14,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-extract($¤vars); // Template variables.
+extract($this->vars); // Template variables.
 ?>
 <p>
     <?= sprintf(__('%1$s™ License Key for: <strong>%2$s</strong>', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->App->Config->©brand['§product_name'])); ?>

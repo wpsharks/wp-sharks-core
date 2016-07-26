@@ -39,7 +39,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '160724.64804'; //v//
+    const VERSION = '160726.57755'; //v//
 
     /**
      * ReST action API version.
@@ -667,7 +667,7 @@ class App extends CoreClasses\App
      *
      * @since 160524 Initial release.
      *
-     * @note Only runs when appropriate.
+     * @internal Only runs when appropriate.
      */
     protected function onSetupEarlyHooks()
     {
@@ -679,7 +679,7 @@ class App extends CoreClasses\App
      *
      * @since 160524 Initial release.
      *
-     * @note Only runs when appropriate.
+     * @internal Only runs when appropriate.
      */
     protected function onSetupOtherHooks()
     {

@@ -368,11 +368,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @param array $args Required dependency args.
      *
-     * @note Intentionally choosing not to use built-in notice utilities here.
+     * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
-     * @note Not only that, but the hooks needed to use notice utilities are not attached
+     * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
     protected function maybeEnqueueInstallationNotice(array $args)
@@ -449,11 +449,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @param array $args Required dependency args.
      *
-     * @note Intentionally choosing not to use built-in notice utilities here.
+     * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
-     * @note Not only that, but the hooks needed to use notice utilities are not attached
+     * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
     protected function maybeEnqueueActivationNotice(array $args)
@@ -521,11 +521,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @param array $args Required dependency args.
      *
-     * @note Intentionally choosing not to use built-in notice utilities here.
+     * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
-     * @note Not only that, but the hooks needed to use notice utilities are not attached
+     * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
     protected function maybeEnqueueUpgradeNotice(array $args)
@@ -608,11 +608,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @param array $args Required dependency args.
      *
-     * @note Intentionally choosing not to use built-in notice utilities here.
+     * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
-     * @note Not only that, but the hooks needed to use notice utilities are not attached
+     * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
     protected function maybeEnqueueDowngradeNotice(array $args)
@@ -695,11 +695,11 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @param array $args Required dependency args.
      *
-     * @note Intentionally choosing not to use built-in notice utilities here.
+     * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
      *
-     * @note Not only that, but the hooks needed to use notice utilities are not attached
+     * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
     protected function maybeEnqueueOtherNotice(array $args)

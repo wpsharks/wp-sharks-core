@@ -18,6 +18,10 @@ trait Date
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Date::i18n()
      */
     public static function dateI18n(...$args)
     {
@@ -26,6 +30,10 @@ trait Date
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Date::i18nUtc()
      */
     public static function dateI18nUtc(...$args)
     {
@@ -34,6 +42,10 @@ trait Date
 
     /**
      * @since 160702 UTC conversions.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Date::toUtc()
      */
     public static function localToUtc(...$args)
     {
@@ -42,6 +54,10 @@ trait Date
 
     /**
      * @since 160702 UTC conversions.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Date::toLocal()
      */
     public static function utcToLocal(...$args)
     {

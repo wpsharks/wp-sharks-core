@@ -18,6 +18,10 @@ trait TransientShortlink
 {
     /**
      * @since 160704 Transient shortlinks.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\TransientShortlink::__invoke()
      */
     public static function transientShortlink(...$args)
     {

@@ -26,7 +26,7 @@ class Plugins extends Classes\SCore\Base\Core
      *
      * @since 160524 First documented version.
      *
-     * @type array Global static cache.
+     * @var array Global static cache.
      */
     protected static $cache; // All WPSC usage.
 
@@ -36,7 +36,8 @@ class Plugins extends Classes\SCore\Base\Core
      * @since 160524 First documented version.
      *
      * @param bool $slugify Slugs w/ basename keys?
-     * @note If false you'll get numerically indexed basenames.
+     *
+     * @internal If false you'll get numerically indexed basenames.
      *
      * @return array Active plugins.
      */
@@ -64,7 +65,8 @@ class Plugins extends Classes\SCore\Base\Core
      * @since 160524 First documented version.
      *
      * @param bool $slugify Slugs w/ basename keys?
-     * @note If false you'll get numerically indexed basenames.
+     *
+     * @internal If false you'll get numerically indexed basenames.
      *
      * @return array Network-active plugin basenames.
      */
@@ -94,7 +96,8 @@ class Plugins extends Classes\SCore\Base\Core
      * @since 160524 First documented version.
      *
      * @param bool $slugify Slugs w/ basename keys?
-     * @note If false you'll get numerically indexed basenames.
+     *
+     * @internal If false you'll get numerically indexed basenames.
      *
      * @return array All active plugin basenames.
      */

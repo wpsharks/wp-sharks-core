@@ -18,6 +18,10 @@ trait Fatalities
 {
     /**
      * @since 160606 Fatalities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Fatality::invalid()
      */
     public static function dieInvalid(...$args)
     {
@@ -26,6 +30,10 @@ trait Fatalities
 
     /**
      * @since 160524 Fatalities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Fatality::forbidden()
      */
     public static function dieForbidden(...$args)
     {

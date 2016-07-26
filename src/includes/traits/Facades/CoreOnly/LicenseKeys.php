@@ -18,6 +18,10 @@ trait LicenseKeys
 {
     /**
      * @since 160710 License key utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\LicenseKeys::activate()
      */
     public static function activateLicenseKey(...$args)
     {
@@ -26,6 +30,10 @@ trait LicenseKeys
 
     /**
      * @since 160710 License key utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\LicenseKeys::deactivate()
      */
     public static function deactivateLicenseKey(...$args)
     {
@@ -34,6 +42,10 @@ trait LicenseKeys
 
     /**
      * @since 160710 License key utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\LicenseKeys::maybeRequestViaNotice()
      */
     public static function maybeRequestLicenseKeyViaNotice(...$args)
     {
@@ -42,6 +54,10 @@ trait LicenseKeys
 
     /**
      * @since 160712 License key utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\LicenseKeys::requestViaNoticeIsApplicable()
      */
     public static function licenseKeyRequestViaNoticeIsApplicable(...$args)
     {
@@ -50,6 +66,10 @@ trait LicenseKeys
 
     /**
      * @since 160712 License key utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\LicenseKeys::requestViaNoticeMarkup()
      */
     public static function licenseKeyRequestViaNoticeMarkup(...$args)
     {

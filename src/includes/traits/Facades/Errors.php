@@ -18,6 +18,10 @@ trait Errors
 {
     /**
      * @since 160710 Error utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Error::fromWp()
      */
     public static function wpErrorConvert(...$args)
     {

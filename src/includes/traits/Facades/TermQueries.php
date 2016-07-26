@@ -18,6 +18,10 @@ trait TermQueries
 {
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\TermsQuery::total()
      */
     public static function termsQueryTotal(...$args)
     {
@@ -26,6 +30,10 @@ trait TermQueries
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\TermsQuery::all()
      */
     public static function termsQueryAll(...$args)
     {
@@ -34,6 +42,10 @@ trait TermQueries
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\TermsQuery::selectOptions()
      */
     public static function termSelectOptions(...$args)
     {

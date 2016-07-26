@@ -93,7 +93,7 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @return bool Conflicts exist?
      *
-     * @note Deactivable conflicts are considered conflicts too.
+     * @internal Deactivable conflicts are considered conflicts too.
      *  However, we can deactivate them and simply show a warning w/ refresh link.
      */
     public function exist(): bool
@@ -106,7 +106,7 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @since 160524 Conflicts.
      *
-     * @note Deactivable conflicts are considered conflicts too.
+     * @internal Deactivable conflicts are considered conflicts too.
      *  However, we can deactivate them and simply show a warning w/ refresh link.
      */
     protected function maybeCheck()
@@ -195,11 +195,11 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @since 160524 Conflicts.
      *
-     * @note Intentionally choosing not to use built-in notice utilities here.
+     * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we are in conflict with another
      *  application (e.g., lite/pro edition) that could lead to unforeseen problems.
      *
-     * @note Not only that, but the hooks needed to use notice utilities are not attached
+     * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for conflicts has been finalized; i.e., notice utils won't work anyway.
      */
     protected function maybeNotify()

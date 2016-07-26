@@ -18,6 +18,10 @@ trait SysOption
 {
     /**
      * @since 160531 Sys options.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\SysOption::__invoke()
      */
     public static function sysOption(...$args)
     {

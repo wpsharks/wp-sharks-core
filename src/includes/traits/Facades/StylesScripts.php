@@ -18,6 +18,10 @@ trait StylesScripts
 {
     /**
      * @since 160709 Sharkicon libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueSharkiconLibs()
      */
     public static function enqueueSharkiconLibs(...$args)
     {
@@ -26,6 +30,10 @@ trait StylesScripts
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueMomentLibs()
      */
     public static function enqueueMomentLibs(...$args)
     {
@@ -34,6 +42,10 @@ trait StylesScripts
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueJQueryPickadateLibs()
      */
     public static function enqueueJQueryPickadateLibs(...$args)
     {
@@ -42,6 +54,10 @@ trait StylesScripts
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueJQueryChosenLibs()
      */
     public static function enqueueJQueryChosenLibs(...$args)
     {
@@ -50,6 +66,10 @@ trait StylesScripts
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueJQueryJsGridLibs()
      */
     public static function enqueueJQueryJsGridLibs(...$args)
     {
@@ -58,6 +78,10 @@ trait StylesScripts
 
     /**
      * @since 160709 Menu page libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueMenuPageLibs()
      */
     public static function enqueueMenuPageLibs(...$args)
     {

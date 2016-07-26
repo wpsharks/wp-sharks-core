@@ -18,6 +18,10 @@ trait MenuPageMarkup
 {
     /**
      * @since 160709 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPageMarkup::note()
      */
     public static function menuPageNote(...$args)
     {
@@ -26,6 +30,10 @@ trait MenuPageMarkup
 
     /**
      * @since 160709 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPageMarkup::tip()
      */
     public static function menuPageTip(...$args)
     {
@@ -34,6 +42,10 @@ trait MenuPageMarkup
 
     /**
      * @since 160711 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPageMarkup::noticeErrors()
      */
     public static function menuPageNoticeErrors(...$args)
     {

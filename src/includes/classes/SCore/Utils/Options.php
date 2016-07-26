@@ -167,7 +167,7 @@ class Options extends Classes\SCore\Base\Core
      *
      * @param array $options Options to update.
      *
-     * @note `null` options force a default value.
+     * @internal `null` options force a default value.
      */
     public function update(array $options)
     {
@@ -191,7 +191,7 @@ class Options extends Classes\SCore\Base\Core
      *
      * @return array The resuling array after merging.
      *
-     * @note `null` options force a default value.
+     * @internal `null` options force a default value.
      */
     public function merge(array $base, array $merge): array
     {

@@ -14,7 +14,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-extract($this->current_vars); // Template variables.
+extract($this->vars); // Template variables.
 
 $apps_by_type = $this->s::getAppsByNetworkWide($this->Wp->is_network_admin);
 

@@ -18,6 +18,10 @@ trait Notices
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Notices::enqueue()
      */
     public static function enqueueNotice(...$args)
     {
@@ -26,6 +30,10 @@ trait Notices
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Notices::userEnqueue()
      */
     public static function enqueueUserNotice(...$args)
     {
@@ -34,6 +42,10 @@ trait Notices
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Notices::dismiss()
      */
     public static function dismissNotice(...$args)
     {

@@ -18,6 +18,7 @@ trait Database
 {
     /**
      * @since 160524 Initial release.
+     * @see Classes\SCore\Utils\Database::$wp
      */
     public static function wpDb()
     {
@@ -26,6 +27,10 @@ trait Database
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Database::prefix()
      */
     public static function dbPrefix(...$args)
     {
@@ -34,6 +39,10 @@ trait Database
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Database::createTables()
      */
     public static function createDbTables(...$args)
     {
@@ -42,6 +51,10 @@ trait Database
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Database::dropTables()
      */
     public static function dropDbTables(...$args)
     {
@@ -50,6 +63,10 @@ trait Database
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Database::ifNotExists()
      */
     public static function dbIfNotExists(...$args)
     {
@@ -58,6 +75,10 @@ trait Database
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Database::engineCompat()
      */
     public static function dbEngineCompat(...$args)
     {
@@ -66,6 +87,10 @@ trait Database
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Database::charsetCompat()
      */
     public static function dbCharsetCompat(...$args)
     {

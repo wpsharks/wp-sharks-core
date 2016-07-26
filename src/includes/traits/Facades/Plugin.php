@@ -18,6 +18,10 @@ trait Plugin
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugin::slug()
      */
     public static function pluginSlug(...$args)
     {
@@ -26,6 +30,10 @@ trait Plugin
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugin::slugs()
      */
     public static function pluginSlugs(...$args)
     {
@@ -34,6 +42,10 @@ trait Plugin
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugin::isInstalled()
      */
     public static function pluginIsInstalled(...$args)
     {
@@ -42,6 +54,10 @@ trait Plugin
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugin::installedData()
      */
     public static function installedPluginData(...$args)
     {

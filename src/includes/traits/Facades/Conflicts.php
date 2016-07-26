@@ -18,6 +18,10 @@ trait Conflicts
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Conflicts::exist()
      */
     public static function conflictsExist(...$args)
     {

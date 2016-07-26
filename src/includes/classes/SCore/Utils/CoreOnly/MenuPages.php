@@ -44,7 +44,7 @@ class MenuPages extends Classes\SCore\Base\Core
      *
      * @param array $args Configuration args.
      *
-     * @note Requires core to be activated network-wide.
+     * @internal Requires core to be activated network-wide.
      */
     public function onNetworkAdminMenu()
     {

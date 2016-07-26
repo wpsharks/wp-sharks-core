@@ -18,6 +18,10 @@ trait MenuPage
 {
     /**
      * @since 160712 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::url()
      */
     public static function menuPageUrl(...$args)
     {
@@ -26,6 +30,10 @@ trait MenuPage
 
     /**
      * @since 160524 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::current()
      */
     public static function currentMenuPage(...$args)
     {
@@ -34,6 +42,10 @@ trait MenuPage
 
     /**
      * @since 160524 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::now()
      */
     public static function menuPageNow(...$args)
     {
@@ -42,6 +54,10 @@ trait MenuPage
 
     /**
      * @since 160524 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::is()
      */
     public static function isMenuPage(...$args)
     {
@@ -50,6 +66,10 @@ trait MenuPage
 
     /**
      * @since 160606 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::isOwn()
      */
     public static function isOwnMenuPage(...$args)
     {
@@ -58,6 +78,10 @@ trait MenuPage
 
     /**
      * @since 160606 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::currentTab()
      */
     public static function currentMenuPageTab(...$args)
     {
@@ -66,6 +90,10 @@ trait MenuPage
 
     /**
      * @since 160606 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::isTab()
      */
     public static function isMenuPageTab(...$args)
     {
@@ -74,6 +102,10 @@ trait MenuPage
 
     /**
      * @since 160606 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::isOwnTab()
      */
     public static function isOwnMenuPageTab(...$args)
     {
@@ -82,6 +114,10 @@ trait MenuPage
 
     /**
      * @since 160524 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::currentPostType()
      */
     public static function currentMenuPagePostType(...$args)
     {
@@ -90,6 +126,10 @@ trait MenuPage
 
     /**
      * @since 160524 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::postTypeNow()
      */
     public static function menuPagePostTypeNow(...$args)
     {
@@ -98,6 +138,10 @@ trait MenuPage
 
     /**
      * @since 160524 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::isForPostType()
      */
     public static function isMenuPageForPostType(...$args)
     {
@@ -106,6 +150,10 @@ trait MenuPage
 
     /**
      * @since 160709 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::addMenu()
      */
     public static function addMenuPage(...$args)
     {
@@ -114,6 +162,10 @@ trait MenuPage
 
     /**
      * @since 160709 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::addMenuItem()
      */
     public static function addMenuPageItem(...$args)
     {
@@ -122,6 +174,10 @@ trait MenuPage
 
     /**
      * @since 160709 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::form()
      */
     public static function menuPageForm(...$args)
     {

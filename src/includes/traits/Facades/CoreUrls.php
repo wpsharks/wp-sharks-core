@@ -18,6 +18,10 @@ trait CoreUrls
 {
     /**
      * @since 160713 Core URLs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreUrl::toContainer()
      */
     public static function coreUrl(...$args)
     {

@@ -18,6 +18,10 @@ trait CapQueries
 {
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CapsQuery::total()
      */
     public static function capsQueryTotal(...$args)
     {
@@ -26,6 +30,10 @@ trait CapQueries
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CapsQuery::all()
      */
     public static function capsQueryAll(...$args)
     {
@@ -34,6 +42,10 @@ trait CapQueries
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CapsQuery::selectOptions()
      */
     public static function capSelectOptions(...$args)
     {
@@ -42,6 +54,10 @@ trait CapQueries
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CapsQuery::forRole()
      */
     public static function capsForRole(...$args)
     {
@@ -50,6 +66,10 @@ trait CapQueries
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CapsQuery::collectAll()
      */
     public static function capsCollectAll(...$args)
     {

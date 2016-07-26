@@ -18,6 +18,10 @@ trait Hooks
 {
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Hooks::addFilter()
      */
     public static function addFilter(...$args)
     {
@@ -26,6 +30,10 @@ trait Hooks
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Hooks::applyFilters()
      */
     public static function applyFilters(...$args)
     {
@@ -34,6 +42,10 @@ trait Hooks
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Hooks::addAction()
      */
     public static function addAction(...$args)
     {
@@ -42,6 +54,10 @@ trait Hooks
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Hooks::doAction()
      */
     public static function doAction(...$args)
     {

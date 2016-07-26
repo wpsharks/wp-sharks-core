@@ -18,6 +18,10 @@ trait PostTypeQueries
 {
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostTypesQuery::total()
      */
     public static function postTypesQueryTotal(...$args)
     {
@@ -26,6 +30,10 @@ trait PostTypeQueries
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostTypesQuery::all()
      */
     public static function postTypesQueryAll(...$args)
     {
@@ -34,6 +42,10 @@ trait PostTypeQueries
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostTypesQuery::selectOptions()
      */
     public static function postTypeSelectOptions(...$args)
     {

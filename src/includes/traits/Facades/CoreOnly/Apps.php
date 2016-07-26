@@ -18,6 +18,10 @@ trait Apps
 {
     /**
      * @since 160710 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\Apps::add()
      */
     public static function addApp(...$args)
     {
@@ -26,6 +30,10 @@ trait Apps
 
     /**
      * @since 160710 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\Apps::get()
      */
     public static function getApps(...$args)
     {
@@ -34,6 +42,10 @@ trait Apps
 
     /**
      * @since 160710 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\Apps::byType()
      */
     public static function getAppsByType(...$args)
     {
@@ -42,6 +54,10 @@ trait Apps
 
     /**
      * @since 160710 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\Apps::bySlug()
      */
     public static function getAppsBySlug(...$args)
     {
@@ -50,6 +66,10 @@ trait Apps
 
     /**
      * @since 160715 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\CoreOnly\Apps::byNetworkWide()
      */
     public static function getAppsByNetworkWide(...$args)
     {

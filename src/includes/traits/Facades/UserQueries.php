@@ -18,6 +18,10 @@ trait UserQueries
 {
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\UsersQuery::total()
      */
     public static function usersQueryTotal(...$args)
     {
@@ -26,6 +30,10 @@ trait UserQueries
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\UsersQuery::all()
      */
     public static function usersQueryAll(...$args)
     {
@@ -34,6 +42,10 @@ trait UserQueries
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\UsersQuery::selectOptions()
      */
     public static function userSelectOptions(...$args)
     {

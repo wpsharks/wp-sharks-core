@@ -18,6 +18,10 @@ trait RoleQueries
 {
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\RolesQuery::total()
      */
     public static function rolesQueryTotal(...$args)
     {
@@ -26,6 +30,10 @@ trait RoleQueries
 
     /**
      * @since 160524 App.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\RolesQuery::all()
      */
     public static function rolesQueryAll(...$args)
     {
@@ -34,6 +42,10 @@ trait RoleQueries
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\RolesQuery::selectOptions()
      */
     public static function roleSelectOptions(...$args)
     {

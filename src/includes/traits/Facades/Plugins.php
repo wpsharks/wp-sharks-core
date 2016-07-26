@@ -18,6 +18,10 @@ trait Plugins
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugins::active()
      */
     public static function activePlugins(...$args)
     {
@@ -26,6 +30,10 @@ trait Plugins
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugins::networkActive()
      */
     public static function networkActivePlugins(...$args)
     {
@@ -34,6 +42,10 @@ trait Plugins
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugins::allActive()
      */
     public static function allActivePlugins(...$args)
     {
@@ -42,6 +54,10 @@ trait Plugins
 
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Plugins::allInstalled()
      */
     public static function allInstalledPlugins(...$args)
     {

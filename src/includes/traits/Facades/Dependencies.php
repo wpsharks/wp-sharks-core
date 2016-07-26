@@ -18,6 +18,10 @@ trait Dependencies
 {
     /**
      * @since 160524 Initial release.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Dependencies::unsatisfied()
      */
     public static function dependenciesUnsatisfied(...$args)
     {

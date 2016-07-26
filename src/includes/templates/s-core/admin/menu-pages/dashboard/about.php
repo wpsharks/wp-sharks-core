@@ -14,7 +14,7 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-extract($this->current_vars); // Template variables.
+extract($this->vars); // Template variables.
 ?>
 <h3>
     <a href="<?= esc_url($this->s::coreUrl()); ?>" target="_blank" class="-no-icon"><img src="<?= esc_url($this->c::appUrl('/client-s/images/logo-500.png')); ?>" style="float:right; margin:0 0 5em 5em; width:300px;" /></a>
