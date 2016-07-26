@@ -1,3 +1,9 @@
+## $v
+
+- Updating docBlocks throughout for improved codex generation coming soon.
+- Adding `sami.cfg` for upcoming codex generation.
+- Updating to latest release of the `websharks/core`.
+
 ## v160724.64804
 
 - Adding `onclick` configuration key for menu page tabs.
