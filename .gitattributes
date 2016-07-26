@@ -1,0 +1,405 @@
+# Default
+
+* text=auto
+
+# Text
+
+*.md text
+*.txt text
+
+# Logs
+
+*.log text
+
+# YAML
+
+*.yml
+
+# Properties.
+
+*.properties text
+
+# Translations
+
+*.pot text
+
+# SQL
+
+*.sql text
+*.sqlite text
+
+# Templates
+
+*.tmpl text
+*.tpl text
+
+# Config
+
+*.admins text
+*.cfg text
+*.cnf text
+*.conf text
+*.htaccess text
+*.htaccess-apache text
+*.htpasswd text
+*.ini text
+
+# CSS/JS
+
+*.css text
+*.js text
+*.css.map text
+*.js.map text
+*.json text
+
+# Applescript
+
+*.applescript text
+*.scpt binary
+
+# PHP
+
+*.inc text
+*.php text
+*.php4 text
+*.php5 text
+*.php6 text
+*.phps text
+*.x-php text
+
+# ASP
+
+*.asp text
+*.aspx text
+
+# Perl
+
+*.cgi text
+*.pl text
+
+# HTML/XML
+
+*.dtd text
+*.hta text
+*.htc text
+*.htm text
+*.html text
+*.shtml text
+*.xhtml text
+*.xml text
+*.xsl text
+*.xslt text
+*.xsd text
+
+# Documents
+
+*.csv text
+*.doc binary
+*.docx binary
+*.odt binary
+*.pdf binary
+*.rtf binary
+*.xls binary
+
+# Images
+
+*.ai binary
+*.bmp binary
+*.eps binary
+*.gif binary
+*.ico binary
+*.jpe binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.psd binary
+*.svg text
+*.tif binary
+*.tiff binary
+*.pspimage binary
+
+# Audio
+
+*.mid binary
+*.midi binary
+*.mp3 binary
+*.wav binary
+*.wma binary
+
+# Video
+
+*.avi binary
+*.flv binary
+*.ogg binary
+*.ogv binary
+*.mp4 binary
+*.mov binary
+*.mpg binary
+*.mpeg binary
+*.qt binary
+*.webm binary
+*.wmv binary
+*.fla binary
+*.swf binary
+*.blend binary
+
+# Fonts
+
+*.eot binary
+*.otf binary
+*.ttf binary
+*.woff binary
+
+# Archives
+
+*.7z binary
+*.dmg binary
+*.gtar binary
+*.gz binary
+*.iso binary
+*.jar binary
+*.phar binary
+*.rar binary
+*.tar binary
+*.tgz binary
+*.zip binary
+
+# Other
+
+*.bat text
+*.bash text
+*.bin binary
+*.class binary
+*.com binary
+*.dll binary
+*.exe binary
+*.sh text
+*.so binary
+
+# Export Ignore --------------------------------------------------------------------------------------------------------
+# This follows `.gitignore` almost exactly.
+
+# NOTE: `/**` does not exclude the directory itself like in Phing.
+# Use only a trailing `/` to achieve that here.
+
+# Local
+
+.~* export-ignore
+
+# Logs
+
+*.log export-ignore
+
+# Backups
+
+*~ export-ignore
+*.bak export-ignore
+
+# Vendor
+# NOT excluded here.
+
+# vendor/ export-ignore
+
+# Node
+
+node_modules/ export-ignore
+
+# SASS
+
+.sass-cache/ export-ignore
+
+# IntelliJ
+
+.idea/ export-ignore
+
+# Sublime
+
+*.sublime-workspace export-ignore
+*.sublime-project export-ignore
+
+# CTags
+
+*.tags export-ignore
+*.ctags export-ignore
+
+# VCS
+
+.git/ export-ignore
+
+.svn/ export-ignore
+_svn/ export-ignore
+
+CVS/ export-ignore
+.cvsignore export-ignore
+
+.bzr/ export-ignore
+.bzrignore export-ignore
+
+.hg/ export-ignore
+.hgignore export-ignore
+
+SCCS/ export-ignore
+RCS/ export-ignore
+
+# PC Files
+
+$RECYCLE.BIN/ export-ignore
+Desktop.ini export-ignore
+Thumbs.db export-ignore
+ehthumbs.db export-ignore
+
+# Mac Files
+
+.AppleDB export-ignore
+.AppleDouble export-ignore
+.AppleDesktop export-ignore
+.com.apple.timemachine.donotpresent export-ignore
+Network Trash Folder export-ignore
+Temporary Items export-ignore
+.LSOverride export-ignore
+.Spotlight-V100 export-ignore
+.VolumeIcon.icns export-ignore
+.TemporaryItems export-ignore
+.fseventsd export-ignore
+.DS_Store export-ignore
+.Trashes export-ignore
+.apdisk export-ignore
+Icon? export-ignore
+Icons -export-ignore
+._* export-ignore
+
+# AWS
+
+.elasticbeanstalk/ export-ignore
+
+# Vagrant
+
+.vagrant/ export-ignore
+
+# Export Ignore (More) -------------------------------------------------------------------------------------------------
+# These are in addition to what we have in `.gitignore`.
+
+# SASS
+
+*.scss export-ignore
+*.css.map export-ignore
+
+/src/client-s/**/bourbon/ export-ignore
+/src/vendor/websharks/*/src/client-s/**/bourbon/ export-ignore
+
+# Git
+
+/.gitignore export-ignore
+/src/vendor/*/*/.gitignore export-ignore
+
+/.gitattributes export-ignore
+/src/vendor/*/*/.gitattributes export-ignore
+
+/.gitmodules export-ignore
+/src/vendor/*/*/.gitmodules export-ignore
+
+/.gitchange export-ignore
+/src/vendor/websharks/*/.gitchange export-ignore
+
+# GitHub
+
+/.github/ export-ignore
+/src/vendor/*/*/.github/ export-ignore
+
+/CONTRIBUTING.md export-ignore
+/src/vendor/*/*/CONTRIBUTING.md export-ignore
+
+/ISSUE_TEMPLATE.md export-ignore
+/src/vendor/*/*/ISSUE_TEMPLATE.md export-ignore
+
+/PULL_REQUEST_TEMPLATE.md export-ignore
+/src/vendor/*/*/PULL_REQUEST_TEMPLATE.md export-ignore
+
+# Assets
+
+/assets/ export-ignore
+/src/vendor/websharks/*/assets/ export-ignore
+
+# Build Files
+
+/phings/ export-ignore
+/src/vendor/*/*/phing/ export-ignore
+/src/vendor/*/*/phings/ export-ignore
+
+/.build.props export-ignore
+/src/vendor/*/*/.build.props export-ignore
+
+/build.xml export-ignore
+/src/vendor/*/*/build.xml export-ignore
+
+/build-*.xml export-ignore
+/src/vendor/*/*/build-*.xml export-ignore
+
+# Dot Build Files
+
+/.build.php export-ignore
+/src/vendor/websharks/*/.build.php export-ignore
+
+/.build.*.php export-ignore
+/src/vendor/websharks/*/.build.*.php export-ignore
+
+/src/.build.php export-ignore
+/src/vendor/websharks/*/src/.build.php export-ignore
+
+/src/.build.*.php export-ignore
+/src/vendor/websharks/*/src/.build.*.php export-ignore
+
+/src/client-s/**/.build.php export-ignore
+/src/vendor/websharks/*/src/client-s/**/.build.php export-ignore
+
+/src/client-s/**/.build.*.php export-ignore
+/src/vendor/websharks/*/src/client-s/**/.build.*.php export-ignore
+
+/src/includes/**/.build.php export-ignore
+/src/vendor/websharks/*/src/includes/**/.build.php export-ignore
+
+/src/includes/**/.build.*.php export-ignore
+/src/vendor/websharks/*/src/includes/**/.build.*.php export-ignore
+
+# Tests
+
+/tests/ export-ignore
+/src/vendor/*/*/test/ export-ignore
+/src/vendor/*/*/tests/ export-ignore
+
+# Drone
+
+/.drone.* export-ignore
+/src/vendor/*/*/.drone.* export-ignore
+
+# Travis
+
+/.travis.* export-ignore
+/src/vendor/*/*/.travis.* export-ignore
+
+# Coverage
+
+/.coveralls.* export-ignore
+/src/vendor/*/*/.coveralls.* export-ignore
+
+/.scrutinizer.* export-ignore
+/src/vendor/*/*/.scrutinizer.* export-ignore
+
+# Post-Receive
+
+/post-receive export-ignore
+/src/vendor/websharks/*/post-receive export-ignore
+
+# PHAR Stub
+
+/src/includes/phar-stub.php export-ignore
+/src/vendor/websharks/*/src/includes/phar-stub.php export-ignore
+
+# LFS Storage (Assets) -------------------------------------------------------------------------------------------------
+# NOTE: Here we need to match all assets explictly; i.e., requires `/**`
+
+/assets/** filter=lfs diff=lfs merge=lfs -text
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Custom code reinserted here via [custom] marker. Add your <custom></custom> comment markers here please.
