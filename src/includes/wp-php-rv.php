@@ -1,4 +1,10 @@
 <?php
+/**
+ * WP PHP RV.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 // PHP v5.2 compatible.
 
 if (!defined('WPINC')) {

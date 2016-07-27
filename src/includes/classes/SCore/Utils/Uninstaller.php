@@ -1,4 +1,10 @@
 <?php
+/**
+ * Uninstall utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class Uninstaller extends Classes\SCore\Base\Core
      *
      * @since 160715 DB utils.
      *
-     * @type int Site counter.
+     * @var int Site counter.
      */
     protected $site_counter;
 

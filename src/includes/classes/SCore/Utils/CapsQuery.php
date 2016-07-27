@@ -1,4 +1,10 @@
 <?php
+/**
+ * Cap query utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class CapsQuery extends Classes\SCore\Base\Core
      *
      * @since 160524 Cap utils.
      *
-     * @type string
+     * @var string
      */
     protected $deprecated_levels;
 

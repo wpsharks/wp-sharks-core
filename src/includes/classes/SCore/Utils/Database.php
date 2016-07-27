@@ -1,4 +1,10 @@
 <?php
+/**
+ * Database utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class Database extends Classes\SCore\Base\Core
      *
      * @since 160524 DB utils.
      *
-     * @type \wpdb Reference.
+     * @var \wpdb Reference.
      */
     public $wp;
 

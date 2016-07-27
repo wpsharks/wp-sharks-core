@@ -1,4 +1,10 @@
 <?php
+/**
+ * Menu page utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class MenuPage extends Classes\SCore\Base\Core
      *
      * @since 160715 Conflicts.
      *
-     * @type array Menu page hook names.
+     * @var array Menu page hook names.
      */
     protected $hook_names;
 

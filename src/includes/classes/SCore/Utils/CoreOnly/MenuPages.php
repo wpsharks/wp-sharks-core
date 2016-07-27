@@ -1,4 +1,10 @@
 <?php
+/**
+ * Menu page utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils\CoreOnly;
 
@@ -15,7 +21,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Core menu page utils.
+ * Menu page utils.
  *
  * @since 160524 Core menu page utils.
  */

@@ -1,4 +1,10 @@
 <?php
+/**
+ * App utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils\CoreOnly;
 
@@ -26,7 +32,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @type array Array of all apps.
+     * @var array Array of all apps.
      */
     protected $apps;
 
@@ -35,7 +41,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @type array Array of all apps.
+     * @var array Array of all apps.
      */
     protected $apps_by_slug;
 
@@ -44,7 +50,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @type array Array of all apps.
+     * @var array Array of all apps.
      */
     protected $apps_by_type;
 
@@ -53,7 +59,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160715 App utils.
      *
-     * @type array Array of all apps.
+     * @var array Array of all apps.
      */
     protected $apps_by_network_wide;
 

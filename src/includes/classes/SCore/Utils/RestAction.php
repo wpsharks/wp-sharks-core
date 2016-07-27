@@ -1,4 +1,10 @@
 <?php
+/**
+ * ReST action utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @type string Action var.
+     * @var string Action var.
      */
     public $var;
 
@@ -35,7 +41,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @type string Data var.
+     * @var string Data var.
      */
     public $data_var;
 
@@ -44,7 +50,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @type string Data slug.
+     * @var string Data slug.
      */
     public $data_slug;
 
@@ -53,7 +59,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @type string Current action.
+     * @var string Current action.
      */
     protected $action;
 
@@ -62,7 +68,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @type string Action API version.
+     * @var string Action API version.
      */
     protected $api_version;
 
@@ -71,7 +77,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @type array Registered actions.
+     * @var array Registered actions.
      */
     protected $registered_actions;
 

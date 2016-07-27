@@ -1,4 +1,10 @@
 <?php
+/**
+ * Application.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes;
 
@@ -28,7 +34,7 @@ class App extends CoreClasses\App
      *
      * @since 160524
      *
-     * @type Wp
+     * @var Wp
      */
     public $Wp;
 
@@ -37,7 +43,7 @@ class App extends CoreClasses\App
      *
      * @since 160524
      *
-     * @type string Version.
+     * @var string Version.
      */
     const VERSION = '160726.77065'; //v//
 
@@ -46,7 +52,7 @@ class App extends CoreClasses\App
      *
      * @since 160625 ReST actions.
      *
-     * @type string API version.
+     * @var string API version.
      */
     const REST_ACTION_API_VERSION = '1.0';
 
@@ -55,7 +61,7 @@ class App extends CoreClasses\App
      *
      * @since 160702 Core container.
      *
-     * @type string Core container slug.
+     * @var string Core container slug.
      */
     const CORE_CONTAINER_SLUG = 'wp-sharks';
 
@@ -64,7 +70,7 @@ class App extends CoreClasses\App
      *
      * @since 160702 Core container.
      *
-     * @type string Core container var.
+     * @var string Core container var.
      */
     const CORE_CONTAINER_VAR = 'wp_sharks';
 
@@ -73,7 +79,7 @@ class App extends CoreClasses\App
      *
      * @since 160702 Core container.
      *
-     * @type string Core container name.
+     * @var string Core container name.
      */
     const CORE_CONTAINER_NAME = 'WP Sharks';
 
@@ -82,7 +88,7 @@ class App extends CoreClasses\App
      *
      * @since 160713 Core container.
      *
-     * @type string Core container domain.
+     * @var string Core container domain.
      */
     const CORE_CONTAINER_DOMAIN = 'wpsharks.com';
 
@@ -91,7 +97,7 @@ class App extends CoreClasses\App
      *
      * @since 160715 Core container.
      *
-     * @type string Core license key.
+     * @var string Core license key.
      */
     const CORE_LICENSE_KEY = 'WP-SHARKS-CORE-XXXX-XXXX-XXXX-XXXX-XXXX';
 

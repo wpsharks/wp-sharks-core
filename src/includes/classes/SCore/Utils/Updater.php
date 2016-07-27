@@ -1,4 +1,10 @@
 <?php
+/**
+ * Update utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class Updater extends Classes\SCore\Base\Core
      *
      * @since 160530 Update utils.
      *
-     * @type int Outdated check time.
+     * @var int Outdated check time.
      */
     protected $outdated_check_time;
 

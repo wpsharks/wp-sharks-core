@@ -1,4 +1,10 @@
 <?php
+/**
+ * WP common.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 
@@ -15,7 +21,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * WP utils.
+ * WP common.
  *
  * @since 160710 WP utils.
  */

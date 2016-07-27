@@ -1,4 +1,10 @@
 <?php
+/**
+ * Install utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class Installer extends Classes\SCore\Base\Core
      *
      * @since 160524 Install utils.
      *
-     * @type array Install history.
+     * @var array Install history.
      */
     protected $history;
 

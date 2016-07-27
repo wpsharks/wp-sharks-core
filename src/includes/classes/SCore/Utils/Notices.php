@@ -1,4 +1,10 @@
 <?php
+/**
+ * Notice utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -15,7 +21,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Plugin notices.
+ * Notice utils.
  *
  * @since 160524 WP notices.
  */
@@ -26,7 +32,7 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160524 WP notices.
      *
-     * @type array Defaults.
+     * @var array Defaults.
      */
     protected $defaults;
 
@@ -35,7 +41,7 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160715 WP notices.
      *
-     * @type int Outdated notice time.
+     * @var int Outdated notice time.
      */
     protected $outdated_notice_time;
 

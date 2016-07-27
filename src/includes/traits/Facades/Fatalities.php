@@ -1,4 +1,10 @@
 <?php
+/**
+ * Fatalities.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
@@ -14,6 +20,11 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Fatalities.
+ *
+ * @since 160606
+ */
 trait Fatalities
 {
     /**

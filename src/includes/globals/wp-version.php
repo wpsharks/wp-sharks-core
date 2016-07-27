@@ -1,4 +1,10 @@
 <?php
+/**
+ * WP version.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 // @codingStandardsIgnoreFile
 
 declare (strict_types = 1);

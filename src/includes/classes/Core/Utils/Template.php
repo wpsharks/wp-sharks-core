@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\Core\Utils;
 

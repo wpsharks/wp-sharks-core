@@ -1,4 +1,10 @@
 <?php
+/**
+ * Globals.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 // @codingStandardsIgnoreFile
 
 declare (strict_types = 1);
@@ -11,6 +17,12 @@ if (PHP_SAPI !== 'cli') {
     exit('Requires CLI access.');
 }
 $load = '<?php
+/**
+ * Globals.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Globals;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Uninstaller.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 // PHP v5.2 compatible.
 
 if (!defined('WPINC')) {

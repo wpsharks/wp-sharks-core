@@ -1,4 +1,10 @@
 <?php
+/**
+ * Core abstraction.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 
@@ -26,7 +32,7 @@ abstract class Core extends CoreClasses\Core\Base\Core
      *
      * @since 160524
      *
-     * @type Wp
+     * @var Wp
      */
     protected $Wp;
 

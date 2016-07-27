@@ -1,4 +1,10 @@
 <?php
+/**
+ * Conflicts.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @since 160524 Conflicts.
      *
-     * @type array Slugs.
+     * @var array Slugs.
      */
     protected $plugins;
 
@@ -35,7 +41,7 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @since 160524 Conflicts.
      *
-     * @type array Slugs.
+     * @var array Slugs.
      */
     protected $themes;
 
@@ -44,7 +50,7 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @since 160524 Conflicts.
      *
-     * @type array Slugs.
+     * @var array Slugs.
      */
     protected $deactivatable_plugins;
 
@@ -53,7 +59,7 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @since 160524 Conflicts.
      *
-     * @type bool Checked?
+     * @var bool Checked?
      */
     protected $checked;
 
@@ -62,7 +68,7 @@ class Conflicts extends Classes\SCore\Base\Core
      *
      * @since 160524 Conflicts.
      *
-     * @type int Outdated check time.
+     * @var int Outdated check time.
      */
     protected $outdated_check_time;
 
@@ -198,7 +204,6 @@ class Conflicts extends Classes\SCore\Base\Core
      * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we are in conflict with another
      *  application (e.g., lite/pro edition) that could lead to unforeseen problems.
-     *
      * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for conflicts has been finalized; i.e., notice utils won't work anyway.
      */

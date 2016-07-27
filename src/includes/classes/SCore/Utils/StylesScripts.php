@@ -1,4 +1,10 @@
 <?php
+/**
+ * Styles/scripts.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -15,7 +21,7 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Scripts/styles.
+ * Styles/scripts.
  *
  * @since 160524 Scripts/styles.
  */
@@ -29,7 +35,7 @@ class StylesScripts extends Classes\SCore\Base\Core
      *
      * @since 160524
      *
-     * @type array Enqueued.
+     * @var array Enqueued.
      */
     protected $did_enqueue;
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * License keys.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Traits\Facades\CoreOnly;
 
@@ -14,6 +20,11 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * License keys.
+ *
+ * @since 160710
+ */
 trait LicenseKeys
 {
     /**

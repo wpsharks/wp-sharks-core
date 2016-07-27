@@ -1,4 +1,10 @@
 <?php
+/**
+ * Dependencies.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Dependencies.
      *
-     * @type array Data.
+     * @var array Data.
      */
     protected $plugins;
 
@@ -35,7 +41,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Dependencies.
      *
-     * @type array Data.
+     * @var array Data.
      */
     protected $themes;
 
@@ -44,7 +50,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Dependencies.
      *
-     * @type array Data.
+     * @var array Data.
      */
     protected $others;
 
@@ -53,7 +59,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Dependencies.
      *
-     * @type bool Checked?
+     * @var bool Checked?
      */
     protected $checked;
 
@@ -62,7 +68,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Dependencies.
      *
-     * @type int Outdated check time.
+     * @var int Outdated check time.
      */
     protected $outdated_check_time;
 
@@ -371,7 +377,6 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
-     *
      * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
@@ -452,7 +457,6 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
-     *
      * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
@@ -524,7 +528,6 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
-     *
      * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
@@ -611,7 +614,6 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
-     *
      * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
@@ -698,7 +700,6 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      * @internal Intentionally choosing not to use built-in notice utilities here.
      *  The notice utilities set option values, and if we have unsatisfied dependencies
      *  (e.g., something triggered by a plugin hook) that could lead to unforeseen problems.
-     *
      * @internal Not only that, but the hooks needed to use notice utilities are not attached
      * until after a check for dependencies has been finalized; i.e., notice utils won't work anyway.
      */
@@ -759,7 +760,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Plugin/theme dependencies.
      *
-     * @type string Notice `<div>` tag styles.
+     * @var string Notice `<div>` tag styles.
      */
     protected $notice_div_tag_styles = 'min-height:7.25em;';
 
@@ -768,7 +769,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Plugin/theme dependencies.
      *
-     * @type string Heading `<p>` tag styles.
+     * @var string Heading `<p>` tag styles.
      */
     protected $heading_p_tag_styles = 'font-weight:bold; font-size:125%; margin:.25em 0 0 0;';
 
@@ -777,7 +778,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Plugin/theme dependencies.
      *
-     * @type string Message `<p>` tag styles.
+     * @var string Message `<p>` tag styles.
      */
     protected $message_p_tag_styles = 'margin:0 0 .5em 0;';
 
@@ -786,7 +787,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Plugin/theme dependencies.
      *
-     * @type string Styled arrow icon.
+     * @var string Styled arrow icon.
      */
     protected $arrow = '<span class="dashicons dashicons-editor-break" style="-webkit-transform:scale(-1, 1); transform:scale(-1, 1);"></span>';
 
@@ -795,7 +796,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
      *
      * @since 160524 Plugin/theme dependencies.
      *
-     * @type string Styled bubble icon.
+     * @var string Styled bubble icon.
      */
     protected $icon = '<span class="dashicons dashicons-admin-tools" style="display:inline-block; width:64px; height:64px; font-size:64px; float:left; margin:-5px 10px 0 -2px;"></span>';
 }

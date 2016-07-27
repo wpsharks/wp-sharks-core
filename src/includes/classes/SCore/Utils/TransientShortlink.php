@@ -1,4 +1,10 @@
 <?php
+/**
+ * Transient shortlink utils.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
@@ -26,7 +32,7 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
      *
      * @since 160704 Shortlink var.
      *
-     * @type string Shortlink var.
+     * @var string Shortlink var.
      */
     protected $var;
 
@@ -35,7 +41,7 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
      *
      * @since 160704 Shortlink slug.
      *
-     * @type string Shortlink slug.
+     * @var string Shortlink slug.
      */
     protected $slug;
 

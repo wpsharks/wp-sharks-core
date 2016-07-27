@@ -1,4 +1,10 @@
 <?php
+/**
+ * Menu page form.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Classes\SCore;
 
@@ -26,7 +32,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
      *
      * @since 160709 Menu page utils.
      *
-     * @type string ReST action identifier.
+     * @var string ReST action identifier.
      */
     public $action;
 
@@ -35,7 +41,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
      *
      * @since 160723 Menu page utils.
      *
-     * @type \StdClass Form configuration args.
+     * @var \StdClass Form configuration args.
      */
     public $cfg; // Also for extenders.
 

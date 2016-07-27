@@ -1,4 +1,10 @@
 <?php
+/**
+ * Menu page markup.
+ *
+ * @author @jaswsinc
+ * @copyright WebSharks™
+ */
 declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
@@ -14,6 +20,11 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+/**
+ * Menu page markup.
+ *
+ * @since 160709
+ */
 trait MenuPageMarkup
 {
     /**
