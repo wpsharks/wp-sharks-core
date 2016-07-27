@@ -106,6 +106,7 @@ Icon?
 # Custom code reinserted here via [custom] marker. Add your <custom></custom> comment markers here please.
 
 # <custom>
-src/
+assets/
 phings/
+src/
 # </custom>
