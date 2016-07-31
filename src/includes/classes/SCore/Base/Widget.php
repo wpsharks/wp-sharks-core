@@ -23,7 +23,7 @@ use function get_defined_vars as vars;
 /**
  * Widget base.
  *
- * @since 16xxxx Initial release.
+ * @since 160731.37352 Initial release.
  */
 abstract class Widget extends \WP_Widget
 {
@@ -39,7 +39,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Application.
      *
-     * @since 16xxxx
+     * @since 160731.37352
      *
      * @var Classes\App
      */
@@ -48,7 +48,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Default options.
      *
-     * @since 16xxxx
+     * @since 160731.37352
      *
      * @var array
      */
@@ -57,7 +57,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Class constructor.
      *
-     * @since 16xxxx Initial release.
+     * @since 160731.37352 Initial release.
      *
      * @param Classes\App $App             App.
      * @param array       $args            Configuration.
@@ -93,7 +93,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Outputs the options form on admin.
      *
-     * @since 16xxxx Initial release.
+     * @since 160731.37352 Initial release.
      *
      * @param Classes\SCore\WidgetForm $Form    Instance.
      * @param array                    $options Options.
@@ -108,7 +108,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Widget content markup.
      *
-     * @since 16xxxx Initial release.
+     * @since 160731.37352 Initial release.
      *
      * @param array $options Options.
      *
@@ -122,7 +122,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Outputs the options form.
      *
-     * @since 16xxxx Initial release.
+     * @since 160731.37352 Initial release.
      *
      * @param array $options Options.
      */
@@ -154,7 +154,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Output widget markup.
      *
-     * @since 16xxxx Initial release.
+     * @since 160731.37352 Initial release.
      *
      * @param array $args    Args.
      * @param array $options Options.
@@ -185,7 +185,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Update widget options on save.
      *
-     * @since 16xxxx Initial release.
+     * @since 160731.37352 Initial release.
      *
      * @param array $new     New options.
      * @param array $options Options.
@@ -204,7 +204,7 @@ abstract class Widget extends \WP_Widget
     /**
      * Merge options.
      *
-     * @since 16xxxx Initial release.
+     * @since 160731.37352 Initial release.
      *
      * @param array $base  Base array.
      * @param array $merge Array to merge.
