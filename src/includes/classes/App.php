@@ -45,7 +45,7 @@ class App extends CoreClasses\App
      *
      * @var string Version.
      */
-    const VERSION = '160728.15558'; //v//
+    const VERSION = '160730.63654'; //v//
 
     /**
      * ReST action API version.
@@ -364,8 +364,10 @@ class App extends CoreClasses\App
             '©di' => [
                 '©default_rule' => [
                     'new_instances' => [
+                        Classes\SCore\Base\Widget::class,
                         Classes\SCore\MenuPageForm::class,
                         Classes\SCore\PostMetaBoxForm::class,
+                        Classes\SCore\WidgetForm::class,
                     ],
                 ],
             ],

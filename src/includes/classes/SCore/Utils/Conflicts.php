@@ -132,7 +132,7 @@ class Conflicts extends Classes\SCore\Base\Core
         }
         $all_active_plugin_slugs     = $this->s::allActivePlugins();
         $network_active_plugin_slugs = $this->Wp->is_multisite ? $this->s::networkActivePlugins() : [];
-        $all_active_theme_slugs      = array_unique([get_template(), get_stylesheet()]);
+        $all_active_theme_slugs      = array_unique([$this->Wp->template, $this->Wp->stylesheet]);
 
         $conflicting_plugin_slugs   = array_keys($this->App->Config->§conflicts['§plugins']);
         $conflicting_theme_slugs    = array_keys($this->App->Config->§conflicts['§themes']);

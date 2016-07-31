@@ -43,9 +43,10 @@ class WcProduct extends Classes\SCore\Base\Core
 
         if (!($slug = (string) $slug)) {
             return 0; // Not possible.
-        }
-        if (isset($product_ids[$slug])) {
+        } elseif (isset($product_ids[$slug])) {
             return $product_ids[$slug];
+        } elseif ((string) (int) $slug === $slug) {
+            return $product_ids[$slug] = (int) $slug;
         }
         $WpDb = $this->s::wpDb(); // DB instance.
 
@@ -61,5 +62,31 @@ class WcProduct extends Classes\SCore\Base\Core
             return $product_ids[$slug] = $product_id;
         }
         return $product_ids[$slug] = 0; // Not possible.
+    }
+
+    /**
+     * Product by slug.
+     *
+     * @since 160727 WC product utils.
+     *
+     * @param string $slug     Product slug.
+     * @param bool   $no_cache Bypass cache check?
+     *
+     * @return \WC_Product|null Product, else `null`.
+     */
+    public function bySlug(string $slug, bool $no_cache = false)
+    {
+        $slug = (string) $slug;
+
+        if (!($slug = (string) $slug)) {
+            return null; // Not possible.
+        } elseif (!($product_id = $this->idBySlug($slug, $no_cache))) {
+            return null; // Not possible.
+        } elseif (!($WC_Product = wc_get_product($product_id))) {
+            return null; // Not possible.
+        } elseif (!$WC_Product->exists()) {
+            return null; // Not possible.
+        }
+        return $WC_Product;
     }
 }

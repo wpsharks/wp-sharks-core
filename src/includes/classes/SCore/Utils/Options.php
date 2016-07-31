@@ -181,10 +181,13 @@ class Options extends Classes\SCore\Base\Core
         $this->App->Config->§options = $this->s::applyFilters('options', $this->App->Config->§options);
         $this->s::sysOption('options', $this->App->Config->§options);
 
+        if ($this->Wp->is_admin) { // Limit this to admin contexts.
+            flush_rewrite_rules(); // In case of options that alter permalinks.
+        }
         if ($this->App->Config->§options['§license_key']) {
             $this->s::dismissNotice('§license-key-request');
         }
-        $this->s::dismissNotice('§license-key-error'); // Always.
+        $this->s::dismissNotice('§license-key-error');
     }
 
     /**

@@ -28,7 +28,7 @@ $core-nav-tabs-border-color: #ccc;
 /*
  * Menu page area; anywhere.
  */
-.#{$core-container-slug}-menu-page-area {
+.#{$core-container-slug}-menu-page-area:not(#x) {
   @include wp-admin-links;
   @include wp-admin-list-enable;
   @include wp-admin-field-standards;
@@ -142,13 +142,27 @@ $core-nav-tabs-border-color: #ccc;
         }
       }
     }
+
+    &.-display-block {
+      > tbody {
+        > tr {
+          > th,
+          > td {
+            padding-left:     0;
+            padding-right:    0;
+            width:            100%;
+            display:          block;
+          }
+        }
+      }
+    }
   }
 }
 
 /*
  * Menu page; based on body class.
  */
-.#{$core-container-slug}-menu-page {
+.#{$core-container-slug}-menu-page:not(#x) {
   /*
    * Notices.
    */
@@ -163,7 +177,7 @@ $core-nav-tabs-border-color: #ccc;
 /*
  * Menu page wrapper.
  */
-.#{$core-container-slug}-menu-page-wrapper {
+.#{$core-container-slug}-menu-page-wrapper:not(#x) {
   /*
    * General layout styles.
    */
@@ -191,30 +205,40 @@ $core-nav-tabs-border-color: #ccc;
 }
 
 /*
- * Post meta box wrapper.
+ * Post meta box styles.
  */
-.#{$core-container-slug}-post-meta-box-wrapper {
+.#{$core-container-slug}-post-meta-box-wrapper:not(#x) {
+  /*
+   * Form tables.
+   */
   .-form-table {
+    &:first-child {
+      margin-top:             12px;
+    }
+
     > tbody {
       > tr {
         > th,
         > td {
-          // Match `.inside`.
+          margin:             0;
           padding:            6px 0;
         }
 
-        > th + td {
-          padding:            6px 0 6px 1em;
+        > th {
+          font-size:          13px;
+          font-weight:        normal;
+
+          + td {
+            padding-left:     1em;
+          }
         }
 
         &:first-child {
           > th:first-child,
           > td:first-child {
-            margin-top:       0;
             padding-top:      0;
 
             + td {
-              margin-top:     0;
               padding-top:    0;
             }
           }
@@ -223,8 +247,57 @@ $core-nav-tabs-border-color: #ccc;
         &:last-child {
           > th:last-child,
           > td:last-child {
-            margin-bottom:    0;
             padding-bottom:   0;
+          }
+        }
+      }
+    }
+
+    &.-block-display {
+      &:first-child {
+        margin-top:           8px;
+      }
+
+      > tbody {
+        > tr {
+          > th,
+          > td {
+            padding-left:     0;
+            width:            100%;
+            display:          block;
+
+            + td {
+              padding-top:    0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /*
+   * Post meta box styles (in sidebar).
+   */
+  @at-root #side-sortables .#{$core-container-slug}-post-meta-box-wrapper:not(#x) {
+    /*
+     * Form tables.
+     */
+    .-form-table {
+      &:first-child {
+        margin-top:           8px;
+      }
+
+      > tbody {
+        > tr {
+          > th,
+          > td {
+            padding-left:     0;
+            width:            100%;
+            display:          block;
+
+            + td {
+              padding-top:    0;
+            }
           }
         }
       }
@@ -233,19 +306,56 @@ $core-nav-tabs-border-color: #ccc;
 }
 
 /*
- * Post meta box wrapper (in sidebar).
+ * Widget styles.
  */
-#side-sortables {
-  .#{$core-container-slug}-post-meta-box-wrapper {
-    .-form-table {
-      > tbody {
-        > tr {
-          > th,
-          > td {
-            padding-left:     0;
-            padding-right:    0;
-            width:            100%;
-            display:          block;
+.#{$core-container-slug}-widget-wrapper:not(#x) {
+  /*
+   * Form tables.
+   */
+  .-form-table {
+    &:first-child {
+      margin-top:             13px;
+    }
+
+    &:last-child {
+      margin-bottom:          13px;
+    }
+
+    > tbody {
+      > tr {
+        > th,
+        > td {
+          margin:             0;
+          padding:            6px 0;
+          width:              100%;
+          display:            block;
+        }
+
+        > th {
+          padding-bottom:     0;
+          font-size:          13px;
+          font-weight:        normal;
+
+          + td {
+            padding-top:      0;
+          }
+        }
+
+        &:first-child {
+          > th:first-child,
+          > td:first-child {
+            padding-top:      0;
+
+            + td {
+              padding-top:    0;
+            }
+          }
+        }
+
+        &:last-child {
+          > th:last-child,
+          > td:last-child {
+            padding-bottom:   0;
           }
         }
       }

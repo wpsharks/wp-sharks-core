@@ -16,7 +16,7 @@
     /*
      * Block-level tooltips.
      */
-    $menuPageArea.tooltip({
+    $('body').tooltip({
       show: false, // No animation.
       hide: false, // No animation.
 
@@ -33,7 +33,7 @@
       content: function () {
         return $(this).prop('title');
       },
-      items: '[data-toggle~="-jquery-ui-tooltip"]',
+      items: '.' + x.coreContainerSlug + '-menu-page-area [data-toggle~="-jquery-ui-tooltip"]',
       tooltipClass: x.coreContainerSlug + '-jquery-ui-tooltip'
     });
   });

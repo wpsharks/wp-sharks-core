@@ -64,4 +64,5 @@ abstract class Facades
     use Traits\Facades\UserQueries;
     use Traits\Facades\WcOrderItem;
     use Traits\Facades\WcProduct;
+    use Traits\Facades\Widget;
 }

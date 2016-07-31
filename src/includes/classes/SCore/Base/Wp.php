@@ -73,7 +73,11 @@ class Wp // Stand-alone class.
         } elseif (!($this->template_directory_url_parts = parse_url($this->template_directory_url))) {
             throw new Exception('Failed to parse template directory URL parts.');
         }
-        $this->is_woocommerce_active = defined('WC_VERSION');
-        $this->is_jetpack_active     = defined('JETPACK__VERSION');
+        $this->template   = get_template();
+        $this->stylesheet = get_stylesheet();
+
+        $this->is_woocommerce_active                 = defined('WC_VERSION');
+        $this->is_woocommerce_product_vendors_active = defined('WC_PRODUCT_VENDORS_VERSION');
+        $this->is_jetpack_active                     = defined('JETPACK__VERSION');
     }
 }

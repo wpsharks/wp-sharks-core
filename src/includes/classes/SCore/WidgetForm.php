@@ -1,6 +1,6 @@
 <?php
 /**
- * Post meta box form.
+ * Widget form.
  *
  * @author @jaswsinc
  * @copyright WebSharks™
@@ -21,27 +21,24 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * Post meta box form.
+ * Widget form.
  *
- * @since 160723 Post meta utils.
+ * @since 160729 Post meta utils.
  */
-class PostMetaBoxForm extends MenuPageForm
+class WidgetForm extends MenuPageForm
 {
     /**
      * Class constructor.
      *
-     * @since 160723 Post meta utils.
+     * @since 160729 Post meta utils.
      *
-     * @param Classes\App $App  Instance.
-     * @param string      $slug Post meta box slug.
-     * @param array       $args Any additional behavioral args.
+     * @param Classes\App               $App    Instance.
+     * @param Classes\SCore\Base\Widget $Widget A widget instance.
+     * @param array                     $args   Any additional behavioral args.
      */
-    public function __construct(Classes\App $App, string $slug, array $args = [])
+    public function __construct(Classes\App $App, Classes\SCore\Base\Widget $Widget, array $args = [])
     {
-        if (!$slug) { // Empty slug?
-            throw $this->c::issue('Missing slug.');
-        }
-        $args['slug'] = $slug; // Force matching slug.
+        $args['Widget'] = $Widget;
 
         parent::__construct($App, '', $args);
     }
@@ -49,21 +46,21 @@ class PostMetaBoxForm extends MenuPageForm
     /**
      * Open form tag handler.
      *
-     * @since 160723 Post meta utils.
+     * @since 160729 Post meta utils.
      */
     public function openTag()
     {
-        throw $this->c::issue('Post meta boxes use parent form tag.');
+        throw $this->c::issue('Widgets use parent form tag.');
     }
 
     /**
      * Close form tag handler.
      *
-     * @since 160723 Post meta utils.
+     * @since 160729 Post meta utils.
      */
     public function closeTag()
     {
-        throw $this->c::issue('Post meta boxes use parent form tag.');
+        throw $this->c::issue('Widgets use parent form tag.');
     }
 
     /**
@@ -77,6 +74,6 @@ class PostMetaBoxForm extends MenuPageForm
      */
     public function submitButton(string $label = '')
     {
-        throw $this->c::issue('Post meta boxes use parent submit button.');
+        throw $this->c::issue('Widgets have their own submit button.');
     }
 }

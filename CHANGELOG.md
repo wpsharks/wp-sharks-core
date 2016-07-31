@@ -1,3 +1,11 @@
+## $v
+
+- Adding `Classes\SCore\WidgetForm{}`
+- Adding `Classes\SCore\Base\Widget{}`
+- Adding `Classes\SCore\Base\Widget{}`
+- Enhancing menu page styles in admin area.
+- Fixed a JS bug that caused tooltips not to be shown in widget areas.
+
 ## v160726.77065
 
 - Updating docBlocks throughout for improved codex generation coming soon.

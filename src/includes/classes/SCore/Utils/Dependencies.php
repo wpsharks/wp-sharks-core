@@ -125,7 +125,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
             return; // Had a successfull check recently.
         }
         $all_active_plugin_slugs = $this->s::allActivePlugins();
-        $all_active_theme_slugs  = array_unique([get_template(), get_stylesheet()]);
+        $all_active_theme_slugs  = array_unique([$this->Wp->template, $this->Wp->stylesheet]);
 
         $plugin_dependencies = $this->App->Config->§dependencies['§plugins'];
         $theme_dependencies  = $this->App->Config->§dependencies['§themes'];

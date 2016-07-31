@@ -378,7 +378,8 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg->position      = (string) $cfg->position;
         $cfg->tabs          = (array) $cfg->tabs;
 
-        if ($cfg->page_title && $cfg->auto_prefix) {
+        if ($cfg->page_title && $cfg->auto_prefix // Smart auto-prefixing.
+                && $cfg->page_title !== $this->App->Config->©brand['©name']) {
             $cfg->page_title = $cfg->page_title.' | '.$this->App->Config->©brand['©name'];
         } elseif (!$cfg->page_title) {
             $cfg->page_title = $this->App->Config->©brand['©name'];
@@ -389,7 +390,8 @@ class MenuPage extends Classes\SCore\Base\Core
         if (!$cfg->capability) {
             $cfg->capability = $this->App->Config->§caps['§manage'];
         }
-        if ($cfg->page && $cfg->auto_prefix) {
+        if ($cfg->page && $cfg->auto_prefix // Smart auto-prefixing.
+                && $cfg->page[0] !== '/' && mb_stripos($cfg->page, '.php') === false) {
             $cfg->page = $this->App->Config->©brand['©slug'].'-'.$cfg->page;
         } elseif (!$cfg->page) {
             $cfg->page = $this->App->Config->©brand['©slug'];
@@ -454,12 +456,14 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg->template_dir  = (string) $cfg->template_dir;
         $cfg->tabs          = (array) $cfg->tabs;
 
-        if ($cfg->parent_page && $cfg->auto_prefix) {
+        if ($cfg->parent_page && $cfg->auto_prefix // Smart auto-prefixing.
+                && $cfg->parent_page[0] !== '/' && mb_stripos($cfg->parent_page, '.php') === false) {
             $cfg->parent_page = $this->App->Config->©brand['©slug'].'-'.$cfg->parent_page;
         } elseif (!$cfg->parent_page) {
             $cfg->parent_page = $this->App->Config->©brand['©slug'];
         }
-        if ($cfg->page_title && $cfg->auto_prefix) {
+        if ($cfg->page_title && $cfg->auto_prefix // Smart auto-prefixing.
+                && $cfg->page_title !== $this->App->Config->©brand['©name']) {
             $cfg->page_title = $cfg->page_title.' | '.$this->App->Config->©brand['©name'];
         } elseif (!$cfg->page_title) {
             $cfg->page_title = $this->App->Config->©brand['©name'];
@@ -470,7 +474,8 @@ class MenuPage extends Classes\SCore\Base\Core
         if (!$cfg->capability) {
             $cfg->capability = $this->App->Config->§caps['§manage'];
         }
-        if ($cfg->page && $cfg->auto_prefix) {
+        if ($cfg->page && $cfg->auto_prefix // Smart auto-prefixing.
+                && $cfg->page[0] !== '/' && mb_stripos($cfg->page, '.php') === false) {
             $cfg->page = $this->App->Config->©brand['©slug'].'-'.$cfg->page;
         } elseif (!$cfg->page) {
             $cfg->page = $this->App->Config->©brand['©slug'];
@@ -650,7 +655,7 @@ class MenuPage extends Classes\SCore\Base\Core
         $page_path = str_replace('~', $brand_slug, $page_path);
         $page_path = str_replace('%', $brand_short_slug, $page_path);
 
-        if (!$page_path || $page_path[0] === '/' || mb_substr($page_path, -4) === '.php') {
+        if (!$page_path || $page_path[0] === '/' || mb_stripos($page_path, '.php') !== false) {
             $path       = '/'.$this->c::mbLTrim($page_path, '/');
             return $url = $this->c::addUrlQueryArgs($query_args, $admin_url($path));
             //

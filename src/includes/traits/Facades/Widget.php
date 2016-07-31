@@ -1,6 +1,6 @@
 <?php
 /**
- * WC product.
+ * Widget.
  *
  * @author @jaswsinc
  * @copyright WebSharks™
@@ -21,33 +21,21 @@ use function assert as debug;
 use function get_defined_vars as vars;
 
 /**
- * WC product.
+ * Widget.
  *
- * @since 160727
+ * @since 160729
  */
-trait WcProduct
+trait Widget
 {
     /**
-     * @since 160727 WC product utils.
+     * @since 160729 Widget utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\SCore\Utils\WcProduct::idBySlug()
+     * @see Classes\SCore\Utils\Widget::form()
      */
-    public static function wcProductIdBySlug(...$args)
+    public static function widgetForm(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§WcProduct->idBySlug(...$args);
-    }
-
-    /**
-     * @since 160727 WC product utils.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\SCore\Utils\WcProduct::bySlug()
-     */
-    public static function wcProductBySlug(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§WcProduct->bySlug(...$args);
+        return $GLOBALS[static::class]->Utils->§Widget->form(...$args);
     }
 }

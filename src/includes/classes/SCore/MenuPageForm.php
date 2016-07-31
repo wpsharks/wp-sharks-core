@@ -58,26 +58,32 @@ class MenuPageForm extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
+        $this->action = $action;
+
         $default_args = [
+            'Widget' => null,
+            'slug'   => '',
+
             'auto_prefix' => true,
-            'action'      => '',
+            'action_url'  => '',
             'method'      => 'post',
-            'slug'        => '',
         ];
         $this->cfg = (object) array_merge($default_args, $args);
 
+        if (!($this->cfg->Widget instanceof Classes\SCore\Base\Widget)) {
+            $this->cfg->Widget = null; // Invalid; nullify.
+        }
+        $this->cfg->slug = (string) $this->cfg->slug;
+
         $this->cfg->auto_prefix = (bool) $this->cfg->auto_prefix;
-        $this->cfg->action      = (string) $this->cfg->action;
+        $this->cfg->action_url  = (string) $this->cfg->action_url;
         $this->cfg->method      = (string) $this->cfg->method;
-        $this->cfg->slug        = (string) $this->cfg->slug;
 
         if ($this->cfg->slug && $this->cfg->auto_prefix) {
             $this->cfg->slug = $this->App->Config->©brand['©slug'].'-'.$this->cfg->slug;
-        } elseif (!$this->cfg->slug) {
-            $this->cfg->slug = $this->App->Config->©brand['©slug'];
         }
-        if (!($this->action = $action) && !$this->cfg->slug) {
-            throw $this->c::issue('Must have an `action` or `slug`.');
+        if (!$this->action && !$this->cfg->Widget && !$this->cfg->slug) {
+            throw $this->c::issue('Must have an `action`, `Widget`, or `slug`.');
         }
     }
 
@@ -95,7 +101,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
 
                ($this->action
                     ? ' action="'.esc_url($this->s::restActionUrl($this->action)).'"'
-                    : ' action="'.esc_url($this->cfg->action).'"'
+                    : ' action="'.esc_url($this->cfg->action_url).'"'
                ).// NOTE: The `action` can also be empty.
 
                ' enctype="multipart/form-data"'.
@@ -111,15 +117,22 @@ class MenuPageForm extends Classes\SCore\Base\Core
      *
      * @param string $heading     Optional heading.
      * @param string $description Optional description.
+     * @param array  $args        Any behavioral args.
      *
      * @return string Raw HTML markup.
      */
-    public function openTable(string $heading = '', string $description = '')
+    public function openTable(string $heading = '', string $description = '', array $args = [])
     {
+        $default_args = [
+            'class' => '', // e.g., `-block-display`.
+        ];
+        $args += $default_args;
+        $args['class'] = (string) $args['class'];
+
         $markup = $heading ? '<h2>'.$heading.'</h2>' : '';
         $markup .= $description ? '<p>'.$description.'</p>' : '';
 
-        $markup .= '<table class="-form-table form-table">';
+        $markup .= '<table class="-form-table form-table'.($args['class'] ? ' '.esc_attr($args['class']) : '').'">';
         $markup .=     '<tbody>';
 
         return $markup;
@@ -333,6 +346,8 @@ class MenuPageForm extends Classes\SCore\Base\Core
         foreach ($cfg as $_key => &$_value) {
             if ($_key === 'value' && (bool) $cfg['multiple']) {
                 $_value = array_map('strval', (array) $_value);
+            } elseif ($_key === 'value' && is_bool($_value)) {
+                $_value = (string) (int) $_value;
             } elseif ($_key === 'options' && is_array($_value)) {
                 $_value = array_map('strval', $_value);
             } elseif ($_key === 'multiple') {
@@ -477,6 +492,8 @@ class MenuPageForm extends Classes\SCore\Base\Core
     {
         if ($this->action) {
             return $this->s::restActionFormElementId($this->action, $var_name);
+        } elseif ($this->cfg->Widget) {
+            return $this->cfg->Widget->get_field_id($var_name);
         }
         return $this->cfg->slug.($var_name ? '-'.$this->c::nameToSlug($var_name) : '');
     }
@@ -494,6 +511,8 @@ class MenuPageForm extends Classes\SCore\Base\Core
     {
         if ($this->action) {
             return $this->s::restActionFormElementClass($var_name);
+        } elseif ($this->cfg->Widget) {
+            return $this->cfg->Widget->get_field_id($var_name);
         }
         return $this->cfg->slug.($var_name ? '-'.$this->c::nameToSlug($var_name) : '');
     }
@@ -511,6 +530,8 @@ class MenuPageForm extends Classes\SCore\Base\Core
     {
         if ($this->action) {
             return $this->s::restActionFormElementName($var_name);
+        } elseif ($this->cfg->Widget) {
+            return $this->cfg->Widget->get_field_name($var_name);
         }
         $parts = $var_name // This is optional.
             ? preg_split('/(\[[^[\]]*\])/u', $var_name, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY)
