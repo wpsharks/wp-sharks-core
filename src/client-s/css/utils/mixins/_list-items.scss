@@ -1,0 +1,13 @@
+/*
+ * List item utilities.
+ */
+@mixin utils-list-items($prefix: null) {
+  .#{$prefix}li-margins > li:not(:first-child) {
+    margin-top:               1em !important;
+  }
+
+  .#{$prefix}li-margins + ul > li:not(:first-child),
+  .#{$prefix}li-margins + ol > li:not(:first-child) {
+    margin-top:               1em !important;
+  }
+}

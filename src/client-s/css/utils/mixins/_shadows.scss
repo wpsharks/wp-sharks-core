@@ -1,0 +1,22 @@
+@import '../variables/colors';
+
+/*
+ * Shadow utilities.
+ */
+@mixin utils-shadows($prefix: null) {
+  .#{$prefix}box-shadow {
+    box-shadow:               0 0 2px 0 transparentize($utils-black-color, 0.5) !important;
+  }
+
+  .#{$prefix}perspective-box-shadow {
+    box-shadow:               0 6px 2px -4px transparentize($utils-black-color, 0.75) !important;
+  }
+
+  .#{$prefix}perspective-box-shadows {
+    box-shadow:               0 0 2px 0 transparentize($utils-black-color, 0.5), 0 6px 2px -4px transparentize($utils-black-color, 0.75) !important;
+  }
+
+  .#{$prefix}text-shadow {
+    text-shadow:              0 1px 1px transparentize($utils-black-color, 0.5) !important;
+  }
+}

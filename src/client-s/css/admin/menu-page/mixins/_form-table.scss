@@ -1,0 +1,52 @@
+/*
+ * Block display mode.
+ */
+@mixin form-table-display-block {
+  > tbody {
+    > tr {
+      > th,
+      > td {
+        margin:               0;
+        padding:              0;
+        width:                100%;
+        max-width:            100%;
+        display:              block;
+      }
+
+      > th {
+        margin-top:           1em;
+
+        + td {
+          padding-left:       0;
+          padding-top:       .25em;
+        }
+      }
+
+      &:first-child {
+        > th {
+          margin-top:         0;
+        }
+      }
+    }
+  }
+}
+
+/*
+ * One-line label mode.
+ */
+@mixin form-table-one-line-labels {
+  > tbody {
+    > tr {
+      > th {
+        > div {
+          > label {
+            display:          block;
+            white-space:      nowrap;
+            overflow:         hidden;
+            text-overflow:    ellipsis;
+          }
+        }
+      }
+    }
+  }
+}

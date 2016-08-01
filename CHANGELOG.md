@@ -1,3 +1,8 @@
+## $v
+
+- Enhancing menu page styles.
+- Adding SCSS utility mixins for developers.
+
 ## v160801.2694
 
 - Adding `c::collectPostMeta()`.

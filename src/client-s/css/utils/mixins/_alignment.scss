@@ -1,0 +1,62 @@
+/*
+ * Alignment utilities.
+ */
+@mixin utils-alignment($prefix: null) {
+  .#{$prefix}alignleft,
+  .#{$prefix}float-left,
+  .#{$prefix}float-left-nm,
+  .#{$prefix}float-left-nbm {
+    float:                    left !important;
+  }
+
+  .#{$prefix}alignleft,
+  .#{$prefix}float-left,
+  .#{$prefix}float-left-nbm {
+    margin-right:             3rem;
+  }
+
+  .#{$prefix}alignleft,
+  .#{$prefix}float-left {
+    margin-bottom:            3rem;
+  }
+
+  .#{$prefix}alignright,
+  .#{$prefix}float-right,
+  .#{$prefix}float-right-nm,
+  .#{$prefix}float-right-nbm {
+    float:                    right !important;
+  }
+
+  .#{$prefix}alignright,
+  .#{$prefix}float-right,
+  .#{$prefix}float-right-nbm {
+    margin-left:              3rem;
+  }
+
+  .#{$prefix}alignright,
+  .#{$prefix}float-right {
+    margin-bottom:            3rem;
+  }
+
+  .#{$prefix}aligncenter,
+  .#{$prefix}center:not(.ui-tooltip),
+  .#{$prefix}center-nm,
+  .#{$prefix}center-nbm {
+    float:                    none !important;
+    clear:                    both !important;
+    display:                  block !important;
+  }
+
+  .#{$prefix}center:not(.ui-tooltip),
+  .#{$prefix}aligncenter,
+  .#{$prefix}center-nbm {
+    margin-top:               1rem;
+    margin-right:             auto;
+    margin-left:              auto;
+  }
+
+  .#{$prefix}center:not(.ui-tooltip),
+  .#{$prefix}aligncenter {
+    margin-bottom:            1rem;
+  }
+}

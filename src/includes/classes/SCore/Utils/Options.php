@@ -66,7 +66,7 @@ class Options extends Classes\SCore\Base\Core
         $url = $this->c::currentUrl();
         $url = $this->s::removeUrlRestAction($url);
 
-        $markup = __('%1$s options updated successfully.', 'wp-sharks-core');
+        $markup = __('\'%1$s\' options updated successfully.', 'wp-sharks-core');
         $markup = sprintf($markup, esc_html($this->App->Config->©brand['©name']));
         $this->s::enqueueUserNotice($markup, ['type' => 'success']);
 

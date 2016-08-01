@@ -132,7 +132,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $markup = $heading ? '<h2>'.$heading.'</h2>' : '';
         $markup .= $description ? '<p>'.$description.'</p>' : '';
 
-        $markup .= '<table class="-form-table form-table'.($args['class'] ? ' '.esc_attr($args['class']) : '').'">';
+        $markup .= '<table class="-form-table'.($args['class'] ? ' '.esc_attr($args['class']) : '').'">';
         $markup .=     '<tbody>';
 
         return $markup;
@@ -198,7 +198,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
             $markup .= '<th scope="row">';
             $markup .=      '<div>'; // For positioning.
             $markup .=          $cfg['tip'];
-            $markup .=          '<label for="'.esc_attr($cfg['id']).'">'.
+            $markup .=          '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
                                     $cfg['label'].
                                 '</label>';
             $markup .=      '</div>';
@@ -278,7 +278,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
             $markup .= '<th scope="row">';
             $markup .=      '<div>'; // For positioning.
             $markup .=          $cfg['tip'];
-            $markup .=          '<label for="'.esc_attr($cfg['id']).'">'.
+            $markup .=          '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
                                     $cfg['label'].
                                 '</label>';
             $markup .=      '</div>';
@@ -405,7 +405,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
             $markup .= '<th scope="row">';
             $markup .=      '<div>'; // For positioning.
             $markup .=          $cfg['tip'];
-            $markup .=          '<label for="'.esc_attr($cfg['id']).'">'.
+            $markup .=          '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
                                     $cfg['label'].
                                 '</label>';
             $markup .=      '</div>';

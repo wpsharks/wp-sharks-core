@@ -1,0 +1,14 @@
+/*
+ * Display utilities.
+ */
+@mixin utils-display($prefix: null) {
+  .#{$prefix}block {
+    float:                    none !important;
+    clear:                    both !important;
+    display:                  block !important;
+  }
+
+  .#{$prefix}hidden {
+    display:                  none !important;
+  }
+}
