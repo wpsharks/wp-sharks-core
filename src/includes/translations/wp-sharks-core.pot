@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160801.2694\n"
+"Project-Id-Version: WP Sharks Core 160801.34158\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-08-01 00:45:14+00:00\n"
+"POT-Creation-Date: 2016-08-01 09:29:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -203,7 +203,7 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/Options.php:69
-msgid "%1$s options updated successfully."
+msgid "'%1$s' options updated successfully."
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/Options.php:140
@@ -656,7 +656,7 @@ msgid "Active Network-Only"
 msgstr ""
 
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:29
-msgid "These can only be activated network-wide, and therefore only require a single license key, which covers all child sites in the network."
+msgid "These can only be activated network-wide, and therefore only require a single license key that covers all child sites in the network."
 msgstr ""
 
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:31
@@ -664,43 +664,36 @@ msgid "Active Child-Site"
 msgstr ""
 
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:32
-msgid "These require a license key to be entered for each child site in the network; i.e., if you activate them on a child site."
+msgid "These require a license key to be entered for each child site in the network where you activate them."
 msgstr ""
 
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:34
 msgid "Active"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:52
-msgid "%1$s Themes by %2$s"
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:39
+msgid "%1$sThemes by %2$s"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:53
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:81
-msgid "%1$sActivating a license key enables automatic updates. <em>If you need to deactivate a license key, simply empty the field and click 'Save Changes'.</em>"
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:40
+msgid "%1$sPlugins by %2$s"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:59
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:87
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:29
-msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:42
+msgid "%1$sActivating a license key enables automatic updates. To obtain your license key(s), please log into your account at %2$s™ and then navigate to <a href=\"%3$s\" target=\"_blank\">My Account → My Downloads</a>. <em>If you need to deactivate a license key, simply empty the field and click 'Save Changes'.</em>"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:63
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:91
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:64
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:93
+msgid "Get your license key from the 'My Account → Downloads' page when you log in at https://%1$s"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:68
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:97
 msgid "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:80
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:100
-msgid "%1$s Plugins by %2$s"
-msgstr ""
-
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:101
-msgid "%1$sActivating a license key enables automatic updates."
-msgstr ""
-
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:105
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:108
 msgid "No %1$s plugins at this time."
 msgstr ""
 
@@ -710,6 +703,10 @@ msgstr ""
 
 #: src/includes/templates/s-core/admin/notices/license-key-request.php:28
 msgid "(enables automatic updates)"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:29
+msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
 msgstr ""
 
 #: src/includes/templates/s-core/admin/notices/license-key-request.php:33
