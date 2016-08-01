@@ -1,7 +1,8 @@
-## v160801.34158
+## $v
 
 - Enhancing menu page styles.
 - Adding SCSS utility mixins for developers.
+- Bug fix. Core URL leading to \'My Downloads\' was a broken link.
 
 ## v160801.2694
 

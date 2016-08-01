@@ -39,7 +39,7 @@ $license_key_icon = '<i class="sharkicon sharkicon-icom-key2 -float-right-nbm" s
 $themes_heading  = sprintf(__('%1$sThemes by %2$s', 'wp-sharks-core'), esc_html($active_heading), esc_html($this->App::CORE_CONTAINER_NAME));
 $plugins_heading = sprintf(__('%1$sPlugins by %2$s', 'wp-sharks-core'), esc_html($active_heading), esc_html($this->App::CORE_CONTAINER_NAME));
 
-$description     = $license_key_icon.sprintf(__('%1$sActivating a license key enables automatic updates. To obtain your license key(s), please log into your account at %2$s™ and then navigate to <a href="%3$s" target="_blank">My Account → My Downloads</a>. <em>If you need to deactivate a license key, simply empty the field and click \'Save Changes\'.</em>', 'wp-sharks-core'), esc_html($active_description), esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->s::brandUrl('/my-account/downloads')));
+$description     = $license_key_icon.sprintf(__('%1$sActivating a license key enables automatic updates. To obtain your license key(s), please log into your account at %2$s™ and then navigate to <a href="%3$s" target="_blank">My Account → My Downloads</a>. <em>If you need to deactivate a license key, simply empty the field and click \'Save Changes\'.</em>', 'wp-sharks-core'), esc_html($active_description), esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->s::coreUrl('/my-account/downloads')));
 $table_open_args = ['class' => '-display-block -one-line-labels'];
 
 $Form                             = $this->s::menuPageForm('§update-license-keys');
