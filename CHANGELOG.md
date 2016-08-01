@@ -1,3 +1,7 @@
+## $v
+
+- Adding `c::collectPostMeta()`.
+
 ## v160731.37352
 
 - Adding `Classes\SCore\WidgetForm{}`

@@ -54,7 +54,7 @@ class PostMeta extends Classes\SCore\Base\Core
     }
 
     /**
-     * Get meta values.
+     * Get meta value(s).
      *
      * @since 160723 Post meta utils.
      *
@@ -62,8 +62,9 @@ class PostMeta extends Classes\SCore\Base\Core
      * @param string          $key     Meta key (unprefixed). If empty, returns all metadata.
      * @param mixed           $default A default value when `$single` is `true` and value is `''`.
      *                                 NOTE: Do NOT set if value is allowed to be empty.
-     * @param bool            $single  A single value? Default `true`.
-     *                                 Ignored when `$key` is empty.
+     * @param bool            $single  A single value? Default `true`. Ignored when `$key` is empty.
+     *
+     *                                 @internal Instead of `single=false`, use {@link collect()}.
      *
      * @return array|mixed If `!$single`, an array; else mixed.
      */
@@ -72,7 +73,7 @@ class PostMeta extends Classes\SCore\Base\Core
         $post_id = (int) ($post_id ?? get_the_ID());
         $single  = !$key ? false : $single;
 
-        if (!$post_id) { // Empty key OK here.
+        if (!$post_id) { // Empty key OK.
             return !$single ? [] : $default;
         }
         $value = get_post_meta($post_id, $this->key($key), $single);
@@ -104,7 +105,7 @@ class PostMeta extends Classes\SCore\Base\Core
     }
 
     /**
-     * Delete meta value.
+     * Delete meta value(s).
      *
      * @since 160723 Post meta utils.
      *
@@ -120,6 +121,27 @@ class PostMeta extends Classes\SCore\Base\Core
             return; // Not possible.
         }
         delete_post_meta($post_id, $this->key($key), $where);
+    }
+
+    /**
+     * Collect meta values.
+     *
+     * @since 160731 Post meta utils.
+     *
+     * @param string|int|null $post_id Post ID; `null` = current.
+     * @param string          $key     Meta key (unprefixed). If empty, returns all metadata.
+     *
+     * @return array An array of meta values.
+     */
+    public function collect($post_id, string $key = ''): array
+    {
+        $post_id = (int) ($post_id ?? get_the_ID());
+
+        if (!$post_id) { // Empty key is OK here.
+            return []; // Not possible; empty array.
+        }
+        $value        = get_post_meta($post_id, $this->key($key), false);
+        return $value = !is_array($value) ? [] : $value;
     }
 
     /**

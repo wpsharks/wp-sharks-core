@@ -76,6 +76,18 @@ trait PostMeta
     }
 
     /**
+     * @since 160731 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::collect()
+     */
+    public static function collectPostMeta(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§PostMeta->collect(...$args);
+    }
+
+    /**
      * @since 160723 Post meta utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
