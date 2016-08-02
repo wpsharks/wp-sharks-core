@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 160801.75904\n"
+"Project-Id-Version: WP Sharks Core 160802.23245\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-08-01 21:05:10+00:00\n"
+"POT-Creation-Date: 2016-08-02 06:27:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -932,25 +932,25 @@ msgstr ""
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:27
 #: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:27
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:27
-msgid "We're a globally-distributed team of enthusiastic open-source developers who build software for WordPress"
+msgid "We're a globally-distributed team of enthusiastic developers who build great open-source software for WordPress."
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:31
 #: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:31
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:31
-msgid "<a href=\"%2$s\" target=\"_blank\">%1$s</a> was founded by business partners <a href=\"%3$s\" target=\"_blank\">Jason Caldwell</a> and <a href=\"%4$s\" target=\"_blank\">Raam Dev</a>. Over the years we've built everything from simple contact forms, to ecommerce platforms, cache engines, social-media tools, and more. <em style=\"display:inline-block; margin-left:.5em;\">Always on top of WordPress.</em>"
+msgid "<a href=\"%2$s\" target=\"_blank\">%1$s</a> was founded by business partners <a href=\"%3$s\" target=\"_blank\">Jason Caldwell</a> and <a href=\"%4$s\" target=\"_blank\">Raam Dev</a>. Over the years we've built everything everything from advanced e-commerce platforms and caching engines, to simple contact forms and social-media tools—<em style=\"display:inline-block;\">always with WordPress at the core.</em>"
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:35
 #: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:35
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:35
-msgid "Today, our team includes talented individuals from Florida, Georgia, Alaska, the Phillipines, Mexico, India, and occassionally from aquatic habitats at various temperatures where there's plenty of other fish to feed on 🐟 — we are Sharks after all"
+msgid "Today, our team is comprised of talented engineers and developers working remotely from all around the world: Florida, Georgia, Alaska, New Hampshire, the Phillipines, Mexico, India, and occassionally from aquatic habitats at various temperatures where there's plenty of other fish to feed on 🐟 — we are Sharks after all."
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:39
 #: .~build/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:39
 #: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:39
-msgid "A developer's life is filled with fun and we all love what we do. We find great pleasure in working with each other, with our customers, and with others in the WordPress community. While there is distance between us, we're a really tight group (good at online collaboration), and we work very hard on common goals; e.g., to produce great software and help others. We pride ourselves on our level of <a href=\"%1$s\" target=\"_blank\">customer support</a> and response time."
+msgid "A developer's life is filled with fun and we all love what we do. We find great pleasure in working with each other, with our customers, and with the entire WordPress community. While there is distance between us, we're a really tight group (good at online collaboration), and we work very hard on common goals like producing great software and helping others. We pride ourselves on great <a href=\"%1$s\" target=\"_blank\">customer service</a>, fast response times, and a dedication to maintaining our software."
 msgstr ""
 
 #: .~build/.~/pkg-dirs/for-zip-tgz/wp-sharks-core/src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:43
