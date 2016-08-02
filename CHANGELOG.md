@@ -1,3 +1,7 @@
+## [coming soon]
+
+- Bug fix. Only show widget when extender returns non-empty content.
+
 ## v160801.75904
 
 - Enhancing menu page styles.

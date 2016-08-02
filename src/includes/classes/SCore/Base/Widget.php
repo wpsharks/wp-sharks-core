@@ -173,13 +173,16 @@ abstract class Widget extends \WP_Widget
         $options          = $this->merge([], (array) $options);
         $options['title'] = apply_filters('widget_title', $options['title'], $options, $this->id_base);
 
-        echo $args['before_widget'];
+        if (($content = $this->widgetContent($options))) {
+            echo $args['before_widget'];
 
-        if ($options['title']) { // Only if there is a title.
-            echo $args['before_title'].$options['title'].$args['after_title'];
+            if ($options['title']) { // Only if there is a title.
+                echo $args['before_title'].$options['title'].$args['after_title'];
+            }
+            echo $content; // Via extender.
+
+            echo $args['after_widget'];
         }
-        echo $this->widgetContent($options);
-        echo $args['after_widget'];
     }
 
     /**
