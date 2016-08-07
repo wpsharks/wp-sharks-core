@@ -2,13 +2,13 @@
  * Display utilities.
  */
 @mixin utils-display($prefix: null) {
-  .#{$prefix}block {
+  .#{$prefix}display-block {
     float:                    none !important;
     clear:                    both !important;
     display:                  block !important;
   }
 
-  .#{$prefix}hidden {
+  .#{$prefix}display-hidden {
     display:                  none !important;
   }
 }

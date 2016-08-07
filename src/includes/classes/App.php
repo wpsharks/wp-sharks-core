@@ -233,9 +233,9 @@ class App extends CoreClasses\App
             $Parent = $Parent ?? $GLOBALS[self::class];
 
             $specs                     = array_merge($default_specs, $instance_base['§specs'] ?? [], $instance['§specs'] ?? []);
-            $specs['§in_wp']           = $specs['§in_wp'] ?? false; // Defaults to false. If it's in WP, please specify.
             $specs['§is_pro']          = $specs['§is_pro'] ?? mb_stripos($this->namespace, '\\Pro\\') !== false;
             $specs['§has_pro']         = $specs['§is_pro'] ?: true; // Assume this is true.
+            $specs['§in_wp']           = $specs['§is_pro'] ? false : ($specs['§in_wp'] ?? false);
             $specs['§is_network_wide'] = $specs['§is_network_wide'] && $this->Wp->is_multisite;
 
             if (!$specs['§type'] || !$specs['§file']) {
