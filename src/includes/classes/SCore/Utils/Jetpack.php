@@ -47,8 +47,10 @@ class Jetpack extends Classes\SCore\Base\Core
      */
     public function markdown(string $markdown): string
     {
-        if (!$this->canMarkdown() || !$this->WPCom_Markdown) {
-            throw $this->c::issue('Jetpack markdown unavailable.');
+        if (!$markdown) {
+            return $markdown; // Not necessary.
+        } elseif (!$this->canMarkdown() || !$this->WPCom_Markdown) {
+            return $markdown; // Not possible.
         }
         return (string) $this->WPCom_Markdown->transform($markdown, ['unslash' => false]);
     }
