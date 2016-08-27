@@ -54,6 +54,21 @@ class PostMeta extends Classes\SCore\Base\Core
     }
 
     /**
+     * Meta values exist?
+     *
+     * @since 160826 Post meta utils.
+     *
+     * @param string|int|null $post_id Post ID; `null` = current.
+     * @param string          $key     Meta key (unprefixed). If empty, checks all metadata.
+     *
+     * @return bool True if meta values exist.
+     */
+    public function exists($post_id, string $key = ''): bool
+    {
+        return (bool) $this->collect($post_id, $key);
+    }
+
+    /**
      * Get meta value(s).
      *
      * @since 160723 Post meta utils.

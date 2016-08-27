@@ -40,6 +40,18 @@ trait PostMeta
     }
 
     /**
+     * @since 160826 Post meta utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\PostMeta::exists()
+     */
+    public static function postMetaExists(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§PostMeta->exists(...$args);
+    }
+
+    /**
      * @since 160723 Post meta utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
