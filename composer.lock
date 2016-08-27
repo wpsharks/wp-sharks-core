@@ -462,16 +462,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.4.1",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c"
+                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
-                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
+                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
                 "shasum": ""
             },
             "require": {
@@ -489,7 +489,7 @@
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
                 "mockery/mockery": "^0.9.4",
                 "moontoast/math": "^1.1",
-                "phpunit/phpunit": "^4.7|^5.0",
+                "phpunit/phpunit": "^4.7|>=5.0 <5.4",
                 "satooshi/php-coveralls": "^0.6.1",
                 "squizlabs/php_codesniffer": "^2.3"
             },
@@ -538,7 +538,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-04-24 00:30:41"
+            "time": "2016-08-02 18:39:32"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -703,12 +703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "75a702295165f80158526b6affa9b75a4c49ea5a"
+                "reference": "c278b6bf21b18afcd1a7391232115190992bf4e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/75a702295165f80158526b6affa9b75a4c49ea5a",
-                "reference": "75a702295165f80158526b6affa9b75a4c49ea5a",
+                "url": "https://api.github.com/repos/websharks/core/zipball/c278b6bf21b18afcd1a7391232115190992bf4e3",
+                "reference": "c278b6bf21b18afcd1a7391232115190992bf4e3",
                 "shasum": ""
             },
             "require": {
@@ -828,7 +828,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2016-08-02 06:25:15"
+            "time": "2016-08-27 02:03:59"
         },
         {
             "name": "websharks/dicer",
@@ -937,12 +937,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/wp-php-rv.git",
-                "reference": "0e133e9da484f2adefd43c837f8b8f35e7e1618b"
+                "reference": "d889d4ac090d674153a8de1ec2ae927527d66d35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/0e133e9da484f2adefd43c837f8b8f35e7e1618b",
-                "reference": "0e133e9da484f2adefd43c837f8b8f35e7e1618b",
+                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/d889d4ac090d674153a8de1ec2ae927527d66d35",
+                "reference": "d889d4ac090d674153a8de1ec2ae927527d66d35",
                 "shasum": ""
             },
             "require": {
@@ -978,7 +978,7 @@
                 "wordpress",
                 "wpsharks"
             ],
-            "time": "2016-07-12 11:55:29"
+            "time": "2016-08-24 01:47:28"
         }
     ],
     "packages-dev": [],

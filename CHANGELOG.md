@@ -1,4 +1,4 @@
-## $v
+## v160827.7334
 
 - Bug fix. Only show widget when extender returns non-empty content.
 - Adding `s::postMetaExists()` to check if a post has any given meta values.
