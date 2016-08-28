@@ -73,9 +73,10 @@ class Installer extends Classes\SCore\Base\Core
     {
         if ($this->App->Config->§uninstall) {
             return; // Sanity check.
-        } elseif ($this->App->Config->§force_install // Forcing install (or reinstall)?
-                    || version_compare($this->history['last_version'], $this->App::VERSION, '<')
-                    || version_compare($this->s::getOption('§for_version'), $this->App::VERSION, '<')) {
+        }
+        if ($this->App->Config->§force_install // Forcing install (or reinstall)?
+                || version_compare($this->history['last_version'], $this->App::VERSION, '<')
+                || version_compare($this->s::getOption('§for_version'), $this->App::VERSION, '<')) {
             $this->install(); // Install (or reinstall).
         }
     }
@@ -143,7 +144,7 @@ class Installer extends Classes\SCore\Base\Core
         if (!empty($GLOBALS['wp_rewrite'])) {
             flush_rewrite_rules();
         } else {
-            add_action('setup_theme', 'flush_rewrite_rules', -10000);
+            add_action('setup_theme', 'flush_rewrite_rules');
         }
     }
 

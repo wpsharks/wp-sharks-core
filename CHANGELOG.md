@@ -1,3 +1,7 @@
+## [coming soon]
+
+- New Facade: `s::getDefaultOption()`.
+
 ## v160828.25227
 
 - Automatically add `-widget` suffix in `Widget{}` base class.

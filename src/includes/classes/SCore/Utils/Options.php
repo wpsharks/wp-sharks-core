@@ -167,6 +167,28 @@ class Options extends Classes\SCore\Base\Core
     }
 
     /**
+     * Get default config option.
+     *
+     * @since 160826 Initial release.
+     *
+     * @param string $key Option key.
+     *
+     * @return mixed Default option value.
+     */
+    public function getDefault(string $key)
+    {
+        if (isset($this->App->Config->§default_options[$key])) {
+            return $this->App->Config->§default_options[$key];
+        } // Optimized. Values CAN be `null` however.
+
+        // Else if the key does not exist at all, throw exception.
+        if (!array_key_exists($key, $this->App->Config->§default_options)) {
+            throw $this->c::issue(sprintf('Unknown default option key: `%1$s`.', $key));
+        }
+        return null; // Default return value.
+    }
+
+    /**
      * Update config options.
      *
      * @since 160524 Initial release.

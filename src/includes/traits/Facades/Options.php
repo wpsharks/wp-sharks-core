@@ -58,6 +58,18 @@ trait Options
     }
 
     /**
+     * @since 160826 Default option getter.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Options::getDefault()
+     */
+    public static function getDefaultOption(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Options->getDefault(...$args);
+    }
+
+    /**
      * @since 160524 App.
      *
      * @param mixed ...$args Variadic args to underlying utility.
