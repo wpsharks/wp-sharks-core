@@ -279,6 +279,14 @@ Icons -export-ignore
 # Export Ignore (More) -------------------------------------------------------------------------------------------------
 # These are in addition to what we have in `.gitignore`.
 
+# IDE Helpers
+
+_ide.php export-ignore
+
+# TODO Lists
+
+TODO.md export-ignore
+
 # SASS
 
 *.scss export-ignore
@@ -395,8 +403,13 @@ Icons -export-ignore
 /src/includes/phar-stub.php export-ignore
 /src/vendor/websharks/*/src/includes/phar-stub.php export-ignore
 
+# PsySH Stub
+
+/src/includes/psysh-stub.php export-ignore
+/src/vendor/websharks/*/src/includes/psysh-stub.php export-ignore
+
 # LFS Storage (Assets) -------------------------------------------------------------------------------------------------
-# NOTE: Here we need to match all assets explictly; i.e., requires `/**`
+# NOTE: Here we need to match all assets explicitly; i.e., requires `/**`
 
 /assets/** filter=lfs diff=lfs merge=lfs -text
 
