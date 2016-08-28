@@ -82,7 +82,7 @@ abstract class Widget extends \WP_Widget
         $this->Wp              = $this->App->Wp;
         $this->default_options = array_merge(['title' => ''], $default_options);
 
-        $id_base = $this->App->Config->©brand['©slug'].'-'.$args['slug'];
+        $id_base = $this->App->Config->©brand['©slug'].'-'.$args['slug'].'-widget';
 
         parent::__construct($id_base, $args['name'], [
             'classname'   => $id_base.($args['class'] ? ' '.$args['class'] : ''),

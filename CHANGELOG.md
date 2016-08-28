@@ -1,3 +1,7 @@
+## $v
+
+- Automatically add `-widget` suffix in `Widget{}` base class.
+
 ## v160827.7334
 
 - Bug fix. Only show widget when extender returns non-empty content.
