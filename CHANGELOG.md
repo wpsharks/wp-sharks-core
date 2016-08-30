@@ -1,6 +1,7 @@
 ## [coming soon]
 
 - New Facade: `s::getDefaultOption()`.
+- Upgrading to latest websharks/core.
 
 ## v160828.25227
 
