@@ -1,7 +1,9 @@
-## [coming soon]
+## $v
 
 - New Facade: `s::getDefaultOption()`.
 - Upgrading to latest websharks/core.
+- Adding support for `meta_links` in menu pages.
+- A `restore` tab is now automatically converted into a meta link.
 
 ## v160828.25227
 
