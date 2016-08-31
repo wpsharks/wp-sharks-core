@@ -206,7 +206,7 @@
   #wpbody-content {
     .notice,
     .updated {
-      margin:                 1.5em 1.5em 1.5em 0;
+      margin:                 1.5em 0;
     }
   }
 }
@@ -221,6 +221,24 @@
   margin:                     1.5em 1.5em 0 0;
 
   .-container {
+    > .-meta-links {
+      max-width:              30%;
+      float:                  right;
+
+      > a,
+      > span {
+        float:                left;
+
+        &:not(:first-child) {
+          margin:             0 0 0 1em;
+        }
+
+        &.-restore {
+          @include sharkicon('life-bouy');
+        }
+      }
+    }
+
     > .-nav-tabs {
       border-bottom:          1px solid $nav-tabs-border-color;
     }

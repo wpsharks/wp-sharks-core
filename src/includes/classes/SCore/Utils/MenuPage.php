@@ -361,6 +361,7 @@ class MenuPage extends Classes\SCore\Base\Core
             'template_dir'  => '',
             'icon'          => '',
             'position'      => null,
+            'meta_links'    => [],
             'tabs'          => [],
             'callback'      => null,
         ];
@@ -376,6 +377,7 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg->template_dir  = (string) $cfg->template_dir;
         $cfg->icon          = (string) $cfg->icon;
         $cfg->position      = (string) $cfg->position;
+        $cfg->meta_links    = (array) $cfg->meta_links;
         $cfg->tabs          = (array) $cfg->tabs;
 
         if ($cfg->page_title && $cfg->auto_prefix // Smart auto-prefixing.
@@ -440,6 +442,7 @@ class MenuPage extends Classes\SCore\Base\Core
             'class'         => '',
             'template_file' => '',
             'template_dir'  => '',
+            'meta_links'    => [],
             'tabs'          => [],
             'callback'      => null,
         ];
@@ -454,6 +457,7 @@ class MenuPage extends Classes\SCore\Base\Core
         $cfg->class         = (string) $cfg->class;
         $cfg->template_file = (string) $cfg->template_file;
         $cfg->template_dir  = (string) $cfg->template_dir;
+        $cfg->meta_links    = (array) $cfg->meta_links;
         $cfg->tabs          = (array) $cfg->tabs;
 
         if ($cfg->parent_page && $cfg->auto_prefix // Smart auto-prefixing.
@@ -527,6 +531,10 @@ class MenuPage extends Classes\SCore\Base\Core
         foreach ($cfg->tabs as $_key => &$_tab) {
             if (!$_key || !is_string($_key)) {
                 throw $this->c::issue('Invalid key.');
+            }
+            if ($_key === 'restore') {
+                $cfg->meta_links['restore'] = true;
+                continue; // Back compat for restore.
             }
             if ($_tab && is_string($_tab)) {
                 $_tab = ['label' => $_tab];

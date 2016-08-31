@@ -23,9 +23,22 @@ use function get_defined_vars as vars;
 extract($this->vars); // Template variables.
 ?>
 <div class="<?= esc_attr($cfg->class); ?>">
-    <h1 class="-hidden" data-wp-notices-here></h1>
+    <h1 class="-display-hidden" data-wp-notices-here></h1>
 
     <div class="-container">
+
+        <?php if ($cfg->meta_links) : $_meta_links = $cfg->meta_links; ?>
+            <div class="-meta-links">
+
+                <?php if (!empty($_meta_links['restore'])) : unset($_meta_links['restore']); ?>
+                    <a class="-restore" href="<?= esc_url($this->s::restoreDefaultOptionsUrl()); ?>" onclick="if(!confirm('<?= __('Are you sure?') ?>')) return false;">
+                        <?= __('Restore Default Options'); ?>
+                    </a>
+                <?php endif; ?>
+
+                <?= implode(' ', $_meta_links); // Others. ?>
+            </div>
+        <?php endif; ?>
 
         <?= $cfg->nav_tabs; ?>
 
