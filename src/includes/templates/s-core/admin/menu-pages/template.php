@@ -31,8 +31,8 @@ extract($this->vars); // Template variables.
             <div class="-meta-links">
 
                 <?php if (!empty($_meta_links['restore'])) : unset($_meta_links['restore']); ?>
-                    <a class="-restore" href="<?= esc_url($this->s::restoreDefaultOptionsUrl()); ?>" onclick="if(!confirm('<?= __('Are you sure?') ?>')) return false;">
-                        <?= __('Restore Default Options'); ?>
+                    <a class="-restore" href="<?= esc_url($this->s::restoreDefaultOptionsUrl()); ?>" onclick="if(!confirm('<?= __('Are you sure?', 'wp-sharks-core') ?>')) return false;">
+                        <?= __('Restore Default Options', 'wp-sharks-core'); ?>
                     </a>
                 <?php endif; ?>
 
