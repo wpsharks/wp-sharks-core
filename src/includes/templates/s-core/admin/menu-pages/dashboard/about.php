@@ -32,7 +32,7 @@ extract($this->vars); // Template variables.
 </p>
 
 <p>
-    <?= __('Today, our team is comprised of talented engineers and developers working remotely from all around the world: Florida, Georgia, Alaska, New Hampshire, the Phillipines, Mexico, India, and occassionally from aquatic habitats at various temperatures where there\'s plenty of other fish to feed on 🐟 — we are Sharks after all.', 'wp-sharks-core'); ?> <i class="sharkicon sharkicon-smile-o"></i>
+    <?= __('Today, our team is comprised of talented engineers and developers working remotely from all around the world: Florida, Georgia, Alaska, New Hampshire, the Phillipines, Mexico, India, and occasionally from aquatic habitats at various temperatures where there\'s plenty of other fish to feed on 🐟 — we are Sharks after all.', 'wp-sharks-core'); ?> <i class="sharkicon sharkicon-smile-o"></i>
 </p>
 
 <p>
