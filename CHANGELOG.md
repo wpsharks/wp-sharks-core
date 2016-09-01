@@ -1,3 +1,7 @@
+## [coming soon]
+
+- Correcting a bug in the list of license keys that was causing a table to be displayed as `block` and therefore it lost it's table properties.
+
 ## v160831.54041
 
 - New Facade: `s::getDefaultOption()`.

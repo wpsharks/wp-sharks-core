@@ -2,6 +2,9 @@
  * Block display mode.
  */
 @mixin form-table-display-block {
+  // Don't let utility class display as `block`.
+  display:                    table !important;
+
   > tbody {
     > tr {
       > th,
