@@ -1,4 +1,4 @@
-## [coming soon]
+## $v
 
 - Correcting a bug in the list of license keys that was causing a table to be displayed as `block` and therefore it lost it's table properties.
 - Bug fix. Transient `hashToKey()` should return an un-prefixed key.
