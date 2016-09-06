@@ -148,8 +148,8 @@ class Transient extends Classes\SCore\Base\Core
      */
     protected function hashToKey(string $hash)
     {
-        $WpDb    = $this->s::wpDb(); // DB class.
-        $blog_id = get_current_blog_id(); // Use in cache keys.
+        $WpDb    = $this->s::wpDb();
+        $blog_id = (int) get_current_blog_id();
 
         if (($key = &$this->cacheKey(__FUNCTION__, [$blog_id, $hash])) !== null) {
             return $key; // Already cached this.
@@ -165,6 +165,6 @@ class Transient extends Classes\SCore\Base\Core
             $sql = 'SELECT `option_name` FROM `'.esc_sql($WpDb->options).'` WHERE `option_id` = %s LIMIT 1';
             $key = (string) $WpDb->get_var($WpDb->prepare($sql, $id));
         }
-        return $key = preg_replace('/^_(?:site_)?transient_/u', '', $key);
+        return $key = preg_replace('/^_(?:site_)?transient_'.$this->c::escRegex($this->App->Config->©brand['©var']).'_/u', '', $key);
     }
 }

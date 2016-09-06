@@ -73,16 +73,16 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
      */
     public function __invoke(string $long_url, string $descriptor = '', int $expires_after = null): string
     {
-        global $wp_rewrite;
-
         if (!$long_url) {
             return ''; // Not possible.
         }
+        $WP_Rewrite = $GLOBALS['wp_rewrite'];
+
         $expires_after  = $expires_after ?? $this::SECONDS_IN_DAY;
         $transient_key  = sha1('transient-shortlink-'.$long_url);
         $transient_hash = $this->s::setTransient($transient_key, $long_url, $expires_after, true);
 
-        if ($wp_rewrite->using_mod_rewrite_permalinks()) {
+        if ($WP_Rewrite->using_mod_rewrite_permalinks()) {
             $descriptor       = $this->c::mbTrim($descriptor, '/'); // Only works with fancy permalinks.
             return $shortlink = home_url('/'.$this->slug.'/'.$transient_hash.($descriptor ? '/'.urlencode($descriptor) : ''));
         } else {
@@ -97,14 +97,14 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
      */
     public function onWpLoaded()
     {
-        global $wp_rewrite;
-
         if ($this->c::isCli()) {
             return; // Not applicable.
         }
+        $WP_Rewrite = $GLOBALS['wp_rewrite'];
+
         if (!empty($_REQUEST[$this->var])) {
             $transient_hash = (string) $_REQUEST[$this->var];
-        } elseif (mb_stripos($_SERVER['REQUEST_URI'] ?? '', '/'.$this->slug.'/') !== false && $wp_rewrite->using_mod_rewrite_permalinks()) {
+        } elseif (mb_stripos($_SERVER['REQUEST_URI'] ?? '', '/'.$this->slug.'/') !== false && $WP_Rewrite->using_mod_rewrite_permalinks()) {
             $base_path = $this->c::mbRTrim((string) $this->c::parseUrl(home_url('/'), PHP_URL_PATH), '/');
             $path      = $base_path ? mb_substr($this->c::currentPath(), mb_strlen($base_path)) : $this->c::currentPath();
 
@@ -117,7 +117,7 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
             return; // Not applicable.
         }
         if (!($long_url = $this->s::getTransient('', $transient_hash))) {
-            dieInvalid(__('Sorry, link expired.', 'wp-sharks-core'));
+            $this->s::dieInvalid(__('Sorry, link expired.', 'wp-sharks-core'));
         }
         wp_redirect($long_url, 301).exit(); // Stop on redirection.
     }
