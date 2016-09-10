@@ -578,7 +578,7 @@ class Notices extends Classes\SCore\Base\Core
             }
             # Make sure markup is wrapped in a block-level tag so margins will exist.
 
-            if (!preg_match('/^\<(?:p|div|h[1-6])[\s>]/ui', $_markup)) {
+            if (!preg_match('/^\<(?:p|div|h[1-6]|ul|ol)[\s>]/ui', $_markup)) {
                 $_markup = '<p>'.$_markup.'</p>'; // Add `<p>` tag.
             }
             # Display notice `<div>` with the markup and a possible dismiss icon.

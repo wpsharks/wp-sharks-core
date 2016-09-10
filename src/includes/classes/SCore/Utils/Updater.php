@@ -103,11 +103,10 @@ class Updater extends Classes\SCore\Base\Core
         } // i.e., Applies only to theme instances.
 
         if (!is_object($report)) { // e.g., Does not exist yet?
-            $report = new \StdClass(); // Force object instance.
+            $report = (object) []; // Force object instance.
         }
         if (!isset($report->response) || !is_array($report->response)) {
             $report->response = []; // Force an array value.
-            // This may not exist due to HTTP errors or other quirks.
         }
         $theme_url      = $this->s::brandUrl('/changelog');
         $theme_slug     = $this->App->Config->©brand['§product_slug'];
@@ -147,11 +146,10 @@ class Updater extends Classes\SCore\Base\Core
         } // i.e., Applies only to plugin instances.
 
         if (!is_object($report)) { // e.g., Does not exist yet?
-            $report = new \StdClass(); // Force object instance.
+            $report = (object) []; // Force object instance.
         }
         if (!isset($report->response) || !is_array($report->response)) {
             $report->response = []; // Force an array value.
-            // This may not exist due to HTTP errors or other quirks.
         }
         $plugin_url      = $this->s::brandUrl('/changelog');
         $plugin_slug     = $this->App->Config->©brand['§product_slug'];
@@ -207,15 +205,15 @@ class Updater extends Classes\SCore\Base\Core
         } // Already checked this recently. Don't do it again right now.
 
         if (($api_url_for_latest_version = $this->apiUrlForLatestVersion())
-            && !is_wp_error($remote_response = wp_remote_get($api_url_for_latest_version))
-                && ($remote_api_response = $this->c::mbTrim((string) $remote_response['body']))
-                && $this->c::isWsVersion($remote_api_response) // Avoid odd response body.
-                && version_compare($remote_api_response, $version, '>=')) {
-            $version = $remote_api_response; // Latest available version.
+                && !is_wp_error($remote_response = wp_remote_get($api_url_for_latest_version))
+                && ($remote_response_code = (int) wp_remote_retrieve_response_code($remote_response)) === 200
+                && ($remote_response_body = $this->c::mbTrim((string) wp_remote_retrieve_body($remote_response)))
+                && $this->c::isWsVersion($remote_response_body) && version_compare($remote_response_body, $version, '>=')) {
+            $version = $remote_response_body; // Latest available version.
         }
         $this->lastVersionCheck(['time' => time(), 'version' => $version]);
 
-        return $version;
+        return $version; // Latest version.
     }
 
     /**
@@ -235,20 +233,25 @@ class Updater extends Classes\SCore\Base\Core
         } // Already checked this recently. Don't do it again right now.
 
         if (($api_url_for_latest_package_via_license_key = $this->apiUrlForLatestPackageViaLicenseKey())
-            && !is_wp_error($remote_response = wp_remote_get($api_url_for_latest_package_via_license_key))
-            && is_object($remote_api_response = json_decode((string) $remote_response['body']))) {
+                && !is_wp_error($remote_response = wp_remote_get($api_url_for_latest_package_via_license_key))
+                && ($remote_response_code = (int) wp_remote_retrieve_response_code($remote_response)) === 200
+                && ($remote_response_body = $this->c::mbTrim((string) wp_remote_retrieve_body($remote_response)))
+                && is_object($remote_api_response = json_decode($remote_response_body))) {
             //
-            if ($remote_api_response->success && $remote_api_response->data->url) {
-                $package = $remote_api_response->data->url; // Latest available package.
+            if (!empty($remote_api_response->success) && !empty($remote_api_response->data->url)) {
+                $package = $remote_api_response->data->url; // Latest package.
                 //
-            } elseif (mb_strpos($remote_api_response->error->slug, 'notice::') === 0 && $remote_api_response->error->message) {
+            } elseif (!empty($remote_api_response->error) // Enqueue error notice?
+                    && mb_strpos($remote_api_response->error->slug, 'notice::') === 0
+                    && $remote_api_response->error->message) {
+                //
                 $notice_heading = __('%1$s™ » \'%2$s\' license key error:', 'wp-sharks-core');
                 $notice_heading = sprintf($notice_heading, esc_html($this->App::CORE_CONTAINER_NAME), esc_html($this->App->Config->©brand['§product_name']));
                 $notice_markup  = $this->s::menuPageNoticeErrors($notice_heading, [$remote_api_response->error->message]);
 
                 $this->s::enqueueNotice('', [
-                    'id'   => '§license-key-error',
                     'type' => 'error',
+                    'id'   => '§license-key-error',
 
                     'is_persistent'  => true,
                     'is_dismissable' => true,
@@ -266,7 +269,7 @@ class Updater extends Classes\SCore\Base\Core
         }
         $this->lastPackageCheck(['time' => time(), 'package' => $package]);
 
-        return $package;
+        return $package; // Latest package.
     }
 
     /**
