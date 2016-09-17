@@ -19,7 +19,7 @@ $GLOBALS['wp_php_rv'] = array(
     'extensions' => array('SPL', 'Phar', 'Reflection', 'ctype', 'date', 'fileinfo', 'filter', 'gd', 'hash', 'json', 'mbstring', 'mcrypt', 'session', 'tokenizer', 'zlib', 'pcre', 'openssl', 'curl', 'intl', 'iconv', 'dom', 'xml', 'libxml', 'xmlreader', 'xmlwriter', 'SimpleXML'), //php-required-extensions//
 
     'wp' => array(
-        'min' => '4.5.2', //wp-required-version//
+        'min' => '4.6', //wp-required-version//
     ),
 ); // The following are back compat. keys.
 $GLOBALS['wp_php_rv']['rv'] = $GLOBALS['wp_php_rv']['min'];

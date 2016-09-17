@@ -1,5 +1,7 @@
 ## [coming soon]
 
+- Bumping minimum WP requirement to v4.6.
+- Updating to the latest WP PHP RV library.
 - Enhanced remote API calls for automatic updates. Future-proofing.
 - Adding `ul` and `ol` tag consideration in notice markup generation handler.
 

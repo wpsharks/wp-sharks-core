@@ -650,16 +650,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.9",
+            "version": "v2.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d"
+                "reference": "e7540734bad981fe59f8ef14b6fc194ae9df8d9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
-                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/e7540734bad981fe59f8ef14b6fc194ae9df8d9c",
+                "reference": "e7540734bad981fe59f8ef14b6fc194ae9df8d9c",
                 "shasum": ""
             },
             "require": {
@@ -695,7 +695,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-17 09:06:15"
+            "time": "2016-09-02 01:57:56"
         },
         {
             "name": "websharks/core",
@@ -703,12 +703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "a08c20174ed743a93d3d32b777e4b59d347e73f4"
+                "reference": "c4625ac3b384754952a13dde79614f5c0c894da7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/a08c20174ed743a93d3d32b777e4b59d347e73f4",
-                "reference": "a08c20174ed743a93d3d32b777e4b59d347e73f4",
+                "url": "https://api.github.com/repos/websharks/core/zipball/c4625ac3b384754952a13dde79614f5c0c894da7",
+                "reference": "c4625ac3b384754952a13dde79614f5c0c894da7",
                 "shasum": ""
             },
             "require": {
@@ -828,7 +828,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2016-08-31 17:10:17"
+            "time": "2016-09-06 18:24:30"
         },
         {
             "name": "websharks/dicer",
@@ -937,12 +937,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/wp-php-rv.git",
-                "reference": "d889d4ac090d674153a8de1ec2ae927527d66d35"
+                "reference": "ba924e906e842f6fe102f7cc74cfd00241ca45ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/d889d4ac090d674153a8de1ec2ae927527d66d35",
-                "reference": "d889d4ac090d674153a8de1ec2ae927527d66d35",
+                "url": "https://api.github.com/repos/websharks/wp-php-rv/zipball/ba924e906e842f6fe102f7cc74cfd00241ca45ac",
+                "reference": "ba924e906e842f6fe102f7cc74cfd00241ca45ac",
                 "shasum": ""
             },
             "require": {
@@ -978,7 +978,7 @@
                 "wordpress",
                 "wpsharks"
             ],
-            "time": "2016-08-24 01:47:28"
+            "time": "2016-09-10 19:48:18"
         }
     ],
     "packages-dev": [],
