@@ -1,4 +1,4 @@
-## [coming soon]
+## v160920.13502
 
 - Bumping minimum WP requirement to v4.6.
 - Updating to the latest WP PHP RV library.
