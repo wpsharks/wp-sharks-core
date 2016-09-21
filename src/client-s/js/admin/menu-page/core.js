@@ -14,6 +14,11 @@
     var $menuPageWrapper = $menuPage.find('.' + x.coreContainerSlug + '-menu-page-wrapper');
 
     /*
+     * Color pickers.
+     */
+    $menuPageArea.find('input[type="color"]').wpColorPicker();
+
+    /*
      * Block-level tooltips.
      */
     $('body').tooltip({

@@ -348,8 +348,8 @@ class StylesScripts extends Classes\SCore\Base\Core
 
         $this->enqueueSharkiconLibs(); // Depends on this lib.
 
-        wp_enqueue_style($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/css/admin/menu-page/core.min.css'), ['sharkicons'], $this->App::VERSION, 'all');
-        wp_enqueue_script($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/js/admin/menu-page/core.min.js'), ['jquery', 'jquery-ui-tooltip', 'underscore'], $this->App::VERSION, true);
+        wp_enqueue_style($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/css/admin/menu-page/core.min.css'), ['sharkicons', 'wp-color-picker'], $this->App::VERSION, 'all');
+        wp_enqueue_script($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/js/admin/menu-page/core.min.js'), ['jquery', 'jquery-ui-tooltip', 'underscore', 'wp-color-picker'], $this->App::VERSION, true);
 
         wp_localize_script(
             $this->App::CORE_CONTAINER_SLUG.'-menu-page',
