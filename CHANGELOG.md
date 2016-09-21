@@ -1,3 +1,7 @@
+## [coming soon]
+
+- Use WordPress color pickers for `<input type="color" ...>` fields. See: <https://github.com/websharks/wp-sharks-core/issues/3>
+
 ## v160920.13502
 
 - Bumping minimum WP requirement to v4.6.
