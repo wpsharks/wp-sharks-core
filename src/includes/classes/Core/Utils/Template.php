@@ -39,13 +39,16 @@ class Template extends CoreClasses\Core\Utils\Template
      */
     public function locate(string $file, string $dir = ''): array
     {
-        $dir  = $this->c::mbRTrim($dir, '/');
-        $file = $this->c::mbTrim($file, '/');
+        $file           = $this->c::mbTrim($file, '/');
+        $dir            = $this->c::mbRTrim($dir, '/');
+        $theme_base_dir = $this->App->Config->©fs_paths['§templates_theme_base_dir'];
 
         if (!$dir && $file) { // Allow WP themes to override default templates.
-            if (($template = locate_template($this->App->Config->©fs_paths['§templates_theme_base_dir'].'/'.$file))) {
-                $dir = $this->c::mbRTrim(mb_substr($template, 0, -mb_strlen($file)), '/');
-                return ['dir' => $dir, 'file' => $file, 'ext' => $this->c::fileExt($file)];
+            if (($template = locate_template($theme_base_dir.'/'.$file))) {
+                if (preg_match('/\/\.|\.\/|\.\./u', $this->c::normalizeDirPath($theme_base_dir.'/'.$file))) {
+                    throw $this->c::issue(sprintf('Insecure template path: `%1$s`.', $theme_base_dir.'/'.$file));
+                }
+                return ['dir' => $theme_base_dir, 'file' => $file, 'ext' => $this->c::fileExt($file)];
             }
         }
         return parent::locate($file, $dir);
