@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\Core\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -35,7 +35,7 @@ class Template extends CoreClasses\Core\Utils\Template
      * @param string $file Relative to templates dir.
      * @param string $dir  From a specific directory?
      *
-     * @return array Template `dir`, `file`, and `ext`.
+     * @return array `[dir, file, ext]`.
      */
     public function locate(string $file, string $dir = ''): array
     {

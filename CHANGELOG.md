@@ -1,5 +1,6 @@
 ## [coming soon]
 
+- Updating to latest release of the websharks/core.
 - Use WordPress color pickers for `<input type="color" ...>` fields. See: <https://github.com/websharks/wp-sharks-core/issues/3>
 
 ## v160920.13502

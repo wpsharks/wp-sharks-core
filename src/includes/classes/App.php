@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -45,7 +45,7 @@ class App extends CoreClasses\App
      *
      * @var string Version.
      */
-    const VERSION = '160920.13502'; //v//
+    const VERSION = '161013.18682'; //v//
 
     /**
      * ReST action API version.
@@ -417,6 +417,7 @@ class App extends CoreClasses\App
                 '©cache_dir'                => $this->Wp->tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/cache',
                 '§templates_theme_base_dir' => $this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'],
                 '©templates_dir'            => $this->base_dir.'/src/includes/templates',
+                '©routes_dir'               => '', // Not applicable.
                 '©errors_dir'               => '', // Not applicable.
 
                 '§mysql' => [
