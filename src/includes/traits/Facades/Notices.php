@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -49,6 +49,18 @@ trait Notices
     public static function enqueueUserNotice(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Notices->userEnqueue(...$args);
+    }
+
+    /**
+     * @since 161013 Recurring notices.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Notices::destroy()
+     */
+    public static function destroyNotice(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Notices->destroy(...$args);
     }
 
     /**

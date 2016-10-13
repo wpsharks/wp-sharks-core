@@ -647,6 +647,13 @@ class App extends CoreClasses\App
 
         $this->s::maybeInstall();
 
+        // Maybe stop if trial expired.
+
+        if ($this->Config->§specs['§is_pro']
+            && !$this->Config->§options['§license_key']
+            && $this->s::trialExpired()) {
+            return; // Stop here.
+        }
         // Make global access var available.
 
         $GLOBALS[$this->Config->©brand['©var']] = $this;

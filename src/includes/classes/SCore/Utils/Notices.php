@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -57,7 +57,7 @@ class Notices extends Classes\SCore\Base\Core
         parent::__construct($App);
 
         $this->defaults = [
-            'insertion_time' => time(),
+            '_insertion_time' => time(),
 
             'id'    => '',
             'type'  => 'info',
@@ -68,6 +68,11 @@ class Notices extends Classes\SCore\Base\Core
 
             'for_page'     => '',
             'not_for_page' => '',
+
+            'recurs_every'     => 0,
+            'recurs_times'     => 0,
+            '_recurrences'     => 0,
+            '_last_recur_time' => 0,
 
             'delay_until_time' => 0,
 
@@ -102,7 +107,7 @@ class Notices extends Classes\SCore\Base\Core
         $notice = array_merge($this->defaults, $notice);
         $notice = array_intersect_key($notice, $this->defaults);
 
-        $notice['insertion_time'] = (int) $notice['insertion_time'];
+        $notice['_insertion_time'] = (int) $notice['_insertion_time'];
 
         $notice['id']    = (string) $notice['id'];
         $notice['type']  = (string) $notice['type'];
@@ -113,6 +118,11 @@ class Notices extends Classes\SCore\Base\Core
 
         $notice['for_page']     = (string) $notice['for_page'];
         $notice['not_for_page'] = (string) $notice['not_for_page'];
+
+        $notice['recurs_every']     = max(0, (int) $notice['recurs_every']);
+        $notice['recurs_times']     = max(0, (int) $notice['recurs_times']);
+        $notice['_recurrences']     = max(0, (int) $notice['_recurrences']);
+        $notice['_last_recur_time'] = max(0, (int) $notice['_last_recur_time']);
 
         $notice['delay_until_time'] = max(0, (int) $notice['delay_until_time']);
 
@@ -130,7 +140,10 @@ class Notices extends Classes\SCore\Base\Core
         $notice['is_transient'] = (bool) $notice['is_transient'];
         $notice['push_to_top']  = (bool) $notice['push_to_top'];
 
-        if ($notice['delay_until_time']) { // Sanity check.
+        if (!$notice['id']) { // An ID is required for recurrences.
+            $notice['recurs_every'] = 0; // Not possible.
+        }
+        if ($notice['recurs_every'] || $notice['delay_until_time']) {
             $notice['is_transient'] = false; // Implies NOT transient.
         }
         if (!in_array($notice['type'], ['info', 'success', 'warning', 'error'], true)) {
@@ -158,7 +171,9 @@ class Notices extends Classes\SCore\Base\Core
     protected function key(array $notice): string
     {
         $hashable_notice = $this->normalize($notice);
-        unset($hashable_notice['insertion_time']);
+        unset($hashable_notice['_insertion_time']);
+        unset($hashable_notice['_recurrences']);
+        unset($hashable_notice['_last_recur_time']);
 
         if ($hashable_notice['id']) {
             return $hashable_notice['id']; // Use as key.
@@ -375,6 +390,20 @@ class Notices extends Classes\SCore\Base\Core
     }
 
     /**
+     * Destroy a notice.
+     *
+     * @since 161013 WP notices.
+     *
+     * @param string $key A key to destroy.
+     */
+    public function destroy(string $key)
+    {
+        $notices = $this->get();
+        unset($notices[$key]);
+        $this->update($notices);
+    }
+
+    /**
      * Dismiss a notice.
      *
      * @since 160524 WP notices.
@@ -384,7 +413,20 @@ class Notices extends Classes\SCore\Base\Core
     public function dismiss(string $key)
     {
         $notices = $this->get();
-        unset($notices[$key]);
+
+        if (!isset($notices[$key])) {
+            return; // Nothing to do.
+        } // No update necessary in this case.
+
+        if (!empty($notices[$key]['recurs_every'])) {
+            if ($notices[$key]['_recurrences'] < $notices[$key]['recurs_times']) {
+                $notices[$key]['_last_recur_time'] = time();
+            } else {
+                unset($notices[$key]);
+            }
+        } else {
+            unset($notices[$key]);
+        }
         $this->update($notices);
     }
 
@@ -458,8 +500,8 @@ class Notices extends Classes\SCore\Base\Core
             $_is_applicable    = false;
 
             $_class = $this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
-            $_class            .= ' -notice';
-            $_class            .= ' notice';
+            $_class .= ' -notice';
+            $_class .= ' notice';
 
             $_style   = $_notice['style'];
             $_dismiss = ''; // Default; n/a.
@@ -477,7 +519,7 @@ class Notices extends Classes\SCore\Base\Core
             }
             # Has notice become too old; i.e., lingering?
 
-            if ($_notice['insertion_time'] < $this->outdated_notice_time
+            if ($_notice['_insertion_time'] < $this->outdated_notice_time
                 && /* Not intentially delayed. */ $_notice['delay_until_time'] < $time) {
                 unset($notices[$_key]); // Ancient history after this pass.
             }

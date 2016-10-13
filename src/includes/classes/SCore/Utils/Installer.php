@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -79,6 +79,25 @@ class Installer extends Classes\SCore\Base\Core
                 || version_compare($this->s::getOption('§for_version'), $this->App::VERSION, '<')) {
             $this->install(); // Install (or reinstall).
         }
+    }
+
+    /**
+     * Is trial expired?
+     *
+     * @since 161013 Install utils. @TODO
+     */
+    public function trialExpired()
+    {
+        if (!$this->App->Config->§specs['§is_pro']) {
+            return false; // Not pro version.
+        } elseif ($this->App->Config->§options['§license_key']) {
+            return false; // Have license key.
+        } elseif ($this->history['first_time'] > strtotime('-30 days')) {
+            return false; // Still within trial period.
+        } elseif (!$this->App->Parent || !$this->App->Parent->is_core) {
+            return false; // Not applicable.
+        }
+        $this->App->Parent->s::maybeRequestLicenseKeyViaNotice($this->App->Config->©brand['©slug']);
     }
 
     /**

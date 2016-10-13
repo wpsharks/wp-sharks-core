@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -207,9 +207,9 @@ class Options extends Classes\SCore\Base\Core
             flush_rewrite_rules(); // In case of options that alter permalinks.
         }
         if ($this->App->Config->§options['§license_key']) {
-            $this->s::dismissNotice('§license-key-request');
+            $this->s::destroyNotice('§license-key-request');
         }
-        $this->s::dismissNotice('§license-key-error');
+        $this->s::destroyNotice('§license-key-error');
     }
 
     /**
