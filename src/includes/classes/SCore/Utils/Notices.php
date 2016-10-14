@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -57,7 +57,7 @@ class Notices extends Classes\SCore\Base\Core
         parent::__construct($App);
 
         $this->defaults = [
-            'insertion_time' => time(),
+            '_insertion_time' => time(),
 
             'id'    => '',
             'type'  => 'info',
@@ -68,6 +68,11 @@ class Notices extends Classes\SCore\Base\Core
 
             'for_page'     => '',
             'not_for_page' => '',
+
+            'recurs_every'             => 0,
+            'recurs_times'             => 0,
+            '_recurrences'             => 0,
+            '_last_recur_dismiss_time' => 0,
 
             'delay_until_time' => 0,
 
@@ -102,7 +107,7 @@ class Notices extends Classes\SCore\Base\Core
         $notice = array_merge($this->defaults, $notice);
         $notice = array_intersect_key($notice, $this->defaults);
 
-        $notice['insertion_time'] = (int) $notice['insertion_time'];
+        $notice['_insertion_time'] = (int) $notice['_insertion_time'];
 
         $notice['id']    = (string) $notice['id'];
         $notice['type']  = (string) $notice['type'];
@@ -113,6 +118,11 @@ class Notices extends Classes\SCore\Base\Core
 
         $notice['for_page']     = (string) $notice['for_page'];
         $notice['not_for_page'] = (string) $notice['not_for_page'];
+
+        $notice['recurs_every']             = max(0, (int) $notice['recurs_every']);
+        $notice['recurs_times']             = max(0, (int) $notice['recurs_times']);
+        $notice['_recurrences']             = max(0, (int) $notice['_recurrences']);
+        $notice['_last_recur_dismiss_time'] = max(0, (int) $notice['_last_recur_dismiss_time']);
 
         $notice['delay_until_time'] = max(0, (int) $notice['delay_until_time']);
 
@@ -130,7 +140,10 @@ class Notices extends Classes\SCore\Base\Core
         $notice['is_transient'] = (bool) $notice['is_transient'];
         $notice['push_to_top']  = (bool) $notice['push_to_top'];
 
-        if ($notice['delay_until_time']) { // Sanity check.
+        if (!$notice['id']) { // An ID is required for recurrences.
+            $notice['recurs_every'] = 0; // Not possible.
+        }
+        if ($notice['recurs_every'] || $notice['delay_until_time']) {
             $notice['is_transient'] = false; // Implies NOT transient.
         }
         if (!in_array($notice['type'], ['info', 'success', 'warning', 'error'], true)) {
@@ -158,7 +171,9 @@ class Notices extends Classes\SCore\Base\Core
     protected function key(array $notice): string
     {
         $hashable_notice = $this->normalize($notice);
-        unset($hashable_notice['insertion_time']);
+        unset($hashable_notice['_insertion_time']);
+        unset($hashable_notice['_recurrences']);
+        unset($hashable_notice['_last_recur_dismiss_time']);
 
         if ($hashable_notice['id']) {
             return $hashable_notice['id']; // Use as key.
@@ -375,6 +390,25 @@ class Notices extends Classes\SCore\Base\Core
     }
 
     /**
+     * Dequeue a notice.
+     *
+     * @since 161014 WP notices.
+     *
+     * @param string $key A key to dequeue.
+     */
+    public function dequeue(string $key)
+    {
+        $notices = $this->get();
+
+        if (!isset($notices[$key])) {
+            return; // Nothing to do.
+        } // No update necessary in this case.
+
+        unset($notices[$key]); // Dequeue.
+        $this->update($notices);
+    }
+
+    /**
      * Dismiss a notice.
      *
      * @since 160524 WP notices.
@@ -384,7 +418,27 @@ class Notices extends Classes\SCore\Base\Core
     public function dismiss(string $key)
     {
         $notices = $this->get();
-        unset($notices[$key]);
+
+        if (!isset($notices[$key])) {
+            return; // Nothing to do.
+        } // No update necessary in this case.
+
+        $notices[$key] = $this->normalize($notices[$key]);
+        $notice        = &$notices[$key]; // By reference.
+
+        if ($notice['recurs_every']) {
+            ++$notice['_recurrences']; // Counter.
+            // A recurring + persistent notice is counted/updated when it's dismissed.
+            // i.e., Last recur time set to the time in which it is dismissed by a user.
+
+            if ($notice['_recurrences'] < $notice['recurs_times']) {
+                $notice['_last_recur_dismiss_time'] = time();
+            } else {
+                unset($notices[$key]); // Dequeue.
+            }
+        } else {
+            unset($notices[$key]); // Dequeue.
+        }
         $this->update($notices);
     }
 
@@ -397,7 +451,7 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @return string Dismiss URL.
      */
-    protected function dismissUrl(string $key): string
+    public function dismissUrl(string $key): string
     {
         return $this->s::restActionUrl('§dismiss-notice', $key);
     }
@@ -439,14 +493,13 @@ class Notices extends Classes\SCore\Base\Core
         }
         $time = time(); // The current time.
 
-        foreach ($notices as $_key => $_notice) {
+        foreach ($notices as $_key => &$_notice) {
             # Catch invalid/corrupted notices.
 
             if (!is_string($_key) || !is_array($_notice)) {
                 unset($notices[$_key]);
                 continue; // Ignore.
             }
-
             # Normalize the notice.
 
             $_notice = $this->normalize($_notice);
@@ -458,8 +511,8 @@ class Notices extends Classes\SCore\Base\Core
             $_is_applicable    = false;
 
             $_class = $this->App::CORE_CONTAINER_SLUG.'-menu-page-area';
-            $_class            .= ' -notice';
-            $_class            .= ' notice';
+            $_class .= ' -notice';
+            $_class .= ' notice';
 
             $_style   = $_notice['style'];
             $_dismiss = ''; // Default; n/a.
@@ -477,7 +530,7 @@ class Notices extends Classes\SCore\Base\Core
             }
             # Has notice become too old; i.e., lingering?
 
-            if ($_notice['insertion_time'] < $this->outdated_notice_time
+            if ($_notice['_insertion_time'] < $this->outdated_notice_time
                 && /* Not intentially delayed. */ $_notice['delay_until_time'] < $time) {
                 unset($notices[$_key]); // Ancient history after this pass.
             }
@@ -491,6 +544,9 @@ class Notices extends Classes\SCore\Base\Core
                 continue; // Do not display.
             } elseif ($_notice['delay_until_time'] > $time) {
                 continue; // Do not display.
+            } elseif ($_notice['recurs_every'] && $_notice['_last_recur_dismiss_time']
+                && $_notice['_last_recur_dismiss_time'] + $_notice['recurs_every'] > $time) {
+                continue; // Do not display; not time to recur yet, based on last time.
             }
             # If `is_applicable` is a closure, check it's return value also.
 
@@ -578,7 +634,8 @@ class Notices extends Classes\SCore\Base\Core
             }
             # Make sure markup is wrapped in a block-level tag so margins will exist.
 
-            if (!preg_match('/^\<(?:p|div|h[1-6]|ul|ol)[\s>]/ui', $_markup)) {
+            $_markup = $this->c::mbTrim($_markup); // Before checking.
+            if (!preg_match('/^\<(?:p|div|form|h[1-6]|ul|ol)[\s>]/ui', $_markup)) {
                 $_markup = '<p>'.$_markup.'</p>'; // Add `<p>` tag.
             }
             # Display notice `<div>` with the markup and a possible dismiss icon.
@@ -587,10 +644,23 @@ class Notices extends Classes\SCore\Base\Core
                     $_markup.$_dismiss.// Possible dismiss icon.
                  '</div>';
 
-            # Notice seen! If not persistent, remove it from the queue now.
+            # Notice seen. Handle queue state logic now.
 
-            if (!$_notice['is_persistent']) {
-                unset($notices[$_key]);
+            if ($_notice['is_persistent']) {
+                continue; // Persistent; do nothing.
+                // See {@link dismiss()} for recurring + persistent notice handling.
+                // A recurring + persistent notice is counted/updated when it's dismissed.
+                // If it's not dismissable, then it simply remains until dequeued manually.
+            } elseif ($_notice['recurs_every']) {
+                ++$_notice['_recurrences']; // Update counter.
+
+                if ($_notice['_recurrences'] < $_notice['recurs_times']) {
+                    $_notice['_last_recur_dismiss_time'] = $time;
+                } else {
+                    unset($notices[$_key]); // Dequeue.
+                }
+            } else {
+                unset($notices[$_key]); // Dequeue.
             }
         } // unset($_key, $_notice, $_markup, $_current_user_can, $_is_applicable, $_class, $_style, $_dismiss);
 

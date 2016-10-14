@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -19,8 +19,6 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
-
-extract($this->vars); // Template variables.
 
 $apps_by_type = $this->s::getAppsByNetworkWide($this->Wp->is_network_admin);
 
@@ -100,7 +98,7 @@ $rest_action_data['license_keys'] = (array) ($rest_action_data['license_keys'] ?
 
         <?= $Form->closeTable(); ?>
 
-    <?php else : // If there no active plugins at this time. ?>
+    <?php else : // If there no active plugins at this time.?>
 
         <?= $Form->openTable($plugins_heading, $description, $table_open_args); ?>
         <tr>

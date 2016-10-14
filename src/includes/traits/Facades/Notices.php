@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -52,6 +52,18 @@ trait Notices
     }
 
     /**
+     * @since 161013 Recurring notices.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Notices::dequeue()
+     */
+    public static function dequeueNotice(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Notices->dequeue(...$args);
+    }
+
+    /**
      * @since 160524 Initial release.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -61,5 +73,17 @@ trait Notices
     public static function dismissNotice(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Notices->dismiss(...$args);
+    }
+
+    /**
+     * @since 161014 Trial routines.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Notices::dismissUrl()
+     */
+    public static function dismissNoticeUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Notices->dismissUrl(...$args);
     }
 }

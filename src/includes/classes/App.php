@@ -45,7 +45,7 @@ class App extends CoreClasses\App
      *
      * @var string Version.
      */
-    const VERSION = '161013.18947'; //v//
+    const VERSION = '161014.41394'; //v//
 
     /**
      * ReST action API version.
@@ -647,6 +647,14 @@ class App extends CoreClasses\App
 
         $this->s::maybeInstall();
 
+        // Maybe expire a trial period.
+
+        $is_trial_expired = false; // Initialize.
+
+        if (!$this->is_core && $this->Config->§specs['§is_pro']
+            && !$this->Config->§options['§license_key']) {
+            $is_trial_expired = $this->s::maybeExpireTrial();
+        }
         // Make global access var available.
 
         $GLOBALS[$this->Config->©brand['©var']] = $this;
@@ -661,6 +669,9 @@ class App extends CoreClasses\App
         // i.e., Functionality hooks/filters.
 
         if ($this->Config->§setup['§enable_hooks']) {
+            $this->onSetupCoreHooks();
+        }
+        if ($this->Config->§setup['§enable_hooks'] && !$is_trial_expired) {
             $this->onSetupOtherHooks();
         }
         // Setup fully complete hook.
@@ -684,13 +695,13 @@ class App extends CoreClasses\App
     }
 
     /**
-     * Other hook setup handler.
+     * Core hook setup handler.
      *
-     * @since 160524 Initial release.
+     * @since 161014 Initial release.
      *
      * @internal Only runs when appropriate.
      */
-    protected function onSetupOtherHooks()
+    protected function onSetupCoreHooks()
     {
         $is_theme  = $this->Config->§specs['§type'] === 'theme';
         $is_plugin = $this->Config->§specs['§type'] === 'plugin';
@@ -723,5 +734,17 @@ class App extends CoreClasses\App
         if ($this->is_core) { // Deals with OPcache resets in core.
             add_action('upgrader_process_complete', [$this->Utils->§Updater, 'onUpgraderProcessComplete']);
         }
+    }
+
+    /**
+     * Other hook setup handler.
+     *
+     * @since 160524 Initial release.
+     *
+     * @internal Only runs when appropriate.
+     */
+    protected function onSetupOtherHooks()
+    {
+        // Nothing in core at this time.
     }
 }
