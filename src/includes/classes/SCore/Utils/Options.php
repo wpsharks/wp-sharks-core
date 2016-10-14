@@ -207,9 +207,9 @@ class Options extends Classes\SCore\Base\Core
             flush_rewrite_rules(); // In case of options that alter permalinks.
         }
         if ($this->App->Config->§options['§license_key']) {
-            $this->s::destroyNotice('§license-key-request');
+            $this->s::dequeueNotice('§license-key-request');
         }
-        $this->s::destroyNotice('§license-key-error');
+        $this->s::dequeueNotice('§license-key-error');
     }
 
     /**

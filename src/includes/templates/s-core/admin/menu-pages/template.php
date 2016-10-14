@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -20,7 +20,6 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
-extract($this->vars); // Template variables.
 ?>
 <div class="<?= esc_attr($cfg->class); ?>">
     <h1 class="-display-hidden" data-wp-notices-here></h1>
@@ -36,7 +35,7 @@ extract($this->vars); // Template variables.
                     </a>
                 <?php endif; ?>
 
-                <?= implode(' ', $_meta_links); // Others. ?>
+                <?= implode(' ', $_meta_links); // Others.?>
             </div>
         <?php endif; ?>
 

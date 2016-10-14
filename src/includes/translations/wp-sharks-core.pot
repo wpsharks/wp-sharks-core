@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 161013.18947\n"
+"Project-Id-Version: WP Sharks Core 161014.41394\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-10-13 05:15:52+00:00\n"
+"POT-Creation-Date: 2016-10-14 11:31:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,16 +40,16 @@ msgstr ""
 msgid "<strong>%1$s</strong> will be able load now. Please <a href=\"javascript:location.reload();\">refresh</a>."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:172
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:177
 msgid "Problem updating %1$s™ license keys:"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:177
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:182
 msgid "%1$s™ license keys updated successfully."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:214
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:252
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:219
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:257
 msgid "Unknown error. Please try again later."
 msgstr ""
 
@@ -195,11 +195,11 @@ msgid "Upgrade"
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/MenuPage.php:564
-#: src/includes/templates/s-core/admin/menu-pages/template.php:34
+#: src/includes/templates/s-core/admin/menu-pages/template.php:33
 msgid "Are you sure?"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/Notices.php:576
+#: src/includes/classes/SCore/Utils/Notices.php:627
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -632,97 +632,115 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:27
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:26
 msgid "We're a globally-distributed team of enthusiastic developers who build great open-source software for WordPress."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:31
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:30
 msgid "<a href=\"%2$s\" target=\"_blank\">%1$s</a> was founded by business partners <a href=\"%3$s\" target=\"_blank\">Jason Caldwell</a> and <a href=\"%4$s\" target=\"_blank\">Raam Dev</a>. Over the years we've built everything from advanced e-commerce platforms and caching engines, to simple contact forms and social-media tools—<em style=\"display:inline-block;\">always with WordPress at the core.</em>"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:35
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:34
 msgid "Today, our team is comprised of talented engineers and developers working remotely from all around the world: Florida, Georgia, Alaska, New Hampshire, the Phillipines, Mexico, India, and occasionally from aquatic habitats at various temperatures where there's plenty of other fish to feed on 🐟 — we are Sharks after all."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:39
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:38
 msgid "A developer's life is filled with fun and we all love what we do. We find great pleasure in working with each other, with our customers, and with the entire WordPress community. While there is distance between us, we're a really tight group (good at online collaboration), and we work very hard on common goals like producing great software and helping others. We pride ourselves on great <a href=\"%1$s\" target=\"_blank\">customer service</a>, fast response times, and a dedication to maintaining our software."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:43
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/about.php:42
 msgid "Your WordPress experience will never be the same."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:28
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:26
 msgid "Active Network-Only"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:29
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:27
 msgid "These can only be activated network-wide, and therefore only require a single license key that covers all child sites in the network."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:31
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:29
 msgid "Active Child-Site"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:32
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:30
 msgid "These require a license key to be entered for each child site in the network where you activate them."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:34
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:32
 msgid "Active"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:39
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:37
 msgid "%1$sThemes by %2$s"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:40
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:38
 msgid "%1$sPlugins by %2$s"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:42
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:40
 msgid "%1$sActivating a license key enables automatic updates. To obtain your license key(s), please log into your account at %2$s™ and then navigate to <a href=\"%3$s\" target=\"_blank\">My Account → My Downloads</a>. <em>If you need to deactivate a license key, simply empty the field and click 'Save Changes'.</em>"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:64
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:93
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:62
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:91
 msgid "Get your license key from the 'My Account → Downloads' page when you log in at https://%1$s"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:68
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:97
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:66
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:95
 msgid "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:108
+#: src/includes/templates/s-core/admin/menu-pages/dashboard/default.php:106
 msgid "No %1$s plugins at this time."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/menu-pages/template.php:35
+#: src/includes/templates/s-core/admin/menu-pages/template.php:34
 msgid "Restore Default Options"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:26
-msgid "%1$s™ License Key for: <strong>%2$s</strong>"
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:27
+msgid "Free Trial Expired"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:28
-msgid "(enables automatic updates)"
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:30
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:39
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:47
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:53
+msgid "%1$s™ License Key for <strong>%2$s</strong>"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:29
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:30
+msgid "(required)"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:31
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:40
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:48
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:54
 msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:33
-msgid "Save"
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:35
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:44
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:58
+msgid "Activate"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/on-install.php:25
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:39
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:47
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:53
+msgid "(enables automatic updates)"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/on-install.php:24
 msgid "<strong>%1$s</strong> v%2$s installed successfully."
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/on-reinstall.php:25
+#: src/includes/templates/s-core/admin/notices/on-reinstall.php:24
 msgid "<strong>%1$s</strong> updated successfully. You're now running v%2$s."
 msgstr ""
 

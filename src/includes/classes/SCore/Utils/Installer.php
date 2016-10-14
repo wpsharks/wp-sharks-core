@@ -28,11 +28,20 @@ use function get_defined_vars as vars;
 class Installer extends Classes\SCore\Base\Core
 {
     /**
-     * Install history.
+     * Trial days.
      *
-     * @since 160524 Install utils.
+     * @since 161013
      *
-     * @var array Install history.
+     * @var int
+     */
+    public $trial_days;
+
+    /**
+     * History.
+     *
+     * @since 160524
+     *
+     * @var array
      */
     protected $history;
 
@@ -62,6 +71,9 @@ class Installer extends Classes\SCore\Base\Core
         foreach ($default_history as $_key => $_default_history_value) {
             settype($this->history[$_key], gettype($_default_history_value));
         } // unset($_key, $_default_history_value);
+
+        // Can be adjusted in special circumstances, but never > 90 days.
+        $this->trial_days = min(90, $this->s::applyFilters('trial_days', 30));
     }
 
     /**
@@ -82,22 +94,67 @@ class Installer extends Classes\SCore\Base\Core
     }
 
     /**
-     * Is trial expired?
+     * Maybe expire trial.
      *
-     * @since 161013 Install utils. @TODO
+     * @since 161013 Install utils.
+     *
+     * @return bool True if trial is expired.
      */
-    public function trialExpired()
+    public function maybeExpireTrial(): bool
     {
-        if (!$this->App->Config->§specs['§is_pro']) {
-            return false; // Not pro version.
-        } elseif ($this->App->Config->§options['§license_key']) {
-            return false; // Have license key.
-        } elseif ($this->history['first_time'] > strtotime('-30 days')) {
-            return false; // Still within trial period.
+        if (!$this->isTrialExpired()) {
+            return false; // Not applicable.
         } elseif (!$this->App->Parent || !$this->App->Parent->is_core) {
             return false; // Not applicable.
         }
         $this->App->Parent->s::maybeRequestLicenseKeyViaNotice($this->App->Config->©brand['©slug']);
+
+        return true; // Trial expired, yes.
+    }
+
+    /**
+     * Is trial expired?
+     *
+     * @since 161013 Install utils.
+     *
+     * @return bool True if trial is expired.
+     */
+    public function isTrialExpired(): bool
+    {
+        return $this->trialDaysRemaining() === 0;
+    }
+
+    /**
+     * Trial days remaining.
+     *
+     * @since 161013 Install utils.
+     *
+     * @return int Trial days remaining.
+     */
+    public function trialDaysRemaining(): int
+    {
+        if (($days = &$this->cacheKey(__FUNCTION__)) !== null) {
+            return $days; // Cached already.
+        }
+        if ($this->App->is_core) {
+            return $days = -1; // Not applicable.
+        } elseif ($this->App->Config->§specs['§in_wp']) {
+            return $days = -1; // Not applicable.
+        } elseif (!$this->App->Config->§specs['§is_pro']) {
+            return $days = -1; // Not pro version.
+        } elseif ($this->App->Config->§options['§license_key']) {
+            return $days = -1; // Have license key.
+        } elseif (!in_array($this->App->Config->§specs['§type'], ['theme', 'plugin'], true)) {
+            return $days = -1; // Only applies to themes & plugins.
+        } elseif (!$this->App->Parent || !$this->App->Parent->is_core) {
+            return $days = -1; // Not applicable.
+        }
+        if (!$this->history['first_time']) {
+            return $days = $this->trial_days;
+        }
+        $time        = time(); // Current time.
+        $exp_time    = strtotime('+'.$this->trial_days.' days', $this->history['first_time']);
+        return $days = $exp_time > $time ? min($this->trial_days, (int) ceil($exp_time - $time)) : 0;
     }
 
     /**

@@ -390,16 +390,21 @@ class Notices extends Classes\SCore\Base\Core
     }
 
     /**
-     * Destroy a notice.
+     * Dequeue a notice.
      *
-     * @since 161013 WP notices.
+     * @since 161014 WP notices.
      *
-     * @param string $key A key to destroy.
+     * @param string $key A key to dequeue.
      */
-    public function destroy(string $key)
+    public function dequeue(string $key)
     {
         $notices = $this->get();
-        unset($notices[$key]);
+
+        if (!isset($notices[$key])) {
+            return; // Nothing to do.
+        } // No update necessary in this case.
+
+        unset($notices[$key]); // Dequeue.
         $this->update($notices);
     }
 
@@ -446,7 +451,7 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @return string Dismiss URL.
      */
-    protected function dismissUrl(string $key): string
+    public function dismissUrl(string $key): string
     {
         return $this->s::restActionUrl('§dismiss-notice', $key);
     }
@@ -553,7 +558,7 @@ class Notices extends Classes\SCore\Base\Core
                     $_is_applicable = $_is_applicable === null ? $_is_applicable : (bool) $_is_applicable;
 
                     // NOTE: A special return value of `null` indicates the notice
-                    // is no longer applicable (at all) and should be dequeued immediately.
+                    // is no longer applicable (at all) and should be dequeued entirely.
 
                     if ($_is_applicable === null) {
                         unset($notices[$_key]);
@@ -629,7 +634,8 @@ class Notices extends Classes\SCore\Base\Core
             }
             # Make sure markup is wrapped in a block-level tag so margins will exist.
 
-            if (!preg_match('/^\<(?:p|div|h[1-6]|ul|ol)[\s>]/ui', $_markup)) {
+            $_markup = $this->c::mbTrim($_markup); // Before checking.
+            if (!preg_match('/^\<(?:p|div|form|h[1-6]|ul|ol)[\s>]/ui', $_markup)) {
                 $_markup = '<p>'.$_markup.'</p>'; // Add `<p>` tag.
             }
             # Display notice `<div>` with the markup and a possible dismiss icon.
@@ -644,6 +650,7 @@ class Notices extends Classes\SCore\Base\Core
                 continue; // Persistent; do nothing.
                 // See {@link dismiss()} for recurring + persistent notice handling.
                 // A recurring + persistent notice is counted/updated when it's dismissed.
+                // If it's not dismissable, then it simply remains until dequeued manually.
             } elseif ($_notice['recurs_every']) {
                 ++$_notice['_recurrences']; // Update counter.
 

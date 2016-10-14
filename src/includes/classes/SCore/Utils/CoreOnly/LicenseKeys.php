@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils\CoreOnly;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -25,7 +25,7 @@ use function get_defined_vars as vars;
  *
  * @since 160710 License key utils.
  */
-class LicenseKeys extends Classes\SCore\Base\Core
+class LicenseKeys extends Classes\SCore\Base\Core implements CoreInterfaces\SecondConstants
 {
     /**
      * Class constructor.
@@ -61,12 +61,18 @@ class LicenseKeys extends Classes\SCore\Base\Core
         } elseif (!in_array($App->Config->§specs['§type'], ['theme', 'plugin'], true)) {
             return; // Only applies to themes & plugins.
         }
+        $is_trial_expired     = $App->s::isTrialExpired();
+        $trial_days_remaining = $App->s::trialDaysRemaining();
+
         $App->s::enqueueNotice('', [
             'id'   => '§license-key-request',
-            'type' => 'info', // Simple request.
+            'type' => $is_trial_expired ? 'warning' : 'info',
 
             'is_persistent'  => true,
-            'is_dismissable' => true,
+            'is_dismissable' => $is_trial_expired ? false : true,
+
+            'recurs_every' => $trial_days_remaining >= 0 ? $this::SECONDS_IN_DAY * 7 : 0,
+            'recurs_times' => $trial_days_remaining >= 0 ? PHP_INT_MAX : 0,
 
             'for_context' => $App->Config->§specs['§is_network_wide']
                 && $this->Wp->is_multisite ? 'network' : 'admin',
@@ -108,7 +114,7 @@ class LicenseKeys extends Classes\SCore\Base\Core
         } elseif (in_array($menu_page, ['themes.php', 'plugins.php', 'update.php'], true) && !empty($_REQUEST['action'])) {
             return false; // Not during a plugin install/activate/update.
         }
-        return true; // Is applicable; i.e., do display.
+        return true; // Is applicable; i.e., display notice.
     }
 
     /**
@@ -122,10 +128,10 @@ class LicenseKeys extends Classes\SCore\Base\Core
      */
     public function requestViaNoticeMarkup(string $app_slug): string
     {
-        if (($App = $this->s::getAppsBySlug()[$app_slug] ?? null)) {
-            return $App->c::getTemplate('s-core/admin/notices/license-key-request.php')->parse();
+        if (!($App = $this->s::getAppsBySlug()[$app_slug] ?? null)) {
+            return ''; // Dequeue entirely.
         }
-        return ''; // Dequeue entirely.
+        return $App->c::getTemplate('s-core/admin/notices/license-key-request.php')->parse();
     }
 
     /**

@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -37,5 +37,50 @@ trait Installer
     public static function maybeInstall(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Installer->maybeInstall(...$args);
+    }
+
+    /**
+     * @since 161014 Trial routines.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Installer::maybeExpireTrial()
+     */
+    public static function maybeExpireTrial(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Installer->maybeExpireTrial(...$args);
+    }
+
+    /**
+     * @since 161014 Trial routines.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Installer::isTrialExpired()
+     */
+    public static function isTrialExpired(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Installer->isTrialExpired(...$args);
+    }
+
+    /**
+     * @since 161014 Trial routines.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Installer::trialDaysRemaining()
+     */
+    public static function trialDaysRemaining(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Installer->trialDaysRemaining(...$args);
+    }
+
+    /**
+     * @since 161014 Trial routines.
+     * @see Classes\SCore\Utils\Installer::$trial_days
+     */
+    public static function trialDays()
+    {
+        return $GLOBALS[static::class]->Utils->§Installer->trial_days;
     }
 }

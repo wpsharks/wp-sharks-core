@@ -56,11 +56,11 @@ trait Notices
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\SCore\Utils\Notices::destroy()
+     * @see Classes\SCore\Utils\Notices::dequeue()
      */
-    public static function destroyNotice(...$args)
+    public static function dequeueNotice(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Notices->destroy(...$args);
+        return $GLOBALS[static::class]->Utils->§Notices->dequeue(...$args);
     }
 
     /**
@@ -73,5 +73,17 @@ trait Notices
     public static function dismissNotice(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Notices->dismiss(...$args);
+    }
+
+    /**
+     * @since 161014 Trial routines.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Notices::dismissUrl()
+     */
+    public static function dismissNoticeUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Notices->dismissUrl(...$args);
     }
 }

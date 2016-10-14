@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -216,8 +216,9 @@ class RestAction extends Classes\SCore\Base\Core
     {
         if ($this->viaAjax($action) || $this->viaApi($action)) {
             return home_url('/'); // Both ride on index.
-        }
-        if ($this->Wp->is_admin && ($this->s::isOwnMenuPage() || $this->s::isOwnMenuPageTab())) {
+        } elseif ($this->Wp->is_admin && ($this->s::isOwnMenuPage() || $this->s::isOwnMenuPageTab())) {
+            return $this->urlRemove($this->c::currentUrl());
+        } elseif ($this->Wp->is_admin && $action === '§dismiss-notice') {
             return $this->urlRemove($this->c::currentUrl());
         } elseif ($this->Wp->is_admin) {
             return self_admin_url('/');
