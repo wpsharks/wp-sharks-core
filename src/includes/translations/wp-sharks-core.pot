@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 161014.41394\n"
+"Project-Id-Version: WP Sharks Core 161014.51335\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2016-10-14 11:31:41+00:00\n"
+"POT-Creation-Date: 2016-10-14 14:15:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,16 +40,16 @@ msgstr ""
 msgid "<strong>%1$s</strong> will be able load now. Please <a href=\"javascript:location.reload();\">refresh</a>."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:177
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:178
 msgid "Problem updating %1$s™ license keys:"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:182
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:183
 msgid "%1$s™ license keys updated successfully."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:219
-#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:257
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:220
+#: src/includes/classes/SCore/Utils/CoreOnly/LicenseKeys.php:258
 msgid "Unknown error. Please try again later."
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/Notices.php:627
+#: src/includes/classes/SCore/Utils/Notices.php:632
 msgid "Dismiss this notice."
 msgstr ""
 
@@ -702,38 +702,69 @@ msgstr ""
 msgid "Restore Default Options"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:27
-msgid "Free Trial Expired"
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:29
+msgid "<strong>IMPORTANT:</strong> Free Trial Expired"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:30
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:39
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:47
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:53
-msgid "%1$s™ License Key for <strong>%2$s</strong>"
-msgstr ""
-
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:30
-msgid "(required)"
-msgstr ""
-
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:31
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:40
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:48
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:54
-msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:34
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:50
+msgid "License Key for <strong>%1$s</strong>"
 msgstr ""
 
 #: src/includes/templates/s-core/admin/notices/license-key-request.php:35
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:44
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:51
+msgid "Buy Now"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:36
+msgid "To restore functionality provided by this software please activate a license key."
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:37
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:52
+msgid "Click the 'Buy Now' button to purchase a license key.<hr />At %1$s™, navigate to your 'My Downloads' page to get your license key."
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:43
 #: src/includes/templates/s-core/admin/notices/license-key-request.php:58
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:92
 msgid "Activate"
 msgstr ""
 
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:39
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:47
-#: src/includes/templates/s-core/admin/notices/license-key-request.php:53
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:62
+msgid "or"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:66
+msgid "Dismiss &amp; Begin Free Trial"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:69
+msgid "(%1$s day of unrestricted access to all pro features)"
+msgid_plural "(%1$s days of unrestricted access to all pro features)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:73
+msgid "Dismiss &amp; Continue Trial (%1$s day remaining)"
+msgid_plural "Dismiss &amp; Continue Trial (%1$s days remaining)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:76
+msgid "unrestricted access to all pro features."
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:86
+msgid "%1$s™ License Key for <strong>%2$s</strong>"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:86
 msgid "(enables automatic updates)"
+msgstr ""
+
+#: src/includes/templates/s-core/admin/notices/license-key-request.php:87
+msgid "Get your license key from the 'My Account → My Downloads' page at %1$s™."
 msgstr ""
 
 #: src/includes/templates/s-core/admin/notices/on-install.php:24

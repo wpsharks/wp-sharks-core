@@ -1,7 +1,9 @@
 ## [coming soon]
 
 - Updating to latest release of the websharks/core.
+- Adding support for recurring notices, errors, and/or warnings.
 - Use WordPress color pickers for `<input type="color" ...>` fields. See: <https://github.com/websharks/wp-sharks-core/issues/3>
+- Adding support for free trial copies of pro software with time-limited access to all pro features.
 
 ## v160920.13502
 

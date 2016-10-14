@@ -59,7 +59,7 @@ use function get_defined_vars as vars;
         </form>
 
         <form method="post" action="<?= esc_url($this->s::dismissNoticeUrl('§license-key-request')); ?>" style="margin:.5em 0 1em 0;">
-            <span style="display:inline-block; margin:0 .5em 0 .15em; vertical-align:middle; font-variant:small-caps;"><?= __('or'); ?></span>
+            <span style="display:inline-block; margin:0 .5em 0 .15em; vertical-align:middle; font-variant:small-caps;"><?= __('or', 'wp-sharks-core'); ?></span>
 
             <?php if ($trial_days_remaining === $this->s::trialDays()) : ?>
                 <button type="submit" class="button button-small" style="vertical-align:middle;">
@@ -73,7 +73,7 @@ use function get_defined_vars as vars;
                     <?= sprintf(_n('Dismiss &amp; Continue Trial (%1$s day remaining)', 'Dismiss &amp; Continue Trial (%1$s days remaining)', $trial_days_remaining, 'wp-sharks-core'), $trial_days_remaining); ?>
                 </button>
                 <span class="-note" style="margin:0 0 0 .5em; vertical-align:middle;">
-                    <?= __('unrestricted access to all pro features.'); ?>
+                    <?= __('unrestricted access to all pro features.', 'wp-sharks-core'); ?>
                 </span>
             <?php endif; ?>
         </form>
