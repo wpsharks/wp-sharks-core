@@ -1,4 +1,4 @@
-## [coming soon]
+## $v
 
 - Updating to latest release of the websharks/core.
 - Adding support for recurring notices, errors, and/or warnings.
