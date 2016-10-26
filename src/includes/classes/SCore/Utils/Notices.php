@@ -447,13 +447,14 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160524 WP notices.
      *
-     * @param string $key A key to dismiss.
+     * @param string      $key Key to dismiss.
+     * @param string|null $url URL (100% optional).
      *
      * @return string Dismiss URL.
      */
-    public function dismissUrl(string $key): string
+    public function dismissUrl(string $key, string $url = null): string
     {
-        return $this->s::restActionUrl('§dismiss-notice', $key);
+        return $this->s::restActionUrl('§dismiss-notice', $key, $url);
     }
 
     /**
@@ -471,6 +472,17 @@ class Notices extends Classes\SCore\Base\Core
 
             if (!$this->currentUserCan($notice)) {
                 $this->s::dieForbidden();
+            }
+            if ($key === '§license-key-request' && $this->App->Config->§specs['§is_pro']) {
+                $trial_days           = $this->s::trialDays();
+                $trial_days_remaining = $this->s::trialDaysRemaining();
+
+                if ($trial_days_remaining > 0 && $trial_days_remaining === $trial_days) {
+                    $this->userEnqueue('', [ // Enqueue for the current user only.
+                        'type'   => 'success', // Notify about trial being started successfully.
+                        'markup' => $this->c::getTemplate('s-core/admin/notices/trial-started.php')->parse(),
+                    ]);
+                }
             }
             $this->dismiss($key);
         }

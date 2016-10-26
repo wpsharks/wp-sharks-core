@@ -4,6 +4,9 @@
 - Adding support for recurring notices, errors, and/or warnings.
 - Use WordPress color pickers for `<input type="color" ...>` fields. See: <https://github.com/websharks/wp-sharks-core/issues/3>
 - Adding support for free trial copies of pro software with time-limited access to all pro features.
+- Bug fix. Plugins nested inside a `woocommerce` parent page were not being linked up properly in the list of plugin action links.
+- Adding `s::defaultMenuPageUrl()` that collects the default menu page URL for the current plugin, based on which menu pages were added via WPSC API calls.
+- Remove `Dismiss &` from trial notice buttons in favor of more concise calls to action.
 
 ## v160920.13502
 

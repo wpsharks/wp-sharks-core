@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -320,18 +320,8 @@ class MenuPage extends Classes\SCore\Base\Core
         if ($this->App->Config->§specs['§type'] !== 'plugin') {
             return $actions; // Not applicable.
         }
-        if (!empty($this->hook_names[$this->App->Config->©brand['©slug']])) {
-            $actions[] = '<a href="'.esc_url($this->url()).'">'.__('Settings', 'wp-sharks-core').'</a>';
-            //
-        } else { // Search for sub-menu item matching slug regex pattern.
-            $_page_regex = $this->c::escRegex($this->App->Config->©brand['©slug']);
-
-            foreach ($this->hook_names as $_hook_page_key => $_hook_name) {
-                if (preg_match('/^(?<parent_page>[^:]+)\:(?<page>'.$_page_regex.')$/u', $_hook_page_key, $_m)) {
-                    $actions[] = '<a href="'.esc_url($this->url($_m['parent_page'], ['page' => $_m['page']])).'">'.__('Settings', 'wp-sharks-core').'</a>';
-                    break; // Only need to add one action link.
-                }
-            } // unset($_page_regex, $_hook_page_key, $_hook_name); // Houskeeping.
+        if (($default_url = $this->defaultUrl())) { // See {@link defaultUrl()} below.
+            $actions[] = '<a href="'.esc_url($default_url).'">'.__('Settings', 'wp-sharks-core').'</a>';
         }
         if (!$this->App->Config->§specs['§is_pro'] && $this->App->Config->§specs['§has_pro']) {
             $actions[] = '<a href="'.esc_url($this->s::brandUrl('/', true)).'" target="_blank">'.__('Upgrade', 'wp-sharks-core').' <i class="sharkicon sharkicon-octi-tag"></i></a>';
@@ -667,11 +657,35 @@ class MenuPage extends Classes\SCore\Base\Core
             $path       = '/'.$this->c::mbLTrim($page_path, '/');
             return $url = $this->c::addUrlQueryArgs($query_args, $admin_url($path));
             //
-        } else { // Treat it as a `?page` instead of a path.
+        } else { // Treat as `?page` instead of a path.
             $page       = $this->c::mbTrim($page_path, '/');
             $query_args = array_merge(['page' => $page], $query_args);
-            return $url = $this->c::addUrlQueryArgs($query_args, $admin_url('/'));
+            return $url = $this->c::addUrlQueryArgs($query_args, $admin_url('/admin.php'));
         }
+    }
+
+    /**
+     * Default menu page URL.
+     *
+     * @since 161026 Menu page utils.
+     *
+     * @return string Default menu page URL.
+     */
+    public function defaultUrl(): string
+    {
+        if (!empty($this->hook_names[$this->App->Config->©brand['©slug']])) {
+            return $this->url(); // Nothing special in this case.
+            //
+        } else { // Search for sub-menu item matching slug regex pattern.
+            $_page_regex = $this->c::escRegex($this->App->Config->©brand['©slug']);
+
+            foreach ($this->hook_names as $_hook_page_key => $_hook_name) { // Find parent page.
+                if (preg_match('/^(?<parent_page>[^:]+)\:(?<page>'.$_page_regex.')$/u', $_hook_page_key, $_m)) {
+                    return $this->url($_m['parent_page'], ['page' => $_m['page']]);
+                }
+            } // unset($_page_regex, $_hook_page_key, $_hook_name); // Houskeeping.
+        }
+        return ''; // Not possible.
     }
 
     /**

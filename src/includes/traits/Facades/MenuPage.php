@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -27,18 +27,6 @@ use function get_defined_vars as vars;
  */
 trait MenuPage
 {
-    /**
-     * @since 160712 Menu page utils.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\SCore\Utils\MenuPage::url()
-     */
-    public static function menuPageUrl(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§MenuPage->url(...$args);
-    }
-
     /**
      * @since 160524 Menu page utils.
      *
@@ -181,6 +169,30 @@ trait MenuPage
     public static function addMenuPageItem(...$args)
     {
         return $GLOBALS[static::class]->Utils->§MenuPage->addMenuItem(...$args);
+    }
+
+    /**
+     * @since 160712 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::url()
+     */
+    public static function menuPageUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->url(...$args);
+    }
+
+    /**
+     * @since 161026 Menu page utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\MenuPage::defaultUrl()
+     */
+    public static function defaultMenuPageUrl(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§MenuPage->defaultUrl(...$args);
     }
 
     /**
