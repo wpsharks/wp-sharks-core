@@ -738,7 +738,7 @@ class Dependencies extends Classes\SCore\Base\Core implements CoreInterfaces\Sec
         $markup .= '<p style="'.esc_attr($this->message_p_tag_styles).'">';
         $markup     .= $this->icon.sprintf(__('<strong>%1$s is not active.</strong> It requires %2$s.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']), $args['description']).'<br />';
         $markup     .= $this->arrow.' '.sprintf(__('To resolve, %1$s.', 'wp-sharks-core'), $args['how_to_resolve']).'<br />';
-        $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, resolove the issue or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
+        $markup     .= sprintf(__('<em style="font-size:80%%; opacity:.7;">To remove this message, resolve the issue or remove %1$s from WordPress.</em>', 'wp-sharks-core'), esc_html($this->App->Config->©brand['©name']));
         $markup .= '</p>';
 
         add_action('all_admin_notices', function () use ($args, $markup) {

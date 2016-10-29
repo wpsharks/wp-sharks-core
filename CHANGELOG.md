@@ -1,3 +1,7 @@
+## [coming soon]
+
+- Correcting typo in dependency notice. `resolove` should be `resolve`.
+
 ## v161026.47592
 
 - Updating to latest release of the websharks/core.

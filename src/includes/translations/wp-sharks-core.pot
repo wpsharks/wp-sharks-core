@@ -169,7 +169,7 @@ msgid "To resolve, %1$s."
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/Dependencies.php:741
-msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, resolove the issue or remove %1$s from WordPress.</em>"
+msgid "<em style=\"font-size:80%%; opacity:.7;\">To remove this message, resolve the issue or remove %1$s from WordPress.</em>"
 msgstr ""
 
 #: src/includes/classes/SCore/Utils/Fatality.php:44
