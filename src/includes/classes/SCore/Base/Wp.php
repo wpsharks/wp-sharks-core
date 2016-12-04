@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -52,6 +52,22 @@ class Wp // Stand-alone class.
         if (!($this->tmp_dir = rtrim(get_temp_dir(), '/'))) {
             throw new Exception('Failed to acquire a writable tmp dir.');
         }
+        if (!($this->home_url = home_url('/'))) {
+            throw new Exception('Failed to acquire home URL.');
+        } elseif (!($this->home_url_parts = parse_url($this->home_url))) {
+            throw new Exception('Failed to parse home URL parts.');
+        } elseif (!($this->home_url_host = $this->home_url_parts['host'] ?? '')) {
+            throw new Exception('Failed to parse home URL host.');
+        } elseif (!($this->home_url_root_host = implode('.', array_slice(explode('.', $this->home_url_host), -2)))) {
+            throw new Exception('Failed to parse home URL root host.');
+        }
+        if (!($this->home_url_option = get_option('home'))) {
+            throw new Exception('Failed to acquire home URL option.');
+        } elseif (!($this->home_url_option_parts = parse_url($this->home_url_option))) {
+            throw new Exception('Failed to parse home URL option parts.');
+        } elseif (!($this->home_default_scheme = $this->home_url_option_parts['scheme'] ?? '')) {
+            throw new Exception('Failed to parse home URL option scheme.');
+        }
         if (!($this->site_url = site_url('/'))) {
             throw new Exception('Failed to acquire site URL.');
         } elseif (!($this->site_url_parts = parse_url($this->site_url))) {
@@ -73,8 +89,8 @@ class Wp // Stand-alone class.
         } elseif (!($this->template_directory_url_parts = parse_url($this->template_directory_url))) {
             throw new Exception('Failed to parse template directory URL parts.');
         }
-        $this->template   = get_template();
-        $this->stylesheet = get_stylesheet();
+        $this->template   = get_template(); // Current theme/template.
+        $this->stylesheet = get_stylesheet(); // Current stylesheet.
 
         $this->is_woocommerce_active                 = defined('WC_VERSION');
         $this->is_woocommerce_product_vendors_active = defined('WC_PRODUCT_VENDORS_VERSION');

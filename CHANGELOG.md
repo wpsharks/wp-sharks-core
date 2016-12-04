@@ -1,5 +1,6 @@
 ## [coming soon]
 
+- Adding `home_url` and related properties to the centralized `Wp` base class.
 - Correcting typo in dependency notice. `resolove` should be `resolve`.
 
 ## v161026.47592
