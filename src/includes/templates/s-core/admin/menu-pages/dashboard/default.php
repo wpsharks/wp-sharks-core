@@ -103,7 +103,7 @@ $rest_action_data['license_keys'] = (array) ($rest_action_data['license_keys'] ?
         <?= $Form->openTable($plugins_heading, $description, $table_open_args); ?>
         <tr>
             <td>
-                <?= sprintf(__('No %1$s plugins at this time.', 'wp-sharks-core'), esc_html(mb_strtolower($active_label))); ?>
+                <?= sprintf(__('No %1$s plugins at this time.', 'wp-sharks-core'), esc_html(mb_strtolower($active_heading))); ?>
             </td>
         </tr>
         <?= $Form->closeTable(); ?>
