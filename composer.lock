@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "embedly/embedly-php",
-            "version": "v0.5.5",
+            "version": "v0.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/embedly/embedly-php.git",
-                "reference": "a2cbf6dc45c1a8d82063ef099216f74007c8ad1a"
+                "reference": "bd1bc196a0f891b43a99773b476b7e63f227e25a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/embedly/embedly-php/zipball/a2cbf6dc45c1a8d82063ef099216f74007c8ad1a",
-                "reference": "a2cbf6dc45c1a8d82063ef099216f74007c8ad1a",
+                "url": "https://api.github.com/repos/embedly/embedly-php/zipball/bd1bc196a0f891b43a99773b476b7e63f227e25a",
+                "reference": "bd1bc196a0f891b43a99773b476b7e63f227e25a",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
             "keywords": [
                 "embedly"
             ],
-            "time": "2015-02-05 15:06:38"
+            "time": "2016-08-22 20:47:45"
         },
         {
             "name": "erusev/parsedown",
@@ -655,7 +655,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.14",
+            "version": "v2.8.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -708,12 +708,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "bdf417b51643e4d944bb952b2b96f6982a7fd4f0"
+                "reference": "d3e4c8de56caa0f0cc0384e79aa6ff46322c772d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/bdf417b51643e4d944bb952b2b96f6982a7fd4f0",
-                "reference": "bdf417b51643e4d944bb952b2b96f6982a7fd4f0",
+                "url": "https://api.github.com/repos/websharks/core/zipball/d3e4c8de56caa0f0cc0384e79aa6ff46322c772d",
+                "reference": "d3e4c8de56caa0f0cc0384e79aa6ff46322c772d",
                 "shasum": ""
             },
             "require": {
@@ -833,7 +833,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2016-12-12 09:47:47"
+            "time": "2016-12-22 01:19:47"
         },
         {
             "name": "websharks/dicer",
