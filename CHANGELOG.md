@@ -4,6 +4,7 @@
 - Adding `home_url` and related properties to the centralized `Wp` base class.
 - Correcting typo in dependency notice. `resolove` should be `resolve`.
 - Bug fix. Broken 'Settings' link for some plugins running on the WP Sharks Core. See [Issue #5](https://github.com/websharks/wp-sharks-core/issues/5).
+- Enhancing WooCommerce conditionals in `Wp` base class.
 
 ## v161026.47592
 
