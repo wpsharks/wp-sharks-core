@@ -11,7 +11,7 @@ namespace WebSharks\WpSharks\Core;
 use WebSharks\WpSharks\Core\Classes\App;
 
 if (!defined('WPINC')) {
-    exit('Do NOT access this file directly: '.basename(__FILE__));
+    exit('Do NOT access this file directly.');
 }
 add_action('plugins_loaded', function () {
     require_once __DIR__.'/stub.php'; // Autoloader.

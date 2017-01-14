@@ -8,7 +8,7 @@
 // PHP v5.2 compatible.
 
 if (!defined('WPINC')) {
-    exit('Do NOT access this file directly: '.basename(__FILE__));
+    exit('Do NOT access this file directly.');
 }
 $GLOBALS['wp_php_rv'] = array(
     'os' => '', //os-required//

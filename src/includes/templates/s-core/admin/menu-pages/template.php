@@ -20,6 +20,9 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+if (!defined('WPINC')) {
+    exit('Do NOT access this file directly.');
+}
 ?>
 <div class="<?= esc_attr($cfg->class); ?>">
     <h1 class="-display-hidden" data-wp-notices-here></h1>

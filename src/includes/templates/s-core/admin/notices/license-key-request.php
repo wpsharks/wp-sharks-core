@@ -20,6 +20,9 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+if (!defined('WPINC')) {
+    exit('Do NOT access this file directly.');
+}
 ?>
 <?php if ($this->App->Config->§specs['§is_pro'] && ($trial_days_remaining = $this->s::trialDaysRemaining()) >= 0) : ?>
 

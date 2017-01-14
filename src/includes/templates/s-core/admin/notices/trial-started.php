@@ -20,5 +20,8 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+if (!defined('WPINC')) {
+    exit('Do NOT access this file directly.');
+}
 ?>
 <p><?= sprintf(__('Your <strong>%1$s-day trial</strong> of <strong>%2$s</strong> has begun.', 'wp-sharks-core'), esc_html($this->s::trialDays()), esc_html($this->App->Config->©brand['§product_name'])) ?></p>

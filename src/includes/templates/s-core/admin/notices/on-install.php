@@ -20,5 +20,8 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+if (!defined('WPINC')) {
+    exit('Do NOT access this file directly.');
+}
 ?>
 <p><?= sprintf(__('<strong>%1$s</strong> v%2$s installed successfully.', 'wp-sharks-core'), esc_html($this->App->Config->©brand['§product_name']), esc_html($this->App::VERSION)) ?></p>

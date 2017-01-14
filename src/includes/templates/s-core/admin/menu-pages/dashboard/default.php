@@ -20,6 +20,9 @@ use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
 use function assert as debug;
 use function get_defined_vars as vars;
 
+if (!defined('WPINC')) {
+    exit('Do NOT access this file directly.');
+}
 $apps_by_type = $this->s::getAppsByNetworkWide($this->Wp->is_network_admin);
 
 if ($this->Wp->is_multisite && $this->Wp->is_network_admin) {
