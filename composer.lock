@@ -405,16 +405,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.17",
+            "version": "v5.2.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "208913c6042967ba404f4bfa0819bf5bef79dbec"
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/208913c6042967ba404f4bfa0819bf5bef79dbec",
-                "reference": "208913c6042967ba404f4bfa0819bf5bef79dbec",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/b18cb98131bd83103ccb26a888fdfe3177b8a663",
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663",
                 "shasum": ""
             },
             "require": {
@@ -461,7 +461,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2016-12-09 10:03:48"
+            "time": "2017-01-09 09:33:47"
         },
         {
             "name": "ramsey/uuid",
@@ -655,16 +655,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.15",
+            "version": "v2.8.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "befb26a3713c97af90d25dd12e75621ef14d91ff"
+                "reference": "dbe61fed9cd4a44c5b1d14e5e7b1a8640cfb2bf2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/befb26a3713c97af90d25dd12e75621ef14d91ff",
-                "reference": "befb26a3713c97af90d25dd12e75621ef14d91ff",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/dbe61fed9cd4a44c5b1d14e5e7b1a8640cfb2bf2",
+                "reference": "dbe61fed9cd4a44c5b1d14e5e7b1a8640cfb2bf2",
                 "shasum": ""
             },
             "require": {
@@ -700,7 +700,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-14 16:15:57"
+            "time": "2017-01-03 13:49:52"
         },
         {
             "name": "websharks/core",
@@ -708,12 +708,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "d3e4c8de56caa0f0cc0384e79aa6ff46322c772d"
+                "reference": "f740cb5952815187a4ca30088cd5c8bb633fe181"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/d3e4c8de56caa0f0cc0384e79aa6ff46322c772d",
-                "reference": "d3e4c8de56caa0f0cc0384e79aa6ff46322c772d",
+                "url": "https://api.github.com/repos/websharks/core/zipball/f740cb5952815187a4ca30088cd5c8bb633fe181",
+                "reference": "f740cb5952815187a4ca30088cd5c8bb633fe181",
                 "shasum": ""
             },
             "require": {
@@ -833,7 +833,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2016-12-22 01:19:47"
+            "time": "2017-01-11 06:28:14"
         },
         {
             "name": "websharks/dicer",
