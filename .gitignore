@@ -21,6 +21,10 @@
 
 vendor/
 
+# TypeScript
+
+typings/
+
 # Node
 
 node_modules/
