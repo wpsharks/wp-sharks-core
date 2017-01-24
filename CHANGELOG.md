@@ -1,4 +1,4 @@
-## [coming soon]
+## v170124.73639
 
 - Bug fix. Undefined index `active_label` on license keys menu page.
 - Adding `home_url` and related properties to the centralized `Wp` base class.
