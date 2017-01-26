@@ -23,12 +23,12 @@ use function get_defined_vars as vars;
 /**
  * WP MD Extra.
  *
- * @since 17xxxx
+ * @since 170126.83164
  */
 trait WpMdExtra
 {
     /**
-     * @since 17xxxx WP MD Extra utils.
+     * @since 170126.83164 WP MD Extra utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -40,7 +40,7 @@ trait WpMdExtra
     }
 
     /**
-     * @since 17xxxx WP MD Extra utils.
+     * @since 170126.83164 WP MD Extra utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -52,7 +52,7 @@ trait WpMdExtra
     }
 
     /**
-     * @since 17xxxx WP MD Extra utils.
+     * @since 170126.83164 WP MD Extra utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

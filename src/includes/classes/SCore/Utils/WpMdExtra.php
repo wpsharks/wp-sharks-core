@@ -23,14 +23,14 @@ use function get_defined_vars as vars;
 /**
  * WP MD Extra utils.
  *
- * @since 17xxxx WP MDE utils.
+ * @since 170126.83164 WP MDE utils.
  */
 class WpMdExtra extends Classes\SCore\Base\Core
 {
     /**
      * Transform via WP MD Extra.
      *
-     * @since 17xxxx WP MD Extra utils.
+     * @since 170126.83164 WP MD Extra utils.
      *
      * @param string $markdown Markdown.
      * @param int    $post_id  Post ID (optional).
@@ -56,7 +56,7 @@ class WpMdExtra extends Classes\SCore\Base\Core
     /**
      * WP MD Extra enabled?
      *
-     * @since 17xxxx WP MD Extra utils.
+     * @since 170126.83164 WP MD Extra utils.
      *
      * @param string $for Enabled for what?
      *
@@ -74,7 +74,7 @@ class WpMdExtra extends Classes\SCore\Base\Core
     /**
      * Can transform via WP MD Extra?
      *
-     * @since 17xxxx WP MD Extra utils.
+     * @since 170126.83164 WP MD Extra utils.
      *
      * @return bool Can transform via WP MDE?
      */

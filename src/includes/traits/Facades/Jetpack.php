@@ -40,7 +40,7 @@ trait Jetpack
     }
 
     /**
-     * @since 17xxxx Jetpack utils.
+     * @since 170126.83164 Jetpack utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

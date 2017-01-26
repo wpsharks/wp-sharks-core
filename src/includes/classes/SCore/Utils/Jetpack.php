@@ -64,7 +64,7 @@ class Jetpack extends Classes\SCore\Base\Core
     /**
      * Jetpack markdown enabled?
      *
-     * @since 17xxxx Jetpack utils.
+     * @since 170126.83164 Jetpack utils.
      *
      * @param string $for Enabled for what?
      *
