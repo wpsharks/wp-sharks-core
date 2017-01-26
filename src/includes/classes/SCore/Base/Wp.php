@@ -92,8 +92,8 @@ class Wp // Stand-alone class.
         $this->template   = get_template(); // Current theme/template.
         $this->stylesheet = get_stylesheet(); // Current stylesheet.
 
-        $this->is_woocommerce_active                 = defined('WC_VERSION') && class_exists('WooCommerce');
+        $this->is_woocommerce_active                 = defined('WC_VERSION') && class_exists('WooCommerce', false);
         $this->is_woocommerce_product_vendors_active = $this->is_woocommerce_active && defined('WC_PRODUCT_VENDORS_VERSION');
-        $this->is_jetpack_active                     = defined('JETPACK__VERSION') && class_exists('Jetpack');
+        $this->is_jetpack_active                     = defined('JETPACK__VERSION') && class_exists('Jetpack', false);
     }
 }
