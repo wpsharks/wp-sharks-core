@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -37,6 +37,18 @@ trait Jetpack
     public static function jetpackMarkdown(...$args)
     {
         return $GLOBALS[static::class]->Utils->§Jetpack->markdown(...$args);
+    }
+
+    /**
+     * @since 17xxxx Jetpack utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Jetpack::markdownEnabled()
+     */
+    public static function jetpackMarkdownEnabled(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Jetpack->markdownEnabled(...$args);
     }
 
     /**
