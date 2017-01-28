@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -28,6 +28,30 @@ use function get_defined_vars as vars;
 trait StylesScripts
 {
     /**
+     * @since 17xxxx Latest jQuery.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueLatestJQuery()
+     */
+    public static function enqueueLatestJQuery(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueLatestJQuery(...$args);
+    }
+
+    /**
+     * @since 17xxxx Font Awesome libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueFontAwesomeLibs()
+     */
+    public static function enqueueFontAwesomeLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueFontAwesomeLibs(...$args);
+    }
+
+    /**
      * @since 160709 Sharkicon libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -37,6 +61,42 @@ trait StylesScripts
     public static function enqueueSharkiconLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSharkiconLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Semantic UI libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueSemanticUiLibs()
+     */
+    public static function enqueueSemanticUiLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSemanticUiLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Highlight.js libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueHighlightJsLibs()
+     */
+    public static function enqueueHighlightJsLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueHighlightJsLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Simple MDE libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueSimpleMdeLibs()
+     */
+    public static function enqueueSimpleMdeLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSimpleMdeLibs(...$args);
     }
 
     /**

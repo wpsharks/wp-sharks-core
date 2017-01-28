@@ -1,3 +1,13 @@
+## $v
+
+- Updating to latest core.
+- Enhancing built-in scripts/styles.
+- Adding Simple MDE scripts/styles.
+- Adding Font Awesome scripts/styles.
+- Adding Highlight.js scripts/styles.
+- Adding jQuery (latest) scripts/styles.
+- Adding `integrity=""` attributes for remote scripts.
+
 ## v170124.73639
 
 - Bug fix. Undefined index `active_label` on license keys menu page.
