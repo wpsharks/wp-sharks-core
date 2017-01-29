@@ -28,7 +28,7 @@ use function get_defined_vars as vars;
 trait StylesScripts
 {
     /**
-     * @since 17xxxx Latest jQuery.
+     * @since 170128.18158 Latest jQuery.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -40,7 +40,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Font Awesome libs.
+     * @since 170128.18158 Font Awesome libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -64,7 +64,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Semantic UI libs.
+     * @since 170128.18158 Semantic UI libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -76,7 +76,19 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Highlight.js libs.
+     * @since 170128.18158 Marked libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueMarkedLibs()
+     */
+    public static function enqueueMarkedLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueMarkedLibs(...$args);
+    }
+
+    /**
+     * @since 170128.18158 Highlight.js libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -85,18 +97,6 @@ trait StylesScripts
     public static function enqueueHighlightJsLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueHighlightJsLibs(...$args);
-    }
-
-    /**
-     * @since 17xxxx Simple MDE libs.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\SCore\Utils\StylesScripts::enqueueSimpleMdeLibs()
-     */
-    public static function enqueueSimpleMdeLibs(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSimpleMdeLibs(...$args);
     }
 
     /**
@@ -109,6 +109,18 @@ trait StylesScripts
     public static function enqueueMomentLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueMomentLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Adding jQuery animate.css libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueJQueryAnimateCssLibs()
+     */
+    public static function enqueueJQueryAnimateCssLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryAnimateCssLibs(...$args);
     }
 
     /**

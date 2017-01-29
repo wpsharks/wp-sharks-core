@@ -219,6 +219,56 @@
             "time": "2016-10-29 18:58:20"
         },
         {
+            "name": "michelf/php-smartypants",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michelf/php-smartypants.git",
+                "reference": "47d17c90a4dfd0ccf1f87e25c65e6c8012415aad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michelf/php-smartypants/zipball/47d17c90a4dfd0ccf1f87e25c65e6c8012415aad",
+                "reference": "47d17c90a4dfd0ccf1f87e25c65e6c8012415aad",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Michelf": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Michel Fortin",
+                    "email": "michel.fortin@michelf.ca",
+                    "homepage": "https://michelf.ca/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "John Gruber",
+                    "homepage": "https://daringfireball.net/"
+                }
+            ],
+            "description": "PHP SmartyPants",
+            "homepage": "https://michelf.ca/projects/php-smartypants/",
+            "keywords": [
+                "dashes",
+                "quotes",
+                "spaces",
+                "typographer",
+                "typography"
+            ],
+            "time": "2016-12-13 01:01:17"
+        },
+        {
             "name": "nikic/php-parser",
             "version": "v3.0.2",
             "source": {
@@ -622,12 +672,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "bfc7164ab74f0bbc61d13a0b71f9f56c2ad24866"
+                "reference": "293593d649f48d563b17932c9dfee58cbc5fef3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/bfc7164ab74f0bbc61d13a0b71f9f56c2ad24866",
-                "reference": "bfc7164ab74f0bbc61d13a0b71f9f56c2ad24866",
+                "url": "https://api.github.com/repos/websharks/core/zipball/293593d649f48d563b17932c9dfee58cbc5fef3b",
+                "reference": "293593d649f48d563b17932c9dfee58cbc5fef3b",
                 "shasum": ""
             },
             "require": {
@@ -667,6 +717,7 @@
                 "lib-openssl": "*",
                 "lib-pcre": "*",
                 "michelf/php-markdown": "1.*",
+                "michelf/php-smartypants": "1.*",
                 "php-64bit": ">=7.0.4",
                 "phpmailer/phpmailer": "5.*",
                 "ramsey/uuid": "3.*",
@@ -745,7 +796,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-01-27 23:26:04"
+            "time": "2017-01-29 19:40:01"
         },
         {
             "name": "websharks/dicer",
