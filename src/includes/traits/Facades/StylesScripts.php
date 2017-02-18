@@ -28,7 +28,7 @@ use function get_defined_vars as vars;
 trait StylesScripts
 {
     /**
-     * @since 17xxxx Styles/scripts.
+     * @since 170218.31677 Styles/scripts.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -40,7 +40,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Styles/scripts.
+     * @since 170218.31677 Styles/scripts.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -52,7 +52,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Styles/scripts.
+     * @since 170218.31677 Styles/scripts.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -64,7 +64,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Styles/scripts.
+     * @since 170218.31677 Styles/scripts.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -76,7 +76,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Require.js.
+     * @since 170218.31677 Require.js.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -100,7 +100,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Unicode Gcs libs.
+     * @since 170218.31677 Unicode Gcs libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -112,7 +112,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Pako inflate/deflate.
+     * @since 170218.31677 Pako inflate/deflate.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -172,7 +172,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Ace libs.
+     * @since 170218.31677 Ace libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -196,7 +196,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Highlight.js style data.
+     * @since 170218.31677 Highlight.js style data.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -232,7 +232,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Adding jQuery animate.css libs.
+     * @since 170218.31677 Adding jQuery animate.css libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

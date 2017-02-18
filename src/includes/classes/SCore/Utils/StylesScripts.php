@@ -39,7 +39,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueued.
      *
-     * @since 17xxxx
+     * @since 170218.31677
      *
      * @type array Enqueued.
      */
@@ -48,7 +48,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueued.
      *
-     * @since 17xxxx
+     * @since 170218.31677
      *
      * @type array Enqueued.
      */
@@ -57,7 +57,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueued.
      *
-     * @since 17xxxx
+     * @since 170218.31677
      *
      * @type array Enqueued.
      */
@@ -88,7 +88,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Did enqueue libs?
      *
-     * @since 17xxxx Scripts/styles.
+     * @since 170218.31677 Scripts/styles.
      *
      * @param string $caller `__METHOD__`.
      *
@@ -102,7 +102,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Did enqueue a style?
      *
-     * @since 17xxxx Scripts/styles.
+     * @since 170218.31677 Scripts/styles.
      *
      * @param string $handle Style handle.
      *
@@ -116,7 +116,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Did enqueue a script?
      *
-     * @since 17xxxx Scripts/styles.
+     * @since 170218.31677 Scripts/styles.
      *
      * @param string $handle Script handle.
      *
@@ -130,7 +130,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * On `style_loader_tag`.
      *
-     * @since 17xxxx Scripts/styles.
+     * @since 170218.31677 Scripts/styles.
      *
      * @param string|scalar $tag    HTML markup.
      * @param string|scalar $handle Style handle.
@@ -158,7 +158,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * On `script_loader_tag`.
      *
-     * @since 17xxxx Scripts/styles.
+     * @since 170218.31677 Scripts/styles.
      *
      * @param string|scalar $tag    HTML markup.
      * @param string|scalar $handle Script handle.
@@ -186,7 +186,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue styles/scripts.
      *
-     * @since 17xxxx Scripts/styles.
+     * @since 170218.31677 Scripts/styles.
      *
      * @param string $caller `__METHOD__`.
      * @param array  $data   Library data.
@@ -322,7 +322,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Unicode Gcs libs.
      *
-     * @since 17xxxx Unicode Gcs libs.
+     * @since 170218.31677 Unicode Gcs libs.
      *
      * @return array Library details.
      */
@@ -495,7 +495,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Ace libs.
      *
-     * @since 17xxxx Ace libs.
+     * @since 170218.31677 Ace libs.
      *
      * @param string $mode  Mode.
      * @param string $theme Theme.

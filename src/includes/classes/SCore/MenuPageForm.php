@@ -141,7 +141,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
     /**
      * Creates an HR row.
      *
-     * @since 17xxxx Menu page utils.
+     * @since 170218.31677 Menu page utils.
      *
      * @param array $args Configuration args.
      *
