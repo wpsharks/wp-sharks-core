@@ -1,7 +1,7 @@
 /*
  * Dependencies.
  */
-@import '../../bourbon/bourbon';
+@import '../../env';
 @import '../../../../vendor/websharks/sharkicons/src/sharkicons';
 @import '../../jquery-plugins/ui-tooltip/enhancements';
 
@@ -178,6 +178,20 @@
           + td {
             padding-left:     1em;
           }
+        }
+
+        &.-hr {
+          > td {
+            padding:          0;
+          }
+        }
+
+        &.-disabled-via-if-check {
+          opacity:           .45 !important;
+        }
+
+        &.-hidden {
+          display:            none !important;
         }
       }
     }

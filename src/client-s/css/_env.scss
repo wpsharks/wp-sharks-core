@@ -1,4 +1,9 @@
 /*
- * Dependencies. Requires a local copy of the WebSharks Core.
+ * Requires a local copy of the WebSharks Core.
  */
 @import '../../../../../../core/src/client-s/css/env';
+
+//
+@import 'variables/all';
+@import 'functions/all';
+@import 'mixins/all';

@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -32,7 +32,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
      *
      * @since 160709 Menu page utils.
      *
-     * @var string ReST action identifier.
+     * @type string ReST action identifier.
      */
     public $action;
 
@@ -41,7 +41,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
      *
      * @since 160723 Menu page utils.
      *
-     * @var \StdClass Form configuration args.
+     * @type \StdClass Form configuration args.
      */
     public $cfg; // Also for extenders.
 
@@ -133,9 +133,23 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $markup .= $description ? '<p>'.$description.'</p>' : '';
 
         $markup .= '<table class="-form-table'.($args['class'] ? ' '.esc_attr($args['class']) : '').'">';
-        $markup .=     '<tbody>';
+        $markup .= '<tbody>';
 
         return $markup;
+    }
+
+    /**
+     * Creates an HR row.
+     *
+     * @since 17xxxx Menu page utils.
+     *
+     * @param array $args Configuration args.
+     *
+     * @return string Raw HTML markup.
+     */
+    public function hrRow(array $args = [])
+    {
+        echo '<tr class="-hr"><td colspan="2"><hr /></td></tr>';
     }
 
     /**
@@ -171,6 +185,9 @@ class MenuPageForm extends Classes\SCore\Base\Core
             'class' => '',
             'style' => '',
             'attrs' => '',
+
+            // Optional.
+            'if' => '',
         ];
         if (!array_key_exists('value', $args)) {
             throw $this->c::issue('Missing `value` key.');
@@ -180,9 +197,9 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $cfg = array_map('strval', $cfg);
 
         if (!$cfg['name']) {
-            throw $this->c::issue('Arg `name` required.');
+            throw $this->c::issue('Arg `name` is required.');
         } elseif (in_array($cfg['type'], ['checkbox', 'radio', 'reset', 'button', 'image'], true)) {
-            throw $this->c::issue(sprintf('Input `type="%1$s"` unsupported at this time.', $cfg['type']));
+            throw $this->c::issue(sprintf('Input `type="%1$s"` is unsupported at this time.', $cfg['type']));
         }
         $cfg['var_name'] = $cfg['name']; // Internal copy.
         $cfg['id']       = $this->elementId($cfg['var_name']);
@@ -192,34 +209,48 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $cfg['tip']  = $cfg['tip'] ? $this->s::menuPageTip($cfg['tip']) : '';
         $cfg['note'] = $cfg['note'] ? $this->s::menuPageNote($cfg['note']) : '';
 
-        $markup = '<tr>';
+        if ($cfg['type'] === 'hidden') {
+            $markup = '<tr class="-hidden">';
+            $markup .= '<td colspan="2">';
+            $markup .= '<input'. // Hidden input value.
+                            ' type="'.esc_attr($cfg['type']).'"'.
+                            ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
+                            ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
+                            ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
+                            ' value="'.($cfg['type'] === 'url' ? esc_url($cfg['value']) : esc_attr($cfg['value'])).'"'.
+                            ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
+                            ' />';
+            $markup .= '</td>';
+            $markup .= '</tr>';
+        } else { // Any other type of `<input>` tag.
+            $markup = '<tr'.($cfg['if'] ? ' data-if="'.esc_attr($cfg['if']).'"' : '').'>';
 
-        if ($cfg['label']) {
-            $markup .= '<th scope="row">';
-            $markup .=      '<div>'; // For positioning.
-            $markup .=          $cfg['tip'];
-            $markup .=          '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
-                                    $cfg['label'].
-                                '</label>';
-            $markup .=      '</div>';
-            $markup .= '</th>';
+            if ($cfg['label']) {
+                $markup .= '<th scope="row">';
+                $markup .= '<div>'; // For positioning.
+                $markup .= $cfg['tip'];
+                $markup .= '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
+                                $cfg['label'].
+                           '</label>';
+                $markup .= '</div>';
+                $markup .= '</th>';
+            }
+            $markup .= '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
+            $markup .= '<div>'; // For positioning.
+            $markup .= '<input'.
+                            ' type="'.esc_attr($cfg['type']).'"'.
+                            ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
+                            ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
+                            ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
+                            ' value="'.($cfg['type'] === 'url' ? esc_url($cfg['value']) : esc_attr($cfg['value'])).'"'.
+                            ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
+                            ' />';
+            $markup .= $cfg['note'];
+            $markup .= '</div>';
+            $markup .= '</td>';
+
+            $markup .= '</tr>';
         }
-        $markup .=     '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
-        $markup .=         '<div>'; // For positioning.
-        $markup .=              '<input'.
-                                ' type="'.esc_attr($cfg['type']).'"'.
-                                ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
-                                ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
-                                ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
-                                ' value="'.($cfg['type'] === 'url' ? esc_url($cfg['value']) : esc_attr($cfg['value'])).'"'.
-                                ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
-                                ' />';
-        $markup .=              $cfg['note'];
-        $markup .=          '</div>';
-        $markup .=     '</td>';
-
-        $markup .= '</tr>';
-
         return $markup;
     }
 
@@ -253,6 +284,9 @@ class MenuPageForm extends Classes\SCore\Base\Core
             'class' => '',
             'style' => '',
             'attrs' => '',
+
+            // Optional.
+            'if' => '',
         ];
         if (!array_key_exists('value', $args)) {
             throw $this->c::issue('Missing `value` key.');
@@ -262,7 +296,7 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $cfg = array_map('strval', $cfg);
 
         if (!$cfg['name']) {
-            throw $this->c::issue('Arg `name` required.');
+            throw $this->c::issue('Arg `name` is required.');
         }
         $cfg['var_name'] = $cfg['name']; // Internal copy.
         $cfg['id']       = $this->elementId($cfg['var_name']);
@@ -272,29 +306,29 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $cfg['tip']  = $cfg['tip'] ? $this->s::menuPageTip($cfg['tip']) : '';
         $cfg['note'] = $cfg['note'] ? $this->s::menuPageNote($cfg['note']) : '';
 
-        $markup = '<tr>';
+        $markup = '<tr'.($cfg['if'] ? ' data-if="'.esc_attr($cfg['if']).'"' : '').'>';
 
         if ($cfg['label']) {
             $markup .= '<th scope="row">';
-            $markup .=      '<div>'; // For positioning.
-            $markup .=          $cfg['tip'];
-            $markup .=          '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
-                                    $cfg['label'].
-                                '</label>';
-            $markup .=      '</div>';
+            $markup .= '<div>'; // For positioning.
+            $markup .= $cfg['tip'];
+            $markup .= '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
+                            $cfg['label'].
+                       '</label>';
+            $markup .= '</div>';
             $markup .= '</th>';
         }
-        $markup .=     '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
-        $markup .=          '<div>'; // For positioning.
-        $markup .=              '<textarea'.
-                                ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
-                                ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
-                                ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
-                                ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
-                                '>'.esc_textarea($cfg['value']).'</textarea>';
-        $markup .=              $cfg['note'];
-        $markup .=          '</div>';
-        $markup .=      '</td>';
+        $markup .= '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
+        $markup .= '<div>'; // For positioning.
+        $markup .= '<textarea'.
+                        ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
+                        ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
+                        ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
+                        ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
+                        '>'.esc_textarea($cfg['value']).'</textarea>';
+        $markup .= $cfg['note'];
+        $markup .= '</div>';
+        $markup .= '</td>';
 
         $markup .= '</tr>';
 
@@ -336,6 +370,9 @@ class MenuPageForm extends Classes\SCore\Base\Core
             'class' => '',
             'style' => '',
             'attrs' => '',
+
+            // Optional.
+            'if' => '',
         ];
         if (!array_key_exists('value', $args)) {
             throw $this->c::issue('Missing `value` key.');
@@ -355,10 +392,11 @@ class MenuPageForm extends Classes\SCore\Base\Core
             } else { // Everything else.
                 $_value = (string) $_value;
             }
-        } // unset($_key, $_value); // Housekeeping.
+        } // Unset `$_value` by reference.
+        unset($_key, $_value); // Housekeeping.
 
         if (!$cfg['name']) {
-            throw $this->c::issue('Arg `name` required.');
+            throw $this->c::issue('Arg `name` is required.');
         }
         if (is_array($cfg['options'])) {
             $_options       = $cfg['options'];
@@ -399,36 +437,36 @@ class MenuPageForm extends Classes\SCore\Base\Core
         $cfg['tip']  = $cfg['tip'] ? $this->s::menuPageTip($cfg['tip']) : '';
         $cfg['note'] = $cfg['note'] ? $this->s::menuPageNote($cfg['note']) : '';
 
-        $markup = '<tr>';
+        $markup = '<tr'.($cfg['if'] ? ' data-if="'.esc_attr($cfg['if']).'"' : '').'>';
 
         if ($cfg['label']) {
             $markup .= '<th scope="row">';
-            $markup .=      '<div>'; // For positioning.
-            $markup .=          $cfg['tip'];
-            $markup .=          '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
-                                    $cfg['label'].
-                                '</label>';
-            $markup .=      '</div>';
+            $markup .= '<div>'; // For positioning.
+            $markup .= $cfg['tip'];
+            $markup .= '<label for="'.esc_attr($cfg['id']).'" title="'.esc_attr($cfg['label']).'">'.
+                            $cfg['label'].
+                       '</label>';
+            $markup .= '</div>';
             $markup .= '</th>';
         }
-        $markup .=     '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
-        $markup .=          '<div>'; // For positioning.
-        $markup .=              '<select'.
-                                ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
-                                ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
-                                ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
-                                ($cfg['multiple'] ? ' multiple' : '').
-                                ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
-                                '>'.$cfg['options'].'</select>';
-        $markup .=              $cfg['note'];
+        $markup .= '<td'.(!$cfg['label'] ? ' colspan="2"' : '').'>';
+        $markup .= '<div>'; // For positioning.
+        $markup .= '<select'.
+                        ' name="'.esc_attr($cfg['name']).'" id="'.esc_attr($cfg['id']).'"'.
+                        ' class="'.esc_attr($cfg['class']).'" style="'.esc_attr($cfg['style']).'"'.
+                        ' placeholder="'.esc_attr($cfg['placeholder']).'" autocomplete="new-password"'.
+                        ($cfg['multiple'] ? ' multiple' : '').
+                        ($cfg['attrs'] ? ' '.$cfg['attrs'] : '').
+                        '>'.$cfg['options'].'</select>';
+        $markup .= $cfg['note'];
 
         if ($cfg['multiple']) { // Flag used to detect a case where nothing is selected.
             // NOTE: Browsers will not submit an empty array. If nothing selected, nothing submitted.
             // With this flag, something will always be submitted, because we're hard-coding an array element.
-            $markup .=      '<input type="hidden" name="'.esc_attr(mb_substr($cfg['name'], 0, -2).'[___ignore]').'" />';
+            $markup .= '<input type="hidden" name="'.esc_attr(mb_substr($cfg['name'], 0, -2).'[___ignore]').'" />';
         }
-        $markup .=          '</div>';
-        $markup .=     '</td>';
+        $markup .= '</div>';
+        $markup .= '</td>';
 
         $markup .= '</tr>';
 
@@ -459,9 +497,9 @@ class MenuPageForm extends Classes\SCore\Base\Core
     public function submitButton(string $label = '')
     {
         $markup = '<p class="-submit submit">';
-        $markup .=     '<button class="button button-primary" type="submit">';
-        $markup .=         $label ?: __('Save Changes', 'wp-sharks-core');
-        $markup .=     '</button>';
+        $markup .= '<button class="button button-primary" type="submit">';
+        $markup .= $label ?: __('Save Changes', 'wp-sharks-core');
+        $markup .= '</button>';
         $markup .= '</p>';
 
         return $markup;

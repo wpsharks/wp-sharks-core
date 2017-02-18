@@ -28,6 +28,66 @@ use function get_defined_vars as vars;
 trait StylesScripts
 {
     /**
+     * @since 17xxxx Styles/scripts.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueLibs()
+     */
+    public static function enqueueLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Styles/scripts.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::didEnqueueLibs()
+     */
+    public static function didEnqueueLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->didEnqueueLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Styles/scripts.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::didEnqueueStyle()
+     */
+    public static function didEnqueueStyle(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->didEnqueueStyle(...$args);
+    }
+
+    /**
+     * @since 17xxxx Styles/scripts.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::didEnqueueScript()
+     */
+    public static function didEnqueueScript(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->didEnqueueScript(...$args);
+    }
+
+    /**
+     * @since 17xxxx Require.js.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueRequireJsLibs()
+     */
+    public static function enqueueRequireJsLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueRequireJsLibs(...$args);
+    }
+
+    /**
      * @since 170128.18158 Latest jQuery.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -37,6 +97,30 @@ trait StylesScripts
     public static function enqueueLatestJQuery(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueLatestJQuery(...$args);
+    }
+
+    /**
+     * @since 17xxxx Unicode Gcs libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueUnicodeGcsLibs()
+     */
+    public static function enqueueUnicodeGcsLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueUnicodeGcsLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Pako inflate/deflate.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueuePakoLibs()
+     */
+    public static function enqueuePakoLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueuePakoLibs(...$args);
     }
 
     /**
@@ -76,15 +160,51 @@ trait StylesScripts
     }
 
     /**
-     * @since 170128.18158 Marked libs.
+     * @since 170128.18158 Behave libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\SCore\Utils\StylesScripts::enqueueMarkedLibs()
+     * @see Classes\SCore\Utils\StylesScripts::enqueueBehaveLibs()
      */
-    public static function enqueueMarkedLibs(...$args)
+    public static function enqueueBehaveLibs(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueMarkedLibs(...$args);
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueBehaveLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Ace libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueAceLibs()
+     */
+    public static function enqueueAceLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueAceLibs(...$args);
+    }
+
+    /**
+     * @since 170128.18158 Markdown It libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueMarkdownItLibs()
+     */
+    public static function enqueueMarkdownItLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueMarkdownItLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Highlight.js style data.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::highlightJsStyleData()
+     */
+    public static function highlightJsStyleData(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->highlightJsStyleData(...$args);
     }
 
     /**

@@ -34,7 +34,7 @@ class App extends CoreClasses\App
      *
      * @since 160524
      *
-     * @var Wp
+     * @type Wp
      */
     public $Wp;
 
@@ -43,16 +43,16 @@ class App extends CoreClasses\App
      *
      * @since 160524
      *
-     * @var string Version.
+     * @type string Version.
      */
-    const VERSION = '170129.71016'; //v//
+    const VERSION = '170218.31533'; //v//
 
     /**
      * ReST action API version.
      *
      * @since 160625 ReST actions.
      *
-     * @var string API version.
+     * @type string API version.
      */
     const REST_ACTION_API_VERSION = '1.0';
 
@@ -61,7 +61,7 @@ class App extends CoreClasses\App
      *
      * @since 160702 Core container.
      *
-     * @var string Core container slug.
+     * @type string Core container slug.
      */
     const CORE_CONTAINER_SLUG = 'wp-sharks';
 
@@ -70,7 +70,7 @@ class App extends CoreClasses\App
      *
      * @since 160702 Core container.
      *
-     * @var string Core container var.
+     * @type string Core container var.
      */
     const CORE_CONTAINER_VAR = 'wp_sharks';
 
@@ -79,7 +79,7 @@ class App extends CoreClasses\App
      *
      * @since 160702 Core container.
      *
-     * @var string Core container name.
+     * @type string Core container name.
      */
     const CORE_CONTAINER_NAME = 'WP Sharks';
 
@@ -88,7 +88,7 @@ class App extends CoreClasses\App
      *
      * @since 160713 Core container.
      *
-     * @var string Core container domain.
+     * @type string Core container domain.
      */
     const CORE_CONTAINER_DOMAIN = 'wpsharks.com';
 
@@ -97,7 +97,7 @@ class App extends CoreClasses\App
      *
      * @since 160715 Core container.
      *
-     * @var string Core license key.
+     * @type string Core license key.
      */
     const CORE_LICENSE_KEY = 'WP-SHARKS-CORE-XXXX-XXXX-XXXX-XXXX-XXXX';
 
@@ -415,6 +415,7 @@ class App extends CoreClasses\App
             '©fs_paths' => [
                 '©logs_dir'                 => $this->Wp->tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/logs',
                 '©cache_dir'                => $this->Wp->tmp_dir.'/.'.$this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'].'/cache',
+                '©sris_dir'                 => $this->base_dir.'/src/client-s', // Store SRIs locally.
                 '§templates_theme_base_dir' => $this::CORE_CONTAINER_SLUG.'/'.$brand['©slug'],
                 '©templates_dir'            => $this->base_dir.'/src/includes/templates',
                 '©routes_dir'               => '', // Not applicable.

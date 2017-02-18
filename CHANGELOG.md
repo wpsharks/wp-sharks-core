@@ -1,12 +1,21 @@
 ## $v
 
 - Updating to latest core.
-- Enhancing built-in scripts/styles.
-- Adding Simple MDE scripts/styles.
+- Adding Ace scripts/styles.
+- Adding Behave scripts/styles.
+- Adding MarkdownIt scripts/styles.
 - Adding Font Awesome scripts/styles.
 - Adding Highlight.js scripts/styles.
 - Adding jQuery (latest) scripts/styles.
+- Improving organization of CSS/JS framework.
+- Added support for automatic SRIs in scripts/styles.
 - Adding `integrity=""` attributes for remote scripts.
+- Adding `src/client-s/sris.json` map file for fast lookups.
+- Refactoring `StyleScripts{}` class to make it more robust.
+- Adding support for `$Form->inputRow(['type' => 'hidden']);`.
+- Adding support for `$Form->*Row(['if' => 'option=0|1|2|3|etc']);`.
+- Adding support for `$Form->*Row(['if' => 'option!=0|1|2|3|etc']);`.
+- Adding support for `$Form->hrRow();` (horizontal dividing row).
 
 ## v170124.73639
 

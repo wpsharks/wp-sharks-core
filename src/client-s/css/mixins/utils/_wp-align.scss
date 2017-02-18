@@ -1,0 +1,19 @@
+/*
+ * WP align utils.
+ */
+@mixin wp-align-utils {
+  img.alignleft {
+    float:                    left !important;
+    margin:                   0 1em 1em 0 !important;
+  }
+
+  img.aligncenter {
+    display:                  block !important;
+    margin:                   1em auto !important;
+  }
+
+  img.alignright {
+    float:                    right !important;
+    margin:                   0 0 1em 1em !important;
+  }
+}

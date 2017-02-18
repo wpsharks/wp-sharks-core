@@ -39,11 +39,29 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueued.
      *
-     * @since 160524
+     * @since 17xxxx
      *
      * @type array Enqueued.
      */
-    protected $did_enqueue;
+    protected $did_enqueue_libs;
+
+    /**
+     * Enqueued.
+     *
+     * @since 17xxxx
+     *
+     * @type array Enqueued.
+     */
+    protected $did_enqueue_styles;
+
+    /**
+     * Enqueued.
+     *
+     * @since 17xxxx
+     *
+     * @type array Enqueued.
+     */
+    protected $did_enqueue_scripts;
 
     /**
      * Class constructor.
@@ -56,31 +74,224 @@ class StylesScripts extends Classes\SCore\Base\Core
     {
         parent::__construct($App);
 
-        $core              = $this->c::appCore();
-        $this->cv          = $core::VERSION;
-        $this->did_enqueue = []; // Initialize.
+        $core     = $this->c::appCore();
+        $this->cv = $core::VERSION;
+
+        $this->did_enqueue_libs    = [];
+        $this->did_enqueue_styles  = [];
+        $this->did_enqueue_scripts = [];
+
+        add_filter('style_loader_tag', [$this, 'onStyleLoaderTag'], 10, 2);
+        add_filter('script_loader_tag', [$this, 'onScriptLoaderTag'], 10, 2);
     }
 
     /**
      * Did enqueue libs?
      *
-     * @since 160524 Scripts/styles.
+     * @since 17xxxx Scripts/styles.
      *
-     * @param string $identifier Identifier.
-     * @param array  $details    Library details.
+     * @param string $caller `__METHOD__`.
      *
-     * @return array Details if enqueued already, else an empty array.
+     * @return array Details, else empty array.
      */
-    protected function didEnqueue(string $identifier, array $details = null): array
+    public function didEnqueueLibs(string $caller): array
     {
-        if (isset($details)) {
-            $this->did_enqueue[$identifier] = $details;
-        }
-        if (isset($this->did_enqueue[$identifier])) {
-            return $this->did_enqueue[$identifier] ?: [null];
-        } // We need to avoid returning an empty array.
+        return $this->did_enqueue_libs[$caller] ?? [];
+    }
 
-        return []; // Not enqueued yet.
+    /**
+     * Did enqueue a style?
+     *
+     * @since 17xxxx Scripts/styles.
+     *
+     * @param string $handle Style handle.
+     *
+     * @return array Details, else empty array.
+     */
+    public function didEnqueueStyle(string $handle): array
+    {
+        return $this->did_enqueue_styles[$handle] ?? [];
+    }
+
+    /**
+     * Did enqueue a script?
+     *
+     * @since 17xxxx Scripts/styles.
+     *
+     * @param string $handle Script handle.
+     *
+     * @return array Details, else empty array.
+     */
+    public function didEnqueueScript(string $handle): array
+    {
+        return $this->did_enqueue_scripts[$handle] ?? [];
+    }
+
+    /**
+     * On `style_loader_tag`.
+     *
+     * @since 17xxxx Scripts/styles.
+     *
+     * @param string|scalar $tag    HTML markup.
+     * @param string|scalar $handle Style handle.
+     *
+     * @return array Details, else empty array.
+     */
+    public function onStyleLoaderTag($tag, $handle): string
+    {
+        $tag    = (string) $tag;
+        $handle = (string) $handle;
+
+        if (!($style = $this->didEnqueueStyle($handle))) {
+            return $tag; // We did not enqueue this style.
+        } elseif (mb_stripos($tag, 'integrity=') !== false) {
+            return $tag; // If WP core handles in the future.
+        }
+        if (($sri = $this->c::sri($style['url']))) {
+            $tag = str_replace(' rel=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" rel=', $tag);
+        } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
+        // NOTE: `c::sri()` also will not return an SRI for local resources on the current hostname.
+
+        return $tag; // With SRI hash if at all possible.
+    }
+
+    /**
+     * On `script_loader_tag`.
+     *
+     * @since 17xxxx Scripts/styles.
+     *
+     * @param string|scalar $tag    HTML markup.
+     * @param string|scalar $handle Script handle.
+     *
+     * @return array Details, else empty array.
+     */
+    public function onScriptLoaderTag($tag, $handle): string
+    {
+        $tag    = (string) $tag;
+        $handle = (string) $handle;
+
+        if (!($script = $this->didEnqueueScript($handle))) {
+            return $tag; // We did not enqueue this script.
+        } elseif (mb_stripos($tag, 'integrity=') !== false) {
+            return $tag; // If WP core handles in the future.
+        }
+        if (($sri = $this->c::sri($script['url']))) {
+            $tag = str_replace(' src=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" src=', $tag);
+        } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
+        // NOTE: `c::sri()` also will not return an SRI for local resources on the current hostname.
+
+        return $tag; // With SRI hash if at all possible.
+    }
+
+    /**
+     * Enqueue styles/scripts.
+     *
+     * @since 17xxxx Scripts/styles.
+     *
+     * @param string $caller `__METHOD__`.
+     * @param array  $data   Library data.
+     *
+     * @return array Reverberated `$data`.
+     */
+    public function enqueueLibs(string $caller, array $data)
+    {
+        if (!$data) {
+            return []; // No data.
+        } // Data cannot be empty here.
+        // Empty data would cause `did*()` functions
+        // to return an empty array, which is unexpected!
+
+        foreach ($data['styles'] ?? [] as $_handle => $_style) {
+            if (!$_handle || !is_string($_handle)) {
+                continue; // Invalid handle.
+            }
+            $_version = $_style['version'] ?? '';
+            $_ver     = $_style['ver'] ?? null;
+            $_url     = $_style['url'] ?? '';
+            $_deps    = $_style['deps'] ?? [];
+            $_media   = $_style['media'] ?? 'all';
+
+            if ($_version && $_url) { // Version in URL?
+                $_url = sprintf($_url, urlencode($_version));
+            }
+            if ($_url) { // Only if there is a URL to register.
+                wp_register_style($_handle, $_url, $_deps, $_ver, $_media);
+            }// If no URL, enqueue handle only.
+
+            wp_enqueue_style($_handle); // Immediately.
+
+            $this->did_enqueue_styles[$_handle] = [
+                'version' => $_version,
+                'ver'     => $_ver,
+                'url'     => $_url,
+                'deps'    => $_deps,
+                'media'   => $_media,
+            ];
+        } // unset($_handle, $_script, $_version, $_ver, $_url, $_deps, $_media);
+
+        foreach ($data['scripts'] ?? [] as $_handle => $_script) {
+            if (!$_handle || !is_string($_handle)) {
+                continue; // Invalid handle.
+            }
+            $_version   = $_script['version'] ?? '';
+            $_ver       = $_script['ver'] ?? null;
+            $_url       = $_script['url'] ?? '';
+            $_deps      = $_script['deps'] ?? [];
+            $_in_footer = $_script['in_footer'] ?? true;
+            $_localize  = $_script['localize'] ?? [];
+
+            if ($_version && $_url) { // Version in URL?
+                $_url = sprintf($_url, urlencode($_version));
+            }
+            if ($_url) { // Only if there is a URL to register.
+                wp_register_script($_handle, $_url, $_deps, $_ver, $_in_footer);
+            }// If no URL, enqueue handle only.
+
+            wp_enqueue_script($_handle); // Immediately.
+
+            if (!empty($_localize['key']) && array_key_exists('data', $_localize)) {
+                wp_localize_script($_handle, $_localize['key'], $_localize['data']);
+            }
+            $this->did_enqueue_scripts[$_handle] = [
+                'version'   => $_version,
+                'ver'       => $_ver,
+                'url'       => $_url,
+                'deps'      => $_deps,
+                'in_footer' => $_in_footer,
+                'localize'  => $_localize,
+            ];
+        } // unset($_handle, $_script, $_version, $_ver, $_url, $_deps, $_in_footer, $_localize);
+
+        return $this->did_enqueue_libs[$caller] = $data;
+    }
+
+    /**
+     * Enqueue Require.js.
+     *
+     * @since 170128.18158 Require.js.
+     *
+     * @param array $deps An array of any script dependencies.
+     *                    This is helpful in cases where RequireJS should be loaded up
+     *                    after other scripts that contain anonymous defines.
+     *
+     * @return array Library details.
+     */
+    public function enqueueRequireJsLibs(array $deps = []): array
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'requirejs' => [
+                    'version' => '2.3.2',
+                    'deps'    => $deps, // If applicable.
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/require.js/%1$s/require.min.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -90,29 +301,92 @@ class StylesScripts extends Classes\SCore\Base\Core
      *
      * @return array Library details.
      */
-    public function enqueueLatestJQuery(): string
+    public function enqueueLatestJQuery(): array
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'     => '3.1.1',
-            'script_shas' => [
-                'base' => 'sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=',
+        $data = [
+            'scripts' => [
+                'jquery' => [
+                    'version' => '3.1.1',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/jquery/%1$s/jquery.min.js',
+                ],
             ],
         ];
-        wp_deregister_script('jquery'); // Ditch this and use the latest version of jQuery.
-        wp_register_script('jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/'.urlencode($details['version']).'/jquery.min.js', [], null, true);
+        wp_deregister_script('jquery');
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
 
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
+    /**
+     * Enqueue Unicode Gcs libs.
+     *
+     * @since 17xxxx Unicode Gcs libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueUnicodeGcsLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        return $this->didEnqueue(__FUNCTION__, $details);
+        $data = [
+            'scripts' => [
+                'unicode-gcs' => [
+                    'version' => '1.0.3',
+                    'url'     => '//cdn.rawgit.com/websharks/unicode-gcs/%1$s/dist/index.min.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue Pako libs.
+     *
+     * @since 170128.18158 Pako libs.
+     *
+     * @param string $which Which library?
+     *
+     * @return array Library details.
+     */
+    public function enqueuePakoLibs(string $which = 'base')
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        if ($which === 'base') {
+            $data = [
+                'scripts' => [
+                    'pako' => [
+                        'version' => '1.0.4',
+                        'url'     => '//cdnjs.cloudflare.com/ajax/libs/pako/%1$s/pako.min.js',
+                    ],
+                ],
+            ];
+        } elseif ($which === 'deflate') {
+            $data = [
+                'scripts' => [
+                    'pako-deflate' => [
+                        'version' => '1.0.4',
+                        'url'     => '//cdnjs.cloudflare.com/ajax/libs/pako/%1$s/pako_deflate.min.js',
+                    ],
+                ],
+            ];
+        } elseif ($which === 'inflate') {
+            $data = [
+                'scripts' => [
+                    'pako-inflate' => [
+                        'version' => '1.0.4',
+                        'url'     => '//cdnjs.cloudflare.com/ajax/libs/pako/%1$s/pako_inflate.min.js',
+                    ],
+                ],
+            ];
+        }
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -124,26 +398,19 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueFontAwesomeLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'    => '4.7.0',
-            'style_shas' => [
-                'base' => 'sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN',
+        $data = [
+            'styles' => [
+                'font-awesome' => [
+                    'version' => '4.7.0',
+                    'url'     => '//maxcdn.bootstrapcdn.com/font-awesome/%1$s/css/font-awesome.min.css',
+                ],
             ],
         ];
-        wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/'.urlencode($details['version']).'/css/font-awesome.min.css', [], null);
-
-        add_filter('style_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'font-awesome') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['base']).'" crossorigin="anonymous" rel=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -155,15 +422,19 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueSharkiconLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = []; // No details at this time.
-
-        wp_enqueue_style('sharkicons', $this->c::appCoreUrl('/vendor/websharks/sharkicons/src/long-classes.min.css'), [], $this->cv);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+        $data = [
+            'styles' => [
+                'sharkicons' => [
+                    'ver' => $this->cv,
+                    'url' => $this->c::appCoreUrl('/vendor/websharks/sharkicons/src/long-classes.min.css'),
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -175,69 +446,154 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueSemanticUiLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'     => '2.2.7',
-            'style_shas'  => [
-                'base' => 'sha256-wT6CFc7EKRuf7uyVfi+MQNHUzojuHN2pSw0YWFt2K5E=',
+        $data = [
+            'styles' => [
+                'semantic-ui' => [
+                    'version' => '2.2.7',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/%1$s/semantic.min.css',
+                ],
             ],
-            'script_shas' => [
-                'base' => 'sha256-flVaeawsBV96vCHiLmXn03IRJym7+ZfcLVvUWONCas8=',
+            'styles' => [
+                'semantic-ui' => [
+                    'version' => '2.2.7',
+                    'deps'    => ['jquery'],
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/%1$s/semantic.min.js',
+                ],
             ],
-        ]; // No details at this time.
-
-        wp_enqueue_style('semantic-ui', '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/'.urlencode($details['version']).'/semantic.min.css', [], null);
-        wp_enqueue_script('semantic-ui', '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/'.urlencode($details['version']).'/semantic.min.js', ['jquery'], null, true);
-
-        add_filter('style_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'semantic-ui') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['base']).'" crossorigin="anonymous" rel=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'semantic-ui') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
-     * Enqueue Marked libs.
+     * Enqueue Behave libs.
      *
-     * @since 170128.18158 Highlight.js libs.
+     * @since 170128.18158 Behave libs.
      *
      * @return array Library details.
      */
-    public function enqueueMarkedLibs()
+    public function enqueueBehaveLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'     => '0.3.6',
-            'script_shas' => [
-                'base' => 'sha256-mJAzKDq6kSoKqZKnA6UNLtPaIj8zT2mFnWu/GSouhgQ=',
+        $data = [
+            'scripts' => [
+                'behave' => [
+                    'version' => '0.1',
+                    'url'     => '//cdn.jsdelivr.net/behave.js/%1$s/behave.js',
+                ],
             ],
-        ]; // No details at this time.
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
 
-        wp_enqueue_script('marked', '//cdnjs.cloudflare.com/ajax/libs/marked/'.urlencode($details['version']).'/marked.min.js', [], null, true);
+    /**
+     * Enqueue Ace libs.
+     *
+     * @since 17xxxx Ace libs.
+     *
+     * @param string $mode  Mode.
+     * @param string $theme Theme.
+     *
+     * @return array Library details.
+     */
+    public function enqueueAceLibs(string $mode, string $theme)
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'marked') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
+        $version  = '170216';
+        $base_url = 'https://cdn.rawgit.com/websharks/ace-builds/%1$s/src-min-noconflict';
 
-        return $this->didEnqueue(__FUNCTION__, $details);
+        $data = [
+            'scripts' => [
+                'ace' => [
+                    'version' => $version,
+                    'url'     => $base_url.'/ace.js',
+                ],
+                'ace-ext-linking' => [
+                    'deps'    => ['ace'],
+                    'version' => $version,
+                    'url'     => $base_url.'/ext-linking.js',
+                ],
+                'ace-ext-searchbox' => [
+                    'deps'    => ['ace'],
+                    'version' => $version,
+                    'url'     => $base_url.'/ext-searchbox.js',
+                ],
+                'ace-ext-spellcheck' => [
+                    'deps'    => ['ace'],
+                    'version' => $version,
+                    'url'     => $base_url.'/ext-spellcheck.js',
+                ],
+                'ace-ext-language_tools' => [
+                    'deps'    => ['ace'],
+                    'version' => $version,
+                    'url'     => $base_url.'/ext-language_tools.js',
+                ],
+                'ace-mode-'.$mode => [
+                    'deps'    => ['ace'],
+                    'version' => $version,
+                    'url'     => $base_url.'/mode-'.$mode.'.js',
+                ],
+                'ace-theme-'.$theme => [
+                    'deps'    => ['ace'],
+                    'version' => $version,
+                    'url'     => $base_url.'/theme-'.$theme.'.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue Markdown-It libs.
+     *
+     * @since 170128.18158 Markdown-It libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueMarkdownItLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'markdown-it' => [
+                    'version' => '8.2.2',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/markdown-it/%1$s/markdown-it.min.js',
+                ],
+                'markdown-it-attrs' => [
+                    'version' => '0.8.0',
+                    'deps'    => ['markdown-it'],
+                    'url'     => 'https://cdn.rawgit.com/arve0/markdown-it-attrs/v%1$s/markdown-it-attrs.browser.js',
+                ],
+                'markdown-it-deflist' => [
+                    'version' => '2.0.1',
+                    'deps'    => ['markdown-it'],
+                    'url'     => '//cdn.rawgit.com/markdown-it/markdown-it-deflist/%1$s/dist/markdown-it-deflist.min.js',
+                ],
+                'markdown-it-abbr' => [
+                    'version' => '1.0.4',
+                    'deps'    => ['markdown-it'],
+                    'url'     => '//cdn.rawgit.com/markdown-it/markdown-it-abbr/%1$s/dist/markdown-it-abbr.min.js',
+                ],
+                'markdown-it-footnote' => [
+                    'version' => '3.0.1',
+                    'deps'    => ['markdown-it'],
+                    'url'     => '//cdn.rawgit.com/markdown-it/markdown-it-footnote/%1$s/dist/markdown-it-footnote.min.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -251,49 +607,51 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueHighlightJsLibs($style = '')
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'    => '9.9.0',
-            'style_shas' => [
-                'github'         => 'sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=',
-                'codepen-embed'  => 'sha256-o5BnFXfXTynYnUOhQkOiLwZ8LjYORl/68na9YLOvm/U=',
-                'atom-one-dark'  => 'sha256-akwTLZec/XAFvgYgVH1T5/369lhA2Efr22xzCNl1nHs=',
-                'atom-one-light' => 'sha256-aw9uGjVU5OJyMYN70Vu2kZ1DDVc1slcJCS2XvuPCPKo=',
-                'hybrid'         => 'sha256-7XQMS8TcWkntQbO7LIrjEG4uPGwq1hBOF0DLRTk2A10=',
-                'ir-black'       => 'sha256-DHDpPa1qGl7RmS/xSreA5cg+zRUBGoqk58TlsDHzoSg=',
-                'default'        => 'sha256-Zd1icfZ72UBmsId/mUcagrmN7IN5Qkrvh75ICHIQVTk=',
+        if (isset($style)) {
+            $style = $style ?: 'default';
+        } else {
+            $style = ''; // No style.
+        }
+        $data = [
+            'scripts' => [
+                'highlight-js' => [
+                    'version' => '9.9.0',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/highlight.min.js',
+                ],
+                'highlight-js-lang-wp' => [
+                    'ver'  => $this->cv,
+                    'deps' => ['highlight-js'],
+                    'url'  => $this->c::appWsCoreUrl('/client-s/js/hljs/langs/wp.min.js'),
+                ],
             ],
-            'script_shas' => [
-                'base' => 'sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=',
-            ],
-        ]; // No details at this time.
+        ];
+        if ($style) {
+            $data['styles'] = [
+                'highlight-js' => $this->highlightJsStyleData($style),
+            ];
+        }
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
 
-        if (isset($style)) { // Only if this is not `null`.
-            $style = $style ?: 'default'; // Fall back on default style.
-            wp_enqueue_style('highlight-js', '//cdnjs.cloudflare.com/ajax/libs/highlight.js/'.urlencode($details['version']).'/styles/'.urlencode($style).'.min.css', [], null);
-
-            add_filter('style_loader_tag', function (string $tag, string $handle) use ($details, $style): string {
-                if ($handle === 'highlight-js' && $style && !empty($details['style_shas'][$style])) {
-                    $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas'][$style]).'" crossorigin="anonymous" rel=', $tag);
-                }
-                return $tag;
-            }, 10, 2);
-        } // A `null` style indicates that a style is being loaded elsewhere or is unnecessary.
-
-        wp_enqueue_script('highlight-js', '//cdnjs.cloudflare.com/ajax/libs/highlight.js/'.urlencode($details['version']).'/highlight.min.js', [], null, true);
-        wp_enqueue_script('highlight-js-lang-wp', $this->c::appCoreUrl('/client-s/js/hljs/langs/wp.min.js'), ['highlight-js'], $this->cv, true);
-
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'highlight-js') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+    /**
+     * Highlight.js style data.
+     *
+     * @since 170128.18158 Highlight.js libs.
+     *
+     * @param string $style Highlight.js style.
+     *
+     * @return array Library details.
+     */
+    public function highlightJsStyleData(string $style): array
+    {
+        return [ // Note: Caller still needs to `sprintf()` `version` into place.
+            'version' => '9.9.0',
+            'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/styles/'.urlencode($style).'.min.css',
+        ]; // This is separate so that callers can get stylesheet data for multiple styles.
     }
 
     /**
@@ -305,42 +663,33 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueMomentLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'     => '2.17.1',
-            'script_shas' => [
-                'base' => 'sha256-Gn7MUQono8LUxTfRA0WZzJgTua52Udm1Ifrk5421zkA=',
-            ],
-        ]; // No details at this time.
+        $data = [
+            'scripts' => [
+                'moment' => [
+                    'version'  => '2.17.1',
+                    'url'      => '//cdnjs.cloudflare.com/ajax/libs/moment.js/%1$s/moment.min.js',
+                    'localize' => [
+                        'key'  => 'rgvfbtgzxqrdbpcdjvzpcrfrsbtgpdvpMomentData',
+                        'data' => [
+                            'format'     => _x('MMM Do, YYYY h:mm a', 'moment-libs', 'wp-sharks-core'), // Same as: `M jS, Y g:i a`
+                            'formatDate' => _x('MMM Do, YYYY', 'moment-libs', 'wp-sharks-core'), // Same as: `M jS, Y`
+                            'formatTime' => _x('h:mm a', 'moment-libs', 'wp-sharks-core'), // Same as: `g:i a`
 
-        wp_enqueue_script('moment', '//cdnjs.cloudflare.com/ajax/libs/moment.js/'.urlencode($details['version']).'/moment.min.js', [], null, true);
-
-        wp_localize_script(
-            'moment', // See: <http://momentjs.com/docs/>
-            'rgvfbtgzxqrdbpcdjvzpcrfrsbtgpdvpMomentData',
-            [
-                'format'     => _x('MMM Do, YYYY h:mm a', 'moment-libs', 'wp-sharks-core'), // Same as: `M jS, Y g:i a`
-                'formatDate' => _x('MMM Do, YYYY', 'moment-libs', 'wp-sharks-core'), // Same as: `M jS, Y`
-                'formatTime' => _x('h:mm a', 'moment-libs', 'wp-sharks-core'), // Same as: `g:i a`
-
-                'locale' => _x('en', 'moment-libs', 'wp-sharks-core'), // Override to translate.
-                'i18n'   => [ // Or, you can change the `en` language here.
-                    'en'  => [], // See: <http://momentjs.com/docs/#/i18n/>
-                    'utc' => _x('UTC', 'moment-libs', 'wp-sharks-core'),
+                            'locale' => _x('en', 'moment-libs', 'wp-sharks-core'), // Override to translate.
+                            'i18n'   => [ // Or, you can change the `en` language here.
+                                'en'  => [], // See: <http://momentjs.com/docs/#/i18n/>
+                                'utc' => _x('UTC', 'moment-libs', 'wp-sharks-core'),
+                            ],
+                        ],
+                    ],
                 ],
-            ]
-        );
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'moment') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -348,49 +697,35 @@ class StylesScripts extends Classes\SCore\Base\Core
      *
      * @since 170128.18158 jQuery animate.css libs.
      *
-     * @param bool $styles Enqueue styles too?
+     * @param bool $with_styles Enqueue styles too?
      *
      * @return array Library details.
      */
-    public function enqueueJQueryAnimateCssLibs(bool $styles = false)
+    public function enqueueJQueryAnimateCssLibs(bool $with_styles = false)
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'versions'    => [
-                'style'  => '3.5.2',
-                'script' => '1.2.1',
-            ],
-            'style_shas' => [
-                'base' => 'sha256-j+P6EZJVrbXgwSR5Mx+eCS6FvP9Wq27MBRC/ogVriY0=',
-            ],
-            'script_shas' => [
-                'base' => 'sha256-EhOY3S+u1i6Wf5ZnoABv6wmv8WIH+023kKfiI8/zD+Y=',
+        $data = [
+            'scripts' => [
+                'jquery-animate-css' => [
+                    'version' => '1.2.1',
+                    'deps'    => ['jquery'],
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/animateCSS/%1$s/jquery.animatecss.min.js',
+                ],
             ],
         ];
-        if ($styles) { // It's generally unnecessary to load all of these animation styles.
+        if ($with_styles) { // It's generally unnecessary to load all of these animation styles.
             // Instead, steal the ones you need an include individually in your own CSS please.
-            wp_enqueue_style('animate-css', '//cdnjs.cloudflare.com/ajax/libs/animate.css/'.urlencode($details['version']).'/animate.min.css', [], null);
-
-            add_filter('style_loader_tag', function (string $tag, string $handle) use ($details): string {
-                if ($handle === 'animate-css') {
-                    $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['base']).'" crossorigin="anonymous" rel=', $tag);
-                }
-                return $tag;
-            }, 10, 2);
+            $data['styles'] = [
+                'animate-css' => [
+                    'version' => '3.5.2',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/animate.css/%1$s/animate.min.css',
+                ],
+            ];
         }
-        wp_enqueue_script('jquery-animate-css', '//cdnjs.cloudflare.com/ajax/libs/animateCSS/'.urlencode($details['version']).'/jquery.animatecss.min.js', ['jquery'], null, true);
-
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery-animate-css') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -404,141 +739,133 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueJQueryPickadateLibs(string $which = 'date-time')
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'    => '3.5.6',
-            'style_shas' => [
-                'base' => 'sha256-HJnF0By+MMhHfGTHjMMD7LlFL0KAQEMyWB86VbeFn4k=',
-                'date' => 'sha256-Ex8MCGbDP5+fEwTgLt8IbGaIDJu2uj88ZDJgZJrxA4Y=',
-                'time' => 'sha256-0GwWH1zJVNiu4u+bL27FHEpI0wjV0hZ4nSSRM2HmpK8=',
+        $data = [
+            'styles' => [
+                'jquery-pickadate' => [
+                    'version' => '3.5.6',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/%1$s/compressed/themes/default.css',
+                ],
             ],
-            'script_shas' => [
-                'base' => 'sha256-A1y8n02GW5dvJFkEOX7UCbzJoko8kqgWUquWf9TWFS8=',
-                'date' => 'sha256-rTh8vmcE+ZrUK3k9M6QCNZIBmAd1vumeuJkagq0EU3g=',
-                'time' => 'sha256-vFMKre5X5oQN63N+oJU9cJzn22opMuJ+G9FWChlH5n8=',
+            'scripts' => [
+                'jquery-pickadate' => [
+                    'version'  => '3.5.6',
+                    'deps'     => ['jquery'],
+                    'url'      => '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/%1$s/compressed/picker.js',
+                    'localize' => [
+                        'key'  => 'bvtnafpwxwhxtzqwqumtmwfywfmmgffdPickadateData',
+                        'data' => [
+                            'defaultDateOptions' => [
+                                'selectYears'   => true, 'selectMonths' => true,
+                                'closeOnSelect' => true, 'closeOnClear' => true,
+
+                                'format'       => _x('mmm dd, yyyy', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'momentFormat' => _x('MMM DD, YYYY', 'jquery-pickadate-libs', 'wp-sharks-core'),
+
+                                'formatSubmit' => _x('yyyy-mm-dd', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'hiddenName'   => true, // <http://amsul.ca/pickadate.js/date/#formats>
+
+                                'today' => _x('Today', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'clear' => _x('Clear', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'close' => _x('Close', 'jquery-pickadate-libs', 'wp-sharks-core'),
+
+                                'labelMonthNext'   => _x('Next Month', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'labelMonthPrev'   => _x('Previous Month', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'labelMonthSelect' => _x('Select Month', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'labelYearSelect'  => _x('Select Year', 'jquery-pickadate-libs', 'wp-sharks-core'),
+
+                                'weekdaysShort' => [
+                                    _x('Sun', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Mon', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Tue', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Wed', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Thu', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Fri', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Sat', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                ],
+                                'weekdaysFull' => [
+                                    _x('Sunday', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Monday', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Tuesday', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Wednesday', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Thursday', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Friday', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Saturday', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                ],
+                                'monthsShort' => [
+                                    _x('Jan', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Feb', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Mar', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Apr', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('May', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Jun', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Jul', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Aug', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Sep', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Oct', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Nov', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('Dec', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                ],
+                                'monthsFull' => [
+                                    _x('January', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('February', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('March', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('April', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('May', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('June', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('July', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('August', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('September', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('October', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('November', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                    _x('December', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                ],
+                            ],
+                            'defaultTimeOptions' => [
+                                'interval'      => 15,
+                                'closeOnSelect' => true, 'closeOnClear' => true,
+
+                                'format'       => _x('h:i A', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'momentFormat' => _x('h:mm A', 'jquery-pickadate-libs', 'wp-sharks-core'),
+
+                                'formatSubmit' => _x('HH:i', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                                'hiddenName'   => true, // <http://amsul.ca/pickadate.js/time/#formats>
+
+                                'clear' => _x('Clear', 'jquery-pickadate-libs', 'wp-sharks-core'),
+                            ],
+                        ],
+                    ],
+                ],
             ],
-        ]; // No details at this time.
-
-        wp_enqueue_style('jquery-pickadate', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/'.urlencode($details['version']).'/compressed/themes/default.css', [], null);
-        wp_enqueue_script('jquery-pickadate', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/'.urlencode($details['version']).'/compressed/picker.js', ['jquery'], null, true);
-
+        ];
         if ($which === 'date-time' || $which === 'date') {
-            wp_enqueue_style('jquery-pickadate-date', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/'.urlencode($details['version']).'/compressed/themes/default.date.css', ['jquery-pickadate'], null);
-            wp_enqueue_script('jquery-pickadate-date', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/'.urlencode($details['version']).'/compressed/picker.date.js', ['jquery-pickadate'], null, true);
+            $data['styles']['jquery-pickadate-date'] = [
+                'version' => '3.5.6',
+                'deps'    => ['jquery-pickadate'],
+                'url'     => '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/%1$s/compressed/themes/default.date.css',
+            ];
+            $data['scripts']['jquery-pickadate-date'] = [
+                'version' => '3.5.6',
+                'deps'    => ['jquery-pickadate'],
+                'url'     => '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/%1$s/compressed/picker.date.js',
+            ];
         }
         if ($which === 'date-time' || $which === 'time') {
-            wp_enqueue_style('jquery-pickadate-time', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/'.urlencode($details['version']).'/compressed/themes/default.time.css', ['jquery-pickadate'], null);
-            wp_enqueue_script('jquery-pickadate-time', '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/'.urlencode($details['version']).'/compressed/picker.time.js', ['jquery-pickadate'], null, true);
+            $data['styles']['jquery-pickadate-time'] = [
+                'version' => '3.5.6',
+                'deps'    => ['jquery-pickadate'],
+                'url'     => '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/%1$s/compressed/themes/default.time.css',
+            ];
+            $data['scripts']['jquery-pickadate-time'] = [
+                'version' => '3.5.6',
+                'deps'    => ['jquery-pickadate'],
+                'url'     => '//cdnjs.cloudflare.com/ajax/libs/pickadate.js/%1$s/compressed/picker.time.js',
+            ];
         }
-        wp_localize_script(
-            'jquery-pickadate', // See: <https://github.com/amsul/pickadate.js>
-            'bvtnafpwxwhxtzqwqumtmwfywfmmgffdPickadateData',
-            [
-                'defaultDateOptions' => [
-                    'selectYears'   => true, 'selectMonths' => true,
-                    'closeOnSelect' => true, 'closeOnClear' => true,
-
-                    'format'       => _x('mmm dd, yyyy', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'momentFormat' => _x('MMM DD, YYYY', 'jquery-pickadate-libs', 'wp-sharks-core'),
-
-                    'formatSubmit' => _x('yyyy-mm-dd', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'hiddenName'   => true, // <http://amsul.ca/pickadate.js/date/#formats>
-
-                    'today' => _x('Today', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'clear' => _x('Clear', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'close' => _x('Close', 'jquery-pickadate-libs', 'wp-sharks-core'),
-
-                    'labelMonthNext'   => _x('Next Month', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'labelMonthPrev'   => _x('Previous Month', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'labelMonthSelect' => _x('Select Month', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'labelYearSelect'  => _x('Select Year', 'jquery-pickadate-libs', 'wp-sharks-core'),
-
-                    'weekdaysShort' => [
-                        _x('Sun', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Mon', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Tue', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Wed', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Thu', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Fri', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Sat', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    ],
-                    'weekdaysFull' => [
-                        _x('Sunday', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Monday', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Tuesday', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Wednesday', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Thursday', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Friday', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Saturday', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    ],
-                    'monthsShort' => [
-                        _x('Jan', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Feb', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Mar', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Apr', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('May', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Jun', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Jul', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Aug', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Sep', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Oct', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Nov', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('Dec', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    ],
-                    'monthsFull' => [
-                        _x('January', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('February', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('March', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('April', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('May', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('June', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('July', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('August', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('September', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('October', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('November', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                        _x('December', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    ],
-                ],
-                'defaultTimeOptions' => [
-                    'interval'      => 15,
-                    'closeOnSelect' => true, 'closeOnClear' => true,
-
-                    'format'       => _x('h:i A', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'momentFormat' => _x('h:mm A', 'jquery-pickadate-libs', 'wp-sharks-core'),
-
-                    'formatSubmit' => _x('HH:i', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                    'hiddenName'   => true, // <http://amsul.ca/pickadate.js/time/#formats>
-
-                    'clear' => _x('Clear', 'jquery-pickadate-libs', 'wp-sharks-core'),
-                ],
-            ]
-        );
-        add_filter('style_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery-pickadate') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['base']).'" crossorigin="anonymous" rel=', $tag);
-            } elseif ($handle === 'jquery-pickadate-date') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['date']).'" crossorigin="anonymous" rel=', $tag);
-            } elseif ($handle === 'jquery-pickadate-time') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['time']).'" crossorigin="anonymous" rel=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery-pickadate') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            } elseif ($handle === 'jquery-pickadate-date') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['date']).'" crossorigin="anonymous" src=', $tag);
-            } elseif ($handle === 'jquery-pickadate-time') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['time']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -550,50 +877,38 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueJQueryChosenLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'     => '1.6.2',
-            'style_shas'  => [
-                'base' => 'sha256-QD+eN1fgrT9dm2vaE+NAAznRdtWd1JqM0xP2wkgjTSQ=',
-            ],
-            'script_shas' => [
-                'base' => 'sha256-sLYUdmo3eloR4ytzZ+7OJsswEB3fuvUGehbzGBOoy+8=',
-            ],
-        ]; // No details at this time.
-
-        wp_enqueue_style('jquery-chosen', '//cdnjs.cloudflare.com/ajax/libs/chosen/'.urlencode($details['version']).'/chosen.min.css', [], null);
-        wp_enqueue_script('jquery-chosen', '//cdnjs.cloudflare.com/ajax/libs/chosen/'.urlencode($details['version']).'/chosen.jquery.min.js', ['jquery'], null, true);
-
-        wp_localize_script(
-            'jquery-chosen', // See: <https://harvesthq.github.io/chosen/>
-            'jazssggqbtujeebgvnskynzyzwqttqqzJQueryChosenData',
-            [
-                'defaultOptions' => [
-                    'width'                     => '100%',
-                    'search_contains'           => true,
-                    'no_results_text'           => _x('No results.', 'jquery-chosen-libs', 'wp-sharks-core'),
-                    'placeholder_text_multiple' => _x('Search or click to select options...', 'jquery-chosen-libs', 'wp-sharks-core'),
-                    'placeholder_text_single'   => _x('Search or click to select an option...', 'jquery-chosen-libs', 'wp-sharks-core'),
+        $data = [
+            'styles' => [
+                'jquery-chosen' => [
+                    'version' => '1.6.2',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/chosen/%1$s/chosen.min.css',
                 ],
-            ]
-        );
-        add_filter('style_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery-chosen') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['base']).'" crossorigin="anonymous" rel=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery-chosen') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-
-        return $this->didEnqueue(__FUNCTION__, $details);
+            ],
+            'scripts' => [
+                'jquery-chosen' => [
+                    'version'  => '1.6.2',
+                    'deps'     => ['jquery'],
+                    'url'      => '//cdnjs.cloudflare.com/ajax/libs/chosen/%1$s/chosen.jquery.min.js',
+                    'localize' => [
+                        'key'  => 'jazssggqbtujeebgvnskynzyzwqttqqzJQueryChosenData',
+                        'data' => [
+                            'defaultOptions' => [
+                                'width'                     => '100%',
+                                'search_contains'           => true,
+                                'no_results_text'           => _x('No results.', 'jquery-chosen-libs', 'wp-sharks-core'),
+                                'placeholder_text_multiple' => _x('Search or click to select options...', 'jquery-chosen-libs', 'wp-sharks-core'),
+                                'placeholder_text_single'   => _x('Search or click to select an option...', 'jquery-chosen-libs', 'wp-sharks-core'),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -605,99 +920,99 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueJQueryJsGridLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = [
-            'version'     => '1.5.3',
-            'style_shas'  => [
-                'base'  => 'sha256-a/jNbtm7jpeKiXCShJ8YC+eNL9Abh7CBiYXHgaofUVs=',
-                'theme' => 'sha256-0rD7ZUV4NLK6VtGhEim14ZUZGC45Kcikjdcr4N03ddA=',
-            ],
-            'script_shas' => [
-                'base' => 'sha256-lzjMTpg04xOdI+MJdjBst98bVI6qHToLyVodu3EywFU=',
-            ],
-        ]; // No details at this time.
+        $this->enqueueMomentLibs();
+        $this->enqueueJQueryPickadateLibs();
 
-        $this->enqueueMomentLibs(); // The `date-time-fields` depend on this lib.
-        $this->enqueueJQueryPickadateLibs(); // The `date-time-fields` depend on this.
-
-        wp_enqueue_style('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/'.urlencode($details['version']).'/jsgrid.min.css', [], null);
-        wp_enqueue_style('jquery-jsgrid-theme', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/'.urlencode($details['version']).'/jsgrid-theme.min.css', ['jquery-jsgrid'], null);
-
-        wp_enqueue_script('jquery-jsgrid', '//cdnjs.cloudflare.com/ajax/libs/jsgrid/'.urlencode($details['version']).'/jsgrid.min.js', ['jquery'], null, true);
-        wp_enqueue_script('jquery-jsgrid-select-field', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/select-field.min.js'), ['jquery-jsgrid', 'underscore'], $this->cv, true);
-        wp_enqueue_script('jquery-jsgrid-control-field', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/control-field.min.js'), ['jquery-jsgrid', 'underscore'], $this->cv, true);
-        wp_enqueue_script('jquery-jsgrid-date-time-fields', $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'), ['jquery-jsgrid', 'jquery-pickadate', 'underscore'], $this->cv, true);
-
-        wp_localize_script(
-            'jquery-jsgrid', // See: <http://js-grid.com/docs/>
-            'neyjfbxruwddgfeedwacfbggzbxkwfxhJQueryJsGridData',
-            [
-                'defaultOptions' => [
-                    'width'  => '100%',
-                    'height' => 'auto',
-
-                    'inserting' => true,
-                    'editing'   => true,
-                    'sorting'   => true,
-                    'paging'    => true,
-
-                    'pageSize'              => 10,
-                    'pageButtonCount'       => 10,
-                    'pageFirstText'         => _x('««', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'pagePrevText'          => _x('«', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'pageNextText'          => _x('»', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'pageLastText'          => _x('»»', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'pageNavigatorNextText' => _x('…', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'pageNavigatorPrevText' => _x('…', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'pagerFormat'           => _x('Pages:', 'jquery-jsgrid-libs', 'wp-sharks-core').
-                        ' {first} {prev} {pages} {next} {last}',
-
-                    'invalidMessage' => _x('A slight problem...', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'loadMessage'    => _x('loading...', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'noDataContent'  => _x('Nothing to display.', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'deleteConfirm'  => _x('Are you sure?', 'jquery-jsgrid-libs', 'wp-sharks-core'), 'confirmDeleting' => false,
+        $data = [
+            'styles' => [
+                'jquery-jsgrid' => [
+                    'version' => '1.5.3',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/jsgrid/%1$s/jsgrid.min.css',
                 ],
-                'controlDefaultOptions' => [
-                    'width' => '10%',
-                    'type'  => 'control',
-                    'align' => 'center',
-
-                    'editButton'        => true,
-                    'deleteButton'      => true,
-                    'clearFilterButton' => true,
-                    'modeSwitchButton'  => true,
-
-                    'editButtonTooltip'        => _x('Edit', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'deleteButtonTooltip'      => _x('Delete', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'searchButtonTooltip'      => _x('Search', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'insertButtonTooltip'      => _x('Insert', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'updateButtonTooltip'      => _x('Update', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'cancelEditButtonTooltip'  => _x('Cancel edit', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'clearFilterButtonTooltip' => _x('Clear filter', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'insertModeButtonTooltip'  => _x('Switch to inserting', 'jquery-jsgrid-libs', 'wp-sharks-core'),
-                    'searchModeButtonTooltip'  => _x('Switch to searching', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                'jquery-jsgrid-theme' => [
+                    'version' => '1.5.3',
+                    'deps'    => ['jquery-jsgrid'],
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/jsgrid/%1$s/jsgrid-theme.min.css',
                 ],
-            ]
-        );
-        add_filter('style_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery-jsgrid') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['base']).'" crossorigin="anonymous" rel=', $tag);
-            } elseif ($handle === 'jquery-jsgrid-theme') {
-                $tag = str_replace(' rel=', ' integrity="'.esc_attr($details['style_shas']['theme']).'" crossorigin="anonymous" rel=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-        add_filter('script_loader_tag', function (string $tag, string $handle) use ($details): string {
-            if ($handle === 'jquery-jsgrid') {
-                $tag = str_replace(' src=', ' integrity="'.esc_attr($details['script_shas']['base']).'" crossorigin="anonymous" src=', $tag);
-            }
-            return $tag;
-        }, 10, 2);
+            ],
+            'scripts' => [
+                'jquery-jsgrid' => [
+                    'version'  => '1.5.3',
+                    'deps'     => ['jquery'],
+                    'url'      => '//cdnjs.cloudflare.com/ajax/libs/jsgrid/%1$s/jsgrid.min.js',
+                    'localize' => [
+                        'key'  => 'neyjfbxruwddgfeedwacfbggzbxkwfxhJQueryJsGridData',
+                        'data' => [
+                            'defaultOptions' => [
+                                'width'  => '100%',
+                                'height' => 'auto',
 
-        return $this->didEnqueue(__FUNCTION__, $details);
+                                'inserting' => true,
+                                'editing'   => true,
+                                'sorting'   => true,
+                                'paging'    => true,
+
+                                'pageSize'              => 10,
+                                'pageButtonCount'       => 10,
+                                'pageFirstText'         => _x('««', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'pagePrevText'          => _x('«', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'pageNextText'          => _x('»', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'pageLastText'          => _x('»»', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'pageNavigatorNextText' => _x('…', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'pageNavigatorPrevText' => _x('…', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'pagerFormat'           => _x('Pages:', 'jquery-jsgrid-libs', 'wp-sharks-core').
+                                    ' {first} {prev} {pages} {next} {last}',
+
+                                'invalidMessage' => _x('A slight problem...', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'loadMessage'    => _x('loading...', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'noDataContent'  => _x('Nothing to display.', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'deleteConfirm'  => _x('Are you sure?', 'jquery-jsgrid-libs', 'wp-sharks-core'), 'confirmDeleting' => false,
+                            ],
+                            'controlDefaultOptions' => [
+                                'width' => '10%',
+                                'type'  => 'control',
+                                'align' => 'center',
+
+                                'editButton'        => true,
+                                'deleteButton'      => true,
+                                'clearFilterButton' => true,
+                                'modeSwitchButton'  => true,
+
+                                'editButtonTooltip'        => _x('Edit', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'deleteButtonTooltip'      => _x('Delete', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'searchButtonTooltip'      => _x('Search', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'insertButtonTooltip'      => _x('Insert', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'updateButtonTooltip'      => _x('Update', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'cancelEditButtonTooltip'  => _x('Cancel edit', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'clearFilterButtonTooltip' => _x('Clear filter', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'insertModeButtonTooltip'  => _x('Switch to inserting', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                                'searchModeButtonTooltip'  => _x('Switch to searching', 'jquery-jsgrid-libs', 'wp-sharks-core'),
+                            ],
+                        ],
+                    ],
+                ],
+                'jquery-jsgrid-select-field' => [
+                    'ver'  => $this->cv,
+                    'deps' => ['underscore', 'jquery-jsgrid'],
+                    'url'  => $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/select-field.min.js'),
+                ],
+                'jquery-jsgrid-control-field' => [
+                    'ver'  => $this->cv,
+                    'deps' => ['underscore', 'jquery-jsgrid'],
+                    'url'  => $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/control-field.min.js'),
+                ],
+                'jquery-jsgrid-date-time-fields' => [
+                    'ver'  => $this->cv,
+                    'deps' => ['underscore', 'jquery-jsgrid', 'moment', 'jquery-pickadate'],
+                    'url'  => $this->c::appCoreUrl('/client-s/js/jquery-plugins/jsgrid/date-time-fields.min.js'),
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 
     /**
@@ -709,29 +1024,39 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function enqueueMenuPageLibs()
     {
-        if (($details = $this->didEnqueue(__FUNCTION__))) {
-            return $details; // Did this already.
-        } // We only need to enqueue these libs once.
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
 
-        $details = []; // No details at this time.
+        $this->enqueueSharkiconLibs();
 
-        $this->enqueueSharkiconLibs(); // Depends on this lib.
+        $data = [
+            'styles' => [
+                $this->App::CORE_CONTAINER_SLUG.'-menu-page' => [
+                    'ver'  => $this->cv,
+                    'deps' => ['sharkicons', 'wp-color-picker'],
+                    'url'  => $this->c::appCoreUrl('/client-s/css/admin/menu-page/core.min.css'),
+                ],
+            ],
+            'scripts' => [
+                $this->App::CORE_CONTAINER_SLUG.'-menu-page' => [
+                    'ver'      => $this->cv,
+                    'deps'     => ['jquery', 'underscore', 'jquery-ui-tooltip', 'wp-color-picker'],
+                    'url'      => $this->c::appCoreUrl('/client-s/js/admin/menu-page/core.min.js'),
+                    'localize' => [
+                        'key'  => 'nuqvUt59Aqv9RhzvhjafETjNS5hAFScXMenuPageData',
+                        'data' => [
+                            'coreContainerSlug' => $this->App::CORE_CONTAINER_SLUG,
+                            'coreContainerVar'  => $this->App::CORE_CONTAINER_VAR,
+                            'coreContainerName' => $this->App::CORE_CONTAINER_NAME,
 
-        wp_enqueue_style($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/css/admin/menu-page/core.min.css'), ['sharkicons', 'wp-color-picker'], $this->cv);
-        wp_enqueue_script($this->App::CORE_CONTAINER_SLUG.'-menu-page', $this->c::appCoreUrl('/client-s/js/admin/menu-page/core.min.js'), ['jquery', 'jquery-ui-tooltip', 'underscore', 'wp-color-picker'], $this->cv, true);
-
-        wp_localize_script(
-            $this->App::CORE_CONTAINER_SLUG.'-menu-page',
-            'nuqvUt59Aqv9RhzvhjafETjNS5hAFScXMenuPageData',
-            [
-                'coreContainerSlug' => $this->App::CORE_CONTAINER_SLUG,
-                'coreContainerVar'  => $this->App::CORE_CONTAINER_VAR,
-                'coreContainerName' => $this->App::CORE_CONTAINER_NAME,
-
-                'currentMenuPage'    => $this->s::currentMenuPage(),
-                'currentMenuPageTab' => $this->s::currentMenuPageTab(),
-            ]
-        );
-        return $this->didEnqueue(__FUNCTION__, $details);
+                            'currentMenuPage'    => $this->s::currentMenuPage(),
+                            'currentMenuPageTab' => $this->s::currentMenuPageTab(),
+                        ],
+                    ],
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
     }
 }

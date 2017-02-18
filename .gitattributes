@@ -438,6 +438,8 @@ _ide.php export-ignore
 
 # TypeScript Files
 
+*.ts export-ignore
+*.d.ts -export-ignore
 typings.json export-ignore
 tsconfig.json export-ignore
 
