@@ -457,7 +457,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                     'url'     => '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/%1$s/semantic.min.css',
                 ],
             ],
-            'styles' => [
+            'scripts' => [
                 'semantic-ui' => [
                     'version' => '2.2.7',
                     'deps'    => ['jquery'],

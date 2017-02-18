@@ -1,3 +1,7 @@
+## $v
+
+- Bug fix. Missing `scripts` key in Semantic UI libs.
+
 ## v170218.31677
 
 - Updating to latest core.
