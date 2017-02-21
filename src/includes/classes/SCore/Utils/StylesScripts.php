@@ -144,15 +144,14 @@ class StylesScripts extends Classes\SCore\Base\Core
 
         if (!($style = $this->didEnqueueStyle($handle))) {
             return $tag; // We did not enqueue this style.
-        } elseif (mb_stripos($tag, 'integrity=') !== false) {
-            return $tag; // If WP core handles in the future.
         }
-        if (($sri = $this->c::sri($style['url']))) {
-            $tag = str_replace(' rel=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" rel=', $tag);
-        } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
-        // NOTE: `c::sri()` also will not return an SRI for local resources on the current hostname.
-
-        return $tag; // With SRI hash if at all possible.
+        if ($style['sri'] !== '') { // Obey explicitly empty SRI in config.
+            if (($sri = $style['sri']) || ($sri = $this->c::sri($style['url']))) {
+                $tag = str_replace(' rel=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" rel=', $tag);
+            } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
+            // NOTE: `c::sri()` also will not return an SRI for local resources on the current hostname.
+        }
+        return $tag; // Possibly modifed above.
     }
 
     /**
@@ -171,19 +170,18 @@ class StylesScripts extends Classes\SCore\Base\Core
         $handle = (string) $handle;
 
         if (!($script = $this->didEnqueueScript($handle))) {
-            return $tag; // We did not enqueue this script.
-        } elseif (mb_stripos($tag, 'integrity=') !== false) {
-            return $tag; // If WP core handles in the future.
+            return $tag; // We did not enqueue.
         }
-        if ($script['async']) { // Load async?
+        if ($script['async']) { // Load script async?
             $tag = str_replace(' src=', ' async src=', $tag);
         }
-        if (($sri = $this->c::sri($script['url']))) {
-            $tag = str_replace(' src=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" src=', $tag);
-        } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
-        // NOTE: `c::sri()` also will not return an SRI for local resources on the current hostname.
-
-        return $tag; // With SRI hash if at all possible.
+        if ($script['sri'] !== '') { // Obey explicitly empty SRI in config.
+            if (($sri = $script['sri']) || ($sri = $this->c::sri($script['url']))) {
+                $tag = str_replace(' src=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" src=', $tag);
+            } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
+            // NOTE: `c::sri()` also will not return an SRI for local resources on the current hostname.
+        }
+        return $tag; // Possibly modifed above.
     }
 
     /**
@@ -211,6 +209,7 @@ class StylesScripts extends Classes\SCore\Base\Core
             $_version = $_style['version'] ?? '';
             $_ver     = $_style['ver'] ?? null;
             $_url     = $_style['url'] ?? '';
+            $_sri     = $_style['sri'] ?? null;
             $_deps    = $_style['deps'] ?? [];
             $_media   = $_style['media'] ?? 'all';
 
@@ -227,6 +226,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                 'version' => $_version,
                 'ver'     => $_ver,
                 'url'     => $_url,
+                'sri'     => $_sri,
                 'deps'    => $_deps,
                 'media'   => $_media,
             ];
@@ -239,6 +239,7 @@ class StylesScripts extends Classes\SCore\Base\Core
             $_version   = $_script['version'] ?? '';
             $_ver       = $_script['ver'] ?? null;
             $_url       = $_script['url'] ?? '';
+            $_sri       = $_script['sri'] ?? null;
             $_deps      = $_script['deps'] ?? [];
             $_async     = $_script['async'] ?? false;
             $_in_footer = $_script['in_footer'] ?? true;
@@ -260,6 +261,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                 'version'   => $_version,
                 'ver'       => $_ver,
                 'url'       => $_url,
+                'sri'       => $_sri,
                 'deps'      => $_deps,
                 'async'     => $_async,
                 'in_footer' => $_in_footer,

@@ -1,6 +1,7 @@
 ## $v
 
 - Adding support for `async` scripts.
+- Adding support for explicitly empty SRIs.
 
 ## v170219.18660
 
