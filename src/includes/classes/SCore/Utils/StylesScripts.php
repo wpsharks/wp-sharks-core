@@ -175,6 +175,9 @@ class StylesScripts extends Classes\SCore\Base\Core
         } elseif (mb_stripos($tag, 'integrity=') !== false) {
             return $tag; // If WP core handles in the future.
         }
+        if ($script['async']) { // Load async?
+            $tag = str_replace(' src=', ' async src=', $tag);
+        }
         if (($sri = $this->c::sri($script['url']))) {
             $tag = str_replace(' src=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" src=', $tag);
         } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
@@ -237,6 +240,7 @@ class StylesScripts extends Classes\SCore\Base\Core
             $_ver       = $_script['ver'] ?? null;
             $_url       = $_script['url'] ?? '';
             $_deps      = $_script['deps'] ?? [];
+            $_async     = $_script['async'] ?? false;
             $_in_footer = $_script['in_footer'] ?? true;
             $_localize  = $_script['localize'] ?? [];
 
@@ -257,6 +261,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                 'ver'       => $_ver,
                 'url'       => $_url,
                 'deps'      => $_deps,
+                'async'     => $_async,
                 'in_footer' => $_in_footer,
                 'localize'  => $_localize,
             ];

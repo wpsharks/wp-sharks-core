@@ -1,3 +1,7 @@
+## $v
+
+- Adding support for `async` scripts.
+
 ## v170219.18660
 
 - Bug fix. Missing `scripts` key in Semantic UI libs.
