@@ -234,6 +234,8 @@ class Options extends Classes\SCore\Base\Core
                 $options[$_key] = $_default_option_value;
             } elseif (!$this->App->Config->§specs['§is_pro'] && in_array($_key, $this->App->Config->§pro_option_keys, true)) {
                 $options[$_key] = $_default_option_value;
+            } elseif (!$this->App->Config->§specs['§is_elite'] && in_array($_key, $this->App->Config->§elite_option_keys, true)) {
+                $options[$_key] = $_default_option_value;
             } else {
                 settype($options[$_key], gettype($_default_option_value));
             }

@@ -1,5 +1,6 @@
 ## $v
 
+- Adding support for Elite variation.
 - Adding support for `async` scripts.
 - Adding support for explicitly empty SRIs.
 

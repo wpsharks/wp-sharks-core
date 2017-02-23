@@ -45,7 +45,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170223.5069'; //v//
+    const VERSION = '170223.12459'; //v//
 
     /**
      * ReST action API version.
@@ -134,6 +134,8 @@ class App extends CoreClasses\App
         $default_specs = [
             '§is_pro'          => null,
             '§has_pro'         => null,
+            '§is_elite'        => null,
+            '§has_elite'       => null,
             '§in_wp'           => null,
             '§is_network_wide' => false,
             '§type'            => '',
@@ -179,6 +181,8 @@ class App extends CoreClasses\App
                 [
                     '§is_pro'          => false,
                     '§has_pro'         => false,
+                    '§is_elite'        => false,
+                    '§has_elite'       => false,
                     '§in_wp'           => false,
                     '§is_network_wide' => false,
                     '§type'            => 'plugin',
@@ -206,10 +210,11 @@ class App extends CoreClasses\App
 
                     '©text_domain' => 'wp-sharks-core',
 
-                    '§domain'           => 'wpsharks.com',
-                    '§domain_path'      => '/product/wp-sharks-core',
-                    '§domain_pro_path'  => '', // Not applicable.
-                    '§domain_short_var' => 'wps',
+                    '§domain'            => 'wpsharks.com',
+                    '§domain_path'       => '/product/wp-sharks-core',
+                    '§domain_pro_path'   => '', // Not applicable.
+                    '§domain_elite_path' => '', // Not applicable.
+                    '§domain_short_var'  => 'wps',
 
                     '§api_domain'           => 'api.wpsharks.com',
                     '§api_domain_path'      => '/',
@@ -234,8 +239,10 @@ class App extends CoreClasses\App
 
             $specs                     = array_merge($default_specs, $instance_base['§specs'] ?? [], $instance['§specs'] ?? []);
             $specs['§is_pro']          = $specs['§is_pro'] ?? mb_stripos($this->namespace, '\\Pro\\') !== false;
-            $specs['§has_pro']         = $specs['§is_pro'] ?: true; // Assume this is true.
-            $specs['§in_wp']           = $specs['§is_pro'] ? false : ($specs['§in_wp'] ?? false);
+            $specs['§has_pro']         = $specs['§is_pro'] ?: true; // Assume true, quite common.
+            $specs['§is_elite']        = $specs['§is_elite'] ?? mb_stripos($this->namespace, '\\Elite\\') !== false;
+            $specs['§has_elite']       = $specs['§is_elite'] ?: false; // Assume this is false.
+            $specs['§in_wp']           = $specs['§is_pro'] || $specs['§is_elite'] ? false : ($specs['§in_wp'] ?? false);
             $specs['§is_network_wide'] = $specs['§is_network_wide'] && $this->Wp->is_multisite;
 
             if (!$specs['§type'] || !$specs['§file']) {
@@ -266,7 +273,7 @@ class App extends CoreClasses\App
             $brand['©short_slug'] = $brand['©short_slug'] ?: (strlen($brand['©slug']) <= 10 ? $brand['©slug'] : 's'.substr(md5($brand['©slug']), 0, 9));
             $brand['©short_var']  = $brand['©short_var'] ?: $Parent->c::slugToVar($brand['©short_slug']);
 
-            $brand['§product_name'] = $brand['§product_name'] ?: $brand['©name'].($specs['§is_pro'] ? ' Pro' : '');
+            $brand['§product_name'] = $brand['§product_name'] ?: $brand['©name'].($specs['§is_pro'] ? ' Pro' : ($specs['§is_elite'] ? ' Elite' : ''));
             $brand['§product_slug'] = $brand['§product_slug'] ?: $this->base_dir_basename;
 
             $brand['©text_domain'] = $brand['©text_domain'] ?: $brand['©slug'];
@@ -278,37 +285,40 @@ class App extends CoreClasses\App
                 $brand['§domain_pro_path'] = $specs['§is_pro'] ? $brand['§domain_path']
                     : ($specs['§has_pro'] ? '/product/'.$brand['§product_slug'].'-pro' : '');
 
+                $brand['§domain_elite_path'] = $specs['§is_elite'] ? $brand['§domain_path']
+                    : ($specs['§has_elite'] ? '/product/'.$brand['§product_slug'].'-elite' : '');
+
                 $brand['§domain_short_var'] = $Parent->Config->©brand['§domain_short_var'];
             }
             if ($this->Wp->debug) {
-                if (preg_match('/(?:LITE|PRO)$/ui', $brand['©acronym'])) {
-                    throw new Exception('Please remove `LITE|PRO` suffix from `©acronym`.');
-                } elseif (preg_match('/\s+(?:Lite|Pro)$/ui', $brand['©name'])) {
-                    throw new Exception('Please remove `Lite|Pro` suffix from `©name`.');
+                if (preg_match('/(?:LITE|PRO|ELITE)$/ui', $brand['©acronym'])) {
+                    throw new Exception('Please remove `LITE|PRO|ELITE` suffix from `©acronym`.');
+                } elseif (preg_match('/\s+(?:Lite|Pro|Elite)$/ui', $brand['©name'])) {
+                    throw new Exception('Please remove `Lite|Pro|Elite` suffix from `©name`.');
                     //
                 } elseif (!$Parent->c::isSlug($brand['©slug'])) {
                     throw new Exception('Please fix; `©slug` has invalid chars.');
-                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©slug'])) {
-                    throw new Exception('Please remove `lite|pro` suffix from `©slug`.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro|elite)$/ui', $brand['©slug'])) {
+                    throw new Exception('Please remove `lite|pro|elite` suffix from `©slug`.');
                     //
                 } elseif (!$Parent->c::isVar($brand['©var'])) {
                     throw new Exception('Please fix; `©var` has invalid chars.');
-                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©var'])) {
-                    throw new Exception('Please remove `lite|pro` suffix from `©var`.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro|elite)$/ui', $brand['©var'])) {
+                    throw new Exception('Please remove `lite|pro|elite` suffix from `©var`.');
                     //
                 } elseif (strlen($brand['©short_slug']) > 10) {
                     throw new Exception('Please fix; `©short_slug` is > 10 bytes.');
                 } elseif (!$Parent->c::isSlug($brand['©short_slug'])) {
                     throw new Exception('Please fix; `©short_slug` has invalid chars.');
-                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_slug'])) {
-                    throw new Exception('Please remove `lite|pro` suffix from `©short_slug`.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro|elite)$/ui', $brand['©short_slug'])) {
+                    throw new Exception('Please remove `lite|pro|elite` suffix from `©short_slug`.');
                     //
                 } elseif (strlen($brand['©short_var']) > 10) {
                     throw new Exception('Please fix; `©short_var` is > 10 bytes.');
                 } elseif (!$Parent->c::isVar($brand['©short_var'])) {
                     throw new Exception('Please fix; `©short_var` has invalid chars.');
-                } elseif (preg_match('/[_\-]+(?:lite|pro)$/ui', $brand['©short_var'])) {
-                    throw new Exception('Please remove `lite|pro` suffix from `©short_var`.');
+                } elseif (preg_match('/[_\-]+(?:lite|pro|elite)$/ui', $brand['©short_var'])) {
+                    throw new Exception('Please remove `lite|pro|elite` suffix from `©short_var`.');
                     //
                 } elseif (!$Parent->c::isSlug($brand['©text_domain'])) {
                     throw new Exception('Please fix; `©text_domain` has invalid chars.');
@@ -517,32 +527,34 @@ class App extends CoreClasses\App
                     ? 'manage_network_plugins' : 'activate_plugins',
             ],
 
-            '§pro_option_keys' => [
-                /*
-                    '[key]',
-                */
-            ],
-            '§default_options' => [
+            '§pro_option_keys'   => [],
+            '§elite_option_keys' => [],
+            '§default_options'   => [
                 '§for_version'      => $this::VERSION,
                 '§for_product_slug' => $brand['§product_slug'],
                 '§license_key'      => '', // For product slug.
             ],
-            '§options' => [
-                /*
-                    '[key]' => '[value]',
-                */
-            ], // Filled automatically (see below).
+            '§options' => [], // Filled automatically (see below).
 
             '§force_install' => false, // Force install (or reinstall)?
             '§uninstall'     => false, // Uninstall? e.g., on deletion.
         ];
-        # Automatically add lite/pro conflict to the array.
+        # Automatically add lite/pro/elite conflicts to the array.
 
-        if ($specs['§type'] === 'plugin') { // Only for plugins. Only one theme can be active at a time.
-            $_lp_conflicting_name                                                                 = $brand['©name'].($specs['§is_pro'] ? ' Lite' : ' Pro');
-            $_lp_conflicting_slug                                                                 = $brand['©slug'].($specs['§is_pro'] ? '' : '-pro');
-            $default_instance_base['§conflicts']['§plugins'][$_lp_conflicting_slug]               = $_lp_conflicting_name;
-            $default_instance_base['§conflicts']['§deactivatable_plugins'][$_lp_conflicting_slug] = $_lp_conflicting_name;
+        if ($specs['§type'] === 'plugin') { // Only for plugins; n/a to themes.
+            if ($specs['§is_pro']) {
+                $default_instance_base['§conflicts']['§plugins'][$brand['©slug']]               = $brand['©name'];
+                $default_instance_base['§conflicts']['§deactivatable_plugins'][$brand['©slug']] = $brand['©name'];
+                $default_instance_base['§conflicts']['§plugins'][$brand['©slug'].'-elite']      = $brand['©name'].' Elite';
+            } elseif ($specs['§is_elite']) {
+                $default_instance_base['§conflicts']['§plugins'][$brand['©slug']]                      = $brand['©name'];
+                $default_instance_base['§conflicts']['§deactivatable_plugins'][$brand['©slug']]        = $brand['©name'];
+                $default_instance_base['§conflicts']['§plugins'][$brand['©slug'].'-pro']               = $brand['©name'].' Pro';
+                $default_instance_base['§conflicts']['§deactivatable_plugins'][$brand['©slug'].'-pro'] = $brand['©name'].' Pro';
+            } else {
+                $default_instance_base['§conflicts']['§plugins'][$brand['©slug'].'-pro']   = $brand['©name'].' Pro';
+                $default_instance_base['§conflicts']['§plugins'][$brand['©slug'].'-elite'] = $brand['©name'].' Elite';
+            }
         }
         # Merge `$default_instance_base` w/ `$instance_base` param.
 
@@ -652,7 +664,8 @@ class App extends CoreClasses\App
 
         $is_trial_expired = false; // Initialize.
 
-        if (!$this->is_core && $this->Config->§specs['§is_pro']
+        if (!$this->is_core // Check if software trial is expired.
+            && ($this->Config->§specs['§is_pro'] || $this->Config->§specs['§is_elite'])
             && !$this->Config->§options['§license_key']) {
             $is_trial_expired = $this->s::maybeExpireTrial();
         }

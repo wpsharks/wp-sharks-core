@@ -66,8 +66,8 @@ class Updater extends Classes\SCore\Base\Core
             // This redirects the 'details' page for a plugin, to the product changelog
             // at the brand domain for the app; i.e., instead of pulling all details into WP.
             if (($_REQUEST['plugin'] ?? '') === $this->App->Config->©brand['§product_slug']
-                && ($_REQUEST['tab'] ?? '') === 'plugin-information'
-                && $this->s::isMenuPage('plugin-install.php')) {
+                    && ($_REQUEST['tab'] ?? '') === 'plugin-information'
+                    && $this->s::isMenuPage('plugin-install.php')) {
                 wp_redirect($this->s::brandUrl('/changelog?in-wp')).exit();
             }
         }

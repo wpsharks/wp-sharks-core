@@ -5,7 +5,7 @@
  * @author @jaswsinc
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -32,12 +32,12 @@ class BrandUrl extends Classes\SCore\Base\Core
      *
      * @since 160625 Brand URLs.
      *
-     * @param string    $uri URI to append.
-     * @param bool|null $pro Force pro variation?
+     * @param string $uri       URI to append.
+     * @param string $variation i.e., `pro|elite`.
      *
      * @return string Output URL.
      */
-    public function toBrand(string $uri = '', bool $pro = null): string
+    public function toBrand(string $uri = '', string $variation = null): string
     {
         if (!($host = $this->App->Config->©brand['§domain'])) {
             throw $this->c::issue('Missing brand domain.');
@@ -45,8 +45,10 @@ class BrandUrl extends Classes\SCore\Base\Core
         $uri = $uri ? $this->c::mbLTrim($uri, '/') : '';
         $uri = $uri ? '/'.$uri : ''; // Force leading slash.
 
-        if ($pro && !$this->App->Config->§specs['§is_pro'] && $this->App->Config->§specs['§has_pro']) {
+        if ($variation === 'pro' && !$this->App->Config->§specs['§is_pro'] && $this->App->Config->§specs['§has_pro']) {
             $base_path = $this->App->Config->©brand['§domain_pro_path'];
+        } elseif ($variation === 'elite' && !$this->App->Config->§specs['§is_elite'] && $this->App->Config->§specs['§has_elite']) {
+            $base_path = $this->App->Config->©brand['§domain_elite_path'];
         } else {
             $base_path = $this->App->Config->©brand['§domain_path'];
         }
@@ -75,14 +77,14 @@ class BrandUrl extends Classes\SCore\Base\Core
      *
      * @since 160625 Brand URLs.
      *
-     * @param string    $uri URI to append.
-     * @param bool|null $pro Force pro variation?
+     * @param string $uri       URI to append.
+     * @param string $variation i.e., `pro|elite`.
      *
      * @return string Output URL.
      */
-    public function toBrandParent(string $uri = '', bool $pro = null): string
+    public function toBrandParent(string $uri = '', string $variation = null): string
     {
-        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrand($uri, $pro) : $this->toBrand($uri, $pro);
+        return $this->App->Parent ? $this->App->Parent->Utils->§BrandUrl->toBrand($uri, $variation) : $this->toBrand($uri, $variation);
     }
 
     /**
@@ -104,17 +106,17 @@ class BrandUrl extends Classes\SCore\Base\Core
      *
      * @since 160625 Brand URLs.
      *
-     * @param string    $uri URI to append.
-     * @param bool|null $pro Force pro variation?
+     * @param string $uri       URI to append.
+     * @param string $variation i.e., `pro|elite`.
      *
      * @return string Output URL.
      */
-    public function toBrandCore(string $uri = '', bool $pro = null): string
+    public function toBrandCore(string $uri = '', string $variation = null): string
     {
         if ($this->App->Parent) { // Looking for the root core.
-            return $this->App->Parent->Utils->§BrandUrl->toBrandCore($uri, $pro);
+            return $this->App->Parent->Utils->§BrandUrl->toBrandCore($uri, $variation);
         }
-        return $this->toBrand($uri, $pro);
+        return $this->toBrand($uri, $variation);
     }
 
     /**

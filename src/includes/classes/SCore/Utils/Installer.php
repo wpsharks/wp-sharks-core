@@ -32,7 +32,7 @@ class Installer extends Classes\SCore\Base\Core
      *
      * @since 161013
      *
-     * @var int
+     * @type int
      */
     public $trial_days;
 
@@ -41,7 +41,7 @@ class Installer extends Classes\SCore\Base\Core
      *
      * @since 160524
      *
-     * @var array
+     * @type array
      */
     protected $history;
 
@@ -140,8 +140,8 @@ class Installer extends Classes\SCore\Base\Core
             return $days = -1; // Not applicable.
         } elseif ($this->App->Config->§specs['§in_wp']) {
             return $days = -1; // Not applicable.
-        } elseif (!$this->App->Config->§specs['§is_pro']) {
-            return $days = -1; // Not pro version.
+        } elseif (!$this->App->Config->§specs['§is_elite'] && !$this->App->Config->§specs['§is_pro']) {
+            return $days = -1; // Not elite/pro version.
         } elseif ($this->App->Config->§options['§license_key']) {
             return $days = -1; // Have license key.
         } elseif (!in_array($this->App->Config->§specs['§type'], ['theme', 'plugin'], true)) {

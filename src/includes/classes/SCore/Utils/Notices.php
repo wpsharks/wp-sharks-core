@@ -32,7 +32,7 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160524 WP notices.
      *
-     * @var array Defaults.
+     * @type array Defaults.
      */
     protected $defaults;
 
@@ -41,7 +41,7 @@ class Notices extends Classes\SCore\Base\Core
      *
      * @since 160715 WP notices.
      *
-     * @var int Outdated notice time.
+     * @type int Outdated notice time.
      */
     protected $outdated_notice_time;
 
@@ -473,7 +473,8 @@ class Notices extends Classes\SCore\Base\Core
             if (!$this->currentUserCan($notice)) {
                 $this->s::dieForbidden();
             }
-            if ($key === '§license-key-request' && $this->App->Config->§specs['§is_pro']) {
+            if ($key === '§license-key-request' // Maybe welcome user to their free trial!
+                    && ($this->App->Config->§specs['§is_pro'] || $this->App->Config->§specs['§is_elite'])) {
                 $trial_days           = $this->s::trialDays();
                 $trial_days_remaining = $this->s::trialDaysRemaining();
 
@@ -564,7 +565,6 @@ class Notices extends Classes\SCore\Base\Core
 
             if ($this->c::isSerialized($_notice['is_applicable'])) {
                 try { // Maybe catch exceptions here.
-
                     $_is_applicable = $this->c::unserializeClosure($_notice['is_applicable']);
                     $_is_applicable = $_is_applicable($this->App); // Should return (bool) or `null`.
                     $_is_applicable = $_is_applicable === null ? $_is_applicable : (bool) $_is_applicable;
@@ -591,7 +591,6 @@ class Notices extends Classes\SCore\Base\Core
 
             if ($this->c::isSerialized($_notice['markup'])) {
                 try { // Maybe catch exceptions here.
-
                     $_markup = $this->c::unserializeClosure($_notice['markup']);
                     $_markup = (string) $_markup($this->App); // Should return a string.
 

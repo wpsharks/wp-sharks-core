@@ -32,7 +32,7 @@ class MenuPage extends Classes\SCore\Base\Core
      *
      * @since 160715 Conflicts.
      *
-     * @var array Menu page hook names.
+     * @type array Menu page hook names.
      */
     protected $hook_names;
 
@@ -323,9 +323,12 @@ class MenuPage extends Classes\SCore\Base\Core
         if (($default_url = $this->defaultUrl())) { // See {@link defaultUrl()} below.
             $actions[] = '<a href="'.esc_url($default_url).'">'.__('Settings', 'wp-sharks-core').'</a>';
         }
-        if (!$this->App->Config->§specs['§is_pro'] && $this->App->Config->§specs['§has_pro']) {
-            $actions[] = '<a href="'.esc_url($this->s::brandUrl('/', true)).'" target="_blank">'.__('Upgrade', 'wp-sharks-core').' <i class="sharkicon sharkicon-octi-tag"></i></a>';
-        } elseif ($this->App->is_core) {
+        if (!$this->App->Config->§specs['§is_pro'] && !$this->App->Config->§specs['§is_elite'] && $this->App->Config->§specs['§has_pro']) {
+            $actions[] = '<a href="'.esc_url($this->s::brandUrl('/', 'pro')).'" target="_blank">'.__('Pro Upgrade', 'wp-sharks-core').' <i class="sharkicon sharkicon-octi-tag"></i></a>';
+        } elseif (!$this->App->Config->§specs['§is_elite'] && $this->App->Config->§specs['§has_elite']) {
+            $actions[] = '<a href="'.esc_url($this->s::brandUrl('/', 'elite')).'" target="_blank">'.__('Elite Upgrade', 'wp-sharks-core').' <i class="sharkicon sharkicon-octi-tag"></i></a>';
+        }
+        if ($this->App->is_core) {
             $actions[] = '<a href="'.esc_url($this->s::coreUrl('/shop')).'" target="_blank">'.esc_html($this->App::CORE_CONTAINER_NAME).'™ <i class="sharkicon sharkicon-wp-sharks-fin"></i></a>';
         }
         return $actions;

@@ -24,7 +24,7 @@ if (!defined('WPINC')) {
     exit('Do NOT access this file directly.');
 }
 ?>
-<?php if ($this->App->Config->§specs['§is_pro'] && ($trial_days_remaining = $this->s::trialDaysRemaining()) >= 0) : ?>
+<?php if (($this->App->Config->§specs['§is_pro'] || $this->App->Config->§specs['§is_elite']) && ($trial_days_remaining = $this->s::trialDaysRemaining()) >= 0) : ?>
 
     <?php if ($this->s::isTrialExpired()) : // Trial applicable.?>
 
@@ -69,14 +69,14 @@ if (!defined('WPINC')) {
                     <?= __('Begin Free Trial', 'wp-sharks-core'); ?>
                 </button>
                 <span class="-note" style="margin:0 0 0 .5em; vertical-align:middle;">
-                    <?= sprintf(_n('(%1$s day of unrestricted access to all pro features)', '(%1$s days of unrestricted access to all pro features)', $trial_days_remaining, 'wp-sharks-core'), $trial_days_remaining); ?>
+                    <?= sprintf(_n('(%1$s day of unrestricted access to all features)', '(%1$s days of unrestricted access to all features)', $trial_days_remaining, 'wp-sharks-core'), $trial_days_remaining); ?>
                 </span>
             <?php else : ?>
                 <button type="submit" class="button button-small" style="vertical-align:middle;">
                     <?= sprintf(_n('Continue Trial (%1$s day remaining)', 'Continue Trial (%1$s days remaining)', $trial_days_remaining, 'wp-sharks-core'), $trial_days_remaining); ?>
                 </button>
                 <span class="-note" style="margin:0 0 0 .5em; vertical-align:middle;">
-                    <?= __('unrestricted access to all pro features.', 'wp-sharks-core'); ?>
+                    <?= __('unrestricted access to all features.', 'wp-sharks-core'); ?>
                 </span>
             <?php endif; ?>
         </form>
