@@ -460,13 +460,13 @@ class StylesScripts extends Classes\SCore\Base\Core
         $data = [
             'styles' => [
                 'semantic-ui' => [
-                    'version' => '2.2.7',
+                    'version' => '2.2.9',
                     'url'     => '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/%1$s/semantic.min.css',
                 ],
             ],
             'scripts' => [
                 'semantic-ui' => [
-                    'version' => '2.2.7',
+                    'version' => '2.2.9',
                     'deps'    => ['jquery'],
                     'url'     => '//cdnjs.cloudflare.com/ajax/libs/semantic-ui/%1$s/semantic.min.js',
                 ],
