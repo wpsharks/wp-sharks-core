@@ -212,6 +212,7 @@ class StylesScripts extends Classes\SCore\Base\Core
             $_sri     = $_style['sri'] ?? null;
             $_deps    = $_style['deps'] ?? [];
             $_media   = $_style['media'] ?? 'all';
+            $_inline  = $_style['inline'] ?? '';
 
             if ($_version && $_url) { // Version in URL?
                 $_url = sprintf($_url, urlencode($_version));
@@ -222,6 +223,9 @@ class StylesScripts extends Classes\SCore\Base\Core
 
             wp_enqueue_style($_handle); // Immediately.
 
+            if ($_inline) { // Inline styles also?
+                wp_add_inline_style($_handle, $_inline);
+            }
             $this->did_enqueue_styles[$_handle] = [
                 'version' => $_version,
                 'ver'     => $_ver,
@@ -229,8 +233,9 @@ class StylesScripts extends Classes\SCore\Base\Core
                 'sri'     => $_sri,
                 'deps'    => $_deps,
                 'media'   => $_media,
+                'inline'  => $_inline,
             ];
-        } // unset($_handle, $_script, $_version, $_ver, $_url, $_deps, $_media);
+        } // unset($_handle, $_script, $_version, $_ver, $_url, $_deps, $_media, $_inline);
 
         foreach ($data['scripts'] ?? [] as $_handle => $_script) {
             if (!$_handle || !is_string($_handle)) {

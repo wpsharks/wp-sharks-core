@@ -3,6 +3,7 @@
 - Adding support for Elite variation.
 - Adding support for `async` scripts.
 - Adding support for explicitly empty SRIs.
+- Adding support for inline styles in our own lib.
 
 ## v170219.18660
 
