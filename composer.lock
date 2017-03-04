@@ -270,16 +270,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.7",
+            "version": "v2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "b5ea1ef3d8ff10c307ba8c5945c2f134e503278f"
+                "reference": "6968531206671f94377b01dc7888d5d1b858a01b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/b5ea1ef3d8ff10c307ba8c5945c2f134e503278f",
-                "reference": "b5ea1ef3d8ff10c307ba8c5945c2f134e503278f",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/6968531206671f94377b01dc7888d5d1b858a01b",
+                "reference": "6968531206671f94377b01dc7888d5d1b858a01b",
                 "shasum": ""
             },
             "require": {
@@ -314,7 +314,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2017-02-27 17:11:23"
+            "time": "2017-03-03 20:43:42"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -621,12 +621,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "b808accf252f42b0e00d87633b0f2529cf41b6a6"
+                "reference": "3f149b149ffff719c23cdc274bed32f23347d161"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/b808accf252f42b0e00d87633b0f2529cf41b6a6",
-                "reference": "b808accf252f42b0e00d87633b0f2529cf41b6a6",
+                "url": "https://api.github.com/repos/websharks/core/zipball/3f149b149ffff719c23cdc274bed32f23347d161",
+                "reference": "3f149b149ffff719c23cdc274bed32f23347d161",
                 "shasum": ""
             },
             "require": {
@@ -745,7 +745,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-03-01 00:10:54"
+            "time": "2017-03-04 23:48:23"
         },
         {
             "name": "websharks/dicer",
