@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 170304.85924\n"
+"Project-Id-Version: WP Sharks Core 170308.51606\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2017-03-04 23:53:47+00:00\n"
+"POT-Creation-Date: 2017-03-08 14:21:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -227,390 +227,390 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:690
+#: src/includes/classes/SCore/Utils/StylesScripts.php:714
 msgctxt "moment-libs"
 msgid "MMM Do, YYYY h:mm a"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:691
+#: src/includes/classes/SCore/Utils/StylesScripts.php:715
 msgctxt "moment-libs"
 msgid "MMM Do, YYYY"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:692
+#: src/includes/classes/SCore/Utils/StylesScripts.php:716
 msgctxt "moment-libs"
 msgid "h:mm a"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:694
+#: src/includes/classes/SCore/Utils/StylesScripts.php:718
 msgctxt "moment-libs"
 msgid "en"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:697
+#: src/includes/classes/SCore/Utils/StylesScripts.php:721
 msgctxt "moment-libs"
 msgid "UTC"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:777
+#: src/includes/classes/SCore/Utils/StylesScripts.php:801
 msgctxt "jquery-pickadate-libs"
 msgid "mmm dd, yyyy"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:778
+#: src/includes/classes/SCore/Utils/StylesScripts.php:802
 msgctxt "jquery-pickadate-libs"
 msgid "MMM DD, YYYY"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:780
+#: src/includes/classes/SCore/Utils/StylesScripts.php:804
 msgctxt "jquery-pickadate-libs"
 msgid "yyyy-mm-dd"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:783
+#: src/includes/classes/SCore/Utils/StylesScripts.php:807
 msgctxt "jquery-pickadate-libs"
 msgid "Today"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:784
-#: src/includes/classes/SCore/Utils/StylesScripts.php:849
+#: src/includes/classes/SCore/Utils/StylesScripts.php:808
+#: src/includes/classes/SCore/Utils/StylesScripts.php:873
 msgctxt "jquery-pickadate-libs"
 msgid "Clear"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:785
+#: src/includes/classes/SCore/Utils/StylesScripts.php:809
 msgctxt "jquery-pickadate-libs"
 msgid "Close"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:787
+#: src/includes/classes/SCore/Utils/StylesScripts.php:811
 msgctxt "jquery-pickadate-libs"
 msgid "Next Month"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:788
+#: src/includes/classes/SCore/Utils/StylesScripts.php:812
 msgctxt "jquery-pickadate-libs"
 msgid "Previous Month"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:789
+#: src/includes/classes/SCore/Utils/StylesScripts.php:813
 msgctxt "jquery-pickadate-libs"
 msgid "Select Month"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:790
+#: src/includes/classes/SCore/Utils/StylesScripts.php:814
 msgctxt "jquery-pickadate-libs"
 msgid "Select Year"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:793
+#: src/includes/classes/SCore/Utils/StylesScripts.php:817
 msgctxt "jquery-pickadate-libs"
 msgid "Sun"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:794
+#: src/includes/classes/SCore/Utils/StylesScripts.php:818
 msgctxt "jquery-pickadate-libs"
 msgid "Mon"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:795
+#: src/includes/classes/SCore/Utils/StylesScripts.php:819
 msgctxt "jquery-pickadate-libs"
 msgid "Tue"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:796
+#: src/includes/classes/SCore/Utils/StylesScripts.php:820
 msgctxt "jquery-pickadate-libs"
 msgid "Wed"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:797
+#: src/includes/classes/SCore/Utils/StylesScripts.php:821
 msgctxt "jquery-pickadate-libs"
 msgid "Thu"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:798
+#: src/includes/classes/SCore/Utils/StylesScripts.php:822
 msgctxt "jquery-pickadate-libs"
 msgid "Fri"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:799
+#: src/includes/classes/SCore/Utils/StylesScripts.php:823
 msgctxt "jquery-pickadate-libs"
 msgid "Sat"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:802
+#: src/includes/classes/SCore/Utils/StylesScripts.php:826
 msgctxt "jquery-pickadate-libs"
 msgid "Sunday"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:803
+#: src/includes/classes/SCore/Utils/StylesScripts.php:827
 msgctxt "jquery-pickadate-libs"
 msgid "Monday"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:804
+#: src/includes/classes/SCore/Utils/StylesScripts.php:828
 msgctxt "jquery-pickadate-libs"
 msgid "Tuesday"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:805
+#: src/includes/classes/SCore/Utils/StylesScripts.php:829
 msgctxt "jquery-pickadate-libs"
 msgid "Wednesday"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:806
+#: src/includes/classes/SCore/Utils/StylesScripts.php:830
 msgctxt "jquery-pickadate-libs"
 msgid "Thursday"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:807
+#: src/includes/classes/SCore/Utils/StylesScripts.php:831
 msgctxt "jquery-pickadate-libs"
 msgid "Friday"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:808
+#: src/includes/classes/SCore/Utils/StylesScripts.php:832
 msgctxt "jquery-pickadate-libs"
 msgid "Saturday"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:811
+#: src/includes/classes/SCore/Utils/StylesScripts.php:835
 msgctxt "jquery-pickadate-libs"
 msgid "Jan"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:812
+#: src/includes/classes/SCore/Utils/StylesScripts.php:836
 msgctxt "jquery-pickadate-libs"
 msgid "Feb"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:813
+#: src/includes/classes/SCore/Utils/StylesScripts.php:837
 msgctxt "jquery-pickadate-libs"
 msgid "Mar"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:814
+#: src/includes/classes/SCore/Utils/StylesScripts.php:838
 msgctxt "jquery-pickadate-libs"
 msgid "Apr"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:815
-#: src/includes/classes/SCore/Utils/StylesScripts.php:829
+#: src/includes/classes/SCore/Utils/StylesScripts.php:839
+#: src/includes/classes/SCore/Utils/StylesScripts.php:853
 msgctxt "jquery-pickadate-libs"
 msgid "May"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:816
+#: src/includes/classes/SCore/Utils/StylesScripts.php:840
 msgctxt "jquery-pickadate-libs"
 msgid "Jun"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:817
+#: src/includes/classes/SCore/Utils/StylesScripts.php:841
 msgctxt "jquery-pickadate-libs"
 msgid "Jul"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:818
+#: src/includes/classes/SCore/Utils/StylesScripts.php:842
 msgctxt "jquery-pickadate-libs"
 msgid "Aug"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:819
+#: src/includes/classes/SCore/Utils/StylesScripts.php:843
 msgctxt "jquery-pickadate-libs"
 msgid "Sep"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:820
+#: src/includes/classes/SCore/Utils/StylesScripts.php:844
 msgctxt "jquery-pickadate-libs"
 msgid "Oct"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:821
+#: src/includes/classes/SCore/Utils/StylesScripts.php:845
 msgctxt "jquery-pickadate-libs"
 msgid "Nov"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:822
+#: src/includes/classes/SCore/Utils/StylesScripts.php:846
 msgctxt "jquery-pickadate-libs"
 msgid "Dec"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:825
+#: src/includes/classes/SCore/Utils/StylesScripts.php:849
 msgctxt "jquery-pickadate-libs"
 msgid "January"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:826
+#: src/includes/classes/SCore/Utils/StylesScripts.php:850
 msgctxt "jquery-pickadate-libs"
 msgid "February"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:827
+#: src/includes/classes/SCore/Utils/StylesScripts.php:851
 msgctxt "jquery-pickadate-libs"
 msgid "March"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:828
+#: src/includes/classes/SCore/Utils/StylesScripts.php:852
 msgctxt "jquery-pickadate-libs"
 msgid "April"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:830
+#: src/includes/classes/SCore/Utils/StylesScripts.php:854
 msgctxt "jquery-pickadate-libs"
 msgid "June"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:831
+#: src/includes/classes/SCore/Utils/StylesScripts.php:855
 msgctxt "jquery-pickadate-libs"
 msgid "July"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:832
+#: src/includes/classes/SCore/Utils/StylesScripts.php:856
 msgctxt "jquery-pickadate-libs"
 msgid "August"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:833
+#: src/includes/classes/SCore/Utils/StylesScripts.php:857
 msgctxt "jquery-pickadate-libs"
 msgid "September"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:834
+#: src/includes/classes/SCore/Utils/StylesScripts.php:858
 msgctxt "jquery-pickadate-libs"
 msgid "October"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:835
+#: src/includes/classes/SCore/Utils/StylesScripts.php:859
 msgctxt "jquery-pickadate-libs"
 msgid "November"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:836
+#: src/includes/classes/SCore/Utils/StylesScripts.php:860
 msgctxt "jquery-pickadate-libs"
 msgid "December"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:843
+#: src/includes/classes/SCore/Utils/StylesScripts.php:867
 msgctxt "jquery-pickadate-libs"
 msgid "h:i A"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:844
+#: src/includes/classes/SCore/Utils/StylesScripts.php:868
 msgctxt "jquery-pickadate-libs"
 msgid "h:mm A"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:846
+#: src/includes/classes/SCore/Utils/StylesScripts.php:870
 msgctxt "jquery-pickadate-libs"
 msgid "HH:i"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:914
+#: src/includes/classes/SCore/Utils/StylesScripts.php:938
 msgctxt "jquery-chosen-libs"
 msgid "No results."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:915
+#: src/includes/classes/SCore/Utils/StylesScripts.php:939
 msgctxt "jquery-chosen-libs"
 msgid "Search or click to select options..."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:916
+#: src/includes/classes/SCore/Utils/StylesScripts.php:940
 msgctxt "jquery-chosen-libs"
 msgid "Search or click to select an option..."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:973
+#: src/includes/classes/SCore/Utils/StylesScripts.php:997
 msgctxt "jquery-jsgrid-libs"
 msgid "««"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:974
+#: src/includes/classes/SCore/Utils/StylesScripts.php:998
 msgctxt "jquery-jsgrid-libs"
 msgid "«"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:975
+#: src/includes/classes/SCore/Utils/StylesScripts.php:999
 msgctxt "jquery-jsgrid-libs"
 msgid "»"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:976
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1000
 msgctxt "jquery-jsgrid-libs"
 msgid "»»"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:977
-#: src/includes/classes/SCore/Utils/StylesScripts.php:978
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1001
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1002
 msgctxt "jquery-jsgrid-libs"
 msgid "…"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:979
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1003
 msgctxt "jquery-jsgrid-libs"
 msgid "Pages:"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:982
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1006
 msgctxt "jquery-jsgrid-libs"
 msgid "A slight problem..."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:983
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1007
 msgctxt "jquery-jsgrid-libs"
 msgid "loading..."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:984
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1008
 msgctxt "jquery-jsgrid-libs"
 msgid "Nothing to display."
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:985
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1009
 msgctxt "jquery-jsgrid-libs"
 msgid "Are you sure?"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:997
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1021
 msgctxt "jquery-jsgrid-libs"
 msgid "Edit"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:998
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1022
 msgctxt "jquery-jsgrid-libs"
 msgid "Delete"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:999
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1023
 msgctxt "jquery-jsgrid-libs"
 msgid "Search"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:1000
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1024
 msgctxt "jquery-jsgrid-libs"
 msgid "Insert"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:1001
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1025
 msgctxt "jquery-jsgrid-libs"
 msgid "Update"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:1002
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1026
 msgctxt "jquery-jsgrid-libs"
 msgid "Cancel edit"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:1003
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1027
 msgctxt "jquery-jsgrid-libs"
 msgid "Clear filter"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:1004
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1028
 msgctxt "jquery-jsgrid-libs"
 msgid "Switch to inserting"
 msgstr ""
 
-#: src/includes/classes/SCore/Utils/StylesScripts.php:1005
+#: src/includes/classes/SCore/Utils/StylesScripts.php:1029
 msgctxt "jquery-jsgrid-libs"
 msgid "Switch to searching"
 msgstr ""

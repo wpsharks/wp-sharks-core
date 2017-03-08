@@ -45,7 +45,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170304.85924'; //v//
+    const VERSION = '170308.51606'; //v//
 
     /**
      * ReST action API version.
@@ -673,6 +673,9 @@ class App extends CoreClasses\App
 
         $GLOBALS[$this->Config->©brand['©var']] = $this;
 
+        if ($this->Config->§specs['§type'] === 'theme') {
+            $GLOBALS[$this::CORE_CONTAINER_VAR.'_theme'] = $this;
+        }
         // Plugin available hook.
         // i.e., Global is available.
 

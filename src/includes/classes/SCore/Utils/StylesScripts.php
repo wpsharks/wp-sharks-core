@@ -673,7 +673,7 @@ class StylesScripts extends Classes\SCore\Base\Core
      *
      * @return array Library details.
      */
-    public function enqueueGoogleRecaptchaLibs()
+    public function enqueueRecaptchaLibs()
     {
         if (($data = $this->didEnqueueLibs(__METHOD__))) {
             return $data; // Did this already.
@@ -681,7 +681,7 @@ class StylesScripts extends Classes\SCore\Base\Core
 
         $data = [
             'scripts' => [
-                'google-recaptcha' => [
+                'recaptcha' => [
                     'url' => '//www.google.com/recaptcha/api.js',
                 ],
                 'sri' => '', // No SRI, updated by Google.

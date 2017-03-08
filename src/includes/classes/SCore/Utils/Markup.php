@@ -32,12 +32,11 @@ class Markup extends Classes\SCore\Base\Core
      *
      * @since 17xxxx Markup utils.
      *
-     * @param string $heading  Heading.
-     * @param array  $messages Error messages.
+     * @param array $messages Errors.
      *
      * @return string Raw HTML markup.
      */
-    public function errors(string $heading, array $messages): string
+    public function errors(array $messages): string
     {
         if (!$messages) {
             return ''; // No error messages.

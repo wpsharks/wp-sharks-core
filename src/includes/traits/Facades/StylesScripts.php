@@ -224,11 +224,11 @@ trait StylesScripts
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\SCore\Utils\StylesScripts::enqueueGoogleRecaptchaLibs()
+     * @see Classes\SCore\Utils\StylesScripts::enqueueRecaptchaLibs()
      */
-    public static function enqueueGoogleRecaptchaLibs(...$args)
+    public static function enqueueRecaptchaLibs(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueGoogleRecaptchaLibs(...$args);
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueRecaptchaLibs(...$args);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 - Adding new `Markup{}` utils.
 - Adding reCAPTCHA JS lib.
+- Updating to latest WebSharks core.
 
 ## v170226.32361
 
