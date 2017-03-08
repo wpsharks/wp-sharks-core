@@ -667,6 +667,30 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue reCAPTCHA libs.
+     *
+     * @since 17xxxx reCAPTCHA libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueGoogleRecaptchaLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'google-recaptcha' => [
+                    'url' => '//www.google.com/recaptcha/api.js',
+                ],
+                'sri' => '', // No SRI, updated by Google.
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue Moment libs.
      *
      * @since 160524 Moment libs.

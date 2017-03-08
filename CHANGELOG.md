@@ -1,3 +1,8 @@
+## $v
+
+- Adding new `Markup{}` utils.
+- Adding reCAPTCHA JS lib.
+
 ## v170226.32361
 
 - Adding support for Elite variation.

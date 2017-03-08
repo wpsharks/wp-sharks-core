@@ -220,6 +220,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx reCAPTCHA libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueGoogleRecaptchaLibs()
+     */
+    public static function enqueueGoogleRecaptchaLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueGoogleRecaptchaLibs(...$args);
+    }
+
+    /**
      * @since 160524 Initial release.
      *
      * @param mixed ...$args Variadic args to underlying utility.
