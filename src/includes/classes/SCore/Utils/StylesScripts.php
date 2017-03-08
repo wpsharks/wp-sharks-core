@@ -682,9 +682,9 @@ class StylesScripts extends Classes\SCore\Base\Core
         $data = [
             'scripts' => [
                 'recaptcha' => [
+                    'sri' => '', // No SRI, updated by Google.
                     'url' => '//www.google.com/recaptcha/api.js',
                 ],
-                'sri' => '', // No SRI, updated by Google.
             ],
         ];
         return $this->enqueueLibs(__METHOD__, $data);
