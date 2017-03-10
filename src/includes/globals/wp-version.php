@@ -2,7 +2,7 @@
 /**
  * WP version.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 // @codingStandardsIgnoreFile

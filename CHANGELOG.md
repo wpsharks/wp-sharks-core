@@ -3,6 +3,12 @@
 - Adding new `Markup{}` utils.
 - Adding reCAPTCHA JS lib.
 - Updating to latest WebSharks core.
+- Adding `initial_network_id` and `initial_site_id` to `Wp{}` class.
+- Enhanced security & flexibility by removing reliance upon `wp_salt()` for plugin-specific cryptography needs.
+- Enhanced security by adding support for Defuse crypto keys & encryption.
+- Enhanced security by using network-specific and site-specific keys.
+- Removing `mcrypt` dependency entirely.
+- Reorganizing App class methods.
 
 ## v170226.32361
 

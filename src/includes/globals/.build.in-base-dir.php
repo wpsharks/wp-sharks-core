@@ -2,7 +2,7 @@
 /**
  * Globals.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 // @codingStandardsIgnoreFile
@@ -20,7 +20,7 @@ $load = '<?php
 /**
  * Globals.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare (strict_types = 1);

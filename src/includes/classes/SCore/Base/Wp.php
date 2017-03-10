@@ -2,7 +2,7 @@
 /**
  * WP common.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare(strict_types=1);
@@ -37,6 +37,10 @@ class Wp // Stand-alone class.
         $this->is_multisite = is_multisite();
         $this->is_main_site = !$this->is_multisite || is_main_site();
 
+        $this->initial_network_id = $this->is_multisite ? (int) get_current_network_id() : 1;
+        $this->initial_site_id    = $this->is_multisite ? (int) get_current_blog_id() : 1;
+        $this->initial_blog_id    = $this->initial_site_id; // Old terminology.
+
         $this->is_admin         = is_admin();
         $this->is_user_admin    = $this->is_admin && is_user_admin();
         $this->is_network_admin = $this->is_admin && $this->is_multisite && is_network_admin();
@@ -48,7 +52,8 @@ class Wp // Stand-alone class.
 
         if (!($this->salt = wp_salt())) {
             throw new Exception('Failed to acquire WP salt.');
-        }
+        } // @deprecated Avoid using; it's transient these days.
+
         if (!($this->tmp_dir = rtrim(get_temp_dir(), '/'))) {
             throw new Exception('Failed to acquire a writable tmp dir.');
         }

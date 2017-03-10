@@ -2,7 +2,7 @@
 /**
  * WC order item utils.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare (strict_types = 1);

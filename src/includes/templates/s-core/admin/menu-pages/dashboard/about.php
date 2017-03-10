@@ -2,7 +2,7 @@
 /**
  * Template.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare(strict_types=1);
@@ -30,7 +30,7 @@ if (!defined('WPINC')) {
 </h3>
 
 <p>
-    <?= sprintf(__('<a href="%2$s" target="_blank">%1$s</a> was founded by business partners <a href="%3$s" target="_blank">Jason Caldwell</a> and <a href="%4$s" target="_blank">Raam Dev</a>. Over the years we\'ve built everything from advanced e-commerce platforms and caching engines, to simple contact forms and social-media tools—<em style="display:inline-block;">always with WordPress at the core.</em>', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME), esc_url($this->s::coreUrl('/')), esc_url($this->s::coreUrl('/vendor/jaswsinc')), esc_url($this->s::coreUrl('/vendor/raamdev'))); ?>
+    <?= sprintf(__('<a href="%2$s" target="_blank">%1$s</a> was founded by business partners <a href="%3$s" target="_blank">Jason Caldwell</a> and <a href="%4$s" target="_blank">Raam Dev</a>. Over the years we\'ve built everything from advanced e-commerce platforms and caching engines, to simple contact forms and social-media tools—<em style="display:inline-block;">always with WordPress at the core.</em>', 'wp-sharks-core'), esc_html($this->App::CORE_CONTAINER_NAME), esc_url($this->s::coreUrl('/')), esc_url($this->s::coreUrl('/vendor/jaswrks')), esc_url($this->s::coreUrl('/vendor/raamdev'))); ?>
 </p>
 
 <p>

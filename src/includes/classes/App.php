@@ -2,7 +2,7 @@
 /**
  * Application.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 declare(strict_types=1);
@@ -21,6 +21,8 @@ use function assert as debug;
 use function get_defined_vars as vars;
 #
 use WebSharks\WpSharks\Core\Classes\SCore\Base\Wp;
+use WebSharks\WpSharks\Core\Classes\SCore\Base\WpAppUrl;
+use WebSharks\WpSharks\Core\Classes\SCore\Base\WpAppKeys;
 
 /**
  * App (plugins must extend).
@@ -45,7 +47,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170308.54256'; //v//
+    const VERSION = '170310.49451'; //v//
 
     /**
      * ReST action API version.
@@ -137,7 +139,7 @@ class App extends CoreClasses\App
             '§is_elite'        => null,
             '§has_elite'       => null,
             '§in_wp'           => null,
-            '§is_network_wide' => false,
+            '§is_network_wide' => null,
             '§type'            => '',
             '§file'            => '',
         ];
@@ -239,9 +241,9 @@ class App extends CoreClasses\App
 
             $specs                     = array_merge($default_specs, $instance_base['§specs'] ?? [], $instance['§specs'] ?? []);
             $specs['§is_pro']          = $specs['§is_pro'] ?? mb_stripos($this->namespace, '\\Pro\\') !== false;
-            $specs['§has_pro']         = $specs['§is_pro'] ?: true; // Assume true, quite common.
+            $specs['§has_pro']         = $specs['§has_pro'] ?? ($specs['§is_pro'] ?: true); // Assume true.
             $specs['§is_elite']        = $specs['§is_elite'] ?? mb_stripos($this->namespace, '\\Elite\\') !== false;
-            $specs['§has_elite']       = $specs['§is_elite'] ?: false; // Assume this is false.
+            $specs['§has_elite']       = $specs['§has_elite'] ?? ($specs['§is_elite'] ?: false); // Assume false.
             $specs['§in_wp']           = $specs['§is_pro'] || $specs['§is_elite'] ? false : ($specs['§in_wp'] ?? false);
             $specs['§is_network_wide'] = $specs['§is_network_wide'] && $this->Wp->is_multisite;
 
@@ -328,29 +330,11 @@ class App extends CoreClasses\App
                 }
             }
         }
-        # Collect additional WordPress config values.
+        # Acquire encryption & salt keys.
+        # Collect app URL parts, based on app type.
 
-        if (!($wp_app_salt_key = hash('sha256', $this->Wp->salt.$brand['©slug']))) {
-            throw new Exception('Failed to generate a unique salt/key.');
-        }
-        if ($specs['§type'] === 'plugin') {
-            if (!($wp_app_url_parts = parse_url(plugin_dir_url($specs['§file'])))) {
-                throw new Exception('Failed to parse plugin dir URL parts.');
-            }
-        } elseif ($specs['§type'] === 'theme') {
-            if (!($wp_app_url_parts = $this->Wp->template_directory_url_parts)) {
-                throw new Exception('Failed to parse theme dir URL parts.');
-            }
-        } elseif ($specs['§type'] === 'mu-plugin') {
-            if (!($wp_app_url_parts = $this->Wp->site_url_parts)) {
-                throw new Exception('Failed to parse app URL parts.');
-            }
-        } else { // Unexpected application `§type` in this case.
-            throw new Exception('Failed to parse URL for unexpected `§type`.');
-        }
-        $wp_app_url_base_path = rtrim($wp_app_url_parts['path'] ?? '', '/');
-        $wp_app_url_base_path .= in_array($specs['§type'], ['theme', 'plugin'], true) ? '/src' : '';
-        $wp_app_url_base_path .= '/'; // Always; i.e., this is a directory location.
+        $Url  = new WpAppUrl($this->Wp, $specs, $brand);
+        $Keys = new WpAppKeys($this->Wp, $specs, $brand);
 
         # Build the core/default instance base.
 
@@ -375,6 +359,9 @@ class App extends CoreClasses\App
                 '©default_rule' => [
                     'new_instances' => [
                         Classes\SCore\Base\Widget::class,
+                        Classes\SCore\Base\WpAppUrl::class,
+                        Classes\SCore\Base\WpAppKeys::class,
+
                         Classes\SCore\MenuPageForm::class,
                         Classes\SCore\PostMetaBoxForm::class,
                         Classes\SCore\WidgetForm::class,
@@ -389,7 +376,7 @@ class App extends CoreClasses\App
                 ],
             ],
 
-            '§specs' => $default_specs, // Already established above.
+            '§specs' => $default_specs, // Established already.
             '©brand' => $brand_defaults, // Established already.
 
             '©urls' => [
@@ -403,12 +390,12 @@ class App extends CoreClasses\App
                     ],
                 ],
                 '©base_paths' => [
-                    '©app' => $wp_app_url_base_path,
+                    '©app' => $Url->base_path,
                     '©cdn' => '/',
                 ],
                 '©cdn_filter_enable' => false,
                 '©default_scheme'    => $this->Wp->site_default_scheme,
-                '©sig_key'           => $wp_app_salt_key,
+                '©sig_key'           => $Keys->salt_key,
             ],
 
             '§setup' => [ // On (or after) `plugins_loaded`.
@@ -439,16 +426,19 @@ class App extends CoreClasses\App
             ],
 
             '©encryption' => [
-                '©key' => $wp_app_salt_key,
+                '©key' => $Keys->encryption_key,
             ],
             '©cookies' => [
-                '©encryption_key' => $wp_app_salt_key,
+                '©encryption_key' => $Keys->encryption_key,
+            ],
+            '©hash' => [
+                '©key' => $Keys->salt_key,
             ],
             '©hash_ids' => [
-                '©hash_key' => $wp_app_salt_key,
+                '©hash_key' => $Keys->salt_key,
             ],
             '©passwords' => [
-                '©hash_key' => $wp_app_salt_key,
+                '©hash_key' => $Keys->salt_key,
             ],
 
             '§conflicts' => [
@@ -571,10 +561,20 @@ class App extends CoreClasses\App
 
         parent::__construct($instance_base, $instance, $Parent);
 
-        /* Post-construct sub-routines are run now -------------------------------------------------------------- */
+        # Post-construct sub-routines.
 
-        # Merge site owner options (highest precedence).
+        $this->prepareOptions();
+        $this->transitionOptions();
+        $this->initialize();
+    }
 
+    /**
+     * Prepare options.
+     *
+     * @since 17xxxx Prep options.
+     */
+    protected function prepareOptions()
+    {
         if ($this->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             if (!is_array($site_owner_options = get_network_option(null, $this->Config->©brand['©var'].'_options'))) {
                 update_network_option(null, $this->Config->©brand['©var'].'_options', $site_owner_options = []);
@@ -585,9 +585,15 @@ class App extends CoreClasses\App
         $this->Config->§options = $this->s::mergeOptions($this->Config->§default_options, $this->Config->§options);
         $this->Config->§options = $this->s::mergeOptions($this->Config->§options, $site_owner_options);
         $this->Config->§options = $this->s::applyFilters('options', $this->Config->§options);
+    }
 
-        # Handle option transitions from one variation of the software to another; e.g., pro upgrade.
-
+    /**
+     * Maybe transition options.
+     *
+     * @since 17xxxx Option transitions.
+     */
+    protected function transitionOptions()
+    {
         if ($this->Config->§options['§for_product_slug'] !== $this->Config->©brand['§product_slug']) {
             $this->Config->§options['§for_product_slug'] = $this->Config->©brand['§product_slug'];
             $this->Config->§options['§license_key']      = ''; // No longer applicable.
@@ -599,31 +605,39 @@ class App extends CoreClasses\App
             }
             $this->Config->§force_install = !$this->Config->§uninstall; // Force reinstall (if not uninstalling).
         }
-        # Sanity check; must be on (or after) `plugins_loaded` hook.
-        # If uninstalling, must be on (or after) `init` hook.
+    }
+
+    /**
+     * Initialize.
+     *
+     * @since 17xxxx Inits.
+     */
+    protected function initialize()
+    {
+        // Sanity check; must be on (or after) `plugins_loaded` hook.
+        // If uninstalling, must be on (or after) `init` hook.
 
         if (!did_action('plugins_loaded')) {
             throw new Exception('`plugins_loaded` action not done yet.');
         } elseif ($this->Config->§uninstall && !did_action('init')) {
             throw new Exception('`init` action not done yet.');
         }
-        # Check for any known conflicts.
+        // Check for any known conflicts.
 
         if ($this->s::conflictsExist()) {
             return; // Stop here.
         }
-        # Check for any unsatisfied dependencies.
+        // Check for any unsatisfied dependencies.
 
         if ($this->s::dependenciesUnsatisfied()) {
             return; // Stop here.
         }
-        # Add app instance to collection.
+        // Add app instance to collection.
 
         if ($this->Parent && $this->Parent->is_core && !$this->Config->§uninstall) {
-            // NOTE: If uninstalling, don't expose it to the parent/core.
             $this->Parent->s::addApp($this);
         }
-        # Remaining routines are driven by setup hook.
+        // Remaining routines are driven by setup hook.
 
         if ($this->Config->§uninstall || did_action($this->Config->§setup['§hook'])) {
             $this->onSetup(); // Run setup immediately.

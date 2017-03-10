@@ -4,9 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f1d16f1ffd60aaac751fe8b27cb0287",
+    "hash": "1e31a75a4b96fdc65b350cf0cf72d06c",
     "content-hash": "c91f3dfe63d81a34c66c20bda401be84",
     "packages": [
+        {
+            "name": "defuse/php-encryption",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/defuse/php-encryption.git",
+                "reference": "2c6fea3d9a4eaaa8cef86b2a89f3660818117b33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/2c6fea3d9a4eaaa8cef86b2a89f3660818117b33",
+                "reference": "2c6fea3d9a4eaaa8cef86b2a89f3660818117b33",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "paragonie/random_compat": "~2.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "nikic/php-parser": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Hornby",
+                    "email": "taylor@defuse.ca",
+                    "homepage": "https://defuse.ca/"
+                },
+                {
+                    "name": "Scott Arciszewski",
+                    "email": "info@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "Secure PHP Encryption Library",
+            "keywords": [
+                "aes",
+                "authenticated encryption",
+                "cipher",
+                "crypto",
+                "cryptography",
+                "encrypt",
+                "encryption",
+                "openssl",
+                "security",
+                "symmetric key cryptography"
+            ],
+            "time": "2016-10-10 15:20:26"
+        },
         {
             "name": "embedly/embedly-php",
             "version": "v0.5.6",
@@ -621,15 +680,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "3f149b149ffff719c23cdc274bed32f23347d161"
+                "reference": "4c95adce7c6c3c8800f646efa644da3d99e10a76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/3f149b149ffff719c23cdc274bed32f23347d161",
-                "reference": "3f149b149ffff719c23cdc274bed32f23347d161",
+                "url": "https://api.github.com/repos/websharks/core/zipball/4c95adce7c6c3c8800f646efa644da3d99e10a76",
+                "reference": "4c95adce7c6c3c8800f646efa644da3d99e10a76",
                 "shasum": ""
             },
             "require": {
+                "defuse/php-encryption": "2.*",
                 "embedly/embedly-php": "0.*",
                 "ext-ctype": "*",
                 "ext-curl": "*",
@@ -644,7 +704,6 @@
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
-                "ext-mcrypt": "*",
                 "ext-openssl": "*",
                 "ext-pcre": "*",
                 "ext-phar": "*",
@@ -729,13 +788,13 @@
                     "role": "company"
                 },
                 {
-                    "name": "jaswsinc",
-                    "homepage": "https://jaswsinc.com",
+                    "name": "raamdev",
+                    "homepage": "http://raam.org",
                     "role": "developer"
                 },
                 {
-                    "name": "raamdev",
-                    "homepage": "http://raam.org",
+                    "name": "jaswrks",
+                    "homepage": "https://jaswrks.com",
                     "role": "developer"
                 }
             ],
@@ -745,7 +804,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-03-04 23:48:23"
+            "time": "2017-03-10 13:31:07"
         },
         {
             "name": "websharks/dicer",

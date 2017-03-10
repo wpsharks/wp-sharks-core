@@ -2,7 +2,7 @@
 /**
  * Uninstaller.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WebSharks™
  */
 // PHP v5.2 compatible.

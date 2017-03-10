@@ -2,7 +2,7 @@
 /**
  * Facades.
  *
- * @author @jaswsinc
+ * @author @jaswrks
  * @copyright WP Sharks™
  */
 declare (strict_types = 1);

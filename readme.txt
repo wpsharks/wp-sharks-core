@@ -1,15 +1,15 @@
 === WP Sharks Core ===
 
-Stable tag: 170308.54256
-Requires at least: 4.6
-Tested up to: 4.7-alpha
+Stable tag: 170310.49451
+Requires at least: 4.7
+Tested up to: 4.8-alpha
 Text Domain: wp-sharks-core
 
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Donate: https://wpsharks.com/donate/
-Contributors: wpsharks, JasWSInc, raamdev, KristineDS, reedyseth, sitegeek
+Contributors: wpsharks, jaswrks, raamdev, KristineDS, reedyseth, sitegeek
 Tags: websharks, wp sharks, wpsharks
 
 The WP Sharks Core is a WordPress plugin that serves as a framework for other plugins by the WP Sharks™ team.
@@ -34,10 +34,4 @@ Wait until you're prompted; i.e., wait until another plugin developed by the WP 
 
 In addition to the [WordPress Requirements](http://wordpress.org/about/requirements/), The WP Sharks™ Core framework requires:
 
-- PHP 7.0.1+
-
-== Changelog ==
-
-= v160228 =
-
-- Initial release.
+- PHP 7.0.4+
