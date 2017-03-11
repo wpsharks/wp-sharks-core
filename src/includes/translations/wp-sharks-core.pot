@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Sharks Core package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Sharks Core 170310.49451\n"
+"Project-Id-Version: WP Sharks Core 170311.43134\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-sharks-core\n"
-"POT-Creation-Date: 2017-03-10 13:44:17+00:00\n"
+"POT-Creation-Date: 2017-03-11 11:59:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,11 +16,11 @@ msgstr ""
 msgid "Title:"
 msgstr ""
 
-#: src/includes/classes/SCore/MenuPageForm.php:434
+#: src/includes/classes/SCore/MenuPageForm.php:438
 msgid "Use Ctrl key (or ⌘) to select multiple items from the list."
 msgstr ""
 
-#: src/includes/classes/SCore/MenuPageForm.php:501
+#: src/includes/classes/SCore/MenuPageForm.php:505
 msgid "Save Changes"
 msgstr ""
 
