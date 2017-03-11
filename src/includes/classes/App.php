@@ -47,7 +47,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170311.43134'; //v//
+    const VERSION = '170311.43193'; //v//
 
     /**
      * ReST action API version.
@@ -571,7 +571,7 @@ class App extends CoreClasses\App
     /**
      * Prepare options.
      *
-     * @since 17xxxx Prep options.
+     * @since 170311.43193 Prep options.
      */
     protected function prepareOptions()
     {
@@ -590,7 +590,7 @@ class App extends CoreClasses\App
     /**
      * Maybe transition options.
      *
-     * @since 17xxxx Option transitions.
+     * @since 170311.43193 Option transitions.
      */
     protected function transitionOptions()
     {
@@ -610,7 +610,7 @@ class App extends CoreClasses\App
     /**
      * Initialize.
      *
-     * @since 17xxxx Inits.
+     * @since 170311.43193 Inits.
      */
     protected function initialize()
     {

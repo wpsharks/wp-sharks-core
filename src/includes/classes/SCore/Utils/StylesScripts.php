@@ -669,7 +669,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue reCAPTCHA libs.
      *
-     * @since 17xxxx reCAPTCHA libs.
+     * @since 170311.43193 reCAPTCHA libs.
      *
      * @return array Library details.
      */

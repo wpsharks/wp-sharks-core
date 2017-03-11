@@ -25,14 +25,14 @@ use Defuse\Crypto\Key as DefuseKey;
 /**
  * WP app keys.
  *
- * @since 17xxxx WP utils.
+ * @since 170311.43193 WP utils.
  */
 class WpAppKeys // Stand-alone class.
 {
     /**
      * Class constructor.
      *
-     * @since 17xxxx Common utils.
+     * @since 170311.43193 Common utils.
      */
     public function __construct(Wp $Wp, array $specs, array $brand)
     {
@@ -64,7 +64,7 @@ class WpAppKeys // Stand-alone class.
     /**
      * Generates a Defuse key.
      *
-     * @since 17xxxx Initial release.
+     * @since 170311.43193 Initial release.
      *
      * @return string The Defuse key.
      */
@@ -83,7 +83,7 @@ class WpAppKeys // Stand-alone class.
     /**
      * Generates a random key.
      *
-     * @since 17xxxx Initial release.
+     * @since 170311.43193 Initial release.
      *
      * @param int  $char_size           Key char size. Default is `64`.
      * @param bool $special_chars       Include standard special characters? Defaults to `true`.
