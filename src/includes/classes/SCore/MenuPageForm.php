@@ -124,14 +124,18 @@ class MenuPageForm extends Classes\SCore\Base\Core
     public function openTable(string $heading = '', string $description = '', array $args = [])
     {
         $default_args = [
-            'class' => '', // e.g., `-block-display`.
+            'class' => '', // e.g., `-display-block`.
         ];
         $args += $default_args;
         $args['class'] = (string) $args['class'];
 
         $markup = $heading ? '<h2>'.$heading.'</h2>' : '';
-        $markup .= $description ? '<p>'.$description.'</p>' : '';
 
+        if ($description && mb_stripos($description, '<') === 0) {
+            $markup .= $description; // Append HTML block.
+        } elseif ($description) {
+            $markup .= '<p>'.$description.'</p>';
+        }
         $markup .= '<table class="-form-table'.($args['class'] ? ' '.esc_attr($args['class']) : '').'">';
         $markup .= '<tbody>';
 
