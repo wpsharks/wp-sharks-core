@@ -1,3 +1,7 @@
+## $v
+
+- Updating to latest WebSharks Core, which now includes Stripe integration.
+
 ## v170311.43193
 
 - Adding new `Markup{}` utils.
