@@ -1,6 +1,6 @@
 === WP Sharks Core ===
 
-Stable tag: 170312.44363
+Stable tag: 170312.47717
 Requires at least: 4.7
 Tested up to: 4.8-alpha
 Text Domain: wp-sharks-core
