@@ -220,6 +220,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx Stripe libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueStripeLibs()
+     */
+    public static function enqueueStripeLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueStripeLibs(...$args);
+    }
+
+    /**
      * @since 170311.43193 reCAPTCHA libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -241,6 +253,18 @@ trait StylesScripts
     public static function enqueueMomentLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueMomentLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx No UI Slider libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueNoUiSliderLibs()
+     */
+    public static function enqueueNoUiSliderLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueNoUiSliderLibs(...$args);
     }
 
     /**

@@ -667,6 +667,30 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue Stripe libs.
+     *
+     * @since 17xxxx Stripe libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueStripeLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'stripe' => [
+                    'sri' => '', // No SRI, updated by Stripe.
+                    'url' => '//checkout.stripe.com/checkout.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue reCAPTCHA libs.
      *
      * @since 170311.43193 reCAPTCHA libs.
@@ -722,6 +746,36 @@ class StylesScripts extends Classes\SCore\Base\Core
                             ],
                         ],
                     ],
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue No UI Slider libs.
+     *
+     * @since 17xxxx No UI Slider libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueNoUiSliderLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'styles' => [
+                'no-ui-slider' => [
+                    'version' => '9.2.0',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/noUiSlider/%1$s/nouislider.min.css',
+                ],
+            ],
+            'scripts' => [
+                'no-ui-slider' => [
+                    'version' => '9.2.0',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/noUiSlider/%1$s/nouislider.min.js',
                 ],
             ],
         ];

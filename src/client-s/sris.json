@@ -88,6 +88,13 @@
     "sri": "sha384-WtUWHyk39lfUpZQVgokNfSKCJaKAeD6adgLduBLrKTMUuPzFhLtL23y1guFy6lZn"
   },
 
+  "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.css": {
+    "sri": "sha384-kfpEehYc0yBWG4RbU3E/NT0GA+GQSIAHWXLENAheFZj5WsgklIgXEwZoN/vyCuP0"
+  },
+  "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.js": {
+    "sri": "sha384-MBxFKGkuKqF48JWgefwb8fe/l7vr3Beh8YeHdKW6LO9ndPKSz6vmGiKn523LXKCg"
+  },
+
   "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js": {
     "sri": "sha384-KgEy7s3ThYKule8wWiu2WJkm0AmJeSLkXku5PY5X8MhVgdm8K1ebsVRKHfNfWPrR"
   },
