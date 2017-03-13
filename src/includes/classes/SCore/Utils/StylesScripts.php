@@ -773,8 +773,13 @@ class StylesScripts extends Classes\SCore\Base\Core
                 ],
             ],
             'scripts' => [
+                'no-ui-wnumb' => [
+                    'version' => '1.1.0',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/wnumb/%1$s/wNumb.min.js',
+                ],
                 'no-ui-slider' => [
                     'version' => '9.2.0',
+                    'deps'    => ['no-ui-wnumb'],
                     'url'     => '//cdnjs.cloudflare.com/ajax/libs/noUiSlider/%1$s/nouislider.min.js',
                 ],
             ],

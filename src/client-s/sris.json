@@ -91,6 +91,9 @@
   "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.css": {
     "sri": "sha384-kfpEehYc0yBWG4RbU3E/NT0GA+GQSIAHWXLENAheFZj5WsgklIgXEwZoN/vyCuP0"
   },
+  "//cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js": {
+    "sri": "sha384-9NhfMwMkkA6dDFEyj5CxOiYaL6KqLjKINTJkR7e5SlZthrndR9oB/SJsi5PBNnjw"
+  },
   "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.js": {
     "sri": "sha384-MBxFKGkuKqF48JWgefwb8fe/l7vr3Beh8YeHdKW6LO9ndPKSz6vmGiKn523LXKCg"
   },

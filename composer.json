@@ -47,8 +47,14 @@
 
   "config": {
     "vendor-dir": "src/vendor",
-    "preferred-install": "dist"
+    "preferred-install": {
+      "websharks/core": "source",
+      "*": "dist"
+    }
   },
 
-  "repositories": []
+  "repositories": [{
+    "type": "path",
+    "url": "../../websharks/core"
+  }]
 }
