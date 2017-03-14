@@ -100,6 +100,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx Latest Underscore.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueLatestUnderscore()
+     */
+    public static function enqueueLatestUnderscore(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueLatestUnderscore(...$args);
+    }
+
+    /**
      * @since 170218.31677 Unicode Gcs libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -265,6 +277,18 @@ trait StylesScripts
     public static function enqueueNoUiSliderLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueNoUiSliderLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Adding jQuery Address libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueJQueryAddressLibs()
+     */
+    public static function enqueueJQueryAddressLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryAddressLibs(...$args);
     }
 
     /**

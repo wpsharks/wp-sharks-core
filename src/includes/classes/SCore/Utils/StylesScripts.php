@@ -332,6 +332,31 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue Underscore.
+     *
+     * @since 17xxxx Underscore libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueLatestUnderscore(): array
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'underscore' => [
+                    'version' => '1.8.3',
+                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/underscore.js/%1$s/underscore-min.js',
+                ],
+            ],
+        ];
+        wp_deregister_script('underscore');
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue Unicode Gcs libs.
      *
      * @since 170218.31677 Unicode Gcs libs.
@@ -781,6 +806,31 @@ class StylesScripts extends Classes\SCore\Base\Core
                     'version' => '9.2.0',
                     'deps'    => ['no-ui-wnumb'],
                     'url'     => '//cdnjs.cloudflare.com/ajax/libs/noUiSlider/%1$s/nouislider.min.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue jQuery Address libs.
+     *
+     * @since 17xxxx jQuery Address libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueJQueryAddressLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'jquery-address' => [
+                    'version' => '1.6',
+                    'deps'    => ['jquery'],
+                    'url'     => 'https://cdnjs.cloudflare.com/ajax/libs/jquery.address/%1$s/jquery.address.min.js',
                 ],
             ],
         ];

@@ -5,6 +5,9 @@
   "//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js": {
     "sri": "sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7"
   },
+  "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js": {
+    "sri": "sha384-FZY+KSLVXVyc1qAlqH9oCx1JEOlQh6iXfw3o2n3Iy32qGjXmUPWT9I0Z9e9wxYe3"
+  },
   "//cdn.rawgit.com/websharks/unicode-gcs/1.0.3/dist/index.min.js": {
     "sri": "sha384-WBiEUjMvveCEU90cSrgCylsmrvp78cIELCL3piryoc2kf8+uHtZ1U6IVJWsi6tEx"
   },
@@ -100,6 +103,10 @@
 
   "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js": {
     "sri": "sha384-KgEy7s3ThYKule8wWiu2WJkm0AmJeSLkXku5PY5X8MhVgdm8K1ebsVRKHfNfWPrR"
+  },
+
+  "//cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js": {
+    "sri": "sha384-zMTBSQGBLON8BzJvCLwjWuuA1q8Ew5clzw9A3FMXoo/AdY/oB2Q1QTOT/aHDGzfg"
   },
 
   "//cdnjs.cloudflare.com/ajax/libs/animateCSS/1.2.1/jquery.animatecss.min.js": {
