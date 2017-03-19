@@ -3,6 +3,7 @@
 - Adding `s::enqueueStripeLibs()`.
 - Adding `s::enqueueNoUiSliderLibs()`.
 - Updating to latest WebSharks Core, which now includes Stripe integration.
+- Updating to latest Semantic UI build, now a custom build that comes with the WebSharks Core.
 
 ## v170311.43193
 
