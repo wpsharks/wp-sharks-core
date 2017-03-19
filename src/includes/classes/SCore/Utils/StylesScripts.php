@@ -248,6 +248,7 @@ class StylesScripts extends Classes\SCore\Base\Core
             $_deps      = $_script['deps'] ?? [];
             $_async     = $_script['async'] ?? false;
             $_in_footer = $_script['in_footer'] ?? true;
+            $_inline    = $_script['inline'] ?? '';
             $_localize  = $_script['localize'] ?? [];
 
             if ($_version && $_url) { // Version in URL?
@@ -259,6 +260,9 @@ class StylesScripts extends Classes\SCore\Base\Core
 
             wp_enqueue_script($_handle); // Immediately.
 
+            if ($_inline) { // Inline scripting also?
+                wp_add_inline_script($_handle, $_inline);
+            }
             if (!empty($_localize['key']) && array_key_exists('data', $_localize)) {
                 wp_localize_script($_handle, $_localize['key'], $_localize['data']);
             }
@@ -270,6 +274,7 @@ class StylesScripts extends Classes\SCore\Base\Core
                 'deps'      => $_deps,
                 'async'     => $_async,
                 'in_footer' => $_in_footer,
+                'inline'    => $_inline,
                 'localize'  => $_localize,
             ];
         } // unset($_handle, $_script, $_version, $_ver, $_url, $_deps, $_in_footer, $_localize);
