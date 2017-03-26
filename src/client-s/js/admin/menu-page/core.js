@@ -59,7 +59,7 @@
      * e.g., data-if="option_name!=0|<disabled>" (disabled in some way).
      * In other words, it's not `0` and it's not `<disabled>` in some way.
      */
-    $menuPageWrapper.find('.-form-table tr[data-if]').each(function () {
+    $menuPageArea.find('.-form-table tr[data-if]').each(function () {
       var $this = $(this),
         $form = $this.closest('form');
 
