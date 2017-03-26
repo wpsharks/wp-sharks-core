@@ -60,13 +60,13 @@
      * In other words, it's not `0` and it's not `<disabled>` in some way.
      */
     $menuPageArea.find('.-form-table tr[data-if]').each(function () {
-      var $this = $(this),
-        $form = $this.closest('form');
+      var $tr = $(this),
+        $form = $tr.closest('form');
 
       var disabledClass = '-disabled-via-if-check',
         disabledValue = '<disabled>';
 
-      var parts = $this.data('if').split(/(!==|===|!=|=)/),
+      var parts = $tr.data('if').split(/(!==|===|!=|=)/),
         option = parts[0] || '',
         operator = parts[1] || '=',
         values = (parts[2] || '1').split(/\|/);
@@ -74,13 +74,13 @@
       if (!option || !operator || !values.length)
         return; // Nothing to do in this case.
 
-      var onOptionChange = function (e) {
-        var $this = $(this);
-        var value = $.trim($this.val());
+      var onFieldChange = function (e) {
+        var $field = $(this),
+          value = $.trim($field.val());
 
-        if ($this.prop('disabled')) {
+        if ($field.prop('disabled')) {
           value = disabledValue;
-        } else if ($this.hasClass(disabledClass)) {
+        } else if ($tr.hasClass(disabledClass)) {
           value = disabledValue;
         }
         switch (operator) {
@@ -89,8 +89,8 @@
         case '=':
 
           if ($.inArray(value, values) !== -1) {
-            $this.removeClass(disabledClass);
-          } else $this.addClass(disabledClass);
+            $tr.removeClass(disabledClass);
+          } else $tr.addClass(disabledClass);
 
           break; // Break here.
 
@@ -98,15 +98,15 @@
         case '!=':
 
           if ($.inArray(value, values) === -1) {
-            $this.removeClass(disabledClass);
-          } else $this.addClass(disabledClass);
+            $tr.removeClass(disabledClass);
+          } else $tr.addClass(disabledClass);
 
           break; // Break here.
         }
       }; // Attach event & trigger an initial change on setup.
 
       $form.find('[name$="' + esqJqAttr('[' + option + ']') + '"]')
-        .on('change', onOptionChange).trigger('change');
+        .on('change', onFieldChange).trigger('change');
     });
   });
 })(jQuery);
