@@ -52,61 +52,60 @@
     /*
      * Menu page `if` dependencies.
      *
-     * e.g., data-if="option_name" (same as `=1`).
-     * e.g., data-if="option_name=0|1|2|3"
-     * e.g., data-if="option_name!=0|1|2|3"
+     * e.g., data-if="other_field_name" (same as `=1`).
+     * e.g., data-if="other_field_name=0|1|2|3"
+     * e.g., data-if="other_field_name!=0|1|2|3"
      *
-     * e.g., data-if="option_name!=0|<disabled>" (disabled in some way).
+     * e.g., data-if="other_field_name!=0|<disabled>" (disabled in some way).
      * In other words, it's not `0` and it's not `<disabled>` in some way.
      */
     $menuPageArea.find('.-form-table tr[data-if]').each(function () {
-      var $tr = $(this),
-        $form = $tr.closest('form');
-
       var disabledClass = '-disabled-via-if-check',
         disabledValue = '<disabled>';
 
-      var parts = $tr.data('if').split(/(!==|===|!=|=)/),
-        option = parts[0] || '',
-        operator = parts[1] || '=',
-        values = (parts[2] || '1').split(/\|/);
+      var $thisTr = $(this),
+        $form = $thisTr.closest('form');
 
-      if (!option || !operator || !values.length)
+      var ifParts = $thisTr.data('if').split(/(!==|===|!=|=)/),
+        ifOtherFieldName = ifParts[0] || '',
+        ifOperator = ifParts[1] || '=',
+        ifValues = (ifParts[2] || '1').split(/\|/);
+
+      if (!ifOtherFieldName || !ifOperator || !ifValues.length)
         return; // Nothing to do in this case.
 
-      var onFieldChange = function (e) {
-        var $field = $(this),
-          value = $.trim($field.val());
+      var $otherField = $form.find('[name$="' + esqJqAttr('[' + ifOtherFieldName + ']') + '"]'),
+        $otherTr = $otherField.closest('tr'); // Parent table row for the other field.
 
-        if ($field.prop('disabled')) {
-          value = disabledValue;
-        } else if ($tr.hasClass(disabledClass)) {
-          value = disabledValue;
+      $otherField.on('change', function (e) {
+        var otherValue = $.trim($otherField.val());
+
+        if ($otherField.prop('disabled')) {
+          otherValue = disabledValue;
+        } else if ($otherTr.hasClass(disabledClass)) {
+          otherValue = disabledValue;
         }
-        switch (operator) {
+        switch (ifOperator) {
 
         case '==': // Equal to any.
         case '=':
 
-          if ($.inArray(value, values) !== -1) {
-            $tr.removeClass(disabledClass);
-          } else $tr.addClass(disabledClass);
+          if ($.inArray(otherValue, ifValues) !== -1) {
+            $thisTr.removeClass(disabledClass);
+          } else $thisTr.addClass(disabledClass);
 
           break; // Break here.
 
         case '!==': // Not equal to any.
         case '!=':
 
-          if ($.inArray(value, values) === -1) {
-            $tr.removeClass(disabledClass);
-          } else $tr.addClass(disabledClass);
+          if ($.inArray(otherValue, ifValues) === -1) {
+            $thisTr.removeClass(disabledClass);
+          } else $thisTr.addClass(disabledClass);
 
           break; // Break here.
         }
-      }; // Attach event & trigger an initial change on setup.
-
-      $form.find('[name$="' + esqJqAttr('[' + option + ']') + '"]')
-        .on('change', onFieldChange).trigger('change');
+      }).trigger('change');
     });
   });
 })(jQuery);
