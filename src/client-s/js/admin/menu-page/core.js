@@ -26,7 +26,7 @@
     $menuPageArea.find('input[type="color"]').wpColorPicker();
 
     /*
-     * Block-level tooltips.
+     * Tooltips.
      */
     $('body').tooltip({
       show: false, // No animation.
@@ -53,10 +53,10 @@
      * Menu page `if` dependencies.
      *
      * e.g., data-if="other_field_name" (same as `=1`).
-     * e.g., data-if="other_field_name=0|1|2|3"
-     * e.g., data-if="other_field_name!=0|1|2|3"
+     * e.g., data-if="other_field_name=0,1,2,3"
+     * e.g., data-if="other_field_name!=0,1,2,3"
      *
-     * e.g., data-if="other_field_name!=0|<disabled>" (disabled in some way).
+     * e.g., data-if="other_field_name!=0,<disabled>" (disabled in some way).
      * In other words, it's not `0` and it's not `<disabled>` in some way.
      */
     $menuPageArea.find('.-form-table tr[data-if]').each(function () {
@@ -66,46 +66,109 @@
       var $thisTr = $(this),
         $form = $thisTr.closest('form');
 
-      var ifParts = $thisTr.data('if').split(/(!==|===|!=|=)/),
-        ifOtherFieldName = ifParts[0] || '',
-        ifOperator = ifParts[1] || '=',
-        ifValues = (ifParts[2] || '1').split(/\|/);
+      var data = $.trim($thisTr.data('if')),
+        logic = /\s+(?:OR|\|\|)\s+/i.test(data) ? 'ANY' : 'ALL',
+        conditionals = data.split(/\s+(?:AND|&&|OR|\|\|)\s+/i);
 
-      if (!ifOtherFieldName || !ifOperator || !ifValues.length)
-        return; // Nothing to do in this case.
+      // Parse conditionals into condition objects.
 
-      var $otherField = $form.find('[name$="' + esqJqAttr('[' + ifOtherFieldName + ']') + '"]'),
-        $otherTr = $otherField.closest('tr'); // Parent table row for the other field.
+      if (!conditionals.length)
+        throw 'Missing conditionals.';
 
-      $otherField.on('change', function (e) {
-        var otherValue = $.trim($otherField.val());
+      var conditions = []; // Initialize.
 
-        if ($otherField.prop('disabled')) {
-          otherValue = disabledValue;
-        } else if ($otherTr.hasClass(disabledClass)) {
-          otherValue = disabledValue;
+      conditionals.forEach(function (c, index) {
+        var parts = c.split(/(!==|===|!=|=)/),
+          otherFieldName = parts[0] || '',
+          operator = parts[1] || '==',
+          values = (parts[2] || '1').split(/(?:,\|)/);
+
+        if (!otherFieldName || !operator || !values.length)
+          throw 'Missing field name, operator, or values.';
+
+        var $otherField = $form.find('[name$="' + esqJqAttr('[' + otherFieldName + ']') + '"]'),
+          $otherTr = $otherField.closest('tr'); // Parent table row for the other field.
+
+        conditions[index] = {
+          $otherField: $otherField,
+          $otherTr: $otherTr,
+          operator: operator,
+          values: values,
+        };
+      });
+
+      // Runs all tests & returns their results.
+
+      var runTests = function () {
+        var tests = []; // Initialize results.
+
+        conditions.forEach(function (c, index) {
+          var otherValue; // Initialize.
+
+          if (c.$otherField.length < 1) {
+            otherValue = '<undefined>';
+
+          } else { // Field exists.
+            otherValue = $.trim(c.$otherField.val());
+
+            if (c.$otherField.prop('disabled')) {
+              otherValue = disabledValue;
+            } else if (c.$otherTr.hasClass(disabledClass)) {
+              otherValue = disabledValue;
+            }
+          }
+          switch (c.operator) {
+            case '==': // Equal to any.
+            case '=': // Alias.
+
+              if ($.inArray(otherValue, c.values) !== -1) {
+                tests[index] = true;
+              } else tests[index] = false;
+
+              break; // Break here.
+
+            case '!==': // Not equal to any.
+            case '!=': // Alias.
+
+              if ($.inArray(otherValue, c.values) === -1) {
+                tests[index] = true;
+              } else tests[index] = false;
+
+              break; // Break here.
+          }
+        });
+        return tests;
+      };
+
+      // Checks all tests and adjusts classes.
+
+      var checkTests = function () {
+        var tests = runTests(),
+          i, enabled;
+
+        if (logic === 'ANY') {
+          for (i = 0, enabled = false; i < tests.length; i++) {
+            if (tests[i]) enabled = true;
+          }
+        } else { // Defaults to `ALL` logic.
+          for (i = 0, enabled = true; i < tests.length; i++) {
+            if (!tests[i]) enabled = false;
+          }
         }
-        switch (ifOperator) {
+        if (enabled) { // Enabled?
+          $thisTr.removeClass(disabledClass);
+        } else $thisTr.addClass(disabledClass);
+      };
 
-        case '==': // Equal to any.
-        case '=':
+      // Setup change event handlers.
 
-          if ($.inArray(otherValue, ifValues) !== -1) {
-            $thisTr.removeClass(disabledClass);
-          } else $thisTr.addClass(disabledClass);
+      conditions.forEach(function (c, index) {
+        c.$otherField.on('input change', _.debounce(checkTests, 500));
+      });
 
-          break; // Break here.
+      // Check tests right away.
 
-        case '!==': // Not equal to any.
-        case '!=':
-
-          if ($.inArray(otherValue, ifValues) === -1) {
-            $thisTr.removeClass(disabledClass);
-          } else $thisTr.addClass(disabledClass);
-
-          break; // Break here.
-        }
-      }).trigger('change');
+      checkTests();
     });
   });
 })(jQuery);
