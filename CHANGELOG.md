@@ -5,6 +5,7 @@
 - Updating to latest WebSharks Core, which now includes Stripe integration.
 - Updating to latest Semantic UI build, now a custom build that comes with the WebSharks Core.
 - Adding support for inline scripts via `wp_add_inline_script()`.
+- Enhancing `data-if=""` attribute handling.
 
 ## v170311.43193
 

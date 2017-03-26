@@ -51,15 +51,22 @@
 
     /*
      * Menu page `if` dependencies.
-     * e.g., data-if="option_name" as `=1`.
+     *
+     * e.g., data-if="option_name" (same as `=1`).
      * e.g., data-if="option_name=0|1|2|3"
      * e.g., data-if="option_name!=0|1|2|3"
+     *
+     * e.g., data-if="option_name!=0|<disabled>" (disabled in some way).
+     * In other words, it's not `0` and it's not `<disabled>` in some way.
      */
     $menuPageWrapper.find('.-form-table tr[data-if]').each(function () {
       var $this = $(this),
         $form = $this.closest('form');
 
-      var parts = $this.data('if').split(/(!=|=)/),
+      var disabledClass = '-disabled-via-if-check',
+        disabledValue = '<disabled>';
+
+      var parts = $this.data('if').split(/(!==|===|!=|=)/),
         option = parts[0] || '',
         operator = parts[1] || '=',
         values = (parts[2] || '1').split(/\|/);
@@ -68,22 +75,36 @@
         return; // Nothing to do in this case.
 
       var onOptionChange = function (e) {
-        var value = $.trim($(this).val());
+        var $this = $(this);
+        var value = $.trim($this.val());
 
-        switch (operator) {
-        case '=': // Enable if in array.
-          if ($.inArray(value, values) !== -1) {
-            $this.removeClass('-disabled-via-if-check');
-          } else $this.addClass('-disabled-via-if-check');
-          break;
-
-        case '!=': // Enable if not in array.
-          if ($.inArray(value, values) === -1) {
-            $this.removeClass('-disabled-via-if-check');
-          } else $this.addClass('-disabled-via-if-check');
-          break;
+        if ($this.prop('disabled')) {
+          value = disabledValue;
+        } else if ($this.hasClass(disabledClass)) {
+          value = disabledValue;
         }
-      }; // Trigger an initial change on setup.
+        switch (operator) {
+
+        case '==': // Equal to any.
+        case '=':
+
+          if ($.inArray(value, values) !== -1) {
+            $this.removeClass(disabledClass);
+          } else $this.addClass(disabledClass);
+
+          break; // Break here.
+
+        case '!==': // Not equal to any.
+        case '!=':
+
+          if ($.inArray(value, values) === -1) {
+            $this.removeClass(disabledClass);
+          } else $this.addClass(disabledClass);
+
+          break; // Break here.
+        }
+      }; // Attach event & trigger an initial change on setup.
+
       $form.find('[name$="' + esqJqAttr('[' + option + ']') + '"]')
         .on('change', onOptionChange).trigger('change');
     });
