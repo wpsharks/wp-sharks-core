@@ -163,7 +163,7 @@
       // Setup change event handlers.
 
       conditions.forEach(function (c, index) {
-        c.$otherField.on('input change', _.debounce(checkTests, 500));
+        c.$otherField.on('input change', _.debounce(checkTests, 250, true));
       });
 
       // Check tests right away.
