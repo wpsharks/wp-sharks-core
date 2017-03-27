@@ -15,20 +15,41 @@
  * Fancy monospace tags.
  */
 /*
- * Social network colors.
+ * Named colors.
  */
 /*
- * Our own named colors.
+ * Social networks.
+ */
+/*
+ * Our own names.
  */
 /*
  * Name that color!
  * <http://chir.ag/projects/name-that-color>
  */
 /*
+ * Font variables.
+ */
+/*
+ * Content font variables.
+ */
+/*
  * Pixels to rem.
  */
 /*
  * Fancy blockquotes.
+ */
+/*
+ * Fancy checkboxes.
+ */
+/*
+ * Fancy definitions.
+ */
+/*
+ * Fancy HR tags.
+ */
+/*
+ * Fancy link targets.
  */
 /*
  * Fancy monospace tags.
@@ -43,16 +64,25 @@
  * Fancy placeholders.
  */
 /*
+ * Font events.
+ */
+/*
+ * Font features.
+ */
+/*
  * Pixels to rem.
  */
 /*
- * Mixins for responsive tweaks.
- * See: <http://semantic-ui.com/elements/container.html>
- * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
- * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
+ * Device breakpoints.
+ * Following Semantic UI breakpoints.
  */
 /*
- * Larger fonts.
+ * Responsive utils.
+ * Following Semantic UI breakpoints.
+ * + custom `handheld` & `small screen` breakpoints.
+ */
+/*
+ * Responsive fonts.
  */
 /*
  * Responsive images.
@@ -61,13 +91,34 @@
  * Highlight.js <pre><code>.
  */
 /*
- * Position utils.
+ * Box shadow tools.
  */
 /*
- * Mixins for responsive tweaks.
- * See: <http://semantic-ui.com/elements/container.html>
- * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
- * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
+ * Centered tools.
+ */
+/*
+ * Position tools.
+ */
+/*
+ * Device breakpoints.
+ * Following Semantic UI breakpoints.
+ */
+/*
+ * Responsive utils.
+ * Following Semantic UI breakpoints.
+ * + custom `handheld` & `small screen` breakpoints.
+ */
+/*
+ * Text shadow tools.
+ */
+/*
+ * Device breakpoints.
+ * Following Semantic UI breakpoints.
+ */
+/*
+ * Responsive utils.
+ * Following Semantic UI breakpoints.
+ * + custom `handheld` & `small screen` breakpoints.
  */
 /*
  * Align utils.
@@ -76,19 +127,46 @@
  * Blurred utils.
  */
 /*
- * Box shadow utilities.
+ * Border utils.
+ */
+/*
+ * Box shadow utils.
+ */
+/*
+ * Color utils.
  */
 /*
  * Content utils.
  */
 /*
+ * Disabled utils.
+ */
+/*
  * Display utils.
  */
 /*
- * Line clamp utils.
+ * Font utils.
  */
 /*
- * Muted utils.
+ * Height utils.
+ */
+/*
+ * Inset utils.
+ */
+/*
+ * Line utils.
+ */
+/*
+ * List utils.
+ */
+/*
+ * Margin utils.
+ */
+/*
+ * Opacity utils.
+ */
+/*
+ * Padding utils.
  */
 /*
  * Position utils.
@@ -100,7 +178,10 @@
  * Text shadow utilities.
  */
 /*
- * WP align utils.
+ * Visibility utils.
+ */
+/*
+ * Width utils.
  */
 /*
  * Color definitions.
