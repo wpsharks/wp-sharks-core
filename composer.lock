@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.24.7",
+            "version": "3.24.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f062d7ea2123fe2aefef91da855c10ef8ff3af1c"
+                "reference": "a7ce54bffdb1a759fb2f6f6e4bf2927148583c80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f062d7ea2123fe2aefef91da855c10ef8ff3af1c",
-                "reference": "f062d7ea2123fe2aefef91da855c10ef8ff3af1c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a7ce54bffdb1a759fb2f6f6e4bf2927148583c80",
+                "reference": "a7ce54bffdb1a759fb2f6f6e4bf2927148583c80",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-03-23 22:17:20"
+            "time": "2017-03-27 22:54:11"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1240,12 +1240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "368eae12fc42321be21b73d6b77128a51a463ace"
+                "reference": "053c68772daae85f1585787ed54fbf6e5f645ec8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/368eae12fc42321be21b73d6b77128a51a463ace",
-                "reference": "368eae12fc42321be21b73d6b77128a51a463ace",
+                "url": "https://api.github.com/repos/websharks/core/zipball/053c68772daae85f1585787ed54fbf6e5f645ec8",
+                "reference": "053c68772daae85f1585787ed54fbf6e5f645ec8",
                 "shasum": ""
             },
             "require": {
@@ -1359,7 +1359,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-03-27 09:16:18"
+            "time": "2017-03-28 07:59:21"
         },
         {
             "name": "websharks/dicer",
