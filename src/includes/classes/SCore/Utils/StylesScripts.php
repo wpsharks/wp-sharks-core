@@ -339,7 +339,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Underscore.
      *
-     * @since 17xxxx Underscore libs.
+     * @since 170329.20871 Underscore libs.
      *
      * @return array Library details.
      */
@@ -699,7 +699,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Stripe libs.
      *
-     * @since 17xxxx Stripe libs.
+     * @since 170329.20871 Stripe libs.
      *
      * @return array Library details.
      */
@@ -785,7 +785,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue No UI Slider libs.
      *
-     * @since 17xxxx No UI Slider libs.
+     * @since 170329.20871 No UI Slider libs.
      *
      * @return array Library details.
      */
@@ -820,7 +820,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue jQuery Address libs.
      *
-     * @since 17xxxx jQuery Address libs.
+     * @since 170329.20871 jQuery Address libs.
      *
      * @return array Library details.
      */

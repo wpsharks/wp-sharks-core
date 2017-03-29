@@ -100,7 +100,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Latest Underscore.
+     * @since 170329.20871 Latest Underscore.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -232,7 +232,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Stripe libs.
+     * @since 170329.20871 Stripe libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -268,7 +268,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx No UI Slider libs.
+     * @since 170329.20871 No UI Slider libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -280,7 +280,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Adding jQuery Address libs.
+     * @since 170329.20871 Adding jQuery Address libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
