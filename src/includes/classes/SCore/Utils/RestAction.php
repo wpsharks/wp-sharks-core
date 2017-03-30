@@ -32,7 +32,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @var string Action var.
+     * @type string Action var.
      */
     public $var;
 
@@ -41,7 +41,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @var string Data var.
+     * @type string Data var.
      */
     public $data_var;
 
@@ -50,7 +50,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @var string Data slug.
+     * @type string Data slug.
      */
     public $data_slug;
 
@@ -59,7 +59,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @var string Current action.
+     * @type string Current action.
      */
     protected $action;
 
@@ -68,7 +68,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @var string Action API version.
+     * @type string Action API version.
      */
     protected $api_version;
 
@@ -77,7 +77,7 @@ class RestAction extends Classes\SCore\Base\Core
      *
      * @since 160608 ReST utils.
      *
-     * @var array Registered actions.
+     * @type array Registered actions.
      */
     protected $registered_actions;
 
@@ -109,7 +109,7 @@ class RestAction extends Classes\SCore\Base\Core
     }
 
     /**
-     * Handle actions.
+     * On `wp_loaded` hook.
      *
      * @since 160608 ReST utils.
      */
