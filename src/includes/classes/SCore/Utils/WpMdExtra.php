@@ -41,16 +41,16 @@ class WpMdExtra extends Classes\SCore\Base\Core
     public function transform(string $markdown, int $post_id = 0, array $args = []): string
     {
         global $wp_markdown_extra;
-        $wpMde = $wp_markdown_extra;
+        $mde = $wp_markdown_extra;
 
         if (!$markdown) {
             return $markdown;
-        } elseif (!$wpMde) {
-            return $markdown;
         } elseif (!$this->canTransform()) {
             return $markdown;
+        } elseif (!$mde) {
+            return $markdown;
         }
-        return $wpMde->a::transform($markdown, $post_id, $args);
+        return $mde->a::transform($markdown, $post_id, $args);
     }
 
     /**
@@ -65,10 +65,10 @@ class WpMdExtra extends Classes\SCore\Base\Core
     public function enabled(string $for = ''): bool
     {
         global $wp_markdown_extra;
-        $wpMde = $wp_markdown_extra;
+        $mde = $wp_markdown_extra;
 
         $for = $for === 'posts' || $for === 'comments' ? $for : 'posts';
-        return $wpMde && $wpMde->s::getOption($for.'_enable');
+        return $mde && $mde->s::getOption($for.'_enable');
     }
 
     /**
@@ -81,8 +81,8 @@ class WpMdExtra extends Classes\SCore\Base\Core
     public function canTransform(): bool
     {
         global $wp_markdown_extra;
-        $wpMde = $wp_markdown_extra;
+        $mde = $wp_markdown_extra;
 
-        return !empty($wpMde);
+        return !empty($mde);
     }
 }
