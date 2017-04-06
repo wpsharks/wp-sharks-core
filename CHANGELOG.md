@@ -1,3 +1,8 @@
+## $v
+
+- Adding `s::enqueueDeviconLibs()`.
+- Updating to latest WebSharks Core.
+
 ## v170329.20871
 
 - Adding `s::enqueueStripeLibs()`.

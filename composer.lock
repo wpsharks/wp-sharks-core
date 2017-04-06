@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.25.2",
+            "version": "3.25.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d513a8c5c993fc130e9592569ee9b148f5319107"
+                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d513a8c5c993fc130e9592569ee9b148f5319107",
-                "reference": "d513a8c5c993fc130e9592569ee9b148f5319107",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f5181b893c8822c5dc3986e4e52eddff66bbd04f",
+                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-03 20:12:57"
+            "time": "2017-04-05 23:01:19"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1187,16 +1187,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.18",
+            "version": "v2.8.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "2a7bab3c16f6f452c47818fdd08f3b1e49ffcf7d"
+                "reference": "286d84891690b0e2515874717e49360d1c98a703"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/2a7bab3c16f6f452c47818fdd08f3b1e49ffcf7d",
-                "reference": "2a7bab3c16f6f452c47818fdd08f3b1e49ffcf7d",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/286d84891690b0e2515874717e49360d1c98a703",
+                "reference": "286d84891690b0e2515874717e49360d1c98a703",
                 "shasum": ""
             },
             "require": {
@@ -1232,7 +1232,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-01 18:13:50"
+            "time": "2017-03-20 09:41:44"
         },
         {
             "name": "websharks/core",
@@ -1240,12 +1240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "d84073066b1b5457529bea2d1bff86a7c42916cb"
+                "reference": "291dd65205a3533837013eea478cd69d1f091fc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/d84073066b1b5457529bea2d1bff86a7c42916cb",
-                "reference": "d84073066b1b5457529bea2d1bff86a7c42916cb",
+                "url": "https://api.github.com/repos/websharks/core/zipball/291dd65205a3533837013eea478cd69d1f091fc3",
+                "reference": "291dd65205a3533837013eea478cd69d1f091fc3",
                 "shasum": ""
             },
             "require": {
@@ -1295,7 +1295,7 @@
                 "stripe/stripe-php": "4.*",
                 "symfony/yaml": "2.*",
                 "websharks/dicer": "160110",
-                "websharks/php-markdown": "170215",
+                "websharks/php-markdown": "170406",
                 "websharks/sharkicons": "160620"
             },
             "require-dev": {
@@ -1359,7 +1359,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-04-04 02:56:57"
+            "time": "2017-04-06 05:33:41"
         },
         {
             "name": "websharks/dicer",
@@ -1414,16 +1414,16 @@
         },
         {
             "name": "websharks/php-markdown",
-            "version": "170215",
+            "version": "170406",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/php-markdown.git",
-                "reference": "da47e3586f3b5c24112d73c4fba867e156793e1c"
+                "reference": "a0bb441347dd50546a30a191280a77e9d067b04a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/da47e3586f3b5c24112d73c4fba867e156793e1c",
-                "reference": "da47e3586f3b5c24112d73c4fba867e156793e1c",
+                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/a0bb441347dd50546a30a191280a77e9d067b04a",
+                "reference": "a0bb441347dd50546a30a191280a77e9d067b04a",
                 "shasum": ""
             },
             "require": {
@@ -1459,7 +1459,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2017-02-15 20:06:57"
+            "time": "2017-04-06 04:06:23"
         },
         {
             "name": "websharks/sharkicons",

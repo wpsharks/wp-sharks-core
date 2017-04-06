@@ -160,6 +160,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx Devicon libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueDeviconLibs()
+     */
+    public static function enqueueDeviconLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueDeviconLibs(...$args);
+    }
+
+    /**
      * @since 170128.18158 Semantic UI libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.

@@ -6,7 +6,7 @@
  * Requires a local copy of the WebSharks Core.
  */
 /*
- * Semantic colors.
+ * General colors.
  */
 /*
  * Fancy blockquotes.
@@ -37,6 +37,9 @@
  * Pixels to rem.
  */
 /*
+ * Better inversions.
+ */
+/*
  * Fancy blockquotes.
  */
 /*
@@ -50,6 +53,9 @@
  */
 /*
  * Fancy link targets.
+ */
+/*
+ * Fancy messages.
  */
 /*
  * Fancy monospace tags.
@@ -95,6 +101,9 @@
  */
 /*
  * Centered tools.
+ */
+/*
+ * Text shadow tools.
  */
 /*
  * Position tools.
@@ -143,6 +152,9 @@
  */
 /*
  * Display utils.
+ */
+/*
+ * Filter shadow utilities.
  */
 /*
  * Font utils.

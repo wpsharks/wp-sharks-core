@@ -25,6 +25,9 @@
   "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css": {
     "sri": "sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
   },
+  "//cdn.rawgit.com/konpa/devicon/4f6a4b08efdad6bb29f9cc801f5c07e263b39907/devicon.min.css": {
+    "sri": "sha384-Hg10JSWDaBfCghpDpPs4N2juWwx4EnWuO71d9UN3smUeUCuv2WkfZwQIDGcszb/w"
+  },
 
   "//cdn.jsdelivr.net/behave.js/0.1/behave.js": {
     "sri": "sha384-7WwtPSLS6yr81Gd8NG6iNM8T+bk/2caG0ElR2TOP+CJ0r9aK3Rl99+kDPj4Lc+vr"

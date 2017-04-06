@@ -480,6 +480,30 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue Devicon libs.
+     *
+     * @since 17xxxx Devicon libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueDeviconLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'styles' => [
+                'devicons' => [
+                    'version' => '4f6a4b08efdad6bb29f9cc801f5c07e263b39907',
+                    'url'     => '//cdn.rawgit.com/konpa/devicon/%1$s/devicon.min.css',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue Semantic UI libs.
      *
      * @since 170128.18158 Semantic UI libs.
