@@ -2,6 +2,7 @@
 
 - Adding `s::enqueueDeviconLibs()`.
 - Updating to latest WebSharks Core.
+- Updating for compatibility with WooCommerce 3.0+.
 
 ## v170329.20871
 
