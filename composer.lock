@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.25.4",
+            "version": "3.25.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f"
+                "reference": "d4f1104f5ac9c755875c5e6e9bade2c70708219a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f5181b893c8822c5dc3986e4e52eddff66bbd04f",
-                "reference": "f5181b893c8822c5dc3986e4e52eddff66bbd04f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d4f1104f5ac9c755875c5e6e9bade2c70708219a",
+                "reference": "d4f1104f5ac9c755875c5e6e9bade2c70708219a",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-05 23:01:19"
+            "time": "2017-04-11 22:31:27"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1024,16 +1024,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v4.5.1",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "420d34ae71059700ea2a2e466670f66ddd97777d"
+                "reference": "54a10a3731398c5e56b3bf8f03df88b26b1a2b51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/420d34ae71059700ea2a2e466670f66ddd97777d",
-                "reference": "420d34ae71059700ea2a2e466670f66ddd97777d",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/54a10a3731398c5e56b3bf8f03df88b26b1a2b51",
+                "reference": "54a10a3731398c5e56b3bf8f03df88b26b1a2b51",
                 "shasum": ""
             },
             "require": {
@@ -1075,7 +1075,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2017-03-22 17:51:32"
+            "time": "2017-04-10 16:53:09"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -1240,12 +1240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "9a36f90074fa2521672add9373001183bf863a1a"
+                "reference": "6d1ef619c923c41da1e8700fa87a2d546e5e1d69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/9a36f90074fa2521672add9373001183bf863a1a",
-                "reference": "9a36f90074fa2521672add9373001183bf863a1a",
+                "url": "https://api.github.com/repos/websharks/core/zipball/6d1ef619c923c41da1e8700fa87a2d546e5e1d69",
+                "reference": "6d1ef619c923c41da1e8700fa87a2d546e5e1d69",
                 "shasum": ""
             },
             "require": {
@@ -1359,7 +1359,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-04-06 08:46:00"
+            "time": "2017-04-12 06:06:12"
         },
         {
             "name": "websharks/dicer",
