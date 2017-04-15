@@ -52,7 +52,13 @@
  * Fancy HR tags.
  */
 /*
+ * Fancy labels.
+ */
+/*
  * Fancy link targets.
+ */
+/*
+ * Fancy lists.
  */
 /*
  * Fancy messages.
@@ -158,6 +164,9 @@
  */
 /*
  * Font utils.
+ */
+/*
+ * Heading utils.
  */
 /*
  * Height utils.
@@ -543,6 +552,14 @@
 
 .wp-sharks-menu-page-area:not(#x) input[type='color'] {
   padding: 0;
+}
+
+.wp-sharks-menu-page-area:not(#x) input[type='text'][data-toggle~='-color-picker'] {
+  margin: 0;
+  width: 65px;
+  font-size: 12px;
+  line-height: 16px;
+  font-family: monospace;
 }
 
 .wp-sharks-menu-page-area:not(#x) textarea,
