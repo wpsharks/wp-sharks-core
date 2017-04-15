@@ -9,7 +9,7 @@
 @mixin wp-admin-field-standards($scope: null) {
   #{$scope}select,
   #{$scope}textarea,
-  #{$scope}input:not([type='checkbox']):not([type='radio']):not([type='color']):not([data-toggle~='-color-picker']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']) {
+  #{$scope}input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']) {
     border-radius:            0;
     width:                    100%;
     margin:                   1px;
@@ -32,11 +32,11 @@
   }
 
   #{$scope}input[type='text'][data-toggle~='-color-picker'] {
-    margin:                   0;
-    width:                    65px;
-    font-size:                12px;
     line-height:              16px;
     font-family:              monospace;
+    margin:                   0 !important;
+    width:                    65px !important;
+    font-size:                12px !important;
   }
 
   #{$scope}input[type='color'] {
