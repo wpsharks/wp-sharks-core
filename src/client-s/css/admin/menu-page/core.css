@@ -503,7 +503,7 @@
 
 .wp-sharks-menu-page-area:not(#x) select,
 .wp-sharks-menu-page-area:not(#x) textarea,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']) {
+.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([data-toggle~='-color-picker']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']) {
   border-radius: 0;
   width: 100%;
   margin: 1px;
@@ -517,41 +517,33 @@
 
 .wp-sharks-menu-page-area:not(#x) select::-webkit-input-placeholder,
 .wp-sharks-menu-page-area:not(#x) textarea::-webkit-input-placeholder,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button'])::-webkit-input-placeholder {
+.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([data-toggle~='-color-picker']):not([type='range']):not([type='image']):not([type='submit']):not([type='button'])::-webkit-input-placeholder {
   color: #c8c8c8;
 }
 
 .wp-sharks-menu-page-area:not(#x) select::-moz-placeholder,
 .wp-sharks-menu-page-area:not(#x) textarea::-moz-placeholder,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button'])::-moz-placeholder {
+.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([data-toggle~='-color-picker']):not([type='range']):not([type='image']):not([type='submit']):not([type='button'])::-moz-placeholder {
   color: #c8c8c8;
 }
 
 .wp-sharks-menu-page-area:not(#x) select:-moz-placeholder,
 .wp-sharks-menu-page-area:not(#x) textarea:-moz-placeholder,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):-moz-placeholder {
+.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([data-toggle~='-color-picker']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):-moz-placeholder {
   color: #c8c8c8;
 }
 
 .wp-sharks-menu-page-area:not(#x) select:-ms-input-placeholder,
 .wp-sharks-menu-page-area:not(#x) textarea:-ms-input-placeholder,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):-ms-input-placeholder {
+.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([data-toggle~='-color-picker']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):-ms-input-placeholder {
   color: #c8c8c8;
 }
 
 .wp-sharks-menu-page-area:not(#x) select:focus,
 .wp-sharks-menu-page-area:not(#x) textarea:focus,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):focus {
+.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([data-toggle~='-color-picker']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):focus {
   border: 1px solid #5b9dd9;
   box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);
-}
-
-.wp-sharks-menu-page-area:not(#x) input[type='range'] {
-  width: 100%;
-}
-
-.wp-sharks-menu-page-area:not(#x) input[type='color'] {
-  padding: 0;
 }
 
 .wp-sharks-menu-page-area:not(#x) input[type='text'][data-toggle~='-color-picker'] {
@@ -560,6 +552,14 @@
   font-size: 12px;
   line-height: 16px;
   font-family: monospace;
+}
+
+.wp-sharks-menu-page-area:not(#x) input[type='color'] {
+  padding: 0;
+}
+
+.wp-sharks-menu-page-area:not(#x) input[type='range'] {
+  width: 100%;
 }
 
 .wp-sharks-menu-page-area:not(#x) textarea,
