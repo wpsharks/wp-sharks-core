@@ -7,7 +7,7 @@
  */
 // @codingStandardsIgnoreFile
 
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Globals;
 
 error_reporting(-1);
@@ -27,7 +27,7 @@ declare (strict_types = 1);
 namespace WebSharks\WpSharks\Core\Globals;
 
 if (!defined(\'WPINC\')) {
-    exit(\'Do NOT access this file directly: \'.basename(__FILE__));
+    exit(\'Do NOT access this file directly.\');
 }
 ';
 foreach (dir_recursive_regex(__DIR__, '/\.php$/ui') as $_file) {

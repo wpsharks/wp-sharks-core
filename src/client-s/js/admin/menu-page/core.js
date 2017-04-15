@@ -23,7 +23,7 @@
     /*
      * Color pickers.
      */
-    $menuPageArea.find('input[type="color"]').wpColorPicker();
+    $menuPageArea.find('input[type="color"], input[type="text"][data-toggle~="-color-picker"]').wpColorPicker();
 
     /*
      * Tooltips.

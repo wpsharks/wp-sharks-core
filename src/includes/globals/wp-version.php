@@ -7,7 +7,7 @@
  */
 // @codingStandardsIgnoreFile
 
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Globals;
 
 if (!defined('WPINC')) {
