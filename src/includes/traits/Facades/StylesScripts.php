@@ -160,7 +160,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Devicon libs.
+     * @since 170417.43553 Devicon libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

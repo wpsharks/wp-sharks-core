@@ -105,7 +105,7 @@ class WcOrderItem extends Classes\SCore\Base\Core
      * Get product ID from item.
      *
      * @since 160608 Order item utilities.
-     * @since 17xxxx Accept `\WC_Order_Item`.
+     * @since 170417.43553 Accept `\WC_Order_Item`.
      *
      * @param \WC_Order_Item|array $WC_Order_Item Order item.
      *

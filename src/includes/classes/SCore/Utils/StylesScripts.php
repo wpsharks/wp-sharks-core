@@ -482,7 +482,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Devicon libs.
      *
-     * @since 17xxxx Devicon libs.
+     * @since 170417.43553 Devicon libs.
      *
      * @return array Library details.
      */

@@ -1,4 +1,4 @@
-## $v
+## v170417.43553
 
 - Adding `s::enqueueDeviconLibs()`.
 - Updating to latest WebSharks Core.
