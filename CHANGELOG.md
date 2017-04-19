@@ -1,6 +1,7 @@
 ## $v
 
 - Adding `s::wcProductPost()`.
+- Adding `s::wcProductParent()`.
 
 ## v170417.43553
 

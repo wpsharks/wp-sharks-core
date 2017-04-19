@@ -111,4 +111,26 @@ class WcProduct extends Classes\SCore\Base\Core
         }
         return $WP_Post instanceof \WP_Post ? $WP_Post : null;
     }
+
+    /**
+     * Product parent.
+     *
+     * @since 17xxxx WC product utils.
+     *
+     * @param \WC_Product $WC_Product Product.
+     *
+     * @return \WC_Product|null Product, else `null`.
+     */
+    public function parent(\WC_Product $WC_Product)
+    {
+        if (!$WC_Product->exists()) {
+            return null; // Not possible.
+        }
+        if ($WC_Product->is_type('variation')) {
+            $WC_Parent_Product = wc_get_product($WC_Product->get_parent_id());
+        } else {
+            $WC_Parent_Product = null; // Not applicable.
+        }
+        return $WC_Parent_Product instanceof \WC_Product ? $WC_Parent_Product : null;
+    }
 }

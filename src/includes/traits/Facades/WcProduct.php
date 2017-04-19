@@ -62,4 +62,16 @@ trait WcProduct
     {
         return $GLOBALS[static::class]->Utils->§WcProduct->post(...$args);
     }
+
+    /**
+     * @since 17xxxx WC product utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\WcProduct::parent()
+     */
+    public static function wcProductParent(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§WcProduct->parent(...$args);
+    }
 }
