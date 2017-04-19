@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -49,5 +49,17 @@ trait WcProduct
     public static function wcProductBySlug(...$args)
     {
         return $GLOBALS[static::class]->Utils->§WcProduct->bySlug(...$args);
+    }
+
+    /**
+     * @since 17xxxx WC product utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\WcProduct::post()
+     */
+    public static function wcProductPost(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§WcProduct->post(...$args);
     }
 }

@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -88,5 +88,27 @@ class WcProduct extends Classes\SCore\Base\Core
             return null; // Not possible.
         }
         return $WC_Product;
+    }
+
+    /**
+     * Product post.
+     *
+     * @since 17xxxx WC product utils.
+     *
+     * @param \WC_Product $WC_Product Product.
+     *
+     * @return \WP_Post|null Post, else `null`.
+     */
+    public function post(\WC_Product $WC_Product)
+    {
+        if (!$WC_Product->exists()) {
+            return null; // Not possible.
+        }
+        if ($WC_Product->is_type('variation')) {
+            $WP_Post = get_post($WC_Product->get_parent_id());
+        } else {
+            $WP_Post = get_post($WC_Product->get_id());
+        }
+        return $WP_Post instanceof \WP_Post ? $WP_Post : null;
     }
 }

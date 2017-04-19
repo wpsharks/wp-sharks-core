@@ -1,3 +1,7 @@
+## $v
+
+- Adding `s::wcProductPost()`.
+
 ## v170417.43553
 
 - Adding `s::enqueueDeviconLibs()`.
