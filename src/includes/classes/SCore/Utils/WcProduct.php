@@ -109,7 +109,7 @@ class WcProduct extends Classes\SCore\Base\Core
         } else {
             $WP_Post = get_post($WC_Product->get_id());
         }
-        return $WP_Post instanceof \WP_Post ? $WP_Post : null;
+        return $WP_Post instanceof \WP_Post && $WP_Post->ID ? $WP_Post : null;
     }
 
     /**
@@ -131,6 +131,6 @@ class WcProduct extends Classes\SCore\Base\Core
         } else {
             $WC_Parent_Product = null; // Not applicable.
         }
-        return $WC_Parent_Product instanceof \WC_Product ? $WC_Parent_Product : null;
+        return $WC_Parent_Product instanceof \WC_Product && $WC_Parent_Product->exists() ? $WC_Parent_Product : null;
     }
 }
