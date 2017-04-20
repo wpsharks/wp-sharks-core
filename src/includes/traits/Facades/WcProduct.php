@@ -52,7 +52,7 @@ trait WcProduct
     }
 
     /**
-     * @since 17xxxx WC product utils.
+     * @since 170420.14768 WC product utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
@@ -64,7 +64,7 @@ trait WcProduct
     }
 
     /**
-     * @since 17xxxx WC product utils.
+     * @since 170420.14768 WC product utils.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *

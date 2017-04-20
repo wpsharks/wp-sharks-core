@@ -93,7 +93,7 @@ class WcProduct extends Classes\SCore\Base\Core
     /**
      * Product post.
      *
-     * @since 17xxxx WC product utils.
+     * @since 170420.14768 WC product utils.
      *
      * @param \WC_Product $WC_Product Product.
      *
@@ -115,7 +115,7 @@ class WcProduct extends Classes\SCore\Base\Core
     /**
      * Product parent.
      *
-     * @since 17xxxx WC product utils.
+     * @since 170420.14768 WC product utils.
      *
      * @param \WC_Product $WC_Product Product.
      *
