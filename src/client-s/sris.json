@@ -95,6 +95,10 @@
     "sri": "sha384-KgEy7s3ThYKule8wWiu2WJkm0AmJeSLkXku5PY5X8MhVgdm8K1ebsVRKHfNfWPrR"
   },
 
+  "//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js": {
+    "sri": "sha384-tSi+YsgNwyohDGfW/VhY51IK3RKAPYDcj1sNXJ16oRAyDP++K0NCzSCUW78EMFmf"
+  },
+
   "//cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js": {
     "sri": "sha384-zMTBSQGBLON8BzJvCLwjWuuA1q8Ew5clzw9A3FMXoo/AdY/oB2Q1QTOT/aHDGzfg"
   },

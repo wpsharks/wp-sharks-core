@@ -842,6 +842,31 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue jQuery Cookie libs.
+     *
+     * @since 170525.80892 jQuery Address libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueJQueryCookieLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'jquery-cookie' => [
+                    'version' => '1.4.1',
+                    'deps'    => ['jquery'],
+                    'url'     => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/%1$s/jquery.cookie.min.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue jQuery Address libs.
      *
      * @since 170329.20871 jQuery Address libs.

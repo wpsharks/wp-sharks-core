@@ -292,6 +292,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 170525.80892 Adding jQuery Address libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueJQueryCookieLibs()
+     */
+    public static function enqueueJQueryCookieLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryCookieLibs(...$args);
+    }
+
+    /**
      * @since 170329.20871 Adding jQuery Address libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.

@@ -1,3 +1,7 @@
+## $v
+
+- Adding `s::enqueueJQueryCookieLibs()`.
+
 ## v170420.14768
 
 - Adding `s::wcProductPost()`.
