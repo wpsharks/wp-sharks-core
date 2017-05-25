@@ -1,6 +1,6 @@
 ## $v
 
-- Adding `s::enqueueJQueryCookieLibs()`.
+- Adding `s::enqueueJsCookieLibs()`.
 
 ## v170420.14768
 

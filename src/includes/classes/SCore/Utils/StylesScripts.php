@@ -456,30 +456,6 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
-     * Enqueue Sharkicon libs.
-     *
-     * @since 160709 Sharkicon libs.
-     *
-     * @return array Library details.
-     */
-    public function enqueueSharkiconLibs()
-    {
-        if (($data = $this->didEnqueueLibs(__METHOD__))) {
-            return $data; // Did this already.
-        } // We only need to enqueue once.
-
-        $data = [
-            'styles' => [
-                'sharkicons' => [
-                    'ver' => $this->cv,
-                    'url' => $this->c::appCoreUrl('/vendor/websharks/sharkicons/src/long-classes.min.css'),
-                ],
-            ],
-        ];
-        return $this->enqueueLibs(__METHOD__, $data);
-    }
-
-    /**
      * Enqueue Devicon libs.
      *
      * @since 170417.43553 Devicon libs.
@@ -497,6 +473,30 @@ class StylesScripts extends Classes\SCore\Base\Core
                 'devicons' => [
                     'version' => '4f6a4b08efdad6bb29f9cc801f5c07e263b39907',
                     'url'     => '//cdn.rawgit.com/konpa/devicon/%1$s/devicon.min.css',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue Sharkicon libs.
+     *
+     * @since 160709 Sharkicon libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueSharkiconLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'styles' => [
+                'sharkicons' => [
+                    'ver' => $this->cv,
+                    'url' => $this->c::appCoreUrl('/vendor/websharks/sharkicons/src/long-classes.min.css'),
                 ],
             ],
         ];
@@ -769,6 +769,30 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue JS Cookie libs.
+     *
+     * @since 17xxxx JS Cookie libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueJsCookieLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'js-cookie' => [
+                    'version' => '2.1.4',
+                    'url'     => 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/%1$s/js.cookie.min.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue Moment libs.
      *
      * @since 160524 Moment libs.
@@ -835,31 +859,6 @@ class StylesScripts extends Classes\SCore\Base\Core
                     'version' => '9.2.0',
                     'deps'    => ['no-ui-wnumb'],
                     'url'     => '//cdnjs.cloudflare.com/ajax/libs/noUiSlider/%1$s/nouislider.min.js',
-                ],
-            ],
-        ];
-        return $this->enqueueLibs(__METHOD__, $data);
-    }
-
-    /**
-     * Enqueue jQuery Cookie libs.
-     *
-     * @since 170525.80892 jQuery Address libs.
-     *
-     * @return array Library details.
-     */
-    public function enqueueJQueryCookieLibs()
-    {
-        if (($data = $this->didEnqueueLibs(__METHOD__))) {
-            return $data; // Did this already.
-        } // We only need to enqueue once.
-
-        $data = [
-            'scripts' => [
-                'jquery-cookie' => [
-                    'version' => '1.4.1',
-                    'deps'    => ['jquery'],
-                    'url'     => 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/%1$s/jquery.cookie.min.js',
                 ],
             ],
         ];

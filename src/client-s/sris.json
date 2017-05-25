@@ -2,12 +2,14 @@
   "//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.min.js": {
     "sri": "sha384-/6fSBW6alCm8WL259qD1kQ6bEBlBQJUEehscPXkJ4vQibYGLIMB6R4MNnKg//Sxj"
   },
+
   "//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js": {
     "sri": "sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7"
   },
   "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js": {
     "sri": "sha384-FZY+KSLVXVyc1qAlqH9oCx1JEOlQh6iXfw3o2n3Iy32qGjXmUPWT9I0Z9e9wxYe3"
   },
+
   "//cdn.rawgit.com/websharks/unicode-gcs/1.0.3/dist/index.min.js": {
     "sri": "sha384-WBiEUjMvveCEU90cSrgCylsmrvp78cIELCL3piryoc2kf8+uHtZ1U6IVJWsi6tEx"
   },
@@ -81,6 +83,13 @@
     "sri": "sha384-WtUWHyk39lfUpZQVgokNfSKCJaKAeD6adgLduBLrKTMUuPzFhLtL23y1guFy6lZn"
   },
 
+  "//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js": {
+    "sri": "sha384-3C51VYzyLN6W+IdxzwqCdGDQUOJfaRbPH2h6z97sB+sD4nZ4FCymhVZFvHMGN2ZE"
+  },
+  "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js": {
+    "sri": "sha384-KgEy7s3ThYKule8wWiu2WJkm0AmJeSLkXku5PY5X8MhVgdm8K1ebsVRKHfNfWPrR"
+  },
+
   "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.css": {
     "sri": "sha384-kfpEehYc0yBWG4RbU3E/NT0GA+GQSIAHWXLENAheFZj5WsgklIgXEwZoN/vyCuP0"
   },
@@ -89,14 +98,6 @@
   },
   "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.js": {
     "sri": "sha384-MBxFKGkuKqF48JWgefwb8fe/l7vr3Beh8YeHdKW6LO9ndPKSz6vmGiKn523LXKCg"
-  },
-
-  "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js": {
-    "sri": "sha384-KgEy7s3ThYKule8wWiu2WJkm0AmJeSLkXku5PY5X8MhVgdm8K1ebsVRKHfNfWPrR"
-  },
-
-  "//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js": {
-    "sri": "sha384-tSi+YsgNwyohDGfW/VhY51IK3RKAPYDcj1sNXJ16oRAyDP++K0NCzSCUW78EMFmf"
   },
 
   "//cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js": {

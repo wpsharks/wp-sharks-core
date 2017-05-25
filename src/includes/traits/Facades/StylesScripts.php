@@ -148,18 +148,6 @@ trait StylesScripts
     }
 
     /**
-     * @since 160709 Sharkicon libs.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\SCore\Utils\StylesScripts::enqueueSharkiconLibs()
-     */
-    public static function enqueueSharkiconLibs(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSharkiconLibs(...$args);
-    }
-
-    /**
      * @since 170417.43553 Devicon libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -169,6 +157,18 @@ trait StylesScripts
     public static function enqueueDeviconLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueDeviconLibs(...$args);
+    }
+
+    /**
+     * @since 160709 Sharkicon libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueSharkiconLibs()
+     */
+    public static function enqueueSharkiconLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSharkiconLibs(...$args);
     }
 
     /**
@@ -268,6 +268,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx Adding JS Cookie libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueJsCookieLibs()
+     */
+    public static function enqueueJsCookieLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJsCookieLibs(...$args);
+    }
+
+    /**
      * @since 160524 Initial release.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -289,18 +301,6 @@ trait StylesScripts
     public static function enqueueNoUiSliderLibs(...$args)
     {
         return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueNoUiSliderLibs(...$args);
-    }
-
-    /**
-     * @since 170525.80892 Adding jQuery Address libs.
-     *
-     * @param mixed ...$args Variadic args to underlying utility.
-     *
-     * @see Classes\SCore\Utils\StylesScripts::enqueueJQueryCookieLibs()
-     */
-    public static function enqueueJQueryCookieLibs(...$args)
-    {
-        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueJQueryCookieLibs(...$args);
     }
 
     /**
