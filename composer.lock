@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.26.1",
+            "version": "3.28.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "fb58de550919d0472f62dcb9e1bb11d793c6d297"
+                "reference": "a02d10b668ce905c627c6ce149e095b159538341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fb58de550919d0472f62dcb9e1bb11d793c6d297",
-                "reference": "fb58de550919d0472f62dcb9e1bb11d793c6d297",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a02d10b668ce905c627c6ce149e095b159538341",
+                "reference": "a02d10b668ce905c627c6ce149e095b159538341",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 "ext-simplexml": "*",
                 "ext-spl": "*",
                 "nette/neon": "^2.3",
-                "phpunit/phpunit": "~4.0|~5.0",
+                "phpunit/phpunit": "^4.8.35|^5.4.0",
                 "psr/cache": "^1.0"
             },
             "suggest": {
@@ -85,28 +85,26 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-20 21:58:43"
+            "time": "2017-05-25 22:17:39"
         },
         {
             "name": "corneltek/getoptionkit",
-            "version": "2.5.1",
+            "version": "2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/c9s/GetOptionKit.git",
-                "reference": "ded820e487ab1aade804b846712569499956e2ee"
+                "reference": "9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/ded820e487ab1aade804b846712569499956e2ee",
-                "reference": "ded820e487ab1aade804b846712569499956e2ee",
+                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80",
+                "reference": "9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "corneltek/phpunit-testmore": "dev-master",
-                "phpunit/phpunit": ">=4.8,<6",
                 "satooshi/php-coveralls": "^1"
             },
             "type": "library",
@@ -132,20 +130,20 @@
             ],
             "description": "Powerful command-line option toolkit",
             "homepage": "http://github.com/c9s/GetOptionKit",
-            "time": "2017-02-22 04:51:57"
+            "time": "2017-04-30 09:31:04"
         },
         {
             "name": "defuse/php-encryption",
-            "version": "2.0.3",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/defuse/php-encryption.git",
-                "reference": "2c6fea3d9a4eaaa8cef86b2a89f3660818117b33"
+                "reference": "5176f5abb38d3ea8a6e3ac6cd3bbb54d8185a689"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/2c6fea3d9a4eaaa8cef86b2a89f3660818117b33",
-                "reference": "2c6fea3d9a4eaaa8cef86b2a89f3660818117b33",
+                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/5176f5abb38d3ea8a6e3ac6cd3bbb54d8185a689",
+                "reference": "5176f5abb38d3ea8a6e3ac6cd3bbb54d8185a689",
                 "shasum": ""
             },
             "require": {
@@ -154,13 +152,17 @@
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "nikic/php-parser": "^2.0"
+                "nikic/php-parser": "^2.0|^3.0",
+                "phpunit/phpunit": "^4|^5"
             },
+            "bin": [
+                "bin/generate-defuse-key"
+            ],
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "src"
-                ]
+                "psr-4": {
+                    "Defuse\\Crypto\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -191,7 +193,7 @@
                 "security",
                 "symmetric key cryptography"
             ],
-            "time": "2016-10-10 15:20:26"
+            "time": "2017-05-18 21:28:48"
         },
         {
             "name": "embedly/embedly-php",
@@ -1024,16 +1026,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v4.8.0",
+            "version": "v4.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "708b0428fb1d3f4901277844713a6eb1a3b3084f"
+                "reference": "4844ef4693f2a4de70bfa7848c9571ed6ac06b75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/708b0428fb1d3f4901277844713a6eb1a3b3084f",
-                "reference": "708b0428fb1d3f4901277844713a6eb1a3b3084f",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/4844ef4693f2a4de70bfa7848c9571ed6ac06b75",
+                "reference": "4844ef4693f2a4de70bfa7848c9571ed6ac06b75",
                 "shasum": ""
             },
             "require": {
@@ -1075,7 +1077,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2017-04-20 18:23:52"
+            "time": "2017-05-25 21:38:10"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -1187,16 +1189,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.19",
+            "version": "v2.8.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "286d84891690b0e2515874717e49360d1c98a703"
+                "reference": "93ccdde79f4b079c7558da4656a3cb1c50c68e02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/286d84891690b0e2515874717e49360d1c98a703",
-                "reference": "286d84891690b0e2515874717e49360d1c98a703",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/93ccdde79f4b079c7558da4656a3cb1c50c68e02",
+                "reference": "93ccdde79f4b079c7558da4656a3cb1c50c68e02",
                 "shasum": ""
             },
             "require": {
@@ -1232,7 +1234,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-20 09:41:44"
+            "time": "2017-05-01 14:31:55"
         },
         {
             "name": "websharks/core",
@@ -1240,12 +1242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "4faca851f81bc6849175a866d4b78bb17f207dd6"
+                "reference": "ce2ba4c3bf4afbb1a1be0994c922f09f0080bcfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/4faca851f81bc6849175a866d4b78bb17f207dd6",
-                "reference": "4faca851f81bc6849175a866d4b78bb17f207dd6",
+                "url": "https://api.github.com/repos/websharks/core/zipball/ce2ba4c3bf4afbb1a1be0994c922f09f0080bcfa",
+                "reference": "ce2ba4c3bf4afbb1a1be0994c922f09f0080bcfa",
                 "shasum": ""
             },
             "require": {
@@ -1359,7 +1361,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-04-21 16:02:18"
+            "time": "2017-05-26 08:07:05"
         },
         {
             "name": "websharks/dicer",
