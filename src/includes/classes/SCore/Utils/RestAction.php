@@ -243,6 +243,12 @@ class RestAction extends Classes\SCore\Base\Core
             $action = $this->addApiVersion($action);
         }
         $url = $this->urlRemove($url ?: $this->bestUrl($action));
+
+        // $url = $this->c::removeUrlQueryArgs(['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'], $url);
+        // `utm_*` variables are stripped to avoid duplicate sessions as a result of reposting to a URL that included them.
+        // Duplicated sessions occur in GA; i.e., a new set of `utm_*` vars triggers a new GA session. Need to avoid this.
+        // @TODO ↑ Instead of stripping these away, convert them to `utm-*` internal variables.
+
         $url = $this->c::addUrlQueryArgs([$this->var => $action, $this->data_var => $data], $url);
         // NOTE: If `$data` is null, it will simply not be included in the URL.
 
