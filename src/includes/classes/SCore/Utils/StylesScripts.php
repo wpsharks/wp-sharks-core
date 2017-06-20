@@ -508,27 +508,65 @@ class StylesScripts extends Classes\SCore\Base\Core
      *
      * @since 170128.18158 Semantic UI libs.
      *
+     * @param string $which Which library?
+     *
      * @return array Library details.
      */
-    public function enqueueSemanticUiLibs()
+    public function enqueueSemanticUiLibs(string $which = 'all')
     {
         if (($data = $this->didEnqueueLibs(__METHOD__))) {
             return $data; // Did this already.
         } // We only need to enqueue once.
 
-        $data = [
-            'styles' => [
-                'semantic-ui' => [
-                    'ver' => $this->cv,
-                    'url' => $this->c::appWsCoreUrl('/client-s/semantic/dist/semantic.min.css'),
-                ],
+        if ($which === 'all' || $which === 'styles') {
+            $data['styles'] = $this->enqueueSemanticUiStyles();
+        }
+        if ($which === 'all' || $which === 'scripts') {
+            $data['scripts'] = $this->enqueueSemanticUiScripts();
+        }
+        return $data = $data ?? [];
+    }
+
+    /**
+     * Enqueue Semantic UI styles.
+     *
+     * @since 17xxxx Semantic UI styles.
+     *
+     * @return array Library details.
+     */
+    public function enqueueSemanticUiStyles()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data['styles'] = [
+            'semantic-ui' => [
+                'ver' => $this->cv,
+                'url' => $this->c::appWsCoreUrl('/client-s/semantic/dist/semantic.min.css'),
             ],
-            'scripts' => [
-                'semantic-ui' => [
-                    'ver'  => $this->cv,
-                    'deps' => ['jquery'],
-                    'url'  => $this->c::appWsCoreUrl('/client-s/semantic/dist/semantic.min.js'),
-                ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue Semantic UI scripts.
+     *
+     * @since 17xxxx Semantic UI scripts.
+     *
+     * @return array Library details.
+     */
+    public function enqueueSemanticUiScripts()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data['scripts'] = [
+            'semantic-ui' => [
+                'ver'  => $this->cv,
+                'deps' => ['jquery'],
+                'url'  => $this->c::appWsCoreUrl('/client-s/semantic/dist/semantic.min.js'),
             ],
         ];
         return $this->enqueueLibs(__METHOD__, $data);
@@ -685,7 +723,7 @@ class StylesScripts extends Classes\SCore\Base\Core
         $data = [
             'scripts' => [
                 'highlight-js' => [
-                    'version' => '9.9.0',
+                    'version' => '9.12.0',
                     'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/highlight.min.js',
                 ],
                 'highlight-js-lang-wp' => [
@@ -715,7 +753,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     public function highlightJsStyleData(string $style): array
     {
         return [ // Note: Caller still needs to `sprintf()` `version` into place.
-            'version' => '9.9.0',
+            'version' => '9.12.0',
             'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/styles/'.urlencode($style).'.min.css',
         ]; // This is separate so that callers can get stylesheet data for multiple styles.
     }

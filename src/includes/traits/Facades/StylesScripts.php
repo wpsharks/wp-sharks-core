@@ -184,6 +184,30 @@ trait StylesScripts
     }
 
     /**
+     * @since 170128.18158 Semantic UI libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueSemanticUiStyles()
+     */
+    public static function enqueueSemanticUiStyles(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSemanticUiStyles(...$args);
+    }
+
+    /**
+     * @since 170128.18158 Semantic UI libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueSemanticUiScripts()
+     */
+    public static function enqueueSemanticUiScripts(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueSemanticUiScripts(...$args);
+    }
+
+    /**
      * @since 170128.18158 Behave libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.

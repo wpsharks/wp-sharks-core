@@ -1,11 +1,6 @@
-/*
- * Dependencies.
- */
 @import '../../colors/fields';
 
-/*
- * WP admin field standards.
- */
+//
 @mixin jquery-chosen-wp-admin-field-standards($scope: null) {
   #{$scope}.chosen-container {
     .chosen-choices {

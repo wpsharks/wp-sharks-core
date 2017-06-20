@@ -1,50 +1,49 @@
-/*
- * Dependencies.
- */
+// Dependencies.
+
 @import '../../env';
 @import '../../../../vendor/websharks/sharkicons/src/sharkicons';
 @import '../../jquery-plugins/ui-tooltip/enhancements';
 
 // Utility mixins.
+
 @import '../../utils/mixins/alignment';
 @import '../../utils/mixins/display';
 @import '../../utils/mixins/list-items';
 @import '../../utils/mixins/shadows';
 
 // Admin mixins.
+
 @import '../mixins/links';
 @import '../mixins/lists';
 @import '../mixins/fields';
 
 // Menu page mixins.
+
 @import 'mixins/form-table';
 
 // Menu page variables.
+
 @import 'variables/colors';
 @import 'variables/core-container';
 
-/*
- * Menu page area; anywhere.
- */
+// Menu page area; anywhere.
+
 .#{$core-container-slug}-menu-page-area:not(#x) {
-  /*
-   * Utilities.
-   */
+  // Utilities.
+
   @include utils-alignment('-');
   @include utils-display('-');
   @include utils-list-items('-');
   @include utils-shadows('-');
 
-  /*
-   * Admin enhancements.
-   */
+  // Admin enhancements.
+
   @include wp-admin-links;
   @include wp-admin-list-enable;
   @include wp-admin-field-standards;
 
-  /*
-   * Inline code.
-   */
+  // Inline code.
+
   code {
     font-size:                inherit;
     padding:                 .15em .35em;
@@ -54,9 +53,8 @@
     }
   }
 
-  /*
-   * Notices.
-   */
+  // Notices.
+
   &.-notice {
     h3,
     h4 {
@@ -73,9 +71,8 @@
     }
   }
 
-  /*
-   * Tooltips.
-   */
+  // Tooltips.
+
   .-tip {
     @include sharkicon(question-circle);
 
@@ -101,18 +98,16 @@
     }
   }
 
-  /*
-   * Notes.
-   */
+  // Notes.
+
   .-note {
     opacity:                  0.75;
     font-size:               .85em;
     margin:                   0 0 0 .25em;
   }
 
-  /*
-   * Form tables.
-   */
+  // Form tables.
+
   .-form-table {
     border:                   0;
     padding:                  0;
@@ -210,13 +205,9 @@
   }
 }
 
-/*
- * Menu page; based on body class.
- */
+// Menu page; based on body class.
+
 .#{$core-container-slug}-menu-page:not(#x) {
-  /*
-   * Notices.
-   */
   #wpbody-content {
     .notice,
     .updated {
@@ -225,13 +216,9 @@
   }
 }
 
-/*
- * Menu page wrapper.
- */
+// Menu page wrapper.
+
 .#{$core-container-slug}-menu-page-wrapper:not(#x) {
-  /*
-   * General layout styles.
-   */
   margin:                     1.5em 1.5em 0 0;
 
   .-container {
@@ -273,13 +260,9 @@
   }
 }
 
-/*
- * Post meta box styles.
- */
+// Post meta box styles.
+
 .#{$core-container-slug}-post-meta-box-wrapper:not(#x) {
-  /*
-   * Form tables.
-   */
   .-form-table {
     margin:                   0;
 
@@ -323,13 +306,9 @@
     }
   }
 
-  /*
-   * Post meta box styles (in sidebar).
-   */
+  // Post meta box styles (in sidebar).
+
   @at-root #side-sortables .#{$core-container-slug}-post-meta-box-wrapper:not(#x) {
-    /*
-     * Form tables.
-     */
     .-form-table {
       @include form-table-display-block;
 
@@ -340,13 +319,9 @@
   }
 }
 
-/*
- * Widget styles.
- */
+// Widget styles.
+
 .#{$core-container-slug}-widget-wrapper:not(#x) {
-  /*
-   * Form tables.
-   */
   .-form-table {
     margin:                   1em 0;
 
@@ -373,7 +348,6 @@
   }
 }
 
-/*
- * Tooltip enhancements.
- */
+// Tooltip enhancements.
+
 @include jquery-ui-tooltip-enhancements('.#{$core-container-slug}-jquery-ui-tooltip');

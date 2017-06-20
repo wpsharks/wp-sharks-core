@@ -1,6 +1,3 @@
-/*
- * WP dashicons.
- */
 @mixin wp-admin-dashicon($icon, $position: before) {
   &::#{$position} {
     font:                     normal normal normal 14px/1 dashicons;

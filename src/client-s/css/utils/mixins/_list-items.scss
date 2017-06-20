@@ -1,6 +1,3 @@
-/*
- * List item utilities.
- */
 @mixin utils-list-items($prefix: null) {
   .#{$prefix}li-margins > li:not(:first-child) {
     margin-top:               1em !important;

@@ -1,6 +1,3 @@
-/*
- * Color definitions.
- */
 $jquery-ui-tooltip-color: #fff;
 $jquery-ui-tooltip-bg-color: #23282d;
 $jquery-ui-tooltip-border-color: #747474;
@@ -61,10 +58,9 @@ $jquery-ui-tooltip-hr-color-2: rgba(255, 255, 255, 0.5);
       }
 
       hr {
-        @include linear-gradient(to right, $jquery-ui-tooltip-hr-color-1, $jquery-ui-tooltip-hr-color-2, $jquery-ui-tooltip-hr-color-1);
-
         border:               0;
         height:               1px;
+        background-image:     linear-gradient(to right, $jquery-ui-tooltip-hr-color-1, $jquery-ui-tooltip-hr-color-2, $jquery-ui-tooltip-hr-color-1);
       }
     }
 

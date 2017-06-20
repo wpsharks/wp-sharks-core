@@ -1,6 +1,8 @@
 ## $v
 
 - Adding `s::enqueueJsCookieLibs()`.
+- Updating to latest WebSharks Core lib.
+- Enhancing CSS framework.
 
 ## v170420.14768
 

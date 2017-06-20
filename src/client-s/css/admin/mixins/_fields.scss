@@ -1,11 +1,6 @@
-/*
- * Dependencies.
- */
 @import '../colors/fields';
 
-/*
- * WP admin field standards.
- */
+//
 @mixin wp-admin-field-standards($scope: null) {
   #{$scope}select,
   #{$scope}textarea,
@@ -20,10 +15,13 @@
     border:                   1px solid $wp-admin-field-border-color;
     box-shadow:               inset 0 1px 2px $wp-admin-field-box-shadow-color;
 
-    @include placeholder {
+    &::-webkit-input-placeholder {
       color:                  $wp-admin-field-placeholder-color;
     }
 
+    &::-moz-placeholder {
+      color:                  $wp-admin-field-placeholder-color;
+    }
 
     &:focus {
       border:                 1px solid $wp-admin-field-active-border-color;

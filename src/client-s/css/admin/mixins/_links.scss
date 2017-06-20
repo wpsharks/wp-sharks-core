@@ -1,11 +1,6 @@
-/*
- * Dependencies.
- */
 @import './dashicons';
 
-/*
- * WP admin links.
- */
+//
 @mixin wp-admin-links($scope: null) {
   #{$scope}a {
     text-decoration:          none;

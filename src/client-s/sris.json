@@ -76,10 +76,10 @@
     "sri": "sha384-lj0fCQWZPEFeQMSSPecL15z3Y9rNanvTe/N68LDbRvIdalPtT9TlcdBF7ZTnuZhO"
   },
 
-  "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js": {
-    "sri": "sha384-EEKn1+/1X9qlVxiFuB664oooAridEz1FSrcb8hOxNUeUPfYxqq2B6FGnfmS7LIE2"
+  "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js": {
+    "sri": "sha384-ZeLYJ2PNSQjvogWP559CDAf02Qb8FE5OyQicqtz/+UhZutbrwyr87Be7NPH/RgyC"
   },
-  "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/github.min.css": {
+  "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css": {
     "sri": "sha384-WtUWHyk39lfUpZQVgokNfSKCJaKAeD6adgLduBLrKTMUuPzFhLtL23y1guFy6lZn"
   },
 

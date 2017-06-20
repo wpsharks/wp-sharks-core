@@ -1,213 +1,5 @@
 @charset "UTF-8";
 /*
- * Dependencies.
- */
-/*
- * Requires a local copy of the WebSharks Core.
- */
-/*
- * General colors.
- */
-/*
- * Fancy blockquotes.
- */
-/*
- * Fancy monospace tags.
- */
-/*
- * Named colors.
- */
-/*
- * Social networks.
- */
-/*
- * Our own names.
- */
-/*
- * Name that color!
- * <http://chir.ag/projects/name-that-color>
- */
-/*
- * Font variables.
- */
-/*
- * Content font variables.
- */
-/*
- * Pixels to rem.
- */
-/*
- * Better inversions.
- */
-/*
- * Fancy blockquotes.
- */
-/*
- * Fancy checkboxes.
- */
-/*
- * Fancy definitions.
- */
-/*
- * Fancy HR tags.
- */
-/*
- * Fancy labels.
- */
-/*
- * Fancy link targets.
- */
-/*
- * Fancy lists.
- */
-/*
- * Fancy messages.
- */
-/*
- * Fancy monospace tags.
- */
-/*
- * Fancy navigation menus.
- */
-/*
- * Fancy pagination menus.
- */
-/*
- * Fancy placeholders.
- */
-/*
- * Font events.
- */
-/*
- * Font features.
- */
-/*
- * Pixels to rem.
- */
-/*
- * Device breakpoints.
- * Following Semantic UI breakpoints.
- */
-/*
- * Responsive utils.
- * Following Semantic UI breakpoints.
- * + custom `handheld` & `small screen` breakpoints.
- */
-/*
- * Responsive fonts.
- */
-/*
- * Responsive images.
- */
-/*
- * Highlight.js <pre><code>.
- */
-/*
- * Box shadow tools.
- */
-/*
- * Centered tools.
- */
-/*
- * Text shadow tools.
- */
-/*
- * Position tools.
- */
-/*
- * Device breakpoints.
- * Following Semantic UI breakpoints.
- */
-/*
- * Responsive utils.
- * Following Semantic UI breakpoints.
- * + custom `handheld` & `small screen` breakpoints.
- */
-/*
- * Text shadow tools.
- */
-/*
- * Device breakpoints.
- * Following Semantic UI breakpoints.
- */
-/*
- * Responsive utils.
- * Following Semantic UI breakpoints.
- * + custom `handheld` & `small screen` breakpoints.
- */
-/*
- * Align utils.
- */
-/*
- * Blurred utils.
- */
-/*
- * Border utils.
- */
-/*
- * Box shadow utils.
- */
-/*
- * Color utils.
- */
-/*
- * Content utils.
- */
-/*
- * Disabled utils.
- */
-/*
- * Display utils.
- */
-/*
- * Filter shadow utilities.
- */
-/*
- * Font utils.
- */
-/*
- * Heading utils.
- */
-/*
- * Height utils.
- */
-/*
- * Inset utils.
- */
-/*
- * Line utils.
- */
-/*
- * List utils.
- */
-/*
- * Margin utils.
- */
-/*
- * Opacity utils.
- */
-/*
- * Padding utils.
- */
-/*
- * Position utils.
- */
-/*
- * Responsive utils.
- */
-/*
- * Text shadow utilities.
- */
-/*
- * Visibility utils.
- */
-/*
- * Width utils.
- */
-/*
- * Color definitions.
- */
-/*
  * jQuery UI tooltip enhancements.
  {
    position:                  {
@@ -226,93 +18,6 @@
    tooltipClass: x.coreContainerSlug + '-jquery-ui-tooltip'
  }
  */
-/*
- * Alignment utilities.
- */
-/*
- * Display utilities.
- */
-/*
- * List item utilities.
- */
-/*
- * Color utilities.
- */
-/*
- * Shadow utilities.
- */
-/*
- * Dependencies.
- */
-/*
- * WP dashicons.
- */
-/*
- * WP admin links.
- */
-/*
- * Dependencies.
- */
-/*
- * WP admin field colors.
- */
-/*
- * WP admin lists enable.
- */
-/*
- * Dependencies.
- */
-/*
- * WP admin field colors.
- */
-/*
- * WP admin field standards.
- */
-/*
- * Block display mode.
- */
-/*
- * One-line label mode.
- */
-/*
- * Utility colors.
- */
-/*
- * Color utilities.
- */
-/*
- * Colors.
- */
-/*
- * Core container data.
- */
-/*
- * Menu page area; anywhere.
- */
-.wp-sharks-menu-page-area:not(#x) {
-  /*
-   * Utilities.
-   */
-  /*
-   * Admin enhancements.
-   */
-  /*
-   * Inline code.
-   */
-  /*
-   * Notices.
-   */
-  /*
-   * Tooltips.
-   */
-  /*
-   * Notes.
-   */
-  /*
-   * Form tables.
-   */
-}
-
 .wp-sharks-menu-page-area:not(#x) .-alignleft,
 .wp-sharks-menu-page-area:not(#x) .-float-left,
 .wp-sharks-menu-page-area:not(#x) .-float-left-nm,
@@ -524,18 +229,6 @@
 .wp-sharks-menu-page-area:not(#x) select::-moz-placeholder,
 .wp-sharks-menu-page-area:not(#x) textarea::-moz-placeholder,
 .wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button'])::-moz-placeholder {
-  color: #c8c8c8;
-}
-
-.wp-sharks-menu-page-area:not(#x) select:-moz-placeholder,
-.wp-sharks-menu-page-area:not(#x) textarea:-moz-placeholder,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):-moz-placeholder {
-  color: #c8c8c8;
-}
-
-.wp-sharks-menu-page-area:not(#x) select:-ms-input-placeholder,
-.wp-sharks-menu-page-area:not(#x) textarea:-ms-input-placeholder,
-.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']):-ms-input-placeholder {
   color: #c8c8c8;
 }
 
@@ -763,27 +456,12 @@
   text-overflow: ellipsis;
 }
 
-/*
- * Menu page; based on body class.
- */
-.wp-sharks-menu-page:not(#x) {
-  /*
-   * Notices.
-   */
-}
-
 .wp-sharks-menu-page:not(#x) #wpbody-content .notice,
 .wp-sharks-menu-page:not(#x) #wpbody-content .updated {
   margin: 1.5em 0;
 }
 
-/*
- * Menu page wrapper.
- */
 .wp-sharks-menu-page-wrapper:not(#x) {
-  /*
-   * General layout styles.
-   */
   margin: 1.5em 1.5em 0 0;
 }
 
@@ -831,18 +509,6 @@
 .wp-sharks-menu-page-wrapper:not(#x) .-container > .-content > h1:first-child,
 .wp-sharks-menu-page-wrapper:not(#x) .-container > .-content > h2:first-child {
   padding-top: 0;
-}
-
-/*
- * Post meta box styles.
- */
-.wp-sharks-post-meta-box-wrapper:not(#x) {
-  /*
-   * Form tables.
-   */
-  /*
-   * Post meta box styles (in sidebar).
-   */
 }
 
 .wp-sharks-post-meta-box-wrapper:not(#x) .-form-table {
@@ -923,18 +589,11 @@
   margin-top: 8px;
 }
 
-#side-sortables .wp-sharks-post-meta-box-wrapper:not(#x) {
-  /*
-     * Form tables.
-     */
-}
-
 #side-sortables .wp-sharks-post-meta-box-wrapper:not(#x) .-form-table {
   display: table !important;
 }
 
-#side-sortables .wp-sharks-post-meta-box-wrapper:not(#x) .-form-table > tbody > tr > th,
-#side-sortables .wp-sharks-post-meta-box-wrapper:not(#x) .-form-table > tbody > tr > td {
+#side-sortables .wp-sharks-post-meta-box-wrapper:not(#x) .-form-table > tbody > tr > th, #side-sortables .wp-sharks-post-meta-box-wrapper:not(#x) .-form-table > tbody > tr > td {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -957,15 +616,6 @@
 
 #side-sortables .wp-sharks-post-meta-box-wrapper:not(#x) .-form-table:first-child {
   margin-top: 8px;
-}
-
-/*
- * Widget styles.
- */
-.wp-sharks-widget-wrapper:not(#x) {
-  /*
-   * Form tables.
-   */
 }
 
 .wp-sharks-widget-wrapper:not(#x) .-form-table {
@@ -1008,9 +658,6 @@
   margin-top: 0;
 }
 
-/*
- * Tooltip enhancements.
- */
 .wp-sharks-jquery-ui-tooltip.ui-tooltip.ui-widget {
   font-size: .8em;
   border-radius: .25em;
@@ -1044,11 +691,9 @@
 }
 
 .wp-sharks-jquery-ui-tooltip.ui-tooltip.ui-widget > .ui-tooltip-content hr {
-  background-color: rgba(255, 255, 255, 0);
-  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-  background-image: linear-gradient(to right,rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
   border: 0;
   height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
 .wp-sharks-jquery-ui-tooltip.ui-tooltip.ui-widget.center.top[class$=' center top'] > .ui-tooltip-content::after {

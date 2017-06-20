@@ -1,6 +1,3 @@
-/*
- * Display utilities.
- */
 @mixin utils-display($prefix: null) {
   .#{$prefix}display-block {
     float:                    none !important;

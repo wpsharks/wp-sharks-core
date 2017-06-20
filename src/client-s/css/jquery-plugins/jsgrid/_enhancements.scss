@@ -1,6 +1,3 @@
-/*
- * jQuery JsGrid enhancements.
- */
 @mixin jquery-jsgrid-enhancements($scope: null) {
   #{$scope}.jsgrid-grid-header,
   #{$scope}.jsgrid-grid-body {

@@ -1,6 +1,3 @@
-/*
- * Alignment utilities.
- */
 @mixin utils-alignment($prefix: null) {
   .#{$prefix}alignleft,
   .#{$prefix}float-left,
