@@ -1242,12 +1242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "f923022424ee38cc000617ef327f82d8b5256689"
+                "reference": "968d727784de451b1d6bf177f50eecbb5ce2f753"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/f923022424ee38cc000617ef327f82d8b5256689",
-                "reference": "f923022424ee38cc000617ef327f82d8b5256689",
+                "url": "https://api.github.com/repos/websharks/core/zipball/968d727784de451b1d6bf177f50eecbb5ce2f753",
+                "reference": "968d727784de451b1d6bf177f50eecbb5ce2f753",
                 "shasum": ""
             },
             "require": {
@@ -1297,7 +1297,7 @@
                 "stripe/stripe-php": "4.*",
                 "symfony/yaml": "2.*",
                 "websharks/dicer": "160110",
-                "websharks/php-markdown": "170406",
+                "websharks/php-markdown": "170620",
                 "websharks/sharkicons": "160620"
             },
             "require-dev": {
@@ -1361,7 +1361,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-06-20 12:25:36"
+            "time": "2017-06-20 14:01:35"
         },
         {
             "name": "websharks/dicer",
@@ -1416,16 +1416,16 @@
         },
         {
             "name": "websharks/php-markdown",
-            "version": "170406",
+            "version": "170620",
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/php-markdown.git",
-                "reference": "a0bb441347dd50546a30a191280a77e9d067b04a"
+                "reference": "fab424ad5522dff8c3b5dcc3ec18cb162cb879af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/a0bb441347dd50546a30a191280a77e9d067b04a",
-                "reference": "a0bb441347dd50546a30a191280a77e9d067b04a",
+                "url": "https://api.github.com/repos/websharks/php-markdown/zipball/fab424ad5522dff8c3b5dcc3ec18cb162cb879af",
+                "reference": "fab424ad5522dff8c3b5dcc3ec18cb162cb879af",
                 "shasum": ""
             },
             "require": {
@@ -1461,7 +1461,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2017-04-06 04:06:23"
+            "time": "2017-06-14 17:14:56"
         },
         {
             "name": "websharks/sharkicons",
