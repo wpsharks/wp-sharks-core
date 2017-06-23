@@ -530,7 +530,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Semantic UI styles.
      *
-     * @since 17xxxx Semantic UI styles.
+     * @since 170623.59000 Semantic UI styles.
      *
      * @return array Library details.
      */
@@ -552,7 +552,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue Semantic UI scripts.
      *
-     * @since 17xxxx Semantic UI scripts.
+     * @since 170623.59000 Semantic UI scripts.
      *
      * @return array Library details.
      */
@@ -809,7 +809,7 @@ class StylesScripts extends Classes\SCore\Base\Core
     /**
      * Enqueue JS Cookie libs.
      *
-     * @since 17xxxx JS Cookie libs.
+     * @since 170623.59000 JS Cookie libs.
      *
      * @return array Library details.
      */

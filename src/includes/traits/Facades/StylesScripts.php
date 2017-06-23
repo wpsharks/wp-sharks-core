@@ -292,7 +292,7 @@ trait StylesScripts
     }
 
     /**
-     * @since 17xxxx Adding JS Cookie libs.
+     * @since 170623.59000 Adding JS Cookie libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
