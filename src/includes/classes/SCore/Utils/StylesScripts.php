@@ -706,10 +706,11 @@ class StylesScripts extends Classes\SCore\Base\Core
      * @since 170128.18158 Highlight.js libs.
      *
      * @param string|null $style Highlight.js style.
+     * @param array       $langs Highlight.js extra langs.
      *
      * @return array Library details.
      */
-    public function enqueueHighlightJsLibs($style = '')
+    public function enqueueHighlightJsLibs($style = '', array $langs = ['wp'])
     {
         if (($data = $this->didEnqueueLibs(__METHOD__))) {
             return $data; // Did this already.
@@ -720,24 +721,23 @@ class StylesScripts extends Classes\SCore\Base\Core
         } else {
             $style = ''; // No style.
         }
-        $data = [
-            'scripts' => [
-                'highlight-js' => [
-                    'version' => '9.12.0',
-                    'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/highlight.min.js',
-                ],
-                'highlight-js-lang-wp' => [
-                    'ver'  => $this->cv,
-                    'deps' => ['highlight-js'],
-                    'url'  => $this->c::appWsCoreUrl('/client-s/js/hljs/langs/wp.min.js'),
-                ],
-            ],
-        ];
-        if ($style) {
+        $data = []; // Initialize data array.
+
+        if ($style) { // Loading a style?
             $data['styles'] = [
                 'highlight-js' => $this->highlightJsStyleData($style),
             ];
         }
+        $data['scripts'] = [
+            'highlight-js' => [
+                'version' => '9.12.0',
+                'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/highlight.min.js',
+            ],
+        ];
+        foreach ($langs as $_lang) {
+            $data['scripts']['highlight-js-lang-'.$_lang] = $this->highlightJsLangData($_lang);
+        } // unset($_lang); // Housekeeping.
+
         return $this->enqueueLibs(__METHOD__, $data);
     }
 
@@ -752,10 +752,35 @@ class StylesScripts extends Classes\SCore\Base\Core
      */
     public function highlightJsStyleData(string $style): array
     {
-        return [ // Note: Caller still needs to `sprintf()` `version` into place.
+        return [
             'version' => '9.12.0',
             'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/styles/'.urlencode($style).'.min.css',
-        ]; // This is separate so that callers can get stylesheet data for multiple styles.
+        ];
+    }
+
+    /**
+     * Highlight.js lang data.
+     *
+     * @since 17xxxx Highlight.js libs.
+     *
+     * @param string $lang Highlight.js lang.
+     *
+     * @return array Library details.
+     */
+    public function highlightJsLangData(string $lang): array
+    {
+        if ($lang === 'wp') {
+            return [
+                'ver'  => $this->cv,
+                'deps' => ['highlight-js'],
+                'url'  => $this->c::appWsCoreUrl('/client-s/js/hljs/langs/wp.min.js'),
+            ];
+        }
+        return [
+            'version' => '9.12.0',
+            'deps'    => ['highlight-js'],
+            'url'     => '//cdnjs.cloudflare.com/ajax/libs/highlight.js/%1$s/languages/'.urlencode($lang).'.min.js',
+        ];
     }
 
     /**

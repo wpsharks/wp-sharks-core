@@ -1,3 +1,7 @@
+## $v
+
+- Adding `s::highlightJsLangData()`.
+
 ## v170623.59000
 
 - Adding `s::enqueueJsCookieLibs()`.

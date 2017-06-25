@@ -244,6 +244,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 170128.18158 Highlight.js libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueHighlightJsLibs()
+     */
+    public static function enqueueHighlightJsLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueHighlightJsLibs(...$args);
+    }
+
+    /**
      * @since 170218.31677 Highlight.js style data.
      *
      * @param mixed ...$args Variadic args to underlying utility.
@@ -256,15 +268,15 @@ trait StylesScripts
     }
 
     /**
-     * @since 170128.18158 Highlight.js libs.
+     * @since 17xxxx Highlight.js lang data.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\SCore\Utils\StylesScripts::enqueueHighlightJsLibs()
+     * @see Classes\SCore\Utils\StylesScripts::highlightJsLangData()
      */
-    public static function enqueueHighlightJsLibs(...$args)
+    public static function highlightJsLangData(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueHighlightJsLibs(...$args);
+        return $GLOBALS[static::class]->Utils->§StylesScripts->highlightJsLangData(...$args);
     }
 
     /**
