@@ -612,7 +612,7 @@ class StylesScripts extends Classes\SCore\Base\Core
             return $data; // Did this already.
         } // We only need to enqueue once.
 
-        $version  = '170216';
+        $version  = '170626';
         $base_url = 'https://cdn.rawgit.com/websharks/ace-builds/%1$s/src-min-noconflict';
 
         $data = [

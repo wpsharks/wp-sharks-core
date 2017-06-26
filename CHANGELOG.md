@@ -1,6 +1,7 @@
 ## $v
 
 - Adding `s::highlightJsLangData()`.
+- Upgrading to latest release of Ace (fork maintained by WebSharks).
 
 ## v170623.59000
 
