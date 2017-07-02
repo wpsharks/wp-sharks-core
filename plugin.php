@@ -4,7 +4,7 @@
  *
  * @wp-plugin
  *
- * Version: 170702.40254
+ * Version: 170702.40824
  * Text Domain: wp-sharks-core
  * Plugin Name: WP Sharks Core
  *
