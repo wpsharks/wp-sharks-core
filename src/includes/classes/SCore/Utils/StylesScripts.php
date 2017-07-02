@@ -355,6 +355,31 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue Lodash.
+     *
+     * @since 17xxxx Lodash libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueLatestLodash(): array
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'lodash' => [
+                    'version' => '4.17.4',
+                    'url'     => 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/%1$s/lodash.min.js',
+                ],
+            ],
+        ];
+        wp_deregister_script('lodash');
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue Underscore.
      *
      * @since 170329.20871 Underscore libs.

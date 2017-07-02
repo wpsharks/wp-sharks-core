@@ -100,6 +100,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx Latest Lodash.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueLatestLodash()
+     */
+    public static function enqueueLatestLodash(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueLatestLodash(...$args);
+    }
+
+    /**
      * @since 170329.20871 Latest Underscore.
      *
      * @param mixed ...$args Variadic args to underlying utility.
