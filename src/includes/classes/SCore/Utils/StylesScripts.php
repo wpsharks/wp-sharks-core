@@ -259,8 +259,17 @@ class StylesScripts extends Classes\SCore\Base\Core
 
             $_in_footer = $_script['in_footer'] ?? true;
             $_async     = $_script['async'] ?? false;
-            $_defer     = $_script['defer'] ?? ($_in_footer && !$_async);
+            $_defer     = $_script['defer'] ?? null;
 
+            if (!isset($_defer) && $_in_footer && !$_async) {
+                // If in footer and not async, defer automatically.
+                // However, don't defer jQuery if a user is logged-in.
+                // jQuery is needed by the WP admin bar in non-defer mode.
+                $_defer = !($_handle === 'jquery' && is_user_logged_in());
+                //
+            } elseif (!isset($_defer)) {
+                $_defer = false; // Defaults to false otherwise.
+            }
             $_inline    = $_script['inline'] ?? '';
             $_localize  = $_script['localize'] ?? [];
 
