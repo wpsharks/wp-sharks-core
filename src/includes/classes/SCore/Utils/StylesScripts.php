@@ -172,7 +172,9 @@ class StylesScripts extends Classes\SCore\Base\Core
         if (!($script = $this->didEnqueueScript($handle))) {
             return $tag; // We did not enqueue.
         }
-        if ($script['async']) { // Load script async?
+        if ($script['defer']) { // Defer script?
+            $tag = str_replace(' src=', ' defer src=', $tag);
+        } elseif ($script['async']) { // Load async?
             $tag = str_replace(' src=', ' async src=', $tag);
         }
         if ($script['sri'] !== '') { // Obey explicitly empty SRI in config.
@@ -208,10 +210,13 @@ class StylesScripts extends Classes\SCore\Base\Core
             }
             $_version = $_style['version'] ?? '';
             $_ver     = $_style['ver'] ?? null;
+
             $_url     = $_style['url'] ?? '';
             $_sri     = $_style['sri'] ?? null;
-            $_deps    = $_style['deps'] ?? [];
             $_media   = $_style['media'] ?? 'all';
+
+            $_deps    = $_style['deps'] ?? [];
+
             $_inline  = $_style['inline'] ?? '';
 
             if ($_version && $_url) { // Version in URL?
@@ -229,10 +234,13 @@ class StylesScripts extends Classes\SCore\Base\Core
             $this->did_enqueue_styles[$_handle] = [
                 'version' => $_version,
                 'ver'     => $_ver,
+
                 'url'     => $_url,
                 'sri'     => $_sri,
-                'deps'    => $_deps,
                 'media'   => $_media,
+
+                'deps'    => $_deps,
+
                 'inline'  => $_inline,
             ];
         } // unset($_handle, $_script, $_version, $_ver, $_url, $_deps, $_media, $_inline);
@@ -243,11 +251,16 @@ class StylesScripts extends Classes\SCore\Base\Core
             }
             $_version   = $_script['version'] ?? '';
             $_ver       = $_script['ver'] ?? null;
+
             $_url       = $_script['url'] ?? '';
             $_sri       = $_script['sri'] ?? null;
+
             $_deps      = $_script['deps'] ?? [];
-            $_async     = $_script['async'] ?? false;
+
             $_in_footer = $_script['in_footer'] ?? true;
+            $_async     = $_script['async'] ?? false;
+            $_defer     = $_script['defer'] ?? ($_in_footer && !$_async);
+
             $_inline    = $_script['inline'] ?? '';
             $_localize  = $_script['localize'] ?? [];
 
@@ -269,11 +282,16 @@ class StylesScripts extends Classes\SCore\Base\Core
             $this->did_enqueue_scripts[$_handle] = [
                 'version'   => $_version,
                 'ver'       => $_ver,
+
                 'url'       => $_url,
                 'sri'       => $_sri,
+
                 'deps'      => $_deps,
-                'async'     => $_async,
+
                 'in_footer' => $_in_footer,
+                'async'     => $_async,
+                'defer'     => $_defer,
+
                 'inline'    => $_inline,
                 'localize'  => $_localize,
             ];
