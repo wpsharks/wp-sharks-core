@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.30.4",
+            "version": "3.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "69696dd3ec8c92170a4e7083ced867d01b8b3f55"
+                "reference": "21480f1ba2b7a329241f47d3042e9c9ad06e8e5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/69696dd3ec8c92170a4e7083ced867d01b8b3f55",
-                "reference": "69696dd3ec8c92170a4e7083ced867d01b8b3f55",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/21480f1ba2b7a329241f47d3042e9c9ad06e8e5e",
+                "reference": "21480f1ba2b7a329241f47d3042e9c9ad06e8e5e",
                 "shasum": ""
             },
             "require": {
@@ -85,32 +85,29 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-06-29 18:44:14"
+            "time": "2017-06-30 19:39:55"
         },
         {
             "name": "corneltek/getoptionkit",
-            "version": "2.5.4",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/c9s/GetOptionKit.git",
-                "reference": "9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80"
+                "reference": "995607ddf4fc90ebdb4a7d58fe972d581ad8495f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80",
-                "reference": "9eae6f4fa009655f9d0d0ccd04cdd9c0d39cbe80",
+                "url": "https://api.github.com/repos/c9s/GetOptionKit/zipball/995607ddf4fc90ebdb4a7d58fe972d581ad8495f",
+                "reference": "995607ddf4fc90ebdb4a7d58fe972d581ad8495f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "require-dev": {
-                "satooshi/php-coveralls": "^1"
-            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5.x-dev"
+                    "dev-master": "2.6.x-dev"
                 }
             },
             "autoload": {
@@ -125,12 +122,12 @@
             "authors": [
                 {
                     "name": "Yo-An Lin",
-                    "email": "cornelius.howl@gmail.com"
+                    "email": "yoanlin93@gmail.com"
                 }
             ],
             "description": "Powerful command-line option toolkit",
             "homepage": "http://github.com/c9s/GetOptionKit",
-            "time": "2017-04-30 09:31:04"
+            "time": "2017-06-30 14:54:48"
         },
         {
             "name": "defuse/php-encryption",
@@ -1245,12 +1242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "1bf4a9d3d50b4780f9cbd951b499ef06cc40cfbc"
+                "reference": "2873d6a491f83bac7addc9a97a49d21fa9f42718"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/1bf4a9d3d50b4780f9cbd951b499ef06cc40cfbc",
-                "reference": "1bf4a9d3d50b4780f9cbd951b499ef06cc40cfbc",
+                "url": "https://api.github.com/repos/websharks/core/zipball/2873d6a491f83bac7addc9a97a49d21fa9f42718",
+                "reference": "2873d6a491f83bac7addc9a97a49d21fa9f42718",
                 "shasum": ""
             },
             "require": {
@@ -1364,7 +1361,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-06-30 13:20:31"
+            "time": "2017-07-03 05:04:44"
         },
         {
             "name": "websharks/dicer",
