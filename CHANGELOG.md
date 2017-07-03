@@ -2,7 +2,7 @@
 
 - Adding `s::highlightJsLangData()`.
 - Upgrading to latest release of Ace (fork maintained by WebSharks).
-- Automatically defer JS files inserted into the footer.
+- Adding ability to defer JS files enqueued with the WP Sharks Core.
 - Adding Lodash library as a loadable JS module.
 
 ## v170623.59000

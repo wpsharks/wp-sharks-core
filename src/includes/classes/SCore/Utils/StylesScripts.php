@@ -135,7 +135,7 @@ class StylesScripts extends Classes\SCore\Base\Core
      * @param string|scalar $tag    HTML markup.
      * @param string|scalar $handle Style handle.
      *
-     * @return array Details, else empty array.
+     * @return string Possible-modified HTML tag.
      */
     public function onStyleLoaderTag($tag, $handle): string
     {
@@ -145,7 +145,7 @@ class StylesScripts extends Classes\SCore\Base\Core
         if (!($style = $this->didEnqueueStyle($handle))) {
             return $tag; // We did not enqueue this style.
         }
-        if ($style['sri'] !== '') { // Obey explicitly empty SRI in config.
+        if ($style['sri'] !== '' && !preg_match('/\sintegrity\s*\=/ui', $tag)) {
             if (($sri = $style['sri']) || ($sri = $this->c::sri($style['url']))) {
                 $tag = str_replace(' rel=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" rel=', $tag);
             } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
@@ -162,7 +162,7 @@ class StylesScripts extends Classes\SCore\Base\Core
      * @param string|scalar $tag    HTML markup.
      * @param string|scalar $handle Script handle.
      *
-     * @return array Details, else empty array.
+     * @return string Possible-modified HTML tag.
      */
     public function onScriptLoaderTag($tag, $handle): string
     {
@@ -172,12 +172,12 @@ class StylesScripts extends Classes\SCore\Base\Core
         if (!($script = $this->didEnqueueScript($handle))) {
             return $tag; // We did not enqueue.
         }
-        if ($script['defer']) { // Defer script?
-            $tag = str_replace(' src=', ' defer src=', $tag);
-        } elseif ($script['async']) { // Load async?
+        if ($script['async'] && !preg_match('/\s(?:async|defer)[=\s>]/ui', $tag)) {
             $tag = str_replace(' src=', ' async src=', $tag);
+        } elseif ($script['defer'] && !preg_match('/\s(?:async|defer)[=\s>]/ui', $tag)) {
+            $tag = str_replace(' src=', ' defer src=', $tag);
         }
-        if ($script['sri'] !== '') { // Obey explicitly empty SRI in config.
+        if ($script['sri'] !== '' && !preg_match('/\sintegrity\s*\=/ui', $tag)) {
             if (($sri = $script['sri']) || ($sri = $this->c::sri($script['url']))) {
                 $tag = str_replace(' src=', ' integrity="'.esc_attr($sri).'" crossorigin="anonymous" src=', $tag);
             } // NOTE: SRI may or may not be possible right now. Always check if `$sri` is non-empty.
@@ -259,16 +259,8 @@ class StylesScripts extends Classes\SCore\Base\Core
 
             $_in_footer = $_script['in_footer'] ?? true;
             $_async     = $_script['async'] ?? false;
-            $_defer     = $_script['defer'] ?? null;
+            $_defer     = $_script['defer'] ?? false;
 
-            if (!isset($_defer) && $_in_footer && !$_async) {
-                // If in footer and not async, defer automatically.
-                // However, don't defer jQuery if the admin bar is showing.
-                $_defer = !($_handle === 'jquery' && is_admin_bar_showing());
-                //
-            } elseif (!isset($_defer)) {
-                $_defer = false; // Defaults to false otherwise.
-            }
             $_inline    = $_script['inline'] ?? '';
             $_localize  = $_script['localize'] ?? [];
 
@@ -874,8 +866,9 @@ class StylesScripts extends Classes\SCore\Base\Core
         $data = [
             'scripts' => [
                 'recaptcha' => [
-                    'sri' => '', // No SRI, updated by Google.
-                    'url' => '//www.google.com/recaptcha/api.js',
+                    'async' => true,
+                    'sri'   => '', // No SRI, updated by Google.
+                    'url'   => '//www.google.com/recaptcha/api.js',
                 ],
             ],
         ];
