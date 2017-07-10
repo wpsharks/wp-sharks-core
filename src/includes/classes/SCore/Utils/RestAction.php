@@ -259,13 +259,13 @@ class RestAction extends Classes\SCore\Base\Core
     }
 
     /**
-     * Remove an nonce from a URL.
+     * Remove params/nonce from URL.
      *
      * @since 160608 ReST utils.
      *
      * @param string $url Input URL.
      *
-     * @return string URL w/o an nonce.
+     * @return string URL w/o params or nonce.
      */
     public function urlRemove(string $url): string
     {

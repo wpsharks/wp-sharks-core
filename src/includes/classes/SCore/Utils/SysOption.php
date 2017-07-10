@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -52,7 +52,7 @@ class SysOption extends Classes\SCore\Base\Core
             }
         } else { // Default.
             if (isset($value)) {
-                update_option($key, $value);
+                update_option($key, $value, $autoload ? 'yes' : 'no');
             }
             if (($value = get_option($key)) === null || $value === false) {
                 add_option($key, ':null', '', $autoload ? 'yes' : 'no');
