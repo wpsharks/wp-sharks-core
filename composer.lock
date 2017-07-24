@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.31.0",
+            "version": "3.31.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "21480f1ba2b7a329241f47d3042e9c9ad06e8e5e"
+                "reference": "9829a8183016df800110148b467179d67c434f90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/21480f1ba2b7a329241f47d3042e9c9ad06e8e5e",
-                "reference": "21480f1ba2b7a329241f47d3042e9c9ad06e8e5e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9829a8183016df800110148b467179d67c434f90",
+                "reference": "9829a8183016df800110148b467179d67c434f90",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-06-30 19:39:55"
+            "time": "2017-07-20 22:22:05"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1189,7 +1189,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.22",
+            "version": "v2.8.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -1242,12 +1242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "2873d6a491f83bac7addc9a97a49d21fa9f42718"
+                "reference": "4a5b7870cf81026ae504d69881d838e14a0214be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/2873d6a491f83bac7addc9a97a49d21fa9f42718",
-                "reference": "2873d6a491f83bac7addc9a97a49d21fa9f42718",
+                "url": "https://api.github.com/repos/websharks/core/zipball/4a5b7870cf81026ae504d69881d838e14a0214be",
+                "reference": "4a5b7870cf81026ae504d69881d838e14a0214be",
                 "shasum": ""
             },
             "require": {
@@ -1361,7 +1361,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-07-03 05:04:44"
+            "time": "2017-07-24 03:12:24"
         },
         {
             "name": "websharks/dicer",

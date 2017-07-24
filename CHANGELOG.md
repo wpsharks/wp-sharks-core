@@ -4,6 +4,10 @@
 - Upgrading to latest release of Ace (fork maintained by WebSharks).
 - Adding ability to defer JS files enqueued with the WP Sharks Core.
 - Adding Lodash library as a loadable JS module.
+- Updating to latest release of WebSharks Core.
+- Adding `s::enqueueGumroadLibs()`.
+- Adding `s::enqueueGumroadOverlayLibs()`.
+- Adding `s::enqueueGumroadEmbedLibs()`.
 
 ## v170623.59000
 

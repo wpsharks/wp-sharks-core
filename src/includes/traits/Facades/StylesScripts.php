@@ -304,6 +304,42 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx Gumroad libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueGumroadLibs()
+     */
+    public static function enqueueGumroadLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueGumroadLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Gumroad libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueGumroadOverlayLibs()
+     */
+    public static function enqueueGumroadOverlayLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueGumroadOverlayLibs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Gumroad libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueGumroadEmbedLibs()
+     */
+    public static function enqueueGumroadEmbedLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueGumroadEmbedLibs(...$args);
+    }
+
+    /**
      * @since 170311.43193 reCAPTCHA libs.
      *
      * @param mixed ...$args Variadic args to underlying utility.

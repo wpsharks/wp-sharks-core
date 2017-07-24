@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Traits\Facades;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -28,15 +28,27 @@ use function get_defined_vars as vars;
 trait Fatalities
 {
     /**
+     * @since 17xxxx Fatalities.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Fatalities::die()
+     */
+    public static function die(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Fatalities->die(...$args);
+    }
+
+    /**
      * @since 160606 Fatalities.
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\SCore\Utils\Fatality::invalid()
+     * @see Classes\SCore\Utils\Fatalities::dieInvalid()
      */
     public static function dieInvalid(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Fatality->invalid(...$args);
+        return $GLOBALS[static::class]->Utils->§Fatalities->dieInvalid(...$args);
     }
 
     /**
@@ -44,10 +56,10 @@ trait Fatalities
      *
      * @param mixed ...$args Variadic args to underlying utility.
      *
-     * @see Classes\SCore\Utils\Fatality::forbidden()
+     * @see Classes\SCore\Utils\Fatalities::dieForbidden()
      */
     public static function dieForbidden(...$args)
     {
-        return $GLOBALS[static::class]->Utils->§Fatality->forbidden(...$args);
+        return $GLOBALS[static::class]->Utils->§Fatalities->dieForbidden(...$args);
     }
 }

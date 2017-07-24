@@ -551,7 +551,7 @@ class StylesScripts extends Classes\SCore\Base\Core
      *
      * @since 170128.18158 Semantic UI libs.
      *
-     * @param string $which Which library?
+     * @param string $which One of `styles`, `scripts`, `all`.
      *
      * @return array Library details.
      */
@@ -844,6 +844,78 @@ class StylesScripts extends Classes\SCore\Base\Core
                 'stripe' => [
                     'sri' => '', // No SRI, updated by Stripe.
                     'url' => '//checkout.stripe.com/checkout.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue Gumroad libs.
+     *
+     * @since 17xxxx Gumroad libs.
+     *
+     * @param string $which One of `overlay`, `embed`, `all`.
+     *
+     * @return array Library details.
+     */
+    public function enqueueGumroadLibs(string $which = 'all')
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        if ($which === 'all' || $which === 'overlay') {
+            $data = $this->enqueueGumroadOverlayLibs();
+        }
+        if ($which === 'all' || $which === 'embed') {
+            $data = array_merge_recursive($data ?? [], $this->enqueueGumroadEmbedLibs());
+        }
+        return $data = $data ?? [];
+    }
+
+    /**
+     * Enqueue Gumroad overlay libs.
+     *
+     * @since 17xxxx Gumroad overlay libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueGumroadOverlayLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'gumroad-overlay' => [
+                    'sri'     => '', // No SRI, updated by Gumroad.
+                    'url'     => '//gumroad.com/js/gumroad-overlay.js',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
+     * Enqueue Gumroad embed libs.
+     *
+     * @since 17xxxx Gumroad embed libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueGumroadEmbedLibs()
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'gumroad-embed' => [
+                    'sri'     => '', // No SRI, updated by Gumroad.
+                    'url'     => '//gumroad.com/js/gumroad-embed.js',
                 ],
             ],
         ];
