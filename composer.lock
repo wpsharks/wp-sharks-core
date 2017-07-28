@@ -693,16 +693,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "0808939f81c1347a3c8a82a5925385a08074b0f1"
+                "reference": "4d4896e553f2094e657fe493506dc37c509d4e2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0808939f81c1347a3c8a82a5925385a08074b0f1",
-                "reference": "0808939f81c1347a3c8a82a5925385a08074b0f1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4d4896e553f2094e657fe493506dc37c509d4e2b",
+                "reference": "4d4896e553f2094e657fe493506dc37c509d4e2b",
                 "shasum": ""
             },
             "require": {
@@ -740,7 +740,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-06-28 20:53:48"
+            "time": "2017-07-28 14:45:09"
         },
         {
             "name": "paragonie/random_compat",
@@ -1243,12 +1243,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "188b92a918fafab62be246216eafe447686fb38d"
+                "reference": "6f12c627879393ca557d586c9c9affd53dbe0c83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/188b92a918fafab62be246216eafe447686fb38d",
-                "reference": "188b92a918fafab62be246216eafe447686fb38d",
+                "url": "https://api.github.com/repos/websharks/core/zipball/6f12c627879393ca557d586c9c9affd53dbe0c83",
+                "reference": "6f12c627879393ca557d586c9c9affd53dbe0c83",
                 "shasum": ""
             },
             "require": {
@@ -1362,7 +1362,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-07-28 07:50:38"
+            "time": "2017-07-28 23:37:25"
         },
         {
             "name": "websharks/dicer",
