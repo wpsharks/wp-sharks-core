@@ -58,6 +58,9 @@ class Endpoint extends Classes\SCore\Base\Core
      */
     public function getVar(string $specific_ep = '', $default = null)
     {
+        if (!did_action('wp')) {
+            throw new Exception('`wp` action not done yet.');
+        }
         $WP       = $GLOBALS['wp']; // WP class instance.
         $WP_Query = $GLOBALS['wp_the_query']; // Main.
 
