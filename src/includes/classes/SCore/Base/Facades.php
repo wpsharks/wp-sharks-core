@@ -36,6 +36,7 @@ abstract class Facades
     use Traits\Facades\Database;
     use Traits\Facades\Date;
     use Traits\Facades\Dependencies;
+    use Traits\Facades\Endpoint;
     use Traits\Facades\Errors;
     use Traits\Facades\Fatalities;
     use Traits\Facades\Hooks;
@@ -67,4 +68,5 @@ abstract class Facades
     use Traits\Facades\WcProduct;
     use Traits\Facades\Widget;
     use Traits\Facades\WpMdExtra;
+    use Traits\Facades\WpUser;
 }

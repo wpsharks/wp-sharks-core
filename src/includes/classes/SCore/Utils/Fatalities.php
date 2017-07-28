@@ -38,7 +38,7 @@ class Fatalities extends Classes\SCore\Base\Core
      */
     public function die(string $message = '', string $slug = '', int $code = 0)
     {
-        $code    = $code ?: 503;
+        $code    = $code ?: 500;
         $slug    = $slug ?: 'internal';
         $message = $message ?: __('Internal server error.', 'wp-sharks-core');
 

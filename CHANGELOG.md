@@ -1,5 +1,8 @@
 ## $v
 
+- Adding `s::loginAsUser()`.
+- Adding `s::isEndpoint()`.
+- Adding `s::getEndpointVar()`.
 - Adding `s::highlightJsLangData()`.
 - Upgrading to latest release of Ace (fork maintained by WebSharks).
 - Adding ability to defer JS files enqueued with the WP Sharks Core.

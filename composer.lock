@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.31.8",
+            "version": "3.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9829a8183016df800110148b467179d67c434f90"
+                "reference": "ca8791495696a1620fe2275df4983d063627aba7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9829a8183016df800110148b467179d67c434f90",
-                "reference": "9829a8183016df800110148b467179d67c434f90",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ca8791495696a1620fe2275df4983d063627aba7",
+                "reference": "ca8791495696a1620fe2275df4983d063627aba7",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-07-20 22:22:05"
+            "time": "2017-07-27 19:46:08"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -792,19 +792,20 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.23",
+            "version": "v5.2.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "7115df4a6f76281109ebe352900c42403b728bb4"
+                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/7115df4a6f76281109ebe352900c42403b728bb4",
-                "reference": "7115df4a6f76281109ebe352900c42403b728bb4",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/22d04c6a58145a244696f3f254c1875aa653b26a",
+                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a",
                 "shasum": ""
             },
             "require": {
+                "ext-ctype": "*",
                 "php": ">=5.0.0"
             },
             "require-dev": {
@@ -864,7 +865,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-03-15 19:32:56"
+            "time": "2017-07-26 21:00:20"
         },
         {
             "name": "psr/http-message",
@@ -1242,12 +1243,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "4a5b7870cf81026ae504d69881d838e14a0214be"
+                "reference": "37091c46d4f74932faa65a3c23f7a9d7f347e513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/4a5b7870cf81026ae504d69881d838e14a0214be",
-                "reference": "4a5b7870cf81026ae504d69881d838e14a0214be",
+                "url": "https://api.github.com/repos/websharks/core/zipball/37091c46d4f74932faa65a3c23f7a9d7f347e513",
+                "reference": "37091c46d4f74932faa65a3c23f7a9d7f347e513",
                 "shasum": ""
             },
             "require": {
@@ -1361,7 +1362,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-07-24 03:12:24"
+            "time": "2017-07-24 05:38:31"
         },
         {
             "name": "websharks/dicer",
