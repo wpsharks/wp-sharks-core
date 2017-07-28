@@ -105,7 +105,7 @@ class Database extends Classes\SCore\Base\Core
             foreach ([$indexes_dir, $triggers_dir] as $_tables_after_dir) {
                 if ($_tables_after_dir && is_dir($_tables_after_dir)) {
                     // ↓ Looking for additional files for this specific table.
-                    $_tables_after_regex = '/\/'.c::escRegex(basename($_sql_file)).'$/ui';
+                    $_tables_after_regex = '/\/'.$this->c::escRegex(basename($_sql_file)).'$/ui';
 
                     foreach ($this->c::dirRegexRecursiveIterator($_tables_after_dir, $_tables_after_regex) as $__Resource) {
                         if (!$__Resource->isFile()) { // Not a file?
