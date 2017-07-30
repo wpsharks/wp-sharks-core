@@ -134,11 +134,13 @@ class PostMetaBox extends Classes\SCore\Base\Core
                 }
                 foreach ($data as $_key => $_value) {
                     if ($_key && is_string($_key)) {
-                        $this->s::updatePostMeta($post_id, $_key, $_value);
+                        // Slash, because WP will unslash.
+                        // This allows for `\` in form submissions.
+                        $this->s::updatePostMeta($post_id, $_key, wp_slash($_value));
                     }
                 }
-                if ($cfg->on_save && is_callable($cfg->on_save)) {
-                    $cfg->on_save($post_id, $data);
+                if (($on_save = $cfg->on_save)) {
+                    $on_save($post_id, $data);
                 }
             };
             add_action('add_meta_boxes', $on_add_meta_boxes);
