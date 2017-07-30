@@ -239,12 +239,18 @@
   box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);
 }
 
+.wp-sharks-menu-page-area:not(#x) select.-monospace,
+.wp-sharks-menu-page-area:not(#x) textarea.-monospace,
+.wp-sharks-menu-page-area:not(#x) input:not([type='checkbox']):not([type='radio']):not([type='color']):not([type='range']):not([type='image']):not([type='submit']):not([type='button']).-monospace {
+  font-family: 'operator mono', monospace;
+}
+
 .wp-sharks-menu-page-area:not(#x) input[type='text'][data-toggle~='-color-picker'] {
   line-height: 16px;
-  font-family: monospace;
   margin: 0 !important;
   width: 65px !important;
   font-size: 12px !important;
+  font-family: 'operator mono', monospace;
 }
 
 .wp-sharks-menu-page-area:not(#x) input[type='color'] {

@@ -27,14 +27,18 @@
       border:                 1px solid $wp-admin-field-active-border-color;
       box-shadow:             0 0 2px $wp-admin-field-active-box-shadow-color;
     }
+
+    &.-monospace {
+      font-family:            'operator mono', monospace;
+    }
   }
 
   #{$scope}input[type='text'][data-toggle~='-color-picker'] {
     line-height:              16px;
-    font-family:              monospace;
     margin:                   0 !important;
     width:                    65px !important;
     font-size:                12px !important;
+    font-family:              'operator mono', monospace;
   }
 
   #{$scope}input[type='color'] {
