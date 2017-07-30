@@ -11,6 +11,7 @@
 - Adding `s::enqueueGumroadLibs()`.
 - Adding `s::enqueueGumroadOverlayLibs()`.
 - Adding `s::enqueueGumroadEmbedLibs()`.
+- Adding `on_save` callback to `s::postMetaBox()`.
 
 ## v170623.59000
 

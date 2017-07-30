@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -48,6 +48,7 @@ class PostMetaBox extends Classes\SCore\Base\Core
             'template_file'      => '',
             'template_dir'       => '',
             'callback'           => null,
+            'on_save'            => null,
             'screen'             => null,
             'context'            => 'advanced',
             'priority'           => 'default',
@@ -135,6 +136,9 @@ class PostMetaBox extends Classes\SCore\Base\Core
                     if ($_key && is_string($_key)) {
                         $this->s::updatePostMeta($post_id, $_key, $_value);
                     }
+                }
+                if ($cfg->on_save && is_callable($cfg->on_save)) {
+                    $cfg->on_save($post_id, $data);
                 }
             };
             add_action('add_meta_boxes', $on_add_meta_boxes);
