@@ -301,6 +301,30 @@ class StylesScripts extends Classes\SCore\Base\Core
     }
 
     /**
+     * Enqueue Chop-Chop libs.
+     *
+     * @since 17xxxx Chop-Chop libs.
+     *
+     * @return array Library details.
+     */
+    public function enqueueChopChopLibs(array $deps = []): array
+    {
+        if (($data = $this->didEnqueueLibs(__METHOD__))) {
+            return $data; // Did this already.
+        } // We only need to enqueue once.
+
+        $data = [
+            'scripts' => [
+                'chop-chop' => [
+                    'version' => '0.0.1',
+                    'url'     => '//unpkg.com/chop-chop@%1$s',
+                ],
+            ],
+        ];
+        return $this->enqueueLibs(__METHOD__, $data);
+    }
+
+    /**
      * Enqueue Require.js.
      *
      * @since 170128.18158 Require.js.

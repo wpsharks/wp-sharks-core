@@ -76,6 +76,18 @@ trait StylesScripts
     }
 
     /**
+     * @since 17xxxx Chop-Chop libs.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\StylesScripts::enqueueChopChopLibs()
+     */
+    public static function enqueueChopChopLibs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§StylesScripts->enqueueChopChopLibs(...$args);
+    }
+
+    /**
      * @since 170218.31677 Require.js.
      *
      * @param mixed ...$args Variadic args to underlying utility.
