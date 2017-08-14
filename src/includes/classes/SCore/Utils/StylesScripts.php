@@ -316,7 +316,7 @@ class StylesScripts extends Classes\SCore\Base\Core
         $data = [
             'scripts' => [
                 'chop-chop' => [
-                    'version' => '0.0.1',
+                    'version' => '0.0.8',
                     'url'     => '//unpkg.com/chop-chop@%1$s',
                 ],
             ],
