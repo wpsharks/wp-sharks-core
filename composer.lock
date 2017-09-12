@@ -9,19 +9,23 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.32.7",
+            "version": "3.36.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9e2ad0ee0a1269190e411b7409e9b64361626e0a"
+                "reference": "db5dc59777b663c7640a0cd3063e52b39c50dac2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9e2ad0ee0a1269190e411b7409e9b64361626e0a",
-                "reference": "9e2ad0ee0a1269190e411b7409e9b64361626e0a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/db5dc59777b663c7640a0cd3063e52b39c50dac2",
+                "reference": "db5dc59777b663c7640a0cd3063e52b39c50dac2",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-simplexml": "*",
+                "ext-spl": "*",
                 "guzzlehttp/guzzle": "^5.3.1|^6.2.1",
                 "guzzlehttp/promises": "~1.0",
                 "guzzlehttp/psr7": "^1.4.1",
@@ -34,11 +38,7 @@
                 "behat/behat": "~3.0",
                 "doctrine/cache": "~1.4",
                 "ext-dom": "*",
-                "ext-json": "*",
                 "ext-openssl": "*",
-                "ext-pcre": "*",
-                "ext-simplexml": "*",
-                "ext-spl": "*",
                 "nette/neon": "^2.3",
                 "phpunit/phpunit": "^4.8.35|^5.4.0",
                 "psr/cache": "^1.0"
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-08-11 21:16:28"
+            "time": "2017-09-11 19:34:19"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -420,33 +420,34 @@
         },
         {
             "name": "hashids/hashids",
-            "version": "1.0.6",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ivanakimov/hashids.php.git",
-                "reference": "6bd7ceffb2ccddef6cd64e88f1717f97d131cc3c"
+                "reference": "28889ed83cdc91f4a55637daff0fb5c799eb324e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ivanakimov/hashids.php/zipball/6bd7ceffb2ccddef6cd64e88f1717f97d131cc3c",
-                "reference": "6bd7ceffb2ccddef6cd64e88f1717f97d131cc3c",
+                "url": "https://api.github.com/repos/ivanakimov/hashids.php/zipball/28889ed83cdc91f4a55637daff0fb5c799eb324e",
+                "reference": "28889ed83cdc91f4a55637daff0fb5c799eb324e",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "ext-bcmath": "*",
+                "php": "^5.6.4 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8 || ^5.0"
+                "phpunit/phpunit": "^5.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Hashids\\": "lib/Hashids/"
+                    "Hashids\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -458,9 +459,14 @@
                     "name": "Ivan Akimov",
                     "email": "ivan@barreleye.com",
                     "homepage": "https://twitter.com/IvanAkimov"
+                },
+                {
+                    "name": "Vincent Klaiber",
+                    "email": "hello@vinkla.com",
+                    "homepage": "https://vinkla.com"
                 }
             ],
-            "description": "Generate short, unique, non-sequential ids (like YouTube and Bitly) from numbers.",
+            "description": "Generate short, unique, non-sequential ids (like YouTube and Bitly) from numbers",
             "homepage": "http://hashids.org/php",
             "keywords": [
                 "bitly",
@@ -473,7 +479,7 @@
                 "obfuscate",
                 "youtube"
             ],
-            "time": "2016-01-21 04:26:38"
+            "time": "2017-01-01 13:33:33"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -693,16 +699,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "4d4896e553f2094e657fe493506dc37c509d4e2b"
+                "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4d4896e553f2094e657fe493506dc37c509d4e2b",
-                "reference": "4d4896e553f2094e657fe493506dc37c509d4e2b",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a1e8e1a30e1352f118feff1a8481066ddc2f234a",
+                "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a",
                 "shasum": ""
             },
             "require": {
@@ -740,7 +746,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-07-28 14:45:09"
+            "time": "2017-09-02 17:10:46"
         },
         {
             "name": "paragonie/random_compat",
@@ -792,16 +798,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.24",
+            "version": "v5.2.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a"
+                "reference": "2baf20b01690fba8cf720c1ebcf9b988eda50915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/22d04c6a58145a244696f3f254c1875aa653b26a",
-                "reference": "22d04c6a58145a244696f3f254c1875aa653b26a",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/2baf20b01690fba8cf720c1ebcf9b988eda50915",
+                "reference": "2baf20b01690fba8cf720c1ebcf9b988eda50915",
                 "shasum": ""
             },
             "require": {
@@ -865,7 +871,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-07-26 21:00:20"
+            "time": "2017-08-28 11:12:07"
         },
         {
             "name": "psr/http-message",
@@ -1026,6 +1032,67 @@
             "time": "2015-01-07 05:07:16"
         },
         {
+            "name": "slim/http",
+            "version": "0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slimphp/Slim-Http.git",
+                "reference": "960af6e5a4e19e46a5336246c7af403715c23857"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slimphp/Slim-Http/zipball/960af6e5a4e19e46a5336246c7af403715c23857",
+                "reference": "960af6e5a4e19e46a5336246c7af403715c23857",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "psr/http-message": "^1.0"
+            },
+            "conflict": {
+                "slim/slim": "^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7|^6.0",
+                "squizlabs/php_codesniffer": "^2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Slim\\Http\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Allen",
+                    "email": "rob@akrabat.com",
+                    "homepage": "http://akrabat.com"
+                },
+                {
+                    "name": "Josh Lockhart",
+                    "email": "hello@joshlockhart.com",
+                    "homepage": "http://joshlockhart.com"
+                },
+                {
+                    "name": "Andrew Smith",
+                    "email": "a.smith@silentworks.co.uk",
+                    "homepage": "http://silentworks.co.uk"
+                }
+            ],
+            "description": "Slim's PSR-7 implementation",
+            "homepage": "http://slimframework.com",
+            "keywords": [
+                "http",
+                "psr-7",
+                "psr7"
+            ],
+            "time": "2017-06-29 12:20:47"
+        },
+        {
             "name": "stripe/stripe-php",
             "version": "v4.13.0",
             "source": {
@@ -1082,16 +1149,16 @@
         },
         {
             "name": "symfony/polyfill-php56",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "bc0b7d6cb36b10cfabb170a3e359944a95174929"
+                "reference": "e85ebdef569b84e8709864e1a290c40f156b30ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/bc0b7d6cb36b10cfabb170a3e359944a95174929",
-                "reference": "bc0b7d6cb36b10cfabb170a3e359944a95174929",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/e85ebdef569b84e8709864e1a290c40f156b30ca",
+                "reference": "e85ebdef569b84e8709864e1a290c40f156b30ca",
                 "shasum": ""
             },
             "require": {
@@ -1101,7 +1168,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -1134,20 +1201,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-09 08:25:21"
+            "time": "2017-06-14 15:44:48"
         },
         {
             "name": "symfony/polyfill-util",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "ebccbde4aad410f6438d86d7d261c6b4d2b9a51d"
+                "reference": "67925d1cf0b84bd234a83bebf26d4eb281744c6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/ebccbde4aad410f6438d86d7d261c6b4d2b9a51d",
-                "reference": "ebccbde4aad410f6438d86d7d261c6b4d2b9a51d",
+                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/67925d1cf0b84bd234a83bebf26d4eb281744c6d",
+                "reference": "67925d1cf0b84bd234a83bebf26d4eb281744c6d",
                 "shasum": ""
             },
             "require": {
@@ -1156,7 +1223,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -1186,11 +1253,11 @@
                 "polyfill",
                 "shim"
             ],
-            "time": "2017-06-09 08:25:21"
+            "time": "2017-07-05 15:09:33"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.26",
+            "version": "v2.8.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -1243,12 +1310,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "e36d9c916220e8192bb729531a17be6572f794fe"
+                "reference": "89f7a89439327e96173515aef416f3fa58c6afa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/e36d9c916220e8192bb729531a17be6572f794fe",
-                "reference": "e36d9c916220e8192bb729531a17be6572f794fe",
+                "url": "https://api.github.com/repos/websharks/core/zipball/89f7a89439327e96173515aef416f3fa58c6afa3",
+                "reference": "89f7a89439327e96173515aef416f3fa58c6afa3",
                 "shasum": ""
             },
             "require": {
@@ -1256,6 +1323,7 @@
                 "corneltek/getoptionkit": "2.*",
                 "defuse/php-encryption": "2.*",
                 "embedly/embedly-php": "0.*",
+                "ext-bcmath": "*",
                 "ext-ctype": "*",
                 "ext-curl": "*",
                 "ext-date": "*",
@@ -1263,6 +1331,7 @@
                 "ext-fileinfo": "*",
                 "ext-filter": "*",
                 "ext-gd": "*",
+                "ext-gmp": "*",
                 "ext-hash": "*",
                 "ext-iconv": "*",
                 "ext-intl": "*",
@@ -1281,7 +1350,7 @@
                 "ext-xmlreader": "*",
                 "ext-xmlwriter": "*",
                 "ext-zlib": "*",
-                "hashids/hashids": "1.*",
+                "hashids/hashids": "2.0.3",
                 "jeremeamia/superclosure": "2.*",
                 "league/iso3166": "1.*",
                 "lib-curl": "*",
@@ -1295,6 +1364,7 @@
                 "phpmailer/phpmailer": "5.*",
                 "ramsey/uuid": "3.*",
                 "ryakad/pandoc-php": "1.*",
+                "slim/http": "0.*",
                 "stripe/stripe-php": "4.*",
                 "symfony/yaml": "2.*",
                 "websharks/dicer": "160110",
@@ -1302,8 +1372,6 @@
                 "websharks/sharkicons": "160620"
             },
             "require-dev": {
-                "ext-bcmath": "*",
-                "ext-gmp": "*",
                 "ext-memcached": "*",
                 "ext-mysqlnd": "*",
                 "ext-pdo": "*",
@@ -1315,8 +1383,6 @@
             "suggest": {
                 "ext-PDO": "* :: Required when using PDO utilities.",
                 "ext-Zend-OPcache": "* :: Highly recommended for faster processing.",
-                "ext-bcmath": "* :: Required by routines that deal with large numbers.",
-                "ext-gmp": "* :: Required by routines that deal with large numbers.",
                 "ext-memcached": "* :: Required by routines that deal Memcache.",
                 "ext-mysqlnd": "* :: Required when using PDO utilities.",
                 "ext-pdo_mysql": "* :: Required when using PDO utilities.",
@@ -1362,7 +1428,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-08-14 17:53:05"
+            "time": "2017-09-12 04:01:59"
         },
         {
             "name": "websharks/dicer",

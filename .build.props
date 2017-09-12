@@ -37,6 +37,9 @@ project_php_required_extensions  = \
                                    intl, \
                                    iconv, \
                                    \
+                                   gmp, \
+                                   bcmath, \
+                                   \
                                    dom, \
                                    xml, \
                                    libxml, \

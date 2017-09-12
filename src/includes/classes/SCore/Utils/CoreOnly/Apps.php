@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils\CoreOnly;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -13,9 +13,11 @@ use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use WebSharks\Core\WpSharksCore\Classes\Core\Error;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -32,7 +34,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @var array Array of all apps.
+     * @type array Array of all apps.
      */
     protected $apps;
 
@@ -41,7 +43,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @var array Array of all apps.
+     * @type array Array of all apps.
      */
     protected $apps_by_slug;
 
@@ -50,7 +52,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160710 App utils.
      *
-     * @var array Array of all apps.
+     * @type array Array of all apps.
      */
     protected $apps_by_type;
 
@@ -59,7 +61,7 @@ class Apps extends Classes\SCore\Base\Core
      *
      * @since 160715 App utils.
      *
-     * @var array Array of all apps.
+     * @type array Array of all apps.
      */
     protected $apps_by_network_wide;
 

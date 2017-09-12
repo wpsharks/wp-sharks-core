@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core;
 
 use WebSharks\WpSharks\Core\Classes\App;

@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WP Sharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Base;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -13,9 +13,11 @@ use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use WebSharks\Core\WpSharksCore\Classes\Core\Error;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -32,7 +34,7 @@ abstract class Widget extends \WP_Widget
      *
      * @since 160524
      *
-     * @var Wp
+     * @type Wp
      */
     protected $Wp;
 
@@ -41,7 +43,7 @@ abstract class Widget extends \WP_Widget
      *
      * @since 160731.37352
      *
-     * @var Classes\App
+     * @type Classes\App
      */
     protected $App;
 
@@ -50,7 +52,7 @@ abstract class Widget extends \WP_Widget
      *
      * @since 160731.37352
      *
-     * @var array
+     * @type array
      */
     protected $default_options;
 

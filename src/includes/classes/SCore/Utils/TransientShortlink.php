@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -13,9 +13,11 @@ use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use WebSharks\Core\WpSharksCore\Classes\Core\Error;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -32,7 +34,7 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
      *
      * @since 160704 Shortlink var.
      *
-     * @var string Shortlink var.
+     * @type string Shortlink var.
      */
     protected $var;
 
@@ -41,7 +43,7 @@ class TransientShortlink extends Classes\SCore\Base\Core implements CoreInterfac
      *
      * @since 160704 Shortlink slug.
      *
-     * @var string Shortlink slug.
+     * @type string Shortlink slug.
      */
     protected $slug;
 

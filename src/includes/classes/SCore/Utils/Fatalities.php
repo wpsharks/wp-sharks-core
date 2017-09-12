@@ -13,9 +13,11 @@ use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use WebSharks\Core\WpSharksCore\Classes\Core\Error;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -32,15 +34,19 @@ class Fatalities extends Classes\SCore\Base\Core
      *
      * @since 17xxxx Fatalities.
      *
-     * @param string $message Custom message.
-     * @param string $slug    Custom error slug.
-     * @param string $code    Custom error status code.
+     * @param string|int $message Message (or code).
+     * @param string     $slug    Custom error slug.
+     * @param string     $code    Custom error status code.
      */
-    public function die(string $message = '', string $slug = '', int $code = 0)
+    public function die($message = '', string $slug = '', int $code = 500)
     {
-        $code    = $code ?: 500;
-        $slug    = $slug ?: 'internal';
-        $message = $message ?: __('Internal server error.', 'wp-sharks-core');
+        if (is_int($message)) {
+            $code    = $message;
+            $message = '';
+        }
+        $code    = $code ?: 500; // Default code.
+        $slug    = $slug ?: $this->c::statusHeaderSlug($code);
+        $message = $message ?: $this->c::statusHeaderMessage($code);
 
         $this->c::obEndCleanAll();
         $this->c::noCacheFlags();
@@ -57,7 +63,7 @@ class Fatalities extends Classes\SCore\Base\Core
                     'message' => $message,
                 ],
             ]));
-        } else {
+        } else { // Use WordPress die handler.
             wp_die(
                 $message,
                 '!', // Used as `<title>`.
@@ -75,9 +81,9 @@ class Fatalities extends Classes\SCore\Base\Core
      * @param string $slug    Custom error slug.
      * @param string $code    Custom error status code.
      */
-    public function dieInvalid(string $message = '', string $slug = '', int $code = 0)
+    public function dieInvalid(string $message = '', string $slug = '', int $code = 400)
     {
-        $this->die($message ?: __('Bad request.', 'wp-sharks-core'), $slug ?: 'invalid', $code ?: 400);
+        $this->die($message, $slug, $code);
     }
 
     /**
@@ -89,8 +95,8 @@ class Fatalities extends Classes\SCore\Base\Core
      * @param string $slug    Custom error slug.
      * @param string $code    Custom error status code.
      */
-    public function dieForbidden(string $message = '', string $slug = '', int $code = 0)
+    public function dieForbidden(string $message = '', string $slug = '', int $code = 403)
     {
-        $this->die($message ?: __('Forbidden.', 'wp-sharks-core'), $slug ?: 'forbidden', $code ?: 403);
+        $this->die($message, $slug, $code);
     }
 }

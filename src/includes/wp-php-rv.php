@@ -16,7 +16,7 @@ $GLOBALS['wp_php_rv'] = array(
     'min'        => '7.0.4', //php-required-version//
     'bits'       => 64, //php-required-bits//
     'functions'  => array('eval'), //php-required-functions//
-    'extensions' => array('SPL', 'Phar', 'Reflection', 'ctype', 'date', 'fileinfo', 'filter', 'gd', 'hash', 'json', 'mbstring', 'session', 'tokenizer', 'zlib', 'pcre', 'openssl', 'curl', 'intl', 'iconv', 'dom', 'xml', 'libxml', 'xmlreader', 'xmlwriter', 'SimpleXML'), //php-required-extensions//
+    'extensions' => array('SPL', 'Phar', 'Reflection', 'ctype', 'date', 'fileinfo', 'filter', 'gd', 'hash', 'json', 'mbstring', 'session', 'tokenizer', 'zlib', 'pcre', 'openssl', 'curl', 'intl', 'iconv', 'gmp', 'bcmath', 'dom', 'xml', 'libxml', 'xmlreader', 'xmlwriter', 'SimpleXML'), //php-required-extensions//
 
     'wp' => array(
         'min' => '4.7', //wp-required-version//

@@ -5,7 +5,7 @@
  * @author @jaswrks
  * @copyright WebSharks™
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 namespace WebSharks\WpSharks\Core\Classes\SCore\Utils;
 
 use WebSharks\WpSharks\Core\Classes;
@@ -13,9 +13,11 @@ use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
 #
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
-use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
+#
+use WebSharks\Core\WpSharksCore\Classes\Core\Error;
+use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
 #
 use function assert as debug;
 use function get_defined_vars as vars;
@@ -103,7 +105,7 @@ class Transient extends Classes\SCore\Base\Core
             if (!empty($do_restore_wp_using_ext_object_cache)) {
                 wp_using_ext_object_cache($wp_using_ext_object_cache);
             }
-            return $this->c::hashIds($transient_id); // Encoded hash ID.
+            return $this->c::hashId($transient_id); // Encoded hash ID.
             //
         } elseif ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
             set_site_transient($this->App->Config->©brand['©var'].'_'.$key, $value, $expires_after);
@@ -153,9 +155,7 @@ class Transient extends Classes\SCore\Base\Core
 
         if (($key = &$this->cacheKey(__FUNCTION__, [$blog_id, $hash])) !== null) {
             return $key; // Already cached this.
-        } elseif (!($ids = $this->c::decodeHashedIds($hash))) {
-            return $key = ''; // Not possible.
-        } elseif (!($id = $ids[0] ?? 0)) {
+        } elseif (!($id = $this->c::decodeHashId($hash))) {
             return $key = ''; // Not possible.
         }
         if ($this->App->Config->§specs['§is_network_wide'] && $this->Wp->is_multisite) {
