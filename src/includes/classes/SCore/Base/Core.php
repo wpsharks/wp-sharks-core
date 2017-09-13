@@ -43,12 +43,11 @@ abstract class Core extends CoreClasses\Core\Base\Core
      *
      * @since 160223 Initial release.
      *
-     * @param Classes\App|null $App Instance of App.
+     * @param Classes\App $App App.
      */
-    public function __construct(Classes\App $App = null)
+    public function __construct(Classes\App $App)
     {
         parent::__construct($App);
-
         $this->Wp = &$this->App->Wp;
     }
 }
