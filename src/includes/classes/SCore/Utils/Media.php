@@ -48,13 +48,16 @@ class Media extends Classes\SCore\Base\Core
         if (!$url || !$post_id) { // Must have.
             return $this->c::error('bad_request', __('Bad request.', 'wp-sharks-core'));
         }
-        if (is_wp_error($tmp_name = download_url($url))) {
+        $mime = wp_check_filetype(basename($url));
+
+        if (empty($mime['type']) || empty($mime['ext'])) {
+            return $this->c::error('unknown_mime_type', __('Unknown MIME type.', 'wp-sharks-core'));
+            //
+        } elseif (is_wp_error($tmp_name = download_url($url))) {
             return $this->s::wpErrorConvert($tmp_name);
         }
-        $mime = wp_check_filetype($tmp_name);
-        if (empty($mime['type']) || empty($mime['ext'])) {
-            @unlink($tmp_name); // Ditch temporary file.
-            return $this->c::error('unknown_mime_type', __('Unknown MIME type.', 'wp-sharks-core'));
+        if (!preg_match('/\.'.$this->c::escRegex($mime['ext']).'$/ui', $tmp_name)) {
+            rename($tmp_name, $tmp_name.'.'.$mime['ext']);
         }
         $file = [
             'tmp_name' => $tmp_name,
