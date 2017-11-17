@@ -57,7 +57,7 @@ class Media extends Classes\SCore\Base\Core
             return $this->s::wpErrorConvert($tmp_name);
         }
         if (!preg_match('/\.'.$this->c::escRegex($mime['ext']).'$/ui', $tmp_name)) {
-            rename($tmp_name, $tmp_name.'.'.$mime['ext']);
+            rename($tmp_name, $tmp_name .= '.'.$mime['ext']);
         }
         $file = [
             'tmp_name' => $tmp_name,
