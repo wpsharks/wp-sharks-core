@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.38.1",
+            "version": "3.38.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9f704274f4748d2039a16d45b3388ed8dde74e89"
+                "reference": "f572a05d43e4aa1c33f3c06a78cd78b6b8edb67d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9f704274f4748d2039a16d45b3388ed8dde74e89",
-                "reference": "9f704274f4748d2039a16d45b3388ed8dde74e89",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f572a05d43e4aa1c33f3c06a78cd78b6b8edb67d",
+                "reference": "f572a05d43e4aa1c33f3c06a78cd78b6b8edb67d",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-11-09 19:15:59"
+            "time": "2017-11-16 23:45:00"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1433,16 +1433,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.28",
+            "version": "v2.8.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "842fb6df22180244b4c65935ce1a88d324e5ff9e"
+                "reference": "d819bf267e901727141fe828ae888486fd21236e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/842fb6df22180244b4c65935ce1a88d324e5ff9e",
-                "reference": "842fb6df22180244b4c65935ce1a88d324e5ff9e",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/d819bf267e901727141fe828ae888486fd21236e",
+                "reference": "d819bf267e901727141fe828ae888486fd21236e",
                 "shasum": ""
             },
             "require": {
@@ -1478,7 +1478,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-05 14:38:30"
+            "time": "2017-11-05 15:25:56"
         },
         {
             "name": "websharks/core",
@@ -1486,12 +1486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "b4dd51598a641aea2229651d60e21721e1763460"
+                "reference": "9cd9715e6c933eb03a488e098687cac5f39372ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/b4dd51598a641aea2229651d60e21721e1763460",
-                "reference": "b4dd51598a641aea2229651d60e21721e1763460",
+                "url": "https://api.github.com/repos/websharks/core/zipball/9cd9715e6c933eb03a488e098687cac5f39372ad",
+                "reference": "9cd9715e6c933eb03a488e098687cac5f39372ad",
                 "shasum": ""
             },
             "require": {
@@ -1605,7 +1605,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-11-09 16:33:51"
+            "time": "2017-11-16 20:57:54"
         },
         {
             "name": "websharks/dicer",

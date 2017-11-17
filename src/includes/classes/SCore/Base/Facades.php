@@ -45,6 +45,7 @@ abstract class Facades
     use Traits\Facades\Installer;
     use Traits\Facades\Jetpack;
     use Traits\Facades\Markup;
+    use Traits\Facades\Media;
     use Traits\Facades\MenuPage;
     use Traits\Facades\MenuPageMarkup;
     use Traits\Facades\Nonce;

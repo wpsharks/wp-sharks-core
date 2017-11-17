@@ -13,6 +13,7 @@
 - Adding `s::enqueueGumroadEmbedLibs()`.
 - Adding `on_save` callback to `s::postMetaBox()`.
 - Adding `s::enqueueChopChopLibs()`.
+- Adding `s::addAttachmentFromUrl()`.
 
 ## v170623.59000
 
