@@ -63,16 +63,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.38.4",
+            "version": "3.38.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f572a05d43e4aa1c33f3c06a78cd78b6b8edb67d"
+                "reference": "13ffa481127c08e04244f116ae85a64b4172479c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f572a05d43e4aa1c33f3c06a78cd78b6b8edb67d",
-                "reference": "f572a05d43e4aa1c33f3c06a78cd78b6b8edb67d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/13ffa481127c08e04244f116ae85a64b4172479c",
+                "reference": "13ffa481127c08e04244f116ae85a64b4172479c",
                 "shasum": ""
             },
             "require": {
@@ -139,7 +139,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-11-16 23:45:00"
+            "time": "2017-11-17 22:08:25"
         },
         {
             "name": "corneltek/getoptionkit",
@@ -1236,6 +1236,49 @@
             "time": "2017-09-22 20:46:04"
         },
         {
+            "name": "redeyeventures/geopattern",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/redeyeventures/geopattern-php.git",
+                "reference": "26d9f8aa7a8b00c8afc120d706f6bdd7a9965b87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/redeyeventures/geopattern-php/zipball/26d9f8aa7a8b00c8afc120d706f6bdd7a9965b87",
+                "reference": "26d9f8aa7a8b00c8afc120d706f6bdd7a9965b87",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RedeyeVentures\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anand Capur",
+                    "email": "anand@redeyeventures.com",
+                    "homepage": "http://redeyeventures.com"
+                }
+            ],
+            "description": "Generate beautiful SVG patterns.",
+            "keywords": [
+                "background",
+                "geometric",
+                "pattern",
+                "svg"
+            ],
+            "time": "2014-10-21 03:35:54"
+        },
+        {
             "name": "ryakad/pandoc-php",
             "version": "v1.0.0",
             "source": {
@@ -1540,12 +1583,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "784754c87f268adc759fc7c87e9cd13aeab3b5ab"
+                "reference": "107eef49defee50020c10b7820f9d71a93c663b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/784754c87f268adc759fc7c87e9cd13aeab3b5ab",
-                "reference": "784754c87f268adc759fc7c87e9cd13aeab3b5ab",
+                "url": "https://api.github.com/repos/websharks/core/zipball/107eef49defee50020c10b7820f9d71a93c663b5",
+                "reference": "107eef49defee50020c10b7820f9d71a93c663b5",
                 "shasum": ""
             },
             "require": {
@@ -1595,6 +1638,7 @@
                 "php-64bit": ">=7.0.4",
                 "phpmailer/phpmailer": "5.*",
                 "ramsey/uuid": "3.*",
+                "redeyeventures/geopattern": "1.*",
                 "ryakad/pandoc-php": "1.*",
                 "slim/http": "0.*",
                 "stripe/stripe-php": "4.*",
@@ -1660,7 +1704,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-11-17 07:27:01"
+            "time": "2017-11-20 05:45:41"
         },
         {
             "name": "websharks/dicer",
