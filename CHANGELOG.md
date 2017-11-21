@@ -1,5 +1,7 @@
 ## $v
 
+- Adding `s::imageSpecs()`.
+- Adding `s::postThumbnailSpecs()`.
 - Adding `s::loginAsUser()`.
 - Adding `s::isEndpoint()`.
 - Adding `s::getEndpointVar()`.

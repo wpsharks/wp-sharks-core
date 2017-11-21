@@ -70,4 +70,50 @@ class Media extends Classes\SCore\Base\Core
         }
         return $attachment_id;
     }
+
+    /**
+     * Get image specs.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param string $size For which size?
+     *
+     * @return array `[width, height, crop]`.
+     */
+    public function imageSpecs(string $size): array
+    {
+        $specs = wp_get_additional_image_sizes();
+
+        if ($size === 'thumbnail' && !isset($specs[$size])) {
+            $width        = (int) get_option('thumbnail_size_w');
+            $height       = (int) get_option('thumbnail_size_h');
+            $crop         = (bool) get_option('thumbnail_crop');
+            return $specs = compact('width', 'height', 'crop');
+        }
+        return $specs = $specs[$size] ?? [];
+    }
+
+    /**
+     * Get post thumbnail specs.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @return array `[width, height, crop]`.
+     */
+    public function postThumbnailSpecs(): array
+    {
+        return $this->imageSpecs('post-thumbnail');
+    }
+
+    /**
+     * Thumbnail specs.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @return array `[width, height, crop]`.
+     */
+    public function thumbnailSpecs(): array
+    {
+        return $this->imageSpecs('thumbnail');
+    }
 }

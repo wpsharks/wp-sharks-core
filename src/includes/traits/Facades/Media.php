@@ -40,4 +40,40 @@ trait Media
     {
         return $GLOBALS[static::class]->Utils->§Media->addAttachmentFromUrl(...$args);
     }
+
+    /**
+     * @since 17xxxx Media utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Media::imageSpecs()
+     */
+    public static function imageSpecs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Media->imageSpecs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Media utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Media::postThumbnailSpecs()
+     */
+    public static function postThumbnailSpecs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Media->postThumbnailSpecs(...$args);
+    }
+
+    /**
+     * @since 17xxxx Media utils.
+     *
+     * @param mixed ...$args Variadic args to underlying utility.
+     *
+     * @see Classes\SCore\Utils\Media::thumbnailSpecs()
+     */
+    public static function thumbnailSpecs(...$args)
+    {
+        return $GLOBALS[static::class]->Utils->§Media->thumbnailSpecs(...$args);
+    }
 }

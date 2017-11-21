@@ -11,17 +11,17 @@ namespace WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Classes;
 use WebSharks\WpSharks\Core\Interfaces;
 use WebSharks\WpSharks\Core\Traits;
-#
+//
 use WebSharks\Core\WpSharksCore\Classes as CoreClasses;
 use WebSharks\Core\WpSharksCore\Interfaces as CoreInterfaces;
 use WebSharks\Core\WpSharksCore\Traits as CoreTraits;
-#
+//
 use WebSharks\Core\WpSharksCore\Classes\Core\Error;
 use WebSharks\Core\WpSharksCore\Classes\Core\Base\Exception;
-#
+//
 use function assert as debug;
 use function get_defined_vars as vars;
-#
+//
 use WebSharks\WpSharks\Core\Classes\SCore\Base\Wp;
 use WebSharks\WpSharks\Core\Classes\SCore\Base\WpAppUrl;
 use WebSharks\WpSharks\Core\Classes\SCore\Base\WpAppKeys;
@@ -49,7 +49,7 @@ class App extends CoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '171120.21053'; //v//
+    const VERSION = '171121.9783'; //v//
 
     /**
      * ReST action API version.
@@ -116,11 +116,11 @@ class App extends CoreClasses\App
      */
     public function __construct(array $instance_base = [], array $instance = [], Classes\App $Parent = null)
     {
-        # WordPress common properties.
+        // WordPress common properties.
 
         $this->Wp = $Parent ? $Parent->Wp : new Wp();
 
-        # Define a few reflection-based properties.
+        // Define a few reflection-based properties.
 
         $this->Reflection = new \ReflectionClass($this);
 
@@ -133,7 +133,7 @@ class App extends CoreClasses\App
 
         $this->is_core = $this->class === self::class;
 
-        # Establish specs & brand for parent constructor.
+        // Establish specs & brand for parent constructor.
 
         $default_specs = [
             '§is_pro'          => null,
@@ -332,13 +332,13 @@ class App extends CoreClasses\App
                 }
             }
         }
-        # Acquire encryption & salt keys.
-        # Collect app URL parts, based on app type.
+        // Acquire encryption & salt keys.
+        // Collect app URL parts, based on app type.
 
         $Url  = new WpAppUrl($this->Wp, $specs, $brand);
         $Keys = new WpAppKeys($this->Wp, $specs, $brand);
 
-        # Build the core/default instance base.
+        // Build the core/default instance base.
 
         $default_instance_base = [
             '©use_server_cfgs' => false,
@@ -384,15 +384,18 @@ class App extends CoreClasses\App
             '©urls' => [
                 '©hosts' => [
                     '©app' => $this->Wp->site_url_host,
+                    '©api' => 'api.'.$this->Wp->site_url_root_host,
                     '©cdn' => 'cdn.'.$this->Wp->site_url_root_host,
 
                     '©roots' => [
                         '©app' => $this->Wp->site_url_root_host,
+                        '©api' => $this->Wp->site_url_root_host,
                         '©cdn' => $this->Wp->site_url_root_host,
                     ],
                 ],
                 '©base_paths' => [
                     '©app' => $Url->base_path,
+                    '©api' => $Url->base_path,
                     '©cdn' => '/',
                 ],
                 '©cdn_filter_enable' => false,
@@ -531,7 +534,7 @@ class App extends CoreClasses\App
             '§force_install' => false, // Force install (or reinstall)?
             '§uninstall'     => false, // Uninstall? e.g., on deletion.
         ];
-        # Automatically add lite/pro/elite conflicts to the array.
+        // Automatically add lite/pro/elite conflicts to the array.
 
         if ($specs['§type'] === 'plugin') { // Only for plugins; n/a to themes.
             if ($specs['§is_pro']) {
@@ -548,22 +551,22 @@ class App extends CoreClasses\App
                 $default_instance_base['§conflicts']['§plugins'][$brand['©slug'].'-elite'] = $brand['©name'].' Elite';
             }
         }
-        # Merge `$default_instance_base` w/ `$instance_base` param.
+        // Merge `$default_instance_base` w/ `$instance_base` param.
 
         $instance_base           = $this->mergeConfig($default_instance_base, $instance_base);
         $instance_base['§specs'] = &$specs; // Already established (in full) above.
         $instance_base['©brand'] = &$brand; // Already established (in full) above.
 
-        # Give plugins/extensions a chance to filter `$instance`.
+        // Give plugins/extensions a chance to filter `$instance`.
 
         $instance = apply_filters($brand['©var'].'_instance', $instance, $instance_base);
         unset($instance['§specs'], $instance['©brand']); // Already established (in full) above.
 
-        # Call parent app-constructor (i.e., websharks/core).
+        // Call parent app-constructor (i.e., websharks/core).
 
         parent::__construct($instance_base, $instance, $Parent);
 
-        # Post-construct sub-routines.
+        // Post-construct sub-routines.
 
         $this->prepareOptions();
         $this->transitionOptions();
