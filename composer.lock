@@ -1583,12 +1583,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/websharks/core.git",
-                "reference": "586fba8aad9f5bce4e77c8b6937e55932e1484ca"
+                "reference": "1ecd7bbf17a26afa8be18750c0021574a454eaf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/websharks/core/zipball/586fba8aad9f5bce4e77c8b6937e55932e1484ca",
-                "reference": "586fba8aad9f5bce4e77c8b6937e55932e1484ca",
+                "url": "https://api.github.com/repos/websharks/core/zipball/1ecd7bbf17a26afa8be18750c0021574a454eaf6",
+                "reference": "1ecd7bbf17a26afa8be18750c0021574a454eaf6",
                 "shasum": ""
             },
             "require": {
@@ -1704,7 +1704,7 @@
                 "core",
                 "websharks"
             ],
-            "time": "2017-11-21 06:36:57"
+            "time": "2017-11-21 07:47:28"
         },
         {
             "name": "websharks/dicer",
